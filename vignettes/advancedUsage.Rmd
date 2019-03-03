@@ -1,0 +1,88 @@
+---
+title: "B. Advanced Usage"
+author: "Gerold Hepp"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{B. Advanced Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+options("DTSgClone" = TRUE)
+```
+
+This vignette illustrates some more advanced concepts of the `DTSg` package, namely reference semantics as well as chaining and piping.
+
+---
+
+First, let's load the package as well as some data and let's create a `DTSg` object:
+
+```{r}
+library(DTSg)
+
+data(flow)
+TS <- DTSg$new(flow)
+TS
+```
+
+## Reference Semantics
+
+By default, every method manipulating the values of a `DTSg` object creates a copy of it. This behaviour can be overridden by setting their `clone` argument to `FALSE`. Globally, cloning can be controlled with the *DTSgClone* option:
+
+```{r}
+TS$alter("2007-01-01", "2008-12-31")
+# end date is still in the year 2012
+TS
+
+options("DTSgClone" = FALSE)
+getOption("DTSgClone")
+TS$alter("2007-01-01", "2008-12-31")
+# end date is in the year 2008 now
+TS
+```
+
+As we can see, with cloning set to `FALSE`, the object was altered in place, i.e., no assignment to a new or reassignment to an existing variable was necessary in order to make the changes stick. This is due to the R6 nature of `DTSg` objects.
+
+### Note
+
+Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a `DTSg` object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data in the background, i.e., changing one will also affect the other. In case you really want a copy of a `DTSg` object, you will have to use the `clone` method with the `deep` argument set to `TRUE` (for consistency with the `R6` package the default is `FALSE`):
+
+```{r}
+TSc <- TS$clone(deep = TRUE)
+#  or clone(TS, deep = TRUE)
+```
+
+## Chaining and Piping
+
+Especially in combination with reference semantics, chaining and piping can be a fast and comfortable way to apply several object manipulations in a row. While chaining only works in combination with the R6 interface, piping is an exclusive feature of the S3 interface.
+
+Let's start with chaining:
+
+```{r}
+TS <- DTSg$
+  new(flow)$
+  alter("2007-01-01", "2008-12-31")$
+  colapply(interpolateLinear)$
+  aggregate(byYm____, mean)
+TS
+```
+
+For piping, we have to load the `magrittr` package for access to its pipe operator first:
+
+```{r}
+library(magrittr)
+
+TS <- new("DTSg", flow) %>%
+  alter("2007-01-01", "2008-12-31") %>%
+  colapply(interpolateLinear) %>%
+  aggregate(byYm____, mean)
+TS
+```

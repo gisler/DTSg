@@ -1,0 +1,63 @@
+self <- NULL # no R CMD check note
+
+#' S3 Wrapper Generator
+#'
+#' Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
+#'  but can also be used to generate \dQuote{plain} function wrappers.
+#'
+#' @param R6Method An \code{\link{expression}} of a public method of an
+#'  \code{R6ClassGenerator}.
+#' @param self A character string specifying the name of the parameter which
+#'  takes the R6 object.
+#' @param dots A logical specifying if a \code{\dots} parameter is added as last
+#'  parameter in case none already exists. This might be required for S3
+#'  generic/method consistency.
+#'
+#' @return Returns a function with the required parameters which captures its
+#'  own call, reshapes it to the corresponding R6 method call and evaluates it.
+#'
+#' @seealso \code{\link{S3Methods}}, \code{\link[R6]{R6Class}},
+#'  \code{\link{expression}}
+#'
+#' @examples
+#' # generate S3 wrapper for aggregate of DTSg
+#' \dontrun{aggregate.DTSg <- S3wrapperGenerator(
+#'   R6Method = expression(DTSg$public_methods$aggregate)
+#' )}
+#'
+#' @export
+S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {
+  assert_is_expression(R6Method)
+  R6MethodParts <- strsplit(as.character(R6Method), "\\$")[[1L]]
+  if (class(eval(as.name(R6MethodParts[1L]))) != "R6ClassGenerator") {
+    stop('"R6Method" must contain an "R6ClassGenerator".', call. = FALSE)
+  }
+  if (R6MethodParts[2L] != "public_methods") {
+    stop('"R6Method" must contain a public method of an "R6ClassGenerator".', call. = FALSE)
+  }
+  assert_is_function(eval(R6Method))
+  assert_is_a_string(self)
+  assert_is_a_bool(assert_all_are_not_na(dots))
+
+  args <- list()
+  args[[self]] <- alist(`self` = )$`self`
+  args <- c(args, formals(eval(R6Method)))
+
+  if (dots && !any(names(args) == "...")) {
+    args[["..."]] <- alist(... = )$...
+  }
+
+  S3Method <- function() {
+    fun <- R6MethodParts[3L]
+
+    call <- match.call()
+    call[[1L]] <- call("$", eval(as.name(self)), fun)
+    call[[2L]] <- NULL
+
+    eval(call)
+  }
+
+  formals(S3Method) <- args
+
+  S3Method
+}
