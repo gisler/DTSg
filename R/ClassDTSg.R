@@ -108,9 +108,9 @@ NULL
 #' The behaviour of \code{DTSg} objects can be customised with the help of the
 #'  following option. See \code{\link{options}} for further information:
 #'  \itemize{
-#'    \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are by
-#'      default modified in place (\code{FALSE}) or if a clone (copy) is made
-#'      beforehand (\code{TRUE}).
+#'    \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are,
+#'      by default, modified in place (\code{FALSE}) or if a clone (copy) is
+#'      made beforehand (\code{TRUE}).
 #'  }
 #'
 #' @note
