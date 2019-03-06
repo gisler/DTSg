@@ -349,7 +349,16 @@ nas <- function(x, ...) {
 nas.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$nas))
 
 #### new ####
-new <- function(...) {} # no R CMD check warning
+new <- function(
+  Class,
+  values,
+  ID = "",
+  parameter = "",
+  unit = "",
+  variant = "",
+  aggregated = FALSE,
+  fast = FALSE
+) {} # no R CMD check warning
 setClass("DTSg", slots = c(. = "logical"))
 setMethod(
   "initialize",
