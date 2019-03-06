@@ -1,6 +1,6 @@
 Package: DTSg
 Type: Package
-Title: A Class for Working With Time Series Based on data.table and R6 With
+Title: A Class for Working with Time Series Based on data.table and R6 with
     Largely Optional Reference Semantics
 Version: 0.1.0
 Authors@R: person("Gerold", "Hepp", email = "ghepp@iwag.tuwien.ac.at", role = c("aut", "cre"))
