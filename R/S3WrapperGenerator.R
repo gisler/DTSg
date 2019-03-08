@@ -21,9 +21,9 @@ self <- NULL # no R CMD check note
 #'
 #' @examples
 #' # generate S3 wrapper for aggregate of DTSg
-#' \dontrun{aggregate.DTSg <- S3wrapperGenerator(
+#' aggregate.DTSg <- S3WrapperGenerator(
 #'   R6Method = expression(DTSg$public_methods$aggregate)
-#' )}
+#' )
 #'
 #' @export
 S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {

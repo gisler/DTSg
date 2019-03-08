@@ -1,3 +1,3 @@
-## DTSg v0.1.1
+## DTSg v0.1.2
 
 * First release
