@@ -61,7 +61,11 @@ With this done, we can move on and further explore our time series with a summar
 ```{r}
 TS$summary() # or summary(TS)
 TS$nas(cols = "flow") # or nas(TS, cols = "flow")
-TS$plot(cols = "flow") # or plot(TS, cols = "flow")
+if (requireNamespace("xts", quietly = TRUE) &&
+    requireNamespace("dygraphs", quietly = TRUE) &&
+    requireNamespace("RColorBrewer", quietly = TRUE)) {
+  TS$plot(cols = "flow") # or plot(TS, cols = "flow")
+}
 ```
 ![](plot.png)
 

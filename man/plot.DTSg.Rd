@@ -47,11 +47,15 @@ Displays an interactive plot of a \code{\link{DTSg}} object. This method
 x <- DTSg$new(values = flow)
 
 # plot time series
-## R6 method
-\dontrun{x$plot()}
+if (requireNamespace("xts", quietly = TRUE) &&
+    requireNamespace("dygraphs", quietly = TRUE) &&
+    requireNamespace("RColorBrewer", quietly = TRUE)) {
+  ## R6 method
+  x$plot()
 
-## S3 method
-\dontrun{plot(x = x)}
+  ## S3 method
+  plot(x = x)
+}
 
 }
 \seealso{

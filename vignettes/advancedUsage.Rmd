@@ -78,11 +78,13 @@ TS
 For piping, we have to load the `magrittr` package for access to its pipe operator first:
 
 ```{r}
-library(magrittr)
-
-TS <- new("DTSg", flow) %>%
-  alter("2007-01-01", "2008-12-31") %>%
-  colapply(interpolateLinear) %>%
-  aggregate(byYm____, mean)
-TS
+if (requireNamespace("magrittr", quietly = TRUE)) {
+  library(magrittr)
+  
+  TS <- new("DTSg", flow) %>%
+    alter("2007-01-01", "2008-12-31") %>%
+    colapply(interpolateLinear) %>%
+    aggregate(byYm____, mean)
+  TS
+}
 ```

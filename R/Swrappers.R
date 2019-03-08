@@ -358,7 +358,17 @@ new <- function(
   variant = "",
   aggregated = FALSE,
   fast = FALSE
-) {} # no R CMD check warning
+) {
+  DTSg$new(
+    values = values,
+    ID = ID,
+    parameter = parameter,
+    unit = unit,
+    variant = variant,
+    aggregated = aggregated,
+    fast = fast
+  )
+} # no R CMD check warning
 setClass("DTSg", slots = c(. = "logical"))
 setMethod(
   "initialize",
@@ -403,11 +413,15 @@ setMethod(
 #' x <- DTSg$new(values = flow)
 #'
 #' # plot time series
-#' ## R6 method
-#' \dontrun{x$plot()}
+#' if (requireNamespace("xts", quietly = TRUE) &&
+#'     requireNamespace("dygraphs", quietly = TRUE) &&
+#'     requireNamespace("RColorBrewer", quietly = TRUE)) {
+#'   ## R6 method
+#'   x$plot()
 #'
-#' ## S3 method
-#' \dontrun{plot(x = x)}
+#'   ## S3 method
+#'   plot(x = x)
+#' }
 #'
 #' @aliases plot
 #'
