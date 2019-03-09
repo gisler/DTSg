@@ -56,8 +56,8 @@ NULL
 #'  (such as hydrological time series). Doing so ensures that diurnal variations
 #'  are preserved under all circumstances and that all intervals are of
 #'  \dQuote{correct} length. This feature requires that the periodicity of the
-#'  time series is not \code{"unrecognised"} and is supported by the following
-#'  temporal aggregation level functions of the package:
+#'  time series is not unrecognised and is supported by the following temporal
+#'  aggregation level functions of the package:
 #'  \itemize{
 #'    \item \code{\link{byY_____}}
 #'    \item \code{\link{byYQ____}}
@@ -108,8 +108,8 @@ alter <- function(x, ...) {
 #'  time series.
 #' @param by Specifies the new periodicity in one of the ways the \code{by}
 #'  argument of \code{\link{seq.POSIXt}} can be specified. Must be specified for
-#'  time series with \code{"unrecognised"} periodicity. Time steps out of sync
-#'  with the new periodicity are dropped.
+#'  time series with unrecognised periodicity. Time steps out of sync with the
+#'  new periodicity are dropped.
 #' @param rollback A logical specifying if a call to \code{\link{rollback}} is
 #'  made when appropriate.
 #' @param clone A logical specifying if the object is modified in place or if a

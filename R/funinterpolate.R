@@ -9,7 +9,7 @@
 #'
 #' @param .col A numeric vector.
 #' @param roll A positive numeric specifying the maximum size of gaps whose
-#'  missing values shall be filled. For time series with \code{"unrecognised"}
+#'  missing values shall be filled. For time series with unrecognised
 #'  periodicity it is interpreted as seconds and for time series with recognised
 #'  periodicity it is multiplied with the maximum time difference between two
 #'  subsequent time steps in seconds. So for regular time series it is the

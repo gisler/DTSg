@@ -22,8 +22,8 @@ time series.}
 
 \item{by}{Specifies the new periodicity in one of the ways the \code{by}
 argument of \code{\link{seq.POSIXt}} can be specified. Must be specified for
-time series with \code{"unrecognised"} periodicity. Time steps out of sync
-with the new periodicity are dropped.}
+time series with unrecognised periodicity. Time steps out of sync with the
+new periodicity are dropped.}
 
 \item{rollback}{A logical specifying if a call to \code{\link{rollback}} is
 made when appropriate.}
