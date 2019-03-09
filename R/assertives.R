@@ -20,7 +20,7 @@ assert_is_periodicity_recognised <- function(periodicity) {
   if (periodicity == "unrecognised") {
     stop(
       paste(
-        "This functionality doesn't work with time series of unrecognised periodicity.",
+        "This functionality does not work with time series of unrecognised periodicity.",
         'Please call "alter()" with specified "by" argument first.',
         sep = "\n"
       ),

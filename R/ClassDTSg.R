@@ -183,7 +183,7 @@ DTSg <- R6Class(
         },
         warning = function(w) {
           stop(
-            sprintf("Won't coerce %s because %s.", msgPart, deparse(w$message)),
+            sprintf("Will not coerce %s because %s.", msgPart, deparse(w$message)),
             call. = FALSE
           )
         }
