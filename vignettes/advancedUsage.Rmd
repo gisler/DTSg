@@ -75,7 +75,7 @@ TS <- DTSg$
 TS
 ```
 
-For piping, we have to load the `magrittr` package for access to its pipe operator first:
+For piping, we have to make sure the `magrittr` package is installed and load it for access to its pipe operator first:
 
 ```{r}
 if (requireNamespace("magrittr", quietly = TRUE)) {
