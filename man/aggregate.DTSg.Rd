@@ -74,8 +74,8 @@ Depending on the number of columns to aggregate, the \emph{.n} column
  (such as hydrological time series). Doing so ensures that diurnal variations
  are preserved under all circumstances and that all intervals are of
  \dQuote{correct} length. This feature requires that the periodicity of the
- time series is not \code{"unrecognised"} and is supported by the following
- temporal aggregation level functions of the package:
+ time series is not unrecognised and is supported by the following temporal
+ aggregation level functions of the package:
  \itemize{
    \item \code{\link{byY_____}}
    \item \code{\link{byYQ____}}
