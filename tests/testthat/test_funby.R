@@ -3,106 +3,145 @@ context("fasttime functions (UTC)")
 
 test_that(
   '"byFasttimeY_____" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttimeY_____, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), by = "year"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttimeY_____, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), by = "year"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYQ____" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttimeYQ____, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), by = "quarter"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttimeYQ____, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), by = "quarter"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYm____" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttimeYm____, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), by = "month"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttimeYm____, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), by = "month"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYmd___" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttimeYmd___, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), by = "day"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttimeYmd___, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), by = "day"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYmdH__" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdH__, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdH__, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYmdHM_" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdHM_, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "minute"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdHM_, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "minute"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttimeYmdHMS" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdHMS, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "second"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttimeYmdHMS, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "second"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime______" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttime______, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value))][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttime______, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value))][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime_Q____" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttime_Q____, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), keyby = "quarter"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttime_Q____, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), keyby = "quarter"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime_m____" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTChourlyData)$aggregate(byFasttime_m____, sum)$values(TRUE)[["value"]],
-    UTChourlyData[, .(value = sum(value)), keyby = "month"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTChourlyData)$aggregate(byFasttime_m____, sum)$values(TRUE)[["value"]],
+      UTChourlyData[, .(value = sum(value)), keyby = "month"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime___H__" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime___H__, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime___H__, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime____M_" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime____M_, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "hourMinute"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime____M_, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "hourMinute"][["value"]]
+    )
+  }
 )
 
 test_that(
   '"byFasttime_____S" works as expected (UTC)',
-  expect_equal(
-    DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime_____S, sum)$values(TRUE)[["value"]],
-    UTCfractionalSecondData[, .(value = sum(value)), by = "minuteSecond"][["value"]]
-  )
+  {
+    skip_if_not_installed("fasttime")
+    expect_equal(
+      DTSg$new(UTCfractionalSecondData)$aggregate(byFasttime_____S, sum)$values(TRUE)[["value"]],
+      UTCfractionalSecondData[, .(value = sum(value)), by = "minuteSecond"][["value"]]
+    )
+  }
 )
 
 #### base functions (UTC) ####
