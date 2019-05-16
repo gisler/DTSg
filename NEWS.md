@@ -1,6 +1,6 @@
-## DTSg v0.1.2.9000
+## DTSg v0.1.3
 
-* Improved vignettes
+* Slightly improved vignettes and documentation
 
 ## DTSg v0.1.2
 

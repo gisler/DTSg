@@ -5,7 +5,7 @@ NULL
 #'
 #' Applies a temporal aggregation level function to the \emph{.dateTime} column
 #'  of a \code{\link{DTSg}} object and aggregates its values columnwise to the
-#'  function's temporal aggregation level using the provided summary function.
+#'  function's temporal aggregation level utilising a provided summary function.
 #'  Additionally, it sets the object's \emph{aggregated} field to \code{TRUE}.
 #'  See \code{\link{DTSg}} for further information.
 #'
@@ -51,7 +51,7 @@ NULL
 #'  }
 #'
 #' \code{ignoreDST} tells a temporal aggregation level function if it is
-#'  supposed to ignore day saving time when forming new timestamps. This can be
+#'  supposed to ignore day saving time while forming new timestamps. This can be
 #'  a desired feature for time series strictly following the position of the sun
 #'  (such as hydrological time series). Doing so ensures that diurnal variations
 #'  are preserved under all circumstances and that all intervals are of
@@ -71,7 +71,7 @@ NULL
 #' @return Returns an aggregated \code{\link{DTSg}} object.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{cols}},
-#'  \code{\link{POSIXct}}, \code{\link{list}}, \code{\link{difftime}}
+#'  \code{\link{POSIXct}}, \code{\link{list}}
 #'
 #' @examples
 #' # new DTSg object

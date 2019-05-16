@@ -1,15 +1,12 @@
-## Resubmission
+## Patch Release
 
-This is a resubmission. In this version I have:
-
-* Removed `\dontrun{}` in the examples and instead made sure functions requiring suggested packages are only exectuted if these packages are installed.
-* Did the latter for tests and vignettes as well.
+* Slightly improved vignettes and documentation
 
 ## Test Environments
 
-* local Windows (R 3.5.2)
-* Linux on Travis CI (R 3.5.2)
-* OS X on Travis CI (R 3.5.2)
+* local Windows (R 3.6.1)
+* Linux on Travis CI (R 3.6.1)
+* OS X on Travis CI (R 3.6.1)
 * win-builder (devel)
 
 ## R CMD Check Results
