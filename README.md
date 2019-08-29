@@ -16,6 +16,6 @@ Install the development version from GitHub (requires the `devtools` package):
 
 ## Getting Started
 
-[A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/basicUsage.html)
+[A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)
 
-[B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/advancedUsage.html)
+[B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/b_advancedUsage.html)
