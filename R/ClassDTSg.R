@@ -531,13 +531,12 @@ DTSg <- R6Class(
       secAxisCols  = NULL,
       secAxisLabel = ""
     ) {
-      if (!requireNamespace("xts", quietly = TRUE) ||
-          !requireNamespace("dygraphs", quietly = TRUE) ||
+      if (!requireNamespace("dygraphs", quietly = TRUE) ||
           !requireNamespace("RColorBrewer", quietly = TRUE)) {
         stop(
           sprintf(
-            "Packages %s, %s and %s must be installed for this method.",
-            deparse("xts"), deparse("dygraphs"), deparse("RColorBrewer")
+            "Packages %s and %s must be installed for this method.",
+            deparse("dygraphs"), deparse("RColorBrewer")
           ),
           call. = FALSE
         )
@@ -561,10 +560,6 @@ DTSg <- R6Class(
         assert_is_a_string(secAxisLabel)
       }
 
-      values <- as.xts.data.table(
-        private$.values[.dateTime >= from & .dateTime <= to, c(".dateTime", cols), with = FALSE]
-      )
-
       ylab <- ""
       if (private$.parameter != "") {
         ylab <- private$.parameter
@@ -576,7 +571,11 @@ DTSg <- R6Class(
         }
       }
 
-      plot <- dygraphs::dygraph(values, private$.ID, ylab = ylab)
+      plot <- dygraphs::dygraph(
+        private$.values[.dateTime >= from & .dateTime <= to, c(".dateTime", cols), with = FALSE],
+        private$.ID,
+        ylab = ylab
+      )
       plot <- dygraphs::dyOptions(
         plot,
         colors = RColorBrewer::brewer.pal(max(length(cols), 3L), "Set2"),

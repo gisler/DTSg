@@ -34,7 +34,6 @@ Suggests:
     magrittr,
     RColorBrewer,
     rmarkdown,
-    testthat,
-    xts
+    testthat
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
