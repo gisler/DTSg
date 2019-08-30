@@ -382,11 +382,11 @@ setMethod(
 #' Plot Time Series
 #'
 #' Displays an interactive plot of a \code{\link{DTSg}} object. This method
-#'  requires \pkg{xts}, \pkg{dygraphs} and \pkg{RColorBrewer} to be installed.
-#'  Its main purpose is not to make pretty plots, but rather to offer a
-#'  possibility to interactively explore time series. The title of the plot and
-#'  the label of its primary axis is automatically generated out of the object's
-#'  metadata (fields). See \code{\link{DTSg}} for further information.
+#'  requires \pkg{dygraphs} and \pkg{RColorBrewer} to be installed. Its main
+#'  purpose is not to make pretty plots, but rather to offer a possibility to
+#'  interactively explore time series. The title of the plot and the label of
+#'  its primary axis are automatically generated out of the object's metadata
+#'  (fields). See \code{\link{DTSg}} for further information.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param from A \code{\link{POSIXct}} date with the same time zone as the time
@@ -413,8 +413,7 @@ setMethod(
 #' x <- DTSg$new(values = flow)
 #'
 #' # plot time series
-#' if (requireNamespace("xts", quietly = TRUE) &&
-#'     requireNamespace("dygraphs", quietly = TRUE) &&
+#' if (requireNamespace("dygraphs", quietly = TRUE) &&
 #'     requireNamespace("RColorBrewer", quietly = TRUE)) {
 #'   ## R6 method
 #'   x$plot()

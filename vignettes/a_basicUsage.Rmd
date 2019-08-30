@@ -56,13 +56,12 @@ Printing the object shows us the data provided, the specified ID, some more slot
 TS$print() # or 'print(TS)' or just 'TS'
 ```
 
-With this done, we can move on and further explore our time series with a summary (`summary`), a report on missing values (`nas`) and a plot (`plot`). It suddenly seems to contain several missing values which apparently were not there upon loading the data set (`plot` requires the `xts`, `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
+With this done, we can move on and further explore our time series with a summary (`summary`), a report on missing values (`nas`) and a plot (`plot`). It suddenly seems to contain several missing values which apparently were not there upon loading the data set (`plot` requires the `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
 
 ```{r}
 TS$summary() # or 'summary(TS)'
 TS$nas(cols = "flow") # or 'nas(TS, cols = "flow")'
-if (requireNamespace("xts", quietly = TRUE) &&
-    requireNamespace("dygraphs", quietly = TRUE) &&
+if (requireNamespace("dygraphs", quietly = TRUE) &&
     requireNamespace("RColorBrewer", quietly = TRUE)) {
   TS$plot(cols = "flow") # or 'plot(TS, cols = "flow")'
 }
