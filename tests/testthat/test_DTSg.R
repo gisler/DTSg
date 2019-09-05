@@ -390,6 +390,14 @@ test_that(
 )
 
 test_that(
+  '"timestamps" field is set correctly',
+  expect_identical(
+    DTSg$new(DT1)$timestamps,
+    8L
+  )
+)
+
+test_that(
   '"timezone" field is set correctly',
   expect_identical(
     DTSg$new(DT1)$timezone,
@@ -408,6 +416,13 @@ test_that(
   '"regular" field is read-only',
   expect_error(
     DTSg$new(DT1)$regular <- FALSE
+  )
+)
+
+test_that(
+  '"timestamps" field is read-only',
+  expect_error(
+    DTSg$new(DT1)$timestamps <- 1L
   )
 )
 

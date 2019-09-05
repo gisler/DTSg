@@ -93,6 +93,8 @@ NULL
 #'      subsequent timestamps are the same (\code{TRUE}) or if some are
 #'      different (\code{FALSE}). A, for instance, monthly time series is
 #'      considered irregular in this sense (read-only).
+#'    \item \emph{timestamps:} An integer showing the total number of timestamps
+#'      of the time series (read-only).
 #'    \item \emph{timezone:} A character string containing the time zone of the
 #'      time series (read-only).
 #'    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
@@ -164,6 +166,7 @@ DTSg <- R6Class(
     .origDateTimeCol = character(),
     .parameter = character(),
     .periodicity = NULL,
+    .timestamps = integer(),
     .timezone = character(),
     .unit = character(),
     .values = data.table(),
@@ -622,6 +625,7 @@ DTSg <- R6Class(
         print(private$.maxLag)
       }
       cat(  "Time zone:   ", private$.timezone    , "\n", sep = "")
+      cat(  "Timestamps:  ", private$.timestamps  , "\n", sep = "")
 
       invisible(self)
     },
@@ -708,6 +712,8 @@ DTSg <- R6Class(
           }
         }
       }
+
+      private$.timestamps <- nrow(private$.values)
 
       invisible(self)
     },
@@ -873,6 +879,14 @@ DTSg <- R6Class(
     regular = function(value) {
       if (missing(value)) {
         private$.isRegular
+      } else {
+        stop("Read-only field.", call. = FALSE)
+      }
+    },
+
+    timestamps = function(value) {
+      if (missing(value)) {
+        private$.timestamps
       } else {
         stop("Read-only field.", call. = FALSE)
       }

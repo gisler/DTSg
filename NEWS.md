@@ -1,5 +1,6 @@
 ## DTSg v0.1.3.9000
 
+* Added `timestamps` field providing the total number of timestamps
 * Added means to measure code coverage with the help of `covr`
 * Removed `xts` from suggested packages list (already comes along with `dygraphs`)
 * Slightly improved documentation
