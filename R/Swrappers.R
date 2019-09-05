@@ -357,7 +357,8 @@ new <- function(
   unit = "",
   variant = "",
   aggregated = FALSE,
-  fast = FALSE
+  fast = FALSE,
+  swallow = FALSE
 ) {
   DTSg$new(
     values = values,
@@ -366,7 +367,8 @@ new <- function(
     unit = unit,
     variant = variant,
     aggregated = aggregated,
-    fast = fast
+    fast = fast,
+    swallow = swallow
   )
 } # no R CMD check warning
 setClass("DTSg", slots = c(. = "logical"))
