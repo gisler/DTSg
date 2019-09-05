@@ -550,10 +550,30 @@ test_that(
 )
 
 test_that(
+  "all/only global references are removed (DTSg)",
+  expect_true({
+    TS <- DTSg$new(flow)
+    TScopy <<- TS$clone(deep = TRUE)
+    TSref1 <<- TS
+    TSref2 <<- TS
+    TS$values(TRUE, TRUE)
+    exists("TScopy") && !exists("TSref1") && !exists("TSref2")
+  })
+)
+
+test_that(
   "name of .dateTime column is not restored",
   expect_identical(
     names(DTSg$new(DT1)$values(TRUE))[1L],
     ".dateTime"
+  )
+)
+
+test_that(
+  "name of .dateTime column is restored (reference + drop)",
+  expect_identical(
+    names(DTSg$new(DT1)$values(TRUE, TRUE))[1L],
+    "date"
   )
 )
 
