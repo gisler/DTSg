@@ -28,7 +28,7 @@ Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
 \examples{
 # generate S3 wrapper for aggregate of DTSg
 aggregate.DTSg <- S3WrapperGenerator(
-  R6Method = expression(DTSg$public_methods$aggregate)
+  R6Method = expression(DTSg$public_methods$alter)
 )
 
 }
