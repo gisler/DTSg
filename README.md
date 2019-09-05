@@ -14,6 +14,8 @@ Install the development version from GitHub (requires the `devtools` package):
 
 [![Build Status](https://travis-ci.org/gisler/DTSg.svg?branch=master)](https://travis-ci.org/gisler/DTSg)
 
+[![Coverage Status](https://coveralls.io/repos/github/gisler/DTSg/badge.svg?branch=master)](https://coveralls.io/github/gisler/DTSg?branch=master)
+
 ## Getting Started
 
 [A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)

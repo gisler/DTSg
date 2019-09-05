@@ -28,6 +28,7 @@ Imports:
     methods,
     R6
 Suggests:
+    covr,
     dygraphs,
     fasttime,
     knitr,
