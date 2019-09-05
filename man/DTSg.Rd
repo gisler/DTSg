@@ -54,9 +54,9 @@ The \code{DTSg} class is the working horse of the package. It is an
  method first and the object as its first argument (for instance,
  \code{cols(x)}). An exception is the \code{new} method. It is not an S3
  method, but an abused S4 constructor with the character string \code{"DTSg"}
- as its first argument. For the R6 interface the \code{DTSg} class generator
- has to be used to access the \code{new} method with the help of the \code{$}
- operator.
+ as its first argument. Regarding the R6 interface, the \code{DTSg} class
+ generator has to be used to access the \code{new} method with the help of
+ the \code{$} operator.
 }
 \note{
 Due to the \code{\link{POSIXct}} nature of the \emph{.dateTime} column, the
