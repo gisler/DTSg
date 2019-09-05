@@ -465,7 +465,7 @@ DTSg <- R6Class(
       self$refresh()
 
       if (swallow) {
-        private$rmGlobalReferences(private$.values)
+        private$rmGlobalReferences(address(private$.values))
       }
 
       if (private$.periodicity != "unrecognised") {
@@ -843,11 +843,18 @@ DTSg <- R6Class(
       summary(private$.values[, cols, with = FALSE], ...)
     },
 
-    values = function(reference = FALSE) {
+    values = function(reference = FALSE, drop = FALSE) {
       assert_is_a_bool(assert_all_are_not_na(reference))
+      assert_is_a_bool(assert_all_are_not_na(drop))
 
       if (reference) {
         values <- private$.values
+
+        if (drop) {
+          setnames(values, 1L, private$.origDateTimeCol)
+
+          private$rmGlobalReferences(address(self))
+        }
       } else {
         values <- copy(private$.values)
         setnames(values, 1L, private$.origDateTimeCol)

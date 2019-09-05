@@ -579,6 +579,11 @@ values <- function(x, ...) {
 #' @param reference A logical specifying if a copy of the \emph{values} or a
 #'  reference to the \emph{values} is returned. See details for further
 #'  information.
+#' @param drop A logical specifying if the object and all references to it shall
+#'  be removed from the global environment after successfully querying its
+#'  values. Only works in conjunction with the \code{reference} argument set to
+#'  \code{TRUE}. This feature allows for a ressource efficient destruction of a
+#'  \code{\link{DTSg}} object while preserving its \emph{values.}
 #' @param \dots Not used (S3 method only).
 #'
 #' @details
@@ -594,7 +599,7 @@ values <- function(x, ...) {
 #'
 #' @note
 #' The original name of the \emph{.dateTime} column is restored when not
-#'  returned as a reference.
+#'  returned as a reference or when dropped.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link{refresh}},
 #'  \code{\link[data.table]{data.table}}

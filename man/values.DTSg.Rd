@@ -5,7 +5,7 @@
 \alias{values}
 \title{Get Values}
 \usage{
-\method{values}{DTSg}(x, reference = FALSE, ...)
+\method{values}{DTSg}(x, reference = FALSE, drop = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -13,6 +13,12 @@
 \item{reference}{A logical specifying if a copy of the \emph{values} or a
 reference to the \emph{values} is returned. See details for further
 information.}
+
+\item{drop}{A logical specifying if the object and all references to it shall
+be removed from the global environment after successfully querying its
+values. Only works in conjunction with the \code{reference} argument set to
+\code{TRUE}. This feature allows for a ressource efficient destruction of a
+\code{\link{DTSg}} object while preserving its \emph{values.}}
 
 \item{\dots}{Not used (S3 method only).}
 }
@@ -33,7 +39,7 @@ A reference to the \emph{values} of a \code{\link{DTSg}} object can be used
 }
 \note{
 The original name of the \emph{.dateTime} column is restored when not
- returned as a reference.
+ returned as a reference or when dropped.
 }
 \examples{
 # new DTSg object
