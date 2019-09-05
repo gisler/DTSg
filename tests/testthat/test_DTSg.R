@@ -232,6 +232,14 @@ test_that(
   expect_true(
     DTSg$new(DT1, fast = TRUE)$fast
   )
+  "all/only global references are removed (data.table)",
+  expect_true({
+    DTcopy <<- data.table::copy(flow)
+    DTref1 <<- flow
+    DTref2 <<- flow
+    DTSg$new(DTref1, swallow = TRUE)
+    exists("DTcopy") && !exists("DTref1") && !exists("DTref2")
+  })
 )
 
 #### merge method ####

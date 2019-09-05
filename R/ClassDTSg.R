@@ -25,7 +25,7 @@ NULL
 #'  the \code{$} operator.
 #'
 #' @usage new(Class, values, ID = "", parameter = "", unit = "", variant = "",
-#'  aggregated = FALSE, fast = FALSE)
+#'  aggregated = FALSE, fast = FALSE, swallow = FALSE)
 #'
 #' @param Class A character string. Must be \code{"DTSg"} in order to create a
 #'  \code{DTSg} object. Otherwise a different object may or may not be created
@@ -48,6 +48,18 @@ NULL
 #' @param fast A logical signalling if all rows (\code{FALSE}) or only the first
 #'  1000 rows (\code{TRUE}) shall be used to check the object's integrity and
 #'  for the automatic detection of the time series' periodicity.
+#' @param swallow A logical signalling if the object provided through the
+#'  \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
+#'  object, i.e. no copy of the data shall be made. This is generally more
+#'  ressource efficient, but only works if the object provided through the
+#'  \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
+#'  however, that if the creation of the \code{DTSg} object fails for some
+#'  reason, the first column of the provided
+#'  \code{\link[data.table]{data.table}} might have been coerced to
+#'  \code{\link{POSIXct}} and keyed (see \code{\link[data.table]{setkey}} for
+#'  further information). Furthermore, all references to the \dQuote{swallowed}
+#'  \code{\link[data.table]{data.table}} in the global environment are removed
+#'  upon successfull creation of a \code{DTSg} object.
 #'
 #' @return Returns a \code{DTSg} object.
 #'
@@ -136,8 +148,8 @@ NULL
 #'
 #' @seealso \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
 #'  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
-#'  \code{\link{difftime}}, \code{\link{clone}}, \code{\link{options}},
-#'  \code{\link{list}}
+#'  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
+#'  \code{\link{clone}}, \code{\link{options}}, \code{\link{list}}
 #'
 #' @examples
 #' # new DTSg object
@@ -203,6 +215,18 @@ DTSg <- R6Class(
       } else {
         value
       }
+    },
+
+    rmGlobalReferences = function(addr) {
+      globalObjs <- ls(".GlobalEnv", sorted = FALSE)
+
+      rmReferences <- function(globalObj, addr) {
+        if (addr == address(get(globalObj, envir = globalenv()))) {
+          rm(list = globalObj, envir = globalenv())
+        }
+      }
+
+      lapply(globalObjs, rmReferences, addr = addr)
     }
   ),
 
@@ -404,7 +428,8 @@ DTSg <- R6Class(
       unit = "",
       variant = "",
       aggregated = FALSE,
-      fast = FALSE
+      fast = FALSE,
+      swallow = FALSE
     ) {
       assert_is_inherited_from(values, "data.frame")
       if (nrow(values) < 1L || ncol(values) < 2L) {
@@ -416,9 +441,14 @@ DTSg <- R6Class(
       if (anyDuplicated(names(values)[-1L]) > 0) {
         stop('Column names must not have any duplicates.', call. = FALSE)
       }
+      assert_is_a_bool(assert_all_are_not_na(swallow))
 
       if (is.data.table(values)) {
-        private$.values <- copy(values)
+        if (swallow) {
+          private$.values <- values
+        } else {
+          private$.values <- copy(values)
+        }
       } else {
         private$.values <- as.data.table(values)
       }
@@ -433,6 +463,10 @@ DTSg <- R6Class(
       self$fast <- fast
 
       self$refresh()
+
+      if (swallow) {
+        private$rmGlobalReferences(private$.values)
+      }
 
       if (private$.periodicity != "unrecognised") {
         self$alter(clone = FALSE)
@@ -631,6 +665,8 @@ DTSg <- R6Class(
     },
 
     refresh = function() {
+      firstCol <- names(private$.values)[1L]
+
       if (!is_posixct(private$.values[[1L]])) {
         set(
           private$.values,
@@ -639,15 +675,16 @@ DTSg <- R6Class(
             private$.values[[1L]],
             as.POSIXct,
             tz = Sys.timezone(),
-            colname = names(private$.values)[1L]
+            colname = firstCol
           )
         )
       }
 
-      setnames(private$.values, 1L, ".dateTime")
-      setkey(private$.values, .dateTime)
+      if (!isTRUE(key(private$.values) == firstCol)) {
+        setkeyv(private$.values, firstCol)
+      }
 
-      private$.timezone <- attr(private$.values[[".dateTime"]], "tzone")
+      private$.timezone <- attr(private$.values[[1L]], "tzone")
 
       if (nrow(private$.values) < 2L) {
         zeroSecs <- difftime(as.POSIXct("2000-01-01", tz = "UTC"), as.POSIXct("2000-01-01", tz = "UTC"))
@@ -664,7 +701,7 @@ DTSg <- R6Class(
         len <- 1000L
       }
 
-      lags <- round(diff(private$.values[[".dateTime"]][1:len]), 6)
+      lags <- round(diff(private$.values[[1L]][1:len]), 6)
       if (anyNA(lags)) {
         stop(".dateTime column must not have any NA values.", call. = FALSE)
       }
@@ -684,8 +721,8 @@ DTSg <- R6Class(
         private$.isRegular <- FALSE
         private$.periodicity <- "unrecognised"
 
-        from <- private$.values[[".dateTime"]][1L]
-        to   <- private$.values[[".dateTime"]][len]
+        from <- private$.values[[1L]][1L]
+        to   <- private$.values[[1L]][len]
 
         for (by in c(
           sprintf("%s DSTdays", c(1:15, 21L, 28L, 30L)),
@@ -702,8 +739,8 @@ DTSg <- R6Class(
             DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
           }
 
-          DT <- private$.values[DT]
-          lags <- diff(DT[[".dateTime"]])
+          DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
+          lags <- diff(DT[[1L]])
           if (sum(!is.na(DT[, -1L, with = FALSE])) ==
               sum(!is.na(private$.values[1:len, -1L, with = FALSE])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
@@ -714,6 +751,8 @@ DTSg <- R6Class(
       }
 
       private$.timestamps <- nrow(private$.values)
+
+      setnames(private$.values, 1L, ".dateTime")
 
       invisible(self)
     },
