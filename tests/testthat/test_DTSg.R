@@ -189,6 +189,20 @@ test_that(
 )
 
 test_that(
+  '"aggregated" field is set correctly',
+  expect_true(
+    DTSg$new(DT1, aggregated = TRUE)$aggregated
+  )
+)
+
+test_that(
+  '"fast" field is set correctly',
+  expect_true(
+    DTSg$new(DT1, fast = TRUE)$fast
+  )
+)
+
+test_that(
   '"ID" field is set correctly',
   expect_identical(
     DTSg$new(DT1, ID = "ID")$ID,
@@ -221,25 +235,16 @@ test_that(
 )
 
 test_that(
-  '"aggregated" field is set correctly',
-  expect_true(
-    DTSg$new(DT1, aggregated = TRUE)$aggregated
-  )
-)
-
-test_that(
-  '"fast" field is set correctly',
-  expect_true(
-    DTSg$new(DT1, fast = TRUE)$fast
-  )
   "all/only global references are removed (data.table)",
-  expect_true({
-    DTcopy <<- data.table::copy(flow)
-    DTref1 <<- flow
-    DTref2 <<- flow
-    DTSg$new(DTref1, swallow = TRUE)
-    exists("DTcopy") && !exists("DTref1") && !exists("DTref2")
-  })
+  expect_true(
+    {
+      DTcopy <<- data.table::copy(flow)
+      DTref1 <<- flow
+      DTref2 <<- flow
+      DTSg$new(DTref1, swallow = TRUE)
+      exists("DTcopy", where = 1L) && !exists("DTref1", where = 1L) && !exists("DTref2", where = 1L)
+    }
+  )
 )
 
 #### merge method ####
@@ -303,16 +308,16 @@ test_that(
 context("refresh method")
 
 test_that(
-  "coercing .dateTime column returns warning",
-  expect_warning(
-    DTSg$new(data.table::data.table(date = as.character(DT2[["date"]]), col1 = DT2[["col1"]]))
+  "failing to coerce .dateTime column returns error",
+  expect_error(
+    DTSg$new(data.table::data.table(date = "timestamp", col1 = DT2[["col1"]]))
   )
 )
 
 test_that(
-  "failing to coerce .dateTime column returns error",
-  expect_error(
-    DTSg$new(data.table::data.table(date = "timestamp", col1 = DT2[["col1"]]))
+  "coercing .dateTime column returns warning",
+  expect_warning(
+    DTSg$new(data.table::data.table(date = as.character(DT2[["date"]]), col1 = DT2[["col1"]]))
   )
 )
 
@@ -551,14 +556,16 @@ test_that(
 
 test_that(
   "all/only global references are removed (DTSg)",
-  expect_true({
-    TS <- DTSg$new(flow)
-    TScopy <<- TS$clone(deep = TRUE)
-    TSref1 <<- TS
-    TSref2 <<- TS
-    TS$values(TRUE, TRUE)
-    exists("TScopy") && !exists("TSref1") && !exists("TSref2")
-  })
+  expect_true(
+    {
+      TS <- DTSg$new(flow)
+      TScopy <<- TS$clone(deep = TRUE)
+      TSref1 <<- TS
+      TSref2 <<- TS
+      TS$values(TRUE, TRUE)
+      exists("TScopy", where = 1L) && !exists("TSref1", where = 1L) && !exists("TSref2", where = 1L)
+    }
+  )
 )
 
 test_that(
