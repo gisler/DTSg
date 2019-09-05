@@ -154,6 +154,7 @@ Valid results are returned for the following fields:
 * *parameter*
 * *periodicity*
 * *regular*
+* *timestamps*
 * *timezone*
 * *unit*
 * *variant*

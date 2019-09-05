@@ -122,6 +122,8 @@ A \code{DTSg} object has the following fields or properties as they are often
      subsequent timestamps are the same (\code{TRUE}) or if some are
      different (\code{FALSE}). A, for instance, monthly time series is
      considered irregular in this sense (read-only).
+   \item \emph{timestamps:} An integer showing the total number of timestamps
+     of the time series (read-only).
    \item \emph{timezone:} A character string containing the time zone of the
      time series (read-only).
    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
