@@ -36,7 +36,7 @@ rollback <- function(.dateTime, periodicity) {
     stop("Periodicity must be a multiple of month(s) or year(s).", call. = FALSE)
   }
 
-  periodicity <- unlist(strsplit(periodicity, " "))
+  periodicity <- unlist(strsplit(periodicity, " ", fixed = TRUE))
   periodicity[2L] <- sub("s$", "", periodicity[2L])
   clause <- switch(
     periodicity[2L],
