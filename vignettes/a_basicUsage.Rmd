@@ -50,7 +50,7 @@ TS <- new(Class = "DTSg", values = flow, ID = "River Flow")
 
 ## Object Inspection
 
-Printing the object shows us the data provided, the specified ID, some more slots for metadata, which we left empty, as well as that the object represents a regular UTC time series with a periodicity of one day. It also shows us that the first column has been renamed to *.dateTime.* This columns serves as its time index and cannot be changed at will:
+Printing the object shows us the data provided, the specified ID and other metadata (if provided) as well as that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to *.dateTime.* This columns serves as its time index and cannot be changed at will:
 
 ```{r}
 TS$print() # or 'print(TS)' or just 'TS'
