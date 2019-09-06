@@ -640,10 +640,19 @@ DTSg <- R6Class(
     print = function() {
       cat(  "Values:\n")
       print(private$.values, class = TRUE)
-      cat("\nID:          ", private$.ID          , "\n", sep = "")
-      cat(  "Parameter:   ", private$.parameter   , "\n", sep = "")
-      cat(  "Variant:     ", private$.variant     , "\n", sep = "")
-      cat(  "Unit:        ", private$.unit        , "\n", sep = "")
+      cat(  "\n")
+      if (private$.ID != "") {
+        cat("ID:          ", private$.ID          , "\n", sep = "")
+      }
+      if (private$.parameter != "") {
+        cat("Parameter:   ", private$.parameter   , "\n", sep = "")
+      }
+      if (private$.variant != "") {
+        cat("Variant:     ", private$.variant     , "\n", sep = "")
+      }
+      if (private$.unit != "") {
+        cat("Unit:        ", private$.unit        , "\n", sep = "")
+      }
       cat(  "Aggregated:  ", private$.isAggregated, "\n", sep = "")
       cat(  "Regular:     ", private$.isRegular   , "\n", sep = "")
       if (is.character(private$.periodicity)) {
