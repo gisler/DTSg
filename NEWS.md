@@ -2,6 +2,7 @@
 
 * Added `swallow` argument to the `new` method: It allows for a more ressource efficient object creation
 * Added `drop` argument to the `values` method: It allows for a ressource efficient destruction of a `DTSg` object while preserving its *values*
+* `alter` method and linked with it `new` and other methods now are way more ressource efficient in some cases
 * Added `timestamps` field providing the total number of timestamps
 * `print` method now ommits empty metadata fields
 * Added means to measure code coverage with the help of `covr`
