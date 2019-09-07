@@ -357,9 +357,11 @@ DTSg <- R6Class(
       } else {
         DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
       }
-      private$.values <- private$.values[DT]
+      if (by != private$.periodicity || nrow(DT) != private$.timestamps) {
+        private$.values <- private$.values[DT]
 
-      self$refresh()
+        self$refresh()
+      }
 
       invisible(self)
     },
