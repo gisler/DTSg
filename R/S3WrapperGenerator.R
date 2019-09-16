@@ -5,12 +5,12 @@ self <- NULL # no R CMD check note
 #' Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
 #'  but can also be used to generate \dQuote{plain} function wrappers.
 #'
-#' @param R6Method An \code{\link{expression}} of a public method of an
+#' @param R6Method An \code{\link{expression}} with a public method of an
 #'  \code{R6ClassGenerator}.
 #' @param self A character string specifying the name of the parameter which
-#'  takes the R6 object.
-#' @param dots A logical specifying if a \code{\dots} parameter is added as last
-#'  parameter in case none already exists. This might be required for S3
+#'  will take the R6 object.
+#' @param dots A logical specifying if a \code{\dots} parameter shall be added
+#'  as last parameter in case none already exists. This might be required for S3
 #'  generic/method consistency.
 #'
 #' @return Returns a function with the required parameters which captures its

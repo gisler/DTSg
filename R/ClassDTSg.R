@@ -220,13 +220,13 @@ DTSg <- R6Class(
     rmGlobalReferences = function(addr) {
       globalObjs <- ls(".GlobalEnv", sorted = FALSE)
 
-      rmReferences <- function(globalObj, addr) {
+      rmGlobalReferences <- function(globalObj, addr) {
         if (addr == address(get(globalObj, envir = globalenv()))) {
           rm(list = globalObj, envir = globalenv())
         }
       }
 
-      lapply(globalObjs, rmReferences, addr = addr)
+      lapply(globalObjs, rmGlobalReferences, addr = addr)
     }
   ),
 
@@ -695,9 +695,10 @@ DTSg <- R6Class(
         setkeyv(private$.values, firstCol)
       }
 
+      private$.timestamps <- nrow(private$.values)
       private$.timezone <- attr(private$.values[[1L]], "tzone")
 
-      if (nrow(private$.values) < 2L) {
+      if (private$.timestamps < 2L) {
         zeroSecs <- difftime(as.POSIXct("2000-01-01", tz = "UTC"), as.POSIXct("2000-01-01", tz = "UTC"))
         private$.minLag <- zeroSecs
         private$.maxLag <- zeroSecs
@@ -706,8 +707,8 @@ DTSg <- R6Class(
         return(invisible(self))
       }
 
-      if (!private$.isFast || nrow(private$.values) < 1000L) {
-        len <- nrow(private$.values)
+      if (!private$.isFast || private$.timestamps < 1000L) {
+        len <- private$.timestamps
       } else {
         len <- 1000L
       }
@@ -760,8 +761,6 @@ DTSg <- R6Class(
           }
         }
       }
-
-      private$.timestamps <- nrow(private$.values)
 
       setnames(private$.values, 1L, ".dateTime")
 
