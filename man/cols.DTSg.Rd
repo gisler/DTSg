@@ -10,8 +10,9 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{class}{A character string matched to the first element of each column's
-\code{\link{class}} vector or \code{"all"} for all column names.}
+\item{class}{A character string matched to the most specific class (first
+element) of each column's \code{\link{class}} vector or \code{"all"} for all
+column names.}
 
 \item{\dots}{Not used (S3 method only).}
 }

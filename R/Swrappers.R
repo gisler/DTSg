@@ -244,8 +244,9 @@ cols <- function(x, ...) {
 #'  \code{\link{class}} only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param class A character string matched to the first element of each column's
-#'  \code{\link{class}} vector or \code{"all"} for all column names.
+#' @param class A character string matched to the most specific class (first
+#'  element) of each column's \code{\link{class}} vector or \code{"all"} for all
+#'  column names.
 #' @param \dots Not used (S3 method only).
 #'
 #' @return Returns a character vector.

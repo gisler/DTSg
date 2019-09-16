@@ -293,7 +293,7 @@ test_that(
 test_that(
   "no missing values return empty data.table",
   expect_identical(
-    DTSg$new(DT2)$nas(cols = "col3"),
+    DTSg$new(DT2)$nas("col3"),
     data.table::data.table(
       .col = character(),
       .group = integer(),
@@ -474,7 +474,7 @@ test_that(
 )
 
 test_that(
-  '"inverseDistance" weights are correct (power is one)',
+  '"inverseDistance" weights are correct (power = one)',
   expect_identical(
     DTSg$new(DT1)$rollapply(
       weighted.mean,
@@ -491,7 +491,7 @@ test_that(
 )
 
 test_that(
-  '"inverseDistance" weights are correct (power is two)',
+  '"inverseDistance" weights are correct (power = two)',
   expect_identical(
     DTSg$new(DT1)$rollapply(
       weighted.mean,
