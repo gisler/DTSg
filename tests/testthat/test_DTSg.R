@@ -591,3 +591,43 @@ test_that(
     "date"
   )
 )
+
+test_that(
+  "class is data.table (reference + drop)",
+  expect_identical(
+    class(DTSg$new(DT1)$values(TRUE, TRUE)),
+    c("data.table", "data.frame")
+  )
+)
+
+test_that(
+  "class is data.table (drop)",
+  expect_identical(
+    class(DTSg$new(DT1)$values(TRUE)),
+    c("data.table", "data.frame")
+  )
+)
+
+test_that(
+  "class is data.table",
+  expect_identical(
+    class(DTSg$new(DT1)$values()),
+    c("data.table", "data.frame")
+  )
+)
+
+test_that(
+  "class is data.frame (reference + drop)",
+  expect_identical(
+    class(DTSg$new(DT1)$values(TRUE, TRUE, "data.frame")),
+    "data.frame"
+  )
+)
+
+test_that(
+  "class is data.frame",
+  expect_identical(
+    class(DTSg$new(DT1)$values(class = "data.frame")),
+    "data.frame"
+  )
+)
