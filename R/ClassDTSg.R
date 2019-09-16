@@ -854,21 +854,31 @@ DTSg <- R6Class(
       summary(private$.values[, cols, with = FALSE], ...)
     },
 
-    values = function(reference = FALSE, drop = FALSE) {
+    values = function(
+      reference = FALSE,
+      drop = FALSE,
+      class = c("data.table", "data.frame")
+    ) {
       assert_is_a_bool(assert_all_are_not_na(reference))
       assert_is_a_bool(assert_all_are_not_na(drop))
+      class <- match.arg(class)
 
       if (reference) {
         values <- private$.values
 
         if (drop) {
-          setnames(values, 1L, private$.origDateTimeCol)
-
           private$rmGlobalReferences(address(self))
         }
       } else {
         values <- copy(private$.values)
+      }
+
+      if (reference && drop || !reference) {
         setnames(values, 1L, private$.origDateTimeCol)
+
+        if (class == "data.frame") {
+          setDF(values)
+        }
       }
 
       values

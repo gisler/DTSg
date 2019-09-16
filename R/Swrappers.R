@@ -584,6 +584,10 @@ values <- function(x, ...) {
 #'  values. Only works in conjunction with the \code{reference} argument set to
 #'  \code{TRUE}. This feature allows for a ressource efficient destruction of a
 #'  \code{\link{DTSg}} object while preserving its \emph{values.}
+#' @param class A character string specifying the class of the returned
+#'  \emph{values.} \code{"data.frame"} only works if either the
+#'  \code{\link{DTSg}} object is dropped or no reference to the \emph{values} is
+#'  returned.
 #' @param \dots Not used (S3 method only).
 #'
 #' @details
@@ -594,15 +598,15 @@ values <- function(x, ...) {
 #'  \code{\link{refresh}} should be called immediately afterwards in order to
 #'  check the object's integrity.
 #'
-#' @return Returns a \code{\link[data.table]{data.table}} or a reference to a
-#'  \code{\link[data.table]{data.table}}.
+#' @return Returns a \code{\link[data.table]{data.table}}, a reference to a
+#'  \code{\link[data.table]{data.table}} or a \code{\link{data.frame}}.
 #'
 #' @note
 #' The original name of the \emph{.dateTime} column is restored when not
 #'  returned as a reference or when dropped.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link{refresh}},
-#'  \code{\link[data.table]{data.table}}
+#'  \code{\link[data.table]{data.table}}, \code{\link{data.frame}}
 #'
 #' @examples
 #' # new DTSg object
