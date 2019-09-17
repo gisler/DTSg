@@ -17,14 +17,12 @@ information.}
 
 \item{drop}{A logical specifying if the object and all references to it shall
 be removed from the global environment after successfully querying its
-values. Only works in conjunction with the \code{reference} argument set to
-\code{TRUE}. This feature allows for a ressource efficient destruction of a
+values. This feature allows for a ressource efficient destruction of a
 \code{\link{DTSg}} object while preserving its \emph{values.}}
 
 \item{class}{A character string specifying the class of the returned
-\emph{values.} \code{"data.frame"} only works if either the
-\code{\link{DTSg}} object is dropped or no reference to the \emph{values} is
-returned.}
+\emph{values.} \code{"data.frame"} only works if either a copy of the
+\emph{values} is returned or the object is dropped.}
 
 \item{\dots}{Not used (S3 method only).}
 }

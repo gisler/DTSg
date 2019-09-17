@@ -569,22 +569,6 @@ test_that(
 )
 
 test_that(
-  "name of .dateTime column is not restored",
-  expect_identical(
-    names(DTSg$new(DT1)$values(TRUE))[1L],
-    ".dateTime"
-  )
-)
-
-test_that(
-  "name of .dateTime column is restored (reference + drop)",
-  expect_identical(
-    names(DTSg$new(DT1)$values(TRUE, TRUE))[1L],
-    "date"
-  )
-)
-
-test_that(
   "name of .dateTime column is restored",
   expect_identical(
     names(DTSg$new(DT1)$values())[1L],
@@ -593,18 +577,18 @@ test_that(
 )
 
 test_that(
-  "class is data.table (reference + drop)",
+  "name of .dateTime column is restored (drop)",
   expect_identical(
-    class(DTSg$new(DT1)$values(TRUE, TRUE)),
-    c("data.table", "data.frame")
+    names(DTSg$new(DT1)$values(FALSE, TRUE))[1L],
+    "date"
   )
 )
 
 test_that(
-  "class is data.table (drop)",
+  "name of .dateTime column is not restored",
   expect_identical(
-    class(DTSg$new(DT1)$values(TRUE)),
-    c("data.table", "data.frame")
+    names(DTSg$new(DT1)$values(TRUE))[1L],
+    ".dateTime"
   )
 )
 
@@ -617,17 +601,33 @@ test_that(
 )
 
 test_that(
-  "class is data.frame (reference + drop)",
+  "class is data.table (reference)",
   expect_identical(
-    class(DTSg$new(DT1)$values(TRUE, TRUE, "data.frame")),
-    "data.frame"
+    class(DTSg$new(DT1)$values(TRUE, FALSE, "data.frame")),
+    c("data.table", "data.frame")
+  )
+)
+
+test_that(
+  "class is data.table (drop)",
+  expect_identical(
+    class(DTSg$new(DT1)$values(FALSE, TRUE)),
+    c("data.table", "data.frame")
   )
 )
 
 test_that(
   "class is data.frame",
   expect_identical(
-    class(DTSg$new(DT1)$values(class = "data.frame")),
+    class(DTSg$new(DT1)$values(FALSE, FALSE, "data.frame")),
+    "data.frame"
+  )
+)
+
+test_that(
+  "class is data.frame (drop)",
+  expect_identical(
+    class(DTSg$new(DT1)$values(FALSE, TRUE, "data.frame")),
     "data.frame"
   )
 )

@@ -862,7 +862,7 @@ DTSg <- R6Class(
       assert_is_a_bool(assert_all_are_not_na(drop))
       class <- match.arg(class)
 
-      if (reference) {
+      if (reference || drop) {
         values <- private$.values
 
         if (drop) {
@@ -872,7 +872,7 @@ DTSg <- R6Class(
         values <- copy(private$.values)
       }
 
-      if (reference && drop || !reference) {
+      if (!reference || drop) {
         setnames(values, 1L, private$.origDateTimeCol)
 
         if (class == "data.frame") {
