@@ -1,12 +1,3 @@
-#' @import assertive.base
-#' @import assertive.numbers
-#' @import assertive.sets
-#' @import assertive.types
-#' @import data.table
-#' @import methods
-#' @import R6
-NULL
-
 #### Documentation ####
 #' DTSg Class
 #'
@@ -50,7 +41,7 @@ NULL
 #'  for the automatic detection of the time series' periodicity.
 #' @param swallow A logical signalling if the object provided through the
 #'  \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
-#'  object, i.e. no copy of the data shall be made. This is generally more
+#'  object, i.e., no copy of the data shall be made. This is generally more
 #'  ressource efficient, but only works if the object provided through the
 #'  \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
 #'  however, that if the creation of the \code{DTSg} object fails for some
@@ -554,13 +545,13 @@ DTSg <- R6Class(
             list(DT[
               !is.na(.group),
               .(.from = min(.dateTime), .to = max(.dateTime), .n = .N),
-              by = c(".col", ".group")
+              by = .(.col, .group)
             ])
           )
         }
       }
 
-      do.call(rbind, DTs)
+      rbindlist(DTs)
     },
 
     plot = function(

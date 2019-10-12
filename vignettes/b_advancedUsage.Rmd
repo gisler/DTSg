@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 options("DTSgClone" = TRUE)
 ```
 
-This vignette illustrates some more advanced concepts of the `DTSg` package, namely reference semantics as well as chaining and piping.
+This vignette illustrates some more advanced concepts of the `DTSg` package, namely reference semantics, chaining and piping as well as swallowing and dropping.
 
 ---
 
@@ -35,7 +35,7 @@ TS
 
 ## Reference Semantics
 
-By default, every method manipulating the values of a `DTSg` object creates a copy of it. This behaviour can be overridden by setting their `clone` argument to `FALSE`. Globally, cloning can be controlled with the help of the *DTSgClone* option:
+By default, every method manipulating the *values* of a `DTSg` object creates a copy of it. This behaviour can be overridden by setting their `clone` argument to `FALSE`. Globally, cloning can be controlled with the help of the *DTSgClone* option:
 
 ```{r}
 TS$alter("2007-01-01", "2008-12-31")

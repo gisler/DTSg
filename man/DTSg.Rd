@@ -42,7 +42,7 @@ for the automatic detection of the time series' periodicity.}
 
 \item{swallow}{A logical signalling if the object provided through the
 \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
-object, i.e. no copy of the data shall be made. This is generally more
+object, i.e., no copy of the data shall be made. This is generally more
 ressource efficient, but only works if the object provided through the
 \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
 however, that if the creation of the \code{DTSg} object fails for some

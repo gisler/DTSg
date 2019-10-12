@@ -4,10 +4,10 @@ NULL
 #' Aggregate Values
 #'
 #' Applies a temporal aggregation level function to the \emph{.dateTime} column
-#'  of a \code{\link{DTSg}} object and aggregates its values columnwise to the
-#'  function's temporal aggregation level utilising a provided summary function.
-#'  Additionally, it sets the object's \emph{aggregated} field to \code{TRUE}.
-#'  See \code{\link{DTSg}} for further information.
+#'  of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
+#'  to the function's temporal aggregation level utilising a provided summary
+#'  function. Additionally, it sets the object's \emph{aggregated} field to
+#'  \code{TRUE}. See \code{\link{DTSg}} for further information.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param funby One of the temporal aggregation level functions described in

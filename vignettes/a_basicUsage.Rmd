@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 options("DTSgClone" = TRUE)
 ```
 
-This vignette introduces the `DTSg` package, shows how to create objects of its main class and explains their two interfaces: R6 as code and S3 in comments. Familiarity with the `data.table` package helps better understanding certain parts of the vignette, but is not essential to follow it.
+This vignette introduces the `DTSg` package, shows how to create objects of its main as well as only class and explains their two interfaces: R6 as code and S3 in comments. Familiarity with the `data.table` package helps better understanding certain parts of the vignette, but is not essential to follow it.
 
 ---
 
@@ -130,7 +130,7 @@ TSs
 
 On a sidenote, some of the methods which take a function as an argument (`colapply` and `rollapply`) hand over to it an additional `list` argument called `.helpers` containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like `sum` which do not expect such a thing. A solution is to wrap it in an anonymous function with a `...` parameter like this: `function(x, ...) sum(x)`.
 
-With this said, let's join the result of the last calculation to the original time series and extract the values as a `data.table` for further processing in a final step (please note that the *.dateTime* column gets its original name back):
+With this said, let's join the result of the last calculation to the original time series and extract its *values* as a `data.table` for further processing in a final step (please note that the *.dateTime* column gets its original name back):
 
 ```{r}
 TS  <- TS$merge(y = TSs, suffixes = c("_orig", "_movavg"))
