@@ -1,6 +1,6 @@
 self <- NULL # no R CMD check note
 
-#' S3 Wrapper Generator
+#' S3 Wrapper Method Generator
 #'
 #' Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
 #'  but can also be used to generate \dQuote{plain} function wrappers.
@@ -20,8 +20,8 @@ self <- NULL # no R CMD check note
 #'  \code{\link{expression}}
 #'
 #' @examples
-#' # generate S3 wrapper for aggregate of DTSg
-#' aggregate.DTSg <- S3WrapperGenerator(
+#' # generate S3 wrapper method for alter of DTSg
+#' alter.DTSg <- S3WrapperGenerator(
 #'   R6Method = expression(DTSg$public_methods$alter)
 #' )
 #'

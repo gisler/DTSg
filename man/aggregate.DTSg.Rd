@@ -39,10 +39,10 @@ Returns an aggregated \code{\link{DTSg}} object.
 }
 \description{
 Applies a temporal aggregation level function to the \emph{.dateTime} column
- of a \code{\link{DTSg}} object and aggregates its values columnwise to the
- function's temporal aggregation level utilising a provided summary function.
- Additionally, it sets the object's \emph{aggregated} field to \code{TRUE}.
- See \code{\link{DTSg}} for further information.
+ of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
+ to the function's temporal aggregation level utilising a provided summary
+ function. Additionally, it sets the object's \emph{aggregated} field to
+ \code{TRUE}. See \code{\link{DTSg}} for further information.
 }
 \details{
 User defined temporal aggregation level functions have to return a

@@ -8,7 +8,7 @@
 * `print` method now ommits empty metadata fields
 * Added means to measure code coverage with the help of `covr`
 * Removed `xts` from suggested package list (already comes along with `dygraphs`)
-* Slightly improved documentation
+* Slightly improved vignettes and documentation
 * Minor internal code improvements
 
 ## DTSg v0.1.3
