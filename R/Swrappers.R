@@ -240,18 +240,20 @@ cols <- function(x, ...) {
 }
 #' Get Column Names
 #'
-#' Queries all column names of a \code{\link{DTSg}} object or those of a certain
-#'  \code{\link{class}} only.
+#' Queries all column names of a \code{\link{DTSg}} object, those of (a) certain
+#'  \code{\link{class}}(es) and/or those matching a certain pattern only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param class A character string matched to the most specific class (first
+#' @param class A character vector matched to the most specific class (first
 #'  element) of each column's \code{\link{class}} vector or \code{"all"} for all
 #'  column names.
-#' @param \dots Not used (S3 method only).
+#' @param pattern A character string passed on to the \code{pattern} argument of
+#'  \code{\link{grep}}.
+#' @param \dots Further arguments passed on to \code{\link{grep}}.
 #'
 #' @return Returns a character vector.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{class}}
+#' @seealso \code{\link{DTSg}}, \code{\link{class}}, \code{\link{grep}}
 #'
 #' @examples
 #' # new DTSg object

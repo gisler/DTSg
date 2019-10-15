@@ -157,9 +157,41 @@ test_that(
 )
 
 test_that(
-  "no column name is returned",
+  "numeric and character column names are returned",
+  expect_identical(
+    DTSg$new(DT1)$cols(c("numeric", "character")),
+    c("col1", "col2", "col3")
+  )
+)
+
+test_that(
+  "no column name is returned (class)",
   expect_identical(
     DTSg$new(DT1)$cols("integer"),
+    character()
+  )
+)
+
+test_that(
+  "column name matching pattern is returned",
+  expect_identical(
+    DTSg$new(DT1)$cols(pattern = "^c.l1$"),
+    "col1"
+  )
+)
+
+test_that(
+  '"..." passes on arguments correctly',
+  expect_identical(
+    DTSg$new(DT1)$cols(pattern = "COL1", ignore.case = TRUE),
+    "col1"
+  )
+)
+
+test_that(
+  "no column name is returned (pattern)",
+  expect_identical(
+    DTSg$new(DT1)$cols(pattern = "COL1"),
     character()
   )
 )

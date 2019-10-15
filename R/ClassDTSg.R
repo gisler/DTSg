@@ -397,12 +397,12 @@ DTSg <- R6Class(
       invisible(self)
     },
 
-    cols = function(class = "all") {
-      assert_is_a_string(class)
+    cols = function(class = "all", pattern = NULL, ...) {
+      assert_is_character(class)
 
       cols <- names(private$.values)[-1L]
 
-      if (class == "all") {
+      if (length(class) == 1L && class == "all") {
         cols
       } else {
         classes <- vapply(
@@ -410,8 +410,18 @@ DTSg <- R6Class(
           function(col) {class(col)[1L]},
           character(1L)
         )
-        cols[classes == class]
+        cols <- cols[classes %chin% class]
       }
+
+      if (!is.null(pattern)) {
+        if (any(names(list(...)) %in% c("pattern", "x", "value"))) {
+          stop('"pattern", "x" and "value" arguments are not allowed in this context.', call. = FALSE)
+        }
+
+        cols <- grep(pattern, cols, value = TRUE, ...)
+      }
+
+      cols
     },
 
     initialize = function(
