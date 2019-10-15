@@ -1,5 +1,9 @@
 ## DTSg v0.2.0.9000
 
+* `class` argument of `cols` method now accepts a character vector of class names
+* Added `pattern` and `...` arguments to `cols` method: allows for searching column names
+* Slightly improved vignettes
+
 ## DTSg v0.2.0
 
 * Added `swallow` argument to `new` method: allows for a more ressource efficient object creation
