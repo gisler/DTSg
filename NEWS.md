@@ -1,4 +1,6 @@
-## DTSg v0.2.0.9000
+## DTSg v0.2.1
+
+* Fixed error "Unsupported type passed to argument 'data'." related to `dygraphs` in at least some previous releases of R ≤ 3.5.3)
 
 ## DTSg v0.2.0
 
