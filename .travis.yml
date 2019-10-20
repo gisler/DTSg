@@ -1,10 +1,14 @@
 language: r
 cache: packages
 
-r:
-  - oldrel
-  - release
-
-os:
-  - linux
-  - osx
+matrix:
+  include:
+    - r: oldrel
+      os: linux
+    - r: oldrel
+      os: osx
+    - r: release
+      os: linux
+      after_success: Rscript -e 'covr::coveralls(type = "all")'
+    - r: release
+      os: osx
