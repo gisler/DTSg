@@ -157,10 +157,10 @@ test_that(
 )
 
 test_that(
-  "numeric and character column names are returned",
+  "logical and character column names are returned",
   expect_identical(
-    DTSg$new(DT1)$cols(c("numeric", "character")),
-    c("col1", "col2", "col3")
+    DTSg$new(DT2)$cols(c("logical", "character")),
+    c("col2", "col3")
   )
 )
 
