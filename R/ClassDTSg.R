@@ -396,14 +396,21 @@ DTSg <- R6Class(
       invisible(self)
     },
 
-    cols = function(class = "all", pattern = NULL, ...) {
-      assert_is_character(class)
-
+    cols = function(class = NULL, pattern = NULL, ...) {
       cols <- names(private$.values)[-1L]
 
-      if (length(class) == 1L && class == "all") {
-        cols
-      } else {
+      if (length(class) == 1L && is.character(class) && class == "all") {
+        warning(
+          paste(
+            '"class = \'all\'" is deprecated.',
+            'Please use default "class = NULL" to get column names irrespective of their column\'s class.',
+            sep = "\n"
+          ),
+          call. = FALSE
+        )
+      } else if (!is.null(class)) {
+        assert_is_character(class)
+
         classes <- vapply(
           private$.values[, -1L, with = FALSE],
           function(col) {class(col)[1L]},
