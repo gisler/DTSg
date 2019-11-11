@@ -49,8 +49,8 @@
 #'  \code{\link[data.table]{data.table}} might have been coerced to
 #'  \code{\link{POSIXct}} and keyed (see \code{\link[data.table]{setkey}} for
 #'  further information). Furthermore, all references to the \dQuote{swallowed}
-#'  \code{\link[data.table]{data.table}} in the global environment are removed
-#'  upon successfull creation of a \code{DTSg} object.
+#'  \code{\link[data.table]{data.table}} in the global (and only the global)
+#'  environment are removed upon successful creation of a \code{DTSg} object.
 #'
 #' @return Returns a \code{DTSg} object.
 #'
@@ -125,8 +125,7 @@
 #'  the lags in seconds between subsequent timestamps are rounded to
 #'  microseconds during integrity checks. This corresponds to the maximum value
 #'  allowed in \code{\link{options}("digits.secs")}. As a consequence, time
-#'  series with a sub-second accuracy higher than a microsecond will never work
-#'  and with a sub-second accuracy lower than a microsecond might work.
+#'  series with a sub-second accuracy higher than a microsecond will never work.
 #'
 #' Some of the methods which take a function as an argument
 #'  (\code{\link{colapply}} and \code{\link{rollapply}}) hand over to it an

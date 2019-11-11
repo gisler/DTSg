@@ -10,12 +10,11 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{class}{A character vector matched to the most specific class (first
-element) of each column's \code{\link{class}} vector or \code{"all"} for all
-column names.}
+\item{class}{An optional character vector matched to the most specific class
+(first element) of each column's \code{\link{class}} vector.}
 
-\item{pattern}{A character string passed on to the \code{pattern} argument of
-\code{\link{grep}}.}
+\item{pattern}{An optional character string passed on to the \code{pattern}
+argument of \code{\link{grep}}.}
 
 \item{\dots}{Further arguments passed on to \code{\link{grep}}.}
 }
@@ -23,8 +22,8 @@ column names.}
 Returns a character vector.
 }
 \description{
-Queries all column names of a \code{\link{DTSg}} object, those of (a) certain
- \code{\link{class}}(es) and/or those matching a certain pattern only.
+Queries all column names of a \code{\link{DTSg}} object, those of certain
+ \code{\link{class}}es and/or those matching a certain pattern only.
 }
 \examples{
 # new DTSg object

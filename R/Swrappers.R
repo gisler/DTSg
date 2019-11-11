@@ -96,8 +96,8 @@ alter <- function(x, ...) {
 }
 #' Alter Time Series
 #'
-#' Shortens, lengthens and/or changes the periodicity of a \code{\link{DTSg}}
-#'  object.
+#' Shortens (subsets), lengthens and/or changes the periodicity of a
+#'  \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param from A \code{\link{POSIXct}} date with the same time zone as the time
@@ -125,7 +125,7 @@ alter <- function(x, ...) {
 #' # new DTSg object
 #' x <- DTSg$new(values = flow)
 #'
-#' # extract the first two years
+#' # subset the first two years
 #' ## R6 method
 #' x$alter(from = "2007-01-01", to = "2008-12-31")
 #'
@@ -240,15 +240,14 @@ cols <- function(x, ...) {
 }
 #' Get Column Names
 #'
-#' Queries all column names of a \code{\link{DTSg}} object, those of (a) certain
-#'  \code{\link{class}}(es) and/or those matching a certain pattern only.
+#' Queries all column names of a \code{\link{DTSg}} object, those of certain
+#'  \code{\link{class}}es and/or those matching a certain pattern only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param class A character vector matched to the most specific class (first
-#'  element) of each column's \code{\link{class}} vector or \code{"all"} for all
-#'  column names.
-#' @param pattern A character string passed on to the \code{pattern} argument of
-#'  \code{\link{grep}}.
+#' @param class An optional character vector matched to the most specific class
+#'  (first element) of each column's \code{\link{class}} vector.
+#' @param pattern An optional character string passed on to the \code{pattern}
+#'  argument of \code{\link{grep}}.
 #' @param \dots Further arguments passed on to \code{\link{grep}}.
 #'
 #' @return Returns a character vector.
@@ -275,7 +274,7 @@ cols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$cols))
 #' Merge Two DTSg Objects
 #'
 #' Joins two \code{\link{DTSg}} objects based on their \emph{.dateTime} column.
-#'  Their time zones and \emph{aggregated} field must be the same.
+#'  Their time zones and \emph{aggregated} fields must be the same.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param y A \code{\link{DTSg}} object or an object coercible to one. See
@@ -402,10 +401,11 @@ setMethod(
 #'  up to this date.
 #' @param cols A character vector specifying the columns whose values shall be
 #'  plotted.
-#' @param secAxisCols A character vector specifying the columns whose values
-#'  shall be plotted on a secondary axis. Must be a subset of \code{cols}.
-#' @param secAxisLabel A character string specifying the label of the secondary
-#'  axis.
+#' @param secAxisCols An optional character vector specifying the columns whose
+#'  values shall be plotted on a secondary axis. Must be a subset of
+#'  \code{cols}.
+#' @param secAxisLabel A character string specifying the label of the optional
+#'  secondary axis.
 #' @param \dots Not used (S3 method only).
 #'
 #' @return Returns a \code{\link{DTSg}} object.
@@ -583,9 +583,10 @@ values <- function(x, ...) {
 #'  reference to the \emph{values} is returned. See details for further
 #'  information.
 #' @param drop A logical specifying if the object and all references to it shall
-#'  be removed from the global environment after successfully querying its
-#'  values. This feature allows for a ressource efficient destruction of a
-#'  \code{\link{DTSg}} object while preserving its \emph{values.}
+#'  be removed from the global (and only the global) environment after
+#'  successfully querying its values. This feature allows for a ressource
+#'  efficient destruction of a \code{\link{DTSg}} object while preserving its
+#'  \emph{values.}
 #' @param class A character string specifying the class of the returned
 #'  \emph{values.} \code{"data.frame"} only works if either a copy of the
 #'  \emph{values} is returned or the object is dropped.
