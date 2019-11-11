@@ -5,7 +5,7 @@
 \alias{cols}
 \title{Get Column Names}
 \usage{
-\method{cols}{DTSg}(x, class = "all", pattern = NULL, ...)
+\method{cols}{DTSg}(x, class = NULL, pattern = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
