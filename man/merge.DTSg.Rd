@@ -25,7 +25,7 @@ Returns a \code{\link{DTSg}} object.
 }
 \description{
 Joins two \code{\link{DTSg}} objects based on their \emph{.dateTime} column.
- Their time zones and \emph{aggregated} field must be the same.
+ Their time zones and \emph{aggregated} fields must be the same.
 }
 \examples{
 # new DTSg object

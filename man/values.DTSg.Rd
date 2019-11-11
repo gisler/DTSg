@@ -16,9 +16,10 @@ reference to the \emph{values} is returned. See details for further
 information.}
 
 \item{drop}{A logical specifying if the object and all references to it shall
-be removed from the global environment after successfully querying its
-values. This feature allows for a ressource efficient destruction of a
-\code{\link{DTSg}} object while preserving its \emph{values.}}
+be removed from the global (and only the global) environment after
+successfully querying its values. This feature allows for a ressource
+efficient destruction of a \code{\link{DTSg}} object while preserving its
+\emph{values.}}
 
 \item{class}{A character string specifying the class of the returned
 \emph{values.} \code{"data.frame"} only works if either a copy of the

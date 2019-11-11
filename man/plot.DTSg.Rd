@@ -23,11 +23,12 @@ up to this date.}
 \item{cols}{A character vector specifying the columns whose values shall be
 plotted.}
 
-\item{secAxisCols}{A character vector specifying the columns whose values
-shall be plotted on a secondary axis. Must be a subset of \code{cols}.}
+\item{secAxisCols}{An optional character vector specifying the columns whose
+values shall be plotted on a secondary axis. Must be a subset of
+\code{cols}.}
 
-\item{secAxisLabel}{A character string specifying the label of the secondary
-axis.}
+\item{secAxisLabel}{A character string specifying the label of the optional
+secondary axis.}
 
 \item{\dots}{Not used (S3 method only).}
 }

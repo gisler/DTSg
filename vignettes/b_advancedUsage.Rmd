@@ -91,24 +91,24 @@ if (requireNamespace("magrittr", quietly = TRUE)) {
 
 ## Swallowing and Dropping
 
-An extension to reference semantics of existing `DTSg` objects is reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new` method. If set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e., no copy of it is made and all references to it are removed from the global environment upon successful object creation:
+An extension to reference semantics of existing `DTSg` objects is reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new` method. If set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e., no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:
 
 ```{r}
 library(data.table)
 
 DT <- copy(flow)
-ls(pattern = "DT")
+ls(pattern = "^DT$")
 TS <- DTSg$new(DT, swallow = TRUE)
-ls(pattern = "DT")
+ls(pattern = "^DT$")
 ```
 
-The opposite of swallowing is called dropping. This term refers to querying the *values* of a `DTSg` object as a reference while removing all references to the original `DTSg` object from the global environment at the same time:
+The opposite of swallowing is called dropping. This term refers to querying the *values* of a `DTSg` object as a reference while removing all references to the original `DTSg` object from the global (and again only the global) environment at the same time:
 
 ```{r}
 TS <- DTSg$new(flow)
-ls(pattern = "TS")
+ls(pattern = "^TS$")
 DT <- TS$values(drop = TRUE)
-ls(pattern = "TS")
+ls(pattern = "^TS$")
 ```
 
 Please refer to the help pages for further details.
