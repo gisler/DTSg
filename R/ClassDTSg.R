@@ -403,7 +403,7 @@ DTSg <- R6Class(
         warning(
           paste(
             '"class = \'all\'" is deprecated.',
-            'Please use default "class = NULL" to get column names irrespective of their column\'s class.',
+            "Please use argument's default value NULL to get all column names.",
             sep = "\n"
           ),
           call. = FALSE
@@ -445,9 +445,7 @@ DTSg <- R6Class(
       if (nrow(values) < 1L || ncol(values) < 2L) {
         stop('"values" must have at least one row and two columns.', call. = FALSE)
       }
-      if (any(grepl("^\\.", names(values)[-1L]))) {
-        stop('Column names must not start with a ".".', call. = FALSE)
-      }
+      assert_all_have_no_beginning_dot(names(values)[-1L])
       if (anyDuplicated(names(values)[-1L]) > 0) {
         stop('Column names must not have any duplicates.', call. = FALSE)
       }
@@ -581,10 +579,7 @@ DTSg <- R6Class(
       if (!requireNamespace("dygraphs", quietly = TRUE) ||
           !requireNamespace("RColorBrewer", quietly = TRUE)) {
         stop(
-          sprintf(
-            "Packages %s and %s must be installed for this method.",
-            deparse("dygraphs"), deparse("RColorBrewer")
-          ),
+          'Packages "dygraphs" and "RColorBrewer" must be installed for this method.',
           call. = FALSE
         )
       }

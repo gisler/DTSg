@@ -1,6 +1,12 @@
+assert_are_not_intersecting_sets <- function(newCols, cols) {
+  if (length(intersect(newCols, cols)) > 0L) {
+    stop('"newCols" must not intersect with "cols".', call. = FALSE)
+  }
+}
+
 assert_is_fasttime_ok <- function(.dateTime, .helpers) {
   if (!requireNamespace("fasttime", quietly = TRUE)) {
-    stop(sprintf("Package %s must be installed for this function.", deparse("fasttime")), call. = FALSE)
+    stop('Package "fasttime" must be installed for this function.', call. = FALSE)
   }
   if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
     stop("Dates must be between the years 1970 and 2199 for this function.", call. = FALSE)
@@ -26,5 +32,11 @@ assert_is_periodicity_recognised <- function(periodicity) {
       ),
       call. = FALSE
     )
+  }
+}
+
+assert_all_have_no_beginning_dot <- function(cols) {
+  if (any(grepl("^\\.", cols))) {
+    stop('Column names must not begin with a ".".', call. = FALSE)
   }
 }
