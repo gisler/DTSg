@@ -87,11 +87,11 @@ TS$nas()
 In case no column name is provided through the `cols` argument, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method by the way. It supports a `class` and/or `pattern` argument:
 
 ```{r}
-TS$cols(class = "all") # or 'cols(TS, class = "all")'
-TS$cols(class = "numeric")
+TS$cols() # or 'cols(TS)'
+TS$cols(class = "numeric") # or 'cols(TS, class = "numeric")'
 TS$cols(class = "character")
 TS$cols(class = c("double", "integer")) # class of column flow is numeric
-TS$cols(pattern = "f.*w")
+TS$cols(pattern = "f.*w") # or 'cols(TS, pattern = "f.*w")'
 TS$cols(pattern = "temp")
 ```
 
