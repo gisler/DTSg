@@ -1,7 +1,4 @@
-#' @import assertive.base
-#' @import assertive.numbers
-#' @import assertive.sets
-#' @import assertive.types
+#' @import assertive
 #' @import data.table
 #' @import methods
 #' @import R6
