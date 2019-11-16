@@ -1,9 +1,11 @@
 ## DTSg v0.2.1.9000
 
 * `class` argument of `cols` method now accepts a character vector of class names
+* Changed default value of `class` argument of `cols` method from `"all"` to `NULL`, however, for backward compatibility `"all"` can still be used for the same result, but will eventually be treated as a filter for classes of type `all`
 * Added `pattern` and `...` arguments to `cols` method: allows for searching column names
 * Added `assertive` as dependency instead of `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types`
 * Slightly improved vignettes and documentation
+* Minor internal code improvements
 
 ## DTSg v0.2.1
 

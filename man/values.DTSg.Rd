@@ -22,7 +22,7 @@ efficient destruction of a \code{\link{DTSg}} object while preserving its
 \emph{values.}}
 
 \item{class}{A character string specifying the class of the returned
-\emph{values.} \code{"data.frame"} only works if either a copy of the
+\emph{values.} \code{"data.frame"} only works when either a copy of the
 \emph{values} is returned or the object is dropped.}
 
 \item{\dots}{Not used (S3 method only).}
