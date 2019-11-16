@@ -589,7 +589,7 @@ test_that(
 test_that(
   '"newCols" adds and overwrites columns correctly',
   expect_identical(
-    DTSg$new(DT1)$colapply(
+    DTSg$new(DT1)$rollapply(
       function(x, ...) {identity(x)},
       before = 0L,
       after = 0L,
@@ -604,7 +604,7 @@ test_that(
 test_that(
   '"suffix" adds columns correctly',
   expect_identical(
-    DTSg$new(DT1)$colapply(
+    DTSg$new(DT1)$rollapply(
       function(x, ...) {identity(x)},
       before = 0L,
       after = 0L,
@@ -618,7 +618,7 @@ test_that(
 test_that(
   '"suffix" does not overwrite existing columns',
   expect_error(
-    DTSg$new(DT1)$colapply(
+    DTSg$new(DT1)$rollapply(
       function(x, ...) {identity(x)},
       before = 0L,
       after = 0L,
