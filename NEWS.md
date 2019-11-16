@@ -2,6 +2,7 @@
 
 * `class` argument of `cols` method now accepts a character vector of class names
 * Added `pattern` and `...` arguments to `cols` method: allows for searching column names
+* Added `assertive` as dependency instead of `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types`
 * Slightly improved vignettes and documentation
 
 ## DTSg v0.2.1
