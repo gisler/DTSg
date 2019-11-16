@@ -8,7 +8,7 @@
 \method{rollapply}{DTSg}(x, fun, ..., cols = self$cols(class =
   "numeric")[1L], before = 1L, after = before,
   weights = c("inverseDistance"), parameters = list(power = 1),
-  clone = getOption("DTSgClone"))
+  clone = getOption("DTSgClone"), newCols = NULL, suffix = NULL)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -35,6 +35,16 @@ further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
+
+\item{newCols}{A character vector of the same length as \code{cols}.
+Non-existing columns specified in this argument are added and existing
+columns are overwritten by the return values of \code{fun}. Columns are
+matched elementwise between \code{cols} and \code{newCols}.}
+
+\item{suffix}{A character string. The return values of \code{fun} are added
+as new columns with names consisting of the columns specified in \code{cols}
+and this suffix. Existing columns are never overwritten. Only used when
+\code{newCols} is not specified.}
 }
 \value{
 Returns a \code{\link{DTSg}} object.
