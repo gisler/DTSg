@@ -360,12 +360,21 @@ DTSg <- R6Class(
       fun,
       ...,
       cols = self$cols(class = "numeric")[1L],
-      clone = getOption("DTSgClone")
+      clone = getOption("DTSgClone"),
+      newCols = NULL,
+      suffix = NULL
     ) {
       assert_is_function(fun)
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
       assert_is_a_bool(assert_all_are_not_na(clone))
+      if (!is.null(newCols)) {
+        assert_all_have_no_beginning_dot(assert_is_character(newCols))
+        assert_are_same_length(newCols, cols)
+      } else if (!is.null(suffix)) {
+        assert_is_a_string(suffix)
+        assert_are_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+      }
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -373,13 +382,23 @@ DTSg <- R6Class(
           fun = fun,
           ...,
           cols = cols,
-          clone = FALSE
+          clone = FALSE,
+          newCols = newCols,
+          suffix = suffix
         ))
+      }
+
+      if (!is.null(newCols)) {
+        .cols <- newCols
+      } else if (!is.null(suffix)) {
+        .cols <- sprintf("%s%s", cols, suffix)
+      } else {
+        .cols <- cols
       }
 
       private$.values[
         ,
-        (cols) := lapply(
+        (.cols) := lapply(
           .SD,
           fun,
           ...,
@@ -778,7 +797,9 @@ DTSg <- R6Class(
       after = before,
       weights = c("inverseDistance"),
       parameters = list(power = 1),
-      clone = getOption("DTSgClone")
+      clone = getOption("DTSgClone"),
+      newCols = NULL,
+      suffix = NULL
     ) {
       assert_is_periodicity_recognised(private$.periodicity)
       assert_is_function(fun)
@@ -790,6 +811,13 @@ DTSg <- R6Class(
       )
       weights <- match.arg(weights)
       assert_is_a_bool(assert_all_are_not_na(clone))
+      if (!is.null(newCols)) {
+        assert_all_have_no_beginning_dot(assert_is_character(newCols))
+        assert_are_same_length(newCols, cols)
+      } else if (!is.null(suffix)) {
+        assert_is_a_string(suffix)
+        assert_are_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+      }
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -801,8 +829,18 @@ DTSg <- R6Class(
           after = after,
           weights = weights,
           parameters = parameters,
-          clone = FALSE
+          clone = FALSE,
+          newCols = newCols,
+          suffix = suffix
         ))
+      }
+
+      if (!is.null(newCols)) {
+        .cols <- newCols
+      } else if (!is.null(suffix)) {
+        .cols <- sprintf("%s%s", cols, suffix)
+      } else {
+        .cols <- cols
       }
 
       if (weights == "inverseDistance") {
@@ -834,7 +872,7 @@ DTSg <- R6Class(
 
       private$.values[
         ,
-        (cols) := lapply(
+        (.cols) := lapply(
           .SD,
           wapply,
           fun = fun,

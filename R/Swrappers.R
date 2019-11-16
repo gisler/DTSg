@@ -195,6 +195,14 @@ colapply <- function(x, ...) {
 #' @param cols A character vector specifying the columns to apply \code{fun} to.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
+#' @param newCols A character vector of the same length as \code{cols}.
+#'  Non-existing columns specified in this argument are added and existing
+#'  columns are overwritten by the return values of \code{fun}. Columns are
+#'  matched elementwise between \code{cols} and \code{newCols}.
+#' @param suffix A character string. The return values of \code{fun} are added
+#'  as new columns with names consisting of the columns specified in \code{cols}
+#'  and this suffix. Existing columns are never overwritten. Only used when
+#'  \code{newCols} is not specified.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over a
@@ -493,6 +501,14 @@ rollapply <- function(x, ...) {
 #'  \code{weights}. See details for further information.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
+#' @param newCols A character vector of the same length as \code{cols}.
+#'  Non-existing columns specified in this argument are added and existing
+#'  columns are overwritten by the return values of \code{fun}. Columns are
+#'  matched elementwise between \code{cols} and \code{newCols}.
+#' @param suffix A character string. The return values of \code{fun} are added
+#'  as new columns with names consisting of the columns specified in \code{cols}
+#'  and this suffix. Existing columns are never overwritten. Only used when
+#'  \code{newCols} is not specified.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over the weights
