@@ -421,8 +421,8 @@ DTSg <- R6Class(
       }
 
       if (!is.null(pattern)) {
-        if (any(names(list(...)) %chin% c("pattern", "x", "value"))) {
-          stop('"pattern", "x" and "value" arguments are not allowed in this context.', call. = FALSE)
+        if (any(names(list(...)) %chin% c("x", "value"))) {
+          stop('"x" and "value" arguments are not allowed in this context.', call. = FALSE)
         }
 
         cols <- grep(pattern, cols, value = TRUE, ...)
@@ -487,8 +487,8 @@ DTSg <- R6Class(
       }
       assert_are_identical(private$.timezone, y$timezone)
       assert_are_identical(private$.isAggregated, y$aggregated)
-      if (any(names(list(...)) %chin% c("by", "by.x", "by.y"))) {
-        stop('"by", "by.x" and "by.y" arguments are not allowed in this context.', call. = FALSE)
+      if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
+        stop('"x", "by", "by.x" and "by.y" arguments are not allowed in this context.', call. = FALSE)
       }
       assert_is_a_bool(assert_all_are_not_na(clone))
 
