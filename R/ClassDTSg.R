@@ -373,7 +373,7 @@ DTSg <- R6Class(
         assert_are_same_length(newCols, cols)
       } else if (!is.null(suffix)) {
         assert_is_a_string(suffix)
-        assert_are_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+        assert_are_newCols_and_cols_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
       }
 
       if (clone) {
@@ -816,7 +816,7 @@ DTSg <- R6Class(
         assert_are_same_length(newCols, cols)
       } else if (!is.null(suffix)) {
         assert_is_a_string(suffix)
-        assert_are_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+        assert_are_newCols_and_cols_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
       }
 
       if (clone) {
