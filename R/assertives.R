@@ -1,4 +1,4 @@
-assert_are_not_intersecting_sets <- function(newCols, cols) {
+assert_are_newCols_and_cols_not_intersecting_sets <- function(newCols, cols) {
   if (length(intersect(newCols, cols)) > 0L) {
     stop('"newCols" must not intersect with "cols".', call. = FALSE)
   }
