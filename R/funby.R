@@ -42,7 +42,8 @@ to.UTCdateTime <- function(.dateTime, .helpers) {
     by = .helpers$periodicity,
     along.with = .dateTime
   )
-  if (grepl("^\\d+ (month|year)(s?)$", .helpers$periodicity) && mday(.dateTime[1L]) > 28L) {
+  if (grepl("^\\d+ (month|year)(s?)$", .helpers$periodicity) &&
+      mday(.dateTime[1L]) > 28L) {
     .dateTime <- rollback(.dateTime, .helpers$periodicity)
   }
 

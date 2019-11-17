@@ -39,7 +39,7 @@
 #' @export
 interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
   assert_is_numeric(.col)
-  assert_all_are_greater_than(assert_is_a_number(roll), 0)
+  assert_all_are_greater_than(assert_is_a_number(roll), 0L)
 
   if (.helpers$periodicity != "unrecognised") {
     roll <- roll * as.numeric(.helpers$maxLag, units = "secs")
@@ -64,7 +64,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
     roll = roll,
     rollends = rollends
   ]
-  setnames(DT, 2L:3L, c(".dateTimeBefore", ".colBefore"))
+  setnames(DT, 2:3, c(".dateTimeBefore", ".colBefore"))
 
   DT <- values[
     DT,
@@ -73,7 +73,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
     roll = -roll,
     rollends = rollends
   ]
-  setnames(DT, 4L:5L, c(".dateTimeAfter", ".colAfter"))
+  setnames(DT, 4:5, c(".dateTimeAfter", ".colAfter"))
 
   DT[, .divisor := as.numeric(.dateTimeAfter - .dateTimeBefore, units = "secs")]
   DT[, .col := .colBefore]

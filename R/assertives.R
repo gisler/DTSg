@@ -9,7 +9,10 @@ assert_is_fasttime_ok <- function(.dateTime, .helpers) {
     stop('Package "fasttime" must be installed for this function.', call. = FALSE)
   }
   if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
-    stop("Dates must be between the years 1970 and 2199 for this function.", call. = FALSE)
+    stop(
+      "Dates must be between the years 1970 and 2199 for this function.",
+      call. = FALSE
+    )
   }
   if (.helpers$timezone != "UTC") {
     stop('Time zone must be "UTC" for this function.', call. = FALSE)
