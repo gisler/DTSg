@@ -241,6 +241,7 @@ DTSg <- R6Class(
       assert_is_function(fun)
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
       assert_is_a_bool(assert_all_are_not_na(n))
       assert_is_a_bool(assert_all_are_not_na(ignoreDST))
       assert_is_a_bool(assert_all_are_not_na(clone))
@@ -340,7 +341,11 @@ DTSg <- R6Class(
 
       if (rollback && grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
         DT <- data.table(
-          .dateTime = seq(from, to + diff(seq(to, by = "1 DSTday", length.out = 2L)), by),
+          .dateTime = seq(
+            from,
+            to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
+            by
+          ),
           key = ".dateTime"
         )
         DT[, .dateTime := rollback(.dateTime, by)]
@@ -367,13 +372,17 @@ DTSg <- R6Class(
       assert_is_function(fun)
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
       assert_is_a_bool(assert_all_are_not_na(clone))
       if (!is.null(newCols)) {
         assert_all_have_no_beginning_dot(assert_is_character(newCols))
         assert_are_same_length(newCols, cols)
       } else if (!is.null(suffix)) {
         assert_is_a_string(suffix)
-        assert_are_newCols_and_cols_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+        assert_are_newCols_and_cols_not_intersecting_sets(
+          sprintf("%s%s", cols, suffix),
+          self$cols()
+        )
       }
 
       if (clone) {
@@ -441,7 +450,10 @@ DTSg <- R6Class(
 
       if (!is.null(pattern)) {
         if (any(names(list(...)) %chin% c("x", "value"))) {
-          stop('"x" and "value" arguments are not allowed in this context.', call. = FALSE)
+          stop(
+            '"x" and "value" arguments are not allowed in this context.',
+            call. = FALSE
+          )
         }
 
         cols <- grep(pattern, cols, value = TRUE, ...)
@@ -465,7 +477,7 @@ DTSg <- R6Class(
         stop('"values" must have at least one row and two columns.', call. = FALSE)
       }
       assert_all_have_no_beginning_dot(names(values)[-1L])
-      if (anyDuplicated(names(values)[-1L]) > 0) {
+      if (anyDuplicated(names(values)[-1L]) > 0L) {
         stop('Column names must not have any duplicates.', call. = FALSE)
       }
       assert_is_a_bool(assert_all_are_not_na(swallow))
@@ -507,7 +519,10 @@ DTSg <- R6Class(
       assert_are_identical(private$.timezone, y$timezone)
       assert_are_identical(private$.isAggregated, y$aggregated)
       if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
-        stop('"x", "by", "by.x" and "by.y" arguments are not allowed in this context.', call. = FALSE)
+        stop(
+          '"x", "by", "by.x" and "by.y" arguments are not allowed in this context.',
+          call. = FALSE
+        )
       }
       assert_is_a_bool(assert_all_are_not_na(clone))
 
@@ -535,6 +550,7 @@ DTSg <- R6Class(
       assert_is_periodicity_recognised(private$.periodicity)
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
 
       DetectNA <- function(x) {
         i <- 0L
@@ -561,7 +577,12 @@ DTSg <- R6Class(
 
         DT <- private$.values[, ".dateTime", with = FALSE]
         set(DT, j = ".col", value = col)
-        set(DT, j = ".group", value = vapply(private$.values[[col]], detectNA, integer(1L)))
+        set(
+          DT,
+          j = ".group",
+          value = vapply(private$.values[[col]], detectNA, integer(1L))
+        )
+
         if (all(is.na(DT[[".group"]]))) {
           DTs <- c(
             DTs,
@@ -616,8 +637,10 @@ DTSg <- R6Class(
       assert_all_are_greater_than_or_equal_to(as.numeric(to), as.numeric(from))
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
       if (!is.null(secAxisCols)) {
         assert_is_subset(assert_is_character(secAxisCols), cols)
+        assert_has_no_duplicates(secAxisCols)
         assert_is_a_string(secAxisLabel)
       }
 
@@ -633,7 +656,11 @@ DTSg <- R6Class(
       }
 
       plot <- dygraphs::dygraph(
-        as.xts.data.table(private$.values[.dateTime >= from & .dateTime <= to, c(".dateTime", cols), with = FALSE]),
+        as.xts.data.table(private$.values[
+          .dateTime >= from & .dateTime <= to,
+          c(".dateTime", cols),
+          with = FALSE
+        ]),
         private$.ID,
         ylab = ylab
       )
@@ -643,6 +670,7 @@ DTSg <- R6Class(
         useDataTimezone = TRUE
       )
       plot <- dygraphs::dyRangeSelector(plot)
+
       if (!is.null(secAxisCols)) {
         plot <- dygraphs::dyAxis(
           plot,
@@ -651,7 +679,7 @@ DTSg <- R6Class(
           drawGrid = FALSE,
           independentTicks = TRUE
         )
-        for (i in 1:length(secAxisCols)) {
+        for (i in seq_along(secAxisCols)) {
           plot <- dygraphs::dySeries(plot, secAxisCols[i], axis = "y2")
         }
       }
@@ -721,11 +749,15 @@ DTSg <- R6Class(
       private$.timezone <- attr(private$.values[[1L]], "tzone")
 
       if (private$.timestamps < 2L) {
-        zeroSecs <- difftime(as.POSIXct("2000-01-01", tz = "UTC"), as.POSIXct("2000-01-01", tz = "UTC"))
+        zeroSecs <- difftime(
+          as.POSIXct("2000-01-01", tz = "UTC"),
+          as.POSIXct("2000-01-01", tz = "UTC")
+        )
         private$.minLag <- zeroSecs
         private$.maxLag <- zeroSecs
         private$.isRegular <- TRUE
         private$.periodicity <- "unrecognised"
+
         return(invisible(self))
       }
 
@@ -735,7 +767,7 @@ DTSg <- R6Class(
         len <- 1000L
       }
 
-      lags <- round(diff(private$.values[[1L]][1:len]), 6)
+      lags <- round(diff(private$.values[[1L]][1:len]), 6L)
       if (anyNA(lags)) {
         stop(".dateTime column must not have any NA values.", call. = FALSE)
       }
@@ -761,11 +793,15 @@ DTSg <- R6Class(
         for (by in c(
           sprintf("%s DSTdays", c(1:15, 21L, 28L, 30L)),
           sprintf("%s months", c(1:4, 6L)),
-          sprintf("%s years", c(1:14, 15L, 20L, 25L, 30L, 40L, 50L, 60L, 70L, 75L, 80L, 90L, 100L))
+          sprintf("%s years", c(1:15, 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
         )) {
           if (grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
             DT <- data.table(
-              .dateTime = seq(from, to + diff(seq(to, by = "1 DSTday", length.out = 2L)), by),
+              .dateTime = seq(
+                from,
+                to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
+                by
+              ),
               key = ".dateTime"
             )
             DT[, .dateTime := rollback(.dateTime, by)]
@@ -805,6 +841,7 @@ DTSg <- R6Class(
       assert_is_function(fun)
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
       assert_all_are_greater_than_or_equal_to(
         c(assert_is_a_number(before), assert_is_a_number(after)),
         0L
@@ -816,7 +853,10 @@ DTSg <- R6Class(
         assert_are_same_length(newCols, cols)
       } else if (!is.null(suffix)) {
         assert_is_a_string(suffix)
-        assert_are_newCols_and_cols_not_intersecting_sets(sprintf("%s%s", cols, suffix), self$cols())
+        assert_are_newCols_and_cols_not_intersecting_sets(
+          sprintf("%s%s", cols, suffix),
+          self$cols()
+        )
       }
 
       if (clone) {
@@ -845,7 +885,12 @@ DTSg <- R6Class(
 
       if (weights == "inverseDistance") {
         assert_all_are_finite(assert_is_a_number(parameters$power))
-        weights <- 1 / c(rev(seq_len(before) + 1), 1, seq_len(after) + 1)^parameters$power
+
+        weights <- 1 / c(
+          rev(seq_len(before) + 1),
+          1,
+          seq_len(after) + 1
+        )^parameters$power
         weights <- weights / sum(weights)
       }
 
@@ -890,6 +935,7 @@ DTSg <- R6Class(
     summary = function(cols = self$cols(), ...) {
       assert_is_subset(assert_is_character(cols), self$cols())
       assert_is_length_cols_greater_than_or_equal_to_one(cols)
+      assert_has_no_duplicates(cols)
 
       summary(private$.values[, cols, with = FALSE], ...)
     },

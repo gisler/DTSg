@@ -320,7 +320,9 @@ test_that(
       DTref1 <<- flow
       DTref2 <<- flow
       DTSg$new(DTref1, swallow = TRUE)
-      exists("DTcopy", where = 1L) && !exists("DTref1", where = 1L) && !exists("DTref2", where = 1L)
+      exists("DTcopy", where = 1L) &&
+        !exists("DTref1", where = 1L) &&
+        !exists("DTref2", where = 1L)
     }
   )
 )
@@ -361,8 +363,14 @@ test_that(
     data.table::data.table(
       .col = c("col1", "col2"),
       .group = c(1L, 1L),
-      .from = as.POSIXct(c("2000-10-29 01:00:00", "2000-10-29 01:00:00"), tz = "Europe/Vienna"),
-      .to = as.POSIXct(c("2000-10-29 01:30:00", "2000-10-29 02:00:00"), tz = "Europe/Vienna"),
+      .from = as.POSIXct(
+        c("2000-10-29 01:00:00", "2000-10-29 01:00:00"),
+        tz = "Europe/Vienna"
+      ),
+      .to = as.POSIXct(
+        c("2000-10-29 01:30:00", "2000-10-29 02:00:00"),
+        tz = "Europe/Vienna"
+      ),
       .n = c(2L, 3L)
     )
   )
@@ -683,7 +691,9 @@ test_that(
       TSref1 <<- TS
       TSref2 <<- TS
       TS$values(TRUE, TRUE)
-      exists("TScopy", where = 1L) && !exists("TSref1", where = 1L) && !exists("TSref2", where = 1L)
+      exists("TScopy", where = 1L) &&
+        !exists("TSref1", where = 1L) &&
+        !exists("TSref2", where = 1L)
     }
   )
 )

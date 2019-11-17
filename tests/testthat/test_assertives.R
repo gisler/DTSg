@@ -4,7 +4,10 @@ context("assert_are_newCols_and_cols_not_intersecting_sets")
 test_that(
   'intersecting "newCols" and "cols" returns error',
   expect_error(
-    assert_are_newCols_and_cols_not_intersecting_sets(c("col1", "col2"), c("col2", "col3"))
+    assert_are_newCols_and_cols_not_intersecting_sets(
+      c("col1", "col2"),
+      c("col2", "col3")
+    )
   )
 )
 
