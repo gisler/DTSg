@@ -31,8 +31,8 @@
 #'
 #' @export
 rollback <- function(.dateTime, periodicity) {
-  assert_is_posixct(.dateTime)
-  if (!grepl("^\\d+ (month|year)(s?)$", assert_is_a_string(periodicity))) {
+  qassert(.dateTime, "P+")
+  if (!grepl("^\\d+ (month|year)(s?)$", qassert(periodicity, "S1"))) {
     stop("Periodicity must be a multiple of month(s) or year(s).", call. = FALSE)
   }
 

@@ -231,20 +231,19 @@ DTSg <- R6Class(
       ignoreDST = FALSE,
       clone = getOption("DTSgClone")
     ) {
-      assert_is_function(funby)
+      assertFunction(funby)
       .helpers <- list(
         timezone = private$.timezone,
         ignoreDST = ignoreDST,
         periodicity = private$.periodicity
       )
-      assert_is_posixct(funby(private$.values[[".dateTime"]][1L], .helpers))
-      assert_is_function(fun)
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
-      assert_is_a_bool(assert_all_are_not_na(n))
-      assert_is_a_bool(assert_all_are_not_na(ignoreDST))
-      assert_is_a_bool(assert_all_are_not_na(clone))
+      qassert(funby(private$.values[[".dateTime"]][1L], .helpers), "P1")
+      assertFunction(fun)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(n, "B1")
+      qassert(ignoreDST, "B1")
+      qassert(clone, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -308,25 +307,26 @@ DTSg <- R6Class(
       rollback = TRUE,
       clone = getOption("DTSgClone")
     ) {
-      if (is_posixct(from)) {
-        assert_are_identical(attr(from, "tzone"), private$.timezone)
+      if (qtest(from, "P1")) {
+        assertSetEqual(attr(from, "tzone"), private$.timezone)
       } else {
         from <- as.POSIXct(from, tz = private$.timezone)
+        qassert(from, "P1")
       }
-      if (is_posixct(to)) {
-        assert_are_identical(attr(to, "tzone"), private$.timezone)
+      if (qtest(to, "P1")) {
+        assertSetEqual(attr(to, "tzone"), private$.timezone)
       } else {
         to <- as.POSIXct(to, tz = private$.timezone)
       }
-      assert_all_are_greater_than_or_equal_to(as.numeric(to), as.numeric(from))
+      assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
       if (by == "unrecognised") {
         stop(
           '"by" must be explicitly set for time series with unrecognised periodicity.',
           call. = FALSE
         )
       }
-      assert_is_a_bool(assert_all_are_not_na(rollback))
-      assert_is_a_bool(assert_all_are_not_na(clone))
+      qassert(rollback, "B1")
+      qassert(clone, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -369,16 +369,15 @@ DTSg <- R6Class(
       newCols = NULL,
       suffix = NULL
     ) {
-      assert_is_function(fun)
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
-      assert_is_a_bool(assert_all_are_not_na(clone))
+      assertFunction(fun)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(clone, "B1")
       if (!is.null(newCols)) {
-        assert_all_have_no_beginning_dot(assert_is_character(newCols))
-        assert_are_same_length(newCols, cols)
+        assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assert_all_have_no_beginning_dot(newCols)
       } else if (!is.null(suffix)) {
-        assert_is_a_string(suffix)
+        qassert(suffix, "S1")
         assert_are_newCols_and_cols_not_intersecting_sets(
           sprintf("%s%s", cols, suffix),
           self$cols()
@@ -437,7 +436,7 @@ DTSg <- R6Class(
           call. = FALSE
         )
       } else if (!is.null(class)) {
-        assert_is_character(class)
+        qassert(class, "S+")
 
         classes <- vapply(
           private$.values[, -1L, with = FALSE],
@@ -472,7 +471,7 @@ DTSg <- R6Class(
       fast = FALSE,
       swallow = FALSE
     ) {
-      assert_is_inherited_from(values, "data.frame")
+      assertClass(values, "data.frame")
       if (nrow(values) < 1L || ncol(values) < 2L) {
         stop('"values" must have at least one row and two columns.', call. = FALSE)
       }
@@ -480,7 +479,7 @@ DTSg <- R6Class(
       if (anyDuplicated(names(values)[-1L]) > 0L) {
         stop('Column names must not have any duplicates.', call. = FALSE)
       }
-      assert_is_a_bool(assert_all_are_not_na(swallow))
+      qassert(swallow, "B1")
 
       if (is.data.table(values)) {
         if (swallow) {
@@ -513,18 +512,18 @@ DTSg <- R6Class(
     },
 
     merge = function(y, ..., clone = getOption("DTSgClone")) {
-      if (!is_inherited_from(y, "DTSg")) {
+      if (!testClass(y, "DTSg")) {
         y <- DTSg$new(y)
       }
-      assert_are_identical(private$.timezone, y$timezone)
-      assert_are_identical(private$.isAggregated, y$aggregated)
+      assertSetEqual(private$.timezone, y$timezone)
+      assertSetEqual(private$.isAggregated, y$aggregated)
       if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
         stop(
           '"x", "by", "by.x" and "by.y" arguments are not allowed in this context.',
           call. = FALSE
         )
       }
-      assert_is_a_bool(assert_all_are_not_na(clone))
+      qassert(clone, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -548,9 +547,8 @@ DTSg <- R6Class(
 
     nas = function(cols = self$cols()) {
       assert_is_periodicity_recognised(private$.periodicity)
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
 
       DetectNA <- function(x) {
         i <- 0L
@@ -624,24 +622,24 @@ DTSg <- R6Class(
         )
       }
 
-      if (is_posixct(from)) {
-        assert_are_identical(attr(from, "tzone"), private$.timezone)
+      if (qtest(from, "P1")) {
+        assertSetEqual(attr(from, "tzone"), private$.timezone)
       } else {
         from <- as.POSIXct(from, tz = private$.timezone)
+        qassert(from, "P1")
       }
-      if (is_posixct(to)) {
-        assert_are_identical(attr(to, "tzone"), private$.timezone)
+      if (qtest(to, "P1")) {
+        assertSetEqual(attr(to, "tzone"), private$.timezone)
       } else {
         to <- as.POSIXct(to, tz = private$.timezone)
       }
-      assert_all_are_greater_than_or_equal_to(as.numeric(to), as.numeric(from))
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
+      assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
       if (!is.null(secAxisCols)) {
-        assert_is_subset(assert_is_character(secAxisCols), cols)
-        assert_has_no_duplicates(secAxisCols)
-        assert_is_a_string(secAxisLabel)
+        assertCharacter(secAxisCols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+        assertSubset(secAxisCols, cols)
+        qassert(secAxisLabel, "S1")
       }
 
       ylab <- ""
@@ -728,7 +726,7 @@ DTSg <- R6Class(
     refresh = function() {
       firstCol <- names(private$.values)[1L]
 
-      if (!is_posixct(private$.values[[1L]])) {
+      if (!qtest(private$.values[[1L]], "P+")) {
         set(
           private$.values,
           j = 1L,
@@ -838,21 +836,18 @@ DTSg <- R6Class(
       suffix = NULL
     ) {
       assert_is_periodicity_recognised(private$.periodicity)
-      assert_is_function(fun)
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
-      assert_all_are_greater_than_or_equal_to(
-        c(assert_is_a_number(before), assert_is_a_number(after)),
-        0L
-      )
+      assertFunction(fun)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(before, "X1[0,)")
+      qassert(after, "X1[0,)")
       weights <- match.arg(weights)
-      assert_is_a_bool(assert_all_are_not_na(clone))
+      qassert(clone, "B1")
       if (!is.null(newCols)) {
-        assert_all_have_no_beginning_dot(assert_is_character(newCols))
-        assert_are_same_length(newCols, cols)
+        assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assert_all_have_no_beginning_dot(newCols)
       } else if (!is.null(suffix)) {
-        assert_is_a_string(suffix)
+        qassert(suffix, "S1")
         assert_are_newCols_and_cols_not_intersecting_sets(
           sprintf("%s%s", cols, suffix),
           self$cols()
@@ -884,7 +879,7 @@ DTSg <- R6Class(
       }
 
       if (weights == "inverseDistance") {
-        assert_all_are_finite(assert_is_a_number(parameters$power))
+        qassert(parameters$power, "N1()")
 
         weights <- 1 / c(
           rev(seq_len(before) + 1),
@@ -933,9 +928,8 @@ DTSg <- R6Class(
     },
 
     summary = function(cols = self$cols(), ...) {
-      assert_is_subset(assert_is_character(cols), self$cols())
-      assert_is_length_cols_greater_than_or_equal_to_one(cols)
-      assert_has_no_duplicates(cols)
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
 
       summary(private$.values[, cols, with = FALSE], ...)
     },
@@ -945,8 +939,8 @@ DTSg <- R6Class(
       drop = FALSE,
       class = c("data.table", "data.frame")
     ) {
-      assert_is_a_bool(assert_all_are_not_na(reference))
-      assert_is_a_bool(assert_all_are_not_na(drop))
+      qassert(reference, "B1")
+      qassert(drop, "B1")
       class <- match.arg(class)
 
       if (reference || drop) {
@@ -977,7 +971,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.isAggregated
       } else {
-        assert_is_a_bool(assert_all_are_not_na(value))
+        qassert(value, "B1")
 
         private$.isAggregated <- value
 
@@ -989,7 +983,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.isFast
       } else {
-        assert_is_a_bool(assert_all_are_not_na(value))
+        qassert(value, "B1")
 
         private$.isFast <- value
 
@@ -1001,7 +995,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.ID
       } else {
-        assert_is_a_string(value)
+        qassert(value, "S1")
 
         private$.ID <- value
 
@@ -1013,7 +1007,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.parameter
       } else {
-        assert_is_a_string(value)
+        qassert(value, "S1")
 
         private$.parameter <- value
 
@@ -1057,7 +1051,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.unit
       } else {
-        assert_is_a_string(value)
+        qassert(value, "S1")
 
         private$.unit <- value
 
@@ -1069,7 +1063,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.variant
       } else {
-        assert_is_a_string(value)
+        qassert(value, "S1")
 
         private$.variant <- value
 

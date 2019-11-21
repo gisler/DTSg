@@ -20,7 +20,7 @@ ByteCompile: true
 Depends:
     R (>= 3.2.0)
 Imports:
-    assertive,
+    checkmate,
     data.table,
     methods,
     R6
