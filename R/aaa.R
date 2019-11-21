@@ -1,4 +1,4 @@
-#' @import assertive
+#' @import checkmate
 #' @import data.table
 #' @import methods
 #' @import R6

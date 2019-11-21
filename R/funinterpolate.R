@@ -38,8 +38,8 @@
 #'
 #' @export
 interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
-  assert_is_numeric(.col)
-  assert_all_are_greater_than(assert_is_a_number(roll), 0L)
+  qassert(.col, "n+")
+  qassert(roll, "N1(0,]")
 
   if (.helpers$periodicity != "unrecognised") {
     roll <- roll * as.numeric(.helpers$maxLag, units = "secs")
