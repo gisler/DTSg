@@ -2,13 +2,6 @@
 context("aggregate method")
 
 test_that(
-  'wrong "funby" value class returns error',
-  expect_error(
-    DTSg$new(DT1)$aggregate(function(.dateTime, .helpers) {"timestamp"}, mean)
-  )
-)
-
-test_that(
   "values are aggregated correctly",
   expect_identical(
     DTSg$new(DT1)$aggregate(byYmdH__, mean)$values(),
@@ -60,7 +53,7 @@ test_that(
 context("alter method")
 
 test_that(
-  '"unrecognised" periodicity returns error',
+  "unrecognised periodicity returns error",
   expect_error(
     DTSg$new(DT1)$alter(by = "unrecognised")
   )
@@ -165,17 +158,6 @@ test_that(
   )
 )
 
-test_that(
-  '"suffix" does not overwrite existing columns',
-  expect_error(
-    DTSg$new(DT1)$colapply(
-      as.character,
-      cols = c("col1", "col2"),
-      suffix = ""
-    )
-  )
-)
-
 #### cols method ####
 context("cols method")
 
@@ -249,20 +231,6 @@ test_that(
   "data.table with a single column only returns error",
   expect_error(
     DTSg$new(DT1[, .(date)])
-  )
-)
-
-test_that(
-  'data.table with a "." in a column name returns error',
-  expect_error(
-    DTSg$new(DT1[, .(date, .col1 = col1)])
-  )
-)
-
-test_that(
-  "data.table with duplicated column names returns error",
-  expect_error(
-    DTSg$new(DT1[, .(date, col1, col1)])
   )
 )
 
@@ -452,7 +420,7 @@ for (by in c(
 }
 
 test_that(
-  '"unrecognised" periodicity is recognised correctly',
+  "unrecognised periodicity is recognised correctly",
   expect_identical(
     DTSg$new(data.table::data.table(
       date = c(
@@ -620,19 +588,6 @@ test_that(
       suffix = "_identity"
     )$cols(),
     c("col1", "col2", "col3", "col1_identity", "col2_identity")
-  )
-)
-
-test_that(
-  '"suffix" does not overwrite existing columns',
-  expect_error(
-    DTSg$new(DT1)$rollapply(
-      function(x, ...) {identity(x)},
-      before = 0L,
-      after = 0L,
-      cols = c("col1", "col2"),
-      suffix = ""
-    )
   )
 )
 
