@@ -237,7 +237,7 @@ DTSg <- R6Class(
         ignoreDST = ignoreDST,
         periodicity = private$.periodicity
       )
-      qassert(funby(private$.values[[".dateTime"]][1L], .helpers), "P1")
+      qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
@@ -308,13 +308,13 @@ DTSg <- R6Class(
       clone = getOption("DTSgClone")
     ) {
       if (qtest(from, "P1")) {
-        assertSetEqual(attr(from, "tzone"), private$.timezone)
+        assertSetEqual(attr(from, "tzone"), self$timezone)
       } else {
         from <- as.POSIXct(from, tz = private$.timezone)
         qassert(from, "P1")
       }
       if (qtest(to, "P1")) {
-        assertSetEqual(attr(to, "tzone"), private$.timezone)
+        assertSetEqual(attr(to, "tzone"), self$timezone)
       } else {
         to <- as.POSIXct(to, tz = private$.timezone)
       }
@@ -375,13 +375,10 @@ DTSg <- R6Class(
       qassert(clone, "B1")
       if (!is.null(newCols)) {
         assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assert_all_have_no_beginning_dot(newCols)
+        assertNoBeginningDot(newCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
-        assert_are_newCols_and_cols_not_intersecting_sets(
-          sprintf("%s%s", cols, suffix),
-          self$cols()
-        )
+        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
       }
 
       if (clone) {
@@ -475,10 +472,8 @@ DTSg <- R6Class(
       if (nrow(values) < 1L || ncol(values) < 2L) {
         stop('"values" must have at least one row and two columns.', call. = FALSE)
       }
-      assert_all_have_no_beginning_dot(names(values)[-1L])
-      if (anyDuplicated(names(values)[-1L]) > 0L) {
-        stop('Column names must not have any duplicates.', call. = FALSE)
-      }
+      assertCharacter(names(values)[-1L], min.chars = 1L, any.missing = FALSE, unique = TRUE)
+      assertNoBeginningDot(names(values)[-1L])
       qassert(swallow, "B1")
 
       if (is.data.table(values)) {
@@ -515,8 +510,8 @@ DTSg <- R6Class(
       if (!testClass(y, "DTSg")) {
         y <- DTSg$new(y)
       }
-      assertSetEqual(private$.timezone, y$timezone)
-      assertSetEqual(private$.isAggregated, y$aggregated)
+      assertSetEqual(y$timezone, self$timezone)
+      assertSetEqual(y$aggregated, self$aggregated)
       if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
         stop(
           '"x", "by", "by.x" and "by.y" arguments are not allowed in this context.',
@@ -546,7 +541,7 @@ DTSg <- R6Class(
     },
 
     nas = function(cols = self$cols()) {
-      assert_is_periodicity_recognised(private$.periodicity)
+      assertRecognisedPeriodicity(self$periodicity)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
 
@@ -623,13 +618,13 @@ DTSg <- R6Class(
       }
 
       if (qtest(from, "P1")) {
-        assertSetEqual(attr(from, "tzone"), private$.timezone)
+        assertSetEqual(attr(from, "tzone"), self$timezone)
       } else {
         from <- as.POSIXct(from, tz = private$.timezone)
         qassert(from, "P1")
       }
       if (qtest(to, "P1")) {
-        assertSetEqual(attr(to, "tzone"), private$.timezone)
+        assertSetEqual(attr(to, "tzone"), self$timezone)
       } else {
         to <- as.POSIXct(to, tz = private$.timezone)
       }
@@ -835,23 +830,20 @@ DTSg <- R6Class(
       newCols = NULL,
       suffix = NULL
     ) {
-      assert_is_periodicity_recognised(private$.periodicity)
+      assertRecognisedPeriodicity(self$periodicity)
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
-      qassert(before, "X1[0,)")
-      qassert(after, "X1[0,)")
+      before <- assertCount(before, coerce = TRUE)
+      after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
       qassert(clone, "B1")
       if (!is.null(newCols)) {
         assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assert_all_have_no_beginning_dot(newCols)
+        assertNoBeginningDot(newCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
-        assert_are_newCols_and_cols_not_intersecting_sets(
-          sprintf("%s%s", cols, suffix),
-          self$cols()
-        )
+        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
       }
 
       if (clone) {
