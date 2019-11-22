@@ -31,7 +31,7 @@ by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTi
 
 #### Functions ####
 to.UTCdateTime <- function(.dateTime, .helpers) {
-  assert_is_periodicity_recognised(.helpers$periodicity)
+  assertRecognisedPeriodicity(.helpers$periodicity)
 
   from <- .dateTime[1L]
   if (as.POSIXlt(from)$isdst) {
@@ -105,80 +105,80 @@ NULL
 #' @rdname TALFs
 #' @export
 byFasttimeY_____ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeY_____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYQ____ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYQ____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYm____ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYm____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmd___ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYmd___call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdH__ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYmdH__call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdHM_ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYmdHM_call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdHMS <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttimeYmdHMScall)
 }
 
 #' @rdname TALFs
 #' @export
 byFasttime______ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime______call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_Q____ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime_Q____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_m____ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime_m____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime___H__ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime___H__call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime____M_ <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime____M_call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_____S <- function(.dateTime, .helpers) {
-  assert_is_fasttime_ok(.dateTime, .helpers)
+  assertFasttimeOk(.dateTime, .helpers)
   eval(byFasttime_____Scall)
 }
 

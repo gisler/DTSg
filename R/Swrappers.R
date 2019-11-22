@@ -490,10 +490,10 @@ rollapply <- function(x, ...) {
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns whose rolling window
 #'  \code{fun} shall be applied to.
-#' @param before A numeric specifying the size of the window in time steps
-#'  before the \dQuote{center} of the rolling window.
-#' @param after A numeric specifying the size of the window in time steps after
-#'  the \dQuote{center} of the rolling window.
+#' @param before An integerish value specifying the size of the window in time
+#'  steps before the \dQuote{center} of the rolling window.
+#' @param after An integerish value specifying the size of the window in time
+#'  steps after the \dQuote{center} of the rolling window.
 #' @param weights A character string specifying a method to calculate weights
 #'  for \code{fun}, for instance, \code{\link{weighted.mean}}. See details for
 #'  further information.

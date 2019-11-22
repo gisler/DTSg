@@ -28,14 +28,13 @@ self <- NULL # no R CMD check note
 #' @export
 S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {
   if (!is.expression(R6Method) ||
-      class(eval(R6Method[[1L]][[2L]][[2L]])) != "R6ClassGenerator" ||
-      R6Method[[1L]][[2L]][[3L]] != "public_methods") {
+      R6Method[[1L]][[2L]][[3L]] != "public_methods" ||
+      class(eval(R6Method[[1L]][[2L]][[2L]])) != "R6ClassGenerator") {
     stop(
       '"R6Method" must contain an expression object of a public method of an "R6ClassGenerator".',
       call. = FALSE
     )
   }
-  assertFunction(eval(R6Method))
   qassert(self, "S1")
   qassert(dots, "B1")
 

@@ -20,11 +20,11 @@
 \item{cols}{A character vector specifying the columns whose rolling window
 \code{fun} shall be applied to.}
 
-\item{before}{A numeric specifying the size of the window in time steps
-before the \dQuote{center} of the rolling window.}
+\item{before}{An integerish value specifying the size of the window in time
+steps before the \dQuote{center} of the rolling window.}
 
-\item{after}{A numeric specifying the size of the window in time steps after
-the \dQuote{center} of the rolling window.}
+\item{after}{An integerish value specifying the size of the window in time
+steps after the \dQuote{center} of the rolling window.}
 
 \item{weights}{A character string specifying a method to calculate weights
 for \code{fun}, for instance, \code{\link{weighted.mean}}. See details for
