@@ -43,7 +43,7 @@ test_that(
 context("assertNoBeginningDot")
 
 test_that(
-  'column names with beginning dot return error',
+  "column names with beginning dot return error",
   expect_error(
     assertNoBeginningDot(c("col1", ".col2", ".col3"))
   )
