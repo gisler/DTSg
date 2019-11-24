@@ -134,12 +134,12 @@ test_that(
 )
 
 test_that(
-  '"newCols" adds and overwrites columns correctly',
+  '"resultCols" adds and overwrites columns correctly',
   expect_identical(
     DTSg$new(DT1)$colapply(
       as.character,
       cols = c("col1", "col2"),
-      newCols = c("col1", "col4"),
+      resultCols = c("col1", "col4"),
       suffix = "_character"
     )$cols(),
     c("col1", "col2", "col3", "col4")
@@ -563,14 +563,14 @@ test_that(
 )
 
 test_that(
-  '"newCols" adds and overwrites columns correctly',
+  '"resultCols" adds and overwrites columns correctly',
   expect_identical(
     DTSg$new(DT1)$rollapply(
       function(x, ...) {identity(x)},
       before = 0L,
       after = 0L,
       cols = c("col1", "col2"),
-      newCols = c("col1", "col4"),
+      resultCols = c("col1", "col4"),
       suffix = "_character"
     )$cols(),
     c("col1", "col2", "col3", "col4")
