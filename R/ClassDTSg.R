@@ -301,8 +301,8 @@ DTSg <- R6Class(
     },
 
     alter = function(
-      from = first(self$values(TRUE)[[1L]]),
-      to = last(self$values(TRUE)[[1L]]),
+      from = first(self$values(reference = TRUE)[[1L]]),
+      to = last(self$values(reference = TRUE)[[1L]]),
       by = self$periodicity,
       rollback = TRUE,
       clone = getOption("DTSgClone")
@@ -352,6 +352,7 @@ DTSg <- R6Class(
       } else {
         DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
       }
+
       if (by != private$.periodicity || nrow(DT) != private$.timestamps) {
         private$.values <- private$.values[DT]
 
@@ -423,7 +424,7 @@ DTSg <- R6Class(
     cols = function(class = NULL, pattern = NULL, ...) {
       cols <- names(private$.values)[-1L]
 
-      if (length(class) == 1L && is.character(class) && class == "all") {
+      if (is.character(class) && length(class) == 1L && class == "all") {
         warning(
           paste(
             '"class = \'all\'" is deprecated.',
@@ -486,14 +487,14 @@ DTSg <- R6Class(
         private$.values <- as.data.table(values)
       }
 
-      private$.origDateTimeCol <- names(private$.values)[1L]
-
       self$ID <- ID
       self$parameter <- parameter
       self$unit <- unit
       self$variant <- variant
       self$aggregated <- aggregated
       self$fast <- fast
+
+      private$.origDateTimeCol <- names(private$.values)[1L]
 
       self$refresh()
 
@@ -603,8 +604,8 @@ DTSg <- R6Class(
     },
 
     plot = function(
-      from = first(self$values(TRUE)[[1L]]),
-      to = last(self$values(TRUE)[[1L]]),
+      from = first(self$values(reference = TRUE)[[1L]]),
+      to = last(self$values(reference = TRUE)[[1L]]),
       cols = self$cols(class = "numeric"),
       secAxisCols  = NULL,
       secAxisLabel = ""
@@ -616,7 +617,6 @@ DTSg <- R6Class(
           call. = FALSE
         )
       }
-
       if (qtest(from, "P1")) {
         assertSetEqual(attr(from, "tzone"), self$timezone)
       } else {
@@ -638,8 +638,10 @@ DTSg <- R6Class(
       }
 
       ylab <- ""
+
       if (private$.parameter != "") {
         ylab <- private$.parameter
+
         if (private$.variant != "") {
           ylab <- sprintf("%s, %s", ylab, private$.variant)
         }
@@ -672,6 +674,7 @@ DTSg <- R6Class(
           drawGrid = FALSE,
           independentTicks = TRUE
         )
+
         for (i in seq_along(secAxisCols)) {
           plot <- dygraphs::dySeries(plot, secAxisCols[i], axis = "y2")
         }
@@ -746,6 +749,7 @@ DTSg <- R6Class(
           as.POSIXct("2000-01-01", tz = "UTC"),
           as.POSIXct("2000-01-01", tz = "UTC")
         )
+
         private$.minLag <- zeroSecs
         private$.maxLag <- zeroSecs
         private$.isRegular <- TRUE
@@ -761,6 +765,7 @@ DTSg <- R6Class(
       }
 
       lags <- round(diff(private$.values[[1L]][1:len]), 6L)
+
       if (anyNA(lags)) {
         stop(".dateTime column must not have any NA values.", call. = FALSE)
       }
@@ -803,11 +808,14 @@ DTSg <- R6Class(
           }
 
           DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
+
           lags <- diff(DT[[1L]])
+
           if (sum(!is.na(DT[, -1L, with = FALSE])) ==
               sum(!is.na(private$.values[1:len, -1L, with = FALSE])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
             private$.periodicity <- by
+
             break
           }
         }
