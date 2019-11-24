@@ -1,6 +1,6 @@
 ## DTSg v0.2.1.9000
 
-* Added `newCols` and `suffix` arguments to `colapply` and `rollapply` methods: allows for adding return values of applied functions as new columns instead of replacing existing ones
+* Added `resultCols` and `suffix` arguments to `colapply` and `rollapply` methods: allows for adding return values of applied functions as new columns instead of replacing existing ones
 * `class` argument of `cols` method now accepts a character vector of class names
 * Changed default value of `class` argument of `cols` method from `"all"` to `NULL`, however, for backward compatibility `"all"` can still be used for the same result, but will eventually be treated as a filter for classes of type `all`
 * Added `pattern` and `...` arguments to `cols` method: allows for searching column names

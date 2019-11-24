@@ -366,16 +366,16 @@ DTSg <- R6Class(
       ...,
       cols = self$cols(class = "numeric")[1L],
       clone = getOption("DTSgClone"),
-      newCols = NULL,
+      resultCols = NULL,
       suffix = NULL
     ) {
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(clone, "B1")
-      if (!is.null(newCols)) {
-        assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assertNoBeginningDot(newCols)
+      if (!is.null(resultCols)) {
+        assertCharacter(resultCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
         assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
@@ -388,13 +388,13 @@ DTSg <- R6Class(
           ...,
           cols = cols,
           clone = FALSE,
-          newCols = newCols,
+          resultCols = resultCols,
           suffix = suffix
         ))
       }
 
-      if (!is.null(newCols)) {
-        .cols <- newCols
+      if (!is.null(resultCols)) {
+        .cols <- resultCols
       } else if (!is.null(suffix)) {
         .cols <- sprintf("%s%s", cols, suffix)
       } else {
@@ -827,7 +827,7 @@ DTSg <- R6Class(
       weights = c("inverseDistance"),
       parameters = list(power = 1),
       clone = getOption("DTSgClone"),
-      newCols = NULL,
+      resultCols = NULL,
       suffix = NULL
     ) {
       assertRecognisedPeriodicity(self$periodicity)
@@ -838,9 +838,9 @@ DTSg <- R6Class(
       after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
       qassert(clone, "B1")
-      if (!is.null(newCols)) {
-        assertCharacter(newCols, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assertNoBeginningDot(newCols)
+      if (!is.null(resultCols)) {
+        assertCharacter(resultCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
         assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
@@ -857,13 +857,13 @@ DTSg <- R6Class(
           weights = weights,
           parameters = parameters,
           clone = FALSE,
-          newCols = newCols,
+          resultCols = resultCols,
           suffix = suffix
         ))
       }
 
-      if (!is.null(newCols)) {
-        .cols <- newCols
+      if (!is.null(resultCols)) {
+        .cols <- resultCols
       } else if (!is.null(suffix)) {
         .cols <- sprintf("%s%s", cols, suffix)
       } else {
