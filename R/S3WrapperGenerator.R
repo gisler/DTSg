@@ -1,5 +1,3 @@
-self <- NULL # no R CMD check note
-
 #' S3 Wrapper Method Generator
 #'
 #' Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,

@@ -34,14 +34,17 @@ to.UTCdateTime <- function(.dateTime, .helpers) {
   assertRecognisedPeriodicity(.helpers$periodicity)
 
   from <- .dateTime[1L]
+
   if (as.POSIXlt(from)$isdst) {
     from <- from - 3600L
   }
+
   .dateTime <- seq(
     as.POSIXct(as.character(from), tz = "UTC"),
     by = .helpers$periodicity,
     along.with = .dateTime
   )
+
   if (grepl("^\\d+ (month|year)(s?)$", .helpers$periodicity) &&
       mday(.dateTime[1L]) > 28L) {
     .dateTime <- rollback(.dateTime, .helpers$periodicity)

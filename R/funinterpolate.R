@@ -1,3 +1,11 @@
+# no R CMD check notes
+.dateTime <- NULL
+.colAfter <- NULL
+.colBefore <- NULL
+.dateTimeAfter <- NULL
+.dateTimeBefore <- NULL
+.divisor <- NULL
+
 #' Linear Interpolation
 #'
 #' Linearly interpolates missing values of a numeric vector. For use with the
@@ -48,14 +56,6 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
   DT <- data.table(.dateTime = .helpers$.dateTime, key = ".dateTime")
   values <- data.table(.dateTime = .helpers$.dateTime, .col = .col, key = ".dateTime")
   values <- values[!is.na(.col), ]
-
-  # no R CMD check notes
-  .dateTime <- NULL
-  .colAfter <- NULL
-  .colBefore <- NULL
-  .dateTimeAfter <- NULL
-  .dateTimeBefore <- NULL
-  .divisor <- NULL
 
   DT <- values[
     DT,
