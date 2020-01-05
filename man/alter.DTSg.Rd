@@ -5,10 +5,15 @@
 \alias{alter}
 \title{Alter Time Series}
 \usage{
-\method{alter}{DTSg}(x, from = first(self$values(reference =
-  TRUE)[[1L]]), to = last(self$values(reference = TRUE)[[1L]]),
-  by = self$periodicity, rollback = TRUE,
-  clone = getOption("DTSgClone"), ...)
+\method{alter}{DTSg}(
+  x,
+  from = first(self$values(reference = TRUE)[[1L]]),
+  to = last(self$values(reference = TRUE)[[1L]]),
+  by = self$periodicity,
+  rollback = TRUE,
+  clone = getOption("DTSgClone"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}

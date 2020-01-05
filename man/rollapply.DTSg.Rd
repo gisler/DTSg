@@ -5,10 +5,19 @@
 \alias{rollapply}
 \title{Rolling Window Function}
 \usage{
-\method{rollapply}{DTSg}(x, fun, ..., cols = self$cols(class =
-  "numeric")[1L], before = 1L, after = before,
-  weights = c("inverseDistance"), parameters = list(power = 1),
-  clone = getOption("DTSgClone"), resultCols = NULL, suffix = NULL)
+\method{rollapply}{DTSg}(
+  x,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric")[1L],
+  before = 1L,
+  after = before,
+  weights = c("inverseDistance"),
+  parameters = list(power = 1),
+  clone = getOption("DTSgClone"),
+  resultCols = NULL,
+  suffix = NULL
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}

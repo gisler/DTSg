@@ -5,8 +5,13 @@
 \alias{values}
 \title{Get Values}
 \usage{
-\method{values}{DTSg}(x, reference = FALSE, drop = FALSE,
-  class = c("data.table", "data.frame"), ...)
+\method{values}{DTSg}(
+  x,
+  reference = FALSE,
+  drop = FALSE,
+  class = c("data.table", "data.frame"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
