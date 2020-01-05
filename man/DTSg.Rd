@@ -5,7 +5,6 @@
 \alias{DTSg}
 \alias{new}
 \title{DTSg Class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
  aggregated = FALSE, fast = FALSE, swallow = FALSE)
@@ -174,4 +173,3 @@ new(Class = "DTSg", values = flow, ID = "River Flow")
  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
  \code{\link{clone}}, \code{\link{options}}, \code{\link{list}}
 }
-\keyword{datasets}

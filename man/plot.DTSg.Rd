@@ -5,10 +5,15 @@
 \alias{plot}
 \title{Plot Time Series}
 \usage{
-\method{plot}{DTSg}(x, from = first(self$values(reference = TRUE)[[1L]]),
+\method{plot}{DTSg}(
+  x,
+  from = first(self$values(reference = TRUE)[[1L]]),
   to = last(self$values(reference = TRUE)[[1L]]),
-  cols = self$cols(class = "numeric"), secAxisCols = NULL,
-  secAxisLabel = "", ...)
+  cols = self$cols(class = "numeric"),
+  secAxisCols = NULL,
+  secAxisLabel = "",
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
