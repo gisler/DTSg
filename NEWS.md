@@ -1,3 +1,5 @@
+## DTSg v0.3.0.9000
+
 ## DTSg v0.3.0
 
 * Added `resultCols` and `suffix` arguments to `colapply` and `rollapply` methods: allows for adding return values of applied functions as new columns instead of replacing existing ones
