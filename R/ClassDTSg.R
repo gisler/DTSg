@@ -549,7 +549,7 @@ DTSg <- R6Class(
       DetectNA <- function(x) {
         i <- 0L
         isNAlast <- FALSE
-        return <- function(x) {
+        function(x) {
           if (is.na(x)) {
             if (!isNAlast) {
               i <<- i + 1L
@@ -560,7 +560,7 @@ DTSg <- R6Class(
             n <- NA
             isNAlast <<- FALSE
           }
-          return <- n
+          n
         }
       }
 
