@@ -208,7 +208,7 @@ DTSg <- R6Class(
     },
 
     rmGlobalReferences = function(addr) {
-      globalObjs <- ls(".GlobalEnv", sorted = FALSE)
+      globalObjs <- ls(globalenv(), sorted = FALSE)
 
       rmGlobalReferences <- function(globalObj, addr) {
         if (addr == address(get(globalObj, envir = globalenv()))) {
