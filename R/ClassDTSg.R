@@ -724,7 +724,7 @@ DTSg <- R6Class(
     refresh = function() {
       firstCol <- names(private$.values)[1L]
 
-      if (!qtest(private$.values[[1L]], "P+")) {
+      if (!qtest(private$.values[[1L]], "p+")) {
         set(
           private$.values,
           j = 1L,

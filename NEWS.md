@@ -1,5 +1,6 @@
 ## DTSg v0.3.0.9000
 
+* Fixed useless coercion of *.dateTime* column in case it contained `NA`
 * Minor internal code improvements
 
 ## DTSg v0.3.0
