@@ -1,5 +1,6 @@
 ## DTSg v0.3.0.9000
 
+* `rollapply` method now is way less memory hungry thanks to an inspiration from the `data.table` package
 * Fixed useless coercion of *.dateTime* column in case it contained `NA`
 * Minor internal code improvements
 

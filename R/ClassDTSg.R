@@ -890,24 +890,40 @@ DTSg <- R6Class(
       }
 
       wapply <- function(x, fun, ..., before, after, weights) {
-        L <- rev(shift(list(x), 0:before))
-        if (after != 0L) {
-          L <- c(L, shift(list(x), 1:after, type = "lead"))
+        y <- vector(typeof(x), length(x))
+        y[] <- NA
+
+        for (i in seq_along(x)) {
+          lowerBound <- i - before
+
+          if (lowerBound < 1L) {
+            y[i] <- fun(
+              c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)]),
+              ...,
+              w = weights,
+              .helpers = list(
+                before = before,
+                after = after,
+                windowSize = before + 1L + after,
+                centerIndex = before + 1L
+              )
+            )
+          } else {
+            y[i] <- fun(
+              x[lowerBound:(i + after)],
+              ...,
+              w = weights,
+              .helpers = list(
+                before = before,
+                after = after,
+                windowSize = before + 1L + after,
+                centerIndex = before + 1L
+              )
+            )
+          }
         }
 
-        apply(
-          matrix(unlist(L), ncol = length(L)),
-          1L,
-          fun,
-          ...,
-          w = weights,
-          .helpers = list(
-            before = before,
-            after = after,
-            windowSize = before + 1L + after,
-            centerIndex = before + 1L
-          )
-        )
+        y
       }
 
       private$.values[
