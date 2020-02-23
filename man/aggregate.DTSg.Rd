@@ -79,10 +79,11 @@ Depending on the number of columns to aggregate, the \emph{.n} column
  supposed to ignore day saving time while forming new timestamps. This can be
  a desired feature for time series strictly following the position of the sun
  (such as hydrological time series). Doing so ensures that diurnal variations
- are preserved under all circumstances and that all intervals are of
- \dQuote{correct} length. This feature requires that the periodicity of the
- time series is not unrecognised and is supported by the following temporal
- aggregation level functions of the package:
+ are preserved and all intervals are of \dQuote{correct} length, however, a
+ possible limitation might be that the day saving time shift is invariably
+ assumed to be exactly one hour long. This feature requires that the
+ periodicity of the time series is not unrecognised and is supported by the
+ following temporal aggregation level functions of the package:
  \itemize{
    \item \code{\link{byY_____}}
    \item \code{\link{byYQ____}}
