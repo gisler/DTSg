@@ -2,6 +2,7 @@
 
 * Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
 * Fixed pointless coercion of `POSIXct` *.dateTime* columns in case they contained at least one `NA` value
+* Slightly improved documentation
 * Minor internal code improvements
 
 ## DTSg v0.3.0
