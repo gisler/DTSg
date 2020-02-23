@@ -2,6 +2,7 @@
 
 * Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
 * Fixed pointless coercion of `POSIXct` *.dateTime* columns in case they contained at least one `NA` value
+* Switched to unit testing framework of the `tinytest` instead of the `testthat` package
 * Slightly improved documentation
 * Minor internal code improvements
 
@@ -11,7 +12,7 @@
 * `class` argument of `cols` method now accepts a character vector of class names
 * Changed default value of `class` argument of `cols` method from `"all"` to `NULL`, however, for backward compatibility `"all"` can still be used for the same result, but will eventually be treated as a filter for classes of type `all`
 * Added `pattern` and `...` arguments to `cols` method: allows for searching column names
-* Switched to argument check functions of `checkmate` package instead of `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types` packages
+* Switched to argument check functions of the `checkmate` package instead of the `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types` packages
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
 
@@ -28,7 +29,7 @@
 * Added `timestamps` field providing the total number of timestamps
 * `print` method now ommits empty metadata fields
 * Added means to measure code coverage with the help of `covr`
-* Removed `xts` from suggested package list (already comes along with `dygraphs`)
+* Removed `xts` from suggested packages list (already comes along with `dygraphs`)
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
 

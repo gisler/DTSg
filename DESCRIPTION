@@ -32,7 +32,7 @@ Suggests:
     magrittr,
     RColorBrewer,
     rmarkdown,
-    testthat
+    tinytest
 RoxygenNote: 7.0.2
 Roxygen: list(r6 = FALSE)
 VignetteBuilder: knitr
