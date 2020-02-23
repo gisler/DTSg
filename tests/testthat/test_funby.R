@@ -251,11 +251,11 @@ test_that(
   )
 )
 
-#### base functions (CET1) ####
-context("base functions (CET1)")
+#### base functions (CETtoFromDST) ####
+context("base functions (CETtoFromDST)")
 
 test_that(
-  '"byY_____" works as expected (CET1)',
+  '"byY_____" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), by = "year"][["value"]]
@@ -263,7 +263,7 @@ test_that(
 )
 
 test_that(
-  '"byYQ____" works as expected (CET1)',
+  '"byYQ____" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(byYQ____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), by = "quarter"][["value"]]
@@ -271,7 +271,7 @@ test_that(
 )
 
 test_that(
-  '"byYm____" works as expected (CET1)',
+  '"byYm____" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), by = "month"][["value"]]
@@ -279,7 +279,7 @@ test_that(
 )
 
 test_that(
-  '"byYmd___" works as expected (CET1)',
+  '"byYmd___" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(byYmd___, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), by = "day"][["value"]]
@@ -287,31 +287,31 @@ test_that(
 )
 
 test_that(
-  '"byYmdH__" works as expected (CET1)',
+  '"byYmdH__" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(byYmdH__, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "hour"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(byYmdH__, sum)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
   )
 )
 
 test_that(
-  '"byYmdHM_" works as expected (CET1)',
+  '"byYmdHM_" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(byYmdHM_, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "minute"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(byYmdHM_, sum)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "minute"][["value"]]
   )
 )
 
 test_that(
-  '"byYmdHMS" works as expected (CET1)',
+  '"byYmdHMS" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(byYmdHMS, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "second"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(byYmdHMS, sum)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "second"][["value"]]
   )
 )
 
 test_that(
-  '"by______" works as expected (CET1)',
+  '"by______" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(by______, sum)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value))][["value"]]
@@ -319,7 +319,7 @@ test_that(
 )
 
 test_that(
-  '"by_Q____" works as expected (CET1)',
+  '"by_Q____" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(by_Q____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), keyby = "quarter"][["value"]]
@@ -327,7 +327,7 @@ test_that(
 )
 
 test_that(
-  '"by_m____" works as expected (CET1)',
+  '"by_m____" works as expected (CETtoFromDST)',
   expect_equal(
     DTSg$new(CEThourlyData)$aggregate(by_m____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
     CEThourlyData[, .(value = sum(value)), keyby = "month"][["value"]]
@@ -335,76 +335,76 @@ test_that(
 )
 
 test_that(
-  '"by___H__" works as expected (CET1)',
+  '"by___H__" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "hour"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
   )
 )
 
 test_that(
-  '"by____M_" works as expected (CET1)',
+  '"by____M_" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(by____M_, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "hourMinute"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(by____M_, sum)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "hourMinute"][["value"]]
   )
 )
 
 test_that(
-  '"by_____S" works as expected (CET1)',
+  '"by_____S" works as expected (CETtoDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData1)$aggregate(by_____S, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData1[, .(value = sum(value)), by = "minuteSecond"][["value"]]
+    DTSg$new(CETtoDSTfractionalSecondData)$aggregate(by_____S, sum)$values(TRUE)[["value"]],
+    CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "minuteSecond"][["value"]]
   )
 )
 
-#### base functions (CET2) ####
-context("base functions (CET2)")
+#### base functions (CETfromDST) ####
+context("base functions (CETfromDST)")
 
 test_that(
-  '"byYmdH__" works as expected (CET2)',
+  '"byYmdH__" works as expected (CETfromDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(byYmdH__, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "hour"][["value"]]
-  )
-)
-
-test_that(
-  '"byYmdHM_" works as expected (CET2)',
-  expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(byYmdHM_, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "minute"][["value"]]
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(byYmdH__, sum)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
   )
 )
 
 test_that(
-  '"byYmdHMS" works as expected (CET2)',
+  '"byYmdHM_" works as expected (CETfromDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(byYmdHMS, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "second"][["value"]]
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(byYmdHM_, sum)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "minute"][["value"]]
   )
 )
 
 test_that(
-  '"by___H__" works as expected (CET2)',
+  '"byYmdHMS" works as expected (CETfromDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "hour"][["value"]]
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(byYmdHMS, sum)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "second"][["value"]]
   )
 )
 
 test_that(
-  '"by____M_" works as expected (CET2)',
+  '"by___H__" works as expected (CETfromDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(by____M_, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "hourMinute"][["value"]]
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
   )
 )
 
 test_that(
-  '"by_____S" works as expected (CET2)',
+  '"by____M_" works as expected (CETfromDST)',
   expect_equal(
-    DTSg$new(CETfractionalSecondData2)$aggregate(by_____S, sum)$values(TRUE)[["value"]],
-    CETfractionalSecondData2[, .(value = sum(value)), by = "minuteSecond"][["value"]]
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by____M_, sum)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hourMinute"][["value"]]
+  )
+)
+
+test_that(
+  '"by_____S" works as expected (CETfromDST)',
+  expect_equal(
+    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by_____S, sum)$values(TRUE)[["value"]],
+    CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "minuteSecond"][["value"]]
   )
 )

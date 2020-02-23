@@ -47,7 +47,7 @@ CEThourlyData <- data.table::data.table(
   monthDay = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
 )
 
-CETfractionalSecondData1 <- data.table::data.table(
+CETtoDSTfractionalSecondData <- data.table::data.table(
   date = seq(
     as.POSIXct("2000-03-26 01:00:00.0", tz = "Europe/Vienna"),
     as.POSIXct("2000-03-26 03:59:59.5", tz = "Europe/Vienna"),
@@ -61,7 +61,7 @@ CETfractionalSecondData1 <- data.table::data.table(
   minuteSecond = rep(rep(0:59, each =    2L), 120L)
 )
 
-CETfractionalSecondData2 <- data.table::data.table(
+CETfromDSTfractionalSecondData <- data.table::data.table(
   date = seq(
     as.POSIXct("2000-10-29 02:00:00.0", tz = "Europe/Vienna"),
     as.POSIXct("2000-10-29 03:59:59.5", tz = "Europe/Vienna"),
