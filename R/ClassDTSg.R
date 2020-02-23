@@ -207,6 +207,16 @@ DTSg <- R6Class(
       }
     },
 
+    determineCols = function(resultCols, suffix, cols) {
+      if (!is.null(resultCols)) {
+        return(resultCols)
+      } else if (!is.null(suffix)) {
+        return(sprintf("%s%s", cols, suffix))
+      } else {
+        cols
+      }
+    },
+
     rmGlobalReferences = function(addr) {
       globalObjs <- ls(globalenv(), sorted = FALSE)
 
@@ -394,13 +404,7 @@ DTSg <- R6Class(
         ))
       }
 
-      if (!is.null(resultCols)) {
-        .cols <- resultCols
-      } else if (!is.null(suffix)) {
-        .cols <- sprintf("%s%s", cols, suffix)
-      } else {
-        .cols <- cols
-      }
+      .cols <- private$determineCols(resultCols, suffix, cols)
 
       private$.values[
         ,
@@ -873,13 +877,7 @@ DTSg <- R6Class(
         ))
       }
 
-      if (!is.null(resultCols)) {
-        .cols <- resultCols
-      } else if (!is.null(suffix)) {
-        .cols <- sprintf("%s%s", cols, suffix)
-      } else {
-        .cols <- cols
-      }
+      .cols <- private$determineCols(resultCols, suffix, cols)
 
       if (weights == "inverseDistance") {
         qassert(parameters$power, "N1()")
