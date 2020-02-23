@@ -16,7 +16,8 @@
   parameters = list(power = 1),
   clone = getOption("DTSgClone"),
   resultCols = NULL,
-  suffix = NULL
+  suffix = NULL,
+  memoryOverCPU = TRUE
 )
 }
 \arguments{
@@ -54,6 +55,12 @@ are matched elementwise between \code{resultCols} and \code{cols}.}
 are added as new columns with names consisting of the columns specified in
 \code{cols} and this suffix. Existing columns are never overwritten. Only
 used when \code{resultCols} is not specified.}
+
+\item{memoryOverCPU}{A logical specifying if memory usage is preferred over
+CPU usage for this method. The former is generally faster for smaller
+windows and shorter time series, the latter for bigger windows and longer
+time series or might even be the only way that works depending on the
+available hardware.}
 }
 \value{
 Returns a \code{\link{DTSg}} object.

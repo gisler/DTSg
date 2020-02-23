@@ -509,6 +509,11 @@ rollapply <- function(x, ...) {
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
 #'  used when \code{resultCols} is not specified.
+#' @param memoryOverCPU A logical specifying if memory usage is preferred over
+#'  CPU usage for this method. The former is generally faster for smaller
+#'  windows and shorter time series, the latter for bigger windows and longer
+#'  time series or might even be the only way that works depending on the
+#'  available hardware.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over the weights

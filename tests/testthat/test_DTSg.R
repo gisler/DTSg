@@ -504,7 +504,7 @@ test_that(
 context("rollapply method")
 
 test_that(
-  '"fun" is applied correctly',
+  '"fun" is applied correctly (memoryOverCPU = TRUE)',
   expect_identical(
     DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L)$values()[["col1"]],
     c(NA, NA, 16, 24, 32, 40, 48, NA)
@@ -512,7 +512,15 @@ test_that(
 )
 
 test_that(
-  '"..." passes on arguments correctly',
+  '"fun" is applied correctly (memoryOverCPU = FALSE)',
+  expect_identical(
+    DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L, memoryOverCPU = FALSE)$values()[["col1"]],
+    c(NA, NA, 16, 24, 32, 40, 48, NA)
+  )
+)
+
+test_that(
+  '"..." passes on arguments correctly (memoryOverCPU = TRUE)',
   expect_identical(
     DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L)$values()[["col1"]],
     c(2, 3, 4, 6, 8, 10, 12, 13)
@@ -520,9 +528,25 @@ test_that(
 )
 
 test_that(
-  "window of size one returns identity",
+  '"..." passes on arguments correctly (memoryOverCPU = FALSE)',
+  expect_identical(
+    DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L, memoryOverCPU = FALSE)$values()[["col1"]],
+    c(2, 3, 4, 6, 8, 10, 12, 13)
+  )
+)
+
+test_that(
+  "window of size one returns identity (memoryOverCPU = TRUE)",
   expect_identical(
     DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L)$values()[["col1"]],
+    DT1[["col1"]]
+  )
+)
+
+test_that(
+  "window of size one returns identity (memoryOverCPU = FALSE)",
+  expect_identical(
+    DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L, memoryOverCPU = FALSE)$values()[["col1"]],
     DT1[["col1"]]
   )
 )
@@ -552,7 +576,8 @@ test_that(
       na.rm = TRUE,
       before = 2L,
       after = 1L,
-      parameters = list(power = 2)
+      parameters = list(power = 2),
+      memoryOverCPU = FALSE
     )$values()[["col1"]][3L],
     {
       weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^2

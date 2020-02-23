@@ -836,7 +836,8 @@ DTSg <- R6Class(
       parameters = list(power = 1),
       clone = getOption("DTSgClone"),
       resultCols = NULL,
-      suffix = NULL
+      suffix = NULL,
+      memoryOverCPU = TRUE
     ) {
       assertRecognisedPeriodicity(self$periodicity)
       assertFunction(fun)
@@ -853,6 +854,7 @@ DTSg <- R6Class(
         qassert(suffix, "S1")
         assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
       }
+      qassert(memoryOverCPU, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -866,7 +868,8 @@ DTSg <- R6Class(
           parameters = parameters,
           clone = FALSE,
           resultCols = resultCols,
-          suffix = suffix
+          suffix = suffix,
+          memoryOverCPU = memoryOverCPU
         ))
       }
 
@@ -889,41 +892,56 @@ DTSg <- R6Class(
         weights <- weights / sum(weights)
       }
 
-      wapply <- function(x, fun, ..., before, after, weights) {
-        y <- vector(typeof(x), length(x))
-        y[] <- NA
+      .helpers = list(
+        before = before,
+        after = after,
+        windowSize = before + 1L + after,
+        centerIndex = before + 1L
+      )
 
-        for (i in seq_along(x)) {
-          lowerBound <- i - before
-
-          if (lowerBound < 1L) {
-            y[i] <- fun(
-              c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)]),
-              ...,
-              w = weights,
-              .helpers = list(
-                before = before,
-                after = after,
-                windowSize = before + 1L + after,
-                centerIndex = before + 1L
-              )
-            )
-          } else {
-            y[i] <- fun(
-              x[lowerBound:(i + after)],
-              ...,
-              w = weights,
-              .helpers = list(
-                before = before,
-                after = after,
-                windowSize = before + 1L + after,
-                centerIndex = before + 1L
-              )
-            )
+      if (memoryOverCPU) {
+        wapply <- function(x, fun, ..., before, after, weights) {
+          L <- rev(shift(list(x), 0:before))
+          if (after != 0L) {
+            L <- c(L, shift(list(x), 1:after, type = "lead"))
           }
-        }
 
-        y
+          apply(
+            matrix(unlist(L), ncol = length(L)),
+            1L,
+            fun,
+            ...,
+            w = weights,
+            .helpers = .helpers
+          )
+        }
+      } else {
+        wapply <- function(x, fun, ..., before, after, weights) {
+          y <- vector(typeof(x), length(x))
+          y[] <- NA
+
+          for (i in seq_along(x)) {
+            lowerBound <- i - before
+
+            if (lowerBound < 1L) {
+              y[i] <- fun(
+                c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)]),
+                ...,
+                w = weights,
+                .helpers = .helpers
+              )
+            } else {
+              y[i] <- fun(
+                x[lowerBound:(i + after)],
+                ...,
+                w = weights,
+                .helpers = .helpers
+              )
+            }
+          }
+
+          y
+        }
       }
 
       private$.values[
