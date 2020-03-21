@@ -14,7 +14,7 @@
   after = before,
   weights = c("inverseDistance"),
   parameters = list(power = 1),
-  clone = getOption("DTSgClone", TRUE),
+  clone = getOption("DTSgClone"),
   resultCols = NULL,
   suffix = NULL,
   memoryOverCPU = TRUE

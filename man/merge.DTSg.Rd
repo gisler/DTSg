@@ -5,7 +5,7 @@
 \alias{merge}
 \title{Merge Two DTSg Objects}
 \usage{
-\method{merge}{DTSg}(x, y, ..., clone = getOption("DTSgClone", TRUE))
+\method{merge}{DTSg}(x, y, ..., clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
