@@ -239,7 +239,7 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric"),
       n = FALSE,
       ignoreDST = FALSE,
-      clone = getOption("DTSgClone")
+      clone = getOption("DTSgClone", TRUE)
     ) {
       assertFunction(funby)
       .helpers <- list(
@@ -315,7 +315,7 @@ DTSg <- R6Class(
       to = last(self$values(reference = TRUE)[[1L]]),
       by = self$periodicity,
       rollback = TRUE,
-      clone = getOption("DTSgClone")
+      clone = getOption("DTSgClone", TRUE)
     ) {
       if (qtest(from, "P1")) {
         assertSetEqual(attr(from, "tzone"), self$timezone)
@@ -376,7 +376,7 @@ DTSg <- R6Class(
       fun,
       ...,
       cols = self$cols(class = "numeric")[1L],
-      clone = getOption("DTSgClone"),
+      clone = getOption("DTSgClone", TRUE),
       resultCols = NULL,
       suffix = NULL
     ) {
@@ -511,7 +511,7 @@ DTSg <- R6Class(
       }
     },
 
-    merge = function(y, ..., clone = getOption("DTSgClone")) {
+    merge = function(y, ..., clone = getOption("DTSgClone", TRUE)) {
       if (!testClass(y, "DTSg")) {
         y <- DTSg$new(y)
       }
@@ -838,7 +838,7 @@ DTSg <- R6Class(
       after = before,
       weights = c("inverseDistance"),
       parameters = list(power = 1),
-      clone = getOption("DTSgClone"),
+      clone = getOption("DTSgClone", TRUE),
       resultCols = NULL,
       suffix = NULL,
       memoryOverCPU = TRUE

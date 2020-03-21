@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-options("DTSgClone" = TRUE)
 ```
 
 This vignette introduces the `DTSg` package, shows how to create objects of its main as well as only class and explains their two interfaces: R6 as code and S3 in comments. Familiarity with the `data.table` package helps better understanding certain parts of the vignette, but is not essential to follow it.
