@@ -10,7 +10,7 @@
   fun,
   ...,
   cols = self$cols(class = "numeric")[1L],
-  clone = getOption("DTSgClone"),
+  clone = getOption("DTSgClone", TRUE),
   resultCols = NULL,
   suffix = NULL
 )
