@@ -111,7 +111,7 @@ TSm
 
 Printing the object shows us that its *aggregated* field has been set to `TRUE`. This is merely an indicator telling us to now interpret the timestamps of the series as periods between subsequent timestamps and not as snap-shots anymore.
 
-The one family of temporal aggregation level functions of the package sets a timestamp to the lowest possible time of the corresponding temporal aggregation level, i.e., truncates a timestamp, and the other family extracts a certain part of it. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:
+The one family of temporal aggregation level functions of the package sets a timestamp to the lowest possible time of the corresponding temporal aggregation level, i.e. truncates a timestamp, and the other family extracts a certain part of it. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:
 
 ```{r}
 TSQ <- TS$aggregate(funby = by_Q____, fun = mean)

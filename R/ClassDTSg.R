@@ -41,7 +41,7 @@
 #'  for the automatic detection of the time series' periodicity.
 #' @param swallow A logical signalling if the object provided through the
 #'  \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
-#'  object, i.e., no copy of the data shall be made. This is generally more
+#'  object, i.e. no copy of the data shall be made. This is generally more
 #'  ressource efficient, but only works if the object provided through the
 #'  \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
 #'  however, that if the creation of the \code{DTSg} object fails for some
@@ -78,7 +78,7 @@
 #'  that they can be accessed and actively set with the help of the \code{$}
 #'  operator (for instance, \code{x$ID} gets the value of the \emph{ID} field
 #'  and \code{x$ID <- "River Flow"} sets its value). Please note that fields are
-#'  always modified in place, i.e., no clone (copy) of the object is made
+#'  always modified in place, i.e. no clone (copy) of the object is made
 #'  beforehand. See \code{\link{clone}} for further information. Some of the
 #'  fields are read-only though:
 #'  \itemize{

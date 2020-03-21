@@ -76,24 +76,24 @@ to.UTCdateTime <- function(.dateTime, .helpers) {
 #' The truncating family sets timestamps to the lowest possible time of the
 #'  corresponding temporal aggregation level:
 #'  \itemize{
-#'    \item \code{*Y_____} truncates to year,    e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
-#'    \item \code{*YQ____} truncates to quarter, e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
-#'    \item \code{*Ym____} truncates to month,   e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
-#'    \item \code{*Ymd___} truncates to day,     e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
-#'    \item \code{*YmdH__} truncates to hour,    e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
-#'    \item \code{*YmdHM_} truncates to minute,  e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
-#'    \item \code{*YmdHMS} truncates to second,  e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
+#'    \item \code{*Y_____} truncates to year,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
+#'    \item \code{*YQ____} truncates to quarter, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
+#'    \item \code{*Ym____} truncates to month,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
+#'    \item \code{*Ymd___} truncates to day,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
+#'    \item \code{*YmdH__} truncates to hour,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
+#'    \item \code{*YmdHM_} truncates to minute,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
+#'    \item \code{*YmdHMS} truncates to second,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
 #'  }
 #'
 #' By convention, the extracting family sets the year to 2199 and extracts a
 #'  certain part of timestamps:
 #'  \itemize{
-#'    \item \code{*______} extracts nothing,      i.e.,               all timestamps become  \emph{2199-01-01 00:00:00.0}
-#'    \item \code{*_Q____} extracts the quarters, e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2199-10-01 00:00:00.0}
-#'    \item \code{*_m____} extracts the months,   e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2199-11-01 00:00:00.0}
-#'    \item \code{*___H__} extracts the hours,    e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 11:00:00.0}
-#'    \item \code{*____M_} extracts the minutes,  e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:11:00.0}
-#'    \item \code{*_____S} extracts the seconds,  e.g., \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:00:11.0}
+#'    \item \code{*______} extracts nothing,      i.e.               all timestamps become  \emph{2199-01-01 00:00:00.0}
+#'    \item \code{*_Q____} extracts the quarters, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-10-01 00:00:00.0}
+#'    \item \code{*_m____} extracts the months,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-11-01 00:00:00.0}
+#'    \item \code{*___H__} extracts the hours,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 11:00:00.0}
+#'    \item \code{*____M_} extracts the minutes,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:11:00.0}
+#'    \item \code{*_____S} extracts the seconds,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:00:11.0}
 #'  }
 #'
 #' @return All functions return a \code{\link{POSIXct}} vector with timestamps

@@ -23,7 +23,7 @@ Returns a \code{\link{DTSg}} object.
 Clones (copies) a \code{\link{DTSg}} object. Merely assigning a variable
  representing a \code{\link{DTSg}} object to a new variable does not result
  in a copy of the object. Instead, both variables will reference and access
- the same data in the background, i.e., changing one will also affect the
+ the same data in the background, i.e. changing one will also affect the
  other. This is not an issue when calling methods with the \emph{DTSgClone}
  option or \code{clone} argument set to \code{TRUE}, but has to be kept in
  mind when setting fields, as they are always modified in place. See
