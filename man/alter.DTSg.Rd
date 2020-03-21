@@ -11,7 +11,7 @@
   to = last(self$values(reference = TRUE)[[1L]]),
   by = self$periodicity,
   rollback = TRUE,
-  clone = getOption("DTSgClone", TRUE),
+  clone = getOption("DTSgClone"),
   ...
 )
 }

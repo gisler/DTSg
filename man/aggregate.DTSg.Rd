@@ -13,7 +13,7 @@
   cols = self$cols(class = "numeric"),
   n = FALSE,
   ignoreDST = FALSE,
-  clone = getOption("DTSgClone", TRUE)
+  clone = getOption("DTSgClone")
 )
 }
 \arguments{
