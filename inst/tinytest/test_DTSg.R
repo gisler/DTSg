@@ -276,13 +276,15 @@ expect_identical(
   info = "no missing values returns empty data.table"
 )
 
-#### plot method ####
+#### plot and print methods ####
 expect_true(
   {
-    DTSg$new(DT1, "id", "parameter", "unit", "variant")$plot(secAxisCols = "col2", secAxisLabel = "y2")
+    TS <- DTSg$new(DT1, "id", "parameter", "unit", "variant")
+    TS$plot(secAxisCols = "col2", secAxisLabel = "y2")
+    TS$print()
     TRUE
   },
-  info = '"plot" works'
+  info = '"plot" and "print" work'
 )
 
 #### refresh method ####
