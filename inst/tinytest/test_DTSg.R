@@ -276,6 +276,15 @@ expect_identical(
   info = "no missing values returns empty data.table"
 )
 
+#### plot method ####
+expect_true(
+  {
+    DTSg$new(DT1, "id", "parameter", "unit", "variant")$plot(secAxisCols = "col2", secAxisLabel = "y2")
+    TRUE
+  },
+  info = '"plot" works'
+)
+
 #### refresh method ####
 expect_error(
   DTSg$new(data.table(date = "timestamp", col1 = DT2[["col1"]])),
