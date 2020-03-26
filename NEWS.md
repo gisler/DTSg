@@ -1,9 +1,9 @@
-## DTSg v0.3.0.9000
+## DTSg v0.4.0
 
 * Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
-* Fixed pointless coercion of `POSIXct` *.dateTime* columns in case they contained at least one `NA` value
-* Switched to unit testing framework of the `tinytest` instead of the `testthat` package
-* Fixed automatic setting of option `DTSgClone` to `TRUE` on package loading, i.e. the option's setting in e.g. *.RProfile* is no longer overwritten
+* Settings of option `DTSgClone` in e.g. *.RProfile* are now respected and not overwritten by `TRUE` when the package is loaded
+* Fixed useless coercion of `POSIXct` *.dateTime* columns to `POSIXct` upon object creation in case they contained at least one `NA` value
+* Switched to unit testing framework of the `tinytest` package instead of the `testthat` package
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
 

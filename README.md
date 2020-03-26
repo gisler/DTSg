@@ -8,9 +8,9 @@ Install the latest release from CRAN:
 
 [![CRAN Version](https://www.r-pkg.org/badges/version/DTSg)](https://cran.r-project.org/package=DTSg) [![CRAN Checks](https://cranchecks.info/badges/summary/DTSg)](https://cran.r-project.org/web/checks/check_results_DTSg.html)
 
-Install the development version from GitHub (requires the `devtools` package):
+Install the development version from GitHub (requires the `remotes` package):
 
-`devtools::install_github("gisler/DTSg")`
+`remotes::install_github("gisler/DTSg")`
 
 [![Build Status](https://travis-ci.org/gisler/DTSg.svg?branch=master)](https://travis-ci.org/gisler/DTSg) [![Coverage Status](https://coveralls.io/repos/github/gisler/DTSg/badge.svg?branch=master)](https://coveralls.io/github/gisler/DTSg?branch=master)
 

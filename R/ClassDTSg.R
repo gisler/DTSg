@@ -699,11 +699,11 @@ DTSg <- R6Class(
       if (private$.parameter != "") {
         cat("Parameter:   ", private$.parameter   , "\n", sep = "")
       }
-      if (private$.variant != "") {
-        cat("Variant:     ", private$.variant     , "\n", sep = "")
-      }
       if (private$.unit != "") {
         cat("Unit:        ", private$.unit        , "\n", sep = "")
+      }
+      if (private$.variant != "") {
+        cat("Variant:     ", private$.variant     , "\n", sep = "")
       }
       cat(  "Aggregated:  ", private$.isAggregated, "\n", sep = "")
       cat(  "Regular:     ", private$.isRegular   , "\n", sep = "")
