@@ -173,7 +173,10 @@ TScloned   <- TS$clone(deep = TRUE) # or 'clone(x = TS, deep = TRUE)'
 TS$ID <- "Two River Flows"
 TS
 
-# due to reference semantics, the new ID is also propagated to TSassigned, but not to TScloned (as all data manipulating methods create a clone by default, it is usually best to set or update fields after and not before calling such a method)
+# due to reference semantics, the new ID is also propagated to TSassigned, but
+# not to TScloned (as all data manipulating methods create a clone by default,
+# it is usually best to set or update fields after and not before calling such a
+# method)
 TSassigned
 TScloned
 ```
