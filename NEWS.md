@@ -1,3 +1,5 @@
+## DTSg v0.4.0.9000
+
 ## DTSg v0.4.0
 
 * Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
