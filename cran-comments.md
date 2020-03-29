@@ -1,19 +1,18 @@
 ## Minor Release
 
-* Added `resultCols` and `suffix` arguments to `colapply` and `rollapply` methods: allows for adding return values of applied functions as new columns instead of replacing existing ones
-* `class` argument of `cols` method now accepts a character vector of class names
-* Changed default value of `class` argument of `cols` method from `"all"` to `NULL`, however, for backward compatibility `"all"` can still be used for the same result, but will eventually be treated as a filter for classes of type `all`
-* Added `pattern` and `...` arguments to `cols` method: allows for searching column names
-* Switched to argument check functions of `checkmate` package instead of `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types` packages
+* Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
+* Settings of option `DTSgClone` in e.g. *.RProfile* are now respected and not overwritten by `TRUE` when the package is loaded
+* Fixed useless coercion of `POSIXct` *.dateTime* columns to `POSIXct` upon object creation in case they contained at least one `NA` value
+* Switched to unit testing framework of the `tinytest` package instead of the `testthat` package
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
 
 ## Test Environments
 
 * local Windows (R 3.5.3)
-* local Windows (R 3.6.2)
+* local Windows (R 3.6.3)
 * Linux on Travis CI (R 3.5.3)
-* Linux on Travis CI (R 3.6.1)
+* Linux on Travis CI (R 3.6.2)
 * OS X on Travis CI (R 3.5.3)
 * OS X on Travis CI (R 3.6.2)
 * win-builder (devel)
