@@ -209,9 +209,9 @@ DTSg <- R6Class(
 
     determineCols = function(resultCols, suffix, cols) {
       if (!is.null(resultCols)) {
-        return(resultCols)
+        resultCols
       } else if (!is.null(suffix)) {
-        return(sprintf("%s%s", cols, suffix))
+        sprintf("%s%s", cols, suffix)
       } else {
         cols
       }
@@ -473,10 +473,7 @@ DTSg <- R6Class(
       fast = FALSE,
       swallow = FALSE
     ) {
-      assertClass(values, "data.frame")
-      if (nrow(values) < 1L || ncol(values) < 2L) {
-        stop('"values" must have at least one row and two columns.', call. = FALSE)
-      }
+      assertDataFrame(values, min.rows = 1L, min.cols = 2L)
       assertCharacter(names(values)[-1L], min.chars = 1L, any.missing = FALSE, unique = TRUE)
       assertNoBeginningDot(names(values)[-1L])
       qassert(swallow, "B1")

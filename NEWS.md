@@ -1,6 +1,7 @@
 ## DTSg v0.4.0.9000
 
 * Slightly improved vignettes
+* Minor internal code improvements
 
 ## DTSg v0.4.0
 
