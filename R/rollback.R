@@ -60,14 +60,16 @@ rollback <- function(.dateTime, periodicity) {
     .dateTime <- structure(
       c(
         .dateTime[1L],
-        mapply(
-          rollToEndOfPreviousMonth,
-          lags = lags,
-          .dateTime = .dateTime[-1L],
-          MoreArgs = list(clause = clause, periodicity = periodicity)
+        do.call(
+          c,
+          Map(
+            rollToEndOfPreviousMonth,
+            lags = lags,
+            .dateTime = .dateTime[-1L],
+            MoreArgs = list(clause = clause, periodicity = periodicity)
+          )
         )
       ),
-      class = class(.dateTime),
       tzone = attr(.dateTime, "tzone")
     )
   }
