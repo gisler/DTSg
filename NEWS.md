@@ -1,8 +1,10 @@
 ## DTSg v0.4.1.9000
 
+* Minor internal code improvements
+
 ## DTSg v0.4.1
 
-* Fixed error "Error in as.POSIXct.numeric(e) : 'origin' must be supplied" for upcoming R 4.1.0
+* Fixed error "Error in as.POSIXct.numeric(e) : 'origin' must be supplied" related to `rollback` in upcoming R 4.1.0
 * Slightly improved vignettes
 * Minor internal code improvements
 
