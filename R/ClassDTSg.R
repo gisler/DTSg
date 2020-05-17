@@ -217,6 +217,14 @@ DTSg <- R6Class(
       }
     },
 
+    aggregateHelpers = function(ignoreDST) {
+      list(
+        timezone = private$.timezone,
+        ignoreDST = ignoreDST,
+        periodicity = private$.periodicity
+      )
+    },
+
     rmGlobalReferences = function(addr) {
       globalObjs <- ls(globalenv(), sorted = FALSE)
 
@@ -242,17 +250,13 @@ DTSg <- R6Class(
       clone = getOption("DTSgClone")
     ) {
       assertFunction(funby)
-      .helpers <- list(
-        timezone = private$.timezone,
-        ignoreDST = ignoreDST,
-        periodicity = private$.periodicity
-      )
+      qassert(ignoreDST, "B1")
+      .helpers <- private$aggregateHelpers(ignoreDST)
       qassert(funby(private$.values[[".dateTime"]][1L], .helpers), "P1")
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
-      qassert(ignoreDST, "B1")
       qassert(clone, "B1")
 
       if (clone) {
@@ -378,7 +382,9 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric")[1L],
       clone = getOption("DTSgClone"),
       resultCols = NULL,
-      suffix = NULL
+      suffix = NULL,
+      funby = NULL,
+      ignoreDST = FALSE
     ) {
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
@@ -400,27 +406,52 @@ DTSg <- R6Class(
           cols = cols,
           clone = FALSE,
           resultCols = resultCols,
-          suffix = suffix
+          suffix = suffix,
+          funby = funby,
+          ignoreDST = ignoreDST
         ))
       }
 
       .cols <- private$determineCols(resultCols, suffix, cols)
 
-      private$.values[
-        ,
-        (.cols) := lapply(
-          .SD,
-          fun,
-          ...,
-          .helpers = list(
-            .dateTime = .dateTime,
-            periodicity = private$.periodicity,
-            minLag = private$.minLag,
-            maxLag = private$.maxLag
-          )
-        ),
-        .SDcols = cols
-      ]
+      .helpers = list(
+        .dateTime = private$.values[[".dateTime"]],
+        periodicity = private$.periodicity,
+        minLag = private$.minLag,
+        maxLag = private$.maxLag
+      )
+
+      if (!is.null(funby)) {
+        assertFunction(funby)
+        qassert(ignoreDST, "B1")
+        qassert(funby(
+          private$.values[[".dateTime"]][1L],
+          private$aggregateHelpers(ignoreDST)
+        ), "P1")
+
+        private$.values[
+          ,
+          (.cols) := lapply(
+            .SD,
+            fun,
+            ...,
+            .helpers = .helpers
+          ),
+          by = funby(.dateTime, private$aggregateHelpers(ignoreDST)),
+          .SDcols = cols
+        ]
+      } else {
+        private$.values[
+          ,
+          (.cols) := lapply(
+            .SD,
+            fun,
+            ...,
+            .helpers = .helpers
+          ),
+          .SDcols = cols
+        ]
+      }
 
       invisible(self)
     },

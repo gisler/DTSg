@@ -1,5 +1,6 @@
 ## DTSg v0.4.1.9000
 
+* Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
 * Minor internal code improvements
 
 ## DTSg v0.4.1

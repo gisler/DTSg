@@ -12,7 +12,9 @@
   cols = self$cols(class = "numeric")[1L],
   clone = getOption("DTSgClone"),
   resultCols = NULL,
-  suffix = NULL
+  suffix = NULL,
+  funby = NULL,
+  ignoreDST = FALSE
 )
 }
 \arguments{
@@ -36,6 +38,16 @@ are matched elementwise between \code{resultCols} and \code{cols}.}
 are added as new columns with names consisting of the columns specified in
 \code{cols} and this suffix. Existing columns are never overwritten. Only
 used when \code{resultCols} is not specified.}
+
+\item{funby}{One of the temporal aggregation level functions described in
+\code{\link{TALFs}} or a user defined temporal aggregation level function.
+Can be used to apply functions like \code{\link{cumsum}} to a certain
+temporal level. See examples and \code{\link{aggregate}} for further
+information.}
+
+\item{ignoreDST}{A logical specifying if day saving time is ignored during
+formation of the termporal level. See \code{\link{aggregate}} for further
+information.}
 }
 \value{
 Returns a \code{\link{DTSg}} object.
@@ -69,6 +81,13 @@ x$colapply(fun = interpolateLinear)
 
 ## S3 method
 colapply(x = x, fun = interpolateLinear)
+
+# daily cumulative sums per month
+## R6 method
+x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+
+## S3 method
+colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
 }
 \seealso{
