@@ -204,6 +204,14 @@ colapply <- function(x, ...) {
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
 #'  used when \code{resultCols} is not specified.
+#' @param funby One of the temporal aggregation level functions described in
+#'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
+#'  Can be used to apply functions like \code{\link{cumsum}} to a certain
+#'  temporal level. See examples and \code{\link{aggregate}} for further
+#'  information.
+#' @param ignoreDST A logical specifying if day saving time is ignored during
+#'  formation of the termporal level. See \code{\link{aggregate}} for further
+#'  information.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over a
@@ -236,6 +244,13 @@ colapply <- function(x, ...) {
 #'
 #' ## S3 method
 #' colapply(x = x, fun = interpolateLinear)
+#'
+#' # daily cumulative sums per month
+#' ## R6 method
+#' x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+#'
+#' ## S3 method
+#' colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 #'
 #' @aliases colapply
 #'

@@ -126,6 +126,16 @@ expect_identical(
   info = '"suffix" adds columns correctly'
 )
 
+expect_identical(
+  DTSg$new(DT1)$colapply(
+    function(x, ...) {cumsum(x)},
+    cols = "col2",
+    funby = byYmdH__
+  )$values()[["col2"]],
+  c(1, NA, 5, 12, 9, 20, 13, 28),
+  info = '"funby" is applied correctly'
+)
+
 #### cols method ####
 expect_identical(
   DTSg$new(DT1)$cols(),
