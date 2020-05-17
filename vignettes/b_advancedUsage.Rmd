@@ -40,7 +40,7 @@ TS$alter("2007-01-01", "2008-12-31")
 # end date is still in the year 2012
 TS
 
-options("DTSgClone" = FALSE)
+options(DTSgClone = FALSE)
 getOption("DTSgClone")
 TS$alter("2007-01-01", "2008-12-31")
 # end date is in the year 2008 now

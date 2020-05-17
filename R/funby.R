@@ -30,7 +30,7 @@ by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTi
 by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)           ), tz = .helpers$timezone))
 
 #### Functions ####
-to.UTCdateTime <- function(.dateTime, .helpers) {
+to.fakeUTCdateTime <- function(.dateTime, .helpers) {
   assertRecognisedPeriodicity(.helpers$periodicity)
 
   from <- .dateTime[1L]
@@ -189,7 +189,7 @@ byFasttime_____S <- function(.dateTime, .helpers) {
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byY_____call)
 }
@@ -197,7 +197,7 @@ byY_____ <- function(.dateTime, .helpers) {
 #' @export
 byYQ____ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYQ____call)
 }
@@ -205,7 +205,7 @@ byYQ____ <- function(.dateTime, .helpers) {
 #' @export
 byYm____ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYm____call)
 }
@@ -213,7 +213,7 @@ byYm____ <- function(.dateTime, .helpers) {
 #' @export
 byYmd___ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYmd___call)
 }
@@ -242,7 +242,7 @@ by______ <- function(.dateTime, .helpers) {
 #' @export
 by_Q____ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by_Q____call)
 }
@@ -250,7 +250,7 @@ by_Q____ <- function(.dateTime, .helpers) {
 #' @export
 by_m____ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by_m____call)
 }
@@ -258,7 +258,7 @@ by_m____ <- function(.dateTime, .helpers) {
 #' @export
 by___H__ <- function(.dateTime, .helpers) {
   if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
-    .dateTime <- to.UTCdateTime(.dateTime, .helpers)
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by___H__call)
 }

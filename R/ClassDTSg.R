@@ -163,8 +163,8 @@ DTSg <- R6Class(
     .isAggregated = logical(),
     .isFast = logical(),
     .isRegular = logical(),
-    .maxLag = difftime(Sys.time(), Sys.time()),
-    .minLag = difftime(Sys.time(), Sys.time()),
+    .maxLag = .difftime(0, units = "secs"),
+    .minLag = .difftime(0, units = "secs"),
     .origDateTimeCol = character(),
     .parameter = character(),
     .periodicity = NULL,
@@ -247,7 +247,7 @@ DTSg <- R6Class(
         ignoreDST = ignoreDST,
         periodicity = private$.periodicity
       )
-      qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
+      qassert(funby(private$.values[[".dateTime"]][1L], .helpers), "P1")
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
@@ -280,7 +280,7 @@ DTSg <- R6Class(
           message(".n column calculated from .dateTime column.")
         } else {
           private$.values <- private$.values[
-            !is.na(eval(as.name(cols))),
+            !is.na(get(cols)),
             c(lapply(.SD, fun, ...), .(.n = .N)),
             keyby = .(.dateTime = funby(.dateTime, .helpers)),
             .SDcols = cols
@@ -746,13 +746,8 @@ DTSg <- R6Class(
       private$.timezone <- attr(private$.values[[1L]], "tzone")
 
       if (private$.timestamps < 2L) {
-        zeroSecs <- difftime(
-          as.POSIXct("2000-01-01", tz = "UTC"),
-          as.POSIXct("2000-01-01", tz = "UTC")
-        )
-
-        private$.minLag <- zeroSecs
-        private$.maxLag <- zeroSecs
+        private$.minLag <- .difftime(0, units = "secs")
+        private$.maxLag <- .difftime(0, units = "secs")
         private$.isRegular <- TRUE
         private$.periodicity <- "unrecognised"
 
