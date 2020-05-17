@@ -99,7 +99,8 @@
 #'    \item \emph{timestamps:} An integer showing the total number of timestamps
 #'      of the time series (read-only).
 #'    \item \emph{timezone:} A character string containing the time zone of the
-#'      time series (read-only).
+#'      time series. When set, the series is converted to the specified time
+#'      zone. Only names from \code{\link{OlsonNames}} are accepted.
 #'    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
 #'      of the primary axis of plots if the \emph{parameter} field is set.
 #'    \item \emph{variant:} Same as \code{variant} argument. It is added to the
@@ -1098,7 +1099,13 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.timezone
       } else {
-        stop("Read-only field.", call. = FALSE)
+        qassert(value, "S1")
+        assertSubset(value, OlsonNames())
+
+        private$.timezone <- value
+        attr(private$.values[[".dateTime"]], "tzone") <- private$.timezone
+
+        invisible(self)
       }
     },
 

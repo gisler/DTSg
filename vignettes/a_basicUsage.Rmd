@@ -187,6 +187,7 @@ The fields which can be actively set are:
 * *fast*
 * *ID*
 * *parameter*
+* *timezone*
 * *unit*
 * *variant*
 

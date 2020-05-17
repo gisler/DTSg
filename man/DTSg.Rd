@@ -136,7 +136,8 @@ A \code{DTSg} object has the following fields or properties as they are often
    \item \emph{timestamps:} An integer showing the total number of timestamps
      of the time series (read-only).
    \item \emph{timezone:} A character string containing the time zone of the
-     time series (read-only).
+     time series. When set, the series is converted to the specified time
+     zone. Only names from \code{\link{OlsonNames}} are accepted.
    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
      of the primary axis of plots if the \emph{parameter} field is set.
    \item \emph{variant:} Same as \code{variant} argument. It is added to the

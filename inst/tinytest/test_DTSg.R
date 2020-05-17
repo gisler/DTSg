@@ -404,9 +404,18 @@ expect_error(
   info = '"timestamps" field is read-only'
 )
 
-expect_error(
-  DTSg$new(DT1)$timezone <- "Europe/Vienna",
-  info = '"timezone" field is read-only'
+expect_identical(
+  {
+    TS <- DTSg$new(DT1)
+    TS$timezone <- "Europe/Kiev"
+    TS$values()[["date"]]
+  },
+  seq(
+    as.POSIXct("2000-10-29 02:00:00", tz = "Europe/Kiev"),
+    as.POSIXct("2000-10-29 04:30:00", tz = "Europe/Kiev"),
+    by = "30 min"
+  ),
+  info = '"timezone" is converted correctly'
 )
 
 #### rollapply method ####
