@@ -95,6 +95,7 @@ A \code{DTSg} object has the following methods:
    \item \code{aggregate}: See \code{\link{aggregate}} for further
      information.
    \item \code{alter}: See \code{\link{alter}} for further information.
+   \item \code{clone}: See \code{\link{clone}} for further information.
    \item \code{colapply}: See \code{\link{colapply}} for further information.
    \item \code{cols}: See \code{\link{cols}} for further information.
    \item \code{merge}: See \code{\link{merge}} for further information.
@@ -172,5 +173,5 @@ new(Class = "DTSg", values = flow, ID = "River Flow")
 \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
- \code{\link{clone}}, \code{\link{options}}, \code{\link{list}}
+ \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{list}}
 }

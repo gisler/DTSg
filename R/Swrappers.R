@@ -230,9 +230,9 @@ colapply <- function(x, ...) {
 #'
 #' @return Returns a \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}},
-#' \code{\link{POSIXct}}, \code{\link{difftime}},
-#' \code{\link{interpolateLinear}}
+#' @seealso \code{\link{DTSg}}, \code{\link{cols}}, \code{\link{TALFs}},
+#'  \code{\link{aggregate}}, \code{\link{list}}, \code{\link{POSIXct}},
+#'  \code{\link{difftime}}, \code{\link{interpolateLinear}}
 #'
 #' @examples
 #' # new DTSg object
