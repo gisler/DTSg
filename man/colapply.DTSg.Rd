@@ -91,7 +91,7 @@ colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}},
-\code{\link{POSIXct}}, \code{\link{difftime}},
-\code{\link{interpolateLinear}}
+\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{TALFs}},
+ \code{\link{aggregate}}, \code{\link{list}}, \code{\link{POSIXct}},
+ \code{\link{difftime}}, \code{\link{interpolateLinear}}
 }
