@@ -1,4 +1,4 @@
-assertFasttimeOk <- function(.dateTime, .helpers) {
+assertFasttimeOK <- function(.dateTime, .helpers) {
   if (!requireNamespace("fasttime", quietly = TRUE)) {
     stop('Package "fasttime" must be installed for this function.', call. = FALSE)
   }
