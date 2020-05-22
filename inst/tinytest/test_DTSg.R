@@ -13,13 +13,36 @@ expect_identical(
     col2 = c(NA, 6, 10, 14),
     key = "date"
   ),
-  info = "values are aggregated correctly"
+  info = "values are aggregated correctly (one function)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum))$values(),
+  data.table(
+    date = seq(
+      as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
+      as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
+      "1 hour"
+    ),
+    col1.mean = c( 2, 6 , 10, 14),
+    col1.sum  = c( 4, 12, 20, 28),
+    col2.mean = c(NA, 6 , 10, 14),
+    col2.sum  = c(NA, 12, 20, 28),
+    key = "date"
+  ),
+  info = "values are aggregated correctly (multiple functions)"
 )
 
 expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, mean, na.rm = TRUE)$values()[["col2"]],
   c(1, 6, 10, 14),
-  info = '"..." passes on arguments correctly'
+  info = '"..." passes on arguments correctly (one function)'
+)
+
+expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), na.rm = TRUE)$values()[["col2.sum"]],
+  c(1, 12, 20, 28),
+  info = '"..." passes on arguments correctly (multiple functions)'
 )
 
 expect_true(

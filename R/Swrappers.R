@@ -5,17 +5,19 @@ NULL
 #'
 #' Applies a temporal aggregation level function to the \emph{.dateTime} column
 #'  of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
-#'  to the function's temporal aggregation level utilising a provided summary
-#'  function. Additionally, it sets the object's \emph{aggregated} field to
-#'  \code{TRUE}. See \code{\link{DTSg}} for further information.
+#'  to the function's temporal aggregation level utilising one or more provided
+#'  summary functions. Additionally, it sets the object's \emph{aggregated}
+#'  field to \code{TRUE}. See \code{\link{DTSg}} for further information.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param funby One of the temporal aggregation level functions described in
 #'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
 #'  See details for further information.
-#' @param fun A summary function applied columnwise to all the values of the
-#'  same temporal aggregation level, for instance, \code{\link{mean}}. Its
-#'  return value must be of length one.
+#' @param fun A summary function or a named \code{\link{list}} of summary
+#'  functions applied columnwise to all the values of the same temporal
+#'  aggregation level, for instance, \code{\link{mean}} or
+#'  \code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
+#'  must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to aggregate.
 #' @param n A logical specifying if a column named \emph{.n} giving the number
@@ -71,8 +73,8 @@ NULL
 #'
 #' @return Returns an aggregated \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{cols}},
-#'  \code{\link{POSIXct}}, \code{\link{list}}
+#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
+#'  \code{\link{cols}}, \code{\link{POSIXct}}
 #'
 #' @examples
 #' # new DTSg object
@@ -84,6 +86,13 @@ NULL
 #'
 #' ## S3 method
 #' aggregate(x = x, funby = byY_____, fun = mean, na.rm = TRUE)
+#'
+#' # minimum and maximum river flow per quarter
+#' ## R6 method
+#' x$aggregate(funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+#'
+#' ## S3 method
+#' aggregate(x = x, funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
 #'
 #' @aliases aggregate
 #'

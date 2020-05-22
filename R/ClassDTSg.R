@@ -219,6 +219,19 @@ DTSg <- R6Class(
       }
     },
 
+    multilapply = function(.SD, fun, ...) {
+      do.call("c", lapply(
+        .SD,
+        function(x, ...) {
+          structure(
+            lapply(names(fun), function(y, ...) {fun[[y]](x, ...)}, ... = ...),
+            names = names(fun)
+          )
+        },
+        ... = ...
+      ))
+    },
+
     aggregateHelpers = function(ignoreDST) {
       list(
         timezone = private$.timezone,
@@ -254,8 +267,13 @@ DTSg <- R6Class(
       assertFunction(funby)
       qassert(ignoreDST, "B1")
       .helpers <- private$aggregateHelpers(ignoreDST)
-      assertFunction(fun)
       qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
+      if (is.list(fun)) {
+        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
+        lapply(fun, assertFunction, .var.name = "fun[[i]]")
+      } else {
+        assertFunction(fun)
+      }
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
@@ -278,7 +296,10 @@ DTSg <- R6Class(
         if (length(cols) > 1L) {
           private$.values <- private$.values[
             ,
-            c(lapply(.SD, fun, ...), .(.n = .N)),
+            c(
+              if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
+              .(.n = .N)
+            ),
             keyby = .(.dateTime = funby(.dateTime, .helpers)),
             .SDcols = cols
           ]
@@ -287,7 +308,10 @@ DTSg <- R6Class(
         } else {
           private$.values <- private$.values[
             !is.na(get(cols)),
-            c(lapply(.SD, fun, ...), .(.n = .N)),
+            c(
+              if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
+              .(.n = .N)
+            ),
             keyby = .(.dateTime = funby(.dateTime, .helpers)),
             .SDcols = cols
           ]
@@ -299,7 +323,7 @@ DTSg <- R6Class(
       } else {
         private$.values <- private$.values[
           ,
-          lapply(.SD, fun, ...),
+          if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
           keyby = .(.dateTime = funby(.dateTime, .helpers)),
           .SDcols = cols
         ]
