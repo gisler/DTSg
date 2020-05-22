@@ -1,6 +1,6 @@
-#### assertFasttimeOk ####
+#### assertFasttimeOK ####
 expect_error(
-  assertFasttimeOk(
+  assertFasttimeOK(
     seq(
       as.POSIXct("1960-01-01"),
       as.POSIXct("2209-12-31"),
@@ -12,7 +12,7 @@ expect_error(
 )
 
 expect_error(
-  assertFasttimeOk(
+  assertFasttimeOK(
     seq(
       as.POSIXct("1970-01-01"),
       as.POSIXct("2199-12-31"),

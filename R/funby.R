@@ -108,80 +108,80 @@ NULL
 #' @rdname TALFs
 #' @export
 byFasttimeY_____ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeY_____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYQ____ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYQ____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYm____ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYm____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmd___ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYmd___call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdH__ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYmdH__call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdHM_ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYmdHM_call)
 }
 #' @rdname TALFs
 #' @export
 byFasttimeYmdHMS <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttimeYmdHMScall)
 }
 
 #' @rdname TALFs
 #' @export
 byFasttime______ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime______call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_Q____ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime_Q____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_m____ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime_m____call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime___H__ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime___H__call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime____M_ <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime____M_call)
 }
 #' @rdname TALFs
 #' @export
 byFasttime_____S <- function(.dateTime, .helpers) {
-  assertFasttimeOk(.dateTime, .helpers)
+  assertFasttimeOK(.dateTime, .helpers)
   eval(byFasttime_____Scall)
 }
 
