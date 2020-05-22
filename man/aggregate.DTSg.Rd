@@ -23,9 +23,11 @@
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 See details for further information.}
 
-\item{fun}{A summary function applied columnwise to all the values of the
-same temporal aggregation level, for instance, \code{\link{mean}}. Its
-return value must be of length one.}
+\item{fun}{A summary function or a named \code{\link{list}} of summary
+functions applied columnwise to all the values of the same temporal
+aggregation level, for instance, \code{\link{mean}} or
+\code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
+must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -47,9 +49,9 @@ Returns an aggregated \code{\link{DTSg}} object.
 \description{
 Applies a temporal aggregation level function to the \emph{.dateTime} column
  of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
- to the function's temporal aggregation level utilising a provided summary
- function. Additionally, it sets the object's \emph{aggregated} field to
- \code{TRUE}. See \code{\link{DTSg}} for further information.
+ to the function's temporal aggregation level utilising one or more provided
+ summary functions. Additionally, it sets the object's \emph{aggregated}
+ field to \code{TRUE}. See \code{\link{DTSg}} for further information.
 }
 \details{
 User defined temporal aggregation level functions have to return a
@@ -105,8 +107,15 @@ x$aggregate(funby = byY_____, fun = mean, na.rm = TRUE)
 ## S3 method
 aggregate(x = x, funby = byY_____, fun = mean, na.rm = TRUE)
 
+# minimum and maximum river flow per quarter
+## R6 method
+x$aggregate(funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+
+## S3 method
+aggregate(x = x, funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{cols}},
- \code{\link{POSIXct}}, \code{\link{list}}
+\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
+ \code{\link{cols}}, \code{\link{POSIXct}}
 }

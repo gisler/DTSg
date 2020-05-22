@@ -1,6 +1,7 @@
 ## DTSg v0.4.1.9000
 
 * Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
+* `funby` argument of `aggregate` method now accepts either a single function or a named `list` of functions, which allows for calculating several summary statistics at once
 * `timezone` field can now be actively set in order to convert the time zone of the series
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
