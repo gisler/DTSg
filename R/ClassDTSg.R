@@ -254,8 +254,8 @@ DTSg <- R6Class(
       assertFunction(funby)
       qassert(ignoreDST, "B1")
       .helpers <- private$aggregateHelpers(ignoreDST)
-      qassert(funby(private$.values[[".dateTime"]][1L], .helpers), "P1")
       assertFunction(fun)
+      qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
@@ -393,7 +393,7 @@ DTSg <- R6Class(
       assertSubset(cols, self$cols())
       qassert(clone, "B1")
       if (!is.null(resultCols)) {
-        assertCharacter(resultCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
         assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
@@ -427,7 +427,7 @@ DTSg <- R6Class(
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         qassert(funby(
-          private$.values[[".dateTime"]][1L],
+          self$values(reference = TRUE)[[".dateTime"]][1L],
           private$aggregateHelpers(ignoreDST)
         ), "P1")
 
@@ -877,7 +877,7 @@ DTSg <- R6Class(
       weights <- match.arg(weights)
       qassert(clone, "B1")
       if (!is.null(resultCols)) {
-        assertCharacter(resultCols, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
         assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
@@ -1103,8 +1103,8 @@ DTSg <- R6Class(
         qassert(value, "S1")
         assertSubset(value, OlsonNames())
 
+        attr(private$.values[[".dateTime"]], "tzone") <- value
         private$.timezone <- value
-        attr(private$.values[[".dateTime"]], "tzone") <- private$.timezone
 
         invisible(self)
       }
