@@ -11,6 +11,8 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
   if (.helpers$timezone != "UTC") {
     stop('Time zone must be "UTC" for this TALF.', call. = FALSE)
   }
+
+  TRUE
 }
 
 assertRecognisedPeriodicity <- function(periodicity) {
@@ -24,6 +26,8 @@ assertRecognisedPeriodicity <- function(periodicity) {
       call. = FALSE
     )
   }
+
+  periodicity
 }
 
 assertNoBeginningDot <- function(x) {
@@ -33,4 +37,6 @@ assertNoBeginningDot <- function(x) {
       call. = FALSE
     )
   }
+
+  x
 }

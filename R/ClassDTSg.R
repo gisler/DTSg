@@ -176,6 +176,14 @@ DTSg <- R6Class(
     .values = data.table(),
     .variant = character(),
 
+    aggregateHelpers = function(ignoreDST) {
+      list(
+        timezone = private$.timezone,
+        ignoreDST = ignoreDST,
+        periodicity = private$.periodicity
+      )
+    },
+
     coerceCol = function(x, fun, ..., colname) {
       toClass <- substring(deparse(substitute(fun)), 4L)
       msgPart <- sprintf("column %s to class %s", deparse(colname), deparse(toClass))
@@ -211,12 +219,38 @@ DTSg <- R6Class(
 
     determineCols = function(resultCols, suffix, cols) {
       if (!is.null(resultCols)) {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
+        assertNoBeginningDot(resultCols)
+
         resultCols
       } else if (!is.null(suffix)) {
+        qassert(suffix, "S1")
+        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
+
         sprintf("%s%s", cols, suffix)
       } else {
         cols
       }
+    },
+
+    determineFrom = function(from) {
+      if (qtest(from, "P1")) {
+        assertSetEqual(attr(from, "tzone"), self$timezone)
+      } else {
+        from <- as.POSIXct(from, tz = private$.timezone)
+        qassert(from, "P1")
+      }
+
+      from
+    },
+
+    determineTo = function(to, from) {
+      if (qtest(to, "P1")) {
+        assertSetEqual(attr(to, "tzone"), self$timezone)
+      } else {
+        to <- as.POSIXct(to, tz = private$.timezone)
+      }
+      assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
     },
 
     multilapply = function(.SD, fun, ...) {
@@ -230,14 +264,6 @@ DTSg <- R6Class(
         },
         ... = ...
       ))
-    },
-
-    aggregateHelpers = function(ignoreDST) {
-      list(
-        timezone = private$.timezone,
-        ignoreDST = ignoreDST,
-        periodicity = private$.periodicity
-      )
     },
 
     rmGlobalReferences = function(addr) {
@@ -347,18 +373,8 @@ DTSg <- R6Class(
       rollback = TRUE,
       clone = getOption("DTSgClone")
     ) {
-      if (qtest(from, "P1")) {
-        assertSetEqual(attr(from, "tzone"), self$timezone)
-      } else {
-        from <- as.POSIXct(from, tz = private$.timezone)
-        qassert(from, "P1")
-      }
-      if (qtest(to, "P1")) {
-        assertSetEqual(attr(to, "tzone"), self$timezone)
-      } else {
-        to <- as.POSIXct(to, tz = private$.timezone)
-      }
-      assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
+      from <- private$determineFrom(from)
+      to <- private$determineTo(to, from)
       if (by == "unrecognised") {
         stop(
           '"by" must be explicitly set for time series with unrecognised periodicity.',
@@ -416,13 +432,7 @@ DTSg <- R6Class(
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(clone, "B1")
-      if (!is.null(resultCols)) {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assertNoBeginningDot(resultCols)
-      } else if (!is.null(suffix)) {
-        qassert(suffix, "S1")
-        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
-      }
+      .cols <- private$determineCols(resultCols, suffix, cols)
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -438,16 +448,14 @@ DTSg <- R6Class(
         ))
       }
 
-      .cols <- private$determineCols(resultCols, suffix, cols)
-
-      .helpers = list(
+      .helpers <- list(
         .dateTime = private$.values[[".dateTime"]],
         periodicity = private$.periodicity,
         minLag = private$.minLag,
         maxLag = private$.maxLag
       )
 
-      if (!is.null(funby)) {
+      .by <- if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         qassert(funby(
@@ -455,29 +463,22 @@ DTSg <- R6Class(
           private$aggregateHelpers(ignoreDST)
         ), "P1")
 
-        private$.values[
-          ,
-          (.cols) := lapply(
-            .SD,
-            fun,
-            ...,
-            .helpers = .helpers
-          ),
-          by = funby(.dateTime, private$aggregateHelpers(ignoreDST)),
-          .SDcols = cols
-        ]
+        funby(private$.values[[".dateTime"]], private$aggregateHelpers(ignoreDST))
       } else {
-        private$.values[
-          ,
-          (.cols) := lapply(
-            .SD,
-            fun,
-            ...,
-            .helpers = .helpers
-          ),
-          .SDcols = cols
-        ]
+        NULL
       }
+
+      private$.values[
+        ,
+        (.cols) := lapply(
+          .SD,
+          fun,
+          ...,
+          .helpers = .helpers
+        ),
+        by = .by,
+        .SDcols = cols
+      ]
 
       invisible(self)
     },
@@ -675,25 +676,10 @@ DTSg <- R6Class(
           call. = FALSE
         )
       }
-      if (qtest(from, "P1")) {
-        assertSetEqual(attr(from, "tzone"), self$timezone)
-      } else {
-        from <- as.POSIXct(from, tz = private$.timezone)
-        qassert(from, "P1")
-      }
-      if (qtest(to, "P1")) {
-        assertSetEqual(attr(to, "tzone"), self$timezone)
-      } else {
-        to <- as.POSIXct(to, tz = private$.timezone)
-      }
-      assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
+      from <- private$determineFrom(from)
+      to <- private$determineTo(to, from)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
-      if (!is.null(secAxisCols)) {
-        assertCharacter(secAxisCols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-        assertSubset(secAxisCols, cols)
-        qassert(secAxisLabel, "S1")
-      }
 
       ylab <- ""
 
@@ -725,6 +711,10 @@ DTSg <- R6Class(
       plot <- dygraphs::dyRangeSelector(plot)
 
       if (!is.null(secAxisCols)) {
+        assertCharacter(secAxisCols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+        assertSubset(secAxisCols, cols)
+        qassert(secAxisLabel, "S1")
+
         plot <- dygraphs::dyAxis(
           plot,
           "y2",
@@ -900,13 +890,7 @@ DTSg <- R6Class(
       after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
       qassert(clone, "B1")
-      if (!is.null(resultCols)) {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assertNoBeginningDot(resultCols)
-      } else if (!is.null(suffix)) {
-        qassert(suffix, "S1")
-        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
-      }
+      .cols <- private$determineCols(resultCols, suffix, cols)
       qassert(memoryOverCPU, "B1")
 
       if (clone) {
@@ -925,8 +909,6 @@ DTSg <- R6Class(
           memoryOverCPU = memoryOverCPU
         ))
       }
-
-      .cols <- private$determineCols(resultCols, suffix, cols)
 
       if (weights == "inverseDistance") {
         qassert(parameters$power, "N1()")
@@ -970,21 +952,16 @@ DTSg <- R6Class(
           for (i in seq_along(x)) {
             lowerBound <- i - before
 
-            if (lowerBound < 1L) {
-              y[i] <- fun(
-                c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)]),
-                ...,
-                w = weights,
-                .helpers = .helpers
-              )
-            } else {
-              y[i] <- fun(
-                x[lowerBound:(i + after)],
-                ...,
-                w = weights,
-                .helpers = .helpers
-              )
-            }
+            y[i] <- fun(
+              if (lowerBound < 1L) {
+                c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)])
+              } else {
+                x[lowerBound:(i + after)]
+              },
+              ...,
+              w = weights,
+              .helpers = .helpers
+            )
           }
 
           y
