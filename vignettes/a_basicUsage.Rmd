@@ -48,7 +48,7 @@ TS <- new(Class = "DTSg", values = flow, ID = "River Flow")
 
 ## Object Inspection
 
-Printing the object shows us the data provided, the specified ID and other metadata (if provided) as well as that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to *.dateTime.* This columns serves as its time index and cannot be changed at will:
+Printing the object shows us the data provided, the specified ID and other metadata (when provided) as well as that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to *.dateTime.* This columns serves as its time index and cannot be changed at will:
 
 ```{r}
 TS$print() # or 'print(TS)' or just 'TS'
@@ -165,7 +165,7 @@ Valid results are returned for the following fields:
 A subset of this fields can also be actively set (please note that reference semantics always apply to fields, hence the "largely" in the title of the package):
 
 ```{r}
-# two new variables to demonstrate reference semantics
+# two new DTSg objects in order to demonstrate reference semantics
 TSassigned <- TS
 TScloned   <- TS$clone(deep = TRUE) # or 'clone(x = TS, deep = TRUE)'
 
