@@ -109,4 +109,32 @@ DT <- TS$values(drop = TRUE)
 ls(pattern = "^TS$")
 ```
 
+## Column Access
+
+Sometimes need may arise to access a column other the one currently processed from a function within the `colapply` method. This can be achieved in the following way:
+
+```{r}
+# add a column recording if a certain value has been interpolated or not before
+# carrying out the interpolation
+TS <- DTSg$new(flow)
+TS$summary()
+TS$
+  colapply(
+    function(x, ...) {ifelse(is.na(x), TRUE, FALSE)},
+    resultCols = "interpolated"
+  )$
+  colapply(interpolateLinear)$
+  summary()
+
+# undo the interpolation (requires additional access to the interpolated column,
+# which is accomplished with the help of a reference to the object's values and
+# the freely chosen y argument)
+TS$
+  colapply(
+    function(x, y, ...) {ifelse(y, NA, x)},
+    y = TS$values(reference = TRUE)$interpolated
+  )$
+  summary()
+```
+
 Please refer to the help pages for further details.
