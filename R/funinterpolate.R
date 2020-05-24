@@ -64,7 +64,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
     roll = roll,
     rollends = rollends
   ]
-  setnames(DT, 2:3, c(".dateTimeBefore", ".colBefore"))
+  setnames(DT, c(2, 3), c(".dateTimeBefore", ".colBefore"))
 
   DT <- values[
     DT,
@@ -73,7 +73,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
     roll = -roll,
     rollends = rollends
   ]
-  setnames(DT, 4:5, c(".dateTimeAfter", ".colAfter"))
+  setnames(DT, c(4, 5), c(".dateTimeAfter", ".colAfter"))
 
   DT[, .divisor := as.numeric(.dateTimeAfter - .dateTimeBefore, units = "secs")]
   DT[, .col := .colBefore]

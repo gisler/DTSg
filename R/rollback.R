@@ -48,6 +48,7 @@ rollback <- function(.dateTime, periodicity) {
     if (eval(clause)) {
       .dateTime <- .dateTime + diff(seq(.dateTime, by = "-1 DSTday", length.out = 2L))
     }
+
     .dateTime
   }
 
