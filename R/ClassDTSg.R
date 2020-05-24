@@ -219,10 +219,15 @@ DTSg <- R6Class(
 
     determineCols = function(resultCols, suffix, cols) {
       if (!is.null(resultCols)) {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(cols), unique = TRUE)
-        assertNoBeginningDot(resultCols)
+        assertCharacter(
+          resultCols,
+          min.chars = 1L,
+          any.missing = FALSE,
+          len = length(cols),
+          unique = TRUE
+        )
 
-        resultCols
+        assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
         assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
@@ -250,20 +255,22 @@ DTSg <- R6Class(
       } else {
         to <- as.POSIXct(to, tz = private$.timezone)
       }
+
       assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
     },
 
-    multilapply = function(.SD, fun, ...) {
-      do.call("c", lapply(
-        .SD,
-        function(x, ...) {
-          structure(
-            lapply(names(fun), function(y, ...) {fun[[y]](x, ...)}, ... = ...),
-            names = names(fun)
-          )
-        },
-        ... = ...
-      ))
+    multiLapply = function(.SD, funs, ...) {
+      if (is.list(funs)) {
+        do.call(c, lapply(
+          .SD,
+          function(x, ...) {
+            lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
+          },
+          ... = ...
+        ))
+      } else {
+        lapply(.SD, funs, ...)
+      }
     },
 
     rmGlobalReferences = function(addr) {
@@ -322,10 +329,7 @@ DTSg <- R6Class(
         if (length(cols) > 1L) {
           private$.values <- private$.values[
             ,
-            c(
-              if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
-              .(.n = .N)
-            ),
+            c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
             keyby = .(.dateTime = funby(.dateTime, .helpers)),
             .SDcols = cols
           ]
@@ -334,10 +338,7 @@ DTSg <- R6Class(
         } else {
           private$.values <- private$.values[
             !is.na(get(cols)),
-            c(
-              if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
-              .(.n = .N)
-            ),
+            c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
             keyby = .(.dateTime = funby(.dateTime, .helpers)),
             .SDcols = cols
           ]
@@ -349,7 +350,7 @@ DTSg <- R6Class(
       } else {
         private$.values <- private$.values[
           ,
-          if (is.list(fun)) {private$multilapply(.SD, fun, ...)} else {lapply(.SD, fun, ...)},
+          private$multiLapply(.SD, fun, ...),
           keyby = .(.dateTime = funby(.dateTime, .helpers)),
           .SDcols = cols
         ]
@@ -455,7 +456,7 @@ DTSg <- R6Class(
         maxLag = private$.maxLag
       )
 
-      .by <- if (!is.null(funby)) {
+      if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         qassert(funby(
@@ -463,9 +464,9 @@ DTSg <- R6Class(
           private$aggregateHelpers(ignoreDST)
         ), "P1")
 
-        funby(private$.values[[".dateTime"]], private$aggregateHelpers(ignoreDST))
+        by <- funby(private$.values[[".dateTime"]], private$aggregateHelpers(ignoreDST))
       } else {
-        NULL
+        by <- NULL
       }
 
       private$.values[
@@ -476,7 +477,7 @@ DTSg <- R6Class(
           ...,
           .helpers = .helpers
         ),
-        by = .by,
+        by = by,
         .SDcols = cols
       ]
 
@@ -608,17 +609,21 @@ DTSg <- R6Class(
       DetectNA <- function(x) {
         i <- 0L
         isNAlast <- FALSE
+
         function(x) {
           if (is.na(x)) {
             if (!isNAlast) {
               i <<- i + 1L
               isNAlast <<- TRUE
             }
+
             n <- i
           } else {
             n <- NA
+
             isNAlast <<- FALSE
           }
+
           n
         }
       }
@@ -807,7 +812,7 @@ DTSg <- R6Class(
         len <- 1000L
       }
 
-      lags <- round(diff(private$.values[[1L]][1:len]), 6L)
+      lags <- round(diff(private$.values[[1L]][seq_len(len)]), 6L)
 
       if (anyNA(lags)) {
         stop(".dateTime column must not have any NA values.", call. = FALSE)
@@ -832,9 +837,9 @@ DTSg <- R6Class(
         to   <- private$.values[[1L]][len]
 
         for (by in c(
-          sprintf("%s DSTdays", c(1:15, 21L, 28L, 30L)),
-          sprintf("%s months", c(1:4, 6L)),
-          sprintf("%s years", c(1:15, 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
+          sprintf("%s DSTdays", c(seq_len(15L), 21L, 28L, 30L)),
+          sprintf("%s months", c(seq_len(4L), 6L)),
+          sprintf("%s years", c(seq_len(15L), 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
         )) {
           if (grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
             DT <- data.table(
@@ -855,7 +860,7 @@ DTSg <- R6Class(
           lags <- diff(DT[[1L]])
 
           if (sum(!is.na(DT[, -1L, with = FALSE])) ==
-              sum(!is.na(private$.values[1:len, -1L, with = FALSE])) &&
+              sum(!is.na(private$.values[seq_len(len), -1L, with = FALSE])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
             private$.periodicity <- by
 
@@ -932,7 +937,7 @@ DTSg <- R6Class(
         wapply <- function(x, fun, ..., before, after, weights) {
           L <- rev(shift(list(x), 0:before))
           if (after != 0L) {
-            L <- c(L, shift(list(x), 1:after, type = "lead"))
+            L <- c(L, shift(list(x), seq_len(after), type = "lead"))
           }
 
           apply(
@@ -954,7 +959,7 @@ DTSg <- R6Class(
 
             y[i] <- fun(
               if (lowerBound < 1L) {
-                c(rep(NA, abs(lowerBound) + 1L), x[1:(i + after)])
+                c(rep(NA, abs(lowerBound) + 1L), x[seq_len(i + after)])
               } else {
                 x[lowerBound:(i + after)]
               },
