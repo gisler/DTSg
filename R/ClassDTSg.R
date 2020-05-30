@@ -797,6 +797,16 @@ DTSg <- R6Class(
       private$.timestamps <- nrow(private$.values)
       private$.timezone <- attr(private$.values[[1L]], "tzone")
 
+      if (!private$.isFast || private$.timestamps < 1000L) {
+        len <- private$.timestamps
+      } else {
+        len <- 1000L
+      }
+
+      if (anyNA(private$.values[[1L]][seq_len(len)])) {
+        stop(".dateTime column must not have any NA values.", call. = FALSE)
+      }
+
       if (private$.timestamps < 2L) {
         private$.minLag <- .difftime(0, units = "secs")
         private$.maxLag <- .difftime(0, units = "secs")
@@ -806,17 +816,8 @@ DTSg <- R6Class(
         return(invisible(self))
       }
 
-      if (!private$.isFast || private$.timestamps < 1000L) {
-        len <- private$.timestamps
-      } else {
-        len <- 1000L
-      }
-
       lags <- round(diff(private$.values[[1L]][seq_len(len)]), 6L)
 
-      if (anyNA(lags)) {
-        stop(".dateTime column must not have any NA values.", call. = FALSE)
-      }
       if (any(lags == 0)) {
         stop(".dateTime column must not have any duplicates.", call. = FALSE)
       }
