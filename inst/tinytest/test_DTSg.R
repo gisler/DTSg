@@ -328,7 +328,15 @@ expect_warning(
 
 expect_error(
   DTSg$new(data.table(
-    date = c(DT1[["date"]][1:2], NA, DT1[["date"]][4:8]),
+    date = .POSIXct(NA),
+    col1 = pi
+  )),
+  info = "data.table with a single row and missing timestamp returns error"
+)
+
+expect_error(
+  DTSg$new(data.table(
+    date = c(DT1[["date"]][1:2], NA, NA, DT1[["date"]][5:8]),
     col1 = DT1[["col1"]]
   )),
   info = "data.table with missing timestamps returns error"

@@ -3,6 +3,7 @@
 * Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
 * `funby` argument of `aggregate` method now also accepts a named `list` of functions, which allows for calculating several summary statistics at once
 * `timezone` field can now be actively set in order to convert the time zone of the series
+* Fixed that a `DTSg` object with only one timestamp accepted an `NA` value in its *.dateTime* column
 * Slightly improved vignettes and documentation
 * Minor internal code improvements
 
