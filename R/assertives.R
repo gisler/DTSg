@@ -1,3 +1,27 @@
+assertNAstatusPeriodicityOK <- function(
+  na.status,
+  periodicity,
+  level = c("error", "warning")
+) {
+  level <- match.arg(level)
+
+  msg <- paste(
+    "This functionality may only give complete and correct results for time series with explicit NA values and recognised periodicity.",
+    'Consider calling "alter()" with "na.status = \'explicit\'" and/or specified "by" argument first.',
+    sep = "\n"
+  )
+
+  if (na.status != "explicit" || periodicity == "unrecognised") {
+    if (level == "error") {
+      stop(msg, call. = FALSE)
+    } else {
+      warning(msg, call. = FALSE)
+    }
+  }
+
+  TRUE
+}
+
 assertFasttimeOK <- function(.dateTime, .helpers) {
   if (!requireNamespace("fasttime", quietly = TRUE)) {
     stop('Package "fasttime" must be installed for this TALF.', call. = FALSE)
@@ -13,21 +37,6 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
   }
 
   TRUE
-}
-
-assertRecognisedPeriodicity <- function(periodicity) {
-  if (periodicity == "unrecognised") {
-    stop(
-      paste(
-        "This functionality does not work with time series of unrecognised periodicity.",
-        'Please call "alter()" with specified "by" argument first.',
-        sep = "\n"
-      ),
-      call. = FALSE
-    )
-  }
-
-  periodicity
 }
 
 assertNoBeginningDot <- function(x) {

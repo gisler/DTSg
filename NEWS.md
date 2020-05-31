@@ -1,6 +1,9 @@
 ## DTSg v0.4.1.9000
 
 * Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
+* Added `na.status` argument to `new` and `alter` methods: allows for making missing values either `"explicit"` or `"implicit"` or leaves them alone via `"undecided"`
+* Added `na.status` field reflecting the status of missing values
+* Added `na.status` also to the `list` of helper data passed on to temporal aggregation level funtions
 * `funby` argument of `aggregate` method now also accepts a named `list` of functions, which allows for calculating several summary statistics at once
 * `timezone` field can now be actively set in order to convert the time zone of the series
 * Fixed that a `DTSg` object with only one timestamp accepted an `NA` value in its *.dateTime* column

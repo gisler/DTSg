@@ -65,6 +65,8 @@ User defined temporal aggregation level functions have to return a
    \item \emph{ignoreDST:} Same as \code{ignoreDST} argument.
    \item \emph{periodicity:} Same as \emph{periodicity} field. See
      \code{\link{DTSg}} for further information.
+   \item \emph{na.status:} Same as \emph{na.status} field. See
+     \code{\link{DTSg}} for further information.
  }
 
 Depending on the number of columns to aggregate, the \emph{.n} column

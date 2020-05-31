@@ -23,6 +23,22 @@ DT2 <- data.table(
   col3 = letters[1:3]
 )
 
+DT3 <- data.table(
+  date = structure(c(
+    seq(
+      as.POSIXct("2000-01-01", tz = "Europe/Vienna"),
+      as.POSIXct("2000-11-01", tz = "Europe/Vienna"),
+      "5 months"
+    ),
+    seq(
+      as.POSIXct("2001-06-01", tz = "Europe/Vienna"),
+      as.POSIXct("2002-01-01", tz = "Europe/Vienna"),
+      "7 months"
+    )
+  ), tzone = "Europe/Vienna"),
+  col1 = LETTERS[1:5]
+)
+
 #### funby test data ####
 daysPerHalfyear <- c(second = 184L, first = 182L)
 daysPerQuarter <- c(third = 92L, fourth = 92L, first = 91L, second = 91L)
