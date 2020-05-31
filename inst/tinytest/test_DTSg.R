@@ -250,6 +250,13 @@ expect_error(
   info = "use of arguments not allowed returns error"
 )
 
+#### getCol method ####
+expect_identical(
+  DTSg$new(DT1)$getCol("col2"),
+  DT1[["col2"]],
+  info = "column is returned"
+)
+
 #### initialize method ####
 expect_error(
   DTSg$new(DT1[, .(date)]),
