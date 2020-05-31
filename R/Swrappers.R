@@ -40,6 +40,8 @@ NULL
 #'    \item \emph{ignoreDST:} Same as \code{ignoreDST} argument.
 #'    \item \emph{periodicity:} Same as \emph{periodicity} field. See
 #'      \code{\link{DTSg}} for further information.
+#'    \item \emph{na.status:} Same as \emph{na.status} field. See
+#'      \code{\link{DTSg}} for further information.
 #'  }
 #'
 #' Depending on the number of columns to aggregate, the \emph{.n} column
@@ -106,8 +108,8 @@ alter <- function(x, ...) {
 }
 #' Alter Time Series
 #'
-#' Shortens (subsets), lengthens and/or changes the periodicity of a
-#'  \code{\link{DTSg}} object.
+#' Shortens, lengthens, changes the periodicity and/or the status of missing
+#'  values of a \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param from A \code{\link{POSIXct}} date with the same time zone as the time
@@ -124,6 +126,11 @@ alter <- function(x, ...) {
 #'  made when appropriate.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
+#' @param na.status A character string. Either \code{"explicit"}, which makes
+#'  missing timestamps according to the recognised periodicity explicit, or
+#'  \code{"implicit"}, which removes timestamps with missing values on all value
+#'  columns. Please note that \code{\link{DTSg}} objects work best with explicit
+#'  missing values.
 #' @param \dots Not used (S3 method only).
 #'
 #' @return Returns a \code{\link{DTSg}} object.
@@ -393,19 +400,9 @@ new <- function(
   variant = "",
   aggregated = FALSE,
   fast = FALSE,
-  swallow = FALSE
-) {
-  DTSg$new(
-    values = values,
-    ID = ID,
-    parameter = parameter,
-    unit = unit,
-    variant = variant,
-    aggregated = aggregated,
-    fast = fast,
-    swallow = swallow
-  )
-} # no R CMD check warning
+  swallow = FALSE,
+  na.status = c("explicit", "implicit", "undecided")
+) {} # no R CMD check warning
 setClass("DTSg", slots = c(. = "logical"))
 setMethod(
   "initialize",

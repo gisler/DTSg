@@ -7,7 +7,8 @@
 \title{DTSg Class}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
- aggregated = FALSE, fast = FALSE, swallow = FALSE)
+ aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status = c("explicit",
+ "implicit", "undecided"))
 }
 \arguments{
 \item{Class}{A character string. Must be \code{"DTSg"} in order to create a
@@ -51,6 +52,12 @@ reason, the first column of the provided
 further information). Furthermore, all references to the \dQuote{swallowed}
 \code{\link[data.table]{data.table}} in the global (and only the global)
 environment are removed upon successful creation of a \code{DTSg} object.}
+
+\item{na.status}{A character string. Either \code{"explicit"}, which makes
+missing timestamps according to the recognised periodicity explicit, or
+\code{"implicit"}, which removes timestamps with missing values on all value
+columns, or \code{"undecided"} for no such action. Please note that
+\code{\link{DTSg}} objects work best with explicit missing values.}
 }
 \value{
 Returns a \code{DTSg} object.
@@ -124,6 +131,8 @@ A \code{DTSg} object has the following fields or properties as they are often
    \item \emph{fast:} Same as \code{fast} argument.
    \item \emph{ID:} Same as \code{ID} argument. It is used as the title of
      plots.
+   \item \emph{na.status:} Same as \code{na.status} argument. When set, the
+     \emph{values} of the object are expanded or collapsed accordingly.
    \item \emph{parameter:} Same as \code{parameter} argument. It is used as
      the label of the primary axis of plots.
    \item \emph{periodicity:} A \code{\link{difftime}} object for a regular

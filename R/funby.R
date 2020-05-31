@@ -31,7 +31,11 @@ by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTi
 
 #### Functions ####
 to.fakeUTCdateTime <- function(.dateTime, .helpers) {
-  assertRecognisedPeriodicity(.helpers$periodicity)
+  assertNAstatusPeriodicityOK(
+    .helpers$na.status,
+    .helpers$periodicity,
+    level = "error"
+  )
 
   from <- .dateTime[1L]
 

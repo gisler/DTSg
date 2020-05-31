@@ -58,11 +58,6 @@ expect_true(
 )
 
 #### alter method ####
-expect_error(
-  DTSg$new(DT1)$alter(by = "unrecognised"),
-  info = "unrecognised periodicity returns error"
-)
-
 expect_identical(
   DTSg$new(DT1[-3L, ])$alter("2000-10-29 01:00:00", "2000-10-29 03:00:00", "1 hour")$values(),
   data.table(
@@ -76,7 +71,7 @@ expect_identical(
     col3 = c("A", NA, "E", "G"),
     key = "date"
   ),
-  info = "values are altered correctly"
+  info = "values are altered correctly (explicit NA values)"
 )
 
 expect_identical(
@@ -86,6 +81,59 @@ expect_identical(
     tz = "Europe/Vienna"
   ),
   info = 'call to "rollback" is made'
+)
+
+expect_error(
+  DTSg$new(DT1)$alter(by = "unrecognised"),
+  info = "recognised to unrecognised periodicity returns error"
+)
+
+expect_warning(
+  DTSg$new(DT3),
+  info = "explicit NA values and unrecognised periodicity returns warning"
+)
+
+expect_identical(
+  DTSg$new(DT2[, .(date, col1)])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, .(date, col1)], "date"),
+  info = "values are altered correctly (single column and implicit NA values)"
+)
+
+expect_identical(
+  DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, -4L, with = FALSE], "date"),
+  info = "values are altered correctly (multiple columns and implicit NA values)"
+)
+
+expect_error(
+  DTSg$new(DT1)$alter(na.status = "undecided"),
+  info = 'decided to undecided "na.status" returns error'
+)
+
+expect_identical(
+  DTSg$new(DT1, na.status = "undecided")$na.status,
+  "undecided",
+  info = '"na.status" field is set correctly'
+)
+
+expect_identical(
+  {
+    TS <- DTSg$new(DT1, na.status = "undecided")
+    TS$na.status <- "implicit"
+    TS$na.status
+  },
+  "implicit",
+  info = '"na.status" field is changed correctly'
+)
+
+expect_identical(
+  {
+    TS <- DTSg$new(DT3)
+    TS$periodicity <- "1 month"
+    TS$periodicity
+  },
+  "1 months",
+  info = '"periodicity" field is changed correctly'
 )
 
 #### clone method ####
@@ -373,21 +421,7 @@ for (by in c(
 }
 
 expect_identical(
-  DTSg$new(data.table(
-    date = c(
-      seq(
-        as.POSIXct("2000-01-01", tz = "Europe/Vienna"),
-        as.POSIXct("2000-11-01", tz = "Europe/Vienna"),
-        "5 months"
-      ),
-      seq(
-        as.POSIXct("2001-06-01", tz = "Europe/Vienna"),
-        as.POSIXct("2002-01-01", tz = "Europe/Vienna"),
-        "7 months"
-      )
-    ),
-    col1 = LETTERS[1:5]
-  ))$periodicity,
+  DTSg$new(DT3)$periodicity,
   "unrecognised",
   info = "unrecognised periodicity is recognised correctly"
 )
@@ -413,11 +447,6 @@ expect_identical(
   DTSg$new(DT1)$timezone,
   "Europe/Vienna",
   info = '"timezone" field is set correctly'
-)
-
-expect_error(
-  DTSg$new(DT1)$periodicity <- "1 month",
-  info = '"periodicity" field is read-only'
 )
 
 expect_error(
