@@ -310,6 +310,39 @@ cols <- function(x, ...) {
 #' @export
 cols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$cols))
 
+#### getCol ####
+#' @export
+getCol <- function(x, ...) {
+  UseMethod("getCol", x)
+}
+#' Get Column Vector
+#'
+#' Queries the values of a column of a \code{\link{DTSg}} object.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param col A character string specifying a column name.
+#' @param \dots Not used (S3 method only).
+#'
+#' @return Returns a vector.
+#'
+#' @seealso \code{\link{DTSg}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # get values of "flow" column
+#' ## R6 method
+#' x$getCol(col = "flow")
+#'
+#' ## S3 method
+#' getCol(x = x, col = "flow")
+#'
+#' @aliases getCol
+#'
+#' @export
+getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
+
 #### merge ####
 #' Merge Two DTSg Objects
 #'

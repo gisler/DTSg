@@ -1,5 +1,6 @@
 ## DTSg v0.4.1.9000
 
+* Added `getCol` method: allows for querying the values of a single column of a `DTSg` object
 * Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
 * Added `na.status` argument to `new` and `alter` methods: allows for making missing values either `"explicit"` or `"implicit"` or leaves them alone via `"undecided"`
 * Added `na.status` field reflecting the status of missing values

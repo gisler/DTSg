@@ -69,6 +69,7 @@
 #'    \item \code{clone}: See \code{\link{clone}} for further information.
 #'    \item \code{colapply}: See \code{\link{colapply}} for further information.
 #'    \item \code{cols}: See \code{\link{cols}} for further information.
+#'    \item \code{getCol}: See \code{\link{getCol}} for further information.
 #'    \item \code{merge}: See \code{\link{merge}} for further information.
 #'    \item \code{nas}: See \code{\link{nas}} for further information.
 #'    \item \code{plot}: See \code{\link{plot}} for further information.
@@ -558,6 +559,13 @@ DTSg <- R6Class(
       }
 
       cols
+    },
+
+    getCol = function(col = self$cols(class = "numeric")) {
+      qassert(col, "S1")
+      assertSubset(col, names(private$.values))
+
+      private$.values[[col]]
     },
 
     initialize = function(
