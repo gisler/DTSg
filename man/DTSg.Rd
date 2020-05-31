@@ -138,7 +138,9 @@ A \code{DTSg} object has the following fields or properties as they are often
    \item \emph{periodicity:} A \code{\link{difftime}} object for a regular
      and a character string for an irregular \code{DTSg} object describing
      its periodicity or containing \code{"unrecognised"} in case it could not
-     be detected (read-only).
+     be detected. When set, the periodicity of the time series is changed as
+     specified. See \code{by} argument of \code{\link{alter}} for further
+     information.
    \item \emph{regular:} A logical signalling if all lags in seconds between
      subsequent timestamps are the same (\code{TRUE}) or if some are
      different (\code{FALSE}). A, for instance, monthly time series is
