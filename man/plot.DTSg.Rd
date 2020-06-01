@@ -7,8 +7,8 @@
 \usage{
 \method{plot}{DTSg}(
   x,
-  from = first(self$values(reference = TRUE)[[1L]]),
-  to = last(self$values(reference = TRUE)[[1L]]),
+  from = first(self$values(reference = TRUE)[[".dateTime"]]),
+  to = last(self$values(reference = TRUE)[[".dateTime"]]),
   cols = self$cols(class = "numeric"),
   secAxisCols = NULL,
   secAxisLabel = "",

@@ -357,7 +357,7 @@ DTSg <- R6Class(
           ]
 
           message(
-            'NA values are always stripped regardless of the value of a possible "na.rm" argument.'
+            'Missing values are always stripped regardless of the value of a possible "na.rm" argument.'
           )
         }
       } else {
@@ -378,8 +378,8 @@ DTSg <- R6Class(
     },
 
     alter = function(
-      from = first(self$values(reference = TRUE)[[1L]]),
-      to = last(self$values(reference = TRUE)[[1L]]),
+      from = first(self$values(reference = TRUE)[[".dateTime"]]),
+      to = last(self$values(reference = TRUE)[[".dateTime"]]),
       by = self$periodicity,
       rollback = TRUE,
       clone = getOption("DTSgClone"),
@@ -432,7 +432,7 @@ DTSg <- R6Class(
       } else if (na.status == "explicit" && by == "unrecognised") {
         warning(
           paste(
-            "Only time series with recognised periodicity can have explicit NA values.",
+            "Only time series with recognised periodicity can have explicit missing values.",
             'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
             sep = "\n"
           ),
@@ -452,7 +452,7 @@ DTSg <- R6Class(
 
         private$.na.status <- na.status
       } else if (na.status == "undecided" && private$.na.status != "undecided") {
-        stop("Status of NA values has already been decided on.", call. = FALSE)
+        stop("Status of missing values has already been decided on.", call. = FALSE)
       }
 
       invisible(self)
@@ -715,8 +715,8 @@ DTSg <- R6Class(
     },
 
     plot = function(
-      from = first(self$values(reference = TRUE)[[1L]]),
-      to = last(self$values(reference = TRUE)[[1L]]),
+      from = first(self$values(reference = TRUE)[[".dateTime"]]),
+      to = last(self$values(reference = TRUE)[[".dateTime"]]),
       cols = self$cols(class = "numeric"),
       secAxisCols  = NULL,
       secAxisLabel = ""
@@ -790,34 +790,34 @@ DTSg <- R6Class(
       print(private$.values, class = TRUE)
       cat(  "\n")
       if (private$.ID != "") {
-        cat("ID:          ", private$.ID          , "\n", sep = "")
+        cat("ID:             ", private$.ID          , "\n", sep = "")
       }
       if (private$.parameter != "") {
-        cat("Parameter:   ", private$.parameter   , "\n", sep = "")
+        cat("Parameter:      ", private$.parameter   , "\n", sep = "")
       }
       if (private$.unit != "") {
-        cat("Unit:        ", private$.unit        , "\n", sep = "")
+        cat("Unit:           ", private$.unit        , "\n", sep = "")
       }
       if (private$.variant != "") {
-        cat("Variant:     ", private$.variant     , "\n", sep = "")
+        cat("Variant:        ", private$.variant     , "\n", sep = "")
       }
-      cat(  "Aggregated:  ", private$.isAggregated, "\n", sep = "")
-      cat(  "Regular:     ", private$.isRegular   , "\n", sep = "")
+      cat(  "Aggregated:     ", private$.isAggregated, "\n", sep = "")
+      cat(  "Regular:        ", private$.isRegular   , "\n", sep = "")
       if (is.character(private$.periodicity)) {
-        cat("Periodicity: ", private$.periodicity , "\n", sep = "")
+        cat("Periodicity:    ", private$.periodicity , "\n", sep = "")
       } else {
-        cat("Periodicity: ")
+        cat("Periodicity:    ")
         print(private$.periodicity)
       }
       if (!private$.isRegular) {
-        cat("Min lag:     ")
+        cat("Min lag:        ")
         print(private$.minLag)
-        cat("Max lag:     ")
+        cat("Max lag:        ")
         print(private$.maxLag)
       }
-      cat(  "NA values:   ", private$.na.status   , "\n", sep = "")
-      cat(  "Time zone:   ", private$.timezone    , "\n", sep = "")
-      cat(  "Timestamps:  ", private$.timestamps  , "\n", sep = "")
+      cat(  "Missing values: ", private$.na.status   , "\n", sep = "")
+      cat(  "Time zone:      ", private$.timezone    , "\n", sep = "")
+      cat(  "Timestamps:     ", private$.timestamps  , "\n", sep = "")
 
       invisible(self)
     },
@@ -852,7 +852,7 @@ DTSg <- R6Class(
       }
 
       if (anyNA(private$.values[[1L]][seq_len(len)])) {
-        stop(".dateTime column must not have any NA values.", call. = FALSE)
+        stop(".dateTime column must not have any missing values.", call. = FALSE)
       }
 
       if (private$.timestamps < 2L) {
