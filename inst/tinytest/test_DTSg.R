@@ -17,7 +17,7 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, mean, cols = "col2", n = TRUE)$values()[[".n"]],
+  DTSg$new(DT1)$aggregate(byYmdH__, mean, cols = "col2", n = TRUE)$values(TRUE)[[".n"]],
   c(1L, 2L, 2L, 2L),
   info = ".n is correct (single column and function)"
 )
@@ -41,13 +41,13 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, mean, na.rm = TRUE)$values()[["col2"]],
+  DTSg$new(DT1)$aggregate(byYmdH__, mean, na.rm = TRUE)$values(TRUE)[["col2"]],
   c(1, 6, 10, 14),
   info = '"..." passes on arguments correctly (single function)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), na.rm = TRUE)$values()[["col2.sum"]],
+  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), na.rm = TRUE)$values(TRUE)[["col2.sum"]],
   c(1, 12, 20, 28),
   info = '"..." passes on arguments correctly (multiple functions)'
 )
@@ -71,7 +71,7 @@ expect_identical(
     col3 = c("A", NA, "E", "G"),
     key = "date"
   ),
-  info = "values are altered correctly (explicit NA values)"
+  info = "values are altered correctly (explicit missing values)"
 )
 
 expect_identical(
@@ -90,19 +90,19 @@ expect_error(
 
 expect_warning(
   DTSg$new(DT3),
-  info = "explicit NA values and unrecognised periodicity returns warning"
+  info = "explicit missing values and unrecognised periodicity returns warning"
 )
 
 expect_identical(
   DTSg$new(DT2[, .(date, col1)])$alter(na.status = "implicit")$values(),
   setkey(DT2[3L, .(date, col1)], "date"),
-  info = "values are altered correctly (single column and implicit NA values)"
+  info = "values are altered correctly (single column and implicit missing values)"
 )
 
 expect_identical(
   DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
   setkey(DT2[3L, -4L, with = FALSE], "date"),
-  info = "values are altered correctly (multiple columns and implicit NA values)"
+  info = "values are altered correctly (multiple columns and implicit missing values)"
 )
 
 expect_error(
@@ -118,7 +118,7 @@ expect_identical(
 
 expect_identical(
   {
-    TS <- DTSg$new(DT1, na.status = "undecided")
+    TS <- DTSg$new(DT1, na.status = "explicit")
     TS$na.status <- "implicit"
     TS$na.status
   },
@@ -128,11 +128,11 @@ expect_identical(
 
 expect_identical(
   {
-    TS <- DTSg$new(DT3)
-    TS$periodicity <- "1 month"
+    TS <- DTSg$new(DT1)
+    TS$periodicity <- "1 hour"
     TS$periodicity
   },
-  "1 months",
+  .difftime(1, units = "hours"),
   info = '"periodicity" field is changed correctly'
 )
 
@@ -166,7 +166,7 @@ expect_identical(
     interpolateLinear,
     rollends = FALSE,
     cols = "col2"
-  )$values()[["col2"]],
+  )$values(TRUE)[["col2"]],
   c(NA, seq(5, 15, by = 2)),
   info = '"..." passes on arguments correctly'
 )
@@ -197,7 +197,7 @@ expect_identical(
     function(x, ...) {cumsum(x)},
     cols = "col2",
     funby = byYmdH__
-  )$values()[["col2"]],
+  )$values(TRUE)[["col2"]],
   c(1, NA, 5, 12, 9, 20, 13, 28),
   info = '"funby" is applied correctly'
 )
@@ -482,37 +482,37 @@ expect_identical(
 
 #### rollapply method ####
 expect_identical(
-  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L)$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
   info = '"fun" is applied correctly (memoryOverCPU = TRUE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L, memoryOverCPU = FALSE)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
   info = '"fun" is applied correctly (memoryOverCPU = FALSE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L)$values(TRUE)[["col1"]],
   c(2, 3, 4, 6, 8, 10, 12, 13),
   info = '"..." passes on arguments correctly (memoryOverCPU = TRUE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L, memoryOverCPU = FALSE)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
   c(2, 3, 4, 6, 8, 10, 12, 13),
   info = '"..." passes on arguments correctly (memoryOverCPU = FALSE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L)$values(TRUE)[["col1"]],
   DT1[["col1"]],
   info = "window of size one returns identity (memoryOverCPU = TRUE)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L, memoryOverCPU = FALSE)$values()[["col1"]],
+  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
   DT1[["col1"]],
   info = "window of size one returns identity (memoryOverCPU = FALSE)"
 )
@@ -523,7 +523,7 @@ expect_identical(
     na.rm = TRUE,
     before = 2L,
     after = 1L
-  )$values()[["col1"]][3L],
+  )$values(TRUE)[["col1"]][3L],
   {
     weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^1
     weights <- weights / sum(weights)
@@ -540,7 +540,7 @@ expect_identical(
     after = 1L,
     parameters = list(power = 2),
     memoryOverCPU = FALSE
-  )$values()[["col1"]][3L],
+  )$values(TRUE)[["col1"]][3L],
   {
     weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^2
     weights <- weights / sum(weights)
@@ -592,7 +592,7 @@ expect_identical(
   {
     TS <- DTSg$new(DT1)
     TS$values()[, col1 := NULL]
-    TS$values()[["col1"]]
+    TS$values(TRUE)[["col1"]]
   },
   DT1[["col1"]],
   info = "values are copied"
@@ -602,7 +602,7 @@ expect_identical(
   {
     TS <- DTSg$new(DT1)
     TS$values(TRUE)[, col1 := NULL]
-    TS$values()[["col1"]]
+    TS$values(TRUE)[["col1"]]
   },
   NULL,
   info = "reference to values is returned"
