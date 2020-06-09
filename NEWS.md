@@ -1,3 +1,5 @@
+## DTSg v0.5.0.9000
+
 ## DTSg v0.5.0
 
 * Added `getCol` method: allows for querying the values of a single column of a `DTSg` object
@@ -5,7 +7,7 @@
 * Added `na.status` argument to `new` and `alter` methods: allows for making missing values either `"explicit"` (default) or `"implicit"` or leaving them alone via `"undecided"`
 * Added `na.status` field reflecting the status of missing values
 * Added `na.status` also to the `list` of helper data passed on to temporal aggregation level funtions
-* `funby` argument of `aggregate` method now also accepts a named `list` of functions, which allows for calculating several summary statistics at once
+* `funby` argument of `aggregate` method now also accepts a named `list` of functions: allows for calculating several summary statistics at once
 * `periodicity` field can now be actively set in order to change the periodicity of the time series
 * `timezone` field can now be actively set in order to convert the time zone of the series
 * Fixed that a `DTSg` object with only one timestamp accepted a missing value in its *.dateTime* column
