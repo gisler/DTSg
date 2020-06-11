@@ -403,8 +403,7 @@ DTSg <- R6Class(
         ))
       }
 
-      if ((by != private$.periodicity ||
-          na.status == "explicit" && na.status != private$.na.status) &&
+      if ((by != private$.periodicity || na.status == "explicit") &&
           by != "unrecognised") {
         if (rollback && grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
           DT <- data.table(
