@@ -1,5 +1,8 @@
 ## DTSg v0.5.0.9000
 
+* Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default.
+* Slightly improved documentation
+
 ## DTSg v0.5.0
 
 * Added `getCol` method: allows for querying the values of a single column of a `DTSg` object
@@ -48,7 +51,7 @@
 * Added `swallow` argument to `new` method: allows for a more ressource efficient object creation
 * Added `drop` argument to `values` method: allows for a ressource efficient destruction of a `DTSg` object while preserving its *values*
 * Added `class` argument to `values` method: can be used to return the *values* of a `DTSg` object as a `data.frame` instead of a `data.table`
-* `alter` method and linked with it `new` and other methods now are way more ressource efficient in some cases
+* `alter` method and linked with it `new` and other methods are now way more ressource efficient in some cases
 * Added `timestamps` field providing the total number of timestamps
 * `print` method now ommits empty metadata fields
 * Added means to measure code coverage with the help of `covr`

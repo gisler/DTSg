@@ -86,7 +86,7 @@ Depending on the number of columns to aggregate, the \emph{.n} column
  are preserved and all intervals are of \dQuote{correct} length, however, a
  possible limitation might be that the day saving time shift is invariably
  assumed to be exactly one hour long. This feature requires that the
- periodicity of the time series is not unrecognised and is supported by the
+ periodicity of the time series is recognised and is supported by the
  following temporal aggregation level functions of the package:
  \itemize{
    \item \code{\link{byY_____}}

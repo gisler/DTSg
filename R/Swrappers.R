@@ -61,7 +61,7 @@ NULL
 #'  are preserved and all intervals are of \dQuote{correct} length, however, a
 #'  possible limitation might be that the day saving time shift is invariably
 #'  assumed to be exactly one hour long. This feature requires that the
-#'  periodicity of the time series is not unrecognised and is supported by the
+#'  periodicity of the time series is recognised and is supported by the
 #'  following temporal aggregation level functions of the package:
 #'  \itemize{
 #'    \item \code{\link{byY_____}}
@@ -288,7 +288,8 @@ cols <- function(x, ...) {
 #'  (first element) of each column's \code{\link{class}} vector.
 #' @param pattern An optional character string passed on to the \code{pattern}
 #'  argument of \code{\link{grep}}.
-#' @param \dots Further arguments passed on to \code{\link{grep}}.
+#' @param \dots Further arguments passed on to \code{\link{grep}}. The
+#'  \code{value} argument is not allowed here.
 #'
 #' @return Returns a character vector.
 #'
@@ -325,7 +326,7 @@ getCol <- function(x, ...) {
 #'
 #' @return Returns a vector.
 #'
-#' @seealso \code{\link{DTSg}}
+#' @seealso \code{\link{DTSg}}, \code{\link{cols}}
 #'
 #' @examples
 #' # new DTSg object
