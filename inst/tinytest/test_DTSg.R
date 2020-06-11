@@ -311,11 +311,6 @@ expect_true(
 )
 
 #### merge method ####
-expect_error(
-  DTSg$new(DT1[, .(date, col1)])$merge(DT2, by = "date"),
-  info = "use of arguments not allowed returns error"
-)
-
 expect_identical(
   DTSg$new(DT1[, .(date, col1)])$merge(DT2)$values(),
   merge(DT1[, .(date, col1)], DT2, by = "date"),
@@ -323,9 +318,20 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1[, .(date, col1)])$merge(DT2, all = TRUE)$values(),
-  merge(DT1[, .(date, col1)], DT2, by = "date", all = TRUE),
-  info = '"..." passes on arguments correctly'
+  DTSg$new(DT1[1:4, .(date, col1)])$merge(
+    DTSg$new(DT1[c(5, 7, 8), .(date, col1)], na.status = "implicit"),
+    all = TRUE
+  )$values(),
+  setkey(rbind(
+    DT1[1:4, .(date, col1.x = col1, col1.y = NA                  )],
+    DT1[5:8, .(date, col1.x = NA  , col1.y = col1[c(1, NA, 3, 4)])]
+  ), "date"),
+  info = '"..." passes on arguments correctly and missing values are made explicit'
+)
+
+expect_error(
+  DTSg$new(DT1[, .(date, col1)])$merge(DT2, by = "date"),
+  info = "use of arguments not allowed returns error"
 )
 
 #### nas method ####
