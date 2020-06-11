@@ -5,7 +5,7 @@
 \alias{getCol}
 \title{Get Column Vector}
 \usage{
-\method{getCol}{DTSg}(x, col = self$cols(class = "numeric"), ...)
+\method{getCol}{DTSg}(x, col = self$cols(class = "numeric")[1L], ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -33,5 +33,5 @@ getCol(x = x, col = "flow")
 
 }
 \seealso{
-\code{\link{DTSg}}
+\code{\link{DTSg}}, \code{\link{cols}}
 }

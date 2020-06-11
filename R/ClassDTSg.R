@@ -561,7 +561,7 @@ DTSg <- R6Class(
       cols
     },
 
-    getCol = function(col = self$cols(class = "numeric")) {
+    getCol = function(col = self$cols(class = "numeric")[1L]) {
       qassert(col, "S1")
       assertSubset(col, names(private$.values))
 

@@ -20,7 +20,7 @@
 #'  missing values shall be filled. For time series with unrecognised
 #'  periodicity it is interpreted as seconds and for time series with recognised
 #'  periodicity it is multiplied with the maximum time difference between two
-#'  subsequent time steps in seconds. So for regular time series it is the
+#'  subsequent time steps in seconds. Thus, for regular time series it is the
 #'  number of time steps and for irregular it is an approximation of it.
 #' @param rollends A logical specifying if missing values at the start and end
 #'  of the time series shall be filled as well. See

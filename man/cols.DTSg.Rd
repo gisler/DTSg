@@ -16,7 +16,8 @@
 \item{pattern}{An optional character string passed on to the \code{pattern}
 argument of \code{\link{grep}}.}
 
-\item{\dots}{Further arguments passed on to \code{\link{grep}}.}
+\item{\dots}{Further arguments passed on to \code{\link{grep}}. The
+\code{value} argument is not allowed here.}
 }
 \value{
 Returns a character vector.
