@@ -71,7 +71,7 @@ expect_identical(
     col3 = c("A", NA, "E", "G"),
     key = "date"
   ),
-  info = "values are altered correctly (explicit missing values)"
+  info = "values are altered correctly (explicitly missing values)"
 )
 
 expect_identical(
@@ -90,19 +90,19 @@ expect_error(
 
 expect_warning(
   DTSg$new(DT3),
-  info = "explicit missing values and unrecognised periodicity returns warning"
+  info = "explicitly missing values and unrecognised periodicity returns warning"
 )
 
 expect_identical(
   DTSg$new(DT2[, .(date, col1)])$alter(na.status = "implicit")$values(),
   setkey(DT2[3L, .(date, col1)], "date"),
-  info = "values are altered correctly (single column and implicit missing values)"
+  info = "values are altered correctly (single column and implicitly missing values)"
 )
 
 expect_identical(
   DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
   setkey(DT2[3L, -4L, with = FALSE], "date"),
-  info = "values are altered correctly (multiple columns and implicit missing values)"
+  info = "values are altered correctly (multiple columns and implicitly missing values)"
 )
 
 expect_error(

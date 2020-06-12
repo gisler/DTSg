@@ -6,7 +6,7 @@ assertNAstatusPeriodicityOK <- function(
   level <- match.arg(level)
 
   msg <- paste(
-    "This functionality may only give complete and correct results for time series with explicit missing values and recognised periodicity.",
+    "This functionality may only give complete and correct results for time series with explicitly missing values and recognised periodicity.",
     'Consider calling "alter()" with "na.status = \'explicit\'" and/or specified "by" argument first.',
     sep = "\n"
   )
