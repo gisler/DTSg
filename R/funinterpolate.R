@@ -11,9 +11,9 @@
 #' Linearly interpolates missing values of a numeric vector. For use with the
 #'  \code{\link{colapply}} method of a \code{\link{DTSg}} object. Other uses are
 #'  possible, but not recommended. It also serves as an example for writing user
-#'  defined functions utilising one of the \code{\link{list}}s with helper data
-#'  as handed over by various methods of \code{\link{DTSg}} objects. See
-#'  \code{\link{DTSg}} for further information.
+#'  defined \code{\link{function}}s utilising one of the \code{\link{list}}s
+#'  with helper data as handed over by some methods of \code{\link{DTSg}}
+#'  objects. See \code{\link{DTSg}} for further information.
 #'
 #' @param .col A numeric vector.
 #' @param roll A positive numeric specifying the maximum size of gaps whose
@@ -30,7 +30,7 @@
 #'
 #' @return Returns a numeric vector.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{colapply}},
+#' @seealso \code{\link{DTSg}}, \code{\link{colapply}}, \code{\link{function}},
 #'  \code{\link[data.table]{data.table}}
 #'
 #' @examples

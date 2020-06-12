@@ -4,7 +4,7 @@ NULL
 #' Aggregate Values
 #'
 #' Applies a temporal aggregation level function to the \emph{.dateTime} column
-#'  of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
+#'  of a \code{\link{DTSg}} object and aggregates its \emph{values} column-wise
 #'  to the function's temporal aggregation level utilising one or more provided
 #'  summary functions. Additionally, it sets the object's \emph{aggregated}
 #'  field to \code{TRUE}. See \code{\link{DTSg}} for further information.
@@ -13,8 +13,8 @@ NULL
 #' @param funby One of the temporal aggregation level functions described in
 #'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
 #'  See details for further information.
-#' @param fun A summary function or a named \code{\link{list}} of summary
-#'  functions applied columnwise to all the values of the same temporal
+#' @param fun A summary \code{\link{function}} or a named \code{\link{list}} of
+#'  summary functions applied column-wise to all the values of the same temporal
 #'  aggregation level, for instance, \code{\link{mean}} or
 #'  \code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
 #'  must be of length one.
@@ -75,8 +75,8 @@ NULL
 #'
 #' @return Returns an aggregated \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
-#'  \code{\link{cols}}, \code{\link{POSIXct}}
+#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{function}},
+#'  \code{\link{list}}, \code{\link{cols}}, \code{\link{POSIXct}}
 #'
 #' @examples
 #' # new DTSg object
@@ -201,13 +201,13 @@ clone.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$clone))
 colapply <- function(x, ...) {
   UseMethod("colapply", x)
 }
-#' Apply Function Columnwise
+#' Apply Function Column-wise
 #'
-#' Applies an arbritary function to selected columns of a \code{\link{DTSg}}
+#' Applies an arbitrary function to selected columns of a \code{\link{DTSg}}
 #'  object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param fun A function. Its return value must be of length one.
+#' @param fun A \code{\link{function}}. Its return value must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to apply \code{fun} to.
 #' @param clone A logical specifying if the object is modified in place or if a
@@ -215,7 +215,7 @@ colapply <- function(x, ...) {
 #' @param resultCols An optional character vector of the same length as
 #'  \code{cols}. Non-existing columns specified in this argument are added and
 #'  existing columns are overwritten by the return values of \code{fun}. Columns
-#'  are matched elementwise between \code{resultCols} and \code{cols}.
+#'  are matched element-wise between \code{resultCols} and \code{cols}.
 #' @param suffix An optional character string. The return values of \code{fun}
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
@@ -246,9 +246,10 @@ colapply <- function(x, ...) {
 #'
 #' @return Returns a \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{cols}}, \code{\link{TALFs}},
-#'  \code{\link{aggregate}}, \code{\link{list}}, \code{\link{POSIXct}},
-#'  \code{\link{difftime}}, \code{\link{interpolateLinear}}
+#' @seealso \code{\link{DTSg}}, \code{\link{function}}, \code{\link{cols}},
+#'  \code{\link{TALFs}}, \code{\link{aggregate}}, \code{\link{list}},
+#'  \code{\link{POSIXct}}, \code{\link{difftime}},
+#'  \code{\link{interpolateLinear}}
 #'
 #' @examples
 #' # new DTSg object
@@ -570,7 +571,7 @@ rollapply <- function(x, ...) {
 #'  \code{\link{DTSg}} object with recognised periodicity.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param fun A function. Its return value must be of length one.
+#' @param fun A \code{\link{function}}. Its return value must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns whose rolling window
 #'  \code{fun} shall be applied to.
@@ -588,7 +589,7 @@ rollapply <- function(x, ...) {
 #' @param resultCols An optional character vector of the same length as
 #'  \code{cols}. Non-existing columns specified in this argument are added and
 #'  existing columns are overwritten by the return values of \code{fun}. Columns
-#'  are matched elementwise between \code{resultCols} and \code{cols}.
+#'  are matched element-wise between \code{resultCols} and \code{cols}.
 #' @param suffix An optional character string. The return values of \code{fun}
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
@@ -624,7 +625,8 @@ rollapply <- function(x, ...) {
 #'
 #' @return Returns a \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}}
+#' @seealso \code{\link{DTSg}}, \code{\link{function}}, \code{\link{cols}},
+#'  \code{\link{list}}
 #'
 #' @examples
 #' # new DTSg object

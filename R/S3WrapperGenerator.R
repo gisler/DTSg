@@ -11,11 +11,12 @@
 #'  as last parameter in case none already exists. This might be required for S3
 #'  generic/method consistency.
 #'
-#' @return Returns a function with the required parameters which captures its
-#'  own call, reshapes it to the corresponding R6 method call and evaluates it.
+#' @return Returns an S3 method (\code{\link{function}}) with the required
+#'  parameters which captures its own call, reshapes it to the corresponding R6
+#'  method call and evaluates it.
 #'
 #' @seealso \code{\link{S3Methods}}, \code{\link[R6]{R6Class}},
-#'  \code{\link{expression}}
+#'  \code{\link{expression}}, \code{\link{function}}
 #'
 #' @examples
 #' # generate S3 wrapper method for alter of DTSg
