@@ -56,7 +56,7 @@
 #'  missing timestamps according to the recognised periodicity explicit, or
 #'  \code{"implicit"}, which removes timestamps with missing values on all value
 #'  columns, or \code{"undecided"} for no such action. Please note that
-#'  \code{\link{DTSg}} objects work best with explicit missing values.
+#'  \code{\link{DTSg}} objects work best with explicitly missing values.
 #'
 #' @return Returns a \code{DTSg} object.
 #'
@@ -431,7 +431,7 @@ DTSg <- R6Class(
       } else if (na.status == "explicit" && by == "unrecognised") {
         warning(
           paste(
-            "Only time series with recognised periodicity can have explicit missing values.",
+            "Only time series with recognised periodicity can have explicitly missing values.",
             'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
             sep = "\n"
           ),
