@@ -496,6 +496,34 @@ setMethod(
 #' @export
 plot.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$plot))
 
+#### print ####
+#' Print Time Series
+#'
+#' Prints a \code{\link{DTSg}}.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param \dots Not used (S3 method only).
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # print object
+#' ## R6 method
+#' x$print()
+#'
+#' ## S3 method
+#' print(x = x)
+#'
+#' @aliases print
+#'
+#' @export
+print.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$print))
+
 #### refresh ####
 #' @export
 refresh <- function(x, ...) {

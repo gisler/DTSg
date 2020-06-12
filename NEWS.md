@@ -2,7 +2,7 @@
 
 * Fixed that not all missing values were made explicit after a call to the `merge` method despite an `"explicit"` `na.status` in some cases
 * Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default
-* Slightly improved documentation
+* Improved documentation
 
 ## DTSg v0.5.0
 
