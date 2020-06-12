@@ -1,10 +1,10 @@
 expect_error(
-  S3WrapperGenerator(DTSg$public_methods$aggregate),
-  info = "not an expression object returns error"
+  S3WrapperGenerator(DTSg$private_fields$.na.status),
+  info = "not a function or expression returns error"
 )
 
 expect_error(
-  S3WrapperGenerator(expression(DTSg$private_methods$aggregate)),
+  S3WrapperGenerator(DTSg$private_methods$aggregate),
   info = "not a public method returns error"
 )
 
