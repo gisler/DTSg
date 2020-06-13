@@ -7,8 +7,8 @@
 S3WrapperGenerator(R6Method, self = "x", dots = TRUE)
 }
 \arguments{
-\item{R6Method}{An \code{\link{expression}} with a public method of an
-\code{R6ClassGenerator}.}
+\item{R6Method}{An \code{\link{expression}} with or a public method
+(\code{\link{function}}) of an \code{R6ClassGenerator}.}
 
 \item{self}{A character string specifying the name of the parameter which
 will take the R6 object.}
@@ -18,8 +18,7 @@ as last parameter in case none already exists. This might be required for S3
 generic/method consistency.}
 }
 \value{
-Returns a function with the required parameters which captures its
- own call, reshapes it to the corresponding R6 method call and evaluates it.
+Returns an S3 method (\code{\link{function}}).
 }
 \description{
 Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
@@ -28,11 +27,11 @@ Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
 \examples{
 # generate S3 wrapper method for alter of DTSg
 alter.DTSg <- S3WrapperGenerator(
-  R6Method = expression(DTSg$public_methods$alter)
+  R6Method = DTSg$public_methods$alter
 )
 
 }
 \seealso{
 \code{\link{S3Methods}}, \code{\link[R6]{R6Class}},
- \code{\link{expression}}
+ \code{\link{expression}}, \code{\link{function}}
 }

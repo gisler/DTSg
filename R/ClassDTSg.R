@@ -292,7 +292,7 @@ DTSg <- R6Class(
     },
 
     multiLapply = function(.SD, funs, ...) {
-      if (is.list(funs)) {
+      if (testClass(funs, "list")) {
         do.call(c, lapply(
           .SD,
           function(x, ...) {
@@ -333,7 +333,7 @@ DTSg <- R6Class(
       qassert(ignoreDST, "B1")
       .helpers <- private$aggregateHelpers(ignoreDST)
       qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
-      if (is.list(fun)) {
+      if (testClass(fun, "list")) {
         assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
         lapply(fun, assertFunction, .var.name = "fun[[i]]")
       } else {
@@ -447,7 +447,7 @@ DTSg <- R6Class(
         private$.na.status <- na.status
       } else if (by != private$.periodicity && by == "unrecognised") {
         stop('Periodicity of the time series cannot be changed to "unrecognised".', call. = FALSE)
-      } else if (na.status == "explicit" && by == "unrecognised") {
+      } else if (na.status == "explicit" && by == "unrecognised" && private$.timestamps > 2L) {
         warning(
           paste(
             "Only time series with recognised periodicity can have explicitly missing values.",

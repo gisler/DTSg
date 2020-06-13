@@ -15,7 +15,8 @@
 \item{\dots}{Not used (S3 method only).}
 }
 \value{
-Returns a vector.
+Returns a vector or a \code{\link{list}} in case of a
+ \code{\link{list}} column.
 }
 \description{
 Queries the values of a column of a \code{\link{DTSg}} object.
@@ -33,5 +34,5 @@ getCol(x = x, col = "flow")
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}
+\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}}
 }

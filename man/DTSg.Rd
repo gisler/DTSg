@@ -5,6 +5,7 @@
 \alias{DTSg}
 \alias{new}
 \title{DTSg Class}
+\format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
  aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status = c("explicit",
@@ -57,7 +58,7 @@ environment are removed upon successful creation of a \code{DTSg} object.}
 missing timestamps according to the recognised periodicity explicit, or
 \code{"implicit"}, which removes timestamps with missing values on all value
 columns, or \code{"undecided"} for no such action. Please note that
-\code{\link{DTSg}} objects work best with explicit missing values.}
+\code{\link{DTSg}} objects work best with explicitly missing values.}
 }
 \value{
 Returns a \code{DTSg} object.
@@ -86,7 +87,7 @@ Due to the \code{\link{POSIXct}} nature of the \emph{.dateTime} column, the
  allowed in \code{\link{options}("digits.secs")}. As a consequence, time
  series with a sub-second accuracy higher than a microsecond will never work.
 
-Some of the methods which take a function as an argument
+Some of the methods which take a \code{\link{function}} as an argument
  (\code{\link{colapply}} and \code{\link{rollapply}}) hand over to it an
  additional \code{\link{list}} argument called \code{.helpers} containing
  useful data for the development of user defined functions (see the
@@ -109,9 +110,12 @@ A \code{DTSg} object has the following methods:
    \item \code{merge}: See \code{\link{merge}} for further information.
    \item \code{nas}: See \code{\link{nas}} for further information.
    \item \code{plot}: See \code{\link{plot}} for further information.
+   \item \code{print}: See \code{\link{print}} for further information.
    \item \code{refresh}: See \code{\link{refresh}} for further information.
    \item \code{rollapply}: See \code{\link{rollapply}} for further
      information.
+   \item \code{setCols}: See \code{\link{setCols}} for further information.
+   \item \code{subset}: See \code{\link{subset}} for further information.
    \item \code{summary}: See \code{\link{summary}} for further information.
    \item \code{values}: See \code{\link{values}} for further information.
  }
@@ -185,5 +189,7 @@ new(Class = "DTSg", values = flow, ID = "River Flow")
 \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
- \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{list}}
+ \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{function}},
+ \code{\link{list}}
 }
+\keyword{datasets}

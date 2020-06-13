@@ -3,24 +3,16 @@
 \name{colapply.DTSg}
 \alias{colapply.DTSg}
 \alias{colapply}
-\title{Apply Function Columnwise}
+\title{Apply Function Column-wise}
 \usage{
-\method{colapply}{DTSg}(
-  x,
-  fun,
-  ...,
-  cols = self$cols(class = "numeric")[1L],
-  clone = getOption("DTSgClone"),
-  resultCols = NULL,
-  suffix = NULL,
-  funby = NULL,
-  ignoreDST = FALSE
-)
+\method{colapply}{DTSg}(x, fun, ..., cols = self$cols(class =
+  "numeric")[1L], clone = getOption("DTSgClone"), resultCols = NULL,
+  suffix = NULL, funby = NULL, ignoreDST = FALSE)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{fun}{A function. Its return value must be of length one.}
+\item{fun}{A \code{\link{function}}. Its return value must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -32,7 +24,7 @@ clone (copy) is made beforehand.}
 \item{resultCols}{An optional character vector of the same length as
 \code{cols}. Non-existing columns specified in this argument are added and
 existing columns are overwritten by the return values of \code{fun}. Columns
-are matched elementwise between \code{resultCols} and \code{cols}.}
+are matched element-wise between \code{resultCols} and \code{cols}.}
 
 \item{suffix}{An optional character string. The return values of \code{fun}
 are added as new columns with names consisting of the columns specified in
@@ -53,7 +45,7 @@ information.}
 Returns a \code{\link{DTSg}} object.
 }
 \description{
-Applies an arbritary function to selected columns of a \code{\link{DTSg}}
+Applies an arbitrary function to selected columns of a \code{\link{DTSg}}
  object.
 }
 \details{
@@ -91,7 +83,8 @@ colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{TALFs}},
- \code{\link{aggregate}}, \code{\link{list}}, \code{\link{POSIXct}},
- \code{\link{difftime}}, \code{\link{interpolateLinear}}
+\code{\link{DTSg}}, \code{\link{function}}, \code{\link{cols}},
+ \code{\link{TALFs}}, \code{\link{aggregate}}, \code{\link{list}},
+ \code{\link{POSIXct}}, \code{\link{difftime}},
+ \code{\link{interpolateLinear}}
 }
