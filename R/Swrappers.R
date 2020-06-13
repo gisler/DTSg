@@ -644,6 +644,89 @@ rollapply <- function(x, ...) {
 #' @export
 rollapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rollapply))
 
+#### setCols ####
+#' @export
+setCols <- function(x, ...) {
+  UseMethod("setCols", x)
+}
+#' Set Columns' Values
+#'
+#' Set the values of and/or add columns to a \code{\link{DTSg}}. If needed, the
+#'  values can be set for certain rows only.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param i A numeric or logical vector or an expression as accepted by the
+#'  \code{i} argument of \code{\link[data.table]{data.table}}.
+#' @param cols A character vector specifying the columns whose values shall be
+#'  set. The values of the \emph{.dateTime} column cannot be set.
+#' @param values A list of replacement and/or new values as accepted by the
+#'  \code{value} argument of \code{\link[data.table]{set}}.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
+#' @param \dots Not used (S3 method only).
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
+#'  \code{\link{cols}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # limit river flow to 100
+#' ## R6 method
+#' x$setCols(i = flow > 100, cols = "flow", values = 100)
+#'
+#' ## S3 method
+#' setCols(x = x, i = flow > 100, cols = "flow", values = 100)
+#'
+#' @aliases setCols
+#'
+#' @export
+setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
+
+#### subset ####
+#' Subset Time Series
+#'
+#' Filter rows and/or select columns of a \code{\link{DTSg}} object.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param i A numeric or logical vector or an expression as accepted by the
+#'  \code{i} argument of \code{\link[data.table]{data.table}}.
+#' @param cols A character vector specifying the columns to select. The
+#'  \emph{.dateTime} column is always selected and cannot be part of it.
+#' @param na.status A character string. Either \code{"explicit"}, which makes
+#'  missing timestamps according to the recognised periodicity explicit, or
+#'  \code{"implicit"}, which removes timestamps with missing values on all value
+#'  columns. Please note that filtering rows and having or making missing
+#'  timestamps explicit equals to setting the values of all the other timestamps
+#'  to missing.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
+#' @param \dots Not used (S3 method only).
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
+#'  \code{\link{cols}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # filter for non-missing river flow between the 280th and 320th row
+#' ## R6 method
+#' x$subset(i = 280:320, na.status = "implicit")
+#'
+#' ## S3 method
+#' subset(x = x, i = 280:320, na.status = "implicit")
+#'
+#' @aliases subset
+#'
+#' @export
+subset.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$subset))
+
 #### summary ####
 #' Time Series Summary
 #'

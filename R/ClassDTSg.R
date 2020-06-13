@@ -73,9 +73,12 @@
 #'    \item \code{merge}: See \code{\link{merge}} for further information.
 #'    \item \code{nas}: See \code{\link{nas}} for further information.
 #'    \item \code{plot}: See \code{\link{plot}} for further information.
+#'    \item \code{print}: See \code{\link{print}} for further information.
 #'    \item \code{refresh}: See \code{\link{refresh}} for further information.
 #'    \item \code{rollapply}: See \code{\link{rollapply}} for further
 #'      information.
+#'    \item \code{setCols}: See \code{\link{setCols}} for further information.
+#'    \item \code{subset}: See \code{\link{subset}} for further information.
 #'    \item \code{summary}: See \code{\link{summary}} for further information.
 #'    \item \code{values}: See \code{\link{values}} for further information.
 #'  }
@@ -250,6 +253,21 @@ DTSg <- R6Class(
       } else {
         cols
       }
+    },
+
+    determineFilter = function(i, expr) {
+      tryCatch(
+        {
+          if (!testClass(i, "integer") && !testClass(i, "numeric") &&
+              !testClass(i, "logical") && !is.list(i) && !is.expression(i)) {
+            i <- expr
+          }
+          i
+        },
+        error = function(e) {
+          expr
+        }
+      )
     },
 
     determineFrom = function(from) {
@@ -1039,6 +1057,88 @@ DTSg <- R6Class(
         ),
         .SDcols = cols
       ]
+
+      invisible(self)
+    },
+
+    setCols = function(
+      i,
+      cols = self$cols(class = "numeric")[1L],
+      values,
+      clone = getOption("DTSgClone")
+    ) {
+      if (!missing(i)) {
+        expr <- as.expression(substitute(i))
+        i <- private$determineFilter(i, expr)
+        assertFilter(i)
+      }
+      assertCharacter(
+        cols,
+        min.chars = 1L,
+        any.missing = FALSE,
+        min.len = 1L,
+        unique = TRUE
+      )
+      assertNoBeginningDot(cols)
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$setCols(
+          i = i,
+          cols = cols,
+          values = values,
+          clone = FALSE
+        ))
+      }
+
+      if (!missing(i)) {
+        private$.values[eval(i), (cols) := values]
+      } else {
+        private$.values[, (cols) := values]
+      }
+
+      invisible(self)
+    },
+
+    subset = function(
+      i,
+      cols = self$cols(),
+      na.status = self$na.status,
+      clone = getOption("DTSgClone")
+    ) {
+      if (!missing(i)) {
+        expr <- as.expression(substitute(i))
+        i <- private$determineFilter(i, expr)
+        assertFilter(i)
+      }
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      na.status <- match.arg(na.status, c("explicit", "implicit", "undecided"))
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$subset(
+          i = i,
+          cols = cols,
+          na.status = na.status,
+          clone = FALSE
+        ))
+      }
+
+      cols <- c(".dateTime", cols)
+
+      if (!missing(i)) {
+        values <- private$.values[eval(i), cols, with = FALSE]
+      } else {
+        values <- private$.values[, cols, with = FALSE]
+      }
+      assertDataFrame(values, min.rows = 1L, min.cols = 2L)
+      private$.values <- values
+
+      self$refresh()
+      self$alter(clone = FALSE, na.status = na.status)
 
       invisible(self)
     },
