@@ -5,16 +5,9 @@
 \alias{aggregate}
 \title{Aggregate Values}
 \usage{
-\method{aggregate}{DTSg}(
-  x,
-  funby,
-  fun,
-  ...,
-  cols = self$cols(class = "numeric"),
-  n = FALSE,
-  ignoreDST = FALSE,
-  clone = getOption("DTSgClone")
-)
+\method{aggregate}{DTSg}(x, funby, fun, ..., cols = self$cols(class =
+  "numeric"), n = FALSE, ignoreDST = FALSE,
+  clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -23,8 +16,8 @@
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 See details for further information.}
 
-\item{fun}{A summary function or a named \code{\link{list}} of summary
-functions applied columnwise to all the values of the same temporal
+\item{fun}{A summary \code{\link{function}} or a named \code{\link{list}} of
+summary functions applied column-wise to all the values of the same temporal
 aggregation level, for instance, \code{\link{mean}} or
 \code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
 must be of length one.}
@@ -48,7 +41,7 @@ Returns an aggregated \code{\link{DTSg}} object.
 }
 \description{
 Applies a temporal aggregation level function to the \emph{.dateTime} column
- of a \code{\link{DTSg}} object and aggregates its \emph{values} columnwise
+ of a \code{\link{DTSg}} object and aggregates its \emph{values} column-wise
  to the function's temporal aggregation level utilising one or more provided
  summary functions. Additionally, it sets the object's \emph{aggregated}
  field to \code{TRUE}. See \code{\link{DTSg}} for further information.
@@ -118,6 +111,6 @@ aggregate(x = x, funby = byYQ____, fun = list(min = min, max = max), na.rm = TRU
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
- \code{\link{cols}}, \code{\link{POSIXct}}
+\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{function}},
+ \code{\link{list}}, \code{\link{cols}}, \code{\link{POSIXct}}
 }

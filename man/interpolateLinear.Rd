@@ -30,9 +30,9 @@ Returns a numeric vector.
 Linearly interpolates missing values of a numeric vector. For use with the
  \code{\link{colapply}} method of a \code{\link{DTSg}} object. Other uses are
  possible, but not recommended. It also serves as an example for writing user
- defined functions utilising one of the \code{\link{list}}s with helper data
- as handed over by various methods of \code{\link{DTSg}} objects. See
- \code{\link{DTSg}} for further information.
+ defined \code{\link{function}}s utilising one of the \code{\link{list}}s
+ with helper data as handed over by some methods of \code{\link{DTSg}}
+ objects. See \code{\link{DTSg}} for further information.
 }
 \examples{
 # new DTSg object
@@ -47,6 +47,6 @@ colapply(x = x, fun = interpolateLinear)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{colapply}},
+\code{\link{DTSg}}, \code{\link{colapply}}, \code{\link{function}},
  \code{\link[data.table]{data.table}}
 }

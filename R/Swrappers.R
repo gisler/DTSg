@@ -325,9 +325,10 @@ getCol <- function(x, ...) {
 #' @param col A character string specifying a column name.
 #' @param \dots Not used (S3 method only).
 #'
-#' @return Returns a vector.
+#' @return Returns a vector or a \code{\link{list}} in case of a
+#'  \code{\link{list}} column.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{cols}}
+#' @seealso \code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}}
 #'
 #' @examples
 #' # new DTSg object

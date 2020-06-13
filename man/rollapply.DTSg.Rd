@@ -5,25 +5,16 @@
 \alias{rollapply}
 \title{Rolling Window Function}
 \usage{
-\method{rollapply}{DTSg}(
-  x,
-  fun,
-  ...,
-  cols = self$cols(class = "numeric")[1L],
-  before = 1L,
-  after = before,
-  weights = c("inverseDistance"),
-  parameters = list(power = 1),
-  clone = getOption("DTSgClone"),
-  resultCols = NULL,
-  suffix = NULL,
-  memoryOverCPU = TRUE
-)
+\method{rollapply}{DTSg}(x, fun, ..., cols = self$cols(class =
+  "numeric")[1L], before = 1L, after = before,
+  weights = c("inverseDistance"), parameters = list(power = 1),
+  clone = getOption("DTSgClone"), resultCols = NULL, suffix = NULL,
+  memoryOverCPU = TRUE)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{fun}{A function. Its return value must be of length one.}
+\item{fun}{A \code{\link{function}}. Its return value must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -49,7 +40,7 @@ clone (copy) is made beforehand.}
 \item{resultCols}{An optional character vector of the same length as
 \code{cols}. Non-existing columns specified in this argument are added and
 existing columns are overwritten by the return values of \code{fun}. Columns
-are matched elementwise between \code{resultCols} and \code{cols}.}
+are matched element-wise between \code{resultCols} and \code{cols}.}
 
 \item{suffix}{An optional character string. The return values of \code{fun}
 are added as new columns with names consisting of the columns specified in
@@ -105,5 +96,6 @@ rollapply(x = x, fun = mean, na.rm = TRUE, before = 2, after = 2)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}}
+\code{\link{DTSg}}, \code{\link{function}}, \code{\link{cols}},
+ \code{\link{list}}
 }
