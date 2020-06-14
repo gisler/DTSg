@@ -266,7 +266,7 @@ DTSg <- R6Class(
     determineFilter = function(i, expr) {
       tryCatch(
         {
-          if (!testClass(i, "integer") && !testClass(i, "numeric") &&
+          if (!testMultiClass(i, c("integer", "numeric")) &&
               !is.list(i) && !is.expression(i)) {
             i <- expr
           }
@@ -524,10 +524,10 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
-        qassert(funby(
+        assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
           private$aggregateHelpers(ignoreDST)
-        ), "P1")
+        ), len = 1L)
 
         by <- funby(private$.values[[".dateTime"]], private$aggregateHelpers(ignoreDST))
       } else {
@@ -640,7 +640,7 @@ DTSg <- R6Class(
     },
 
     merge = function(y, ..., clone = getOption("DTSgClone")) {
-      if (!testClass(y, "DTSg")) {
+      if (!testR6(y, "DTSg")) {
         y <- DTSg$new(y)
       }
       assertSetEqual(y$timezone, self$timezone)

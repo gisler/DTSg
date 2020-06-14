@@ -226,7 +226,7 @@ colapply <- function(x, ...) {
 #'  temporal level. See examples and \code{\link{aggregate}} for further
 #'  information.
 #' @param ignoreDST A logical specifying if day saving time is ignored during
-#'  formation of the termporal level. See \code{\link{aggregate}} for further
+#'  formation of the temporal level. See \code{\link{aggregate}} for further
 #'  information.
 #'
 #' @details
@@ -726,7 +726,7 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
 #'  \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
-#'  \code{\link{alter}}
+#'  \code{\link{TALFs}}, \code{\link{alter}}
 #'
 #' @examples
 #' # new DTSg object
@@ -741,10 +741,10 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'
 #' # filter for the last two observations per year
 #' ## R6 method
-#' x$subset(i = (.N - 1):.N, funby = byY_____)
+#' x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 #'
 #' ## S3 method
-#' subset(x = x, i = (.N - 1):.N, funby = byY_____)
+#' subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 #'
 #' @aliases subset
 #'
