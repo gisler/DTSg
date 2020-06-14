@@ -38,7 +38,7 @@ temporal level. See examples and \code{\link{aggregate}} for further
 information.}
 
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
-formation of the termporal level. See \code{\link{aggregate}} for further
+formation of the temporal level. See \code{\link{aggregate}} for further
 information.}
 }
 \value{

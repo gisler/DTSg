@@ -64,14 +64,14 @@ subset(x = x, i = (.N - 5):.N)
 
 # filter for the last two observations per year
 ## R6 method
-x$subset(i = (.N - 1):.N, funby = byY_____)
+x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 
 ## S3 method
-subset(x = x, i = (.N - 1):.N, funby = byY_____)
+subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
  \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
- \code{\link{alter}}
+ \code{\link{TALFs}}, \code{\link{alter}}
 }
