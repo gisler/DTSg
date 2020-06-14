@@ -11,8 +11,10 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{i}{A numeric or logical vector or an expression as accepted by the
-\code{i} argument of \code{\link[data.table]{data.table}}.}
+\item{i}{A numeric vector indexing rows or a filter expression as accepted by
+the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
+expressions can contain the special symbol \code{.N}. See
+(\code{\link[data.table]{special-symbols}}) for further information.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
 set. The values of the \emph{.dateTime} column cannot be set.}
@@ -29,8 +31,8 @@ clone (copy) is made beforehand.}
 Returns a \code{\link{DTSg}} object.
 }
 \description{
-Set the values of and/or add columns to a \code{\link{DTSg}}. If needed, the
- values can be set for certain rows only.
+Set the values of and/or add columns to a \code{\link{DTSg}}. The values can
+ be set for certain rows only, if needed.
 }
 \examples{
 # new DTSg object
@@ -46,5 +48,5 @@ setCols(x = x, i = flow > 100, cols = "flow", values = 100)
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
- \code{\link{cols}}
+ \code{\link[data.table]{special-symbols}}, \code{\link{cols}}
 }

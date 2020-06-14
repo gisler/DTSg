@@ -1,24 +1,3 @@
-#### assertNAstatusPeriodicityOK ####
-expect_error(
-  assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
-  info = 'implicit "na.status" returns error'
-)
-
-# expect_warning(
-#   assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
-#   info = 'undecided "na.status" returns warning'
-# )
-
-expect_error(
-  assertNAstatusPeriodicityOK("explicit", "unrecognised"),
-  info = 'unrecognised "periodicity" returns error'
-)
-
-# expect_warning(
-#   assertNAstatusPeriodicityOK("explicit", "unrecognised", "warning"),
-#   info = 'unrecognised "periodicity" returns warning'
-# )
-
 #### assertFasttimeOK ####
 expect_error(
   assertFasttimeOK(
@@ -43,6 +22,27 @@ expect_error(
   ),
   info = 'unsuitable "timezone" returns error'
 )
+
+#### assertNAstatusPeriodicityOK ####
+expect_error(
+  assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
+  info = 'implicit "na.status" returns error'
+)
+
+# expect_warning(
+#   assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
+#   info = 'undecided "na.status" returns warning'
+# )
+
+expect_error(
+  assertNAstatusPeriodicityOK("explicit", "unrecognised"),
+  info = 'unrecognised "periodicity" returns error'
+)
+
+# expect_warning(
+#   assertNAstatusPeriodicityOK("explicit", "unrecognised", "warning"),
+#   info = 'unrecognised "periodicity" returns warning'
+# )
 
 #### assertNoBeginningDot ####
 expect_error(

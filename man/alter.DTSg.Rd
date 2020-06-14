@@ -5,16 +5,10 @@
 \alias{alter}
 \title{Alter Time Series}
 \usage{
-\method{alter}{DTSg}(
-  x,
-  from = first(self$values(reference = TRUE)[[".dateTime"]]),
-  to = last(self$values(reference = TRUE)[[".dateTime"]]),
-  by = self$periodicity,
-  rollback = TRUE,
-  clone = getOption("DTSgClone"),
-  na.status = self$na.status,
-  ...
-)
+\method{alter}{DTSg}(x, from = first(self$values(reference =
+  TRUE)[[".dateTime"]]), to = last(self$values(reference =
+  TRUE)[[".dateTime"]]), by = self$periodicity, rollback = TRUE,
+  clone = getOption("DTSgClone"), na.status = self$na.status, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -50,8 +44,8 @@ missing values.}
 Returns a \code{\link{DTSg}} object.
 }
 \description{
-Shortens, lengthens, changes the periodicity and/or the status of missing
- values of a \code{\link{DTSg}} object.
+Shortens, lengthens, subsets a complete range, changes the periodicity and/or
+ the status of missing values of a \code{\link{DTSg}} object.
 }
 \examples{
 # new DTSg object
