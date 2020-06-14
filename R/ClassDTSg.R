@@ -1108,6 +1108,8 @@ DTSg <- R6Class(
     subset = function(
       i,
       cols = self$cols(),
+      funby = NULL,
+      ignoreDST = FALSE,
       na.status = "implicit",
       clone = getOption("DTSgClone")
     ) {
@@ -1126,6 +1128,8 @@ DTSg <- R6Class(
         return(TS$subset(
           i = i,
           cols = cols,
+          funby = funby,
+          ignoreDST = ignoreDST,
           na.status = na.status,
           clone = FALSE
         ))
@@ -1134,7 +1138,24 @@ DTSg <- R6Class(
       cols <- c(".dateTime", cols)
 
       if (!missing(i)) {
-        values <- private$.values[eval(i), cols, with = FALSE]
+        if (!is.null(funby)) {
+          assertFunction(funby)
+          qassert(ignoreDST, "B1")
+          assertAtomic(funby(
+            self$values(reference = TRUE)[[".dateTime"]][1L],
+            private$aggregateHelpers(ignoreDST)
+          ), len = 1L)
+
+          values <- private$.values[
+            ,
+            .SD[eval(i)],
+            by = .(.group = funby(.dateTime, private$aggregateHelpers(ignoreDST))),
+            .SDcols = cols
+          ]
+          values[, .group := NULL]
+        } else {
+          values <- private$.values[eval(i), cols, with = FALSE]
+        }
       } else {
         values <- private$.values[, cols, with = FALSE]
       }

@@ -5,7 +5,8 @@
 \alias{subset}
 \title{Subset Time Series}
 \usage{
-\method{subset}{DTSg}(x, i, cols = self$cols(), na.status = "implicit",
+\method{subset}{DTSg}(x, i, cols = self$cols(), funby = NULL,
+  ignoreDST = FALSE, na.status = "implicit",
   clone = getOption("DTSgClone"), ...)
 }
 \arguments{
@@ -18,6 +19,16 @@ expressions can contain the special symbol \code{.N}. See
 
 \item{cols}{A character vector specifying the columns to select. The
 \emph{.dateTime} column is always selected and cannot be part of it.}
+
+\item{funby}{One of the temporal aggregation level functions described in
+\code{\link{TALFs}} or a user defined temporal aggregation level function.
+Can be used to, for instance, select the last two observations of a certain
+temporal level. See examples and \code{\link{aggregate}} for further
+information.}
+
+\item{ignoreDST}{A logical specifying if day saving time is ignored during
+formation of the temporal level. See \code{\link{aggregate}} for further
+information.}
 
 \item{na.status}{A character string. Either \code{"explicit"}, which makes
 missing timestamps according to the recognised periodicity explicit, or
@@ -46,10 +57,17 @@ x <- DTSg$new(values = flow)
 
 # filter for the last six rows
 ## R6 method
-x$subset(i = (.N-5):.N)
+x$subset(i = (.N - 5):.N)
 
 ## S3 method
-subset(x = x, i = (.N-5):.N)
+subset(x = x, i = (.N - 5):.N)
+
+# filter for the last two observations per year
+## R6 method
+x$subset(i = (.N - 1):.N, funby = byY_____)
+
+## S3 method
+subset(x = x, i = (.N - 1):.N, funby = byY_____)
 
 }
 \seealso{

@@ -701,6 +701,14 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
 #' @param cols A character vector specifying the columns to select. The
 #'  \emph{.dateTime} column is always selected and cannot be part of it.
+#' @param funby One of the temporal aggregation level functions described in
+#'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
+#'  Can be used to, for instance, select the last two observations of a certain
+#'  temporal level. See examples and \code{\link{aggregate}} for further
+#'  information.
+#' @param ignoreDST A logical specifying if day saving time is ignored during
+#'  formation of the temporal level. See \code{\link{aggregate}} for further
+#'  information.
 #' @param na.status A character string. Either \code{"explicit"}, which makes
 #'  missing timestamps according to the recognised periodicity explicit, or
 #'  \code{"implicit"}, which removes timestamps with missing values on all value
@@ -726,10 +734,17 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'
 #' # filter for the last six rows
 #' ## R6 method
-#' x$subset(i = (.N-5):.N)
+#' x$subset(i = (.N - 5):.N)
 #'
 #' ## S3 method
-#' subset(x = x, i = (.N-5):.N)
+#' subset(x = x, i = (.N - 5):.N)
+#'
+#' # filter for the last two observations per year
+#' ## R6 method
+#' x$subset(i = (.N - 1):.N, funby = byY_____)
+#'
+#' ## S3 method
+#' subset(x = x, i = (.N - 1):.N, funby = byY_____)
 #'
 #' @aliases subset
 #'
