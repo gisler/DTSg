@@ -5,14 +5,16 @@
 \alias{subset}
 \title{Subset Time Series}
 \usage{
-\method{subset}{DTSg}(x, i, cols = self$cols(),
-  na.status = self$na.status, clone = getOption("DTSgClone"), ...)
+\method{subset}{DTSg}(x, i, cols = self$cols(), na.status = "implicit",
+  clone = getOption("DTSgClone"), ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{i}{A numeric or logical vector or an expression as accepted by the
-\code{i} argument of \code{\link[data.table]{data.table}}.}
+\item{i}{A numeric vector indexing rows or a filter expression as accepted by
+the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
+expressions can contain the special symbol \code{.N}. See
+(\code{\link[data.table]{special-symbols}}) for further information.}
 
 \item{cols}{A character vector specifying the columns to select. The
 \emph{.dateTime} column is always selected and cannot be part of it.}
@@ -21,8 +23,11 @@
 missing timestamps according to the recognised periodicity explicit, or
 \code{"implicit"}, which removes timestamps with missing values on all value
 columns. Please note that filtering rows and having or making missing
-timestamps explicit equals to setting the values of all the other timestamps
-to missing.}
+timestamps explicit equals to setting the values of all other timestamps to
+missing. Its default value is therefore \code{"implicit"}. To simply subset
+a complete range of a \code{\link{DTSg}} object while leaving
+\code{na.status} untouched, \code{\link{alter}} is probably the better
+choice.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
@@ -39,15 +44,16 @@ Filter rows and/or select columns of a \code{\link{DTSg}} object.
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# filter for non-missing river flow between the 280th and 320th row
+# filter for the last six rows
 ## R6 method
-x$subset(i = 280:320, na.status = "implicit")
+x$subset(i = (.N-5):.N)
 
 ## S3 method
-subset(x = x, i = 280:320, na.status = "implicit")
+subset(x = x, i = (.N-5):.N)
 
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
- \code{\link{cols}}
+ \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
+ \code{\link{alter}}
 }

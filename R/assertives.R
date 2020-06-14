@@ -16,9 +16,8 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
 }
 
 assertFilter <- function(x) {
-  if (!testClass(x, "integer") && !testClass(x, "numeric") &&
-      !testClass(x, "logical") && !is.expression(x)) {
-    stop('"i" must be a numeric or logical vector or an expression.', call. = FALSE)
+  if (!testClass(x, "integer") && !testClass(x, "numeric") && !is.expression(x)) {
+    stop('"i" must be a numeric vector or an expression.', call. = FALSE)
   }
 
   x

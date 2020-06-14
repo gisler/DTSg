@@ -255,11 +255,19 @@ DTSg <- R6Class(
       }
     },
 
+    determineLen = function(timestamps) {
+      if (!private$.isFast || timestamps < 1000L) {
+        timestamps
+      } else {
+        1000L
+      }
+    },
+
     determineFilter = function(i, expr) {
       tryCatch(
         {
           if (!testClass(i, "integer") && !testClass(i, "numeric") &&
-              !testClass(i, "logical") && !is.list(i) && !is.expression(i)) {
+              !is.list(i) && !is.expression(i)) {
             i <- expr
           }
           i
@@ -863,13 +871,9 @@ DTSg <- R6Class(
       private$.timestamps <- nrow(private$.values)
       private$.timezone <- attr(private$.values[[1L]], "tzone")
 
-      if (!private$.isFast || private$.timestamps < 1000L) {
-        len <- private$.timestamps
-      } else {
-        len <- 1000L
-      }
+      seqLen <- seq_len(private$determineLen(private$.timestamps))
 
-      if (anyNA(private$.values[[1L]][seq_len(len)])) {
+      if (anyNA(private$.values[[1L]][seqLen])) {
         stop(".dateTime column must not have any missing values.", call. = FALSE)
       }
 
@@ -882,7 +886,7 @@ DTSg <- R6Class(
         return(invisible(self))
       }
 
-      lags <- round(diff(private$.values[[1L]][seq_len(len)]), 6L)
+      lags <- round(diff(private$.values[[1L]][seqLen]), 6L)
 
       if (any(lags == 0)) {
         stop(".dateTime column must not have any duplicates.", call. = FALSE)
@@ -901,7 +905,7 @@ DTSg <- R6Class(
         private$.periodicity <- "unrecognised"
 
         from <- private$.values[[1L]][1L]
-        to   <- private$.values[[1L]][len]
+        to   <- private$.values[[1L]][last(seqLen)]
 
         for (by in c(
           sprintf("%s DSTdays", c(seq_len(15L), 21L, 28L, 30L)),
@@ -927,7 +931,7 @@ DTSg <- R6Class(
           lags <- diff(DT[[1L]])
 
           if (sum(!is.na(DT[, -1L, with = FALSE])) ==
-              sum(!is.na(private$.values[seq_len(len), -1L, with = FALSE])) &&
+              sum(!is.na(private$.values[seqLen, -1L, with = FALSE])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
             private$.periodicity <- by
 
@@ -1104,7 +1108,7 @@ DTSg <- R6Class(
     subset = function(
       i,
       cols = self$cols(),
-      na.status = self$na.status,
+      na.status = "implicit",
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {
@@ -1134,7 +1138,15 @@ DTSg <- R6Class(
       } else {
         values <- private$.values[, cols, with = FALSE]
       }
-      assertDataFrame(values, min.rows = 1L, min.cols = 2L)
+
+      len <- private$determineLen(nrow(values))
+      assertPOSIXct(
+        values[[".dateTime"]][seq_len(len)],
+        any.missing = FALSE,
+        min.len = 1L,
+        unique = TRUE,
+        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
+      )
       private$.values <- values
 
       self$refresh()
