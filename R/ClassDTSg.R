@@ -339,8 +339,11 @@ DTSg <- R6Class(
     ) {
       assertFunction(funby)
       qassert(ignoreDST, "B1")
-      .helpers <- private$aggregateHelpers(ignoreDST)
-      qassert(funby(self$values(reference = TRUE)[[".dateTime"]][1L], .helpers), "P1")
+      aggregateHelpers <- private$aggregateHelpers(ignoreDST)
+      qassert(funby(
+        self$values(reference = TRUE)[[".dateTime"]][1L],
+        aggregateHelpers
+      ), "P1")
       if (testClass(fun, "list")) {
         assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
         lapply(fun, assertFunction, .var.name = "fun[[i]]")
@@ -370,7 +373,7 @@ DTSg <- R6Class(
           private$.values <- private$.values[
             ,
             c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .helpers)),
+            keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
             .SDcols = cols
           ]
 
@@ -379,7 +382,7 @@ DTSg <- R6Class(
           private$.values <- private$.values[
             !is.na(get(cols)),
             c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .helpers)),
+            keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
             .SDcols = cols
           ]
 
@@ -391,7 +394,7 @@ DTSg <- R6Class(
         private$.values <- private$.values[
           ,
           private$multiLapply(.SD, fun, ...),
-          keyby = .(.dateTime = funby(.dateTime, .helpers)),
+          keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
           .SDcols = cols
         ]
       }
@@ -434,20 +437,19 @@ DTSg <- R6Class(
           by != "unrecognised") {
         if (rollback && grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
           DT <- data.table(
-            .dateTime = seq(
+            .dateTime = rollback(seq(
               from,
               to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
               by
-            ),
+            ), by),
             key = ".dateTime"
           )
-          DT[, .dateTime := rollback(.dateTime, by)]
         } else {
           DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
         }
 
         if (by != private$.periodicity || nrow(DT) != private$.timestamps) {
-          private$.values <- private$.values[DT]
+          private$.values <- private$.values[DT, ]
 
           self$refresh()
         }
@@ -524,12 +526,13 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
+        aggregateHelpers <- private$aggregateHelpers(ignoreDST)
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
-          private$aggregateHelpers(ignoreDST)
-        ), len = 1L)
+          aggregateHelpers
+        ), any.missing = FALSE, len = 1L)
 
-        by <- funby(private$.values[[".dateTime"]], private$aggregateHelpers(ignoreDST))
+        by <- funby(private$.values[[".dateTime"]], aggregateHelpers)
       } else {
         by <- NULL
       }
@@ -641,7 +644,7 @@ DTSg <- R6Class(
 
     merge = function(y, ..., clone = getOption("DTSgClone")) {
       if (!testR6(y, "DTSg")) {
-        y <- DTSg$new(y)
+        y <- DTSg$new(y, fast = self$fast, na.status = self$na.status)
       }
       assertSetEqual(y$timezone, self$timezone)
       assertSetEqual(y$aggregated, self$aggregated)
@@ -888,14 +891,13 @@ DTSg <- R6Class(
         )) {
           if (grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
             DT <- data.table(
-              .dateTime = seq(
+              .dateTime = rollback(seq(
                 from,
                 to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
                 by
-              ),
+              ), by),
               key = ".dateTime"
             )
-            DT[, .dateTime := rollback(.dateTime, by)]
           } else {
             DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
           }
@@ -1046,8 +1048,7 @@ DTSg <- R6Class(
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {
-        expr <- as.expression(substitute(i))
-        i <- private$determineFilter(i, expr)
+        i <- private$determineFilter(i, as.expression(substitute(i)))
         assertFilter(i)
       }
       assertCharacter(
@@ -1088,8 +1089,7 @@ DTSg <- R6Class(
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {
-        expr <- as.expression(substitute(i))
-        i <- private$determineFilter(i, expr)
+        i <- private$determineFilter(i, as.expression(substitute(i)))
         assertFilter(i)
       }
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
@@ -1115,15 +1115,16 @@ DTSg <- R6Class(
         if (!is.null(funby)) {
           assertFunction(funby)
           qassert(ignoreDST, "B1")
+          aggregateHelpers <- private$aggregateHelpers(ignoreDST)
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
-            private$aggregateHelpers(ignoreDST)
-          ), len = 1L)
+            aggregateHelpers
+          ), any.missing = FALSE, len = 1L)
 
           values <- private$.values[
             ,
             .SD[eval(i)],
-            by = .(.group = funby(.dateTime, private$aggregateHelpers(ignoreDST))),
+            by = .(.group = funby(.dateTime, aggregateHelpers)),
             .SDcols = cols
           ]
           values[, .group := NULL]
@@ -1134,14 +1135,15 @@ DTSg <- R6Class(
         values <- private$.values[, cols, with = FALSE]
       }
 
+      assertDataTable(values, min.rows = 1L, .var.name = "self$values(reference = TRUE)")
       len <- private$determineLen(nrow(values))
       assertPOSIXct(
         values[[".dateTime"]][seq_len(len)],
         any.missing = FALSE,
-        min.len = 1L,
         unique = TRUE,
         .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
       )
+
       private$.values <- values
 
       self$refresh()
