@@ -679,42 +679,25 @@ DTSg <- R6Class(
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
 
-      DetectNA <- function(x) {
-        i <- 0L
-        isNAlast <- FALSE
-
-        function(x) {
-          if (is.na(x)) {
-            if (!isNAlast) {
-              i <<- i + 1L
-              isNAlast <<- TRUE
-            }
-
-            n <- i
-          } else {
-            n <- NA
-
-            isNAlast <<- FALSE
-          }
-
-          n
-        }
-      }
-
       DTs <- list()
 
       for (col in cols) {
-        detectNA <- DetectNA(x)
+        if (anyNA(private$.values[[col]])) {
+          DT <- private$.values[
+            ,
+            .(.dateTime, .col = get(col), .group = rleid(get(col)))
+          ]
 
-        DT <- private$.values[, ".dateTime", with = FALSE]
-        set(DT, j = ".col", value = col)
-        set(
-          DT,
-          j = ".group",
-          value = vapply(private$.values[[col]], detectNA, integer(1L))
-        )
+          DT <- DT[
+            is.na(.col),
+            .(.from = min(.dateTime), .to = max(.dateTime), .n = .N),
+            by = .(.col, .group = rleid(.group))
+          ]
+          DT[, .col := as.character(.col)]
+          DT[, .col := col]
 
-        if (all(is.na(DT[[".group"]]))) {
+          DTs <- c(DTs, list(DT))
+        } else {
           DTs <- c(
             DTs,
             list(data.table(
@@ -724,15 +707,6 @@ DTSg <- R6Class(
               .to = .POSIXct(numeric(), tz = private$.timezone),
               .n = integer()
             ))
-          )
-        } else {
-          DTs <- c(
-            DTs,
-            list(DT[
-              !is.na(.group),
-              .(.from = min(.dateTime), .to = max(.dateTime), .n = .N),
-              by = .(.col, .group)
-            ])
           )
         }
       }

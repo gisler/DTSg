@@ -3,6 +3,7 @@
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
 * Added `setCols` method: allows for setting the values of and/or adding columns to a `DTSg` object
 * Temporal aggregation level funtions supplied to the `funby` argument of the `colapply` method are now not forced to return a `POSIXct` timestamp any longer
+* Greatly sped up `nas` method
 * `R6Method` argument of `S3WrapperGenerator` now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression
 * Fixed that not all missing values were made explicit after a call to the `merge` method despite an `"explicit"` `na.status` in some cases
 * Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default
