@@ -145,6 +145,8 @@ expect_identical(
     TS$colapply(function(x, ...) {as.factor(x)})
     TS$merge(DT2)
     TS$rollapply(weighted.mean, na.rm = TRUE)
+    TS$setCols(values = 1)
+    TS$subset(1)
     TS
   },
   TS,
@@ -579,6 +581,50 @@ expect_identical(
   c("col1", "col2", "col3", "col1_identity", "col2_identity"),
   info = '"suffix" adds columns correctly'
 )
+
+#### setCols method ####
+expect_identical(
+  DTSg$new(DT1)$setCols(2L, "col2", 3)$values(TRUE)[["col2"]],
+  DT1[["col1"]],
+  info = "values are set correctly (numeric vector and single column)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$setCols(1:3, c("col1", "col2", "col3"), values = DT2[1:3, .(col1, as.numeric(col2), col3)])$values(),
+  setkey(rbind(
+    DT2[1:3, .(date = DT1$date[1:3], col1, col2 = as.numeric(col2), col3)],
+    DT1[4:8]
+  ), "date"),
+  info = "values are set correctly (numeric vector and multiple columns)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$setCols(is.na(col2), "col2", 3)$values(TRUE)[["col2"]],
+  DT1[["col1"]],
+  info = "values are set correctly (expression)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$setCols(, "col4", DT1[["col1"]])$values(TRUE)[["col4"]],
+  DT1[["col1"]],
+  info = "column is added correctly"
+)
+
+expect_identical(
+  DTSg$new(DT1)$setCols(, "col2", NULL)$cols(),
+  c("col1", "col3"),
+  info = "column is removed correctly"
+)
+
+expect_error(
+  {
+    TS <- DTSg$new(DT1)
+    TS$setCols(, TS$cols(), NULL)
+  },
+  info = "removing all value columns returns error"
+)
+
+#### subset method ####
 
 #### summary method ####
 expect_identical(

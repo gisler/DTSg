@@ -361,7 +361,7 @@ DTSg <- R6Class(
         return(TS$aggregate(
           funby = funby,
           fun = fun,
-          ...,
+          ... = ...,
           cols = cols,
           n = n,
           ignoreDST = ignoreDST,
@@ -507,7 +507,7 @@ DTSg <- R6Class(
         TS <- self$clone(deep = TRUE)
         return(TS$colapply(
           fun = fun,
-          ...,
+          ... = ...,
           cols = cols,
           clone = FALSE,
           resultCols = resultCols,
@@ -659,7 +659,7 @@ DTSg <- R6Class(
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
-        return(TS$merge(y = y, ..., clone = FALSE))
+        return(TS$merge(y = y, ... = ..., clone = FALSE))
       }
 
       private$.values <- merge(
@@ -952,7 +952,7 @@ DTSg <- R6Class(
         TS <- self$clone(deep = TRUE)
         return(TS$rollapply(
           fun = fun,
-          ...,
+          ... = ...,
           cols = cols,
           before = before,
           after = after,
