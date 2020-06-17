@@ -270,6 +270,7 @@ DTSg <- R6Class(
               !is.list(i) && !is.expression(i)) {
             i <- expr
           }
+
           i
         },
         error = function(e) {
@@ -592,7 +593,7 @@ DTSg <- R6Class(
 
     getCol = function(col = self$cols(class = "numeric")[1L]) {
       qassert(col, "S1")
-      assertSubset(col, names(private$.values))
+      assertSubset(col, c(".dateTime", self$cols()))
 
       private$.values[[col]]
     },
@@ -903,9 +904,7 @@ DTSg <- R6Class(
           }
 
           DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
-
           lags <- diff(DT[[1L]])
-
           if (sum(!is.na(DT[, -1L, with = FALSE])) ==
               sum(!is.na(private$.values[seqLen, -1L, with = FALSE])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
@@ -1059,6 +1058,9 @@ DTSg <- R6Class(
         unique = TRUE
       )
       assertNoBeginningDot(cols)
+      if (length(cols) == length(names(private$.values)) - 1L && is.null(unlist(values))) {
+        stop("Removing all value columns is not allowed.", call. = FALSE)
+      }
       qassert(clone, "B1")
 
       if (clone) {
