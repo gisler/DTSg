@@ -1042,8 +1042,8 @@ DTSg <- R6Class(
 
     setCols = function(
       i,
-      cols = self$cols(class = "numeric")[1L],
       values,
+      cols = self$cols(class = "numeric")[1L],
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {
@@ -1058,7 +1058,8 @@ DTSg <- R6Class(
         unique = TRUE
       )
       assertNoBeginningDot(cols)
-      if (length(cols) == length(names(private$.values)) - 1L && is.null(unlist(values))) {
+      if (length(cols) == length(names(private$.values)) - 1L &&
+          is.null(unlist(values))) {
         stop("Removing all value columns is not allowed.", call. = FALSE)
       }
       qassert(clone, "B1")
@@ -1067,8 +1068,8 @@ DTSg <- R6Class(
         TS <- self$clone(deep = TRUE)
         return(TS$setCols(
           i = i,
-          cols = cols,
           values = values,
+          cols = cols,
           clone = FALSE
         ))
       }
