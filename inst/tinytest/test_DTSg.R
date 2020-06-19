@@ -2,16 +2,16 @@ source("data.R")
 
 #### aggregate method ####
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, mean)$values(),
+  DTSg$new(DT1)$aggregate(byYmdH__, mean)$values(TRUE),
   data.table(
-    date = seq(
+    .dateTime = seq(
       as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
       as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
       "1 hour"
     ),
     col1 = c( 2, 6, 10, 14),
     col2 = c(NA, 6, 10, 14),
-    key = "date"
+    key = ".dateTime"
   ),
   info = "values are aggregated correctly (multiple columns and single function)"
 )
@@ -23,9 +23,9 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(),
+  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE),
   data.table(
-    date = seq(
+    .dateTime = seq(
       as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
       as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
       "1 hour"
@@ -35,7 +35,7 @@ expect_identical(
     col2.mean = c(NA, 6 , 10, 14),
     col2.sum  = c(NA, 12, 20, 28),
     .n = rep(2L, 4),
-    key = "date"
+    key = ".dateTime"
   ),
   info = "values are aggregated correctly and .n is correct (multiple columns and functions)"
 )
@@ -47,7 +47,11 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), na.rm = TRUE)$values(TRUE)[["col2.sum"]],
+  DTSg$new(DT1)$aggregate(
+    byYmdH__,
+    list(mean = mean, sum = sum),
+    na.rm = TRUE
+  )$values(TRUE)[["col2.sum"]],
   c(1, 12, 20, 28),
   info = '"..." passes on arguments correctly (multiple functions)'
 )
@@ -59,9 +63,13 @@ expect_true(
 
 #### alter method ####
 expect_identical(
-  DTSg$new(DT1[-3L, ])$alter("2000-10-29 01:00:00", "2000-10-29 03:00:00", "1 hour")$values(),
+  DTSg$new(DT1[-3L, ])$alter(
+    "2000-10-29 01:00:00",
+    "2000-10-29 03:00:00",
+    "1 hour"
+  )$values(TRUE),
   data.table(
-    date = seq(
+    .dateTime = seq(
       as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
       as.POSIXct("2000-10-29 03:00:00", tz = "Europe/Vienna"),
       "1 hour"
@@ -69,13 +77,29 @@ expect_identical(
     col1 = c(  1, NA,   9,  13),
     col2 = c(  1, NA,   9,  13),
     col3 = c("A", NA, "E", "G"),
-    key = "date"
+    key = ".dateTime"
   ),
   info = "values are altered correctly (explicitly missing values)"
 )
 
 expect_identical(
-  DTSg$new(DT1[-3L, ])$alter("2000-01-31", "2000-07-01", "1 month")$values()[["date"]],
+  DTSg$new(DT2[, .(date, col1)])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, .(date, col1)], "date"),
+  info = "values are altered correctly (single column and implicitly missing values)"
+)
+
+expect_identical(
+  DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, -4L, with = FALSE], "date"),
+  info = "values are altered correctly (multiple columns and implicitly missing values)"
+)
+
+expect_identical(
+  DTSg$new(DT1[-3L, ])$alter(
+    "2000-01-31",
+    "2000-07-01",
+    "1 month"
+  )$values(TRUE)[[".dateTime"]],
   as.POSIXct(
     c("2000-01-31", "2000-02-29", "2000-03-31", "2000-04-30", "2000-05-31", "2000-06-30"),
     tz = "Europe/Vienna"
@@ -93,32 +117,20 @@ expect_warning(
   info = "explicitly missing values and unrecognised periodicity returns warning"
 )
 
-expect_identical(
-  DTSg$new(DT2[, .(date, col1)])$alter(na.status = "implicit")$values(),
-  setkey(DT2[3L, .(date, col1)], "date"),
-  info = "values are altered correctly (single column and implicitly missing values)"
-)
-
-expect_identical(
-  DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
-  setkey(DT2[3L, -4L, with = FALSE], "date"),
-  info = "values are altered correctly (multiple columns and implicitly missing values)"
-)
-
 expect_error(
   DTSg$new(DT1)$alter(na.status = "undecided"),
   info = 'decided to undecided "na.status" returns error'
 )
 
 expect_identical(
-  DTSg$new(DT1, na.status = "undecided")$na.status,
-  "undecided",
+  DTSg$new(DT1)$na.status,
+  "explicit",
   info = '"na.status" field is set correctly'
 )
 
 expect_identical(
   {
-    TS <- DTSg$new(DT1, na.status = "explicit")
+    TS <- DTSg$new(DT1, na.status = "undecided")
     TS$na.status <- "implicit"
     TS$na.status
   },
@@ -146,7 +158,7 @@ expect_identical(
     TS$merge(DT2)
     TS$rollapply(weighted.mean, na.rm = TRUE)
     TS$setCols(values = 1)
-    TS$subset(1)
+    TS$subset(1L)
     TS
   },
   TS,
@@ -214,7 +226,7 @@ expect_identical(
 expect_identical(
   DTSg$new(DT1)$cols("character"),
   "col3",
-  info = "character column name is returned"
+  info = "character column names are returned"
 )
 
 expect_identical(
@@ -232,7 +244,7 @@ expect_identical(
 expect_identical(
   DTSg$new(DT1)$cols(pattern = "^c.l1$"),
   "col1",
-  info = "column name matching pattern is returned"
+  info = "column names matching pattern are returned"
 )
 
 expect_identical(
@@ -256,13 +268,18 @@ expect_error(
 expect_identical(
   DTSg$new(DT1)$getCol("col2"),
   DT1[["col2"]],
-  info = "column is returned"
+  info = "column is returned correctly"
 )
 
 #### initialize method ####
 expect_error(
+  DTSg$new(data.table(date = numeric(0L), col1 = integer(0L))),
+  info = "data.table without a single row returns error"
+)
+
+expect_error(
   DTSg$new(DT1[, .(date)]),
-  info = "data.table with a single column only returns error"
+  info = "data.table with a single column returns error"
 )
 
 expect_true(
@@ -321,7 +338,7 @@ expect_identical(
 
 expect_identical(
   DTSg$new(DT1[1:4, .(date, col1)])$merge(
-    DTSg$new(DT1[c(5, 7, 8), .(date, col1)], na.status = "implicit"),
+    DTSg$new(DT1[c(5L, 7L, 8L), .(date, col1)], na.status = "implicit"),
     all = TRUE
   )$values(),
   setkey(rbind(
@@ -390,10 +407,7 @@ expect_warning(
 )
 
 expect_error(
-  DTSg$new(data.table(
-    date = .POSIXct(NA),
-    col1 = pi
-  )),
+  DTSg$new(data.table(date = .POSIXct(NA_real_), col1 = pi)),
   info = "data.table with a single row and missing timestamp returns error"
 )
 
@@ -478,7 +492,7 @@ expect_identical(
   {
     TS <- DTSg$new(DT1)
     TS$timezone <- "Europe/Kiev"
-    TS$values()[["date"]]
+    TS$values(TRUE)[[".dateTime"]]
   },
   seq(
     as.POSIXct("2000-10-29 02:00:00", tz = "Europe/Kiev"),
@@ -490,37 +504,69 @@ expect_identical(
 
 #### rollapply method ####
 expect_identical(
-  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    function(x, ...) {sum(x)},
+    before = 2L,
+    after = 1L,
+    memoryOverCPU = TRUE
+  )$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
   info = '"fun" is applied correctly (memoryOverCPU = TRUE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(function(x, ...) {sum(x)}, before = 2L, after = 1L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    function(x, ...) {sum(x)},
+    before = 2L,
+    after = 1L,
+    memoryOverCPU = FALSE
+  )$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
   info = '"fun" is applied correctly (memoryOverCPU = FALSE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    mean,
+    na.rm = TRUE,
+    before = 2L,
+    after = 1L,
+    memoryOverCPU = TRUE
+  )$values(TRUE)[["col1"]],
   c(2, 3, 4, 6, 8, 10, 12, 13),
   info = '"..." passes on arguments correctly (memoryOverCPU = TRUE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 2L, after = 1L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    mean,
+    na.rm = TRUE,
+    before = 2L,
+    after = 1L,
+    memoryOverCPU = FALSE
+  )$values(TRUE)[["col1"]],
   c(2, 3, 4, 6, 8, 10, 12, 13),
   info = '"..." passes on arguments correctly (memoryOverCPU = FALSE)'
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    mean,
+    na.rm = TRUE,
+    before = 0L,
+    memoryOverCPU = TRUE
+  )$values(TRUE)[["col1"]],
   DT1[["col1"]],
   info = "window of size one returns identity (memoryOverCPU = TRUE)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$rollapply(mean, na.rm = TRUE, before = 0L, after = 0L, memoryOverCPU = FALSE)$values(TRUE)[["col1"]],
+  DTSg$new(DT1)$rollapply(
+    mean,
+    na.rm = TRUE,
+    before = 0L,
+    memoryOverCPU = FALSE
+  )$values(TRUE)[["col1"]],
   DT1[["col1"]],
   info = "window of size one returns identity (memoryOverCPU = FALSE)"
 )
@@ -530,14 +576,15 @@ expect_identical(
     weighted.mean,
     na.rm = TRUE,
     before = 2L,
-    after = 1L
+    after = 1L,
+    memoryOverCPU = TRUE
   )$values(TRUE)[["col1"]][3L],
   {
     weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^1
     weights <- weights / sum(weights)
     weighted.mean(DT1[["col1"]][1:4], weights, na.rm = TRUE)
   },
-  info = '"inverseDistance" weights are correct (power = one)'
+  info = '"inverseDistance" weights are correct (power = 1 and memoryOverCPU = TRUE)'
 )
 
 expect_identical(
@@ -554,14 +601,13 @@ expect_identical(
     weights <- weights / sum(weights)
     weighted.mean(DT1[["col1"]][1:4], weights, na.rm = TRUE)
   },
-  info = '"inverseDistance" weights are correct (power = two)'
+  info = '"inverseDistance" weights are correct (power = 2 and memoryOverCPU = FALSE)'
 )
 
 expect_identical(
   DTSg$new(DT1)$rollapply(
     function(x, ...) {identity(x)},
     before = 0L,
-    after = 0L,
     cols = c("col1", "col2"),
     resultCols = c("col1", "col4"),
     suffix = "_character"

@@ -12,7 +12,7 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
     stop('Time zone must be "UTC" for this TALF.', call. = FALSE)
   }
 
-  TRUE
+  invisible(TRUE)
 }
 
 assertFilter <- function(x) {
@@ -20,7 +20,7 @@ assertFilter <- function(x) {
     stop('"i" must be a numeric vector or an expression.', call. = FALSE)
   }
 
-  x
+  invisible(x)
 }
 
 assertNAstatusPeriodicityOK <- function(
@@ -43,7 +43,7 @@ assertNAstatusPeriodicityOK <- function(
     }
   }
 
-  TRUE
+  invisible(TRUE)
 }
 
 assertNoBeginningDot <- function(x) {
@@ -54,5 +54,5 @@ assertNoBeginningDot <- function(x) {
     )
   }
 
-  x
+  invisible(x)
 }
