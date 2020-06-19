@@ -457,8 +457,12 @@ DTSg <- R6Class(
 
         private$.na.status <- na.status
       } else if (by != private$.periodicity && by == "unrecognised") {
-        stop('Periodicity of the time series cannot be changed to "unrecognised".', call. = FALSE)
-      } else if (na.status == "explicit" && by == "unrecognised" && private$.timestamps > 2L) {
+        stop(
+          'Periodicity of the time series cannot be changed to "unrecognised".',
+          call. = FALSE
+        )
+      } else if (na.status == "explicit" && by == "unrecognised" &&
+                 private$.timestamps > 2L) {
         warning(
           paste(
             "Only time series with recognised periodicity can have explicitly missing values.",
@@ -610,7 +614,12 @@ DTSg <- R6Class(
       na.status = c("explicit", "implicit", "undecided")
     ) {
       assertDataFrame(values, min.rows = 1L, min.cols = 2L)
-      assertCharacter(names(values)[-1L], min.chars = 1L, any.missing = FALSE, unique = TRUE)
+      assertCharacter(
+        names(values)[-1L],
+        min.chars = 1L,
+        any.missing = FALSE,
+        unique = TRUE
+      )
       assertNoBeginningDot(names(values)[-1L])
       qassert(swallow, "B1")
       na.status <- match.arg(na.status)

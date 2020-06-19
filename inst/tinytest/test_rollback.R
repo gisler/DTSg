@@ -7,14 +7,11 @@ expect_error(
 )
 
 expect_identical(
-  rollback(
-    seq(
-      as.POSIXct("2000-01-31", tz = "Europe/Vienna"),
-      as.POSIXct("2000-07-01", tz = "Europe/Vienna"),
-      "1 month"
-    ),
+  rollback(    seq(
+    as.POSIXct("2000-01-31", tz = "Europe/Vienna"),
+    as.POSIXct("2000-07-01", tz = "Europe/Vienna"),
     "1 month"
-  ),
+  ), "1 month"),
   as.POSIXct(
     c("2000-01-31", "2000-02-29", "2000-03-31", "2000-04-30", "2000-05-31", "2000-06-30"),
     tz = "Europe/Vienna"
@@ -23,14 +20,11 @@ expect_identical(
 )
 
 expect_identical(
-  rollback(
-    seq(
-      as.POSIXct("2000-02-29", tz = "Europe/Vienna"),
-      as.POSIXct("2010-03-01", tz = "Europe/Vienna"),
-      "2 years"
-    ),
+  rollback(seq(
+    as.POSIXct("2000-02-29", tz = "Europe/Vienna"),
+    as.POSIXct("2010-03-01", tz = "Europe/Vienna"),
     "2 years"
-  ),
+  ), "2 years"),
   as.POSIXct(
     c("2000-02-29", "2002-02-28", "2004-02-29", "2006-02-28", "2008-02-29", "2010-02-28"),
     tz = "Europe/Vienna"
