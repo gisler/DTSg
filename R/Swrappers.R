@@ -652,18 +652,20 @@ setCols <- function(x, ...) {
 }
 #' Set Columns' Values
 #'
-#' Set the values of and/or add columns to a \code{\link{DTSg}}. The values can
-#'  be set for certain rows only, if needed.
+#' Set the values of columns, add columns to and/or remove columns from a
+#'  \code{\link{DTSg}} object. The values can optionally be set for certain rows
+#'  only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param i A numeric vector indexing rows or a filter expression as accepted by
 #'  the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
 #'  expressions can contain the special symbol \code{.N}. See
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
+#' @param values A list of replacement and/or new values as accepted by the
+#'  \code{value} argument of \code{\link[data.table]{set}}. \code{\link{NULL}}
+#'  as value removes a column.
 #' @param cols A character vector specifying the columns whose values shall be
 #'  set. The values of the \emph{.dateTime} column cannot be set.
-#' @param values A list of replacement and/or new values as accepted by the
-#'  \code{value} argument of \code{\link[data.table]{set}}.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #' @param \dots Not used (S3 method only).
@@ -671,7 +673,8 @@ setCols <- function(x, ...) {
 #' @return Returns a \code{\link{DTSg}} object.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
-#'  \code{\link[data.table]{special-symbols}}, \code{\link{cols}}
+#'  \code{\link[data.table]{special-symbols}}, \code{\link[data.table]{set}},
+#'  \code{\link{NULL}}, \code{\link{cols}}
 #'
 #' @examples
 #' # new DTSg object
@@ -679,10 +682,10 @@ setCols <- function(x, ...) {
 #'
 #' # limit river flow to 100
 #' ## R6 method
-#' x$setCols(i = flow > 100, cols = "flow", values = 100)
+#' x$setCols(i = flow > 100, values = 100, cols = "flow")
 #'
 #' ## S3 method
-#' setCols(x = x, i = flow > 100, cols = "flow", values = 100)
+#' setCols(x = x, i = flow > 100, values = 100, cols = "flow")
 #'
 #' @aliases setCols
 #'
