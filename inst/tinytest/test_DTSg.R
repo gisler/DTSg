@@ -574,7 +574,6 @@ expect_identical(
   DTSg$new(DT1)$rollapply(
     function(x, ...) {identity(x)},
     before = 0L,
-    after = 0L,
     cols = c("col1", "col2"),
     suffix = "_identity"
   )$cols(),
@@ -584,13 +583,20 @@ expect_identical(
 
 #### setCols method ####
 expect_identical(
-  DTSg$new(DT1)$setCols(2L, "col2", 3)$values(TRUE)[["col2"]],
+  DTSg$new(DT1)$setCols(2L, 3, "col2")$values(TRUE)[["col2"]],
   DT1[["col1"]],
   info = "values are set correctly (numeric vector and single column)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(1:3, c("col1", "col2", "col3"), values = DT2[1:3, .(col1, as.numeric(col2), col3)])$values(),
+  {
+    i <- 1:3
+    DTSg$new(DT1)$setCols(
+      i,
+      DT2[1:3, .(col1, as.numeric(col2), col3)],
+      c("col1", "col2", "col3"),
+    )$values()
+  },
   setkey(rbind(
     DT2[1:3, .(date = DT1$date[1:3], col1, col2 = as.numeric(col2), col3)],
     DT1[4:8]
@@ -599,32 +605,82 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(is.na(col2), "col2", 3)$values(TRUE)[["col2"]],
+  {
+    col2 <- rep(NA_real_, 8)
+    DTSg$new(DT1)$setCols(is.na(col2), 3, "col2")$values(TRUE)[["col2"]]
+  },
   DT1[["col1"]],
   info = "values are set correctly (expression)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(, "col4", DT1[["col1"]])$values(TRUE)[["col4"]],
+  DTSg$new(DT1)$setCols(, DT1[["col1"]], "col4")$values(TRUE)[["col4"]],
   DT1[["col1"]],
   info = "column is added correctly"
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(, "col2", NULL)$cols(),
+  DTSg$new(DT1)$setCols(, NULL, "col2")$cols(),
   c("col1", "col3"),
   info = "column is removed correctly"
 )
 
 expect_error(
-  {
-    TS <- DTSg$new(DT1)
-    TS$setCols(, TS$cols(), NULL)
-  },
+  DTSg$new(DT1)$setCols(, NULL, c("col1", "col2", "col3")),
   info = "removing all value columns returns error"
 )
 
 #### subset method ####
+expect_identical(
+  {
+    i <- 1L
+    DTSg$new(DT1)$subset(i, funby = byYmdH__)$values()
+  },
+  setkey(DT1[c(1L, 3L, 5L, 7L), ], "date"),
+  info = "rows are filtered correctly (numeric vector and funby)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$subset(.N, funby = byYmdH__)$values(),
+  setkey(DT1[c(2L, 4L, 6L, 8L), ], "date"),
+  info = "rows are filtered correctly (expression and funby)"
+)
+
+expect_identical(
+  {
+    col2 <- 1:4
+    DTSg$new(DT1)$subset(col2 > 8, "col2")$values()
+  },
+  setkey(DT1[5:8, .(date, col2)], "date"),
+  info = "rows and columns are subset correctly"
+)
+
+expect_identical(
+  DTSg$new(DT1)$subset(, c("col1", "col3"))$values(),
+  setkey(DT1[, .(date, col1, col3)], "date"),
+  info = "columns are selected correctly"
+)
+
+expect_identical(
+  DTSg$new(DT1)$subset(c(1L, 8L))$values(),
+  setkey(DT1[c(1L, 8L), ], "date"),
+  info = "missing values are made implicit"
+)
+
+expect_error(
+  DTSg$new(DT1)$subset(col2 > 100),
+  info = "empty filter result returns error"
+)
+
+expect_error(
+  DTSg$new(DT1)$subset(12L),
+  info = "missing timestamps return error"
+)
+
+expect_error(
+  DTSg$new(DT1)$subset(c(1L, 1L)),
+  info = "duplicated timestamps return error"
+)
 
 #### summary method ####
 expect_identical(
