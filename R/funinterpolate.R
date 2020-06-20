@@ -49,11 +49,11 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
   qassert(.col, "n+")
   qassert(roll, "N1(0,]")
 
-  if (.helpers$periodicity != "unrecognised") {
-    roll <- roll * as.numeric(.helpers$maxLag, units = "secs")
+  if (.helpers[["periodicity"]] != "unrecognised") {
+    roll <- roll * as.numeric(.helpers[["maxLag"]], units = "secs")
   }
 
-  DT <- data.table(.dateTime = .helpers$.dateTime, key = ".dateTime")
+  DT <- data.table(.dateTime = .helpers[[".dateTime"]], key = ".dateTime")
   values <- DT[, list(.dateTime = .dateTime[!is.na(.col)], .col = .col[!is.na(.col)])]
 
   DT <- values[
