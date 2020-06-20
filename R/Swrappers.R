@@ -149,6 +149,13 @@ alter <- function(x, ...) {
 #' ## S3 method
 #' alter(x = x, from = "2007-01-01", to = "2008-12-31")
 #'
+#' # change periodicity to one month
+#' ## R6 method
+#' x$alter(by = "1 month")
+#'
+#' ## S3 method
+#' alter(x = x, by = "1 month")
+#'
 #' @aliases alter
 #'
 #' @export
@@ -268,6 +275,24 @@ colapply <- function(x, ...) {
 #'
 #' ## S3 method
 #' colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+#'
+#' # calculate moving averages with the help of 'runner'
+#' if (requireNamespace("runner", quietly = TRUE)) {
+#'   wrapper <- function(x, f, k, lag, ...) {
+#'     runner::runner(x, f, k, lag)
+#'   }
+#'   wrapper2 <- function(x, f, k, lag, .helpers) {
+#'     runner::runner(x, f, k, lag, .helpers[[".dateTime"]])
+#'   }
+#'
+#'   ## R6 method
+#'   x$colapply(fun = wrapper , f = mean, k = 5       , lag = -2       )
+#'   x$colapply(fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+#'
+#'   ## S3 method
+#'   colapply(x = x, fun = wrapper , f = mean, k = 5       , lag = -2       )
+#'   colapply(x = x, fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+#' }
 #'
 #' @aliases colapply
 #'
@@ -501,7 +526,7 @@ plot.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$plot))
 #### print ####
 #' Print Time Series
 #'
-#' Prints a \code{\link{DTSg}}.
+#' Prints a \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param \dots Not used (S3 method only).
@@ -633,7 +658,7 @@ rollapply <- function(x, ...) {
 #' # new DTSg object
 #' x <- DTSg$new(values = flow)
 #'
-#' # calculate moving average
+#' # calculate a moving average
 #' ## R6 method
 #' x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
 #'
@@ -657,15 +682,15 @@ setCols <- function(x, ...) {
 #'  only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param i A numeric vector indexing rows or a filter expression as accepted by
+#' @param i A numeric vector indexing rows or a filter expression accepted by
 #'  the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
 #'  expressions can contain the special symbol \code{.N}. See
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
 #' @param cols A character vector specifying the columns whose values shall be
 #'  set. The values of the \emph{.dateTime} column cannot be set.
-#' @param values A list of replacement and/or new values as accepted by the
-#'  \code{value} argument of \code{\link[data.table]{set}}. \code{\link{NULL}}
-#'  as value removes a column.
+#' @param values A list of replacement and/or new values accepted by the
+#'  \code{value} argument of \pkg{data.table}'s \code{\link[data.table]{set}}
+#'  function. \code{\link{NULL}} as a value removes a column.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #' @param \dots Not used (S3 method only).
@@ -698,7 +723,7 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' Filter rows and/or select columns of a \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param i A numeric vector indexing rows or a filter expression as accepted by
+#' @param i A numeric vector indexing rows or a filter expression accepted by
 #'  the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
 #'  expressions can contain the special symbol \code{.N}. See
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
@@ -801,7 +826,7 @@ values <- function(x, ...) {
 #'  information.
 #' @param drop A logical specifying if the object and all references to it shall
 #'  be removed from the global (and only the global) environment after
-#'  successfully querying its values. This feature allows for a ressource
+#'  successfully querying its values. This feature allows for a resource
 #'  efficient destruction of a \code{\link{DTSg}} object while preserving its
 #'  \emph{values.}
 #' @param class A character string specifying the class of the returned

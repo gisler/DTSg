@@ -22,7 +22,7 @@ information.}
 
 \item{drop}{A logical specifying if the object and all references to it shall
 be removed from the global (and only the global) environment after
-successfully querying its values. This feature allows for a ressource
+successfully querying its values. This feature allows for a resource
 efficient destruction of a \code{\link{DTSg}} object while preserving its
 \emph{values.}}
 

@@ -5,11 +5,20 @@
 \alias{rollapply}
 \title{Rolling Window Function}
 \usage{
-\method{rollapply}{DTSg}(x, fun, ..., cols = self$cols(class =
-  "numeric")[1L], before = 1L, after = before,
-  weights = c("inverseDistance"), parameters = list(power = 1),
-  clone = getOption("DTSgClone"), resultCols = NULL, suffix = NULL,
-  memoryOverCPU = TRUE)
+\method{rollapply}{DTSg}(
+  x,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric")[1L],
+  before = 1L,
+  after = before,
+  weights = c("inverseDistance"),
+  parameters = list(power = 1),
+  clone = getOption("DTSgClone"),
+  resultCols = NULL,
+  suffix = NULL,
+  memoryOverCPU = TRUE
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -87,7 +96,7 @@ Currently, only one method to calculate weights is supported:
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# calculate moving average
+# calculate a moving average
 ## R6 method
 x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
 

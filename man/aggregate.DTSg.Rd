@@ -5,9 +5,16 @@
 \alias{aggregate}
 \title{Aggregate Values}
 \usage{
-\method{aggregate}{DTSg}(x, funby, fun, ..., cols = self$cols(class =
-  "numeric"), n = FALSE, ignoreDST = FALSE,
-  clone = getOption("DTSgClone"))
+\method{aggregate}{DTSg}(
+  x,
+  funby,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric"),
+  n = FALSE,
+  ignoreDST = FALSE,
+  clone = getOption("DTSgClone")
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
