@@ -5,13 +5,19 @@
 \alias{setCols}
 \title{Set Columns' Values}
 \usage{
-\method{setCols}{DTSg}(x, i, cols = self$cols(class = "numeric")[1L],
-  values, clone = getOption("DTSgClone"), ...)
+\method{setCols}{DTSg}(
+  x,
+  i,
+  cols = self$cols(class = "numeric")[1L],
+  values,
+  clone = getOption("DTSgClone"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{i}{A numeric vector indexing rows or a filter expression as accepted by
+\item{i}{A numeric vector indexing rows or a filter expression accepted by
 the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
 expressions can contain the special symbol \code{.N}. See
 (\code{\link[data.table]{special-symbols}}) for further information.}
@@ -19,9 +25,9 @@ expressions can contain the special symbol \code{.N}. See
 \item{cols}{A character vector specifying the columns whose values shall be
 set. The values of the \emph{.dateTime} column cannot be set.}
 
-\item{values}{A list of replacement and/or new values as accepted by the
-\code{value} argument of \code{\link[data.table]{set}}. \code{\link{NULL}}
-as value removes a column.}
+\item{values}{A list of replacement and/or new values accepted by the
+\code{value} argument of \pkg{data.table}'s \code{\link[data.table]{set}}
+function. \code{\link{NULL}} as a value removes a column.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}

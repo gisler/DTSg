@@ -5,9 +5,17 @@
 \alias{colapply}
 \title{Apply Function Column-wise}
 \usage{
-\method{colapply}{DTSg}(x, fun, ..., cols = self$cols(class =
-  "numeric")[1L], clone = getOption("DTSgClone"), resultCols = NULL,
-  suffix = NULL, funby = NULL, ignoreDST = FALSE)
+\method{colapply}{DTSg}(
+  x,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric")[1L],
+  clone = getOption("DTSgClone"),
+  resultCols = NULL,
+  suffix = NULL,
+  funby = NULL,
+  ignoreDST = FALSE
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -80,6 +88,24 @@ x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
 ## S3 method
 colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+
+# calculate moving averages with the help of 'runner'
+if (requireNamespace("runner", quietly = TRUE)) {
+  wrapper <- function(x, f, k, lag, ...) {
+    runner::runner(x, f, k, lag)
+  }
+  wrapper2 <- function(x, f, k, lag, .helpers) {
+    runner::runner(x, f, k, lag, .helpers[[".dateTime"]])
+  }
+
+  ## R6 method
+  x$colapply(fun = wrapper , f = mean, k = 5       , lag = -2       )
+  x$colapply(fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+
+  ## S3 method
+  colapply(x = x, fun = wrapper , f = mean, k = 5       , lag = -2       )
+  colapply(x = x, fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+}
 
 }
 \seealso{

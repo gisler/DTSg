@@ -5,7 +5,6 @@
 \alias{DTSg}
 \alias{new}
 \title{DTSg Class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
  aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status = c("explicit",
@@ -44,7 +43,7 @@ for the automatic detection of the time series' periodicity.}
 \item{swallow}{A logical signalling if the object provided through the
 \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
 object, i.e. no copy of the data shall be made. This is generally more
-ressource efficient, but only works if the object provided through the
+resource efficient, but only works if the object provided through the
 \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
 however, that if the creation of the \code{DTSg} object fails for some
 reason, the first column of the provided
@@ -192,4 +191,3 @@ new(Class = "DTSg", values = flow, ID = "River Flow")
  \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{function}},
  \code{\link{list}}
 }
-\keyword{datasets}

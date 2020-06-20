@@ -5,14 +5,21 @@
 \alias{subset}
 \title{Subset Time Series}
 \usage{
-\method{subset}{DTSg}(x, i, cols = self$cols(), funby = NULL,
-  ignoreDST = FALSE, na.status = "implicit",
-  clone = getOption("DTSgClone"), ...)
+\method{subset}{DTSg}(
+  x,
+  i,
+  cols = self$cols(),
+  funby = NULL,
+  ignoreDST = FALSE,
+  na.status = "implicit",
+  clone = getOption("DTSgClone"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{i}{A numeric vector indexing rows or a filter expression as accepted by
+\item{i}{A numeric vector indexing rows or a filter expression accepted by
 the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
 expressions can contain the special symbol \code{.N}. See
 (\code{\link[data.table]{special-symbols}}) for further information.}

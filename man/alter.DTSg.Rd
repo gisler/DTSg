@@ -5,10 +5,16 @@
 \alias{alter}
 \title{Alter Time Series}
 \usage{
-\method{alter}{DTSg}(x, from = first(self$values(reference =
-  TRUE)[[".dateTime"]]), to = last(self$values(reference =
-  TRUE)[[".dateTime"]]), by = self$periodicity, rollback = TRUE,
-  clone = getOption("DTSgClone"), na.status = self$na.status, ...)
+\method{alter}{DTSg}(
+  x,
+  from = first(self$values(reference = TRUE)[[".dateTime"]]),
+  to = last(self$values(reference = TRUE)[[".dateTime"]]),
+  by = self$periodicity,
+  rollback = TRUE,
+  clone = getOption("DTSgClone"),
+  na.status = self$na.status,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -57,6 +63,13 @@ x$alter(from = "2007-01-01", to = "2008-12-31")
 
 ## S3 method
 alter(x = x, from = "2007-01-01", to = "2008-12-31")
+
+# change periodicity to one month
+## R6 method
+x$alter(by = "1 month")
+
+## S3 method
+alter(x = x, by = "1 month")
 
 }
 \seealso{

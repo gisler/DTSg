@@ -16,7 +16,7 @@
 Returns a \code{\link{DTSg}} object.
 }
 \description{
-Prints a \code{\link{DTSg}}.
+Prints a \code{\link{DTSg}} object.
 }
 \examples{
 # new DTSg object
