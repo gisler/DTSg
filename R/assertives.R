@@ -8,7 +8,7 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
       call. = FALSE
     )
   }
-  if (.helpers$timezone != "UTC") {
+  if (.helpers[["timezone"]] != "UTC") {
     stop('Time zone must be "UTC" for this TALF.', call. = FALSE)
   }
 

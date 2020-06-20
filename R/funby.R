@@ -14,26 +14,26 @@ byFasttime___H__call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:
 byFasttime____M_call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)           ), tz = "UTC"))
 byFasttime_____Scall <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)           ), tz = "UTC"))
 
-byY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"  , year(.dateTime)                              ), tz = .helpers$timezone))
-byYQ____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers$timezone))
-byYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), month(.dateTime)            ), tz = .helpers$timezone))
-byYmd___call <- quote(as.POSIXct(  trunc(.dateTime     , units = "days"                               ), tz = .helpers$timezone))
-byYmdH__call <- quote(as.POSIXct(  trunc(.dateTime     , units = "hours"                              ), tz = .helpers$timezone))
-byYmdHM_call <- quote(as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers$timezone))
-byYmdHMScall <- quote(as.POSIXct(  trunc(.dateTime     , units = "secs"                               ), tz = .helpers$timezone))
+byY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"  , year(.dateTime)                              ), tz = .helpers[["timezone"]]))
+byYQ____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
+byYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), month(.dateTime)            ), tz = .helpers[["timezone"]]))
+byYmd___call <- quote(as.POSIXct(  trunc(.dateTime     , units = "days"                               ), tz = .helpers[["timezone"]]))
+byYmdH__call <- quote(as.POSIXct(  trunc(.dateTime     , units = "hours"                              ), tz = .helpers[["timezone"]]))
+byYmdHM_call <- quote(as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers[["timezone"]]))
+byYmdHMScall <- quote(as.POSIXct(  trunc(.dateTime     , units = "secs"                               ), tz = .helpers[["timezone"]]))
 
-by______call <- quote(as.POSIXct(    rep("2199-01-01"           , length(.dateTime)           ), tz = .helpers$timezone))
-by_Q____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers$timezone))
-by_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , month(.dateTime)            ), tz = .helpers$timezone))
-by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00", hour(.dateTime)             ), tz = .helpers$timezone))
-by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)           ), tz = .helpers$timezone))
-by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)           ), tz = .helpers$timezone))
+by______call <- quote(as.POSIXct(    rep("2199-01-01"           , length(.dateTime)           ), tz = .helpers[["timezone"]]))
+by_Q____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
+by_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , month(.dateTime)            ), tz = .helpers[["timezone"]]))
+by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00", hour(.dateTime)             ), tz = .helpers[["timezone"]]))
+by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)           ), tz = .helpers[["timezone"]]))
+by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)           ), tz = .helpers[["timezone"]]))
 
 #### Functions ####
 to.fakeUTCdateTime <- function(.dateTime, .helpers) {
   assertNAstatusPeriodicityOK(
-    .helpers$na.status,
-    .helpers$periodicity,
+    .helpers[["na.status"]],
+    .helpers[["periodicity"]],
     level = "error"
   )
 
@@ -45,13 +45,13 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 
   .dateTime <- seq(
     as.POSIXct(as.character(from), tz = "UTC"),
-    by = .helpers$periodicity,
+    by = .helpers[["periodicity"]],
     along.with = .dateTime
   )
 
-  if (grepl("^\\d+ (month|year)(s?)$", .helpers$periodicity) &&
+  if (grepl("^\\d+ (month|year)(s?)$", .helpers[["periodicity"]]) &&
       mday(.dateTime[1L]) > 28L) {
-    .dateTime <- rollback(.dateTime, .helpers$periodicity)
+    .dateTime <- rollback(.dateTime, .helpers[["periodicity"]])
   }
 
   .dateTime
@@ -192,7 +192,7 @@ byFasttime_____S <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byY_____call)
@@ -200,7 +200,7 @@ byY_____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYQ____ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYQ____call)
@@ -208,7 +208,7 @@ byYQ____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYm____ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYm____call)
@@ -216,7 +216,7 @@ byYm____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmd___ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(byYmd___call)
@@ -245,7 +245,7 @@ by______ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_Q____ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by_Q____call)
@@ -253,7 +253,7 @@ by_Q____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_m____ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by_m____call)
@@ -261,7 +261,7 @@ by_m____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by___H__ <- function(.dateTime, .helpers) {
-  if (.helpers$ignoreDST && .helpers$timezone != "UTC") {
+  if (.helpers[["ignoreDST"]] && .helpers[["timezone"]] != "UTC") {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
   eval(by___H__call)
