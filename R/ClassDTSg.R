@@ -183,6 +183,7 @@ DTSg <- R6Class(
     .maxLag = .difftime(0, units = "secs"),
     .minLag = .difftime(0, units = "secs"),
     .na.status = "undecided",
+    .na.statuses = c("explicit", "implicit", "undecided"),
     .origDateTimeCol = character(),
     .parameter = character(),
     .periodicity = NULL,
@@ -440,7 +441,7 @@ DTSg <- R6Class(
       to <- private$determineTo(to, from)
       qassert(rollback, "B1")
       qassert(clone, "B1")
-      na.status <- match.arg(na.status, c("explicit", "implicit", "undecided"))
+      na.status <- match.arg(na.status, private$.na.statuses)
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -1088,7 +1089,8 @@ DTSg <- R6Class(
       )
       assertNoBeginningDot(cols)
       if (length(cols) == length(names(private$.values)) - 1L &&
-          is.null(unlist(values))) {
+          ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
+          is.null(values))) {
         stop("Removing all value columns is not allowed.", call. = FALSE)
       }
       qassert(clone, "B1")
@@ -1126,7 +1128,7 @@ DTSg <- R6Class(
       }
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
-      na.status <- match.arg(na.status, c("explicit", "implicit", "undecided"))
+      na.status <- match.arg(na.status, private$.na.statuses)
       qassert(clone, "B1")
 
       if (clone) {
