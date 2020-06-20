@@ -1051,8 +1051,8 @@ DTSg <- R6Class(
 
     setCols = function(
       i,
-      values,
       cols = self$cols(class = "numeric")[1L],
+      values,
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {
@@ -1077,8 +1077,8 @@ DTSg <- R6Class(
         TS <- self$clone(deep = TRUE)
         return(TS$setCols(
           i = i,
-          values = values,
           cols = cols,
+          values = values,
           clone = FALSE
         ))
       }
