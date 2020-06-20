@@ -42,7 +42,7 @@ DT3 <- data.table(
 #### funby test data ####
 daysPerHalfyear <- c(second = 184L, first = 182L)
 daysPerQuarter <- c(third = 92L, fourth = 92L, first = 91L, second = 91L)
-daysPerMonth <- as.integer(c(31, 31, 30, 31, 30, 31, 31, 29, 31, 30, 31, 30))
+daysPerMonth <- c(31L, 31L, 30L, 31L, 30L, 31L, 31L, 29L, 31L, 30L, 31L, 30L)
 names(daysPerMonth) <- c(month.name[7:12], month.name[1:6])
 
 #### UTC ####
