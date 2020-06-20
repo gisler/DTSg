@@ -733,6 +733,11 @@ expect_error(
   info = "duplicated timestamps return error"
 )
 
+expect_error(
+  DTSg$new(DT1)$subset(, ""),
+  info = '"empty" selection returns error'
+)
+
 #### summary method ####
 expect_identical(
   DTSg$new(DT1)$summary(),
