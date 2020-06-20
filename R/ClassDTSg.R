@@ -345,6 +345,58 @@ DTSg <- R6Class(
       }
 
       lapply(globalObjs, rmGlobalReferences, addr = addr)
+    },
+
+    #f move to public once ready for release
+    rowapply = function(
+      fun,
+      ...,
+      resultCols,
+      cols = self$cols(class = "numeric"),
+      clone = getOption("DTSgClone")
+    ) {
+      if (testClass(fun, "list")) {
+        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
+        lapply(fun, assertFunction, .var.name = "fun[[i]]")
+      } else {
+        assertFunction(fun)
+      }
+      lenNamesFun <- length(names(fun))
+      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
+        if (length(resultCols) < lenNamesFun) {
+          resultCols <- sprintf("%s.%s", resultCols, names(fun))
+        }
+      } else {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
+      }
+      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$rowapply(
+          fun = fun,
+          ... = ...,
+          resultCols = resultCols,
+          cols = cols,
+          clone = FALSE
+        ))
+      }
+
+      if (!testClass(fun, "list")) {
+        fun <- list(fun)
+      }
+
+      private$.values[
+        ,
+        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
+        by = seq_len(private$.timestamps),
+        .SDcols = cols
+      ]
+
+      invisible(self)
     }
   ),
 
