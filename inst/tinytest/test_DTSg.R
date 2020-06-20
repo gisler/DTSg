@@ -629,7 +629,7 @@ expect_identical(
 
 #### setCols method ####
 expect_identical(
-  DTSg$new(DT1)$setCols(2L, 3, "col2")$values(TRUE)[["col2"]],
+  DTSg$new(DT1)$setCols(2L, "col2", 3)$values(TRUE)[["col2"]],
   DT1[["col1"]],
   info = "values are set correctly (numeric vector and single column)"
 )
@@ -639,8 +639,8 @@ expect_identical(
     i <- 1:3
     DTSg$new(DT1)$setCols(
       i,
-      DT2[1:3, .(col1, as.numeric(col2), col3)],
       c("col1", "col2", "col3"),
+      DT2[1:3, .(col1, as.numeric(col2), col3)],
     )$values()
   },
   setkey(rbind(
@@ -653,26 +653,31 @@ expect_identical(
 expect_identical(
   {
     col2 <- rep(NA_real_, 8)
-    DTSg$new(DT1)$setCols(is.na(col2), 3, "col2")$values(TRUE)[["col2"]]
+    DTSg$new(DT1)$setCols(is.na(col2), "col2", 3)$values(TRUE)[["col2"]]
   },
   DT1[["col1"]],
   info = "values are set correctly (expression)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(, DT1[["col1"]], "col4")$values(TRUE)[["col4"]],
+  DTSg$new(DT1)$setCols(, "col4", DT1[["col1"]])$values(TRUE)[["col4"]],
   DT1[["col1"]],
   info = "column is added correctly"
 )
 
 expect_identical(
-  DTSg$new(DT1)$setCols(, NULL, "col2")$cols(),
+  DTSg$new(DT1)$setCols(, "col2", NULL)$cols(),
   c("col1", "col3"),
   info = "column is removed correctly"
 )
 
 expect_error(
-  DTSg$new(DT1)$setCols(, NULL, c("col1", "col2", "col3")),
+  DTSg$new(DT1)$setCols(, ".dateTime", 1),
+  info = "setting .dateTime column returns error"
+)
+
+expect_error(
+  DTSg$new(DT1)$setCols(, c("col1", "col2", "col3"), NULL),
   info = "removing all value columns returns error"
 )
 
