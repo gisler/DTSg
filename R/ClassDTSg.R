@@ -192,15 +192,6 @@ DTSg <- R6Class(
     .values = data.table(),
     .variant = character(),
 
-    aggregateHelpers = function(ignoreDST) {
-      list(
-        timezone = private$.timezone,
-        ignoreDST = ignoreDST,
-        periodicity = private$.periodicity,
-        na.status = private$.na.status
-      )
-    },
-
     coerceCol = function(x, fun, ..., colname) {
       toClass <- substring(deparse(substitute(fun)), 4L)
       msgPart <- sprintf("column %s to class %s", deparse(colname), deparse(toClass))
@@ -300,6 +291,35 @@ DTSg <- R6Class(
       assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
     },
 
+    funbyHelpers = function(ignoreDST, .helpers) {
+      elements <- names(.helpers)
+
+      if (any(elements %chin% c("timezone", "periodicity", "na.status"))) {
+        stop(
+          '"timezone", "periodicity" and "na.status" elements are not allowed in this context.',
+          call. = FALSE
+        )
+      }
+
+      if ("ignoreDST" %chin% elements) {
+        qassert(
+          .helpers[["ignoreDST"]],
+          "B1",
+          .var.name = 'funbyHelpers[["ignoreDST"]]'
+        )
+
+        ignoreDST <- .helpers[["ignoreDST"]]
+        .helpers[["ignoreDST"]] <- NULL
+      }
+
+      c(list(
+        timezone = private$.timezone,
+        ignoreDST = ignoreDST,
+        periodicity = private$.periodicity,
+        na.status = private$.na.status
+      ), .helpers)
+    },
+
     multiLapply = function(.SD, funs, ...) {
       if (testClass(funs, "list")) {
         do.call(c, lapply(
@@ -340,10 +360,10 @@ DTSg <- R6Class(
     ) {
       assertFunction(funby)
       qassert(ignoreDST, "B1")
-      aggregateHelpers <- private$aggregateHelpers(ignoreDST)
+      .funbyHelpers <- private$funbyHelpers(ignoreDST, list())
       qassert(funby(
         self$values(reference = TRUE)[[".dateTime"]][1L],
-        aggregateHelpers
+        .funbyHelpers
       ), "P1")
       if (testClass(fun, "list")) {
         assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
@@ -374,7 +394,7 @@ DTSg <- R6Class(
           private$.values <- private$.values[
             ,
             c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
 
@@ -383,7 +403,7 @@ DTSg <- R6Class(
           private$.values <- private$.values[
             !is.na(get(cols)),
             c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
 
@@ -395,7 +415,7 @@ DTSg <- R6Class(
         private$.values <- private$.values[
           ,
           private$multiLapply(.SD, fun, ...),
-          keyby = .(.dateTime = funby(.dateTime, aggregateHelpers)),
+          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
           .SDcols = cols
         ]
       }
@@ -531,13 +551,13 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
-        aggregateHelpers <- private$aggregateHelpers(ignoreDST)
+        .funbyHelpers <- private$funbyHelpers(ignoreDST, list())
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
-          aggregateHelpers
+          .funbyHelpers
         ), any.missing = FALSE, len = 1L)
 
-        by <- funby(private$.values[[".dateTime"]], aggregateHelpers)
+        by <- funby(private$.values[[".dateTime"]], .funbyHelpers)
       } else {
         by <- NULL
       }
@@ -1127,16 +1147,16 @@ DTSg <- R6Class(
         if (!is.null(funby)) {
           assertFunction(funby)
           qassert(ignoreDST, "B1")
-          aggregateHelpers <- private$aggregateHelpers(ignoreDST)
+          .funbyHelpers <- private$funbyHelpers(ignoreDST, list())
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
-            aggregateHelpers
+            .funbyHelpers
           ), any.missing = FALSE, len = 1L)
 
           values <- private$.values[
             ,
             .SD[eval(i)],
-            by = .(.group = funby(.dateTime, aggregateHelpers)),
+            by = .(.group = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
           values[, .group := NULL]
