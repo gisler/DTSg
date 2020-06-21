@@ -126,7 +126,7 @@ TS$
   colapply(interpolateLinear)$
   summary()
 
-# undo the interpolation (requires additional access to the interpolated column,
+# undo the interpolation (requires additional access to the interpolated column
 # which is accomplished with the help of the getCol method and the freely chosen
 # y argument)
 TS$

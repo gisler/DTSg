@@ -85,7 +85,7 @@
 #'
 #' @section Fields:
 #' A \code{DTSg} object has the following fields or properties as they are often
-#'  called. They are implemented through so called active bindings, which means
+#'  called. They are implemented through so called active bindings which means
 #'  that they can be accessed and actively set with the help of the \code{$}
 #'  operator (for instance, \code{x$ID} gets the value of the \emph{ID} field
 #'  and \code{x$ID <- "River Flow"} sets its value). Please note that fields are

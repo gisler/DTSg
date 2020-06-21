@@ -9,7 +9,7 @@
 * `R6Method` argument of `S3WrapperGenerator` now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression
 * Fixed that not all missing values were made explicit after a call to the `merge` method despite an `"explicit"` `na.status` in some cases
 * Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default
-* Improved documentation and vignettes
+* Improved vignettes and documentation
 * Minor internal code improvements
 
 ## DTSg v0.5.0
@@ -34,7 +34,7 @@
 
 ## DTSg v0.4.0
 
-* Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage, which makes the method more flexible in terms of resource consumption
+* Added `memoryOverCPU` argument to `rollapply` method: allows for preferring CPU over memory usage which makes the method more flexible in terms of resource consumption
 * Settings of option `DTSgClone` in e.g. *.RProfile* are now respected and not overwritten by `TRUE` when the package is loaded
 * Fixed useless coercion of `POSIXct` *.dateTime* columns to `POSIXct` upon object creation in case they contained at least one missing value
 * Switched to unit testing framework of the `tinytest` package instead of the `testthat` package
