@@ -15,9 +15,18 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
   invisible(TRUE)
 }
 
-assertFilter <- function(x) {
+assertFilter <- function(x, limit) {
   if (!testMultiClass(x, c("integer", "numeric")) && !is.expression(x)) {
     stop('"i" must be a numeric vector or an expression.', call. = FALSE)
+  } else if (testMultiClass(x, c("integer", "numeric"))) {
+    assertIntegerish(
+      x,
+      lower = -limit,
+      upper = limit,
+      any.missing = FALSE,
+      unique = TRUE,
+      .var.name = "i"
+    )
   }
 
   invisible(x)

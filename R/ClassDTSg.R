@@ -1078,7 +1078,7 @@ DTSg <- R6Class(
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
-        assertFilter(i)
+        assertFilter(i, private$.timestamps)
       }
       assertCharacter(
         cols,
@@ -1124,7 +1124,7 @@ DTSg <- R6Class(
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
-        assertFilter(i)
+        assertFilter(i, private$.timestamps)
       }
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
@@ -1170,13 +1170,6 @@ DTSg <- R6Class(
       }
 
       assertDataTable(values, min.rows = 1L, .var.name = "self$values(reference = TRUE)")
-      len <- private$determineLen(nrow(values))
-      assertPOSIXct(
-        values[[".dateTime"]][seq_len(len)],
-        any.missing = FALSE,
-        unique = TRUE,
-        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
-      )
 
       private$.values <- values
 
