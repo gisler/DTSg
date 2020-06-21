@@ -353,58 +353,6 @@ DTSg <- R6Class(
       }
 
       lapply(globalObjs, rmGlobalReferences, addr = addr)
-    },
-
-    #f move to public once ready for release
-    rowapply = function(
-      fun,
-      ...,
-      resultCols,
-      cols = self$cols(class = "numeric"),
-      clone = getOption("DTSgClone")
-    ) {
-      if (testClass(fun, "list")) {
-        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
-        lapply(fun, assertFunction, .var.name = "fun[[i]]")
-      } else {
-        assertFunction(fun)
-      }
-      lenNamesFun <- length(names(fun))
-      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
-        if (length(resultCols) < lenNamesFun) {
-          resultCols <- sprintf("%s.%s", resultCols, names(fun))
-        }
-      } else {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
-      }
-      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
-      assertSubset(cols, self$cols())
-      qassert(clone, "B1")
-
-      if (clone) {
-        TS <- self$clone(deep = TRUE)
-        return(TS$rowapply(
-          fun = fun,
-          ... = ...,
-          resultCols = resultCols,
-          cols = cols,
-          clone = FALSE
-        ))
-      }
-
-      if (!testClass(fun, "list")) {
-        fun <- list(fun)
-      }
-
-      private$.values[
-        ,
-        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
-        by = seq_len(private$.timestamps),
-        .SDcols = cols
-      ]
-
-      invisible(self)
     }
   ),
 
@@ -1119,6 +1067,89 @@ DTSg <- R6Class(
           after = after,
           weights = weights
         ),
+        .SDcols = cols
+      ]
+
+      invisible(self)
+    },
+
+    rbind = function(..., clone = getOption("DTSgClone")) {
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$rbind(... = ..., clone = FALSE))
+      }
+
+      processDots <- function(obj) {
+        if (!testR6(obj, "DTSg")) {
+          obj <- DTSg$new(
+            obj,
+            aggregated = self$aggregated,
+            fast = self$fast,
+            na.status = self$na.status
+          )
+        }
+        assertSetEqual(obj$timezone, self$timezone)
+        assertSetEqual(obj$aggregated, self$aggregated)
+
+        obj$values(TRUE)
+      }
+
+      DTs <- c(list(private$.values), lapply(list(...), processDots))
+      values <- rbindlist(DTs, use.names = TRUE, fill = TRUE)
+      len <- private$determineLen(nrow(values))
+      assertPOSIXct(
+        values[[".dateTime"]][seq_len(len)],
+        any.missing = FALSE,
+        unique = TRUE,
+        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
+      )
+
+      private$.values <- values
+
+      self$refresh()
+      self$alter(clone = FALSE)
+
+      invisible(self)
+    },
+
+    rowapply = function(
+      fun,
+      ...,
+      resultCols,
+      cols = self$cols(class = "numeric"),
+      clone = getOption("DTSgClone")
+    ) {
+      fun <- private$determineFun(fun)
+      lenNamesFun <- length(names(fun))
+      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
+        if (length(resultCols) < lenNamesFun) {
+          resultCols <- sprintf("%s.%s", resultCols, names(fun))
+        }
+      } else {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
+      }
+      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$rowapply(
+          fun = fun,
+          ... = ...,
+          resultCols = resultCols,
+          cols = cols,
+          clone = FALSE
+        ))
+      }
+
+      private$.values[
+        ,
+        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
+        by = seq_len(private$.timestamps),
         .SDcols = cols
       ]
 
