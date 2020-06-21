@@ -682,15 +682,17 @@ setCols <- function(x, ...) {
 #'  only.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param i A numeric vector indexing rows or a filter expression accepted by
-#'  the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
-#'  expressions can contain the special symbol \code{.N}. See
+#' @param i An integerish vector indexing rows (positive numbers pick and
+#'  negative numbers omit rows) or a filter expression accepted by the \code{i}
+#'  argument of \code{\link[data.table]{data.table}}. Filter expressions can
+#'  contain the special symbol \code{.N}. See
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
 #' @param cols A character vector specifying the columns whose values shall be
 #'  set. The values of the \emph{.dateTime} column cannot be set.
-#' @param values A list of replacement and/or new values accepted by the
-#'  \code{value} argument of \pkg{data.table}'s \code{\link[data.table]{set}}
-#'  function. \code{\link{NULL}} as a value removes a column.
+#' @param values A vector or list-like object of replacement and/or new values
+#'  accepted by the \code{value} argument of \pkg{data.table}'s
+#'  \code{\link[data.table]{set}} function. \code{\link{NULL}} as a value
+#'  removes a column.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #' @param \dots Not used (S3 method only).
@@ -723,9 +725,10 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' Filter rows and/or select columns of a \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
-#' @param i A numeric vector indexing rows or a filter expression accepted by
-#'  the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
-#'  expressions can contain the special symbol \code{.N}. See
+#' @param i An integerish vector indexing rows (positive numbers pick and
+#'  negative numbers omit rows) or a filter expression accepted by the \code{i}
+#'  argument of \code{\link[data.table]{data.table}}. Filter expressions can
+#'  contain the special symbol \code{.N}. See
 #'  (\code{\link[data.table]{special-symbols}}) for further information.
 #' @param cols A character vector specifying the columns to select. The
 #'  \emph{.dateTime} column is always selected and cannot be part of it.
