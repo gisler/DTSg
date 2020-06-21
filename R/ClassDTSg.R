@@ -271,6 +271,18 @@ DTSg <- R6Class(
       )
     },
 
+    determineFun = function(fun) {
+      if (!testClass(fun, "list")) {
+        fun <- list(fun)
+      }
+      lapply(fun, assertFunction, .var.name = "fun' or 'fun[[i]]")
+      if (length(fun) > 1L) {
+        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
+      }
+
+      fun
+    },
+
     determineFrom = function(from) {
       if (qtest(from, "P1")) {
         assertSetEqual(attr(from, "tzone"), self$timezone)
@@ -322,17 +334,13 @@ DTSg <- R6Class(
     },
 
     multiLapply = function(.SD, funs, ...) {
-      if (testClass(funs, "list")) {
-        do.call(c, lapply(
-          .SD,
-          function(x, ...) {
-            lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
-          },
-          ... = ...
-        ))
-      } else {
-        lapply(.SD, funs, ...)
-      }
+      do.call(c, lapply(
+        .SD,
+        function(x, ...) {
+          lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
+        },
+        ... = ...
+      ))
     },
 
     rmGlobalReferences = function(addr) {
@@ -418,12 +426,7 @@ DTSg <- R6Class(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
       ), "P1")
-      if (testClass(fun, "list")) {
-        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
-        lapply(fun, assertFunction, .var.name = "fun[[i]]")
-      } else {
-        assertFunction(fun)
-      }
+      fun <- private$determineFun(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
