@@ -1085,9 +1085,9 @@ DTSg <- R6Class(
         if (!testR6(obj, "DTSg")) {
           obj <- DTSg$new(
             obj,
-            aggregated = self$aggregated,
-            fast = self$fast,
-            na.status = self$na.status
+            aggregated = private$.isAggregated,
+            fast = private$.isFast,
+            na.status = private$.na.status
           )
         }
         assertSetEqual(obj$timezone, self$timezone)
