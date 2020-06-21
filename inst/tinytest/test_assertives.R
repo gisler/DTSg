@@ -19,7 +19,7 @@ expect_error(
 
 #### assertFilter ####
 expect_error(
-  assertFilter(TRUE),
+  assertFilter(TRUE, Inf),
   info = "logical returns error"
 )
 
