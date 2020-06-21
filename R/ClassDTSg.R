@@ -140,7 +140,7 @@
 #'  objects. In order to prevent at least some of the possible precision issues,
 #'  the lags in seconds between subsequent timestamps are rounded to
 #'  microseconds during integrity checks. This corresponds to the maximum value
-#'  allowed in \code{\link{options}("digits.secs")}. As a consequence, time
+#'  allowed for \code{\link{options}("digits.secs")}. As a consequence, time
 #'  series with a sub-second accuracy higher than a microsecond will never work.
 #'
 #' Some of the methods which take a \code{\link{function}} as an argument
@@ -293,16 +293,16 @@ DTSg <- R6Class(
     },
 
     funbyHelpers = function(ignoreDST, .helpers) {
-      elements <- names(.helpers)
+      helpers <- names(.helpers)
 
-      if (any(elements %chin% c("timezone", "periodicity", "na.status"))) {
+      if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
         stop(
-          '"timezone", "periodicity" and "na.status" elements are not allowed in this context.',
+          '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
           call. = FALSE
         )
       }
 
-      if ("ignoreDST" %chin% elements) {
+      if ("ignoreDST" %chin% helpers) {
         qassert(
           .helpers[["ignoreDST"]],
           "B1",

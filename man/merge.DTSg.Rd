@@ -15,7 +15,7 @@
 
 \item{\dots}{Further arguments passed on to \code{\link[data.table]{merge}}.
 As the \code{by}, \code{by.x} and \code{by.y} arguments can endanger the
-integrity of the object, they are not allowed here.}
+integrity of the object, they are rejected.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}

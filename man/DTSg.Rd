@@ -83,7 +83,7 @@ Due to the \code{\link{POSIXct}} nature of the \emph{.dateTime} column, the
  objects. In order to prevent at least some of the possible precision issues,
  the lags in seconds between subsequent timestamps are rounded to
  microseconds during integrity checks. This corresponds to the maximum value
- allowed in \code{\link{options}("digits.secs")}. As a consequence, time
+ allowed for \code{\link{options}("digits.secs")}. As a consequence, time
  series with a sub-second accuracy higher than a microsecond will never work.
 
 Some of the methods which take a \code{\link{function}} as an argument
