@@ -101,7 +101,7 @@ TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
 TS
 ```
 
-In order to get mean monthly river flows as an example, we can use the `aggregate` method with one of the package's temporal aggregation level functions as its `funby` argument (the `fun` argument also accepts a named `list` of functions, which allows for calculating several summary statistics at once):
+In order to get mean monthly river flows as an example, we can use the `aggregate` method with one of the package's temporal aggregation level functions as its `funby` argument (the `fun` argument also accepts a named `list` of functions which allows for calculating several summary statistics at once):
 
 ```{r}
 TSm <- TS$aggregate(funby = byYm____, fun = mean)
@@ -140,6 +140,15 @@ TS$values()
 ```
 
 A better way to add results of the `colapply` and `rollapply` methods as new columns are actually their `resultCols` and `suffix` arguments. It would not have allowed to demonstrate the `merge` method though.
+
+For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods or functions have not been discussed in this vignette:
+
+* *getCol*
+* *refresh*
+* *setCols*
+* *subset*
+* *rollback*
+* *S3WrapperGenerator*
 
 ## Object Fields
 
@@ -187,4 +196,4 @@ The fields which cannot be actively set are:
 * *regular*
 * *timestamps*
 
-For a full explanation of all the methods, functions, arguments and fields available in the package please consult the help pages.
+Please refer to the help pages for further details.
