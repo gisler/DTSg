@@ -1,3 +1,8 @@
+## DTSg v0.6.0.9000
+
+* Added `rowapply` method: allows for applying functions to `DTSg` objects row-wise
+* Added `rbind` method: allows for combining `DTSg` objects by rows
+
 ## DTSg v0.5.0.9000
 
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object

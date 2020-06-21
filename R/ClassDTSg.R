@@ -1081,7 +1081,24 @@ DTSg <- R6Class(
         return(TS$rbind(... = ..., clone = FALSE))
       }
 
-      processDots <- function(obj) {
+      dotsToList <- function(...) {
+        do.call(c, lapply(
+          seq_len(...length()),
+          function(i) {
+            if (testClass(...elt(i), "list")) {
+              lapply(
+                seq_len(length(...elt(i))),
+                function(j, x) {x[[j]]},
+                x = ...elt(i)
+              )
+            } else {
+              list(...elt(i))
+            }
+          }
+        ))
+      }
+
+      processElements <- function(obj) {
         if (!testR6(obj, "DTSg")) {
           obj <- DTSg$new(
             obj,
@@ -1096,7 +1113,7 @@ DTSg <- R6Class(
         obj$values(TRUE)
       }
 
-      DTs <- c(list(private$.values), lapply(list(...), processDots))
+      DTs <- c(list(private$.values), lapply(dotsToList(...), processElements))
       values <- rbindlist(DTs, use.names = TRUE, fill = TRUE)
       len <- private$determineLen(nrow(values))
       assertPOSIXct(
