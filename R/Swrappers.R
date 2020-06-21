@@ -315,7 +315,7 @@ cols <- function(x, ...) {
 #' @param pattern An optional character string passed on to the \code{pattern}
 #'  argument of \code{\link{grep}}.
 #' @param \dots Further arguments passed on to \code{\link{grep}}. The
-#'  \code{value} argument is not allowed here.
+#'  \code{value} argument is rejected.
 #'
 #' @return Returns a character vector.
 #'
@@ -382,7 +382,7 @@ getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
 #'  \code{\link{new}} for further information.
 #' @param \dots Further arguments passed on to \code{\link[data.table]{merge}}.
 #'  As the \code{by}, \code{by.x} and \code{by.y} arguments can endanger the
-#'  integrity of the object, they are not allowed here.
+#'  integrity of the object, they are rejected.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #'
