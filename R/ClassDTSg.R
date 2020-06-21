@@ -675,7 +675,12 @@ DTSg <- R6Class(
 
     merge = function(y, ..., clone = getOption("DTSgClone")) {
       if (!testR6(y, "DTSg")) {
-        y <- DTSg$new(y, fast = self$fast, na.status = self$na.status)
+        y <- DTSg$new(
+          y,
+          aggregated = private$.isAggregated,
+          fast = private$.isFast,
+          na.status = private$.na.status
+        )
       }
       assertSetEqual(y$timezone, self$timezone)
       assertSetEqual(y$aggregated, self$aggregated)
