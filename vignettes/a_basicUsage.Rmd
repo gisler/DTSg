@@ -141,6 +141,8 @@ TS$values()
 
 A better way to add results of the `colapply` and `rollapply` methods as new columns are actually their `resultCols` and `suffix` arguments. It would not have allowed to demonstrate the `merge` method though.
 
+---
+
 For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods or functions have not been discussed in this vignette:
 
 * *getCol*
