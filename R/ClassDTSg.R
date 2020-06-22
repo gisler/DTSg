@@ -1127,7 +1127,7 @@ DTSg <- R6Class(
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
-        return(TS$rbind(... = ..., clone = FALSE))
+        return(TS$rowbind(... = ..., clone = FALSE))
       }
 
       dotsToList <- function(...) {
@@ -1176,6 +1176,32 @@ DTSg <- R6Class(
 
       self$refresh()
       self$alter(clone = FALSE)
+
+      invisible(self)
+    },
+
+    setColNames = function(
+      cols = self$cols(class = "numeric")[1L],
+      values,
+      clone = getOption("DTSgClone")
+    ) {
+      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      assertCharacter(
+        values,
+        min.chars = 1L,
+        any.missing = FALSE,
+        len = length(cols),
+        unique = TRUE
+      )
+      assertNoBeginningDot(values)
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$setColNames(cols = cols, values = values, clone = FALSE))
+      }
+
+      setnames(private$.values, cols, values)
 
       invisible(self)
     },
