@@ -19,9 +19,10 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{i}{A numeric vector indexing rows or a filter expression accepted by
-the \code{i} argument of \code{\link[data.table]{data.table}}. Filter
-expressions can contain the special symbol \code{.N}. See
+\item{i}{An integerish vector indexing rows (positive numbers pick and
+negative numbers omit rows) or a filter expression accepted by the \code{i}
+argument of \code{\link[data.table]{data.table}}. Filter expressions can
+contain the special symbol \code{.N}. See
 (\code{\link[data.table]{special-symbols}}) for further information.}
 
 \item{cols}{A character vector specifying the columns to select. The
