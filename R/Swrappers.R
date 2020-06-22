@@ -750,6 +750,44 @@ rowbind <- function(x, ...) {
 #' @export
 rowbind.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowbind))
 
+#### setColNames ####
+#' @export
+setColNames <- function(x, ...) {
+  UseMethod("setColNames", x)
+}
+#' Set Columns' Names
+#'
+#' Set the names of columns of \code{\link{DTSg}} objects.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param cols A character vector specifying the columns whose names shall be
+#'  set. The name of the \emph{.dateTime} column cannot be set.
+#' @param values A character vector of the same length as \code{cols} specifying
+#'  the desired names.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
+#' @param \dots Not used (S3 method only).
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}, \code{\link{cols}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # rename column "flow" to "River Flow"
+#' ## R6 method
+#' x$setColNames(cols = "flow", values = "River Flow")
+#'
+#' ## S3 method
+#' setColNames(x = x, cols = "flow", values = "River Flow")
+#'
+#' @aliases setColNames
+#'
+#' @export
+setColNames.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setColNames))
+
 #### setCols ####
 #' @export
 setCols <- function(x, ...) {
