@@ -2,6 +2,7 @@
 
 * Added `rowapply` method: allows for applying functions to `DTSg` objects row-wise
 * Added `rbind` method: allows for combining `DTSg` objects by rows
+* Minor internal code improvements
 
 ## DTSg v0.5.0.9000
 
