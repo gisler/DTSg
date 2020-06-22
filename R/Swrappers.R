@@ -670,6 +670,86 @@ rollapply <- function(x, ...) {
 #' @export
 rollapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rollapply))
 
+#### rowapply ####
+#' @export
+rowapply <- function(x, ...) {
+  UseMethod("rowapply", x)
+}
+#' Apply Function(s) Row-wise
+#'
+#' Applies one or more arbitrary functions row-wise to selected columns of a
+#'  \code{\link{DTSg}} object.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param fun A \code{\link{function}} or a named \code{\link{list}} of
+#'  functions applied row-wise to all the values of the specified columns, for
+#'  instance, \code{\link{mean}} or \code{\link{list}(min = \link{min},
+#'  max = \link{max})}. The return value(s) must be of length one.
+#' @param \dots Further arguments passed on to \code{fun}.
+#' @param resultCols A character vector either of length one (names of
+#'  \code{fun} are appended in the case more than one function is provided) or
+#'  the same length as \code{fun}.
+#' @param cols A character vector specifying the columns to apply \code{fun} to.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}, \code{\link{function}}, \code{\link{list}},
+#'  \code{\link{cols}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # check object integrity
+#' ## R6 method
+#'
+#'
+#' ## S3 method
+#'
+#'
+#' @aliases rowapply
+#'
+#' @export
+rowapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowapply))
+
+#### rowbind ####
+#' @export
+rowbind <- function(x, ...) {
+  UseMethod("rowbind", x)
+}
+#' Combine Rows
+#'
+#' Combines the rows of \code{\link{DTSg}} and other suitable objects.
+#'
+#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param \dots Any number of \code{\link{DTSg}} objects or objects coercible to
+#'  one (see \code{\link{new}} for further information). \code{\link{list}}s of
+#'  such objects or a mixture of lists and non-lists are also accepted.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
+#'
+#' @return Returns a \code{\link{DTSg}} object.
+#'
+#' @seealso \code{\link{DTSg}}, \code{\link{new}}, \code{\link{list}}
+#'
+#' @examples
+#' # new DTSg object
+#' x <- DTSg$new(values = flow)
+#'
+#' # check object integrity
+#' ## R6 method
+#'
+#'
+#' ## S3 method
+#'
+#'
+#' @aliases rowbind
+#'
+#' @export
+rowbind.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowbind))
+
 #### setCols ####
 #' @export
 setCols <- function(x, ...) {

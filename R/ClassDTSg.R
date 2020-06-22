@@ -77,6 +77,8 @@
 #'    \item \code{refresh}: See \code{\link{refresh}} for further information.
 #'    \item \code{rollapply}: See \code{\link{rollapply}} for further
 #'      information.
+#'    \item \code{rowapply}: See \code{\link{rowapply}} for further information.
+#'    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
 #'    \item \code{setCols}: See \code{\link{setCols}} for further information.
 #'    \item \code{subset}: See \code{\link{subset}} for further information.
 #'    \item \code{summary}: See \code{\link{summary}} for further information.
@@ -1078,7 +1080,49 @@ DTSg <- R6Class(
       invisible(self)
     },
 
-    rbind = function(..., clone = getOption("DTSgClone")) {
+    rowapply = function(
+      fun,
+      ...,
+      resultCols,
+      cols = self$cols(class = "numeric"),
+      clone = getOption("DTSgClone")
+    ) {
+      fun <- private$determineFun(fun)
+      lenNamesFun <- length(names(fun))
+      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
+        if (length(resultCols) < lenNamesFun) {
+          resultCols <- sprintf("%s.%s", resultCols, names(fun))
+        }
+      } else {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
+      }
+      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
+      assertSubset(cols, self$cols())
+      qassert(clone, "B1")
+
+      if (clone) {
+        TS <- self$clone(deep = TRUE)
+        return(TS$rowapply(
+          fun = fun,
+          ... = ...,
+          resultCols = resultCols,
+          cols = cols,
+          clone = FALSE
+        ))
+      }
+
+      private$.values[
+        ,
+        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
+        by = seq_len(private$.timestamps),
+        .SDcols = cols
+      ]
+
+      invisible(self)
+    },
+
+    rowbind = function(..., clone = getOption("DTSgClone")) {
       qassert(clone, "B1")
 
       if (clone) {
@@ -1132,48 +1176,6 @@ DTSg <- R6Class(
 
       self$refresh()
       self$alter(clone = FALSE)
-
-      invisible(self)
-    },
-
-    rowapply = function(
-      fun,
-      ...,
-      resultCols,
-      cols = self$cols(class = "numeric"),
-      clone = getOption("DTSgClone")
-    ) {
-      fun <- private$determineFun(fun)
-      lenNamesFun <- length(names(fun))
-      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
-        if (length(resultCols) < lenNamesFun) {
-          resultCols <- sprintf("%s.%s", resultCols, names(fun))
-        }
-      } else {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
-      }
-      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
-      assertSubset(cols, self$cols())
-      qassert(clone, "B1")
-
-      if (clone) {
-        TS <- self$clone(deep = TRUE)
-        return(TS$rowapply(
-          fun = fun,
-          ... = ...,
-          resultCols = resultCols,
-          cols = cols,
-          clone = FALSE
-        ))
-      }
-
-      private$.values[
-        ,
-        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
-        by = seq_len(private$.timestamps),
-        .SDcols = cols
-      ]
 
       invisible(self)
     },
