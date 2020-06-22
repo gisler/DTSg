@@ -85,7 +85,7 @@
 #'
 #' @section Fields:
 #' A \code{DTSg} object has the following fields or properties as they are often
-#'  called. They are implemented through so called active bindings, which means
+#'  called. They are implemented through so called active bindings which means
 #'  that they can be accessed and actively set with the help of the \code{$}
 #'  operator (for instance, \code{x$ID} gets the value of the \emph{ID} field
 #'  and \code{x$ID <- "River Flow"} sets its value). Please note that fields are
@@ -678,7 +678,12 @@ DTSg <- R6Class(
 
     merge = function(y, ..., clone = getOption("DTSgClone")) {
       if (!testR6(y, "DTSg")) {
-        y <- DTSg$new(y, fast = self$fast, na.status = self$na.status)
+        y <- DTSg$new(
+          y,
+          aggregated = private$.isAggregated,
+          fast = private$.isFast,
+          na.status = private$.na.status
+        )
       }
       assertSetEqual(y$timezone, self$timezone)
       assertSetEqual(y$aggregated, self$aggregated)
@@ -1181,7 +1186,7 @@ DTSg <- R6Class(
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
-        assertFilter(i)
+        assertFilter(i, private$.timestamps)
       }
       assertCharacter(
         cols,
@@ -1227,7 +1232,7 @@ DTSg <- R6Class(
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
-        assertFilter(i)
+        assertFilter(i, private$.timestamps)
       }
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
@@ -1273,13 +1278,6 @@ DTSg <- R6Class(
       }
 
       assertDataTable(values, min.rows = 1L, .var.name = "self$values(reference = TRUE)")
-      len <- private$determineLen(nrow(values))
-      assertPOSIXct(
-        values[[".dateTime"]][seq_len(len)],
-        any.missing = FALSE,
-        unique = TRUE,
-        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
-      )
 
       private$.values <- values
 
