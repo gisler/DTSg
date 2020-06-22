@@ -462,7 +462,7 @@ DTSg <- R6Class(
 
       if ((by != private$.periodicity || na.status == "explicit") &&
           by != "unrecognised") {
-        if (rollback && grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
+        if (rollback && mday(from) > 28L && grepl("^\\d+ (month|year)(s?)$", by)) {
           DT <- data.table(
             .dateTime = rollback(seq(
               from,
@@ -930,7 +930,7 @@ DTSg <- R6Class(
           sprintf("%s months", c(seq_len(4L), 6L)),
           sprintf("%s years", c(seq_len(15L), 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
         )) {
-          if (grepl("^\\d+ (month|year)(s?)$", by) && mday(from) > 28L) {
+          if (mday(from) > 28L && grepl("^\\d+ (month|year)(s?)$", by)) {
             DT <- data.table(
               .dateTime = rollback(seq(
                 from,
@@ -945,9 +945,9 @@ DTSg <- R6Class(
 
           DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
           lags <- diff(DT[[1L]])
-          if (sum(!is.na(DT[, -1L, with = FALSE])) ==
-              sum(!is.na(private$.values[seqLen, -1L, with = FALSE])) &&
-              all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
+          if (all(lags >= private$.minLag) && all(lags <= private$.maxLag) &&
+              sum(!is.na(DT[, -1L, with = FALSE])) ==
+              sum(!is.na(private$.values[seqLen, -1L, with = FALSE]))) {
             private$.periodicity <- by
 
             break
@@ -1113,7 +1113,12 @@ DTSg <- R6Class(
 
       private$.values[
         ,
-        (resultCols) := lapply(fun, function(fun, ...) {fun(unlist(.SD), ...)}),
+        (resultCols) := lapply(
+          fun,
+          function(fun, x, ...) {fun(x, ...)},
+          x = unlist(.SD),
+          ... = ...
+        ),
         by = seq_len(private$.timestamps),
         .SDcols = cols
       ]
