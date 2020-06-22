@@ -273,12 +273,12 @@ DTSg <- R6Class(
       )
     },
 
-    determineFun = function(fun) {
+    determineFun = function(fun, isNames) {
       if (!testClass(fun, "list")) {
         fun <- list(fun)
       }
       lapply(fun, assertFunction, .var.name = "fun' or 'fun[[i]]")
-      if (length(fun) > 1L) {
+      if (isNames && length(fun) > 1L) {
         assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
       }
 
@@ -376,7 +376,7 @@ DTSg <- R6Class(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
       ), "P1")
-      fun <- private$determineFun(fun)
+      fun <- private$determineFun(fun, length(fun) == length(cols))
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
@@ -1087,16 +1087,15 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric"),
       clone = getOption("DTSgClone")
     ) {
-      fun <- private$determineFun(fun)
-      lenNamesFun <- length(names(fun))
-      if (lenNamesFun <= 1L || length(resultCols) < lenNamesFun) {
+      if (length(cols) > 1L && length(resultCols) > 1L) {
+        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(fun))
+      } else {
         assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
-        if (!clone && lenNamesFun >= 1L) {
+        if (!clone && length(names(fun)) > 0L) {
           resultCols <- sprintf("%s.%s", resultCols, names(fun))
         }
-      } else {
-        assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = lenNamesFun)
       }
+      fun <- private$determineFun(fun, length(fun) != length(resultCols))
       assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(clone, "B1")
