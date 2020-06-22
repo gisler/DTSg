@@ -1089,9 +1089,9 @@ DTSg <- R6Class(
     ) {
       fun <- private$determineFun(fun)
       lenNamesFun <- length(names(fun))
-      if (lenNamesFun == 0L || length(resultCols) < lenNamesFun) {
+      if (lenNamesFun <= 1L || length(resultCols) < lenNamesFun) {
         assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
-        if (length(resultCols) < lenNamesFun) {
+        if (!clone && lenNamesFun >= 1L) {
           resultCols <- sprintf("%s.%s", resultCols, names(fun))
         }
       } else {
