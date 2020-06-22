@@ -521,17 +521,17 @@ DTSg <- R6Class(
       fun,
       ...,
       cols = self$cols(class = "numeric")[1L],
-      clone = getOption("DTSgClone"),
       resultCols = NULL,
       suffix = NULL,
       funby = NULL,
-      ignoreDST = FALSE
+      ignoreDST = FALSE,
+      clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
-      qassert(clone, "B1")
       .cols <- private$determineCols(resultCols, suffix, cols)
+      qassert(clone, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -539,11 +539,11 @@ DTSg <- R6Class(
           fun = fun,
           ... = ...,
           cols = cols,
-          clone = FALSE,
           resultCols = resultCols,
           suffix = suffix,
           funby = funby,
-          ignoreDST = ignoreDST
+          ignoreDST = ignoreDST,
+          clone = FALSE
         ))
       }
 
@@ -968,10 +968,10 @@ DTSg <- R6Class(
       after = before,
       weights = c("inverseDistance"),
       parameters = list(power = 1),
-      clone = getOption("DTSgClone"),
       resultCols = NULL,
       suffix = NULL,
-      memoryOverCPU = TRUE
+      memoryOverCPU = TRUE,
+      clone = getOption("DTSgClone")
     ) {
       assertNAstatusPeriodicityOK(
         private$.na.status,
@@ -984,9 +984,9 @@ DTSg <- R6Class(
       before <- assertCount(before, coerce = TRUE)
       after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
-      qassert(clone, "B1")
       .cols <- private$determineCols(resultCols, suffix, cols)
       qassert(memoryOverCPU, "B1")
+      qassert(clone, "B1")
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -998,10 +998,10 @@ DTSg <- R6Class(
           after = after,
           weights = weights,
           parameters = parameters,
-          clone = FALSE,
           resultCols = resultCols,
           suffix = suffix,
-          memoryOverCPU = memoryOverCPU
+          memoryOverCPU = memoryOverCPU,
+          clone = FALSE
         ))
       }
 
@@ -1081,9 +1081,9 @@ DTSg <- R6Class(
     },
 
     rowapply = function(
+      resultCols,
       fun,
       ...,
-      resultCols,
       cols = self$cols(class = "numeric"),
       clone = getOption("DTSgClone")
     ) {
@@ -1104,9 +1104,9 @@ DTSg <- R6Class(
       if (clone) {
         TS <- self$clone(deep = TRUE)
         return(TS$rowapply(
+          resultCols = resultCols,
           fun = fun,
           ... = ...,
-          resultCols = resultCols,
           cols = cols,
           clone = FALSE
         ))

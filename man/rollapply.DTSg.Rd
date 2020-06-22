@@ -14,10 +14,10 @@
   after = before,
   weights = c("inverseDistance"),
   parameters = list(power = 1),
-  clone = getOption("DTSgClone"),
   resultCols = NULL,
   suffix = NULL,
-  memoryOverCPU = TRUE
+  memoryOverCPU = TRUE,
+  clone = getOption("DTSgClone")
 )
 }
 \arguments{
@@ -43,9 +43,6 @@ further information.}
 \item{parameters}{A \code{\link{list}} specifying parameters for
 \code{weights}. See details for further information.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
-
 \item{resultCols}{An optional character vector of the same length as
 \code{cols}. Non-existing columns specified in this argument are added and
 existing columns are overwritten by the return values of \code{fun}. Columns
@@ -61,6 +58,9 @@ CPU usage for this method. The former is generally faster for smaller
 windows and shorter time series, the latter for bigger windows and longer
 time series or might even be the only way that works depending on the
 available hardware.}
+
+\item{clone}{A logical specifying if the object is modified in place or if a
+clone (copy) is made beforehand.}
 }
 \value{
 Returns a \code{\link{DTSg}} object.
