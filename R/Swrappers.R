@@ -217,8 +217,6 @@ colapply <- function(x, ...) {
 #' @param fun A \code{\link{function}}. Its return value must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to apply \code{fun} to.
-#' @param clone A logical specifying if the object is modified in place or if a
-#'  clone (copy) is made beforehand.
 #' @param resultCols An optional character vector of the same length as
 #'  \code{cols}. Non-existing columns specified in this argument are added and
 #'  existing columns are overwritten by the return values of \code{fun}. Columns
@@ -235,6 +233,8 @@ colapply <- function(x, ...) {
 #' @param ignoreDST A logical specifying if day saving time is ignored during
 #'  formation of the temporal level. See \code{\link{aggregate}} for further
 #'  information.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over a
@@ -610,8 +610,6 @@ rollapply <- function(x, ...) {
 #'  further information.
 #' @param parameters A \code{\link{list}} specifying parameters for
 #'  \code{weights}. See details for further information.
-#' @param clone A logical specifying if the object is modified in place or if a
-#'  clone (copy) is made beforehand.
 #' @param resultCols An optional character vector of the same length as
 #'  \code{cols}. Non-existing columns specified in this argument are added and
 #'  existing columns are overwritten by the return values of \code{fun}. Columns
@@ -625,6 +623,8 @@ rollapply <- function(x, ...) {
 #'  windows and shorter time series, the latter for bigger windows and longer
 #'  time series or might even be the only way that works depending on the
 #'  available hardware.
+#' @param clone A logical specifying if the object is modified in place or if a
+#'  clone (copy) is made beforehand.
 #'
 #' @details
 #' In addition to the \code{\dots} argument, this method hands over the weights
@@ -681,14 +681,14 @@ rowapply <- function(x, ...) {
 #'  \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param resultCols A character vector either of length one (names of
+#'  \code{fun} are appended in the case one or more functions are provided) or
+#'  the same length as \code{fun}.
 #' @param fun A \code{\link{function}} or a named \code{\link{list}} of
 #'  functions applied row-wise to all the values of the specified columns, for
 #'  instance, \code{\link{mean}} or \code{\link{list}(min = \link{min},
 #'  max = \link{max})}. The return value(s) must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
-#' @param resultCols A character vector either of length one (names of
-#'  \code{fun} are appended in the case more than one function is provided) or
-#'  the same length as \code{fun}.
 #' @param cols A character vector specifying the columns to apply \code{fun} to.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.

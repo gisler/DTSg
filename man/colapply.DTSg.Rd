@@ -10,11 +10,11 @@
   fun,
   ...,
   cols = self$cols(class = "numeric")[1L],
-  clone = getOption("DTSgClone"),
   resultCols = NULL,
   suffix = NULL,
   funby = NULL,
-  ignoreDST = FALSE
+  ignoreDST = FALSE,
+  clone = getOption("DTSgClone")
 )
 }
 \arguments{
@@ -25,9 +25,6 @@
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to apply \code{fun} to.}
-
-\item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
 
 \item{resultCols}{An optional character vector of the same length as
 \code{cols}. Non-existing columns specified in this argument are added and
@@ -48,6 +45,9 @@ information.}
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
 formation of the temporal level. See \code{\link{aggregate}} for further
 information.}
+
+\item{clone}{A logical specifying if the object is modified in place or if a
+clone (copy) is made beforehand.}
 }
 \value{
 Returns a \code{\link{DTSg}} object.

@@ -7,9 +7,9 @@
 \usage{
 \method{rowapply}{DTSg}(
   x,
+  resultCols,
   fun,
   ...,
-  resultCols,
   cols = self$cols(class = "numeric"),
   clone = getOption("DTSgClone")
 )
@@ -17,16 +17,16 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
+\item{resultCols}{A character vector either of length one (names of
+\code{fun} are appended in the case one or more functions are provided) or
+the same length as \code{fun}.}
+
 \item{fun}{A \code{\link{function}} or a named \code{\link{list}} of
 functions applied row-wise to all the values of the specified columns, for
 instance, \code{\link{mean}} or \code{\link{list}(min = \link{min},
 max = \link{max})}. The return value(s) must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
-
-\item{resultCols}{A character vector either of length one (names of
-\code{fun} are appended in the case more than one function is provided) or
-the same length as \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to apply \code{fun} to.}
 
