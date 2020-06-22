@@ -79,6 +79,8 @@
 #'      information.
 #'    \item \code{rowapply}: See \code{\link{rowapply}} for further information.
 #'    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
+#'    \item \code{setColNames}: See \code{\link{setColNames}} for further
+#'      information.
 #'    \item \code{setCols}: See \code{\link{setCols}} for further information.
 #'    \item \code{subset}: See \code{\link{subset}} for further information.
 #'    \item \code{summary}: See \code{\link{summary}} for further information.
@@ -241,9 +243,8 @@ DTSg <- R6Class(
         assertNoBeginningDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
-        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
 
-        sprintf("%s%s", cols, suffix)
+        assertDisjunct(sprintf("%s%s", cols, suffix), self$cols())
       } else {
         cols
       }
@@ -376,7 +377,7 @@ DTSg <- R6Class(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
       ), "P1")
-      fun <- private$determineFun(fun, length(fun) == length(cols))
+      fun <- private$determineFun(fun, TRUE)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
@@ -1087,7 +1088,7 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric"),
       clone = getOption("DTSgClone")
     ) {
-      if (length(cols) > 1L && length(resultCols) > 1L) {
+      if (length(resultCols) > 1L && length(cols) > 1L) {
         assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = length(fun))
       } else {
         assertCharacter(resultCols, min.chars = 1L, any.missing = FALSE, len = 1L)
@@ -1095,6 +1096,8 @@ DTSg <- R6Class(
           resultCols <- sprintf("%s.%s", resultCols, names(fun))
         }
       }
+      assertNoBeginningDot(resultCols)
+      assertDisjunct(resultCols, self$cols())
       fun <- private$determineFun(fun, length(fun) != length(resultCols))
       assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
       assertSubset(cols, self$cols())
@@ -1173,7 +1176,7 @@ DTSg <- R6Class(
         values[[".dateTime"]][seq_len(len)],
         any.missing = FALSE,
         unique = TRUE,
-        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][1:%s]', len)
+        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][seq_len(%s)]', len)
       )
 
       private$.values <- values

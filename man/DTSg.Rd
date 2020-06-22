@@ -115,6 +115,8 @@ A \code{DTSg} object has the following methods:
      information.
    \item \code{rowapply}: See \code{\link{rowapply}} for further information.
    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
+   \item \code{setColNames}: See \code{\link{setColNames}} for further
+     information.
    \item \code{setCols}: See \code{\link{setCols}} for further information.
    \item \code{subset}: See \code{\link{subset}} for further information.
    \item \code{summary}: See \code{\link{summary}} for further information.
