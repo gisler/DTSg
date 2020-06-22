@@ -149,6 +149,7 @@ For a full explanation of all the methods and functions available in the package
 * *refresh*
 * *rowapply*
 * *rowbind*
+* *setColNames*
 * *setCols*
 * *subset*
 * *rollback*

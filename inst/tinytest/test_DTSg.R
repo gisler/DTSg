@@ -627,6 +627,13 @@ expect_identical(
   info = '"suffix" adds columns correctly'
 )
 
+#### setColNames method ####
+expect_identical(
+  DTSg$new(DT1)$setColNames(c("col2", "col3"), c("column2", "column3"))$cols(),
+  c("col1", "column2", "column3"),
+  info = "names are set correctly"
+)
+
 #### setCols method ####
 expect_identical(
   DTSg$new(DT1)$setCols(2L, "col2", 3)$values(TRUE)[["col2"]],
