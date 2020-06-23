@@ -2,6 +2,7 @@
 
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
 * Added `setCols` method: allows for setting the values of columns, adding columns to and/or removing columns from a `DTSg` object
+* Added `[` method: acts as a shortcut for the `getCol` method
 * Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
 * Greatly sped up `nas` method
 * Temporal aggregation level functions supplied to the `funby` argument of the `colapply` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for `subset` method).

@@ -3,16 +3,20 @@
 \name{getCol.DTSg}
 \alias{getCol.DTSg}
 \alias{getCol}
+\alias{[.DTSg}
 \title{Get Column Vector}
 \usage{
 \method{getCol}{DTSg}(x, col = self$cols(class = "numeric")[1L], ...)
+
+\method{[}{DTSg}(x, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{col}{A character string specifying a column name.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{\dots}{Passes on arguments from \code{[} to \code{getCol}.
+\code{getCol} itself does not make use of it.}
 }
 \value{
 Returns a vector or a \code{\link{list}} in case of a
@@ -26,11 +30,13 @@ Queries the values of a column of a \code{\link{DTSg}} object.
 x <- DTSg$new(values = flow)
 
 # get values of "flow" column
-## R6 method
+## R6 methods
 x$getCol(col = "flow")
+x$`[`("flow")
 
-## S3 method
+## S3 methods
 getCol(x = x, col = "flow")
+x["flow"]
 
 }
 \seealso{

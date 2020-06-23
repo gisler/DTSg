@@ -276,7 +276,7 @@ colapply <- function(x, ...) {
 #' ## S3 method
 #' colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 #'
-#' # calculate moving averages with the help of 'runner' (all three given
+#' # calculate moving averages with the help of 'runner' (all four given
 #' # approaches provide the same result with explicitly missing timestamps)
 #' if (requireNamespace("runner", quietly = TRUE)) {
 #'   wrapper <- function(..., .helpers) {
@@ -293,7 +293,13 @@ colapply <- function(x, ...) {
 #'     lag = "-2 days",
 #'     idx = x$getCol(col = ".dateTime")
 #'   )
-#'
+#'   x$colapply(
+#'     fun = runner::runner,
+#'     f = mean,
+#'     k = "5 days",
+#'     lag = "-2 days",
+#'     idx = x[".dateTime"]
+#'   )
 #'
 #'   ## S3 method
 #'   colapply(x = x, fun = runner::runner, f = mean, k = 5       , lag = -2       )
@@ -305,6 +311,14 @@ colapply <- function(x, ...) {
 #'     k = "5 days",
 #'     lag = "-2 days",
 #'     idx = getCol(x = x, col = ".dateTime")
+#'   )
+#'   colapply(
+#'     x = x,
+#'     fun = runner::runner,
+#'     f = mean,
+#'     k = "5 days",
+#'     lag = "-2 days",
+#'     idx = x[".dateTime"]
 #'   )
 #' }
 #'
@@ -362,7 +376,8 @@ getCol <- function(x, ...) {
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param col A character string specifying a column name.
-#' @param \dots Not used (S3 method only).
+#' @param \dots Passes on arguments from \code{[} to \code{getCol}.
+#'  \code{getCol} itself does not make use of it.
 #'
 #' @return Returns a vector or a \code{\link{list}} in case of a
 #'  \code{\link{list}} column.
@@ -374,16 +389,21 @@ getCol <- function(x, ...) {
 #' x <- DTSg$new(values = flow)
 #'
 #' # get values of "flow" column
-#' ## R6 method
+#' ## R6 methods
 #' x$getCol(col = "flow")
+#' x$`[`("flow")
 #'
-#' ## S3 method
+#' ## S3 methods
 #' getCol(x = x, col = "flow")
+#' x["flow"]
 #'
 #' @aliases getCol
 #'
 #' @export
 getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
+#' @rdname getCol.DTSg
+#' @export
+`[.DTSg` <- S3WrapperGenerator(expression(DTSg$public_methods$`[`))
 
 #### merge ####
 #' Merge Two DTSg Objects

@@ -350,6 +350,10 @@ DTSg <- R6Class(
 
   #### Public ####
   public = list(
+    `[` = function(...) {
+      self$getCol(...)
+    },
+
     aggregate = function(
       funby,
       fun,
