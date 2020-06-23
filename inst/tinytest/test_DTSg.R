@@ -268,7 +268,16 @@ expect_error(
 expect_identical(
   DTSg$new(DT1)$getCol("col2"),
   DT1[["col2"]],
-  info = "column is returned correctly"
+  info = "column is returned correctly (getCol)"
+)
+
+expect_identical(
+  {
+    TS <- DTSg$new(DT1)
+    TS["col2"]
+  },
+  DT1[["col2"]],
+  info = "column is returned correctly ([)"
 )
 
 #### initialize method ####
