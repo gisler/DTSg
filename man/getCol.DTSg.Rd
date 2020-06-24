@@ -11,19 +11,20 @@
 \method{[}{DTSg}(x, ...)
 }
 \arguments{
-\item{x}{A \code{\link{DTSg}} object (S3 method only).}
+\item{x}{A \code{\link{DTSg}} object (\code{getCol} S3 method only).}
 
 \item{col}{A character string specifying a column name.}
 
-\item{\dots}{Passes on arguments from \code{[} to \code{getCol}.
-\code{getCol} itself does not make use of it.}
+\item{\dots}{Arguments passed on to \code{getCol} (only used by the extract
+operator).}
 }
 \value{
 Returns a vector or a \code{\link{list}} in case of a
  \code{\link{list}} column.
 }
 \description{
-Queries the values of a column of a \code{\link{DTSg}} object.
+Queries the values of a column of a \code{\link{DTSg}} object. The extract
+ operator (\code{[}) acts as a shortcut for \code{getCol}.
 }
 \examples{
 # new DTSg object

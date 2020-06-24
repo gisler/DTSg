@@ -22,8 +22,7 @@
 \item{i}{An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the \code{i}
 argument of \code{\link[data.table]{data.table}}. Filter expressions can
-contain the special symbol \code{.N}. See
-(\code{\link[data.table]{special-symbols}}) for further information.}
+contain the special symbol \code{\link[data.table:special-symbols]{.N}}.}
 
 \item{cols}{A character vector specifying the columns to select. The
 \emph{.dateTime} column is always selected and cannot be part of it.}
@@ -80,6 +79,6 @@ subset(x = x, i = 1:2, funby = function(x, ...) {data.table::year(x)})
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
- \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
+ \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
  \code{\link{TALFs}}, \code{\link{alter}}
 }
