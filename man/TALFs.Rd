@@ -85,18 +85,18 @@ by_____S(.dateTime, .helpers)
 \arguments{
 \item{.dateTime}{A \code{\link{POSIXct}} vector.}
 
-\item{.helpers}{A list with helper data as handed over by \code{\link{DTSg}}
-objects' \code{\link{aggregate}} method.}
+\item{.helpers}{A \code{\link{list}} with helper data as handed over by
+\code{\link{DTSg}} objects' \code{\link{aggregate}} method.}
 }
 \value{
 All functions return a \code{\link{POSIXct}} vector with timestamps
  corresponding to the function's temporal aggregation level.
 }
 \description{
-Simply specify one of these functions as \code{funby} argument of
- \code{\link{DTSg}} objects' \code{\link{aggregate}} method. The method does
- the rest of the work. See details for further information. Other uses are
- possible, but not recommended.
+Simply hand over one of these functions to the \code{funby} argument of one
+ of the methods (e.g. \code{\link{aggregate}}) of \code{\link{DTSg}} objects
+ which support it. The method does the rest of the work. See details for
+ further information. Other uses are possible, but not recommended.
 }
 \details{
 There are two families of temporal aggregation level functions. The
@@ -131,6 +131,7 @@ By convention, the extracting family sets the year to 2199 and extracts a
  }
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{aggregate}},
- \code{\link[fasttime]{fastPOSIXct}}
+\code{\link{DTSg}}, \code{\link{aggregate}}, \code{\link{colapply}},
+ \code{\link{subset}}, \code{\link[fasttime]{fastPOSIXct}},
+ \code{\link{list}}, \code{\link{POSIXct}}
 }

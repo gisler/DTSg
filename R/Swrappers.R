@@ -372,12 +372,13 @@ getCol <- function(x, ...) {
 }
 #' Get Column Vector
 #'
-#' Queries the values of a column of a \code{\link{DTSg}} object.
+#' Queries the values of a column of a \code{\link{DTSg}} object. The extract
+#'  operator (\code{[}) acts as a shortcut for \code{getCol}.
 #'
-#' @param x A \code{\link{DTSg}} object (S3 method only).
+#' @param x A \code{\link{DTSg}} object (\code{getCol} S3 method only).
 #' @param col A character string specifying a column name.
-#' @param \dots Passes on arguments from \code{[} to \code{getCol}.
-#'  \code{getCol} itself does not make use of it.
+#' @param \dots Arguments passed on to \code{getCol} (only used by the extract
+#'  operator).
 #'
 #' @return Returns a vector or a \code{\link{list}} in case of a
 #'  \code{\link{list}} column.
@@ -719,13 +720,13 @@ setCols <- function(x, ...) {
 #' @param i An integerish vector indexing rows (positive numbers pick and
 #'  negative numbers omit rows) or a filter expression accepted by the \code{i}
 #'  argument of \code{\link[data.table]{data.table}}. Filter expressions can
-#'  contain the special symbol \code{.N}. See
-#'  (\code{\link[data.table]{special-symbols}}) for further information.
+#'  contain the special symbol \code{\link[data.table:special-symbols]{.N}}.
 #' @param cols A character vector specifying the columns whose values shall be
 #'  set. The values of the \emph{.dateTime} column cannot be set.
-#' @param values A vector or list-like object of replacement and/or new values
+#' @param values A vector, \code{\link{list}} or list-like object (e.g.
+#'  \code{\link[data.table]{data.table}}) of replacement and/or new values
 #'  accepted by the \code{value} argument of \pkg{data.table}'s
-#'  \code{\link[data.table]{set}} function. \code{\link{NULL}} as a value
+#'  \code{\link[data.table:assign]{set}} function. \code{\link{NULL}} as a value
 #'  removes a column.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
@@ -734,8 +735,8 @@ setCols <- function(x, ...) {
 #' @return Returns a \code{\link{DTSg}} object.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
-#'  \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
-#'  \code{\link[data.table]{set}}, \code{\link{NULL}}
+#'  \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
+#'  \code{\link{list}}, \code{\link[data.table:assign]{set}}, \code{\link{NULL}}
 #'
 #' @examples
 #' # new DTSg object
@@ -762,8 +763,7 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' @param i An integerish vector indexing rows (positive numbers pick and
 #'  negative numbers omit rows) or a filter expression accepted by the \code{i}
 #'  argument of \code{\link[data.table]{data.table}}. Filter expressions can
-#'  contain the special symbol \code{.N}. See
-#'  (\code{\link[data.table]{special-symbols}}) for further information.
+#'  contain the special symbol \code{\link[data.table:special-symbols]{.N}}.
 #' @param cols A character vector specifying the columns to select. The
 #'  \emph{.dateTime} column is always selected and cannot be part of it.
 #' @param funby One of the temporal aggregation level functions described in
@@ -790,7 +790,7 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' @return Returns a \code{\link{DTSg}} object.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
-#'  \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
+#'  \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
 #'  \code{\link{TALFs}}, \code{\link{alter}}
 #'
 #' @examples

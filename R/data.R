@@ -1,6 +1,7 @@
 #' Daily River Flows
 #'
-#' A dataset containing a fictional time series of daily river flows.
+#' A dataset containing a fictional time series of daily river flows with
+#'  implicitly missing values.
 #'
 #' @format
 #' A \code{\link[data.table]{data.table}} with 2169 rows and 2 columns:

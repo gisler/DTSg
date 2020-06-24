@@ -20,15 +20,15 @@
 \item{i}{An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the \code{i}
 argument of \code{\link[data.table]{data.table}}. Filter expressions can
-contain the special symbol \code{.N}. See
-(\code{\link[data.table]{special-symbols}}) for further information.}
+contain the special symbol \code{\link[data.table:special-symbols]{.N}}.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
 set. The values of the \emph{.dateTime} column cannot be set.}
 
-\item{values}{A vector or list-like object of replacement and/or new values
+\item{values}{A vector, \code{\link{list}} or list-like object (e.g.
+\code{\link[data.table]{data.table}}) of replacement and/or new values
 accepted by the \code{value} argument of \pkg{data.table}'s
-\code{\link[data.table]{set}} function. \code{\link{NULL}} as a value
+\code{\link[data.table:assign]{set}} function. \code{\link{NULL}} as a value
 removes a column.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
@@ -58,6 +58,6 @@ setCols(x = x, i = flow > 100, cols = "flow", values = 100)
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
- \code{\link[data.table]{special-symbols}}, \code{\link{cols}},
- \code{\link[data.table]{set}}, \code{\link{NULL}}
+ \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
+ \code{\link{list}}, \code{\link[data.table:assign]{set}}, \code{\link{NULL}}
 }
