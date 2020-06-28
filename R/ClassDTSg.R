@@ -246,14 +246,6 @@ DTSg <- R6Class(
       }
     },
 
-    determineLen = function(timestamps) {
-      if (!private$.isFast || timestamps < 1000L) {
-        timestamps
-      } else {
-        1000L
-      }
-    },
-
     determineFilter = function(i, expr) {
       tryCatch(
         {
@@ -279,6 +271,28 @@ DTSg <- R6Class(
       }
 
       from
+    },
+
+    determineFun = function(fun, isNames) {
+      if (!is.character(fun)) {
+        if (!testClass(fun, "list")) {
+          fun <- list(fun)
+        }
+        lapply(fun, assertFunction, .var.name = "fun' or 'fun[[i]]")
+      }
+      if (isNames && length(fun) > 1L) {
+        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
+      }
+
+      fun
+    },
+
+    determineLen = function(timestamps) {
+      if (!private$.isFast || timestamps < 1000L) {
+        timestamps
+      } else {
+        1000L
+      }
     },
 
     determineTo = function(to, from) {
@@ -321,17 +335,38 @@ DTSg <- R6Class(
     },
 
     multiLapply = function(.SD, funs, ...) {
-      if (testClass(funs, "list")) {
-        do.call(c, lapply(
-          .SD,
-          function(x, ...) {
-            lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
-          },
-          ... = ...
-        ))
+      do.call(c, lapply(
+        .SD,
+        function(x, ...) {
+          lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
+        },
+        ... = ...
+      ))
+    },
+
+    optiLapply = function(funs, cols, ...) {
+      funs <- rep(funs, length(cols))
+      cols <- rep(cols, each = length(funs) / length(cols))
+      if (!is.null(names(funs))) {
+        resultCols <- sprintf("%s.%s", cols, names(funs))
       } else {
-        lapply(.SD, funs, ...)
+        resultCols <- cols
       }
+
+      dotsToCharacter <- function(...) {
+        if (...length() > 0L) {
+          dots <- list(...)
+          dots <- sprintf("%s = %s", names(dots), dots)
+          sprintf(", %s", paste(dots, collapse = ", "))
+        } else {
+          ""
+        }
+      }
+
+      paste(
+        sprintf("%s = %s(%s%s)", resultCols, funs, cols, dotsToCharacter(...)),
+        collapse = ", "
+      )
     },
 
     rmGlobalReferences = function(addr) {
@@ -369,12 +404,7 @@ DTSg <- R6Class(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
       ), "P1")
-      if (testClass(fun, "list")) {
-        assertCharacter(names(fun), min.chars = 1L, any.missing = FALSE, unique = TRUE)
-        lapply(fun, assertFunction, .var.name = "fun[[i]]")
-      } else {
-        assertFunction(fun)
-      }
+      fun <- private$determineFun(fun, TRUE)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       qassert(n, "B1")
@@ -393,35 +423,69 @@ DTSg <- R6Class(
         ))
       }
 
+      if (is.character(fun)) {
+        text <- private$optiLapply(fun, cols, ...)
+
+        if (n) {
+          text <- sprintf(".(%s, %s)", text, ".n = .N")
+        } else {
+          text <- sprintf(".(%s)", text)
+        }
+      }
+
       if (n) {
         if (length(cols) > 1L) {
-          private$.values <- private$.values[
-            ,
-            c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-            .SDcols = cols
-          ]
+          if (is.character(fun)) {
+            private$.values <- private$.values[
+              ,
+              eval(parse(text = text)),
+              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
+            ]
+          } else {
+            private$.values <- private$.values[
+              ,
+              c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
+              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+              .SDcols = cols
+            ]
+          }
 
           message(".n column calculated from .dateTime column.")
         } else {
-          private$.values <- private$.values[
-            !is.na(get(cols)),
-            c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-            .SDcols = cols
-          ]
+          if (is.character(fun)) {
+            private$.values <- private$.values[
+              !is.na(get(cols)),
+              eval(parse(text = text)),
+              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
+            ]
+          } else {
+            private$.values <- private$.values[
+              !is.na(get(cols)),
+              c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
+              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+              .SDcols = cols
+            ]
+          }
 
           message(
             'Missing values are always stripped regardless of the value of a possible "na.rm" argument.'
           )
         }
       } else {
-        private$.values <- private$.values[
-          ,
-          private$multiLapply(.SD, fun, ...),
-          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-          .SDcols = cols
-        ]
+        if (is.character(fun)) {
+          private$.values <- private$.values[
+            ,
+            eval(parse(text = text)),
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
+          ]
+        } else {
+          private$.values <- private$.values[
+            ,
+            private$multiLapply(.SD, fun, ...),
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+            .SDcols = cols
+          ]
+        }
       }
 
       private$.isAggregated <- TRUE

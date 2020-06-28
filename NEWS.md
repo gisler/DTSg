@@ -4,6 +4,7 @@
 * Added `setCols` method: allows for setting the values of columns, adding columns to and/or removing columns from a `DTSg` object
 * Added `[` extract operator: acts as a shortcut for the `getCol` method
 * Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
+* `aggregate` method can benefit from `data.table`'s *GForce* optimisation now
 * Greatly sped up `nas` method
 * Temporal aggregation level functions supplied to the `funby` argument of the `colapply` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset` method).
 * `getCol` method now is capable of also querying the *.dateTime* column
