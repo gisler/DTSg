@@ -48,7 +48,7 @@ Set the values of columns, add columns to and/or remove columns from a
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# limit river flow to 100
+# cap river flows to 100
 ## R6 method
 x$setCols(i = flow > 100, cols = "flow", values = 100)
 
