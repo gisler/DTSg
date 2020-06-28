@@ -13,11 +13,14 @@ NULL
 #' @param funby One of the temporal aggregation level functions described in
 #'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
 #'  See details for further information.
-#' @param fun A summary \code{\link{function}} or a named \code{\link{list}} of
-#'  summary functions applied column-wise to all the values of the same temporal
-#'  aggregation level, for instance, \code{\link{mean}} or
-#'  \code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
-#'  must be of length one.
+#' @param fun A summary function, named \code{\link{list}} of summary functions
+#'  or named character vector specifying summary functions applied column-wise
+#'  to all the values of the same temporal aggregation level, for instance,
+#'  \code{\link{mean}}, \code{\link{list}(min = \link{min}, max = \link{max})}
+#'  or \code{c(sd = "\link{sd}", var = "\link{var}")}. Using a character vector
+#'  does not prevent \pkg{data.table} from using its
+#'  \emph{\link[data.table:datatable-optimize]{GForce}} optimisation. The return
+#'  value(s) must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to aggregate.
 #' @param n A logical specifying if a column named \emph{.n} giving the number
@@ -75,8 +78,9 @@ NULL
 #'
 #' @return Returns an aggregated \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{function}},
-#'  \code{\link{list}}, \code{\link{cols}}, \code{\link{POSIXct}}
+#' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
+#'  \emph{\link[data.table:datatable-optimize]{GForce}}, \code{\link{cols}},
+#'  \code{\link{POSIXct}}
 #'
 #' @examples
 #' # new DTSg object
