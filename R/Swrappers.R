@@ -88,17 +88,17 @@ NULL
 #'
 #' # mean yearly river flows
 #' ## R6 method
-#' x$aggregate(funby = byY_____, fun = mean, na.rm = TRUE)
+#' x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)
 #'
 #' ## S3 method
-#' aggregate(x = x, funby = byY_____, fun = mean, na.rm = TRUE)
+#' aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE)
 #'
-#' # minimum and maximum river flow per quarter
+#' # standard deviation and variance of river flows per quarter
 #' ## R6 method
-#' x$aggregate(funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+#' x$aggregate(funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
 #'
 #' ## S3 method
-#' aggregate(x = x, funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+#' aggregate(x = x, funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
 #'
 #' @aliases aggregate
 #'
@@ -746,7 +746,7 @@ setCols <- function(x, ...) {
 #' # new DTSg object
 #' x <- DTSg$new(values = flow)
 #'
-#' # limit river flow to 100
+#' # cap river flows to 100
 #' ## R6 method
 #' x$setCols(i = flow > 100, cols = "flow", values = 100)
 #'

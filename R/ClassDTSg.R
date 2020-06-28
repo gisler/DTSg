@@ -438,7 +438,7 @@ DTSg <- R6Class(
           if (is.character(fun)) {
             private$.values <- private$.values[
               ,
-              eval(parse(text = text)),
+              eval(str2expression(text)),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -455,7 +455,7 @@ DTSg <- R6Class(
           if (is.character(fun)) {
             private$.values <- private$.values[
               !is.na(get(cols)),
-              eval(parse(text = text)),
+              eval(str2expression(text)),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -475,7 +475,7 @@ DTSg <- R6Class(
         if (is.character(fun)) {
           private$.values <- private$.values[
             ,
-            eval(parse(text = text)),
+            eval(str2expression(text)),
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
           ]
         } else {
