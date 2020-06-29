@@ -764,11 +764,21 @@ DTSg <- R6Class(
         return(TS$merge(y = y, ... = ..., clone = FALSE))
       }
 
-      private$.values <- merge(
+      values <- merge(
         private$.values,
         y$values(TRUE),
         ...
       )
+      len <- private$determineLen(nrow(values))
+      assertPOSIXct(
+        values[[".dateTime"]][seq_len(len)],
+        any.missing = FALSE,
+        min.len = 1L,
+        unique = TRUE,
+        .var.name = sprintf('self$values(reference = TRUE)[[".dateTime"]][seq_len(%s)]', len)
+      )
+
+      private$.values <- values
 
       self$refresh()
       self$alter(clone = FALSE)
