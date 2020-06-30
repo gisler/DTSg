@@ -13,14 +13,15 @@ NULL
 #' @param funby One of the temporal aggregation level functions described in
 #'  \code{\link{TALFs}} or a user defined temporal aggregation level function.
 #'  See details for further information.
-#' @param fun A summary function, named \code{\link{list}} of summary functions
-#'  or named character vector specifying summary functions applied column-wise
-#'  to all the values of the same temporal aggregation level, for instance,
+#' @param fun A summary function, \code{\link{list}} of summary functions or
+#'  character vector specifying summary functions applied column-wise to all the
+#'  values of the same temporal aggregation level, for instance,
 #'  \code{\link{mean}}, \code{\link{list}(min = \link{min}, max = \link{max})}
-#'  or \code{c(sd = "\link{sd}", var = "\link{var}")}. Using a character vector
-#'  does not prevent \pkg{data.table} from using its
-#'  \emph{\link[data.table:datatable-optimize]{GForce}} optimisation. The return
-#'  value(s) must be of length one.
+#'  or \code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character
+#'  vector must have names in case more than one summary function is provided.
+#'  The method can benefit from \pkg{data.table}'s
+#'  \emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
+#'  character vector is used. The return value(s) must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to aggregate.
 #' @param n A logical specifying if a column named \emph{.n} giving the number
@@ -730,7 +731,7 @@ setCols <- function(x, ...) {
 #' @param values A vector, \code{\link{list}} or list-like object (e.g.
 #'  \code{\link[data.table]{data.table}}) of replacement and/or new values
 #'  accepted by the \code{value} argument of \pkg{data.table}'s
-#'  \code{\link[data.table:assign]{set}} function. \code{\link{NULL}} as a value
+#'  \code{\link[data.table:assign]{set}} function. \code{NULL} as a value
 #'  removes a column.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
@@ -740,7 +741,7 @@ setCols <- function(x, ...) {
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
 #'  \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
-#'  \code{\link{list}}, \code{\link[data.table:assign]{set}}, \code{\link{NULL}}
+#'  \code{\link{list}}, \code{\link[data.table:assign]{set}}
 #'
 #' @examples
 #' # new DTSg object

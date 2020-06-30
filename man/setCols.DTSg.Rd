@@ -28,7 +28,7 @@ set. The values of the \emph{.dateTime} column cannot be set.}
 \item{values}{A vector, \code{\link{list}} or list-like object (e.g.
 \code{\link[data.table]{data.table}}) of replacement and/or new values
 accepted by the \code{value} argument of \pkg{data.table}'s
-\code{\link[data.table:assign]{set}} function. \code{\link{NULL}} as a value
+\code{\link[data.table:assign]{set}} function. \code{NULL} as a value
 removes a column.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
@@ -59,5 +59,5 @@ setCols(x = x, i = flow > 100, cols = "flow", values = 100)
 \seealso{
 \code{\link{DTSg}}, \code{\link[data.table]{data.table}},
  \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
- \code{\link{list}}, \code{\link[data.table:assign]{set}}, \code{\link{NULL}}
+ \code{\link{list}}, \code{\link[data.table:assign]{set}}
 }

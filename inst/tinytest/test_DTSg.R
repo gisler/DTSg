@@ -144,8 +144,8 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
-  setkey(DT2[3L, -4L, with = FALSE], "date"),
+  DTSg$new(DT2[, -4L])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, -4L], "date"),
   info = "values are altered correctly (multiple columns and implicitly missing values)"
 )
 
@@ -805,7 +805,7 @@ expect_error(
 #### summary method ####
 expect_identical(
   DTSg$new(DT1)$summary(),
-  summary(DT1[, -1L, with = FALSE]),
+  summary(DT1[, -1L]),
   info = "values are summarised correctly"
 )
 
