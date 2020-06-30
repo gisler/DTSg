@@ -155,9 +155,9 @@ A \code{DTSg} object has the following fields or properties as they are often
      time series. When set, the series is converted to the specified time
      zone. Only names from \code{\link{OlsonNames}} are accepted.
    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
-     of the primary axis of plots if the \emph{parameter} field is set.
+     of the primary axis of plots when the \emph{parameter} field is set.
    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-     label of the primary axis of plots if the \emph{parameter} field is set.
+     label of the primary axis of plots when the \emph{parameter} field is set.
  }
 
 The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially

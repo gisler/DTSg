@@ -23,14 +23,15 @@
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 See details for further information.}
 
-\item{fun}{A summary function, named \code{\link{list}} of summary functions
-or named character vector specifying summary functions applied column-wise
-to all the values of the same temporal aggregation level, for instance,
+\item{fun}{A summary function, \code{\link{list}} of summary functions or
+character vector specifying summary functions applied column-wise to all the
+values of the same temporal aggregation level, for instance,
 \code{\link{mean}}, \code{\link{list}(min = \link{min}, max = \link{max})}
-or \code{c(sd = "\link{sd}", var = "\link{var}")}. Using a character vector
-does not prevent \pkg{data.table} from using its
-\emph{\link[data.table:datatable-optimize]{GForce}} optimisation. The return
-value(s) must be of length one.}
+or \code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character
+vector must have names in case more than one summary function is provided.
+The method can benefit from \pkg{data.table}'s
+\emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
+character vector is used. The return value(s) must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 

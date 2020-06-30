@@ -117,9 +117,9 @@
 #'      time series. When set, the series is converted to the specified time
 #'      zone. Only names from \code{\link{OlsonNames}} are accepted.
 #'    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
-#'      of the primary axis of plots if the \emph{parameter} field is set.
+#'      of the primary axis of plots when the \emph{parameter} field is set.
 #'    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-#'      label of the primary axis of plots if the \emph{parameter} field is set.
+#'      label of the primary axis of plots when the \emph{parameter} field is set.
 #'  }
 #'
 #' The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially
@@ -344,7 +344,7 @@ DTSg <- R6Class(
       ))
     },
 
-    optiLapply = function(funs, cols, ...) {
+    optiLapply = function(funs, cols, n, ...) {
       funs <- rep(funs, length(cols))
       cols <- rep(cols, each = length(funs) / length(cols))
       if (!is.null(names(funs))) {
@@ -363,10 +363,16 @@ DTSg <- R6Class(
         }
       }
 
-      paste(
+      text <- paste(
         sprintf("%s = %s(%s%s)", resultCols, funs, cols, dotsToCharacter(...)),
         collapse = ", "
       )
+
+      if (n) {
+        sprintf(".(%s, %s)", text, ".n = .N")
+      } else {
+        sprintf(".(%s)", text)
+      }
     },
 
     rmGlobalReferences = function(addr) {
@@ -423,22 +429,12 @@ DTSg <- R6Class(
         ))
       }
 
-      if (is.character(fun)) {
-        text <- private$optiLapply(fun, cols, ...)
-
-        if (n) {
-          text <- sprintf(".(%s, %s)", text, ".n = .N")
-        } else {
-          text <- sprintf(".(%s)", text)
-        }
-      }
-
       if (n) {
         if (length(cols) > 1L) {
           if (is.character(fun)) {
             private$.values <- private$.values[
               ,
-              eval(str2expression(text)),
+              eval(parse(text = private$optiLapply(fun, cols, n, ...))),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -455,7 +451,7 @@ DTSg <- R6Class(
           if (is.character(fun)) {
             private$.values <- private$.values[
               !is.na(get(cols)),
-              eval(str2expression(text)),
+              eval(parse(text = private$optiLapply(fun, cols, n, ...))),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -475,7 +471,7 @@ DTSg <- R6Class(
         if (is.character(fun)) {
           private$.values <- private$.values[
             ,
-            eval(str2expression(text)),
+            eval(parse(text = private$optiLapply(fun, cols, n, ...))),
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
           ]
         } else {
@@ -562,8 +558,7 @@ DTSg <- R6Class(
       }
 
       if (na.status == "implicit") {
-        allNA <- rowSums(is.na(private$.values[, -1L, with = FALSE])) ==
-          ncol(private$.values) - 1L
+        allNA <- rowSums(is.na(private$.values[, -1L])) == ncol(private$.values) - 1L
 
         if (any(allNA)) {
           private$.values <- private$.values[!allNA, ]
@@ -661,7 +656,7 @@ DTSg <- R6Class(
         qassert(class, "S+")
 
         classes <- vapply(
-          private$.values[, -1L, with = FALSE],
+          private$.values[, -1L],
           function(col) {class(col)[1L]},
           character(1L)
         )
@@ -1017,8 +1012,7 @@ DTSg <- R6Class(
 
           DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
           lags <- diff(DT[[1L]])
-          if (sum(!is.na(DT[, -1L, with = FALSE])) ==
-              sum(!is.na(private$.values[seqLen, -1L, with = FALSE])) &&
+          if (sum(!is.na(DT[, -1L])) == sum(!is.na(private$.values[seqLen, -1L])) &&
               all(lags >= private$.minLag) && all(lags <= private$.maxLag)) {
             private$.periodicity <- by
 
