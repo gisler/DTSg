@@ -89,22 +89,50 @@ x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 ## S3 method
 colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
-# calculate moving averages with the help of 'runner'
+# calculate moving averages with the help of 'runner' (all four given
+# approaches provide the same result with explicitly missing timestamps)
 if (requireNamespace("runner", quietly = TRUE)) {
-  wrapper <- function(x, f, k, lag, ...) {
-    runner::runner(x, f, k, lag)
-  }
-  wrapper2 <- function(x, f, k, lag, .helpers) {
-    runner::runner(x, f, k, lag, .helpers[[".dateTime"]])
+  wrapper <- function(..., .helpers) {
+    runner::runner(..., idx = .helpers[[".dateTime"]])
   }
 
   ## R6 method
-  x$colapply(fun = wrapper , f = mean, k = 5       , lag = -2       )
-  x$colapply(fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+  x$colapply(fun = runner::runner, f = mean, k = 5       , lag = -2       )
+  x$colapply(fun = wrapper       , f = mean, k = "5 days", lag = "-2 days")
+  x$colapply(
+    fun = runner::runner,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days",
+    idx = x$getCol(col = ".dateTime")
+  )
+  x$colapply(
+    fun = runner::runner,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days",
+    idx = x[".dateTime"]
+  )
 
   ## S3 method
-  colapply(x = x, fun = wrapper , f = mean, k = 5       , lag = -2       )
-  colapply(x = x, fun = wrapper2, f = mean, k = "5 days", lag = "-2 days")
+  colapply(x = x, fun = runner::runner, f = mean, k = 5       , lag = -2       )
+  colapply(x = x, fun = wrapper       , f = mean, k = "5 days", lag = "-2 days")
+  colapply(
+    x = x,
+    fun = runner::runner,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days",
+    idx = getCol(x = x, col = ".dateTime")
+  )
+  colapply(
+    x = x,
+    fun = runner::runner,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days",
+    idx = x[".dateTime"]
+  )
 }
 
 }

@@ -59,14 +59,14 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 
 #' Temporal Aggregation Level Functions
 #'
-#' Simply specify one of these functions as \code{funby} argument of
-#'  \code{\link{DTSg}} objects' \code{\link{aggregate}} method. The method does
-#'  the rest of the work. See details for further information. Other uses are
-#'  possible, but not recommended.
+#' Simply hand over one of these functions to the \code{funby} argument of one
+#'  of the methods (e.g. \code{\link{aggregate}}) of \code{\link{DTSg}} objects
+#'  which support it. The method does the rest of the work. See details for
+#'  further information. Other uses are possible, but not recommended.
 #'
 #' @param .dateTime A \code{\link{POSIXct}} vector.
-#' @param .helpers A list with helper data as handed over by \code{\link{DTSg}}
-#'  objects' \code{\link{aggregate}} method.
+#' @param .helpers A \code{\link{list}} with helper data as handed over by
+#'  \code{\link{DTSg}} objects' \code{\link{aggregate}} method.
 #'
 #' @details
 #' There are two families of temporal aggregation level functions. The
@@ -103,8 +103,9 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @return All functions return a \code{\link{POSIXct}} vector with timestamps
 #'  corresponding to the function's temporal aggregation level.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{aggregate}},
-#'  \code{\link[fasttime]{fastPOSIXct}}
+#' @seealso \code{\link{DTSg}}, \code{\link{aggregate}}, \code{\link{colapply}},
+#'  \code{\link{subset}}, \code{\link[fasttime]{fastPOSIXct}},
+#'  \code{\link{list}}, \code{\link{POSIXct}}
 #'
 #' @name TALFs
 NULL

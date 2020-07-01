@@ -83,10 +83,10 @@ Due to the \code{\link{POSIXct}} nature of the \emph{.dateTime} column, the
  objects. In order to prevent at least some of the possible precision issues,
  the lags in seconds between subsequent timestamps are rounded to
  microseconds during integrity checks. This corresponds to the maximum value
- allowed in \code{\link{options}("digits.secs")}. As a consequence, time
+ allowed for \code{\link{options}("digits.secs")}. As a consequence, time
  series with a sub-second accuracy higher than a microsecond will never work.
 
-Some of the methods which take a \code{\link{function}} as an argument
+Some of the methods which take a function as an argument
  (\code{\link{colapply}} and \code{\link{rollapply}}) hand over to it an
  additional \code{\link{list}} argument called \code{.helpers} containing
  useful data for the development of user defined functions (see the
@@ -159,9 +159,9 @@ A \code{DTSg} object has the following fields or properties as they are often
      time series. When set, the series is converted to the specified time
      zone. Only names from \code{\link{OlsonNames}} are accepted.
    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
-     of the primary axis of plots if the \emph{parameter} field is set.
+     of the primary axis of plots when the \emph{parameter} field is set.
    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-     label of the primary axis of plots if the \emph{parameter} field is set.
+     label of the primary axis of plots when the \emph{parameter} field is set.
  }
 
 The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially
@@ -192,6 +192,5 @@ new(Class = "DTSg", values = flow, ID = "River Flow")
 \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
- \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{function}},
- \code{\link{list}}
+ \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{list}}
 }

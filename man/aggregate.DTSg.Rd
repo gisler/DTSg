@@ -23,11 +23,15 @@
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 See details for further information.}
 
-\item{fun}{A summary \code{\link{function}} or a named \code{\link{list}} of
-summary functions applied column-wise to all the values of the same temporal
-aggregation level, for instance, \code{\link{mean}} or
-\code{\link{list}(min = \link{min}, max = \link{max})}. The return value(s)
-must be of length one.}
+\item{fun}{A summary function, \code{\link{list}} of summary functions or
+character vector specifying summary functions applied column-wise to all the
+values of the same temporal aggregation level, for instance,
+\code{\link{mean}}, \code{\link{list}(min = \link{min}, max = \link{max})}
+or \code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character
+vector must have names in case more than one summary function is provided.
+The method can benefit from \pkg{data.table}'s
+\emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
+character vector is used. The return value(s) must be of length one.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -104,20 +108,21 @@ x <- DTSg$new(values = flow)
 
 # mean yearly river flows
 ## R6 method
-x$aggregate(funby = byY_____, fun = mean, na.rm = TRUE)
+x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)
 
 ## S3 method
-aggregate(x = x, funby = byY_____, fun = mean, na.rm = TRUE)
+aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE)
 
-# minimum and maximum river flow per quarter
+# standard deviation and variance of river flows per quarter
 ## R6 method
-x$aggregate(funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+x$aggregate(funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
 
 ## S3 method
-aggregate(x = x, funby = byYQ____, fun = list(min = min, max = max), na.rm = TRUE)
+aggregate(x = x, funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{function}},
- \code{\link{list}}, \code{\link{cols}}, \code{\link{POSIXct}}
+\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
+ \emph{\link[data.table:datatable-optimize]{GForce}}, \code{\link{cols}},
+ \code{\link{POSIXct}}
 }
