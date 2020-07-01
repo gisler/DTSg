@@ -17,7 +17,7 @@
 argument of \code{\link{grep}}.}
 
 \item{\dots}{Further arguments passed on to \code{\link{grep}}. The
-\code{value} argument is not allowed here.}
+\code{value} argument is rejected.}
 }
 \value{
 Returns a character vector.

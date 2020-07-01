@@ -127,12 +127,12 @@ TS$
   summary()
 
 # undo the interpolation (requires additional access to the interpolated column
-# which is accomplished with the help of the getCol method and the freely chosen
-# y argument)
+# which is accomplished with the help of the getCol method or its shortcut [ and
+# the freely chosen y argument)
 TS$
   colapply(
     function(x, y, ...) {ifelse(y, NA, x)},
-    y = TS$getCol("interpolated")
+    y = TS$getCol("interpolated") # or 'y = TS["interpolated"]'
   )$
   summary()
 ```

@@ -17,9 +17,30 @@ expect_identical(
 )
 
 expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, "mean")$values(TRUE),
+  data.table(
+    .dateTime = seq(
+      as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
+      as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
+      "1 hour"
+    ),
+    col1 = c( 2, 6, 10, 14),
+    col2 = c(NA, 6, 10, 14),
+    key = ".dateTime"
+  ),
+  info = "values are aggregated correctly (multiple columns and single character function)"
+)
+
+expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, mean, cols = "col2", n = TRUE)$values(TRUE)[[".n"]],
   c(1L, 2L, 2L, 2L),
   info = ".n is correct (single column and function)"
+)
+
+expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, "mean", cols = "col2", n = TRUE)$values(TRUE)[[".n"]],
+  c(1L, 2L, 2L, 2L),
+  info = ".n is correct (single column and character function)"
 )
 
 expect_identical(
@@ -41,9 +62,33 @@ expect_identical(
 )
 
 expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, c(mean = "mean", sum = "sum"), n = TRUE)$values(TRUE),
+  data.table(
+    .dateTime = seq(
+      as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
+      as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
+      "1 hour"
+    ),
+    col1.mean = c( 2, 6 , 10, 14),
+    col1.sum  = c( 4, 12, 20, 28),
+    col2.mean = c(NA, 6 , 10, 14),
+    col2.sum  = c(NA, 12, 20, 28),
+    .n = rep(2L, 4),
+    key = ".dateTime"
+  ),
+  info = "values are aggregated correctly and .n is correct (multiple columns and character functions)"
+)
+
+expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, mean, na.rm = TRUE)$values(TRUE)[["col2"]],
   c(1, 6, 10, 14),
   info = '"..." passes on arguments correctly (single function)'
+)
+
+expect_identical(
+  DTSg$new(DT1)$aggregate(byYmdH__, "mean", na.rm = TRUE)$values(TRUE)[["col2"]],
+  c(1, 6, 10, 14),
+  info = '"..." passes on arguments correctly (single character function)'
 )
 
 expect_identical(
@@ -54,6 +99,16 @@ expect_identical(
   )$values(TRUE)[["col2.sum"]],
   c(1, 12, 20, 28),
   info = '"..." passes on arguments correctly (multiple functions)'
+)
+
+expect_identical(
+  DTSg$new(DT1)$aggregate(
+    byYmdH__,
+    c(mean = "mean", sum = "sum"),
+    na.rm = TRUE
+  )$values(TRUE)[["col2.sum"]],
+  c(1, 12, 20, 28),
+  info = '"..." passes on arguments correctly (multiple character functions)'
 )
 
 expect_true(
@@ -89,8 +144,8 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT2[, -4L, with = FALSE])$alter(na.status = "implicit")$values(),
-  setkey(DT2[3L, -4L, with = FALSE], "date"),
+  DTSg$new(DT2[, -4L])$alter(na.status = "implicit")$values(),
+  setkey(DT2[3L, -4L], "date"),
   info = "values are altered correctly (multiple columns and implicitly missing values)"
 )
 
@@ -268,7 +323,16 @@ expect_error(
 expect_identical(
   DTSg$new(DT1)$getCol("col2"),
   DT1[["col2"]],
-  info = "column is returned correctly"
+  info = "column is returned correctly (getCol)"
+)
+
+expect_identical(
+  {
+    TS <- DTSg$new(DT1)
+    TS["col2"]
+  },
+  DT1[["col2"]],
+  info = "column is returned correctly ([)"
 )
 
 #### initialize method ####
@@ -748,7 +812,7 @@ expect_error(
 #### summary method ####
 expect_identical(
   DTSg$new(DT1)$summary(),
-  summary(DT1[, -1L, with = FALSE]),
+  summary(DT1[, -1L]),
   info = "values are summarised correctly"
 )
 
