@@ -1,7 +1,7 @@
 ## DTSg v0.5.0.9000
 
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
-* Added `setCols` method: allows for setting the values of columns, adding columns to and/or removing columns from a `DTSg` object
+* Added `setCols` method: allows for setting the values of columns of, adding columns to and/or removing columns from a `DTSg` object
 * Added `[` extract operator: acts as a shortcut for the `getCol` method
 * Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
 * `aggregate` method can benefit from `data.table`'s *GForce* optimisation now if its `fun` argument is provided with a character vector specifying summary functions
