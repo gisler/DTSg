@@ -91,7 +91,8 @@ colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
 
 # calculate moving averages with the help of 'runner' (all four given
 # approaches provide the same result with explicitly missing timestamps)
-if (requireNamespace("runner", quietly = TRUE)) {
+if (requireNamespace("runner", quietly = TRUE) &&
+    packageVersion("runner") >= numeric_version("0.3.5")) {
   wrapper <- function(..., .helpers) {
     runner::runner(..., idx = .helpers[[".dateTime"]])
   }
