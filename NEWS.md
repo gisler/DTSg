@@ -1,10 +1,10 @@
-## DTSg v0.5.0.9000
+## DTSg v0.6.0
 
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
 * Added `setCols` method: allows for setting the values of columns of, adding columns to and/or removing columns from a `DTSg` object
 * Added `[` extract operator: acts as a shortcut for the `getCol` method
 * Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
-* `aggregate` method can benefit from `data.table`'s *GForce* optimisation now if its `fun` argument is provided with a character vector specifying summary functions
+* `aggregate` method can benefit from `data.table`'s *GForce* optimisation now when its `fun` argument is provided with a character vector specifying summary functions
 * Greatly sped up `nas` method
 * Temporal aggregation level functions supplied to the `funby` argument of the `colapply` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset` method).
 * `getCol` method now is capable of also querying the *.dateTime* column
