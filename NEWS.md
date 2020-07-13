@@ -1,3 +1,5 @@
+## DTSg v0.6.0.9000
+
 ## DTSg v0.6.0
 
 * Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
