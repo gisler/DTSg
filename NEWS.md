@@ -1,6 +1,6 @@
 ## DTSg v0.6.0.9000
 
-* Added `rowapply` method: allows for applying functions to `DTSg` objects row-wise
+* Added `rowaggregate` method: allows for applying summary functions row-wise to `DTSg` objects
 * Added `rowbind` method: allows for combining the rows of `DTSg` objects
 * Added `setColNames` method: allows for renaming columns of `DTSg` objects
 * Minor internal code improvements

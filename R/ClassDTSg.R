@@ -77,7 +77,7 @@
 #'    \item \code{refresh}: See \code{\link{refresh}} for further information.
 #'    \item \code{rollapply}: See \code{\link{rollapply}} for further
 #'      information.
-#'    \item \code{rowapply}: See \code{\link{rowapply}} for further information.
+#'    \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further information.
 #'    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
 #'    \item \code{setColNames}: See \code{\link{setColNames}} for further
 #'      information.
@@ -347,13 +347,15 @@ DTSg <- R6Class(
       ))
     },
 
-    optiLapply = function(funs, cols, n, ...) {
-      funs <- rep(funs, length(cols))
-      cols <- rep(cols, each = length(funs) / length(cols))
-      if (!is.null(names(funs))) {
-        resultCols <- sprintf("%s.%s", cols, names(funs))
-      } else {
-        resultCols <- cols
+    optiLapply = function(funs, cols, resultCols, n, ...) {
+      if (is.null(resultCols)) {
+        funs <- rep(funs, length(cols))
+        cols <- rep(cols, each = length(funs) / length(cols))
+        if (!is.null(names(funs))) {
+          resultCols <- sprintf("%s.%s", cols, names(funs))
+        } else {
+          resultCols <- cols
+        }
       }
 
       dotsToCharacter <- function(...) {
@@ -372,9 +374,9 @@ DTSg <- R6Class(
       )
 
       if (n) {
-        sprintf(".(%s, %s)", text, ".n = .N")
+        sprintf("list(%s, %s)", text, ".n = .N")
       } else {
-        sprintf(".(%s)", text)
+        sprintf("list(%s)", text)
       }
     },
 
@@ -437,7 +439,7 @@ DTSg <- R6Class(
           if (testClass(fun, "character")) {
             private$.values <- private$.values[
               ,
-              eval(parse(text = private$optiLapply(fun, cols, n, ...))),
+              eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -454,7 +456,7 @@ DTSg <- R6Class(
           if (testClass(fun, "character")) {
             private$.values <- private$.values[
               !is.na(get(cols)),
-              eval(parse(text = private$optiLapply(fun, cols, n, ...))),
+              eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
@@ -474,7 +476,7 @@ DTSg <- R6Class(
         if (testClass(fun, "character")) {
           private$.values <- private$.values[
             ,
-            eval(parse(text = private$optiLapply(fun, cols, n, ...))),
+            eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
           ]
         } else {
@@ -1146,7 +1148,7 @@ DTSg <- R6Class(
       invisible(self)
     },
 
-    rowapply = function(
+    rowaggregate = function(
       resultCols,
       fun,
       ...,
@@ -1170,7 +1172,7 @@ DTSg <- R6Class(
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
-        return(TS$rowapply(
+        return(TS$rowaggregate(
           resultCols = resultCols,
           fun = fun,
           ... = ...,
@@ -1179,17 +1181,32 @@ DTSg <- R6Class(
         ))
       }
 
-      private$.values[
-        ,
-        (resultCols) := lapply(
-          fun,
-          function(fun, x, ...) {fun(x, ...)},
-          x = unlist(.SD),
-          ... = ...
-        ),
-        by = seq_len(private$.timestamps),
-        .SDcols = cols
-      ]
+      if (testClass(fun, "character")) {
+        private$.values[
+          ,
+          (resultCols) := eval(parse(text = private$optiLapply(
+            fun,
+            "unlist(.SD)",
+            resultCols,
+            FALSE,
+            ...
+          ))),
+          by = seq_len(private$.timestamps),
+          .SDcols = cols
+        ]
+      } else {
+        private$.values[
+          ,
+          (resultCols) := lapply(
+            fun,
+            function(fun, x, ...) {fun(x, ...)},
+            x = unlist(.SD),
+            ... = ...
+          ),
+          by = seq_len(private$.timestamps),
+          .SDcols = cols
+        ]
+      }
 
       invisible(self)
     },
