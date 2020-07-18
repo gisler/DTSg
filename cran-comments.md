@@ -1,25 +1,26 @@
 ## Minor Release
 
-* Added `getCol` method: allows for querying the values of a single column of a `DTSg` object
-* Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
-* Added `na.status` argument to `new` and `alter` methods: allows for making missing values either `"explicit"` (default) or `"implicit"` or leaving them alone via `"undecided"`
-* Added `na.status` field reflecting the status of missing values
-* Added `na.status` also to the `list` of helper data passed on to temporal aggregation level funtions
-* `funby` argument of `aggregate` method now also accepts a named `list` of functions: allows for calculating several summary statistics at once
-* `periodicity` field can now be actively set in order to change the periodicity of the time series
-* `timezone` field can now be actively set in order to convert the time zone of the series
-* Fixed that a `DTSg` object with only one timestamp accepted a missing value in its *.dateTime* column
+* Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
+* Added `setCols` method: allows for setting the values of columns of, adding columns to and/or removing columns from a `DTSg` object
+* Added `[` extract operator: acts as a shortcut for the `getCol` method
+* Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
+* `aggregate` method can benefit from `data.table`'s *GForce* optimisation now when its `fun` argument is provided with a character vector specifying summary functions
+* Greatly sped up `nas` method
+* Temporal aggregation level functions supplied to the `funby` argument of the `colapply` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset` method).
+* `getCol` method now is capable of also querying the *.dateTime* column
+* `R6Method` argument of `S3WrapperGenerator` now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression
+* Fixed that not all missing values were made explicit after a call to the `merge` method despite an `"explicit"` `na.status` in some cases
+* Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default
 * Improved vignettes and documentation
 * Minor internal code improvements
 
 ## Test Environments
 
-* local Windows (3.5.3)
-* local Windows (4.0.1)
+* local Linux (4.0.2)
 * Linux on Travis CI (3.6.3)
 * Linux on Travis CI (4.0.0)
 * OS X on Travis CI (3.6.3)
-* OS X on Travis CI (4.0.0)
+* OS X on Travis CI (4.0.2)
 * win-builder (devel)
 
 ## R CMD Check Results
