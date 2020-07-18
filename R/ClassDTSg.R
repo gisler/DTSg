@@ -252,8 +252,8 @@ DTSg <- R6Class(
     determineFilter = function(i, expr) {
       tryCatch(
         {
-          if (!testMultiClass(i, c("integer", "numeric")) &&
-              !is.list(i) && !is.expression(i)) {
+          if (!testMultiClass(i, c("integer", "numeric")) && !is.expression(i) &&
+              !is.character(i) && !is.list(i)) {
             i <- expr
           }
 
