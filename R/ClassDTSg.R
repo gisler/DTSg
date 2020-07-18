@@ -277,7 +277,7 @@ DTSg <- R6Class(
     },
 
     determineFun = function(fun, isNames) {
-      if (!is.character(fun)) {
+      if (!testClass(fun, "character")) {
         if (!testClass(fun, "list")) {
           fun <- list(fun)
         }
@@ -434,7 +434,7 @@ DTSg <- R6Class(
 
       if (n) {
         if (length(cols) > 1L) {
-          if (is.character(fun)) {
+          if (testClass(fun, "character")) {
             private$.values <- private$.values[
               ,
               eval(parse(text = private$optiLapply(fun, cols, n, ...))),
@@ -451,7 +451,7 @@ DTSg <- R6Class(
 
           message(".n column calculated from .dateTime column.")
         } else {
-          if (is.character(fun)) {
+          if (testClass(fun, "character")) {
             private$.values <- private$.values[
               !is.na(get(cols)),
               eval(parse(text = private$optiLapply(fun, cols, n, ...))),
@@ -471,7 +471,7 @@ DTSg <- R6Class(
           )
         }
       } else {
-        if (is.character(fun)) {
+        if (testClass(fun, "character")) {
           private$.values <- private$.values[
             ,
             eval(parse(text = private$optiLapply(fun, cols, n, ...))),
@@ -646,7 +646,7 @@ DTSg <- R6Class(
     cols = function(class = NULL, pattern = NULL, ...) {
       cols <- names(private$.values)[-1L]
 
-      if (is.character(class) && length(class) == 1L && class == "all") {
+      if (testClass(class, "character") && length(class) == 1L && class == "all") {
         warning(
           paste(
             '"class = \'all\'" is deprecated.',
@@ -793,13 +793,13 @@ DTSg <- R6Class(
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
 
-      DTs <- list()
+      DTs <- vector("list", length(cols))
 
-      for (col in cols) {
-        if (anyNA(private$.values[[col]])) {
+      for (i in seq_along(cols)) {
+        if (anyNA(private$.values[[cols[i]]])) {
           DT <- private$.values[
             ,
-            .(.dateTime, .col = get(col), .group = rleid(get(col)))
+            .(.dateTime, .col = get(cols[i]), .group = rleid(get(cols[i])))
           ]
 
           DT <- DT[
@@ -808,19 +808,16 @@ DTSg <- R6Class(
             by = .(.col, .group = rleid(.group))
           ]
           DT[, .col := as.character(.col)]
-          DT[, .col := col]
+          DT[, .col := cols[i]]
 
-          DTs <- c(DTs, list(DT))
+          DTs[[i]] <- DT
         } else {
-          DTs <- c(
-            DTs,
-            list(data.table(
-              .col = character(),
-              .group = integer(),
-              .from = .POSIXct(numeric(), tz = private$.timezone),
-              .to = .POSIXct(numeric(), tz = private$.timezone),
-              .n = integer()
-            ))
+          DTs[[i]] <- data.table(
+            .col = character(),
+            .group = integer(),
+            .from = .POSIXct(numeric(), tz = private$.timezone),
+            .to = .POSIXct(numeric(), tz = private$.timezone),
+            .n = integer()
           )
         }
       }
