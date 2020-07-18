@@ -711,24 +711,27 @@ rollapply <- function(x, ...) {
 #' @export
 rollapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rollapply))
 
-#### rowapply ####
+#### rowaggregate ####
 #' @export
-rowapply <- function(x, ...) {
-  UseMethod("rowapply", x)
+rowaggregate <- function(x, ...) {
+  UseMethod("rowaggregate", x)
 }
-#' Apply Function(s) Row-wise
+#' Aggregate Values Row-wise
 #'
-#' Applies one or more arbitrary functions row-wise to selected columns of a
-#'  \code{\link{DTSg}} object.
+#' Applies one or more provided summary functions row-wise to selected columns
+#'  of a \code{\link{DTSg}} object.
 #'
 #' @param x A \code{\link{DTSg}} object (S3 method only).
 #' @param resultCols A character vector either of length one (names of
 #'  \code{fun} are appended in the case one or more functions are provided) or
 #'  the same length as \code{fun}.
-#' @param fun A \code{\link{function}} or a named \code{\link{list}} of
-#'  functions applied row-wise to all the values of the specified columns, for
-#'  instance, \code{\link{mean}} or \code{\link{list}(min = \link{min},
-#'  max = \link{max})}. The return value(s) must be of length one.
+#' @param fun A summary function, \code{\link{list}} of summary functions or
+#'  character vector specifying summary functions applied row-wise to all the
+#'  values of the specified columns, for instance, \code{\link{mean}},
+#'  \code{\link{list}(min = \link{min}, max = \link{max})} or
+#'  \code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character vector
+#'  must have names in case more than one summary function is provided. The
+#'  return value(s) must be of length one.
 #' @param \dots Further arguments passed on to \code{fun}.
 #' @param cols A character vector specifying the columns to apply \code{fun} to.
 #' @param clone A logical specifying if the object is modified in place or if a
@@ -736,8 +739,7 @@ rowapply <- function(x, ...) {
 #'
 #' @return Returns a \code{\link{DTSg}} object.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{function}}, \code{\link{list}},
-#'  \code{\link{cols}}
+#' @seealso \code{\link{DTSg}}, \code{\link{list}}, \code{\link{cols}}
 #'
 #' @examples
 #' # new DTSg object
@@ -750,10 +752,10 @@ rowapply <- function(x, ...) {
 #' ## S3 method
 #'
 #'
-#' @aliases rowapply
+#' @aliases rowaggregate
 #'
 #' @export
-rowapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowapply))
+rowaggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowaggregate))
 
 #### rowbind ####
 #' @export

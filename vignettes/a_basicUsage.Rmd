@@ -147,7 +147,7 @@ For a full explanation of all the methods and functions available in the package
 
 * *getCol*
 * *refresh*
-* *rowapply*
+* *rowaggregate*
 * *rowbind*
 * *setColNames*
 * *setCols*

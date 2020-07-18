@@ -113,7 +113,7 @@ A \code{DTSg} object has the following methods:
    \item \code{refresh}: See \code{\link{refresh}} for further information.
    \item \code{rollapply}: See \code{\link{rollapply}} for further
      information.
-   \item \code{rowapply}: See \code{\link{rowapply}} for further information.
+   \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further information.
    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
    \item \code{setColNames}: See \code{\link{setColNames}} for further
      information.
