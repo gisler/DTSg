@@ -62,19 +62,19 @@ Filter rows and/or select columns of a \code{\link{DTSg}} object.
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# filter for the last six rows
+# filter for the first six rows
 ## R6 method
-x$subset(i = (.N - 5):.N)
+x$subset(i = 1:6)
 
 ## S3 method
-subset(x = x, i = (.N - 5):.N)
+subset(x = x, i = 1:6)
 
-# filter for the first two observations per year
+# filter for the last two observations per year
 ## R6 method
-x$subset(i = 1:2, funby = function(x, ...) {data.table::year(x)})
+x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 
 ## S3 method
-subset(x = x, i = 1:2, funby = function(x, ...) {data.table::year(x)})
+subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 
 }
 \seealso{

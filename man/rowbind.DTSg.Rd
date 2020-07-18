@@ -25,14 +25,21 @@ Combines the rows of \code{\link{DTSg}} and other suitable objects.
 }
 \examples{
 # new DTSg object
-x <- DTSg$new(values = flow)
+x <- DTSg$new(values = flow[1:500, ])
 
-# check object integrity
+# combine rows
 ## R6 method
-
+x$rowbind(
+  list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+  flow[1501:.N, ]
+)
 
 ## S3 method
-
+rowbind(
+  x = x,
+  list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+  flow[1501:.N, ]
+)
 
 }
 \seealso{

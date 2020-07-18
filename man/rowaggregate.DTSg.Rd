@@ -45,14 +45,20 @@ Applies one or more provided summary functions row-wise to selected columns
 }
 \examples{
 # new DTSg object
-x <- DTSg$new(values = flow)
+DT <- data.table::data.table(
+  date = flow$date,
+  flow1 = flow$flow - rnorm(nrow(flow)),
+  flow2 = flow$flow,
+  flow3 = flow$flow + rnorm(nrow(flow))
+)
+x <- DTSg$new(values = DT)
 
-# check object integrity
+# mean and standard deviation of repeated measurements per timestamp
 ## R6 method
-
+x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))
 
 ## S3 method
-
+rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd))
 
 }
 \seealso{

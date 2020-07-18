@@ -94,12 +94,12 @@ NULL
 #' ## S3 method
 #' aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE)
 #'
-#' # standard deviation and variance of river flows per quarter
+#' # variance and standard deviation of river flows per quarter
 #' ## R6 method
-#' x$aggregate(funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
+#' x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
 #'
 #' ## S3 method
-#' aggregate(x = x, funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
+#' aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
 #'
 #' @aliases aggregate
 #'
@@ -743,14 +743,20 @@ rowaggregate <- function(x, ...) {
 #'
 #' @examples
 #' # new DTSg object
-#' x <- DTSg$new(values = flow)
+#' DT <- data.table::data.table(
+#'   date = flow$date,
+#'   flow1 = flow$flow - rnorm(nrow(flow)),
+#'   flow2 = flow$flow,
+#'   flow3 = flow$flow + rnorm(nrow(flow))
+#' )
+#' x <- DTSg$new(values = DT)
 #'
-#' # check object integrity
+#' # mean and standard deviation of repeated measurements per timestamp
 #' ## R6 method
-#'
+#' x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))
 #'
 #' ## S3 method
-#'
+#' rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd))
 #'
 #' @aliases rowaggregate
 #'
@@ -779,14 +785,21 @@ rowbind <- function(x, ...) {
 #'
 #' @examples
 #' # new DTSg object
-#' x <- DTSg$new(values = flow)
+#' x <- DTSg$new(values = flow[1:500, ])
 #'
-#' # check object integrity
+#' # combine rows
 #' ## R6 method
-#'
+#' x$rowbind(
+#'   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+#'   flow[1501:.N, ]
+#' )
 #'
 #' ## S3 method
-#'
+#' rowbind(
+#'   x = x,
+#'   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+#'   flow[1501:.N, ]
+#' )
 #'
 #' @aliases rowbind
 #'
@@ -923,19 +936,19 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' # new DTSg object
 #' x <- DTSg$new(values = flow)
 #'
-#' # filter for the last six rows
+#' # filter for the first six rows
 #' ## R6 method
-#' x$subset(i = (.N - 5):.N)
+#' x$subset(i = 1:6)
 #'
 #' ## S3 method
-#' subset(x = x, i = (.N - 5):.N)
+#' subset(x = x, i = 1:6)
 #'
-#' # filter for the first two observations per year
+#' # filter for the last two observations per year
 #' ## R6 method
-#' x$subset(i = 1:2, funby = function(x, ...) {data.table::year(x)})
+#' x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 #'
 #' ## S3 method
-#' subset(x = x, i = 1:2, funby = function(x, ...) {data.table::year(x)})
+#' subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})
 #'
 #' @aliases subset
 #'

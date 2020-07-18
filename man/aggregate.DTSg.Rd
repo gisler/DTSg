@@ -113,12 +113,12 @@ x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)
 ## S3 method
 aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE)
 
-# standard deviation and variance of river flows per quarter
+# variance and standard deviation of river flows per quarter
 ## R6 method
-x$aggregate(funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
+x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
 
 ## S3 method
-aggregate(x = x, funby = byYQ____, fun = c(sd = "sd", var = "var"), na.rm = TRUE)
+aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
 
 }
 \seealso{
