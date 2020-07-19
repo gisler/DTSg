@@ -129,6 +129,6 @@ aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE
 }
 \seealso{
 \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
- \emph{\link[data.table:datatable-optimize]{GForce}}, \code{\link{cols}},
- \code{\link{POSIXct}}
+ \code{\link{cols}}, \code{\link{POSIXct}},
+ \emph{\link[data.table:datatable-optimize]{GForce}}
 }

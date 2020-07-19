@@ -86,8 +86,8 @@ NULL
 #' @return Returns an aggregated \code{\link{DTSg}} object.
 #'
 #' @seealso \code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
-#'  \emph{\link[data.table:datatable-optimize]{GForce}}, \code{\link{cols}},
-#'  \code{\link{POSIXct}}
+#'  \code{\link{cols}}, \code{\link{POSIXct}},
+#'  \emph{\link[data.table:datatable-optimize]{GForce}}
 #'
 #' @examples
 #' # new DTSg object

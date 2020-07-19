@@ -113,7 +113,8 @@ A \code{DTSg} object has the following methods:
    \item \code{refresh}: See \code{\link{refresh}} for further information.
    \item \code{rollapply}: See \code{\link{rollapply}} for further
      information.
-   \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further information.
+   \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further
+     information.
    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
    \item \code{setColNames}: See \code{\link{setColNames}} for further
      information.
@@ -161,11 +162,12 @@ A \code{DTSg} object has the following fields or properties as they are often
    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
      of the primary axis of plots when the \emph{parameter} field is set.
    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-     label of the primary axis of plots when the \emph{parameter} field is set.
+     label of the primary axis of plots when the \emph{parameter} field is
+     set.
  }
 
 The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially
- useful for time series with one variable (value column) only.
+ useful for time series with a single variable (value column) only.
 }
 
 \section{Options}{

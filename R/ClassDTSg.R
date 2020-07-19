@@ -77,7 +77,8 @@
 #'    \item \code{refresh}: See \code{\link{refresh}} for further information.
 #'    \item \code{rollapply}: See \code{\link{rollapply}} for further
 #'      information.
-#'    \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further information.
+#'    \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further
+#'      information.
 #'    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
 #'    \item \code{setColNames}: See \code{\link{setColNames}} for further
 #'      information.
@@ -123,11 +124,12 @@
 #'    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
 #'      of the primary axis of plots when the \emph{parameter} field is set.
 #'    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-#'      label of the primary axis of plots when the \emph{parameter} field is set.
+#'      label of the primary axis of plots when the \emph{parameter} field is
+#'      set.
 #'  }
 #'
 #' The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially
-#'  useful for time series with one variable (value column) only.
+#'  useful for time series with a single variable (value column) only.
 #'
 #' @section Options:
 #' The behaviour of \code{DTSg} objects can be customised with the help of the
@@ -309,7 +311,15 @@ DTSg <- R6Class(
     },
 
     funbyHelpers = function(ignoreDST, multiplier, .helpers) {
+      qassert(.helpers, "L+")
       helpers <- names(.helpers)
+      assertCharacter(
+        helpers,
+        min.chars = 1L,
+        any.missing = FALSE,
+        unique = TRUE,
+        .var.name = "names(funbyHelpers)"
+      )
 
       if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
         stop(
@@ -422,7 +432,7 @@ DTSg <- R6Class(
       qassert(ignoreDST, "B1")
       # multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
       # .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
-      .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list())
+      .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
       qassert(funby(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
@@ -633,7 +643,7 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
-        .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list())
+        .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
           .funbyHelpers
@@ -1064,6 +1074,7 @@ DTSg <- R6Class(
       before <- assertCount(before, coerce = TRUE)
       after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
+      qassert(parameters, "L+")
       .cols <- private$determineCols(resultCols, suffix, cols)
       qassert(memoryOverCPU, "B1")
       qassert(clone, "B1")
@@ -1096,7 +1107,7 @@ DTSg <- R6Class(
         weights <- weights / sum(weights)
       }
 
-      .helpers = list(
+      .helpers <- list(
         before = before,
         after = after,
         windowSize = before + 1L + after,
@@ -1386,7 +1397,7 @@ DTSg <- R6Class(
         if (!is.null(funby)) {
           assertFunction(funby)
           qassert(ignoreDST, "B1")
-          .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list())
+          .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
             .funbyHelpers
