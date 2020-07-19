@@ -50,14 +50,14 @@ missing values.}
 Returns a \code{\link{DTSg}} object.
 }
 \description{
-Shortens, lengthens, subsets a complete range, changes the periodicity and/or
- the status of missing values of a \code{\link{DTSg}} object.
+Shortens, lengthens, filters for a consecutive range, changes the periodicity
+ and/or the status of missing values of a \code{\link{DTSg}} object.
 }
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# subset the first two years
+# filter for the first two years
 ## R6 method
 x$alter(from = "2007-01-01", to = "2008-12-31")
 
