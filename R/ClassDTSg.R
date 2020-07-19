@@ -239,7 +239,7 @@ DTSg <- R6Class(
           unique = TRUE
         )
 
-        assertNoBeginningDot(resultCols)
+        assertNoStartingDot(resultCols)
       } else if (!is.null(suffix)) {
         qassert(suffix, "S1")
 
@@ -708,7 +708,7 @@ DTSg <- R6Class(
         any.missing = FALSE,
         unique = TRUE
       )
-      assertNoBeginningDot(names(values)[-1L])
+      assertNoStartingDot(names(values)[-1L])
       qassert(swallow, "B1")
       na.status <- match.arg(na.status)
 
@@ -969,56 +969,54 @@ DTSg <- R6Class(
         private$.maxLag <- .difftime(0, units = "secs")
         private$.isRegular <- TRUE
         private$.periodicity <- "unrecognised"
-
-        return(invisible(self))
-      }
-
-      lags <- round(diff(private$.values[[1L]][seqLen]), 6L)
-
-      if (any(lags == 0)) {
-        stop(".dateTime column must not have any duplicates.", call. = FALSE)
-      }
-
-      private$.minLag <- min(lags)
-      private$.maxLag <- max(lags)
-      minLag <- as.numeric(private$.minLag, units = "secs")
-      maxLag <- as.numeric(private$.maxLag, units = "secs")
-
-      if (maxLag %% minLag == 0) {
-        private$.isRegular <- TRUE
-        private$.periodicity <- private$.minLag
       } else {
-        private$.isRegular <- FALSE
-        private$.periodicity <- "unrecognised"
+        lags <- round(diff(private$.values[[1L]][seqLen]), 6L)
 
-        from <- private$.values[[1L]][1L]
-        to   <- private$.values[[1L]][last(seqLen)]
+        if (any(lags == 0)) {
+          stop(".dateTime column must not have any duplicates.", call. = FALSE)
+        }
 
-        for (by in c(
-          sprintf("%s DSTdays", c(seq_len(15L), 21L, 28L, 30L)),
-          sprintf("%s months", c(seq_len(4L), 6L)),
-          sprintf("%s years", c(seq_len(15L), 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
-        )) {
-          if (mday(from) > 28L && grepl("^\\d+ (month|year)(s?)$", by)) {
-            DT <- data.table(
-              .dateTime = rollback(seq(
-                from,
-                to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
-                by
-              ), by),
-              key = ".dateTime"
-            )
-          } else {
-            DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
-          }
+        private$.minLag <- min(lags)
+        private$.maxLag <- max(lags)
+        minLag <- as.numeric(private$.minLag, units = "secs")
+        maxLag <- as.numeric(private$.maxLag, units = "secs")
 
-          DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
-          lags <- diff(DT[[1L]])
-          if (all(lags >= private$.minLag) && all(lags <= private$.maxLag) &&
-              sum(!is.na(DT[, -1L])) == sum(!is.na(private$.values[seqLen, -1L]))) {
-            private$.periodicity <- by
+        if (maxLag %% minLag == 0) {
+          private$.isRegular <- TRUE
+          private$.periodicity <- private$.minLag
+        } else {
+          private$.isRegular <- FALSE
+          private$.periodicity <- "unrecognised"
 
-            break
+          from <- private$.values[[1L]][1L]
+          to   <- private$.values[[1L]][last(seqLen)]
+
+          for (by in c(
+            sprintf("%s DSTdays", c(seq_len(15L), 21L, 28L, 30L)),
+            sprintf("%s months", c(seq_len(4L), 6L)),
+            sprintf("%s years", c(seq_len(15L), 20L, 25L, seq(30L, 70L, 10L), 75L, 80L, 90L, 100L))
+          )) {
+            if (mday(from) > 28L && grepl("^\\d+ (month|year)(s?)$", by)) {
+              DT <- data.table(
+                .dateTime = rollback(seq(
+                  from,
+                  to + diff(seq(to, by = "1 DSTday", length.out = 2L)),
+                  by
+                ), by),
+                key = ".dateTime"
+              )
+            } else {
+              DT <- data.table(.dateTime = seq(from, to, by), key = ".dateTime")
+            }
+
+            DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
+            lags <- diff(DT[[1L]])
+            if (all(lags >= private$.minLag) && all(lags <= private$.maxLag) &&
+                sum(!is.na(DT[, -1L])) == sum(!is.na(private$.values[seqLen, -1L]))) {
+              private$.periodicity <- by
+
+              break
+            }
           }
         }
       }
@@ -1163,7 +1161,7 @@ DTSg <- R6Class(
           resultCols <- sprintf("%s.%s", resultCols, names(fun))
         }
       }
-      assertNoBeginningDot(resultCols)
+      assertNoStartingDot(resultCols)
       assertDisjunct(resultCols, self$cols())
       fun <- private$determineFun(fun, length(fun) != length(resultCols))
       assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
@@ -1283,7 +1281,7 @@ DTSg <- R6Class(
         len = length(cols),
         unique = TRUE
       )
-      assertNoBeginningDot(values)
+      assertNoStartingDot(values)
 
       if (clone) {
         TS <- self$clone(deep = TRUE)
@@ -1312,7 +1310,7 @@ DTSg <- R6Class(
         min.len = 1L,
         unique = TRUE
       )
-      assertNoBeginningDot(cols)
+      assertNoStartingDot(cols)
       if (length(cols) == length(names(private$.values)) - 1L &&
           ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
           is.null(values))) {

@@ -55,10 +55,10 @@ assertNAstatusPeriodicityOK <- function(
   invisible(TRUE)
 }
 
-assertNoBeginningDot <- function(x) {
-  if (any(grepl("^\\.", x))) {
+assertNoStartingDot <- function(x) {
+  if (any(startsWith(x, "."))) {
     stop(
-      sprintf('"%s" must not begin with a ".".', deparse(substitute(x))),
+      sprintf('"%s" must not start with a ".".', deparse(substitute(x))),
       call. = FALSE
     )
   }
