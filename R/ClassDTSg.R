@@ -1184,7 +1184,7 @@ DTSg <- R6Class(
           ,
           (resultCols) := eval(parse(text = private$optiLapply(
             fun,
-            "unlist(.SD)",
+            "unlist(.SD, recursive = FALSE)",
             resultCols,
             FALSE,
             ...
@@ -1198,7 +1198,7 @@ DTSg <- R6Class(
           (resultCols) := lapply(
             fun,
             function(fun, x, ...) {fun(x, ...)},
-            x = unlist(.SD),
+            x = unlist(.SD, recursive = FALSE),
             ... = ...
           ),
           by = seq_len(private$.timestamps),

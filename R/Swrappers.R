@@ -751,7 +751,7 @@ rowaggregate <- function(x, ...) {
 #' )
 #' x <- DTSg$new(values = DT)
 #'
-#' # mean and standard deviation of repeated measurements per timestamp
+#' # mean and standard deviation of multiple measurements per timestamp
 #' ## R6 method
 #' x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))
 #'
