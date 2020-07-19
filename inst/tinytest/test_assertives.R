@@ -44,8 +44,8 @@ expect_error(
 #   info = 'undecided "na.status" returns warning'
 # )
 
-#### assertNoBeginningDot ####
+#### assertNoStartingDot ####
 expect_error(
-  assertNoBeginningDot(c("col1", ".col2", "col3")),
-  info = "column name with beginning dot returns error"
+  assertNoStartingDot(c("col1", ".col2", "col3")),
+  info = "column name with starting dot returns error"
 )

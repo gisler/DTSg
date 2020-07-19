@@ -93,7 +93,7 @@ TS$cols(pattern = "f.*w") # or 'cols(TS, pattern = "f.*w")'
 TS$cols(pattern = "temp")
 ```
 
-The time series reaches from the beginning of the year 2007 to the end of the year 2012. Let's say we are only interested in the first two years. With `alter` we can shorten, lengthen and/or change the periodicity of a `DTSg` object. The latter can be achieved through its `by` argument (no example given):
+The time series reaches from the start of the year 2007 to the end of the year 2012. Let's say we are only interested in the first two years. With `alter` we can shorten, lengthen and/or change the periodicity of a `DTSg` object. The latter can be achieved through its `by` argument (no example given):
 
 ```{r}
 TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
