@@ -3,7 +3,7 @@
 \name{subset.DTSg}
 \alias{subset.DTSg}
 \alias{subset}
-\title{Subset Time Series}
+\title{Time Series Subset}
 \usage{
 \method{subset}{DTSg}(
   x,
@@ -40,12 +40,7 @@ information.}
 \item{na.status}{A character string. Either \code{"explicit"}, which makes
 missing timestamps according to the recognised periodicity explicit, or
 \code{"implicit"}, which removes timestamps with missing values on all value
-columns. Please note that filtering rows and having or making missing
-timestamps explicit equals to setting the values of all other timestamps to
-missing. Its default value is therefore \code{"implicit"}. To simply subset
-a complete range of a \code{\link{DTSg}} object while leaving
-\code{na.status} untouched, \code{\link{alter}} is probably the better
-choice.}
+columns. See details for further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
@@ -57,6 +52,14 @@ Returns a \code{\link{DTSg}} object.
 }
 \description{
 Filter rows and/or select columns of a \code{\link{DTSg}} object.
+}
+\details{
+Please note that filtering rows and having or making missing timestamps
+ explicit equals to setting the values of all other timestamps to missing.
+ The default value of \code{na.status} is therefore \code{"implicit"}. To
+ simply filter for a consecutive range of a \code{\link{DTSg}} object while
+ leaving \code{na.status} untouched, \code{\link{alter}} is probably the
+ better choice.
 }
 \examples{
 # new DTSg object

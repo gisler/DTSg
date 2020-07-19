@@ -21,13 +21,10 @@
 \code{fun} are appended in the case one or more functions are provided) or
 the same length as \code{fun}.}
 
-\item{fun}{A summary function, \code{\link{list}} of summary functions or
-character vector specifying summary functions applied row-wise to all the
-values of the specified columns, for instance, \code{\link{mean}},
-\code{\link{list}(min = \link{min}, max = \link{max})} or
-\code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character vector
-must have names in case more than one summary function is provided. The
-return value(s) must be of length one.}
+\item{fun}{A summary function, (named) \code{\link{list}} of summary
+functions or (named) character vector specifying summary functions applied
+row-wise to all the values of the specified columns. The return value(s)
+must be of length one. See details for further information.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -42,6 +39,16 @@ Returns a \code{\link{DTSg}} object.
 \description{
 Applies one or more provided summary functions row-wise to selected columns
  of a \code{\link{DTSg}} object.
+}
+\details{
+Some examples for \code{fun} are as follows:
+ \itemize{
+   \item \code{\link{mean}}
+   \item \code{\link{list}(min = \link{min}, max = \link{max})}
+   \item \code{c(sd = "\link{sd}", var = "\link{var}")}
+ }
+ A list or character vector must have names in case more than one summary
+ function is provided.
 }
 \examples{
 # new DTSg object

@@ -23,15 +23,10 @@
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 See details for further information.}
 
-\item{fun}{A summary function, \code{\link{list}} of summary functions or
-character vector specifying summary functions applied column-wise to all the
-values of the same temporal aggregation level, for instance,
-\code{\link{mean}}, \code{\link{list}(min = \link{min}, max = \link{max})}
-or \code{c(sd = "\link{sd}", var = "\link{var}")}. A list or character
-vector must have names in case more than one summary function is provided.
-The method can benefit from \pkg{data.table}'s
-\emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
-character vector is used. The return value(s) must be of length one.}
+\item{fun}{A summary function, (named) \code{\link{list}} of summary
+functions or (named) character vector specifying summary functions applied
+column-wise to all the values of the same temporal aggregation level. The
+return value(s) must be of length one. See details for further information.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
@@ -72,6 +67,17 @@ User defined temporal aggregation level functions have to return a
    \item \emph{na.status:} Same as \emph{na.status} field. See
      \code{\link{DTSg}} for further information.
  }
+
+Some examples for \code{fun} are as follows:
+ \itemize{
+   \item \code{\link{mean}}
+   \item \code{\link{list}(min = \link{min}, max = \link{max})}
+   \item \code{c(sd = "\link{sd}", var = "\link{var}")}
+ }
+ A list or character vector must have names in case more than one summary
+ function is provided. The method can benefit from \pkg{data.table}'s
+ \emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
+ character vector specifying summary functions is provided.
 
 Depending on the number of columns to aggregate, the \emph{.n} column
  contains different counts:

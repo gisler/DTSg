@@ -2,7 +2,7 @@
 % Please edit documentation in R/rollback.R
 \name{rollback}
 \alias{rollback}
-\title{Rollback Month}
+\title{Rollback of Months}
 \usage{
 rollback(.dateTime, periodicity)
 }

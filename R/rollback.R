@@ -1,4 +1,4 @@
-#' Rollback Month
+#' Rollback of Months
 #'
 #' Generating regular sequences of times with the help of
 #'  \code{\link{seq.POSIXt}} can have undesirable effects. This function

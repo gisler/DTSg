@@ -3,7 +3,7 @@
 \name{cols.DTSg}
 \alias{cols.DTSg}
 \alias{cols}
-\title{Get Column Names}
+\title{Get Names of Value Columns}
 \usage{
 \method{cols}{DTSg}(x, class = NULL, pattern = NULL, ...)
 }

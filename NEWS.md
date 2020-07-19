@@ -4,7 +4,7 @@
 * Added `rowbind` method: allows for combining the rows of `DTSg` objects
 * Added `setColNames` method: allows for renaming columns of `DTSg` objects
 * Fixed that a `DTSg` object with only one timestamp did not set the name of its *.dateTime* column as expected
-* Slightly improved vignettes and documentation
+* Improved vignettes and documentation
 * Minor internal code improvements
 
 ## DTSg v0.6.0
