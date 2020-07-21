@@ -244,11 +244,13 @@ colapply <- function(x, ...) {
 #' @param ignoreDST A logical specifying if day saving time is ignored during
 #'  formation of the temporal level. See \code{\link{aggregate}} for further
 #'  information.
+#' @param helpers A logical specifying if helper data shall be handed over to
+#'  \code{fun}. See details for further information.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #'
 #' @details
-#' In addition to the \code{\dots} argument, this method hands over a
+#' In addition to the \code{\dots} argument, this method optionally hands over a
 #'  \code{\link{list}} argument with helper data called \code{.helpers} to
 #'  \code{fun}. \code{.helpers} contains the following named elements:
 #'  \itemize{
@@ -282,10 +284,10 @@ colapply <- function(x, ...) {
 #'
 #' # daily cumulative sums per month
 #' ## R6 method
-#' x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+#' x$colapply(fun = cumsum, funby = byYm____, helpers = FALSE)
 #'
 #' ## S3 method
-#' colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+#' colapply(x = x, fun = cumsum, funby = byYm____, helpers = FALSE)
 #'
 #' # calculate moving averages with the help of 'runner' (all four given
 #' # approaches provide the same result with explicitly missing timestamps)
@@ -665,6 +667,8 @@ rollapply <- function(x, ...) {
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
 #'  used when \code{resultCols} is not specified.
+#' @param helpers A logical specifying if helper data shall be handed over to
+#'  \code{fun}. See details for further information.
 #' @param memoryOverCPU A logical specifying if memory usage is preferred over
 #'  CPU usage for this method. The former is generally faster for smaller
 #'  windows and shorter time series, the latter for bigger windows and longer
@@ -674,10 +678,10 @@ rollapply <- function(x, ...) {
 #'  clone (copy) is made beforehand.
 #'
 #' @details
-#' In addition to the \code{\dots} argument, this method hands over the weights
-#'  as a numeric vector (\code{w} argument) and a \code{\link{list}} argument
-#'  with helper data called \code{.helpers} to \code{fun}. \code{.helpers}
-#'  contains the following named elements:
+#' In addition to the \code{\dots} argument, this method optionally hands over
+#'  the weights as a numeric vector (\code{w} argument) and a \code{\link{list}}
+#'  argument with helper data called \code{.helpers} to \code{fun}.
+#'  \code{.helpers} contains the following named elements:
 #'  \itemize{
 #'    \item \emph{before:} Same as \code{before} argument.
 #'    \item \emph{after:} Same as \code{after} argument.

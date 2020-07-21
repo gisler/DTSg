@@ -91,9 +91,9 @@ Some of the methods which take a function as an argument
  additional \code{\link{list}} argument called \code{.helpers} containing
  useful data for the development of user defined functions (see the
  respective help pages for further information). This can of course be a
- problem for functions like \code{\link{sum}} which do not expect such a
- thing. A solution is to wrap it in an anonymous function with a
- \code{\dots} parameter like this: \code{function(x, ...) sum(x)}.
+ problem for functions like \code{\link{cumsum}} which do not expect such a
+ thing. A solution is to set the `helpers` argument of the respective method
+ to `FALSE`.
 }
 \section{Methods}{
 

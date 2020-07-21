@@ -154,9 +154,9 @@
 #'  additional \code{\link{list}} argument called \code{.helpers} containing
 #'  useful data for the development of user defined functions (see the
 #'  respective help pages for further information). This can of course be a
-#'  problem for functions like \code{\link{sum}} which do not expect such a
-#'  thing. A solution is to wrap it in an anonymous function with a
-#'  \code{\dots} parameter like this: \code{function(x, ...) sum(x)}.
+#'  problem for functions like \code{\link{cumsum}} which do not expect such a
+#'  thing. A solution is to set the `helpers` argument of the respective method
+#'  to `FALSE`.
 #'
 #' @seealso \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
 #'  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
@@ -311,39 +311,41 @@ DTSg <- R6Class(
     },
 
     funbyHelpers = function(ignoreDST, multiplier, .helpers) {
-      qassert(.helpers, "L+")
-      helpers <- names(.helpers)
-      assertCharacter(
-        helpers,
-        min.chars = 1L,
-        any.missing = FALSE,
-        unique = TRUE,
-        .var.name = "names(funbyHelpers)"
-      )
+      if (!is.null(.helpers)) {
+        qassert(.helpers, "L+")
+        helpers <- names(.helpers)
+        assertCharacter(
+          helpers,
+          min.chars = 1L,
+          any.missing = FALSE,
+          unique = TRUE,
+          .var.name = "names(funbyHelpers)"
+        )
 
-      if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
-        stop(
-          '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
-          call. = FALSE
-        )
-      }
+        if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
+          stop(
+            '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
+            call. = FALSE
+          )
+        }
 
-      if ("ignoreDST" %chin% helpers) {
-        ignoreDST <- qassert(
-          .helpers[["ignoreDST"]],
-          "B1",
-          .var.name = 'funbyHelpers[["ignoreDST"]]'
-        )
-        .helpers[["ignoreDST"]] <- NULL
-      }
-      if ("multiplier" %chin% helpers) {
-        multiplier <- assertCount(
-          .helpers[["multiplier"]],
-          positive = TRUE,
-          coerce = TRUE,
-          .var.name = 'funbyHelpers[["multiplier"]]'
-        )
-        .helpers[["multiplier"]] <- NULL
+        if ("ignoreDST" %chin% helpers) {
+          ignoreDST <- qassert(
+            .helpers[["ignoreDST"]],
+            "B1",
+            .var.name = 'funbyHelpers[["ignoreDST"]]'
+          )
+          .helpers[["ignoreDST"]] <- NULL
+        }
+        if ("multiplier" %chin% helpers) {
+          multiplier <- assertCount(
+            .helpers[["multiplier"]],
+            positive = TRUE,
+            coerce = TRUE,
+            .var.name = 'funbyHelpers[["multiplier"]]'
+          )
+          .helpers[["multiplier"]] <- NULL
+        }
       }
 
       c(list(
@@ -394,7 +396,7 @@ DTSg <- R6Class(
       if (n) {
         sprintf("list(%s, %s)", text, ".n = .N")
       } else {
-        sprintf("list(%s)", text)
+      sprintf("list(%s)", text)
       }
     },
 
@@ -425,7 +427,7 @@ DTSg <- R6Class(
       n = FALSE,
       ignoreDST = FALSE,
       # multiplier = 1L,
-      # funbyHelpers = list(ignoreDST = ignoreDST, multiplier = multiplier),
+      # funbyHelpers = NULL,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(funby)
@@ -460,19 +462,19 @@ DTSg <- R6Class(
 
       if (n) {
         if (length(cols) > 1L) {
-          if (testClass(fun, "character")) {
+      if (testClass(fun, "character")) {
             private$.values <- private$.values[
               ,
               eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
-          } else {
-            private$.values <- private$.values[
-              ,
+      } else {
+          private$.values <- private$.values[
+            ,
               c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-              .SDcols = cols
-            ]
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+            .SDcols = cols
+          ]
           }
 
           message(".n column calculated from .dateTime column.")
@@ -484,12 +486,12 @@ DTSg <- R6Class(
               keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
             ]
           } else {
-            private$.values <- private$.values[
-              !is.na(get(cols)),
+          private$.values <- private$.values[
+            !is.na(get(cols)),
               c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
-              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-              .SDcols = cols
-            ]
+            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+            .SDcols = cols
+          ]
           }
 
           message(
@@ -504,13 +506,13 @@ DTSg <- R6Class(
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
           ]
         } else {
-          private$.values <- private$.values[
-            ,
+        private$.values <- private$.values[
+          ,
             private$multiLapply(.SD, fun, ...),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-            .SDcols = cols
-          ]
-        }
+          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+          .SDcols = cols
+        ]
+      }
       }
 
       private$.isAggregated <- TRUE
@@ -611,12 +613,14 @@ DTSg <- R6Class(
       suffix = NULL,
       funby = NULL,
       ignoreDST = FALSE,
+      helpers = TRUE,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
       assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
       assertSubset(cols, self$cols())
       .cols <- private$determineCols(resultCols, suffix, cols)
+      qassert(helpers, "B1")
       qassert(clone, "B1")
 
       if (clone) {
@@ -629,16 +633,10 @@ DTSg <- R6Class(
           suffix = suffix,
           funby = funby,
           ignoreDST = ignoreDST,
+          helpers = helpers,
           clone = FALSE
         ))
       }
-
-      .helpers <- list(
-        .dateTime = private$.values[[".dateTime"]],
-        periodicity = private$.periodicity,
-        minLag = private$.minLag,
-        maxLag = private$.maxLag
-      )
 
       if (!is.null(funby)) {
         assertFunction(funby)
@@ -654,14 +652,22 @@ DTSg <- R6Class(
         by <- NULL
       }
 
+      if (helpers) {
+        .helpers <- list(
+          .dateTime = private$.values[[".dateTime"]],
+          periodicity = private$.periodicity,
+          minLag = private$.minLag,
+          maxLag = private$.maxLag
+        )
+
+        expr <- quote((.cols) := lapply(.SD, fun, ..., .helpers = .helpers))
+      } else {
+        expr <- quote((.cols) := lapply(.SD, fun, ...))
+      }
+
       private$.values[
         ,
-        (.cols) := lapply(
-          .SD,
-          fun,
-          ...,
-          .helpers = .helpers
-        ),
+        eval(expr),
         by = by,
         .SDcols = cols
       ]
@@ -1060,6 +1066,7 @@ DTSg <- R6Class(
       parameters = list(power = 1),
       resultCols = NULL,
       suffix = NULL,
+      helpers = TRUE,
       memoryOverCPU = TRUE,
       clone = getOption("DTSgClone")
     ) {
@@ -1076,6 +1083,7 @@ DTSg <- R6Class(
       weights <- match.arg(weights)
       qassert(parameters, "L+")
       .cols <- private$determineCols(resultCols, suffix, cols)
+      qassert(helpers, "B1")
       qassert(memoryOverCPU, "B1")
       qassert(clone, "B1")
 
@@ -1091,19 +1099,20 @@ DTSg <- R6Class(
           parameters = parameters,
           resultCols = resultCols,
           suffix = suffix,
+          helpers = helpers,
           memoryOverCPU = memoryOverCPU,
           clone = FALSE
         ))
       }
 
       if (weights == "inverseDistance") {
-        qassert(parameters$power, "N1()")
+        qassert(parameters[["power"]], "N1()")
 
         weights <- 1 / c(
           rev(seq_len(before) + 1),
           1,
           seq_len(after) + 1
-        )^parameters$power
+        )^parameters[["power"]]
         weights <- weights / sum(weights)
       }
 
@@ -1121,14 +1130,23 @@ DTSg <- R6Class(
             L <- c(L, shift(list(x), seq_len(after), type = "lead"))
           }
 
-          apply(
-            matrix(unlist(L), ncol = length(L)),
-            1L,
-            fun,
-            ...,
-            w = weights,
-            .helpers = .helpers
-          )
+          if (helpers) {
+            apply(
+              matrix(unlist(L), ncol = length(L)),
+              1L,
+              fun,
+              ...,
+              w = weights,
+              .helpers = .helpers
+            )
+          } else {
+            apply(
+              matrix(unlist(L), ncol = length(L)),
+              1L,
+              fun,
+              ...
+            )
+          }
         }
       } else {
         wapply <- function(x, fun, ..., before, after, weights) {
@@ -1138,16 +1156,27 @@ DTSg <- R6Class(
           for (i in seq_along(x)) {
             lowerBound <- i - before
 
-            y[i] <- fun(
-              if (lowerBound < 1L) {
-                c(rep(NA, abs(lowerBound) + 1L), x[seq_len(i + after)])
-              } else {
-                x[lowerBound:(i + after)]
-              },
-              ...,
-              w = weights,
-              .helpers = .helpers
-            )
+            if (helpers) {
+              y[i] <- fun(
+                if (lowerBound < 1L) {
+                  c(rep(NA, abs(lowerBound) + 1L), x[seq_len(i + after)])
+                } else {
+                  x[lowerBound:(i + after)]
+                },
+                ...,
+                w = weights,
+                .helpers = .helpers
+              )
+            } else {
+              y[i] <- fun(
+                if (lowerBound < 1L) {
+                  c(rep(NA, abs(lowerBound) + 1L), x[seq_len(i + after)])
+                } else {
+                  x[lowerBound:(i + after)]
+                },
+                ...
+              )
+            }
           }
 
           y

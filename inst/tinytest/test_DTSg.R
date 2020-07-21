@@ -219,7 +219,7 @@ expect_identical(
     TS <- DTSg$new(DT1)
     TS$aggregate(byYmdH__, mean)
     TS$alter(by = "1 hour")
-    TS$colapply(function(x, ...) {as.factor(x)})
+    TS$colapply(as.factor, helpers = FALSE)
     TS$merge(DT2)
     TS$rollapply(weighted.mean, na.rm = TRUE)
     TS$rowaggregate("col", sum, na.rm = TRUE)
@@ -239,8 +239,9 @@ expect_identical(
 #### colapply method ####
 expect_identical(
   DTSg$new(DT1)$colapply(
-    function(x, ...) {as.factor(x)},
-    cols = c("col1", "col2")
+    as.factor,
+    cols = c("col1", "col2"),
+    helpers = FALSE
   )$cols("factor"),
   c("col1", "col2"),
   info = '"fun" is applied correctly'
@@ -279,9 +280,10 @@ expect_identical(
 
 expect_identical(
   DTSg$new(DT1)$colapply(
-    function(x, ...) {cumsum(x)},
+    cumsum,
     cols = "col2",
-    funby = byYmdH__
+    funby = byYmdH__,
+    helpers = FALSE
   )$values(TRUE)[["col2"]],
   c(1, NA, 5, 12, 9, 20, 13, 28),
   info = '"funby" is applied correctly'
@@ -590,9 +592,10 @@ expect_identical(
 #### rollapply method ####
 expect_identical(
   DTSg$new(DT1)$rollapply(
-    function(x, ...) {sum(x)},
+    sum,
     before = 2L,
     after = 1L,
+    helpers = FALSE,
     memoryOverCPU = TRUE
   )$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
@@ -601,9 +604,10 @@ expect_identical(
 
 expect_identical(
   DTSg$new(DT1)$rollapply(
-    function(x, ...) {sum(x)},
+    sum,
     before = 2L,
     after = 1L,
+    helpers = FALSE,
     memoryOverCPU = FALSE
   )$values(TRUE)[["col1"]],
   c(NA, NA, 16, 24, 32, 40, 48, NA),
@@ -691,11 +695,12 @@ expect_identical(
 
 expect_identical(
   DTSg$new(DT1)$rollapply(
-    function(x, ...) {identity(x)},
+    identity,
     before = 0L,
     cols = c("col1", "col2"),
     resultCols = c("col1", "col4"),
-    suffix = "_character"
+    suffix = "_character",
+    helpers = FALSE
   )$cols(),
   c("col1", "col2", "col3", "col4"),
   info = '"resultCols" adds and overwrites columns correctly'
@@ -703,10 +708,11 @@ expect_identical(
 
 expect_identical(
   DTSg$new(DT1)$rollapply(
-    function(x, ...) {identity(x)},
+    identity,
     before = 0L,
     cols = c("col1", "col2"),
-    suffix = "_identity"
+    suffix = "_identity",
+    helpers = FALSE
   )$cols(),
   c("col1", "col2", "col3", "col1_identity", "col2_identity"),
   info = '"suffix" adds columns correctly'
