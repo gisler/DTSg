@@ -667,8 +667,8 @@ rollapply <- function(x, ...) {
 #'  are added as new columns with names consisting of the columns specified in
 #'  \code{cols} and this suffix. Existing columns are never overwritten. Only
 #'  used when \code{resultCols} is not specified.
-#' @param helpers A logical specifying if helper data shall be handed over to
-#'  \code{fun}. See details for further information.
+#' @param helpers A logical specifying if weights and helper data shall be
+#'  handed over to \code{fun}. See details for further information.
 #' @param memoryOverCPU A logical specifying if memory usage is preferred over
 #'  CPU usage for this method. The former is generally faster for smaller
 #'  windows and shorter time series, the latter for bigger windows and longer
