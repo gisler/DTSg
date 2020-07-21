@@ -54,8 +54,8 @@ are added as new columns with names consisting of the columns specified in
 \code{cols} and this suffix. Existing columns are never overwritten. Only
 used when \code{resultCols} is not specified.}
 
-\item{helpers}{A logical specifying if helper data shall be handed over to
-\code{fun}. See details for further information.}
+\item{helpers}{A logical specifying if weights and helper data shall be
+handed over to \code{fun}. See details for further information.}
 
 \item{memoryOverCPU}{A logical specifying if memory usage is preferred over
 CPU usage for this method. The former is generally faster for smaller
