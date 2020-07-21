@@ -367,7 +367,7 @@ DTSg <- R6Class(
       ))
     },
 
-    optiLapply = function(funs, cols, resultCols, n, ...) {
+    optiLapply = function(funs, cols, resultCols, ...) {
       if (is.null(resultCols)) {
         funs <- rep(funs, length(cols))
         cols <- rep(cols, each = length(funs) / length(cols))
@@ -393,11 +393,7 @@ DTSg <- R6Class(
         collapse = ", "
       )
 
-      if (n) {
-        sprintf("list(%s, %s)", text, ".n = .N")
-      } else {
       sprintf("list(%s)", text)
-      }
     },
 
     rmGlobalReferences = function(addr) {
@@ -460,59 +456,41 @@ DTSg <- R6Class(
         ))
       }
 
+      if (testClass(fun, "character")) {
+        expr <- expression(eval(parse(text = private$optiLapply(fun, cols, NULL, ...))))
+      } else {
+        expr <- expression(private$multiLapply(.SD, fun, ...))
+      }
+
       if (n) {
         if (length(cols) > 1L) {
-      if (testClass(fun, "character")) {
-            private$.values <- private$.values[
-              ,
-              eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
-              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
-            ]
-      } else {
           private$.values <- private$.values[
             ,
-              c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
+            c(eval(expr), .(.n = .N)),
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
-          }
 
           message(".n column calculated from .dateTime column.")
         } else {
-          if (testClass(fun, "character")) {
-            private$.values <- private$.values[
-              !is.na(get(cols)),
-              eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
-              keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
-            ]
-          } else {
           private$.values <- private$.values[
             !is.na(get(cols)),
-              c(private$multiLapply(.SD, fun, ...), .(.n = .N)),
+            c(eval(expr), .(.n = .N)),
             keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
-          }
 
           message(
             'Missing values are always stripped regardless of the value of a possible "na.rm" argument.'
           )
         }
       } else {
-        if (testClass(fun, "character")) {
-          private$.values <- private$.values[
-            ,
-            eval(parse(text = private$optiLapply(fun, cols, NULL, n, ...))),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers))
-          ]
-        } else {
         private$.values <- private$.values[
           ,
-            private$multiLapply(.SD, fun, ...),
+          eval(expr),
           keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
           .SDcols = cols
         ]
-      }
       }
 
       private$.isAggregated <- TRUE
@@ -1240,7 +1218,6 @@ DTSg <- R6Class(
             fun,
             "unlist(.SD, recursive = FALSE)",
             resultCols,
-            FALSE,
             ...
           ))),
           by = seq_len(private$.timestamps),
