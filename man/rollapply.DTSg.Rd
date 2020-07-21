@@ -16,6 +16,7 @@
   parameters = list(power = 1),
   resultCols = NULL,
   suffix = NULL,
+  helpers = TRUE,
   memoryOverCPU = TRUE,
   clone = getOption("DTSgClone")
 )
@@ -53,6 +54,9 @@ are added as new columns with names consisting of the columns specified in
 \code{cols} and this suffix. Existing columns are never overwritten. Only
 used when \code{resultCols} is not specified.}
 
+\item{helpers}{A logical specifying if helper data shall be handed over to
+\code{fun}. See details for further information.}
+
 \item{memoryOverCPU}{A logical specifying if memory usage is preferred over
 CPU usage for this method. The former is generally faster for smaller
 windows and shorter time series, the latter for bigger windows and longer
@@ -70,10 +74,10 @@ Applies an arbitrary function to a rolling window of selected columns of a
  \code{\link{DTSg}} object with recognised periodicity.
 }
 \details{
-In addition to the \code{\dots} argument, this method hands over the weights
- as a numeric vector (\code{w} argument) and a \code{\link{list}} argument
- with helper data called \code{.helpers} to \code{fun}. \code{.helpers}
- contains the following named elements:
+In addition to the \code{\dots} argument, this method optionally hands over
+ the weights as a numeric vector (\code{w} argument) and a \code{\link{list}}
+ argument with helper data called \code{.helpers} to \code{fun}.
+ \code{.helpers} contains the following named elements:
  \itemize{
    \item \emph{before:} Same as \code{before} argument.
    \item \emph{after:} Same as \code{after} argument.

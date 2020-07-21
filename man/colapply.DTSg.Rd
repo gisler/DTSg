@@ -14,6 +14,7 @@
   suffix = NULL,
   funby = NULL,
   ignoreDST = FALSE,
+  helpers = TRUE,
   clone = getOption("DTSgClone")
 )
 }
@@ -46,6 +47,9 @@ information.}
 formation of the temporal level. See \code{\link{aggregate}} for further
 information.}
 
+\item{helpers}{A logical specifying if helper data shall be handed over to
+\code{fun}. See details for further information.}
+
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
 }
@@ -57,7 +61,7 @@ Applies an arbitrary function to selected columns of a \code{\link{DTSg}}
  object.
 }
 \details{
-In addition to the \code{\dots} argument, this method hands over a
+In addition to the \code{\dots} argument, this method optionally hands over a
  \code{\link{list}} argument with helper data called \code{.helpers} to
  \code{fun}. \code{.helpers} contains the following named elements:
  \itemize{
@@ -84,10 +88,10 @@ colapply(x = x, fun = interpolateLinear)
 
 # daily cumulative sums per month
 ## R6 method
-x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+x$colapply(fun = cumsum, funby = byYm____, helpers = FALSE)
 
 ## S3 method
-colapply(x = x, fun = function(x, ...) {cumsum(x)}, funby = byYm____)
+colapply(x = x, fun = cumsum, funby = byYm____, helpers = FALSE)
 
 # calculate moving averages with the help of 'runner' (all four given
 # approaches provide the same result with explicitly missing timestamps)

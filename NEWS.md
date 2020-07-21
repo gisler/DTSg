@@ -3,6 +3,7 @@
 * Added `rowaggregate` method: allows for applying summary functions row-wise to `DTSg` objects
 * Added `rowbind` method: allows for combining the rows of `DTSg` objects
 * Added `setColNames` method: allows for renaming columns of `DTSg` objects
+* Added `helpers` argument to `colapply` and `rollapply` methods: controls if helper data is passed on to an applied function (makes anonymous function wrappers obsolete)
 * Fixed that a `DTSg` object with only one timestamp did not set the name of its *.dateTime* column as expected
 * Improved vignettes and documentation
 * Minor internal code improvements
