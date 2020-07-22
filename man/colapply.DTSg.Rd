@@ -12,9 +12,9 @@
   cols = self$cols(class = "numeric")[1L],
   resultCols = NULL,
   suffix = NULL,
+  helpers = TRUE,
   funby = NULL,
   ignoreDST = FALSE,
-  helpers = TRUE,
   clone = getOption("DTSgClone")
 )
 }
@@ -37,6 +37,9 @@ are added as new columns with names consisting of the columns specified in
 \code{cols} and this suffix. Existing columns are never overwritten. Only
 used when \code{resultCols} is not specified.}
 
+\item{helpers}{A logical specifying if helper data shall be handed over to
+\code{fun}. See details for further information.}
+
 \item{funby}{One of the temporal aggregation level functions described in
 \code{\link{TALFs}} or a user defined temporal aggregation level function.
 Can be used to apply functions like \code{\link{cumsum}} to a certain
@@ -46,9 +49,6 @@ information.}
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
 formation of the temporal level. See \code{\link{aggregate}} for further
 information.}
-
-\item{helpers}{A logical specifying if helper data shall be handed over to
-\code{fun}. See details for further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
@@ -88,10 +88,10 @@ colapply(x = x, fun = interpolateLinear)
 
 # daily cumulative sums per month
 ## R6 method
-x$colapply(fun = cumsum, funby = byYm____, helpers = FALSE)
+x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)
 
 ## S3 method
-colapply(x = x, fun = cumsum, funby = byYm____, helpers = FALSE)
+colapply(x = x, fun = cumsum, helpers = FALSE, funby = byYm____)
 
 # calculate moving averages with the help of 'runner' (all four given
 # approaches provide the same result with explicitly missing timestamps)
