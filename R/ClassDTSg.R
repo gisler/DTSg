@@ -589,9 +589,9 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric")[1L],
       resultCols = NULL,
       suffix = NULL,
+      helpers = TRUE,
       funby = NULL,
       ignoreDST = FALSE,
-      helpers = TRUE,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
@@ -609,9 +609,9 @@ DTSg <- R6Class(
           cols = cols,
           resultCols = resultCols,
           suffix = suffix,
+          helpers = helpers,
           funby = funby,
           ignoreDST = ignoreDST,
-          helpers = helpers,
           clone = FALSE
         ))
       }
@@ -1103,7 +1103,7 @@ DTSg <- R6Class(
 
       if (memoryOverCPU) {
         wapply <- function(x, fun, ..., before, after, weights) {
-          L <- rev(shift(list(x), 0:before))
+          L <- shift(list(x), before:0)
           if (after != 0L) {
             L <- c(L, shift(list(x), seq_len(after), type = "lead"))
           }
