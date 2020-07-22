@@ -282,8 +282,8 @@ expect_identical(
   DTSg$new(DT1)$colapply(
     cumsum,
     cols = "col2",
-    funby = byYmdH__,
-    helpers = FALSE
+    helpers = FALSE,
+    funby = byYmdH__
   )$values(TRUE)[["col2"]],
   c(1, NA, 5, 12, 9, 20, 13, 28),
   info = '"funby" is applied correctly'
