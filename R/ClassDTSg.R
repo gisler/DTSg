@@ -422,15 +422,14 @@ DTSg <- R6Class(
       cols = self$cols(class = "numeric"),
       n = FALSE,
       ignoreDST = FALSE,
-      # multiplier = 1L,
-      # funbyHelpers = NULL,
+      multiplier = 1L,
+      funbyHelpers = NULL,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(funby)
       qassert(ignoreDST, "B1")
-      # multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-      # .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
-      .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
+      multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
+      .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
       qassert(funby(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
@@ -450,8 +449,8 @@ DTSg <- R6Class(
           cols = cols,
           n = n,
           ignoreDST = ignoreDST,
-          # multiplier = multiplier,
-          # funbyHelpers = funbyHelpers,
+          multiplier = multiplier,
+          funbyHelpers = funbyHelpers,
           clone = FALSE
         ))
       }
@@ -619,7 +618,7 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
-        .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
+        .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, NULL)
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
           .funbyHelpers
@@ -1403,7 +1402,7 @@ DTSg <- R6Class(
         if (!is.null(funby)) {
           assertFunction(funby)
           qassert(ignoreDST, "B1")
-          .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, list(temp = NA))
+          .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, NULL)
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
             .funbyHelpers
