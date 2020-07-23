@@ -5,18 +5,9 @@
 \alias{aggregate}
 \title{Aggregate Values}
 \usage{
-\method{aggregate}{DTSg}(
-  x,
-  funby,
-  fun,
-  ...,
-  cols = self$cols(class = "numeric"),
-  n = FALSE,
-  ignoreDST = FALSE,
-  multiplier = 1L,
-  funbyHelpers = NULL,
-  clone = getOption("DTSgClone")
-)
+\method{aggregate}{DTSg}(x, funby, fun, ..., cols = self$cols(class =
+  "numeric"), n = FALSE, ignoreDST = FALSE, multiplier = 1L,
+  funbyHelpers = NULL, clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -41,9 +32,9 @@ information.}
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
 aggregation. See details for further information.}
 
-\item{multiplier}{A positive integerish value multiplying the temporal
-aggregation level of certain \code{\link{TALFs}}. See details for further
-information.}
+\item{multiplier}{A positive integerish value \dQuote{multiplying} the
+temporal aggregation level of certain \code{\link{TALFs}}. See details for
+further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on
 to \code{funby}. See details for further information.}

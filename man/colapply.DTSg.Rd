@@ -5,18 +5,10 @@
 \alias{colapply}
 \title{Apply Function Column-wise}
 \usage{
-\method{colapply}{DTSg}(
-  x,
-  fun,
-  ...,
-  cols = self$cols(class = "numeric")[1L],
-  resultCols = NULL,
-  suffix = NULL,
-  helpers = TRUE,
-  funby = NULL,
-  ignoreDST = FALSE,
-  clone = getOption("DTSgClone")
-)
+\method{colapply}{DTSg}(x, fun, ..., cols = self$cols(class =
+  "numeric")[1L], resultCols = NULL, suffix = NULL, helpers = TRUE,
+  funby = NULL, ignoreDST = FALSE, multiplier = 1L,
+  funbyHelpers = NULL, clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -49,6 +41,13 @@ information.}
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
 formation of the temporal level. See \code{\link{aggregate}} for further
 information.}
+
+\item{multiplier}{A positive integerish value \dQuote{multiplying} the
+temporal aggregation level of certain \code{\link{TALFs}}. See
+\code{\link{aggregate}} for further information.}
+
+\item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on
+to \code{funby}. See \code{\link{aggregate}} for further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}

@@ -5,16 +5,10 @@
 \alias{subset}
 \title{Time Series Subset}
 \usage{
-\method{subset}{DTSg}(
-  x,
-  i,
-  cols = self$cols(),
-  funby = NULL,
-  ignoreDST = FALSE,
-  na.status = "implicit",
-  clone = getOption("DTSgClone"),
-  ...
-)
+\method{subset}{DTSg}(x, i, cols = self$cols(), funby = NULL,
+  ignoreDST = FALSE, na.status = "implicit",
+  clone = getOption("DTSgClone"), multiplier = 1L,
+  funbyHelpers = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -44,6 +38,13 @@ columns. See details for further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
 clone (copy) is made beforehand.}
+
+\item{multiplier}{A positive integerish value \dQuote{multiplying} the
+temporal aggregation level of certain \code{\link{TALFs}}. See
+\code{\link{aggregate}} for further information.}
+
+\item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on
+to \code{funby}. See \code{\link{aggregate}} for further information.}
 
 \item{\dots}{Not used (S3 method only).}
 }
