@@ -591,6 +591,8 @@ DTSg <- R6Class(
       helpers = TRUE,
       funby = NULL,
       ignoreDST = FALSE,
+      multiplier = 1L,
+      funbyHelpers = NULL,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
@@ -611,6 +613,8 @@ DTSg <- R6Class(
           helpers = helpers,
           funby = funby,
           ignoreDST = ignoreDST,
+          multiplier = multiplier,
+          funbyHelpers = funbyHelpers,
           clone = FALSE
         ))
       }
@@ -618,7 +622,8 @@ DTSg <- R6Class(
       if (!is.null(funby)) {
         assertFunction(funby)
         qassert(ignoreDST, "B1")
-        .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, NULL)
+        multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
+        .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
           .funbyHelpers
@@ -1373,7 +1378,9 @@ DTSg <- R6Class(
       funby = NULL,
       ignoreDST = FALSE,
       na.status = "implicit",
-      clone = getOption("DTSgClone")
+      clone = getOption("DTSgClone"),
+      multiplier = 1L,
+      funbyHelpers = NULL
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
@@ -1392,7 +1399,9 @@ DTSg <- R6Class(
           funby = funby,
           ignoreDST = ignoreDST,
           na.status = na.status,
-          clone = FALSE
+          clone = FALSE,
+          multiplier = multiplier,
+          funbyHelpers = funbyHelpers
         ))
       }
 
@@ -1402,7 +1411,8 @@ DTSg <- R6Class(
         if (!is.null(funby)) {
           assertFunction(funby)
           qassert(ignoreDST, "B1")
-          .funbyHelpers <- private$funbyHelpers(ignoreDST, 1L, NULL)
+          multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
+          .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
             .funbyHelpers

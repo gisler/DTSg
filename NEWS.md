@@ -3,7 +3,7 @@
 * Added `rowaggregate` method: allows for applying summary functions row-wise to `DTSg` objects
 * Added `rowbind` method: allows for combining the rows of `DTSg` objects
 * Added `setColNames` method: allows for renaming columns of `DTSg` objects
-* Added `multiplier` and `funbyHelpers` arguments to `aggregate` method (all other methods supporting temporal aggregation level functions will follow): allows for modifying the temporal aggregation level of `TALFs` and for passing on user defined helper data to `TALFs`
+* Added `multiplier` and `funbyHelpers` arguments to the `aggregate`, `colapply` and `subset` methods: allows for adjusting the temporal aggregation level of `TALFs` and for passing on user defined helper data to `TALFs`
 * Added `helpers` argument to `colapply` and `rollapply` methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. `x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)` can now be written as `x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)`)
 * Fixed that a `DTSg` object with only one timestamp did not set the name of its *.dateTime* column as expected
 * Improved vignettes and documentation

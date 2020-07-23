@@ -24,9 +24,9 @@ NULL
 #'  information.
 #' @param ignoreDST A logical specifying if day saving time is ignored during
 #'  aggregation. See details for further information.
-#' @param multiplier A positive integerish value multiplying the temporal
-#'  aggregation level of certain \code{\link{TALFs}}. See details for further
-#'  information.
+#' @param multiplier A positive integerish value \dQuote{multiplying} the
+#'  temporal aggregation level of certain \code{\link{TALFs}}. See details for
+#'  further information.
 #' @param funbyHelpers An optional \code{\link{list}} with helper data passed on
 #'  to \code{funby}. See details for further information.
 #' @param clone A logical specifying if the object is modified in place or if a
@@ -286,6 +286,11 @@ colapply <- function(x, ...) {
 #' @param ignoreDST A logical specifying if day saving time is ignored during
 #'  formation of the temporal level. See \code{\link{aggregate}} for further
 #'  information.
+#' @param multiplier A positive integerish value \dQuote{multiplying} the
+#'  temporal aggregation level of certain \code{\link{TALFs}}. See
+#'  \code{\link{aggregate}} for further information.
+#' @param funbyHelpers An optional \code{\link{list}} with helper data passed on
+#'  to \code{funby}. See \code{\link{aggregate}} for further information.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
 #'
@@ -976,6 +981,11 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'  columns. See details for further information.
 #' @param clone A logical specifying if the object is modified in place or if a
 #'  clone (copy) is made beforehand.
+#' @param multiplier A positive integerish value \dQuote{multiplying} the
+#'  temporal aggregation level of certain \code{\link{TALFs}}. See
+#'  \code{\link{aggregate}} for further information.
+#' @param funbyHelpers An optional \code{\link{list}} with helper data passed on
+#'  to \code{funby}. See \code{\link{aggregate}} for further information.
 #' @param \dots Not used (S3 method only).
 #'
 #' @details
