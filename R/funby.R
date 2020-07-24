@@ -294,6 +294,11 @@ byYmd___ <- function(.dateTime, .helpers) {
 byYmdH__ <- function(.dateTime, .helpers) {
   if (.helpers[["multiplier"]] == 1L) {
     eval(byYmdH__call)
+  } else if (!grepl("^UTC$|GMT", .helpers[["timezone"]])) {
+    stop(
+      'Time zone must be "UTC" or any GMT for this TALF.',
+      call. = FALSE
+    )
   } else {
     eval(byMultYmdH__call)
   }

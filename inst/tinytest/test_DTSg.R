@@ -122,6 +122,35 @@ expect_error(
 )
 
 expect_true(
+  all(DTSg$new(UTChourlyData)$aggregate(
+    byYmdH__,
+    length,
+    multiplier = 1L,
+    funbyHelpers = list(multiplier = 2L)
+  )$values(TRUE)[["value"]] == 2L),
+  info = '"funbyHelpers" takes precedence over "multiplier"'
+)
+
+expect_true(
+  all(DTSg$new(CEThourlyData)$aggregate(
+    byYmd___,
+    length,
+    ignoreDST = FALSE,
+    funbyHelpers = list(ignoreDST = TRUE)
+  )$values(TRUE)[["value"]] == 24L),
+  info = '"funbyHelpers" takes precedence over "ignoreDST"'
+)
+
+expect_error(
+  DTSg$new(DT1)$aggregate(
+    byYmdH__,
+    length,
+    funbyHelpers = list(periodicity = "1 hour")
+  ),
+  info = "use of helper data not allowed returns error"
+)
+
+expect_true(
   DTSg$new(DT1)$aggregate(byYmdH__, mean)$aggregated,
   info = '"aggregated" field is set correctly'
 )
@@ -287,6 +316,17 @@ expect_identical(
   )$values(TRUE)[["col2"]],
   c(1, NA, 5, 12, 9, 20, 13, 28),
   info = '"funby" is applied correctly'
+)
+
+expect_identical(
+  DTSg$new(DT1[, .(date, col1, col2, col3 = "A")])$colapply(
+    cumsum,
+    helpers = FALSE,
+    funby = function(x, .helpers) {.helpers[["custom"]]},
+    funbyHelpers = list(custom = "col3")
+  )$values(TRUE)[["col1"]],
+  cumsum(DT1[["col1"]]),
+  info = "custom helper data is appended correctly"
 )
 
 #### cols method ####
