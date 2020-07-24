@@ -119,7 +119,7 @@ TSQ <- TS$aggregate(funby = by_Q____, fun = mean)
 TSQ
 ```
 
-Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the `multiplier` argument of the `aggregate` as well as other methods, e.g. a `multiplier` of 6 makes `byYm____` aggregate to half years instead of months.
+Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the `multiplier` argument of the `aggregate` as well as other methods, e.g. `multiplier = 6` makes `byYm____` aggregate to half years instead of months.
 
 The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do this with the help of the `rollapply` method:
 
