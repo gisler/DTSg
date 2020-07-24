@@ -147,6 +147,13 @@ NULL
 #' ## S3 method
 #' aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
 #'
+#' # mean of river flows of all first and second half years
+#' ## R6 method
+#' x$aggregate(funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)
+#'
+#' ## S3 method
+#' aggregate(x = x, funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)
+#'
 #' @aliases aggregate
 #'
 #' @export
