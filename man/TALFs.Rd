@@ -104,8 +104,11 @@ There are two families of temporal aggregation level functions. The
  certain part of them (extracting family). Each family comes in two flavours:
  one using \code{\link[fasttime]{fastPOSIXct}} of \pkg{fasttime}, the other
  solely relying on base \R. The \pkg{fasttime} versions work with UTC time
- series only and are limited to dates between the years 1970 and 2199, but
- generally are faster for the extracting family of functions.
+ series or time series with an equivalent time zone (execute
+ \code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(),
+ ignore.case = TRUE, value = TRUE)} for a full list) only and are limited to
+ dates between the years 1970 and 2199, but generally are faster for the
+ extracting family of functions.
 
 The truncating family sets timestamps to the lowest possible time of the
  corresponding temporal aggregation level:

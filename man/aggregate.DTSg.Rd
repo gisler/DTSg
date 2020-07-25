@@ -134,11 +134,11 @@ The temporal aggregation level of certain \code{\link{TALFs}} can be adjusted
    \item \code{\link{byFasttime_____S}}
    \item \code{\link{byY_____}}
    \item \code{\link{byYm____}}
-   \item \code{\link{byYmdH__}}
+   \item \code{\link{byYmdH__}} ("UTC" or equivalent or any Etc/GMT only)
    \item \code{\link{byYmdHM_}}
    \item \code{\link{byYmdHMS}}
    \item \code{\link{by_m____}}
-   \item \code{\link{by___H__}}
+   \item \code{\link{by___H__}} ("UTC" or equivalent or any Etc/GMT only)
    \item \code{\link{by____M_}}
    \item \code{\link{by_____S}}
  }

@@ -53,11 +53,12 @@ UTChourlyData <- data.table(
     "1 hour"
   ),
   value = as.numeric(seq_len(8784L)),
-  year     = rep(  1:2        , daysPerHalfyear * 24L),
-  quarter  = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
-  month    = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
-  day      = rep(  1:366                              , each = 24L),
-  monthDay = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
+  year      = rep(  1:2        , daysPerHalfyear * 24L),
+  quarter   = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
+  month     = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
+  yearMonth = rep(  7:18       , daysPerMonth    * 24L),
+  day       = rep(  1:366                              , each = 24L),
+  monthDay  = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
 )
 
 UTCfractionalSecondData <- data.table(
@@ -68,8 +69,8 @@ UTCfractionalSecondData <- data.table(
   ),
   value = as.numeric(seq_len(21600L)),
   hour         = rep(1:3     , each = 7200L),
-  minute       = rep(1:180   , each =  120L),
-  second       = rep(1:10800 , each =    2L),
+  minute       = rep(0:179   , each =  120L),
+  second       = rep(0:10799 , each =    2L),
   hourMinute   = rep(rep(0:59, each =  120L),   3L),
   minuteSecond = rep(rep(0:59, each =    2L), 180L)
 )
@@ -82,11 +83,12 @@ CEThourlyData <- data.table(
     "1 hour"
   ),
   value = as.numeric(seq_len(8784L)),
-  year     = rep(  1:2        , daysPerHalfyear * 24L),
-  quarter  = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
-  month    = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
-  day      = rep(  1:366                              , each = 24L),
-  monthDay = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
+  year      = rep(  1:2        , daysPerHalfyear * 24L),
+  quarter   = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
+  month     = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
+  yearMonth = rep(  7:18       , daysPerMonth    * 24L),
+  day       = rep(  1:366                              , each = 24L),
+  monthDay  = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
 )
 
 CETtoDSTfractionalSecondData <- data.table(
@@ -97,8 +99,8 @@ CETtoDSTfractionalSecondData <- data.table(
   ),
   value = as.numeric(seq_len(14400L)),
   hour         = rep(1:2     , each = 7200L),
-  minute       = rep(1:120   , each =  120L),
-  second       = rep(1:7200  , each =    2L),
+  minute       = rep(0:119   , each =  120L),
+  second       = rep(0:7199  , each =    2L),
   hourMinute   = rep(rep(0:59, each =  120L),   2L),
   minuteSecond = rep(rep(0:59, each =    2L), 120L)
 )
@@ -110,9 +112,9 @@ CETfromDSTfractionalSecondData <- data.table(
     0.5
   ),
   value = as.numeric(seq_len(21600L)),
-  hour         = rep(1:3     , each = 7200L),
-  minute       = rep(1:180   , each =  120L),
-  second       = rep(1:10800 , each =    2L),
+  hour         = rep(2:4     , each = 7200L),
+  minute       = rep(0:179   , each =  120L),
+  second       = rep(0:10799 , each =    2L),
   hourMinute   = rep(rep(0:59, each =  120L),   3L),
   minuteSecond = rep(rep(0:59, each =    2L), 180L)
 )
