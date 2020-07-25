@@ -1108,7 +1108,7 @@ DTSg <- R6Class(
       if (memoryOverCPU) {
         wapply <- function(x, fun, ..., before, after, weights) {
           L <- shift(list(x), before:0)
-          if (after != 0L) {
+          if (after > 0L) {
             L <- c(L, shift(list(x), seq_len(after), type = "lead"))
           }
 
