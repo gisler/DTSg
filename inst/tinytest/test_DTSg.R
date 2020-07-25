@@ -394,6 +394,12 @@ expect_identical(
 )
 
 #### initialize method ####
+expect_identical(
+  DTSg$new(as.data.frame(DT1))$values(),
+  setkey(DT1, "date"),
+  info = "data.frame is coerced"
+)
+
 expect_error(
   DTSg$new(data.table(date = numeric(0L), col1 = integer(0L))),
   info = "data.table without a single row returns error"
@@ -410,7 +416,7 @@ expect_true(
 )
 
 expect_true(
-  DTSg$new(DT1, fast = TRUE)$fast,
+  DTSg$new(UTChourlyData, fast = TRUE)$fast,
   info = '"fast" field is set correctly'
 )
 
@@ -709,7 +715,7 @@ expect_identical(
     memoryOverCPU = TRUE
   )$values(TRUE)[["col1"]][3L],
   {
-    weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^1
+    weights <- 1 / c(rev(seq_len(2L) + 1), 1, seq_len(1L) + 1)^1
     weights <- weights / sum(weights)
     weighted.mean(DT1[["col1"]][1:4], weights, na.rm = TRUE)
   },
@@ -726,7 +732,7 @@ expect_identical(
     memoryOverCPU = FALSE
   )$values(TRUE)[["col1"]][3L],
   {
-    weights <- 1 / c(rev(seq_len(2) + 1), 1, seq_len(1) + 1)^2
+    weights <- 1 / c(rev(seq_len(2L) + 1), 1, seq_len(1L) + 1)^2
     weights <- weights / sum(weights)
     weighted.mean(DT1[["col1"]][1:4], weights, na.rm = TRUE)
   },

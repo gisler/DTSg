@@ -52,7 +52,7 @@ UTChourlyData <- data.table(
     as.POSIXct("2000-06-30 23:00:00", tz = "UTC"),
     "1 hour"
   ),
-  value = abs(rnorm(8784)),
+  value = as.numeric(seq_len(8784L)),
   year     = rep(  1:2        , daysPerHalfyear * 24L),
   quarter  = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
   month    = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
@@ -66,7 +66,7 @@ UTCfractionalSecondData <- data.table(
     as.POSIXct("2000-03-26 03:59:59.5", tz = "UTC"),
     0.5
   ),
-  value = abs(rnorm(21600)),
+  value = as.numeric(seq_len(21600L)),
   hour         = rep(1:3     , each = 7200L),
   minute       = rep(1:180   , each =  120L),
   second       = rep(1:10800 , each =    2L),
@@ -81,7 +81,7 @@ CEThourlyData <- data.table(
     as.POSIXct("2000-07-01 00:00:00", tz = "Europe/Vienna"),
     "1 hour"
   ),
-  value = abs(rnorm(8784)),
+  value = as.numeric(seq_len(8784L)),
   year     = rep(  1:2        , daysPerHalfyear * 24L),
   quarter  = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
   month    = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
@@ -95,7 +95,7 @@ CETtoDSTfractionalSecondData <- data.table(
     as.POSIXct("2000-03-26 03:59:59.5", tz = "Europe/Vienna"),
     0.5
   ),
-  value = abs(rnorm(14400)),
+  value = as.numeric(seq_len(14400L)),
   hour         = rep(1:2     , each = 7200L),
   minute       = rep(1:120   , each =  120L),
   second       = rep(1:7200  , each =    2L),
@@ -109,7 +109,7 @@ CETfromDSTfractionalSecondData <- data.table(
     as.POSIXct("2000-10-29 03:59:59.5", tz = "Europe/Vienna"),
     0.5
   ),
-  value = abs(rnorm(21600)),
+  value = as.numeric(seq_len(21600L)),
   hour         = rep(1:3     , each = 7200L),
   minute       = rep(1:180   , each =  120L),
   second       = rep(1:10800 , each =    2L),
