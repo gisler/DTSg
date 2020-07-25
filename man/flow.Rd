@@ -5,7 +5,7 @@
 \alias{flow}
 \title{Daily River Flows}
 \format{
-A \code{\link[data.table]{data.table}} with 2169 rows and 2 columns:
+A \code{\link[data.table]{data.table}} with 2169 rows and two columns:
  \describe{
    \item{date}{A \code{\link{POSIXct}} vector ranging from the start of the
      year 2007 to the end of the year 2012.}
