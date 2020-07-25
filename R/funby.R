@@ -41,11 +41,11 @@ byFasttimeMult___H__call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 %02d
 byFasttimeMult____M_call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 byFasttimeMult_____Scall <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 
-byMultY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byMultYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), (month(.dateTime)                                                                   - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
-byMultYmdH__call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byMultYmdHM_call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byMultYmdHMScall <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
+byMultY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"                      , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     )                          , tz = .helpers[["timezone"]]                                 ))
+byMultYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01"                    , year(.dateTime), (month(.dateTime)                                                                   - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L)                          , tz = .helpers[["timezone"]]                                 ))
+byMultYmdH__call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"       , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                               ), tz = .helpers[["timezone"]]                                 ))
+byMultYmdHM_call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00 %s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]      , format(.dateTime, "%z")), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S %z"))
+byMultYmdHMScall <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d %s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]      , format(.dateTime, "%z")), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S %z"))
 
 byMult_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
 byMult___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
@@ -331,15 +331,6 @@ byYmdH__ <- function(.dateTime, .helpers) {
 byYmdHM_ <- function(.dateTime, .helpers) {
   if (.helpers[["multiplier"]] == 1L) {
     eval(byYmdHM_call)
-  } else if (!grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF with a multiplier greater than one.',
-      call. = FALSE
-    )
   } else {
     eval(byMultYmdHM_call)
   }
@@ -349,15 +340,6 @@ byYmdHM_ <- function(.dateTime, .helpers) {
 byYmdHMS <- function(.dateTime, .helpers) {
   if (.helpers[["multiplier"]] == 1L) {
     eval(byYmdHMScall)
-  } else if (!grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF with a multiplier greater than one.',
-      call. = FALSE
-    )
   } else {
     eval(byMultYmdHMScall)
   }

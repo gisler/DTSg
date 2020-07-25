@@ -115,8 +115,8 @@ NULL
 #'    \item \code{\link{byY_____}}
 #'    \item \code{\link{byYm____}}
 #'    \item \code{\link{byYmdH__}} (UTC and equivalent and all Etc/GMT only)
-#'    \item \code{\link{byYmdHM_}} (UTC and equivalent and all Etc/GMT only)
-#'    \item \code{\link{byYmdHMS}} (UTC and equivalent and all Etc/GMT only)
+#'    \item \code{\link{byYmdHM_}}
+#'    \item \code{\link{byYmdHMS}}
 #'    \item \code{\link{by_m____}}
 #'    \item \code{\link{by___H__}} (UTC and equivalent and all Etc/GMT only)
 #'    \item \code{\link{by____M_}}

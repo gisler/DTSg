@@ -397,6 +397,18 @@ expect_identical(
 )
 
 expect_identical(
+  DTSg$new(CETtoDSTfractionalSecondData)$aggregate(byYmdHM_, sum, multiplier = 5L)$values(TRUE)[["value"]],
+  CETtoDSTfractionalSecondData[, .(value = sum(value)), by = .(minute %/% 5L * 5L)][["value"]],
+  info = '"byYmdHM_" works as expected (CETtoDST, multiplier > 1L)'
+)
+
+expect_identical(
+  DTSg$new(CETtoDSTfractionalSecondData)$aggregate(byYmdHMS, sum, multiplier = 4L)$values(TRUE)[["value"]],
+  CETtoDSTfractionalSecondData[, .(value = sum(value)), by = .(second %/% 4L * 4L)][["value"]],
+  info = '"byYmdHMS" works as expected (CETtoDST, multiplier > 1L)'
+)
+
+expect_identical(
   DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE, multiplier = 3L)$values(TRUE)[["value"]],
   CEThourlyData[, .(value = sum(value)), by = .((yearMonth - 1L) %/% 3L * 3L + 1L)][["value"]],
   info = '"byYm____" works as expected (CETtoFromDST, multiplier > 1L)'
@@ -421,6 +433,18 @@ expect_identical(
 )
 
 #### base functions (CETfromDST, multiplier > 1L) ####
+expect_identical(
+  DTSg$new(CETfromDSTfractionalSecondData)$aggregate(byYmdHM_, sum, multiplier = 15L)$values(TRUE)[["value"]],
+  CETfromDSTfractionalSecondData[, .(value = sum(value)), by = .(minute %/% 15L * 15L)][["value"]],
+  info = '"byYmdHM_" works as expected (CETfromDST, multiplier > 1L)'
+)
+
+expect_identical(
+  DTSg$new(CETfromDSTfractionalSecondData)$aggregate(byYmdHMS, sum, multiplier = 10L)$values(TRUE)[["value"]],
+  CETfromDSTfractionalSecondData[, .(value = sum(value)), by = .(second %/% 10L * 10L)][["value"]],
+  info = '"byYmdHMS" works as expected (CETfromDST, multiplier > 1L)'
+)
+
 expect_identical(
   DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by____M_, sum, multiplier = 20L)$values(TRUE)[["value"]],
   CETfromDSTfractionalSecondData[, .(value = sum(value)), by = .(hourMinute %/% 20L * 20L)][["value"]],
