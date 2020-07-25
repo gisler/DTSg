@@ -5,10 +5,18 @@
 \alias{subset}
 \title{Time Series Subset}
 \usage{
-\method{subset}{DTSg}(x, i, cols = self$cols(), funby = NULL,
-  ignoreDST = FALSE, na.status = "implicit",
-  clone = getOption("DTSgClone"), multiplier = 1L,
-  funbyHelpers = NULL, ...)
+\method{subset}{DTSg}(
+  x,
+  i,
+  cols = self$cols(),
+  funby = NULL,
+  ignoreDST = FALSE,
+  na.status = "implicit",
+  clone = getOption("DTSgClone"),
+  multiplier = 1L,
+  funbyHelpers = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}

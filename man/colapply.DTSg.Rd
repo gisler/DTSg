@@ -5,10 +5,20 @@
 \alias{colapply}
 \title{Apply Function Column-wise}
 \usage{
-\method{colapply}{DTSg}(x, fun, ..., cols = self$cols(class =
-  "numeric")[1L], resultCols = NULL, suffix = NULL, helpers = TRUE,
-  funby = NULL, ignoreDST = FALSE, multiplier = 1L,
-  funbyHelpers = NULL, clone = getOption("DTSgClone"))
+\method{colapply}{DTSg}(
+  x,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric")[1L],
+  resultCols = NULL,
+  suffix = NULL,
+  helpers = TRUE,
+  funby = NULL,
+  ignoreDST = FALSE,
+  multiplier = 1L,
+  funbyHelpers = NULL,
+  clone = getOption("DTSgClone")
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}

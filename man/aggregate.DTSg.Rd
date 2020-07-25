@@ -5,9 +5,18 @@
 \alias{aggregate}
 \title{Aggregate Values}
 \usage{
-\method{aggregate}{DTSg}(x, funby, fun, ..., cols = self$cols(class =
-  "numeric"), n = FALSE, ignoreDST = FALSE, multiplier = 1L,
-  funbyHelpers = NULL, clone = getOption("DTSgClone"))
+\method{aggregate}{DTSg}(
+  x,
+  funby,
+  fun,
+  ...,
+  cols = self$cols(class = "numeric"),
+  n = FALSE,
+  ignoreDST = FALSE,
+  multiplier = 1L,
+  funbyHelpers = NULL,
+  clone = getOption("DTSgClone")
+)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -134,11 +143,11 @@ The temporal aggregation level of certain \code{\link{TALFs}} can be adjusted
    \item \code{\link{byFasttime_____S}}
    \item \code{\link{byY_____}}
    \item \code{\link{byYm____}}
-   \item \code{\link{byYmdH__}} ("UTC" or equivalent or any Etc/GMT only)
-   \item \code{\link{byYmdHM_}}
-   \item \code{\link{byYmdHMS}}
+   \item \code{\link{byYmdH__}} (UTC and equivalent and all Etc/GMT only)
+   \item \code{\link{byYmdHM_}} (UTC and equivalent and all Etc/GMT only)
+   \item \code{\link{byYmdHMS}} (UTC and equivalent and all Etc/GMT only)
    \item \code{\link{by_m____}}
-   \item \code{\link{by___H__}} ("UTC" or equivalent or any Etc/GMT only)
+   \item \code{\link{by___H__}} (UTC and equivalent and all Etc/GMT only)
    \item \code{\link{by____M_}}
    \item \code{\link{by_____S}}
  }
