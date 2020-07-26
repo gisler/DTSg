@@ -112,7 +112,7 @@ CETfromDSTfractionalSecondData <- data.table(
     0.5
   ),
   value = as.numeric(seq_len(21600L)),
-  hour         = rep(2:4     , each = 7200L),
+  hour         = rep(1:3     , each = 7200L),
   minute       = rep(0:179   , each =  120L),
   second       = rep(0:10799 , each =    2L),
   hourMinute   = rep(rep(0:59, each =  120L),   3L),
