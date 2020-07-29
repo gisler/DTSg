@@ -222,8 +222,11 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(CETtoDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
-  CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]],
+  DTSg$new(CETtoDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE),
+  setkey(data.table(
+    .dateTime = as.POSIXct(c("2199-01-01 01:00:00", "2199-01-01 02:00:00"), tz = "Europe/Vienna"),
+    value = CETtoDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
+  ), ".dateTime"),
   info = '"by___H__" works as expected (CETtoDST, multiplier == 1L)'
 )
 
@@ -259,8 +262,11 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
-  CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]],
+  DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE),
+  setkey(data.table(
+    .dateTime = as.POSIXct(c("2199-01-01 01:00:00", "2199-01-01 02:00:00", "2199-01-01 03:00:00"), tz = "Europe/Vienna"),
+    value = CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
+  ), ".dateTime"),
   info = '"by___H__" works as expected (CETfromDST, multiplier == 1L)'
 )
 
@@ -390,8 +396,11 @@ expect_identical(
 
 #### base functions (CETtoFromDST, multiplier > 1L) ####
 expect_identical(
-  DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE, multiplier = 2L)$values(TRUE)[["value"]],
-  CEThourlyData[, .(value = sum(value)), by = .(year %/% 2L * 2L)][["value"]],
+  DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE, multiplier = 2L)$values(TRUE),
+  setkey(data.table(
+    .dateTime = as.POSIXct(c("1998-01-01", "2000-01-01"), tz = "Europe/Vienna"),
+    value = CEThourlyData[, .(value = sum(value)), by = .(year %/% 2L * 2L)][["value"]]
+  ), ".dateTime"),
   info = '"byY_____" works as expected (CETtoFromDST, multiplier > 1L)'
 )
 
