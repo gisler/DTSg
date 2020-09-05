@@ -1,31 +1,30 @@
 ## Minor Release
 
-* Added `subset` method: allows for filtering rows and/or selecting columns of a `DTSg` object
-* Added `setCols` method: allows for setting the values of columns of, adding columns to and/or removing columns from a `DTSg` object
-* Added `[` extract operator: acts as a shortcut for the `getCol` method
-* Added examples to the documentation of the `colapply` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply` method
-* `aggregate` method can benefit from `data.table`'s *GForce* optimisation now when its `fun` argument is provided with a character vector specifying summary functions
-* Greatly sped up `nas` method
-* Temporal aggregation level functions supplied to the `funby` argument of the `colapply` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset` method).
-* `getCol` method now is capable of also querying the *.dateTime* column
-* `R6Method` argument of `S3WrapperGenerator` now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression
-* Fixed that not all missing values were made explicit after a call to the `merge` method despite an `"explicit"` `na.status` in some cases
-* Fixed that `getCol` method tried to query all numeric columns instead of only the first one by default
+* Added `rowaggregate` method: allows for applying summary functions row-wise to `DTSg` objects
+* Added `rowbind` method: allows for combining the rows of `DTSg` objects
+* Added `setColNames` method: allows for renaming columns of `DTSg` objects
+* Added `multiplier` and `funbyHelpers` arguments to the `aggregate`, `colapply` and `subset` methods: allows for adjusting the temporal aggregation level of `TALFs` and for passing on user defined helper data to `TALFs`
+* Added `multiplier` also to the `list` of helper data passed on to temporal aggregation level functions
+* Added `helpers` argument to `colapply` and `rollapply` methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. `x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)` can now be written as `x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)`)
+* Temporal aggregation level functions based on the `fasttime` package now also support time zones equivalent to UTC (execute `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list of supported time zones)
+* Fixed that a `DTSg` object with only one timestamp did not set the name of its *.dateTime* column as expected
 * Improved vignettes and documentation
 * Minor internal code improvements
 
 ## Test Environments
 
-* local Linux (4.0.2)
+* local Windows (3.5.3)
+* local Windows (4.0.2)
 * Linux on Travis CI (3.6.3)
-* Linux on Travis CI (4.0.0)
-* OS X on Travis CI (3.6.3)
+* Linux on Travis CI (4.0.2)
 * OS X on Travis CI (4.0.2)
 * win-builder (devel)
 
 ## R CMD Check Results
 
-There were no ERRORs, WARNINGs or NOTEs.
+There was 1 NOTE:
+
+unable to verify current time
 
 ## Downstream Dependencies
 
