@@ -92,8 +92,8 @@ Some of the methods which take a function as an argument
  useful data for the development of user defined functions (see the
  respective help pages for further information). This can of course be a
  problem for functions like \code{\link{cumsum}} which do not expect such a
- thing. A solution is to set the `helpers` argument of the respective method
- to `FALSE`.
+ thing. A solution is to set the \code{helpers} argument of the respective
+ method to \code{FALSE}.
 }
 \section{Methods}{
 

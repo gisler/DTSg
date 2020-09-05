@@ -155,8 +155,8 @@
 #'  useful data for the development of user defined functions (see the
 #'  respective help pages for further information). This can of course be a
 #'  problem for functions like \code{\link{cumsum}} which do not expect such a
-#'  thing. A solution is to set the `helpers` argument of the respective method
-#'  to `FALSE`.
+#'  thing. A solution is to set the \code{helpers} argument of the respective
+#'  method to \code{FALSE}.
 #'
 #' @seealso \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
 #'  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
