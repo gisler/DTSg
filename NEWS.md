@@ -1,4 +1,4 @@
-## DTSg v0.6.0.9000
+## DTSg v0.7.0
 
 * Added `rowaggregate` method: allows for applying summary functions row-wise to `DTSg` objects
 * Added `rowbind` method: allows for combining the rows of `DTSg` objects
