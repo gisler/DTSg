@@ -78,7 +78,7 @@ User defined temporal aggregation level functions have to return a
    \item \emph{multiplier:} Same as \code{multiplier} argument.
  }
  Any additional element specified in the \code{funbyHelpers} argument is
-  appened to the end of the \code{\link{list}}. In case \code{funbyHelpers}
+  appended to the end of the \code{\link{list}}. In case \code{funbyHelpers}
   contains a \emph{ignoreDST} or \emph{multiplier} element, it takes
   precedence over the respective method argument. A \emph{timezone},
   \emph{periodicity} or \emph{na.status} element is rejected.
