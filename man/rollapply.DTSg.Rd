@@ -12,7 +12,7 @@
   cols = self$cols(class = "numeric")[1L],
   before = 1L,
   after = before,
-  weights = c("inverseDistance"),
+  weights = "inverseDistance",
   parameters = list(power = 1),
   resultCols = NULL,
   suffix = NULL,
