@@ -14,7 +14,7 @@ expect_error(
     as.POSIXct("2199-12-31"),
     "1 year"
   ), list(timezone = "Europe/Vienna")),
-  info = 'unsuitable time zone returns error'
+  info = "unsuitable time zone returns error"
 )
 
 #### assertFilter ####
