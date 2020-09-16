@@ -12,7 +12,7 @@ Install the development version from GitHub (requires the `remotes` package):
 
 `remotes::install_github("gisler/DTSg")`
 
-[![Build Status](https://travis-ci.org/gisler/DTSg.svg?branch=master)](https://travis-ci.org/gisler/DTSg) [![Coverage Status](https://coveralls.io/repos/github/gisler/DTSg/badge.svg?branch=master)](https://coveralls.io/github/gisler/DTSg?branch=master)
+[![Build Status](https://travis-ci.com/gisler/DTSg.svg?branch=master)](https://travis-ci.com/gisler/DTSg) [![Coverage Status](https://coveralls.io/repos/github/gisler/DTSg/badge.svg?branch=master)](https://coveralls.io/github/gisler/DTSg?branch=master)
 
 ## Getting Started
 
