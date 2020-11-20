@@ -3,11 +3,9 @@
 on:
   push:
     branches:
-      - main
       - master
   pull_request:
     branches:
-      - main
       - master
 
 name: R-CMD-check
@@ -25,13 +23,15 @@ jobs:
           - {os: windows-latest, r: 'devel'}
           - {os: macOS-latest, r: 'oldrel'}
           - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-20.04, r: 'oldrel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-latest, r: 'oldrel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-latest, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+      CI_NAME: 'GitHub Actions'
 
     steps:
       - uses: actions/checkout@v2
@@ -84,5 +84,6 @@ jobs:
           path: check
 
       - name: Test coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.r == 'release'
         run: covr::coveralls(type = "all")
         shell: Rscript {0}
