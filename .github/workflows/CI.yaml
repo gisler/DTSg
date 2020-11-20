@@ -31,7 +31,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-      CI_NAME: 'GitHub Actions'
+      CI_NAME: "GitHub Actions"
 
     steps:
       - uses: actions/checkout@v2
@@ -64,6 +64,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
@@ -84,6 +85,6 @@ jobs:
           path: check
 
       - name: Test coverage
-        if: runner.os == 'Linux' && matrix.config.r == 'release'
+        if: runner.os == 'macOS' && matrix.config.r == 'release'
         run: covr::coveralls(type = "all")
         shell: Rscript {0}
