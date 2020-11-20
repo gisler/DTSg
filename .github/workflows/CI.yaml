@@ -84,6 +84,6 @@ jobs:
           path: check
 
       - name: Test coverage
-        if: matrix.os == 'ubuntu-latest' && matrix.r == 'release'
+        if: runner.os == 'Linux' && matrix.r == 'release'
         run: covr::coveralls(type = "all")
         shell: Rscript {0}
