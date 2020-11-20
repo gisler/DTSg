@@ -12,7 +12,7 @@ Install the development version from GitHub (requires the `remotes` package):
 
 `remotes::install_github("gisler/DTSg")`
 
-[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![Coverage Status](https://coveralls.io/repos/github/gisler/DTSg/badge.svg?branch=master)](https://coveralls.io/github/gisler/DTSg?branch=master)
+[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=309UB25J9G)](https://codecov.io/gh/gisler/DTSg)
 
 ## Getting Started
 
