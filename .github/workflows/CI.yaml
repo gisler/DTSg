@@ -30,8 +30,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-      CI_NAME: "GitHub Actions"
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -86,5 +85,5 @@ jobs:
 
       - name: Test coverage
         if: runner.os == 'macOS' && matrix.config.r == 'release'
-        run: covr::coveralls(type = "all")
+        run: covr::codecov(type = "all")
         shell: Rscript {0}
