@@ -67,7 +67,7 @@ jobs:
       - name: Install dependencies (3.5.2)
         if: matrix.config.r == '3.5.2'
         run: |
-          remotes::install_deps(dependencies = TRUE, repos = c("https://mran.microsoft.com/snapshot/2019-02-01", getOption("repos")))
+          remotes::install_deps(dependencies = TRUE, repos = c("https://mran.microsoft.com/snapshot/2019-02-01", getOption("repos")), type = "win.binary")
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
