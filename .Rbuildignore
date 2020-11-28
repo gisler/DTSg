@@ -1,5 +1,5 @@
 ^.*\.Rproj$
-^\.Rproj\.user$
+^\.github$
 ^\.lintr$
-^\.travis\.yml$
+^\.Rproj\.user$
 ^cran-comments\.md$
