@@ -49,7 +49,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache R packages
-        if: runner.os != 'Windows' || matrix.config.r == '3.5.2'
+        if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -67,11 +67,16 @@ jobs:
       - name: Install dependencies (3.5.2)
         if: matrix.config.r == '3.5.2'
         run: |
-          options(install.packages.check.source = "no")
+          remotes::install_cran(
+            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "magrittr", "RColorBrewer"),
+            repos = "https://mran.microsoft.com/snapshot/2019-02-01",
+            type = "win.binary",
+            dependencies = TRUE
+          )
           remotes::install_deps(
             dependencies = TRUE,
-            repos = c("https://mran.microsoft.com/snapshot/2019-02-01", getOption("repos")),
-            type = "win.binary"
+            type = "win.binary",
+            upgrade = "never"
           )
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
