@@ -873,7 +873,7 @@ DTSg <- R6Class(
 
       plot <- dygraphs::dygraph(
         as.xts.data.table(private$.values[
-          .dateTime >= from & .dateTime <= to,
+          between(.dateTime, from, to),
           c(".dateTime", cols),
           with = FALSE
         ]),
