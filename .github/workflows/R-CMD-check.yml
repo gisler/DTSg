@@ -68,7 +68,7 @@ jobs:
         if: matrix.config.r == '3.5.2'
         run: |
           remotes::install_cran(
-            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "magrittr", "RColorBrewer"),
+            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer"),
             repos = "https://mran.microsoft.com/snapshot/2019-02-01",
             type = "win.binary",
             dependencies = TRUE
