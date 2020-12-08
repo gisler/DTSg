@@ -16,6 +16,7 @@ Description: Basic time series functionalities such as listing of missing
 License: MIT + file LICENSE
 URL: https://github.com/gisler/DTSg
 BugReports: https://github.com/gisler/DTSg/issues
+Language: en-GB
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
