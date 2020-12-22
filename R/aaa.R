@@ -5,5 +5,5 @@
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  getOption("DTSgClone", options(DTSgClone = TRUE))
+  getOption("DTSgClone", options(DTSgClone = TRUE)) # nolint
 }
