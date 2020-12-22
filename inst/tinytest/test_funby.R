@@ -1,4 +1,4 @@
-source("data.R")
+source("data.R") # nolint
 
 #### fasttime functions (UTC, multiplier == 1L) ####
 if (requireNamespace("fasttime", quietly = TRUE)) {
