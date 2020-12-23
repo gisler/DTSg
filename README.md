@@ -12,7 +12,7 @@ Install the development version from GitHub (requires the `remotes` package):
 
 `remotes::install_github("gisler/DTSg")`
 
-[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=309UB25J9G)](https://codecov.io/gh/gisler/DTSg) [![CodeFactor](https://www.codefactor.io/repository/github/gisler/dtsg/badge)](https://www.codefactor.io/repository/github/gisler/dtsg)
+[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=RgpKmhb899)](https://codecov.io/gh/gisler/DTSg) [![CodeFactor](https://www.codefactor.io/repository/github/gisler/dtsg/badge)](https://www.codefactor.io/repository/github/gisler/dtsg)
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
