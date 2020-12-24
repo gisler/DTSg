@@ -14,10 +14,21 @@ Install the development version from GitHub (requires the `remotes` package):
 
 [![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=RgpKmhb899)](https://codecov.io/gh/gisler/DTSg) [![CodeFactor](https://www.codefactor.io/repository/github/gisler/dtsg/badge)](https://www.codefactor.io/repository/github/gisler/dtsg)
 
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-
 ## Getting Started
 
 [A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)
 
 [B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/b_advancedUsage.html)
+
+## Commit Message Guidelines
+
+This project adheres to [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) with the following types:
+
+* **ci**: Changes to CI configuration files and scripts
+* **docs**: Documentation only changes
+* **feat**: A new feature
+* **fix**: A bug fix
+* **perf**: A code change that improves performance
+* **refactor**: A code change that neither fixes a bug nor adds a feature
+* **style**: Changes that do not affect the meaning of the code (whitespace, formatting etc.)
+* **test**: Adding missing tests or correcting existing tests
