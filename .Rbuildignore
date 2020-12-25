@@ -2,4 +2,5 @@
 ^\.github$
 ^\.lintr$
 ^\.Rproj\.user$
+^CONTRIBUTING.md$
 ^cran-comments\.md$
