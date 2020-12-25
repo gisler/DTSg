@@ -564,7 +564,9 @@ new <- function(
   fast = FALSE,
   swallow = FALSE,
   na.status = c("explicit", "implicit", "undecided")
-) {} # no R CMD check warning
+) {
+  # no R CMD check warning
+}
 setClass("DTSg", slots = c(. = "logical"))
 setMethod(
   "initialize",

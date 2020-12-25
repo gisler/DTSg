@@ -1,4 +1,4 @@
-#### Calls (multiplier == 1L) ####
+#### Calls (multiplier == 1L) #### # nolint
 byFasttimeY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            ), tz = .helpers[["timezone"]]))
 byFasttimeYQ____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                              ), tz = .helpers[["timezone"]]))
 byFasttimeYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime),   month(.dateTime)                                                                        ), tz = .helpers[["timezone"]]))
@@ -29,7 +29,7 @@ by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateT
 by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]))
 by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]]))
 
-#### Calls (multiplier > 1L) ####
+#### Calls (multiplier > 1L) #### # nolint
 byFasttimeMultY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 byFasttimeMultYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), (month(.dateTime)                                                                   - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
 byFasttimeMultYmdH__call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))

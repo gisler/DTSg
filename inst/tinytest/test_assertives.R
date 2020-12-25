@@ -29,20 +29,24 @@ expect_error(
   info = 'unrecognised "periodicity" returns error'
 )
 
+# nolint start
 # expect_warning(
 #   assertNAstatusPeriodicityOK("explicit", "unrecognised", "warning"),
 #   info = 'unrecognised "periodicity" returns warning'
 # )
+# nolint end
 
 expect_error(
   assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
   info = 'implicit "na.status" returns error'
 )
 
+# nolint start
 # expect_warning(
 #   assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
 #   info = 'undecided "na.status" returns warning'
 # )
+# nolint end
 
 #### assertNoStartingDot ####
 expect_error(
