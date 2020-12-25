@@ -19,16 +19,3 @@ Install the development version from GitHub (requires the `remotes` package):
 [A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)
 
 [B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/b_advancedUsage.html)
-
-## Commit Message Guidelines
-
-This project adheres to [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) with the following types:
-
-* **ci**: Changes to CI configuration files and scripts
-* **docs**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **style**: Changes that do not affect the meaning of the code (whitespace, formatting etc.)
-* **test**: Adding missing tests or correcting existing tests
