@@ -8,9 +8,5 @@ linters: with_defaults(
     spaces_inside_linter = NULL,
     todo_comment_linter = todo_comment_linter(
       todo = c("todo", "to-do", "to do", "fixme", "fix-me", "fix me")
-    ),
-    undesirable_function_linter = undesirable_function_linter(list(
-      attach, detach, library, mapply, options, par, require, sapply, setwd,
-      sink, source, Sys.setenv, Sys.setlocale
-    ))
+    )
   )
