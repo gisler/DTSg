@@ -6,18 +6,18 @@ labels: bug
 assignees: ''
 ---
 
-**Describe the bug**
+**Bug description.**
 A clear and concise description of what the bug is.
 
-**Steps to reproduce the behaviour**
+**Steps to reproduce the behaviour:**
 1. ...
 2. ...
 3. ...
 
-**Expected behaviour**
+**Expected behaviour.**
 A clear and concise description of what you expected to happen.
 
-**Output of `sessionInfo()`**
+**Output of `sessionInfo()`:**
 ```
 
 ```
