@@ -12,7 +12,7 @@ Install the development version from GitHub (requires the `remotes` package):
 
 `remotes::install_github("gisler/DTSg")`
 
-[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=RgpKmhb899)](https://codecov.io/gh/gisler/DTSg) [![GitHub Super-Linter](https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=RgpKmhb899)](https://codecov.io/gh/gisler/DTSg) [![GitHub Super-Linter](https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3A%22Lint+Code+Base%22)
 
 ## Getting Started
 
