@@ -19,3 +19,7 @@ Install the development version from GitHub (requires the `remotes` package):
 [A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)
 
 [B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/b_advancedUsage.html)
+
+## Semantic Versioning
+
+Releases of this project are versioned following the rules of [SemVer](https://semver.org) with one exception: The public API of major version zero (0.y.z) should be considered stable.
