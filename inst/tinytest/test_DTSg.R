@@ -995,7 +995,7 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$summary(digits = 0L)[1L, 1L],
+  DTSg$new(DT1)$summary(digits = 1L)[1L, 1L],
   "Min.   : 1  ",
   info = '"..." passes on arguments correctly'
 )
