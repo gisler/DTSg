@@ -1,4 +1,4 @@
-## DTSg v0.7.0.9000
+## DTSg v0.7.1
 
 * Fixed error "Error in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, : invalid value 0 for 'digits' argument" related to tests in upcoming R 4.2.0
 * Slightly improved documentation
