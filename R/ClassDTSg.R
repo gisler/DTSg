@@ -672,6 +672,10 @@ DTSg <- R6Class(
       } else if (!is.null(class)) {
         qassert(class, "S+")
 
+        if (".numerary" %chin% class) {
+          class <- c(setdiff(class, ".numerary"), "integer", "numeric")
+        }
+
         classes <- vapply(
           private$.values[, -1L],
           function(col) {class(col)[1L]},
