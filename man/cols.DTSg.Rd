@@ -11,7 +11,9 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{class}{An optional character vector matched to the most specific class
-(first element) of each column's \code{\link{class}} vector.}
+(first element) of each column's \code{\link{class}} vector. The
+\dQuote{special class} \code{".numerary"} matches the \code{\link{integer}}
+and \code{\link{numeric}} classes.}
 
 \item{pattern}{An optional character string passed on to the \code{pattern}
 argument of \code{\link{grep}}.}

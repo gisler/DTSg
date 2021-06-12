@@ -355,6 +355,18 @@ expect_identical(
 )
 
 expect_identical(
+  DTSg$new(DT3)$cols(".numerary"),
+  c("col2", "col3"),
+  info = '".numerary" column names are returned'
+)
+
+expect_identical(
+  DTSg$new(DT3)$cols(c(".numerary", "character")),
+  c("col1", "col2", "col3"),
+  info = '".numerary" and character column names are returned'
+)
+
+expect_identical(
   DTSg$new(DT1)$cols(pattern = "^c.l1$"),
   "col1",
   info = "column names matching pattern are returned"

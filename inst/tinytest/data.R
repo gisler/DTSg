@@ -36,7 +36,9 @@ DT3 <- data.table(
       "7 months"
     )
   ), tzone = "Europe/Vienna"),
-  col1 = LETTERS[1:5]
+  col1 = LETTERS[1:5],
+  col2 = 1:5,
+  col3 = c(1, 2, 3, 4, 5)
 )
 
 #### funby test data ####

@@ -1,5 +1,7 @@
 ## DTSg v0.7.1.9000
 
+* Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
+
 ## DTSg v0.7.1
 
 * Fixed error "Error in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, : invalid value 0 for 'digits' argument" related to tests in upcoming R 4.2.0
