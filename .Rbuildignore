@@ -2,6 +2,9 @@
 ^\.github$
 ^\.lintr$
 ^\.Rproj\.user$
+^_pkgdown\.yml$
 ^CONTRIBUTING\.md$
 ^cran-comments\.md$
+^docs$
 ^LICENSE\.md$
+^pkgdown$
