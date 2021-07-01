@@ -14,12 +14,6 @@ Install the development version from GitHub (requires the `remotes` package):
 
 [![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/master/graph/badge.svg?token=RgpKmhb899)](https://codecov.io/gh/gisler/DTSg) [![GitHub Super-Linter](https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3A%22Lint+Code+Base%22)
 
-## Getting Started
-
-[A. Basic Usage](https://CRAN.R-project.org/package=DTSg/vignettes/a_basicUsage.html)
-
-[B. Advanced Usage](https://CRAN.R-project.org/package=DTSg/vignettes/b_advancedUsage.html)
-
 ## Semantic Versioning
 
 Releases of this project are versioned following the rules of [SemVer](https://semver.org) with one exception: The public API of major version zero (0.y.z) should be considered stable.

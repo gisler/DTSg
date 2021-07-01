@@ -14,7 +14,7 @@ Description: Basic time series functionalities such as listing of missing
     functional approach allows incorporating functionalities from many other
     packages.
 License: MIT + file LICENSE
-URL: https://github.com/gisler/DTSg
+URL: https://gisler.github.io/DTSg
 BugReports: https://github.com/gisler/DTSg/issues
 Language: en-GB
 Encoding: UTF-8
