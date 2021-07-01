@@ -1,4 +1,4 @@
-## Commit Message Guidelines
+# Commit Message Guidelines
 
 This project adheres to [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) with the following types:
 
