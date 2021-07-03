@@ -1,4 +1,60 @@
+url: https://gisler.github.io/DTSg
+
 template:
   params:
     bootswatch: readable
-url: https://gisler.github.io/DTSg
+
+development:
+  mode: auto
+
+navbar:
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Vignettes"
+      menu:
+        - text: "A. Basic Usage"
+          href: articles/a_basicUsage.html
+        - text: "B. Advanced Usage"
+          href: articles/b_advancedUsage.html
+    - text: "Changelog"
+      href: news/index.html
+
+reference:
+  - title: "Working Horse"
+    contents:
+      - DTSg
+  - title: "Methods"
+    contents:
+      - aggregate.DTSg
+      - alter.DTSg
+      - clone.DTSg
+      - colapply.DTSg
+      - cols.DTSg
+      - getCol.DTSg
+      - merge.DTSg
+      - nas.DTSg
+      - plot.DTSg
+      - print.DTSg
+      - refresh.DTSg
+      - rollapply.DTSg
+      - rowaggregate.DTSg
+      - rowbind.DTSg
+      - setColNames.DTSg
+      - setCols.DTSg
+      - subset.DTSg
+      - summary.DTSg
+      - values.DTSg
+  - title: "TALFs"
+    contents:
+      - TALFs
+  - title: "Other Functions"
+    contents:
+      - interpolateLinear
+      - rollback
+      - S3WrapperGenerator
+  - title: "Data"
+    contents:
+      - flow
