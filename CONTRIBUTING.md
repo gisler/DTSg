@@ -10,3 +10,5 @@ This project adheres to [![Conventional Commits](https://img.shields.io/badge/Co
 * **refactor**: A code change that neither fixes a bug nor adds a feature
 * **style**: Changes that do not affect the meaning of the code (whitespace, formatting etc.)
 * **test**: Adding missing tests or correcting existing tests
+* **web**: Changes to website configuration files and scripts
+* **misc**: Changes, which fit no other type (ignore lists, GitHub templates etc.)
