@@ -3,7 +3,7 @@
 \name{cols.DTSg}
 \alias{cols.DTSg}
 \alias{cols}
-\title{Get Names of Value Columns}
+\title{Get column names}
 \usage{
 \method{cols}{DTSg}(x, class = NULL, pattern = NULL, ...)
 }
@@ -11,22 +11,21 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{class}{An optional character vector matched to the most specific class
-(first element) of each column's \code{\link{class}} vector. The
-\dQuote{special class} \code{".numerary"} matches the \code{\link{integer}}
-and \code{\link{numeric}} classes.}
+(first element) of each column's \code{\link{class}} vector. The \dQuote{special
+class} \code{".numerary"} matches the \code{\link{integer}} and \code{\link{numeric}} classes.}
 
 \item{pattern}{An optional character string passed on to the \code{pattern}
 argument of \code{\link{grep}}.}
 
-\item{\dots}{Further arguments passed on to \code{\link{grep}}. The
-\code{value} argument is rejected.}
+\item{\dots}{Further arguments passed on to \code{\link{grep}}. The \code{value} argument is
+rejected.}
 }
 \value{
 Returns a character vector.
 }
 \description{
-Queries all column names of a \code{\link{DTSg}} object, those of certain
- \code{\link{class}}es and/or those matching a certain pattern only.
+Returns all column names of a \code{\link{DTSg}} object, those of certain \code{\link{class}}es
+and/or those matching a certain pattern only.
 }
 \examples{
 # new DTSg object
@@ -39,7 +38,4 @@ x$cols(class = "numeric")
 ## S3 method
 cols(x = x, class = "numeric")
 
-}
-\seealso{
-\code{\link{DTSg}}, \code{\link{class}}, \code{\link{grep}}
 }

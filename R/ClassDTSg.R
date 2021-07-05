@@ -1,174 +1,145 @@
 #### Documentation ####
-#' DTSg Class
+#' DTSg class
 #'
-#' The \code{DTSg} class is the working horse of the package. It is an
-#'  \code{\link[R6]{R6Class}} and offers an S3 interface in addition to its
-#'  native R6 interface. In the usage sections of the documentation only the S3
-#'  interface is shown, however, the examples always show both possibilities.
-#'  Generally, they are very similar anyway. While the R6 interface always has
-#'  the object first and the method is selected with the help of the \code{$}
-#'  operator (for instance, \code{x$cols()}), the S3 interface always has the
-#'  method first and the object as its first argument (for instance,
-#'  \code{cols(x)}). An exception is the \code{new} method. It is not an S3
-#'  method, but an abused S4 constructor with the character string \code{"DTSg"}
-#'  as its first argument. Regarding the R6 interface, the \code{DTSg} class
-#'  generator has to be used to access the \code{new} method with the help of
-#'  the \code{$} operator.
+#' The `DTSg` class is the working horse of the package. It is an
+#' [`R6::R6Class`] and offers an S3 interface in addition to its native R6
+#' interface. In the usage sections of the documentation, unfortunately, only
+#' the usage of the S3 methods are displayed, however, the examples always show
+#' both ways of calling the respective method. Generally, they are very similar
+#' anyway. While the R6 interface always has the object first and the method is
+#' then selected with the help of the `$` operator, for instance, `x$cols()`,
+#' the S3 interface always has the method first and then the object as its first
+#' argument, for instance, `cols(x)`. An exception is the `new` method. It is
+#' not an S3 method, but an abused S4 constructor with the character string
+#' `"DTSg"` as its first argument. Regarding the R6 interface, the `DTSg` class
+#' generator has to be used to access the `new` method with the help of the `$`
+#' operator.
 #'
 #' @usage new(Class, values, ID = "", parameter = "", unit = "", variant = "",
-#'  aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status = c("explicit",
-#'  "implicit", "undecided"))
+#'   aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status =
+#'   c("explicit", "implicit", "undecided"))
 #'
-#' @param Class A character string. Must be \code{"DTSg"} in order to create a
-#'  \code{DTSg} object. Otherwise a different object may or may not be created
-#'  (S4 constructor only).
-#' @param values A \code{\link{data.frame}} or object inherited from class
-#'  \code{\link{data.frame}}, for instance,
-#'  \code{\link[data.table]{data.table}}. Its first column must be of class
-#'  \code{\link{POSIXct}} or coercible to it. It serves as the object's time
-#'  index and is renamed to \emph{.dateTime.}
-#' @param ID A character string specifying the ID (name) of the time series.
-#' @param parameter A character string specifying the parameter of the time
-#'  series.
-#' @param unit A character string specifying the unit of the time series.
+#' @param Class A character string. Must be `"DTSg"` in order to create a `DTSg`
+#'   object. Otherwise a different object may or may not be created (S4
+#'   constructor only).
+#' @param values A [`data.frame`] or object inherited from class [`data.frame`],
+#'   for instance, [`data.table::data.table`]. Its first column must be of class
+#'   [`POSIXct`] or coercible to it. It serves as the object's time index and is
+#'   renamed to _.dateTime._
+#' @param ID A character string specifying the ID (name) of the time series data
+#'   object.
+#' @param parameter A character string specifying the parameter name of the time
+#'   series data.
+#' @param unit A character string specifying the unit of the time series data.
 #' @param variant A character string specifying further metadata of the time
-#'  series, for instance, \code{"min"} to point out that it is a time series of
-#'  lower bound measurements.
-#' @param aggregated A logical signalling how the timestamps of the series have
-#'  to be interpreted: as snap-shots (\code{FALSE}) or as periods between
-#'  subsequent timestamps (\code{TRUE}).
-#' @param fast A logical signalling if all rows (\code{FALSE}) or only the first
-#'  1000 rows (\code{TRUE}) shall be used to check the object's integrity and
-#'  for the automatic detection of the time series' periodicity.
-#' @param swallow A logical signalling if the object provided through the
-#'  \code{values} argument shall be \dQuote{swallowed} by the \code{DTSg}
-#'  object, i.e. no copy of the data shall be made. This is generally more
-#'  resource efficient, but only works if the object provided through the
-#'  \code{values} argument is a \code{\link[data.table]{data.table}}. Be warned,
-#'  however, that if the creation of the \code{DTSg} object fails for some
-#'  reason, the first column of the provided
-#'  \code{\link[data.table]{data.table}} might have been coerced to
-#'  \code{\link{POSIXct}} and keyed (see \code{\link[data.table]{setkey}} for
-#'  further information). Furthermore, all references to the \dQuote{swallowed}
-#'  \code{\link[data.table]{data.table}} in the global (and only the global)
-#'  environment are removed upon successful creation of a \code{DTSg} object.
-#' @param na.status A character string. Either \code{"explicit"}, which makes
-#'  missing timestamps according to the recognised periodicity explicit, or
-#'  \code{"implicit"}, which removes timestamps with missing values on all value
-#'  columns, or \code{"undecided"} for no such action. Please note that
-#'  \code{\link{DTSg}} objects work best with explicitly missing values.
+#'   series, for instance, `"min"` to point out that it is a time series of
+#'   lower bound measurements.
+#' @param aggregated A logical specifying how the timestamps of the series have
+#'   to be interpreted: as snap-shots (`FALSE`) or as periods between subsequent
+#'   timestamps (`TRUE`).
+#' @param fast A logical specifying if all rows (`FALSE`) or only the first 1000
+#'   rows (`TRUE`) shall be used to check the object's integrity and for the
+#'   automatic detection of the time series' periodicity.
+#' @param swallow A logical specifying if the object provided through the
+#'   `values` argument shall be \dQuote{swallowed} by the `DTSg` object, i.e. no
+#'   copy of the data shall be made. This is generally more resource efficient,
+#'   but only works when the provided object is a [`data.table::data.table`]. Be
+#'   warned, however, that when the creation of the `DTSg` object fails for some
+#'   reason, the first column of the provided [`data.table::data.table`] might
+#'   have been coerced to [`POSIXct`] and keyed (see [`data.table::setkey`] for
+#'   further information). Furthermore, all references to the \dQuote{swallowed}
+#'   [`data.table::data.table`] in the global (and only the global) environment
+#'   are removed upon the successful creation of the `DTSg` object.
+#' @param na.status A character string. Either `"explicit"`, which makes missing
+#'   timestamps according to the recognised periodicity explicit, or
+#'   `"implicit"`, which removes timestamps with missing values on all value
+#'   columns, or `"undecided"` for no such action. Please note that `DTSg`
+#'   objects work best with explicitly missing values.
 #'
-#' @return Returns a \code{DTSg} object.
+#' @return Returns a `DTSg` object.
 #'
 #' @section Methods:
-#' A \code{DTSg} object has the following methods:
-#'  \itemize{
-#'    \item \code{aggregate}: See \code{\link{aggregate}} for further
-#'      information.
-#'    \item \code{alter}: See \code{\link{alter}} for further information.
-#'    \item \code{clone}: See \code{\link{clone}} for further information.
-#'    \item \code{colapply}: See \code{\link{colapply}} for further information.
-#'    \item \code{cols}: See \code{\link{cols}} for further information.
-#'    \item \code{getCol}: See \code{\link{getCol}} for further information.
-#'    \item \code{merge}: See \code{\link{merge}} for further information.
-#'    \item \code{nas}: See \code{\link{nas}} for further information.
-#'    \item \code{plot}: See \code{\link{plot}} for further information.
-#'    \item \code{print}: See \code{\link{print}} for further information.
-#'    \item \code{refresh}: See \code{\link{refresh}} for further information.
-#'    \item \code{rollapply}: See \code{\link{rollapply}} for further
-#'      information.
-#'    \item \code{rowaggregate}: See \code{\link{rowaggregate}} for further
-#'      information.
-#'    \item \code{rowbind}: See \code{\link{rowbind}} for further information.
-#'    \item \code{setColNames}: See \code{\link{setColNames}} for further
-#'      information.
-#'    \item \code{setCols}: See \code{\link{setCols}} for further information.
-#'    \item \code{subset}: See \code{\link{subset}} for further information.
-#'    \item \code{summary}: See \code{\link{summary}} for further information.
-#'    \item \code{values}: See \code{\link{values}} for further information.
-#'  }
+#' A `DTSg` object has the following methods:
+#' * `aggregate`: See [`aggregate`] for further information.
+#' * `alter`: See [`alter`] for further information.
+#' * `clone`: See [`clone`] for further information.
+#' * `colapply`: See [`colapply`] for further information.
+#' * `cols`: See [`cols`] for further information.
+#' * `getCol`: See [`getCol`] for further information.
+#' * `merge`: See [`merge`] for further information.
+#' * `nas`: See [`nas`] for further information.
+#' * `plot`: See [`plot`] for further information.
+#' * `print`: See [`print`] for further information.
+#' * `refresh`: See [`refresh`] for further information.
+#' * `rollapply`: See [`rollapply`] for further information.
+#' * `rowaggregate`: See [`rowaggregate`] for further information.
+#' * `rowbind`: See [`rowbind`] for further information.
+#' * `setColNames`: See [`setColNames`] for further information.
+#' * `setCols`: See [`setCols`] for further information.
+#' * `subset`: See [`subset`] for further information.
+#' * `summary`: See [`summary`] for further information.
+#' * `values`: See [`values`] for further information.
 #'
 #' @section Fields:
-#' A \code{DTSg} object has the following fields or properties as they are often
-#'  called. They are implemented through so called active bindings which means
-#'  that they can be accessed and actively set with the help of the \code{$}
-#'  operator (for instance, \code{x$ID} gets the value of the \emph{ID} field
-#'  and \code{x$ID <- "River Flow"} sets its value). Please note that fields are
-#'  always modified in place, i.e. no clone (copy) of the object is made
-#'  beforehand. See \code{\link{clone}} for further information. Some of the
-#'  fields are read-only though:
-#'  \itemize{
-#'    \item \emph{aggregated:} Same as \code{aggregated} argument.
-#'    \item \emph{fast:} Same as \code{fast} argument.
-#'    \item \emph{ID:} Same as \code{ID} argument. It is used as the title of
-#'      plots.
-#'    \item \emph{na.status:} Same as \code{na.status} argument. When set, the
-#'      \emph{values} of the object are expanded or collapsed accordingly.
-#'    \item \emph{parameter:} Same as \code{parameter} argument. It is used as
-#'      the label of the primary axis of plots.
-#'    \item \emph{periodicity:} A \code{\link{difftime}} object for a regular
-#'      and a character string for an irregular \code{DTSg} object describing
-#'      its periodicity or containing \code{"unrecognised"} in case it could not
-#'      be detected. When set, the periodicity of the time series is changed as
-#'      specified. See \code{by} argument of \code{\link{alter}} for further
-#'      information.
-#'    \item \emph{regular:} A logical signalling if all lags in seconds between
-#'      subsequent timestamps are the same (\code{TRUE}) or if some are
-#'      different (\code{FALSE}). A, for instance, monthly time series is
-#'      considered irregular in this sense (read-only).
-#'    \item \emph{timestamps:} An integer showing the total number of timestamps
-#'      of the time series (read-only).
-#'    \item \emph{timezone:} A character string containing the time zone of the
-#'      time series. When set, the series is converted to the specified time
-#'      zone. Only names from \code{\link{OlsonNames}} are accepted.
-#'    \item \emph{unit:} Same as \code{unit} argument. It is added to the label
-#'      of the primary axis of plots when the \emph{parameter} field is set.
-#'    \item \emph{variant:} Same as \code{variant} argument. It is added to the
-#'      label of the primary axis of plots when the \emph{parameter} field is
-#'      set.
-#'  }
+#' A `DTSg` object has the following fields or properties as they are often
+#' called. They are implemented through so called active bindings, which means
+#' that they can be accessed and actively set with the help of the `$` operator,
+#' for instance, `x$ID` gets the value of the `ID` field and
+#' `x$ID <- "River Flow"` sets its value. Please note that fields are always
+#' modified in place, i.e. no deep clone (copy) of the object is made
+#' beforehand. See [`clone`] for further information. Some of the fields are
+#' read-only though:
+#' * `aggregated`: Same as the `aggregated` argument.
+#' * `fast`: Same as the `fast` argument.
+#' * `ID`: Same as the `ID` argument. It is used as the title of plots.
+#' * `na.status`: Same as the `na.status` argument. When set, the missing values
+#' of the object are expanded or collapsed accordingly.
+#' * `parameter`: Same as the `parameter` argument. It is used as the label of
+#' the primary axis of plots.
+#' * `periodicity`: A [`difftime`] object for a regular and a character string
+#' for an irregular `DTSg` object describing its periodicity or containing
+#' `"unrecognised"` in case it could not be detected. When set, the periodicity
+#' of the time series is changed as specified. See the `by` argument of
+#' [`alter`] for further information.
+#' * `regular`: A logical signalling if all lags in seconds between subsequent
+#' timestamps are the same (`TRUE`) or if some are different (`FALSE`). A, for
+#' instance, monthly time series is considered irregular in this sense
+#' (read-only).
+#' * `timestamps`: An integer showing the total number of timestamps of the time
+#' series (read-only).
+#' * `timezone`: A character string showing the time zone of the time series.
+#' When set, the series is converted to the specified time zone. Only names from
+#' [`OlsonNames`] are accepted.
+#' * `unit`: Same as the  `unit` argument. It is added to the label of the
+#' primary axis of plots when the `parameter` field is set.
+#' * `variant`: Same as the `variant` argument. It is added to the label of the
+#' primary axis of plots when the `parameter` field is set.
 #'
-#' The \emph{parameter}, \emph{unit} and \emph{variant} fields are especially
-#'  useful for time series with a single variable (value column) only.
+#' The `parameter`, `unit` and `variant` fields are especially useful for time
+#' series with a single variable (value column) only.
 #'
 #' @section Options:
-#' The behaviour of \code{DTSg} objects can be customised with the help of the
-#'  following option. See \code{\link{options}} for further information:
-#'  \itemize{
-#'    \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are,
-#'      by default, modified in place (\code{FALSE}) or if a clone (copy) is
-#'      made beforehand (\code{TRUE}).
-#'  }
+#' The behaviour of `DTSg` objects can be customised with the help of the
+#' following option. See [`options`] for further information:
+#' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
+#' modified in place (`FALSE`) or if a deep clone (copy) is made beforehand
+#' (`TRUE`).
 #'
 #' @note
-#' Due to the \code{\link{POSIXct}} nature of the \emph{.dateTime} column, the
-#'  same sub-second accuracy, issues and limitations apply to \code{DTSg}
-#'  objects. In order to prevent at least some of the possible precision issues,
-#'  the lags in seconds between subsequent timestamps are rounded to
-#'  microseconds during integrity checks. This corresponds to the maximum value
-#'  allowed for \code{\link{options}("digits.secs")}. As a consequence, time
-#'  series with a sub-second accuracy higher than a microsecond will never work.
-#'
-#' Some of the methods which take a function as an argument
-#'  (\code{\link{colapply}} and \code{\link{rollapply}}) hand over to it an
-#'  additional \code{\link{list}} argument called \code{.helpers} containing
-#'  useful data for the development of user defined functions (see the
-#'  respective help pages for further information). This can of course be a
-#'  problem for functions like \code{\link{cumsum}} which do not expect such a
-#'  thing. A solution is to set the \code{helpers} argument of the respective
-#'  method to \code{FALSE}.
-#'
-#' @seealso \code{\link[R6]{R6Class}}, \code{\link{data.frame}},
-#'  \code{\link[data.table]{data.table}}, \code{\link{POSIXct}},
-#'  \code{\link[data.table]{setkey}}, \code{\link{difftime}},
-#'  \code{\link{OlsonNames}}, \code{\link{options}}, \code{\link{list}}
+#' Due to the [`POSIXct`] nature of the _.dateTime_ column, the same sub-second
+#' accuracy, issues and limitations apply to `DTSg` objects. In order to prevent
+#' at least some of the possible precision issues, the lags between subsequent
+#' timestamps are rounded to microseconds during integrity checks. This
+#' corresponds to the maximum value allowed for
+#' \code{\link{options}("digits.secs")}. As a consequence, time series with a
+#' sub-second accuracy higher than a microsecond will never work.
 #'
 #' @examples
 #' # new DTSg object
 #' ## R6 constructor
 #' DTSg$new(values = flow, ID = "River Flow")
 #'
-#' ## S4 constructor
+#' ## abused S4 constructor
 #' new(Class = "DTSg", values = flow, ID = "River Flow")
 #'
 #' @docType class

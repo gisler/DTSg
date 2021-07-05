@@ -3,7 +3,7 @@
 \name{summary.DTSg}
 \alias{summary.DTSg}
 \alias{summary}
-\title{Time Series Summary}
+\title{Summarise time series data}
 \usage{
 \method{summary}{DTSg}(object, cols = self$cols(), ...)
 }
@@ -19,8 +19,7 @@ summarised.}
 Returns a \code{\link{table}}.
 }
 \description{
-Calculates summary statistics of selected columns of a \code{\link{DTSg}}
- object.
+Calculates summary statistics of selected columns of a \code{\link{DTSg}} object.
 }
 \examples{
 # new DTSg object
@@ -35,6 +34,5 @@ summary(object = x)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}},
- \code{\link{summary.data.frame}}, \code{\link{table}}
+\code{\link{cols}}
 }

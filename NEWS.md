@@ -2,6 +2,7 @@
 
 * Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
 * Created a `pkgdown` website
+* Improved vignettes and documentation
 
 # DTSg v0.7.1
 
@@ -84,8 +85,8 @@
 # DTSg v0.2.0
 
 * Added `swallow` argument to `new` method: allows for a more resource efficient object creation
-* Added `drop` argument to `values` method: allows for a resource efficient destruction of a `DTSg` object while preserving its *values*
-* Added `class` argument to `values` method: can be used to return the *values* of a `DTSg` object as a `data.frame` instead of a `data.table`
+* Added `drop` argument to `values` method: allows for a resource efficient destruction of a `DTSg` object while preserving its values
+* Added `class` argument to `values` method: can be used to return the values of a `DTSg` object as a `data.frame` instead of a `data.table`
 * `alter` method and linked with it `new` and other methods are now way more resource efficient in some cases
 * Added `timestamps` field providing the total number of timestamps
 * `print` method now omits empty metadata fields

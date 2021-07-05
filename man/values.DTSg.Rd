@@ -3,7 +3,7 @@
 \name{values.DTSg}
 \alias{values.DTSg}
 \alias{values}
-\title{Get Values}
+\title{Get values}
 \usage{
 \method{values}{DTSg}(
   x,
@@ -16,41 +16,40 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{reference}{A logical specifying if a copy of the \emph{values} or a
-reference to the \emph{values} is returned. See details for further
-information.}
+\item{reference}{A logical specifying if a copy of the values or a reference
+to the values is returned. See below for further information.}
 
 \item{drop}{A logical specifying if the object and all references to it shall
 be removed from the global (and only the global) environment after
-successfully querying its values. This feature allows for a resource
-efficient destruction of a \code{\link{DTSg}} object while preserving its
-\emph{values.}}
+successfully returning its values. This feature allows for a resource
+efficient destruction of a \code{\link{DTSg}} object while preserving its values.}
 
-\item{class}{A character string specifying the class of the returned
-\emph{values.} \code{"data.frame"} only works when either a copy of the
-\emph{values} is returned or the object is dropped.}
+\item{class}{A character string specifying the class of the returned values.
+\code{"data.frame"} only works when either a copy of the values is returned or
+the object is dropped.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link[data.table]{data.table}}, a reference to a
- \code{\link[data.table]{data.table}} or a \code{\link{data.frame}}.
+Returns a \code{\link[data.table:data.table]{data.table::data.table}}, a reference to a
+\code{\link[data.table:data.table]{data.table::data.table}} or a \code{\link{data.frame}}.
 }
 \description{
-Queries the \emph{values} of a \code{\link{DTSg}} object.
-}
-\details{
-A reference to the \emph{values} of a \code{\link{DTSg}} object can be used
- to modify them in place. This includes the \emph{.dateTime} column which
- serves as the object's time index. Modifying this column can therefore
- endanger the object's integrity. In case needs to do so ever arise,
- \code{\link{refresh}} should be called immediately afterwards in order to
- check the object's integrity.
+Returns the values of a \code{\link{DTSg}} object.
 }
 \note{
-The original name of the \emph{.dateTime} column is restored when not
- returned as a reference or when dropped.
+The original name of the \emph{.dateTime} column is restored when not returned as
+a reference or when dropped.
 }
+\section{Reference}{
+
+A reference to the values of a \code{\link{DTSg}} object can be used to modify them in
+place. This includes the \emph{.dateTime} column, which serves as the object's
+time index. Modifying this column can therefore endanger the object's
+integrity. In case needs to do so ever arise, \code{\link{refresh}} should be called
+immediately afterwards in order to check the object's integrity.
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
@@ -62,8 +61,4 @@ x$values()
 ## S3 method
 values(x = x)
 
-}
-\seealso{
-\code{\link{DTSg}}, \code{\link{refresh}},
- \code{\link[data.table]{data.table}}, \code{\link{data.frame}}
 }

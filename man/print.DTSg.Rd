@@ -3,17 +3,17 @@
 \name{print.DTSg}
 \alias{print.DTSg}
 \alias{print}
-\title{Print Time Series}
+\title{Print object}
 \usage{
 \method{print}{DTSg}(x, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
 Prints a \code{\link{DTSg}} object.
@@ -29,7 +29,4 @@ x$print()
 ## S3 method
 print(x = x)
 
-}
-\seealso{
-\code{\link{DTSg}}
 }

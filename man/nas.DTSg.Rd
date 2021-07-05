@@ -3,7 +3,7 @@
 \name{nas.DTSg}
 \alias{nas.DTSg}
 \alias{nas}
-\title{List Missing Values}
+\title{List missing values}
 \usage{
 \method{nas}{DTSg}(x, cols = self$cols(), ...)
 }
@@ -13,22 +13,21 @@
 \item{cols}{A character vector specifying the columns whose missing values
 shall be listed.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link[data.table]{data.table}} with five columns:
- \itemize{
-   \item \emph{.col:} the column name.
-   \item \emph{.group:} the ID of the missing values group within each
-    column.
-   \item \emph{.from:} the start date of the missing values group.
-   \item \emph{.to:} the end date of the missing values group.
-   \item \emph{.n:} the number of missing values in the group.
- }
+Returns a \code{\link[data.table:data.table]{data.table::data.table}} with five columns:
+\itemize{
+\item \emph{.col:} the column name
+\item \emph{.group:} the ID of the missing values group within each column
+\item \emph{.from:} the first timestamp of the missing values group
+\item \emph{.to:} the last timestamp of the missing values group
+\item \emph{.n:} the number of missing values per group
+}
 }
 \description{
-Lists the missing values of selected columns of a \code{\link{DTSg}} object
- with recognised periodicity.
+Lists the missing values of selected columns of a \code{\link{DTSg}} object with
+recognised periodicity.
 }
 \examples{
 # new DTSg object
@@ -43,6 +42,5 @@ nas(x = x)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}},
- \code{\link[data.table]{data.table}}
+\code{\link{cols}}
 }

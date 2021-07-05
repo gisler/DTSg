@@ -4,7 +4,7 @@
 \alias{getCol.DTSg}
 \alias{getCol}
 \alias{[.DTSg}
-\title{Get Column Vector}
+\title{Get column vector}
 \usage{
 \method{getCol}{DTSg}(x, col = self$cols(class = "numeric")[1L], ...)
 
@@ -19,27 +19,27 @@
 operator).}
 }
 \value{
-Returns a vector or a \code{\link{list}} in case of a
- \code{\link{list}} column.
+Returns a vector or a \code{\link{list}} in case of a \code{\link{list}} column.
 }
 \description{
-Queries the values of a column of a \code{\link{DTSg}} object. The extract
- operator (\code{[}) acts as a shortcut for \code{getCol}.
+Returns the values of a column of a \code{\link{DTSg}} object.
+
+The extract operator (\code{[}) acts as a shortcut for \code{getCol}.
 }
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# get values of "flow" column
+# get the first ten values of the "flow" column
 ## R6 methods
-x$getCol(col = "flow")
-x$`[`("flow")
+x$getCol(col = "flow")[1:10]
+x$`[`("flow")[1:10]
 
 ## S3 methods
-getCol(x = x, col = "flow")
-x["flow"]
+getCol(x = x, col = "flow")[1:10]
+x["flow"][1:10]
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}, \code{\link{list}}
+\code{\link{cols}}
 }

@@ -3,7 +3,7 @@
 \name{plot.DTSg}
 \alias{plot.DTSg}
 \alias{plot}
-\title{Plot Time Series}
+\title{Plot time series data}
 \usage{
 \method{plot}{DTSg}(
   x,
@@ -18,42 +18,41 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{from}{A \code{\link{POSIXct}} date with the same time zone as the time
-series or a character string coercible to one. The time series is plotted
-from this date on.}
+\item{from}{A \code{\link{POSIXct}} timestamp in the same time zone as the time series
+or a character string coercible to one. The data is plotted from this
+timestamp on.}
 
-\item{to}{A \code{\link{POSIXct}} date with the same time zone as the time
-series or a character string coercible to one. The time series is plotted
-up to this date.}
+\item{to}{A \code{\link{POSIXct}} timestamp in the same time zone as the time series or
+a character string coercible to one. The data is plotted up to this
+timestamp.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
 plotted.}
 
 \item{secAxisCols}{An optional character vector specifying the columns whose
-values shall be plotted on a secondary axis. Must be a subset of
-\code{cols}.}
+values shall be plotted on a secondary axis. Must be a subset of \code{cols}.}
 
 \item{secAxisLabel}{A character string specifying the label of the optional
 secondary axis.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
-Displays an interactive plot of a \code{\link{DTSg}} object. This method
- requires \pkg{dygraphs} and \pkg{RColorBrewer} to be installed. Its main
- purpose is not to make pretty plots, but rather to offer a possibility to
- interactively explore time series. The title of the plot and the label of
- its primary axis are automatically generated out of the object's metadata
- (fields). See \code{\link{DTSg}} for further information.
+Displays an interactive plot of a \code{\link{DTSg}} object. This method requires
+\pkg{dygraphs} and \pkg{RColorBrewer} to be installed. Its main purpose is
+not to make pretty plots, but rather to offer a possibility to interactively
+explore the time series data. The title of the plot and the label of its
+primary axis are automatically generated from the object's metadata (fields).
+See \code{\link{DTSg}} for further information.
 }
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# plot time series
+# plot data
 if (requireNamespace("dygraphs", quietly = TRUE) &&
     requireNamespace("RColorBrewer", quietly = TRUE)) {
   ## R6 method
@@ -65,6 +64,5 @@ if (requireNamespace("dygraphs", quietly = TRUE) &&
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link[dygraphs]{dygraph}},
- \code{\link{POSIXct}}, \code{\link{cols}}
+\code{\link{cols}}
 }

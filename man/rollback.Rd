@@ -2,7 +2,7 @@
 % Please edit documentation in R/rollback.R
 \name{rollback}
 \alias{rollback}
-\title{Rollback of Months}
+\title{Rollback of months}
 \usage{
 rollback(.dateTime, periodicity)
 }
@@ -16,14 +16,13 @@ year(s). See \code{\link{seq.POSIXt}} for further information.}
 Returns a \code{\link{POSIXct}} vector.
 }
 \description{
-Generating regular sequences of times with the help of
- \code{\link{seq.POSIXt}} can have undesirable effects. This function
- \dQuote{first advances the month without changing the day: if this results
- in an invalid day of the month, it is counted forward into the next month}.
- Monthly or yearly sequences starting at the end of a month with 30 or 31
- days (or 29 in case of a leap year) therefore do not always fall on the end
- of shorter months. \code{rollback} reverts this process by counting the days
- backwards again.
+Generating regular sequences of time with the help of \code{\link{seq.POSIXt}} can have
+undesirable effects. This function \dQuote{first advances the month without
+changing the day: if this results in an invalid day of the month, it is
+counted forward into the next month}. Monthly or yearly sequences starting at
+the end of a month with 30 or 31 days (or 29 in case of a leap year)
+therefore do not always fall on the end of shorter months. \code{rollback} fixes
+this by counting the days of affected months backwards again.
 }
 \examples{
 # rollback monthly time series
@@ -37,7 +36,4 @@ rollback(
   periodicity = by
 )
 
-}
-\seealso{
-\code{\link{seq.POSIXt}}, \code{\link{POSIXct}}
 }

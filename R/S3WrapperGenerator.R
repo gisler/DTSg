@@ -1,23 +1,22 @@
-#' S3 Wrapper Method Generator
+#' S3 wrapper method generator
 #'
-#' Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
-#'  but can also be used to generate \dQuote{plain} function wrappers.
+#' Generates S3 wrapper methods for public methods of `R6ClassGenerator`s, but
+#' can also be used to generate \dQuote{plain} function wrappers.
 #'
-#' @param R6Method An \code{\link{expression}} with or a public method
-#'  (\code{\link{function}}) of an \code{R6ClassGenerator}.
-#' @param self A character string specifying the name of the parameter which
-#'  will take the R6 object.
-#' @param dots A logical specifying if a \code{\dots} parameter shall be added
-#'  as last parameter in case none already exists. This might be required for S3
-#'  generic/method consistency.
+#' @param R6Method An [`expression`] with or a public method ([`function`]) of
+#'   an `R6ClassGenerator`.
+#' @param self A character string specifying the name of the parameter, which
+#'   will take the R6 object.
+#' @param dots A logical specifying if a `...` parameter shall be added as last
+#'   parameter in case none already exists. This might be required for S3
+#'   generic/method consistency.
 #'
-#' @return Returns an S3 method (\code{\link{function}}).
+#' @return Returns an S3 method ([`function`]).
 #'
-#' @seealso \code{\link{S3Methods}}, \code{\link[R6]{R6Class}},
-#'  \code{\link{expression}}, \code{\link{function}}
+#' @seealso [`S3Methods`], [`R6::R6Class`]
 #'
 #' @examples
-#' # generate S3 wrapper method for alter of DTSg
+#' # generate an S3 wrapper method for 'alter' of 'DTSg'
 #' alter.DTSg <- S3WrapperGenerator(
 #'   R6Method = DTSg$public_methods$alter
 #' )

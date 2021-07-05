@@ -3,36 +3,32 @@
 \name{refresh.DTSg}
 \alias{refresh.DTSg}
 \alias{refresh}
-\title{Object Integrity}
+\title{Object integrity}
 \usage{
 \method{refresh}{DTSg}(x, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
-Checks the integrity of a \code{\link{DTSg}} object and tries to
- automatically (re-)detect its periodicity. Normally, there is no reason for
- a user to call this method. The only exception is stated in
- \code{\link{values}}.
+Checks the integrity of a \code{\link{DTSg}} object and tries to automatically
+(re-)detect its periodicity. Normally, there is no reason for a user to call
+this method. The only exception is stated in \code{\link{values}}.
 }
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# check object integrity
+# check the object's integrity
 ## R6 method
 x$refresh()
 
 ## S3 method
 refresh(x = x)
 
-}
-\seealso{
-\code{\link{DTSg}}, \code{\link{values}}
 }

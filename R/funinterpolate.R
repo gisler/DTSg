@@ -6,32 +6,32 @@
 .dateTimeBefore <- NULL
 .divisor <- NULL
 
-#' Linear Interpolation
+#' Linear interpolation
 #'
+#' @description
 #' Linearly interpolates missing values of a numeric vector. For use with the
-#'  \code{\link{colapply}} method of a \code{\link{DTSg}} object. Other uses are
-#'  possible, but not recommended. It also serves as an example for writing user
-#'  defined \code{\link{function}}s utilising one of the \code{\link{list}}s
-#'  with helper data as handed over by some methods of \code{\link{DTSg}}
-#'  objects. See \code{\link{DTSg}} for further information.
+#' [`colapply`] method of [`DTSg`] objects. Other uses are possible, but not
+#' recommended.
+#'
+#' This [`function`] also serves as an example for writing user defined
+#' [`function`]s utilising one of the [`list`]s with helper data as handed over
+#' by some of the methods of [`DTSg`] objects.
 #'
 #' @param .col A numeric vector.
 #' @param roll A positive numeric specifying the maximum size of gaps whose
-#'  missing values shall be filled. For time series with unrecognised
-#'  periodicity it is interpreted as seconds and for time series with recognised
-#'  periodicity it is multiplied with the maximum time difference between two
-#'  subsequent time steps in seconds. Thus, for regular time series it is the
-#'  number of time steps and for irregular it is an approximation of it.
+#'   missing values shall be filled. For time series with unrecognised
+#'   periodicity it is interpreted in seconds and for time series with
+#'   recognised periodicity it is multiplied with the maximum time difference
+#'   between two subsequent time steps in seconds. Thus, for regular time series
+#'   it is the number of time steps and for irregular it is an approximation of
+#'   it.
 #' @param rollends A logical specifying if missing values at the start and end
-#'  of the time series shall be filled as well. See
-#'  \code{\link[data.table]{data.table}} for further information.
-#' @param .helpers A \code{\link{list}} with helper data as handed over by
-#'  \code{\link{colapply}}. See \code{\link{colapply}} for further information.
+#'   of the time series shall be filled as well. See [`data.table::data.table`]
+#'   for further information.
+#' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
+#'   See [`colapply`] for further information.
 #'
 #' @return Returns a numeric vector.
-#'
-#' @seealso \code{\link{DTSg}}, \code{\link{colapply}}, \code{\link{function}},
-#'  \code{\link[data.table]{data.table}}
 #'
 #' @examples
 #' # new DTSg object
@@ -39,10 +39,10 @@
 #'
 #' # linear interpolation of missing values
 #' ## R6 method
-#' x$colapply(fun = interpolateLinear)
+#' x$colapply(fun = interpolateLinear)$print()
 #'
 #' ## S3 method
-#' colapply(x = x, fun = interpolateLinear)
+#' print(colapply(x = x, fun = interpolateLinear))
 #'
 #' @export
 interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {

@@ -3,22 +3,22 @@
 \name{rowbind.DTSg}
 \alias{rowbind.DTSg}
 \alias{rowbind}
-\title{Combine Rows}
+\title{Combine rows}
 \usage{
 \method{rowbind}{DTSg}(x, ..., clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{\dots}{Any number of \code{\link{DTSg}} objects or objects coercible to
-one (see \code{\link{new}} for further information). \code{\link{list}}s of
-such objects or a mixture of lists and non-lists are also accepted.}
+\item{\dots}{Any number of \code{\link{DTSg}} objects or objects coercible to one (see
+\code{\link{new}} for further information). \code{\link{list}}s of such objects or a mixture of
+lists and non-lists are also accepted.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
 Combines the rows of \code{\link{DTSg}} and other suitable objects.
@@ -32,16 +32,16 @@ x <- DTSg$new(values = flow[1:500, ])
 x$rowbind(
   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
   flow[1501:.N, ]
-)
+)$print()
 
 ## S3 method
-rowbind(
+print(rowbind(
   x = x,
   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
   flow[1501:.N, ]
-)
+))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{new}}, \code{\link{list}}
+\code{\link{cols}}, \code{\link{getOption}}
 }
