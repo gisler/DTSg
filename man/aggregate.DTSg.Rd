@@ -3,7 +3,7 @@
 \name{aggregate.DTSg}
 \alias{aggregate.DTSg}
 \alias{aggregate}
-\title{Aggregate Values}
+\title{Aggregate values}
 \usage{
 \method{aggregate}{DTSg}(
   x,
@@ -22,164 +22,173 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{funby}{One of the temporal aggregation level functions described in
-\code{\link{TALFs}} or a user defined temporal aggregation level function.
-See details for further information.}
+\code{\link{TALFs}} or a user defined temporal aggregation level function. See below
+for further information.}
 
-\item{fun}{A summary function, (named) \code{\link{list}} of summary
-functions or (named) character vector specifying summary functions applied
-column-wise to all the values of the same temporal aggregation level. The
-return value(s) must be of length one. See details for further information.}
+\item{fun}{A summary function, (named) \code{\link{list}} of summary functions or
+(named) character vector specifying summary functions applied column-wise
+to all the values of the same temporal aggregation level. The return
+value(s) must be of length one. See below for further information.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to aggregate.}
 
-\item{n}{A logical specifying if a column named \emph{.n} giving the number
-of values per temporal aggregation level is added. See details for further
+\item{n}{A logical specifying if a column named \code{.n} giving the number of
+values per temporal aggregation level is added. See below for further
 information.}
 
 \item{ignoreDST}{A logical specifying if day saving time is ignored during
-aggregation. See details for further information.}
+aggregation. See below for further information.}
 
 \item{multiplier}{A positive integerish value \dQuote{multiplying} the
-temporal aggregation level of certain \code{\link{TALFs}}. See details for
-further information.}
+temporal aggregation level of certain \code{\link{TALFs}}. See below for further
+information.}
 
-\item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on
-to \code{funby}. See details for further information.}
+\item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
+\code{funby}. See below for further information.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 }
 \value{
 Returns an aggregated \code{\link{DTSg}} object.
 }
 \description{
-Applies a temporal aggregation level function to the \emph{.dateTime} column
- of a \code{\link{DTSg}} object and aggregates its \emph{values} column-wise
- to the function's temporal aggregation level utilising one or more provided
- summary functions. Additionally, it sets the object's \emph{aggregated}
- field to \code{TRUE}. See \code{\link{DTSg}} for further information.
+Applies a temporal aggregation level function to the \emph{.dateTime} column of a
+\code{\link{DTSg}} object and aggregates its values column-wise to the function's
+temporal aggregation level utilising one or more provided summary functions.
+Additionally, it sets the object's \code{aggregated} field to \code{TRUE}. See \code{\link{DTSg}}
+for further information.
 }
-\details{
+\section{User defined TALFs, TALFs helper data and multiplier}{
+
 User defined temporal aggregation level functions have to return a
- \code{\link{POSIXct}} vector of the same length as the time series and
- accept two arguments: a \code{\link{POSIXct}} vector as its first and a
- \code{\link{list}} with helper data as its second. The default elements of
- this \code{\link{list}} are as follows:
- \itemize{
-   \item \emph{timezone:} Same as \emph{timezone} field. See
-     \code{\link{DTSg}} for further information.
-   \item \emph{ignoreDST:} Same as \code{ignoreDST} argument.
-   \item \emph{periodicity:} Same as \emph{periodicity} field. See
-     \code{\link{DTSg}} for further information.
-   \item \emph{na.status:} Same as \emph{na.status} field. See
-     \code{\link{DTSg}} for further information.
-   \item \emph{multiplier:} Same as \code{multiplier} argument.
- }
- Any additional element specified in the \code{funbyHelpers} argument is
-  appended to the end of the \code{\link{list}}. In case \code{funbyHelpers}
-  contains a \emph{ignoreDST} or \emph{multiplier} element, it takes
-  precedence over the respective method argument. A \emph{timezone},
-  \emph{periodicity} or \emph{na.status} element is rejected.
+\code{\link{POSIXct}} vector of the same length as the time series and accept two
+arguments: a \code{\link{POSIXct}} vector as its first and a \code{\link{list}} with helper data
+as its second. The default elements of this \code{\link{list}} are as follows:
+\itemize{
+\item \emph{timezone:} Same as the \code{timezone} field. See \code{\link{DTSg}} for further
+information.
+\item \emph{ignoreDST:} Same as the \code{ignoreDST} argument.
+\item \emph{periodicity:} Same as the \code{periodicity} field. See \code{\link{DTSg}} for further
+information.
+\item \emph{na.status:} Same as the \code{na.status} field. See \code{\link{DTSg}} for further
+information.
+\item \emph{multiplier:} Same as the \code{multiplier} argument.
+}
+
+Any additional element specified in the \code{funbyHelpers} argument is appended
+to the end of the helper data \code{\link{list}}. In case \code{funbyHelpers} contains an
+\emph{ignoreDST} or \emph{multiplier} element, it takes precedence over the respective
+method argument. \emph{timezone, periodicity} and \emph{na.status} elements are
+rejected.
+
+The temporal aggregation level of certain \code{\link{TALFs}} can be adjusted with the
+help of the \code{multiplier} argument. A \code{multiplier} of \code{10}, for example, makes
+\code{\link{byY_____}} aggregate to decades instead of years. Another example
+is a \code{multiplier} of \code{6} provided to \code{\link{by_m____}}. The function
+then aggregates all months of all first and all months of all second half
+years instead of all months of all years separately. This feature is
+supported by the following \code{\link{TALFs}} of the package:
+\itemize{
+\item \code{\link{byFasttimeY_____}}
+\item \code{\link{byFasttimeYm____}}
+\item \code{\link{byFasttimeYmdH__}}
+\item \code{\link{byFasttimeYmdHM_}}
+\item \code{\link{byFasttimeYmdHMS}}
+\item \code{\link{byFasttime_m____}}
+\item \code{\link{byFasttime___H__}}
+\item \code{\link{byFasttime____M_}}
+\item \code{\link{byFasttime_____S}}
+\item \code{\link{byY_____}}
+\item \code{\link{byYm____}}
+\item \code{\link{byYmdH__}} (UTC and equivalent as well as all Etc/GMT time zones only)
+\item \code{\link{byYmdHM_}}
+\item \code{\link{byYmdHMS}}
+\item \code{\link{by_m____}}
+\item \code{\link{by___H__}} (UTC and equivalent as well as all Etc/GMT time zones only)
+\item \code{\link{by____M_}}
+\item \code{\link{by_____S}}
+}
+}
+
+\section{Summary functions}{
 
 Some examples for \code{fun} are as follows:
- \itemize{
-   \item \code{\link{mean}}
-   \item \code{\link{list}(min = \link{min}, max = \link{max})}
-   \item \code{c(sd = "\link{sd}", var = "\link{var}")}
- }
- A list or character vector must have names in case more than one summary
- function is provided. The method can benefit from \pkg{data.table}'s
- \emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a
- character vector specifying summary functions is provided.
-
-Depending on the number of columns to aggregate, the \emph{.n} column
- contains different counts:
- \itemize{
-   \item One column: The counts are calculated from the value column without
-     any missing values. This means that missing values are always stripped
-     regardless of the value of a possible \code{na.rm} argument.
-   \item More than one column: The counts are calculated from the
-     \emph{.dateTime} column including all missing values.
- }
-
-\code{ignoreDST} tells a temporal aggregation level function if it is
- supposed to ignore day saving time while forming new timestamps. This can be
- a desired feature for time series strictly following the position of the sun
- (such as hydrological time series). Doing so ensures that diurnal variations
- are preserved and all intervals are of \dQuote{correct} length, however, a
- possible limitation might be that the day saving time shift is invariably
- assumed to be exactly one hour long. This feature requires that the
- periodicity of the time series is recognised and is supported by the
- following \code{\link{TALFs}} of the package:
- \itemize{
-   \item \code{\link{byY_____}}
-   \item \code{\link{byYQ____}}
-   \item \code{\link{byYm____}}
-   \item \code{\link{byYmd___}}
-   \item \code{\link{by_Q____}}
-   \item \code{\link{by_m____}}
-   \item \code{\link{by___H__}}
- }
-
-The temporal aggregation level of certain \code{\link{TALFs}} can be adjusted
- with the help of the \code{multiplier} argument. A \code{multiplier} of
- \code{10}, for example, makes \code{\link{byY_____}} aggregate to decades
- instead of years. Another example is a \code{multiplier} of \code{6}
- provided to \code{\link{by_m____}}. The function then aggregates all months
- of all first and all months of all second half years instead of all months
- of all years separately. This feature is supported by the following
- \code{\link{TALFs}} of the package:
- \itemize{
-   \item \code{\link{byFasttimeY_____}}
-   \item \code{\link{byFasttimeYm____}}
-   \item \code{\link{byFasttimeYmdH__}}
-   \item \code{\link{byFasttimeYmdHM_}}
-   \item \code{\link{byFasttimeYmdHMS}}
-   \item \code{\link{byFasttime_m____}}
-   \item \code{\link{byFasttime___H__}}
-   \item \code{\link{byFasttime____M_}}
-   \item \code{\link{byFasttime_____S}}
-   \item \code{\link{byY_____}}
-   \item \code{\link{byYm____}}
-   \item \code{\link{byYmdH__}} (UTC and equivalent as well as all Etc/GMT only)
-   \item \code{\link{byYmdHM_}}
-   \item \code{\link{byYmdHMS}}
-   \item \code{\link{by_m____}}
-   \item \code{\link{by___H__}} (UTC and equivalent as well as all Etc/GMT only)
-   \item \code{\link{by____M_}}
-   \item \code{\link{by_____S}}
- }
+\itemize{
+\item \code{\link{mean}}
+\item \code{\link{list}(min = \link{min}, max = \link{max})}
+\item \code{c(sd = "sd", var = "var")}
 }
+
+A \code{\link{list}} or character vector must have names in case more than one summary
+function is provided. The method can benefit from \pkg{data.table}'s
+\emph{\link[data.table:datatable-optimize]{GForce}} optimisation in case a character
+vector specifying summary functions is provided.
+}
+
+\section{Number of values per temporal aggregation level}{
+
+Depending on the number of columns to aggregate, the \code{.n} column contains
+different counts:
+\itemize{
+\item One column: The counts are calculated from the columns' values disregarding
+any missing values. This means that missing values are always stripped
+regardless of the value of a possible \code{na.rm} argument.
+\item More than one column: The counts are calculated from the \emph{.dateTime} column
+including all missing values.
+}
+}
+
+\section{Ignore day saving time}{
+
+\code{ignoreDST} tells a temporal aggregation level function if it is supposed to
+ignore day saving time while forming new timestamps. This can be a desired
+feature for time series strictly following the position of the sun such as
+hydrological time series. Doing so ensures that diurnal variations are
+preserved by all means and all intervals are of the \dQuote{correct} length,
+however, a possible limitation might be that the day saving time shift is
+invariably assumed to be one hour long. This feature requires that the
+periodicity of the time series was recognised and is supported by the
+following \code{\link{TALFs}} of the package:
+\itemize{
+\item \code{\link{byY_____}}
+\item \code{\link{byYQ____}}
+\item \code{\link{byYm____}}
+\item \code{\link{byYmd___}}
+\item \code{\link{by_Q____}}
+\item \code{\link{by_m____}}
+\item \code{\link{by___H__}}
+}
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
 # mean yearly river flows
 ## R6 method
-x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)
+x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)$print()
 
 ## S3 method
-aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE)
+print(aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE))
 
 # variance and standard deviation of river flows per quarter
 ## R6 method
-x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
+x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)$print()
 
 ## S3 method
-aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)
+print(aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE))
 
-# mean of river flows of all first and second half years
+# mean of river flows of all first and all second half years
 ## R6 method
-x$aggregate(funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)
+x$aggregate(funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)$print()
 
 ## S3 method
-aggregate(x = x, funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)
+print(aggregate(x = x, funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{TALFs}}, \code{\link{list}},
- \code{\link{cols}}, \code{\link{POSIXct}},
- \emph{\link[data.table:datatable-optimize]{GForce}}
+\code{\link{cols}}, \code{\link{getOption}}
 }

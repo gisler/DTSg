@@ -2,36 +2,35 @@
 % Please edit documentation in R/S3WrapperGenerator.R
 \name{S3WrapperGenerator}
 \alias{S3WrapperGenerator}
-\title{S3 Wrapper Method Generator}
+\title{S3 wrapper method generator}
 \usage{
 S3WrapperGenerator(R6Method, self = "x", dots = TRUE)
 }
 \arguments{
-\item{R6Method}{An \code{\link{expression}} with or a public method
-(\code{\link{function}}) of an \code{R6ClassGenerator}.}
+\item{R6Method}{An \code{\link{expression}} with or a public method (\code{\link{function}}) of
+an \code{R6ClassGenerator}.}
 
-\item{self}{A character string specifying the name of the parameter which
+\item{self}{A character string specifying the name of the parameter, which
 will take the R6 object.}
 
-\item{dots}{A logical specifying if a \code{\dots} parameter shall be added
-as last parameter in case none already exists. This might be required for S3
+\item{dots}{A logical specifying if a \code{...} parameter shall be added as last
+parameter in case none already exists. This might be required for S3
 generic/method consistency.}
 }
 \value{
 Returns an S3 method (\code{\link{function}}).
 }
 \description{
-Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s,
- but can also be used to generate \dQuote{plain} function wrappers.
+Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s, but
+can also be used to generate \dQuote{plain} function wrappers.
 }
 \examples{
-# generate S3 wrapper method for alter of DTSg
+# generate an S3 wrapper method for 'alter' of 'DTSg'
 alter.DTSg <- S3WrapperGenerator(
   R6Method = DTSg$public_methods$alter
 )
 
 }
 \seealso{
-\code{\link{S3Methods}}, \code{\link[R6]{R6Class}},
- \code{\link{expression}}, \code{\link{function}}
+\code{\link{S3Methods}}, \code{\link[R6:R6Class]{R6::R6Class}}
 }

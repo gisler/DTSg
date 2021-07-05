@@ -3,7 +3,7 @@
 \name{rowaggregate.DTSg}
 \alias{rowaggregate.DTSg}
 \alias{rowaggregate}
-\title{Aggregate Values Row-wise}
+\title{Aggregate values row-wise}
 \usage{
 \method{rowaggregate}{DTSg}(
   x,
@@ -17,39 +17,39 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{resultCols}{A character vector either of length one (names of
-\code{fun} are appended in the case one or more functions are provided) or
-the same length as \code{fun}.}
+\item{resultCols}{A character vector either of length one (names of \code{fun} are
+appended in the case one or more functions are provided) or the same length
+as \code{fun}.}
 
-\item{fun}{A summary function, (named) \code{\link{list}} of summary
-functions or (named) character vector specifying summary functions applied
-row-wise to all the values of the specified columns. The return value(s)
-must be of length one. See details for further information.}
+\item{fun}{A summary function, (named) \code{\link{list}} of summary functions or
+(named) character vector specifying summary functions applied column-wise
+to all the values of the same temporal aggregation level. The return
+value(s) must be of length one. See below for further information.}
 
-\item{\dots}{Further arguments passed on to \code{fun}.}
+\item{...}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to apply \code{fun} to.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
 Applies one or more provided summary functions row-wise to selected columns
- of a \code{\link{DTSg}} object.
+of a \code{\link{DTSg}} object.
 }
-\details{
+\section{Summary functions}{
+
 Some examples for \code{fun} are as follows:
- \itemize{
-   \item \code{\link{mean}}
-   \item \code{\link{list}(min = \link{min}, max = \link{max})}
-   \item \code{c(sd = "\link{sd}", var = "\link{var}")}
- }
- A list or character vector must have names in case more than one summary
- function is provided.
+\itemize{
+\item \code{\link{mean}}
+\item \code{\link{list}(min = \link{min}, max = \link{max})}
+\item \code{c(sd = "sd", var = "var")}
 }
+}
+
 \examples{
 # new DTSg object
 DT <- data.table::data.table(
@@ -62,12 +62,12 @@ x <- DTSg$new(values = DT)
 
 # mean and standard deviation of multiple measurements per timestamp
 ## R6 method
-x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))
+x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))$print()
 
 ## S3 method
-rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd))
+print(rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd)))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{list}}, \code{\link{cols}}
+\code{\link{cols}}, \code{\link{getOption}}
 }

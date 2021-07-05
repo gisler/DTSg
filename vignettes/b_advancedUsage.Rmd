@@ -1,11 +1,11 @@
 ---
-title: "B. Advanced Usage"
+title: "B. Advanced usage"
 author: "Gerold Hepp"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{B. Advanced Usage}
+  %\VignetteIndexEntry{B. Advanced usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,19 +31,21 @@ TS <- DTSg$new(flow)
 TS
 ```
 
-## Reference Semantics
+## Reference semantics
 
-By default, every method manipulating the *values* of a `DTSg` object creates a copy of it. This behaviour can be overridden by setting their `clone` argument to `FALSE`. Globally, cloning can be controlled with the help of the *DTSgClone* option:
+By default, every method manipulating the values of a `DTSg` object creates a deep clone (copy) of it beforehand. This behaviour can be overridden by setting the `clone` argument of the respective method to `FALSE`. Globally, deep cloning can be controlled with the help of the *DTSgClone* option:
 
 ```{r}
 TS$alter("2007-01-01", "2008-12-31")
-# end date is still in the year 2012
+# `TS` was deep cloned before shortening it, hence its end date is still in the
+# year 2012
 TS
 
 options(DTSgClone = FALSE)
 getOption("DTSgClone")
+# `TS` was modified in place this time, hence its end date is in the year 2008
+# now
 TS$alter("2007-01-01", "2008-12-31")
-# end date is in the year 2008 now
 TS
 ```
 
@@ -51,14 +53,14 @@ As we can see, with cloning set to `FALSE`, the object was altered in place, i.e
 
 ### Note
 
-Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a `DTSg` object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data in the background, i.e. changing one will also affect the other. In case you want a "real" copy of a `DTSg` object, you will have to use the `clone` method with the `deep` argument set to `TRUE` (for consistency with the `R6` package the default is `FALSE`):
+Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a `DTSg` object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data under the hood, i.e. changing one will also affect the other. In case you want a "real" copy of a `DTSg` object, you will have to use the `clone` method with its `deep` argument set to `TRUE` (for consistency with the `R6` package its default is `FALSE`):
 
 ```{r}
 TSc <- TS$clone(deep = TRUE)
 # or 'clone(TS, deep = TRUE)'
 ```
 
-## Chaining and Piping
+## Chaining and piping
 
 Especially in combination with reference semantics, chaining and piping can be a fast and comfortable way to apply several object manipulations in a row. While chaining only works in combination with the R6 interface, piping is an exclusive feature of the S3 interface.
 
@@ -73,7 +75,7 @@ TS <- DTSg$
 TS
 ```
 
-For piping, we have to make sure the `magrittr` package is installed and load it for access to its forward-pipe operator first:
+For piping, we have to make sure the `magrittr` package is installed and have to load it for access to its forward-pipe operator first (starting with R 4.1.0, the same can be achieved with R's native pipe operator `|>`):
 
 ```{r}
 if (requireNamespace("magrittr", quietly = TRUE)) {
@@ -87,9 +89,9 @@ if (requireNamespace("magrittr", quietly = TRUE)) {
 }
 ```
 
-## Swallowing and Dropping
+## Swallowing and dropping
 
-An extension to reference semantics of existing `DTSg` objects is reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new` method. If set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:
+An extension to reference semantics of existing `DTSg` objects are reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new` method. When set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:
 
 ```{r}
 library(data.table)
@@ -100,7 +102,7 @@ TS <- DTSg$new(DT, swallow = TRUE)
 ls(pattern = "^DT$")
 ```
 
-The opposite of swallowing is called dropping. This term refers to querying the *values* of a `DTSg` object as a reference while removing all references to the original `DTSg` object from the global (and again only the global) environment at the same time:
+The opposite of swallowing is called dropping. This term refers to querying the values of a `DTSg` object as a reference while removing all references to the original `DTSg` object from the global (and again only the global) environment at the same time:
 
 ```{r}
 TS <- DTSg$new(flow)
@@ -109,30 +111,31 @@ DT <- TS$values(drop = TRUE)
 ls(pattern = "^TS$")
 ```
 
-## Column Access
+## Column access
 
-Sometimes need may arise to access a column other the one currently processed from a function within the `colapply` method. This can be achieved in the following way:
+Sometimes need may arise to access a column other than the one currently processed from a function within the `colapply` method. This can be accomplished in the following way:
 
 ```{r}
-# add a column recording if a certain value has been interpolated or not before
-# carrying out the interpolation
+# add a new column recording if a certain value is missing or not before
+# carrying out a linear interpolation
 TS <- DTSg$new(flow)
 TS$summary()
 TS$
   colapply(
     function(x, ...) {ifelse(is.na(x), TRUE, FALSE)},
-    resultCols = "interpolated"
+    resultCols = "missing"
   )$
   colapply(interpolateLinear)$
   summary()
 
-# undo the interpolation (requires additional access to the interpolated column
-# which is accomplished with the help of the getCol method or its shortcut [ and
-# the freely chosen y argument)
+# undo the linear interpolation (requires additional access to the previously
+# created column named "missing", which can be carried out with the help of the
+# `getCol` method or its shortcut, the `[` operator, and the freely chosen `y`
+# argument)
 TS$
   colapply(
     function(x, y, ...) {ifelse(y, NA, x)},
-    y = TS$getCol("interpolated") # or 'y = TS["interpolated"]'
+    y = TS$getCol("missing") # or 'y = TS["missing"]'
   )$
   summary()
 ```

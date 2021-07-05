@@ -3,21 +3,21 @@
 \docType{data}
 \name{flow}
 \alias{flow}
-\title{Daily River Flows}
+\title{Daily river flows}
 \format{
-A \code{\link[data.table]{data.table}} with 2169 rows and two columns:
- \describe{
-   \item{date}{A \code{\link{POSIXct}} vector ranging from the start of the
-     year 2007 to the end of the year 2012.}
-   \item{flow}{A numeric vector with daily river flows in cubic metres per
-     second.}
- }
+A \code{\link[data.table:data.table]{data.table::data.table}} with 2169 rows and two columns:
+\describe{
+\item{date}{A \code{\link{POSIXct}} vector ranging from the start of the year 2007 to
+the end of the year 2012.}
+\item{flow}{A numeric vector with daily river flows in cubic metres per
+second.}
+}
 }
 \usage{
 flow
 }
 \description{
 A dataset containing a fictional time series of daily river flows with
- implicitly missing values.
+implicitly missing values.
 }
 \keyword{datasets}

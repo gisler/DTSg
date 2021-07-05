@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>S3 Wrapper Method Generator — S3WrapperGenerator • DTSg</title>
+<title>S3 wrapper method generator — S3WrapperGenerator • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="S3 Wrapper Method Generator — S3WrapperGenerator" />
+<meta property="og:title" content="S3 wrapper method generator — S3WrapperGenerator" />
 <meta property="og:description" content="Generates S3 wrapper methods for public methods of R6ClassGenerators,
  but can also be used to generate &amp;#8220;plain&amp;#8221; function wrappers." />
 
@@ -96,10 +96,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -110,7 +110,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +127,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>S3 Wrapper Method Generator</h1>
+    <h1>S3 wrapper method generator</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/S3WrapperGenerator.R'><code>R/S3WrapperGenerator.R</code></a></small>
     <div class="hidden name"><code>S3WrapperGenerator.Rd</code></div>
     </div>
@@ -137,7 +137,7 @@
  but can also be used to generate &#8220;plain&#8221; function wrappers.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>S3WrapperGenerator</span>(<span class='no'>R6Method</span>, <span class='kw'>self</span> <span class='kw'>=</span> <span class='st'>"x"</span>, <span class='kw'>dots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>S3WrapperGenerator</span><span class='op'>(</span><span class='va'>R6Method</span>, self <span class='op'>=</span> <span class='st'>"x"</span>, dots <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,14 +165,16 @@ generic/method consistency.</p></td>
     <p>Returns an S3 method (<code><a href='https://rdrr.io/r/base/function.html'>function</a></code>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/UseMethod.html'>S3Methods</a></code>, <code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6Class</a></code>,
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/UseMethod.html'>S3Methods</a></code>, <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code>,
  <code><a href='https://rdrr.io/r/base/expression.html'>expression</a></code>, <code><a href='https://rdrr.io/r/base/function.html'>function</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># generate S3 wrapper method for alter of DTSg</span>
-<span class='no'>alter.DTSg</span> <span class='kw'>&lt;-</span> <span class='fu'>S3WrapperGenerator</span>(
-  <span class='kw'>R6Method</span> <span class='kw'>=</span> <span class='no'>DTSg</span>$<span class='no'>public_methods</span>$<span class='no'>alter</span>
-)</div></pre>
+<span class='va'>alter.DTSg</span> <span class='op'>&lt;-</span> <span class='fu'>S3WrapperGenerator</span><span class='op'>(</span>
+  R6Method <span class='op'>=</span> <span class='va'>DTSg</span><span class='op'>$</span><span class='va'>public_methods</span><span class='op'>$</span><span class='va'>alter</span>
+<span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -188,7 +190,7 @@ generic/method consistency.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

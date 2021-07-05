@@ -3,7 +3,7 @@
 \name{clone.DTSg}
 \alias{clone.DTSg}
 \alias{clone}
-\title{Clone Object}
+\title{Clone object}
 \usage{
 \method{clone}{DTSg}(x, deep = FALSE, ...)
 }
@@ -11,23 +11,22 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{deep}{A logical specifying if a deep copy is made (for consistency with
-\code{\link[R6]{R6Class}} the default is \code{FALSE}, but should generally
-be set to \code{TRUE}).}
+the \code{\link[R6:R6Class]{R6::R6Class}} the default is \code{FALSE}, but should generally be set to
+\code{TRUE}).}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a cloned \code{\link{DTSg}} object.
 }
 \description{
-Clones (copies) a \code{\link{DTSg}} object. Merely assigning a variable
- representing a \code{\link{DTSg}} object to a new variable does not result
- in a copy of the object. Instead, both variables will reference and access
- the same data in the background, i.e. changing one will also affect the
- other. This is not an issue when calling methods with the \emph{DTSgClone}
- option or \code{clone} argument set to \code{TRUE}, but has to be kept in
- mind when setting fields, as they are always modified in place. See
- \code{\link{DTSg}} for further information.
+Clones (copies) a \code{\link{DTSg}} object. Merely assigning a variable representing a
+\code{\link{DTSg}} object to a new variable does not result in a copy of the object.
+Instead, both variables will reference and access the same data under the
+hood, i.e. changing one will also affect the other. This is not an issue when
+calling methods with the \emph{DTSgClone} option or \code{clone} argument set to
+\code{TRUE}, but has to be kept in mind when setting fields, as they are always
+modified in place. See \code{\link{DTSg}} for further information.
 }
 \examples{
 # new DTSg object
@@ -42,5 +41,5 @@ clone(x = x, deep = TRUE)
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link[R6]{R6Class}}
+\code{\link{options}}
 }

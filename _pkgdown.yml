@@ -15,15 +15,15 @@ navbar:
       href: reference/index.html
     - text: "Vignettes"
       menu:
-        - text: "A. Basic Usage"
+        - text: "A. Basic usage"
           href: articles/a_basicUsage.html
-        - text: "B. Advanced Usage"
+        - text: "B. Advanced usage"
           href: articles/b_advancedUsage.html
     - text: "Changelog"
       href: news/index.html
 
 reference:
-  - title: "Working Horse"
+  - title: "Working horse"
     contents:
       - DTSg
   - title: "Methods"
@@ -50,7 +50,7 @@ reference:
   - title: "TALFs"
     contents:
       - TALFs
-  - title: "Other Functions"
+  - title: "Other functions"
     contents:
       - interpolateLinear
       - rollback

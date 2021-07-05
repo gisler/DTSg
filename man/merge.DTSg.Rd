@@ -3,43 +3,42 @@
 \name{merge.DTSg}
 \alias{merge.DTSg}
 \alias{merge}
-\title{Merge Two Objects}
+\title{Merge two objects}
 \usage{
 \method{merge}{DTSg}(x, y, ..., clone = getOption("DTSgClone"))
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{y}{A \code{\link{DTSg}} object or an object coercible to one. See
-\code{\link{new}} for further information.}
+\item{y}{A \code{\link{DTSg}} object or an object coercible to one. See \code{\link{new}} for
+further information.}
 
-\item{\dots}{Further arguments passed on to \code{\link[data.table]{merge}}.
-As the \code{by}, \code{by.x} and \code{by.y} arguments can endanger the
-integrity of the object, they are rejected.}
+\item{\dots}{Further arguments passed on to \code{\link[data.table:merge]{data.table::merge}}. As the
+\code{by}, \code{by.x} and \code{by.y} arguments can endanger the object's integrity, they
+are rejected.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
-Joins two \code{\link{DTSg}} objects based on their \emph{.dateTime} column.
- Their time zones and \emph{aggregated} fields must be the same.
+Joins two \code{\link{DTSg}} objects based on their \emph{.dateTime} column. Their time
+zones and \code{aggregated} fields must match.
 }
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
-# merge with data.table
+# merge with 'data.table'
 ## R6 method
-x$merge(y = flow, suffixes = c("_1", "_2"))
+x$merge(y = flow, suffixes = c("_1", "_2"))$print()
 
 ## S3 method
-merge(x = x, y = flow, suffixes = c("_1", "_2"))
+print(merge(x = x, y = flow, suffixes = c("_1", "_2")))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{new}},
- \code{\link[data.table]{merge}}
+\code{\link{getOption}}
 }

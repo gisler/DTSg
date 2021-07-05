@@ -3,7 +3,7 @@
 \name{rollapply.DTSg}
 \alias{rollapply.DTSg}
 \alias{rollapply}
-\title{Rolling Window Function}
+\title{Rolling window function}
 \usage{
 \method{rollapply}{DTSg}(
   x,
@@ -26,7 +26,7 @@
 
 \item{fun}{A \code{\link{function}}. Its return value must be of length one.}
 
-\item{\dots}{Further arguments passed on to \code{fun}.}
+\item{...}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns whose rolling window
 \code{fun} shall be applied to.}
@@ -37,78 +37,80 @@ steps before the \dQuote{center} of the rolling window.}
 \item{after}{An integerish value specifying the size of the window in time
 steps after the \dQuote{center} of the rolling window.}
 
-\item{weights}{A character string specifying a method to calculate weights
-for \code{fun}, for instance, \code{\link{weighted.mean}}. See details for
-further information.}
+\item{weights}{A character string specifying the method applied to calculate
+weights for \code{fun}. Weights are useful for functions like \code{\link{weighted.mean}}.
+See below for further information.}
 
-\item{parameters}{A \code{\link{list}} specifying parameters for
-\code{weights}. See details for further information.}
+\item{parameters}{A \code{\link{list}} specifying parameters for weight calculation
+methods. See below for further information.}
 
-\item{resultCols}{An optional character vector of the same length as
-\code{cols}. Non-existing columns specified in this argument are added and
-existing columns are overwritten by the return values of \code{fun}. Columns
-are matched element-wise between \code{resultCols} and \code{cols}.}
+\item{resultCols}{An optional character vector of the same length as \code{cols}
+specifying the column names with the return values of \code{fun}. Non-existing
+columns are added and existing columns are overwritten. Columns are matched
+element-wise between \code{cols} and \code{resultCols}.}
 
-\item{suffix}{An optional character string. The return values of \code{fun}
-are added as new columns with names consisting of the columns specified in
-\code{cols} and this suffix. Existing columns are never overwritten. Only
-used when \code{resultCols} is not specified.}
+\item{suffix}{An optional character string. The return values of \code{fun} are
+added as new columns with names consisting of the columns specified in
+\code{cols} and this suffix. Existing columns are never overwritten. Only used
+when \code{resultCols} is not specified.}
 
-\item{helpers}{A logical specifying if weights and helper data shall be
-handed over to \code{fun}. See details for further information.}
+\item{helpers}{A logical specifying if helper data shall be handed over to
+\code{fun}. See below for further information.}
 
 \item{memoryOverCPU}{A logical specifying if memory usage is preferred over
 CPU usage for this method. The former is generally faster for smaller
 windows and shorter time series, the latter for bigger windows and longer
-time series or might even be the only way that works depending on the
+time series or might even be the only one which works depending on the
 available hardware.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
 Applies an arbitrary function to a rolling window of selected columns of a
- \code{\link{DTSg}} object with recognised periodicity.
+\code{\link{DTSg}} object with recognised periodicity.
 }
-\details{
-In addition to the \code{\dots} argument, this method optionally hands over
- the weights as a numeric vector (\code{w} argument) and a \code{\link{list}}
- argument with helper data called \code{.helpers} to \code{fun}.
- \code{.helpers} contains the following named elements:
- \itemize{
-   \item \emph{before:} Same as \code{before} argument.
-   \item \emph{after:} Same as \code{after} argument.
-   \item \emph{windowSize:} Size of the rolling window
-     (\code{before + 1L + after}).
-   \item \emph{centerIndex:} Index of the \dQuote{center} of the rolling
-     window (\code{before + 1L}).
- }
+\section{Weights}{
 
 Currently, only one method to calculate weights is supported:
- \code{"inverseDistance"}. The distance \eqn{d} of the \dQuote{center} is one
- and each time step away from the \dQuote{center} adds one to it. So, for
- example, the distance of a timestamp three steps away from the
- \dQuote{center} is four. Additionally, the calculation of the weights
- accepts a power \eqn{p} parameter as a named element of a \code{\link{list}}
- provided through the \code{parameters} argument:
- \eqn{\frac{1}{d^p}}{1 / d^p}.
+\code{"inverseDistance"}. The distance \eqn{d} of the \dQuote{center} is one and
+each time step further away from the \dQuote{center} adds one to it. So, for
+example, the distance of a timestamp three steps away from the
+\dQuote{center} is four. Additionally, the calculation of the weights accepts
+a power \eqn{p} parameter as a named element of a \code{\link{list}} provided through
+the \code{parameters} argument: \eqn{\frac{1}{d^p}}{1 / d^p}.
 }
+
+\section{Helper data}{
+
+In addition to the \code{...} argument, this method optionally hands over the
+weights as a numeric vector (\code{w} argument) and a \code{\link{list}} argument with
+helper data called \code{.helpers} to \code{fun}. This \code{\link{list}} contains the following
+elements:
+\itemize{
+\item \emph{before:} Same as the \code{before} argument.
+\item \emph{after:} Same as the \code{after} argument.
+\item \emph{windowSize:} Size of the rolling window (\code{before + 1L + after}).
+\item \emph{centerIndex:} Index of the \dQuote{center} of the rolling window
+(\code{before + 1L}).
+}
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
 
 # calculate a moving average
 ## R6 method
-x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
+x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)$print()
 
 ## S3 method
-rollapply(x = x, fun = mean, na.rm = TRUE, before = 2, after = 2)
+print(rollapply(x = x, fun = mean, na.rm = TRUE, before = 2, after = 2))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{function}}, \code{\link{cols}},
- \code{\link{list}}
+\code{\link{cols}}, \code{\link{getOption}}
 }

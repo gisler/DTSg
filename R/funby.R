@@ -80,58 +80,52 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
   .dateTime
 }
 
-#' Temporal Aggregation Level Functions
+#' Temporal Aggregation Level Functions (TALFs)
 #'
-#' Simply hand over one of these functions to the \code{funby} argument of one
-#'  of the methods (e.g. \code{\link{aggregate}}) of \code{\link{DTSg}} objects
-#'  which support it. The method does the rest of the work. See details for
-#'  further information. Other uses are possible, but not recommended.
+#' Simply hand over one of these functions to the `funby` argument of one of the
+#' methods of [`DTSg`] objects, which support it. The method then does the rest
+#' of the work. See below and the respective method for further information.
+#' Other uses are possible, but not recommended.
 #'
-#' @param .dateTime A \code{\link{POSIXct}} vector.
-#' @param .helpers A \code{\link{list}} with helper data as handed over by
-#'  \code{\link{DTSg}} objects' \code{\link{aggregate}} method.
+#' @param .dateTime A [`POSIXct`] vector.
+#' @param .helpers A [`list`] with helper data as handed over by methods of
+#'   [`DTSg`] objects, which support the `funby` argument.
 #'
-#' @details
-#' There are two families of temporal aggregation level functions. The
-#'  one family truncates timestamps (truncating family), the other extracts a
-#'  certain part of them (extracting family). Each family comes in two flavours:
-#'  one using \code{\link[fasttime]{fastPOSIXct}} of \pkg{fasttime}, the other
-#'  solely relying on base \R. The \pkg{fasttime} versions work with UTC time
-#'  series or time series with an equivalent time zone only (execute
-#'  \code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(),
-#'  ignore.case = TRUE, value = TRUE)} for a full list of supported time zones)
-#'  and are limited to dates between the years 1970 and 2199, but generally are
-#'  faster for the extracting family of functions.
+#' @section Families:
+#' There are two families of temporal aggregation level functions. The one
+#' family truncates timestamps (truncating family), the other extracts a certain
+#' part of them (extracting family). Each family comes in two flavours: one
+#' using [`fasttime::fastPOSIXct`] of \pkg{fasttime}, the other solely relying
+#' on base \R. The \pkg{fasttime} versions work with UTC and equivalent as well
+#' as all Etc/GMT time zones only (execute
+#' `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case
+#' = TRUE, value = TRUE)` for a full list of supported time zones) and are
+#' limited to timestamps between the years 1970 and 2199, but generally are
+#' faster for the extracting family of functions.
 #'
-#' The truncating family sets timestamps to the lowest possible time of the
-#'  corresponding temporal aggregation level:
-#'  \itemize{
-#'    \item \code{*Y_____} truncates to year,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
-#'    \item \code{*YQ____} truncates to quarter, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
-#'    \item \code{*Ym____} truncates to month,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
-#'    \item \code{*Ymd___} truncates to day,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
-#'    \item \code{*YmdH__} truncates to hour,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
-#'    \item \code{*YmdHM_} truncates to minute,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
-#'    \item \code{*YmdHMS} truncates to second,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
-#'  }
+#' The truncating family sets timestamps to the lowest possible point in time of
+#' the corresponding temporal aggregation level:
+#' - `*Y_____` truncates to year,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
+#' - `*YQ____` truncates to quarter, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
+#' - `*Ym____` truncates to month,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
+#' - `*Ymd___` truncates to day,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
+#' - `*YmdH__` truncates to hour,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
+#' - `*YmdHM_` truncates to minute,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
+#' - `*YmdHMS` truncates to second,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
 #'
 #' By convention, the extracting family sets the year to 2199 and extracts a
-#'  certain part of timestamps:
-#'  \itemize{
-#'    \item \code{*______} extracts nothing,      i.e.               all timestamps become  \emph{2199-01-01 00:00:00.0}
-#'    \item \code{*_Q____} extracts the quarters, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-10-01 00:00:00.0}
-#'    \item \code{*_m____} extracts the months,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-11-01 00:00:00.0}
-#'    \item \code{*___H__} extracts the hours,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 11:00:00.0}
-#'    \item \code{*____M_} extracts the minutes,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:11:00.0}
-#'    \item \code{*_____S} extracts the seconds,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:00:11.0}
-#'  }
+#' certain part of timestamps:
+#' - `*______` extracts nothing,      i.e.          all timestamps become  _2199-01-01 00:00:00.0_
+#' - `*_Q____` extracts the quarters, e.g. _2000-11-11 11:11:11.1_ becomes _2199-10-01 00:00:00.0_
+#' - `*_m____` extracts the months,   e.g. _2000-11-11 11:11:11.1_ becomes _2199-11-01 00:00:00.0_
+#' - `*___H__` extracts the hours,    e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 11:00:00.0_
+#' - `*____M_` extracts the minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:11:00.0_
+#' - `*_____S` extracts the seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:00:11.0_
 #'
-#' @return All functions return a \code{\link{POSIXct}} vector with timestamps
-#'  corresponding to the function's temporal aggregation level.
+#' @return All functions return a [`POSIXct`] vector with timestamps
+#'   corresponding to the function's temporal aggregation level.
 #'
-#' @seealso \code{\link{DTSg}}, \code{\link{aggregate}}, \code{\link{colapply}},
-#'  \code{\link{subset}}, \code{\link[fasttime]{fastPOSIXct}},
-#'  \code{\link{list}}, \code{\link{POSIXct}}
+#' @seealso [`aggregate`], [`colapply`], [`subset`]
 #'
 #' @name TALFs
 NULL

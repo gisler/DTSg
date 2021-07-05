@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clone Object — clone.DTSg • DTSg</title>
+<title>Clone object — clone.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Clone Object — clone.DTSg" />
+<meta property="og:title" content="Clone object — clone.DTSg" />
 <meta property="og:description" content="Clones (copies) a DTSg object. Merely assigning a variable
  representing a DTSg object to a new variable does not result
  in a copy of the object. Instead, both variables will reference and access
@@ -102,10 +102,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,7 +133,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clone Object</h1>
+    <h1>Clone object</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>clone.DTSg.Rd</code></div>
     </div>
@@ -150,7 +150,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
-<span class='fu'>clone</span>(<span class='no'>x</span>, <span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>clone</span><span class='op'>(</span><span class='va'>x</span>, deep <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +162,7 @@
     <tr>
       <th>deep</th>
       <td><p>A logical specifying if a deep copy is made (for consistency with
-<code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6Class</a></code> the default is <code>FALSE</code>, but should generally
+<code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code> the default is <code>FALSE</code>, but should generally
 be set to <code>TRUE</code>).</p></td>
     </tr>
     <tr>
@@ -176,15 +176,16 @@ be set to <code>TRUE</code>).</p></td>
     <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6Class</a></code></p></div>
+    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
 
 <span class='co'># make a deep copy</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Values:
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;
 #&gt;    1: 2007-01-01  9.540
@@ -206,7 +207,8 @@ be set to <code>TRUE</code>).</p></td>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'>clone</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Values:
+<span class='fu'>clone</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, deep <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;
 #&gt;    1: 2007-01-01  9.540
@@ -243,7 +245,7 @@ be set to <code>TRUE</code>).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

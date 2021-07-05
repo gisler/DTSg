@@ -3,7 +3,7 @@
 \name{setColNames.DTSg}
 \alias{setColNames.DTSg}
 \alias{setColNames}
-\title{Set Names of Value Columns}
+\title{Set column names}
 \usage{
 \method{setColNames}{DTSg}(
   x,
@@ -17,21 +17,21 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{cols}{A character vector specifying the columns whose names shall be
-set. The name of the \emph{.dateTime} column cannot be set.}
+set. The name of the \emph{.dateTime} column cannot be changed.}
 
-\item{values}{A character vector of the same length as \code{cols} specifying
-the desired names.}
+\item{values}{A character vector of the same length as \code{cols} specifying the
+desired column names.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
-Set the names of columns of \code{\link{DTSg}} objects.
+Changes the column names of \code{\link{DTSg}} objects.
 }
 \examples{
 # new DTSg object
@@ -39,12 +39,12 @@ x <- DTSg$new(values = flow)
 
 # rename column "flow" to "River Flow"
 ## R6 method
-x$setColNames(cols = "flow", values = "River Flow")
+x$setColNames(cols = "flow", values = "River Flow")$print()
 
 ## S3 method
-setColNames(x = x, cols = "flow", values = "River Flow")
+print(setColNames(x = x, cols = "flow", values = "River Flow"))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{cols}}
+\code{\link{cols}}, \code{\link{getOption}}
 }

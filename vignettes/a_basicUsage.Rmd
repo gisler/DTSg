@@ -1,11 +1,11 @@
 ---
-title: "A. Basic Usage"
+title: "A. Basic usage"
 author: "Gerold Hepp"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{A. Basic Usage}
+  %\VignetteIndexEntry{A. Basic usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,7 +21,7 @@ This vignette introduces the `DTSg` package, shows how to create objects of its 
 
 ---
 
-## Object Creation
+## Object creation
 
 First, let's load some data. The package is shipped with a `data.table` containing a daily time series of river flows:
 
@@ -34,7 +34,7 @@ flow
 summary(flow)
 ```
 
-Now that we have a data set, we can create our first object by providing it to the `new` method of the package's main R6 class generator `DTSg`. In addition, we specify an ID in order to give the new object a name:
+Now that we have a data set, we can create our first object by providing it to the `new` method of the package's main R6 class generator `DTSg`. In addition, we specify an ID in order to give the object a name:
 
 ```{r}
 TS <- DTSg$new(values = flow, ID = "River Flow")
@@ -46,15 +46,15 @@ Creating an object with the package's alternative interface abusing an S4 constr
 TS <- new(Class = "DTSg", values = flow, ID = "River Flow")
 ```
 
-## Object Inspection
+## Object inspection
 
-Printing the object shows us the data provided, the specified ID and other metadata (when provided) as well as that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to *.dateTime.* This columns serves as its time index and cannot be changed at will:
+Printing the object shows us, among others, the data provided, the specified ID and that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to *.dateTime.* This column serves as the object's time index and cannot be changed at will:
 
 ```{r}
 TS$print() # or 'print(TS)' or just 'TS'
 ```
 
-With this done, we can move on and further explore our time series with a summary (`summary`), a report on missing values (`nas`) and a plot (`plot`). It suddenly seems to contain several missing values which apparently were not there upon loading the data set (`plot` requires the `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
+With this done, we can move on and further explore our newly created time series data object with a summary (`summary`), a report on missing values (`nas`) and a plot (`plot`). It suddenly seems to contain several missing values, which apparently were not there upon loading the data set (`plot` requires the `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
 
 ```{r}
 TS$summary() # or 'summary(TS)'
@@ -66,13 +66,13 @@ if (requireNamespace("dygraphs", quietly = TRUE) &&
 ```
 ![](plot.png)
 
-Looking at the original data set reveals that the missing values implicitly already were there. Putting it into the object simply expanded the data set to the automatically detected periodicity and made them explicit (this behaviour can be changed, however, `DTSg` objects work best with explicitly missing values):
+Looking at the original data set reveals that the missing values implicitly already were there. Putting the data set into the object simply expanded it to the automatically detected periodicity and made them explicit (this behaviour can be changed, however, `DTSg` objects work best with explicitly missing values):
 
 ```{r}
 flow[date >= as.POSIXct("2007-10-09", tz = "UTC") & date <= as.POSIXct("2007-11-13", tz = "UTC"), ]
 ```
 
-## Object Manipulation
+## Object manipulation
 
 For fairly small gaps like this it might be okay to fill them by means of linear interpolation. Using the `colapply` method together with the `interpolateLinear` function will do the trick:
 
@@ -82,7 +82,7 @@ TS  <- TS$colapply(fun = interpolateLinear)
 TS$nas()
 ```
 
-In case no column name is provided through the `cols` argument, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method. It supports a `class` and/or `pattern` argument:
+In case no column name is provided through the `cols` argument of the `colapply` method, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method. It supports a `class` and/or `pattern` argument:
 
 ```{r}
 TS$cols() # or 'cols(TS)'
@@ -101,7 +101,7 @@ TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
 TS
 ```
 
-In order to get mean monthly river flows as an example, we can use the `aggregate` method with one of the package's temporal aggregation level functions as its `funby` argument (the `fun` argument also accepts a named character vector or `list` of functions which allows for calculating several summary statistics at once):
+In order to get mean monthly river flows as an example, we can use the `aggregate` method with one of the package's temporal aggregation level functions (TALFs) as its `funby` argument (the `fun` argument also accepts a named character vector or `list` of functions, which allows for calculating several summary statistics at once):
 
 ```{r}
 TSm <- TS$aggregate(funby = byYm____, fun = mean)
@@ -109,9 +109,9 @@ TSm <- TS$aggregate(funby = byYm____, fun = mean)
 TSm
 ```
 
-Printing the object shows us that its *aggregated* field has been set to `TRUE`. This is merely an indicator telling us to now interpret the timestamps of the series as periods between subsequent timestamps and not as snap-shots anymore.
+Printing the aggregated object shows us that its `aggregated` field has been set to `TRUE`. This is merely an indicator telling us to now interpret the timestamps of the series as periods between subsequent timestamps and not as snap-shots anymore.
 
-The one family of temporal aggregation level functions of the package sets a timestamp to the lowest possible time of the corresponding temporal aggregation level, i.e. truncates a timestamp, and the other family extracts a certain part of it. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:
+The one family of temporal aggregation level functions of the package sets timestamps to the lowest possible point in time of the corresponding temporal aggregation level, i.e. truncates timestamps, and the other family extracts a certain part of them. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:
 
 ```{r}
 TSQ <- TS$aggregate(funby = by_Q____, fun = mean)
@@ -121,7 +121,7 @@ TSQ
 
 Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the `multiplier` argument of the `aggregate` as well as other methods, e.g. `multiplier = 6` makes `byYm____` aggregate to half years instead of months.
 
-The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do this with the help of the `rollapply` method:
+The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do so with the help of the `rollapply` method:
 
 ```{r}
 TSs <- TS$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
@@ -129,9 +129,9 @@ TSs <- TS$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
 TSs
 ```
 
-On a side note, some of the methods which take a function as an argument (`colapply` and `rollapply`) hand over to it an additional `list` argument called `.helpers` containing useful data for the development of user defined functions (please see the respective help pages for more information). This can of course be a problem for functions like `cumsum` which do not expect such a thing. A solution is to set the `helpers` argument of the respective method to `FALSE`.
+On a side note, some of the methods, which take a function as an argument (`colapply` and `rollapply`) hand over to it an additional `list` argument called `.helpers` containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like `cumsum`, which do not expect such a thing. A solution to this is to set the `helpers` argument of the respective method to `FALSE`.
 
-With this said, let's join the result of the last calculation to the original time series and extract its *values* as a `data.table` for further processing in a final step (please note that the *.dateTime* column gets its original name back):
+With this said, let's join the result of the last calculation to the original time series data object and extract its values as a `data.table` for further processing in a final step (please note that the *.dateTime* column gets its original name back):
 
 ```{r}
 TS  <- TS$merge(y = TSs, suffixes = c("_orig", "_movavg"))
@@ -139,23 +139,23 @@ TS  <- TS$merge(y = TSs, suffixes = c("_orig", "_movavg"))
 TS$values()
 ```
 
-A better way to add results of the `colapply` and `rollapply` methods as new columns are actually their `resultCols` and `suffix` arguments. It would not have allowed to demonstrate the `merge` method though.
+Better ways to add results of the `colapply` or `rollapply` method as new column(s) are actually their `resultCols` and `suffix` arguments. Their use would not have allowed for demonstrating the `merge` method though.
 
 ---
 
-For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods or functions have not been discussed in this vignette:
+For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods and functions have not been discussed in this vignette:
 
-* *getCol*
-* *refresh*
-* *rowaggregate*
-* *rowbind*
-* *setColNames*
-* *setCols*
-* *subset*
-* *rollback*
-* *S3WrapperGenerator*
+* `getCol` or `[`
+* `refresh`
+* `rowaggregate`
+* `rowbind`
+* `setColNames`
+* `setCols`
+* `subset`
+* `rollback`
+* `S3WrapperGenerator`
 
-## Object Fields
+## Object fields
 
 The fields of a `DTSg` object of which the metadata are part of can be accessed through so called active bindings:
 
@@ -165,22 +165,23 @@ TS$ID
 
 Valid results are returned for the following fields:
 
-* *aggregated*
-* *fast*
-* *ID*
-* *na.status*
-* *parameter*
-* *periodicity*
-* *regular*
-* *timestamps*
-* *timezone*
-* *unit*
-* *variant*
+* `aggregated`
+* `fast`
+* `ID`
+* `na.status`
+* `parameter`
+* `periodicity`
+* `regular`
+* `timestamps`
+* `timezone`
+* `unit`
+* `variant`
 
 A subset of this fields can also be actively set (please note that reference semantics always apply to fields, hence the "largely" in the title of the package):
 
 ```{r}
-# two new DTSg objects in order to demonstrate reference semantics
+# two new `DTSg` objects in order to demonstrate reference semantics, which are
+# propagated by assignments and broken by deep clones
 TSassigned <- TS
 TScloned   <- TS$clone(deep = TRUE) # or 'clone(x = TS, deep = TRUE)'
 
@@ -188,17 +189,17 @@ TScloned   <- TS$clone(deep = TRUE) # or 'clone(x = TS, deep = TRUE)'
 TS$ID <- "Two River Flows"
 TS
 
-# due to reference semantics, the new ID is also propagated to TSassigned, but
-# not to TScloned (as all data manipulating methods create a clone by default,
-# it is usually best to set or update fields after and not before calling such a
-# method)
+# due to reference semantics, the new ID is also propagated to `TSassigned`, but
+# not to `TScloned` (as all data manipulating methods create a deep clone by
+# default, it is usually best to set or update fields after and not before
+# calling such a method)
 TSassigned
 TScloned
 ```
 
-The fields which cannot be actively set are:
+The fields, which cannot be actively set are:
 
-* *regular*
-* *timestamps*
+* `regular`
+* `timestamps`
 
 Please refer to the help pages for further details.

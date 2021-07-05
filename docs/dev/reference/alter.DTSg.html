@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alter Time Series — alter.DTSg • DTSg</title>
+<title>Alter time series — alter.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Alter Time Series — alter.DTSg" />
+<meta property="og:title" content="Alter time series — alter.DTSg" />
 <meta property="og:description" content="Shortens, lengthens, filters for a consecutive range, changes the periodicity
  and/or the status of missing values of a DTSg object." />
 
@@ -96,10 +96,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -110,7 +110,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +127,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Alter Time Series</h1>
+    <h1>Alter time series</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>alter.DTSg.Rd</code></div>
     </div>
@@ -138,16 +138,16 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
-<span class='fu'>alter</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'>first</span>(<span class='no'>self</span>$<span class='fu'><a href='values.DTSg.html'>values</a></span>(<span class='kw'>reference</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>[[</span><span class='st'>".dateTime"</span>]]),
-  <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'>last</span>(<span class='no'>self</span>$<span class='fu'><a href='values.DTSg.html'>values</a></span>(<span class='kw'>reference</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>[[</span><span class='st'>".dateTime"</span>]]),
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>self</span>$<span class='no'>periodicity</span>,
-  <span class='kw'>rollback</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clone</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"DTSgClone"</span>),
-  <span class='kw'>na.status</span> <span class='kw'>=</span> <span class='no'>self</span>$<span class='no'>na.status</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>alter</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  from <span class='op'>=</span> <span class='fu'>first</span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='fu'>values</span><span class='op'>(</span>reference <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>[[</span><span class='st'>".dateTime"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>,
+  to <span class='op'>=</span> <span class='fu'>last</span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='fu'>values</span><span class='op'>(</span>reference <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>[[</span><span class='st'>".dateTime"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>,
+  by <span class='op'>=</span> <span class='va'>self</span><span class='op'>$</span><span class='va'>periodicity</span>,
+  rollback <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  clone <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"DTSgClone"</span><span class='op'>)</span>,
+  na.status <span class='op'>=</span> <span class='va'>self</span><span class='op'>$</span><span class='va'>na.status</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,21 +209,23 @@ missing values.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
 
 <span class='co'># filter for the first two years</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>alter</span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2007-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2008-12-31"</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>alter</span><span class='op'>(</span>from <span class='op'>=</span> <span class='st'>"2007-01-01"</span>, to <span class='op'>=</span> <span class='st'>"2008-12-31"</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>alter</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"2007-01-01"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"2008-12-31"</span>)
+<span class='fu'>alter</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, from <span class='op'>=</span> <span class='st'>"2007-01-01"</span>, to <span class='op'>=</span> <span class='st'>"2008-12-31"</span><span class='op'>)</span>
 
 <span class='co'># change periodicity to one month</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>alter</span>(<span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"1 month"</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>alter</span><span class='op'>(</span>by <span class='op'>=</span> <span class='st'>"1 month"</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>alter</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"1 month"</span>)</div></pre>
+<span class='fu'>alter</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, by <span class='op'>=</span> <span class='st'>"1 month"</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +241,7 @@ missing values.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

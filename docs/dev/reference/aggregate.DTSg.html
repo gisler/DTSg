@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aggregate Values — aggregate.DTSg • DTSg</title>
+<title>Aggregate values — aggregate.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Aggregate Values — aggregate.DTSg" />
+<meta property="og:title" content="Aggregate values — aggregate.DTSg" />
 <meta property="og:description" content="Applies a temporal aggregation level function to the .dateTime column
  of a DTSg object and aggregates its values column-wise
  to the function's temporal aggregation level utilising one or more provided
@@ -99,10 +99,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -113,7 +113,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -130,7 +130,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aggregate Values</h1>
+    <h1>Aggregate values</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>aggregate.DTSg.Rd</code></div>
     </div>
@@ -144,18 +144,18 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
-<span class='fu'>aggregate</span>(
-  <span class='no'>x</span>,
-  <span class='no'>funby</span>,
-  <span class='no'>fun</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='no'>self</span>$<span class='fu'><a href='cols.DTSg.html'>cols</a></span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>),
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ignoreDST</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>multiplier</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>funbyHelpers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clone</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"DTSgClone"</span>)
-)</pre>
+<span class='fu'>aggregate</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>funby</span>,
+  <span class='va'>fun</span>,
+  <span class='va'>...</span>,
+  cols <span class='op'>=</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>cols</span><span class='op'>(</span>class <span class='op'>=</span> <span class='st'>"numeric"</span><span class='op'>)</span>,
+  n <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ignoreDST <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  multiplier <span class='op'>=</span> <span class='fl'>1L</span>,
+  funbyHelpers <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clone <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"DTSgClone"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -308,28 +308,30 @@ clone (copy) is made beforehand.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
 
 <span class='co'># mean yearly river flows</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>aggregate</span>(<span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>byY_____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>byY_____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>aggregate</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>byY_____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>byY_____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># variance and standard deviation of river flows per quarter</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>aggregate</span>(<span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>byYQ____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"var"</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='st'>"sd"</span>), <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>byYQ____</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>aggregate</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>byYQ____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"var"</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='st'>"sd"</span>), <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>byYQ____</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># mean of river flows of all first and second half years</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>aggregate</span>(<span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>by_m____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>multiplier</span> <span class='kw'>=</span> <span class='fl'>6</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>by_m____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, multiplier <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>aggregate</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>funby</span> <span class='kw'>=</span> <span class='no'>by_m____</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>multiplier</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div></pre>
+<span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>by_m____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, multiplier <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -345,7 +347,7 @@ clone (copy) is made beforehand.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

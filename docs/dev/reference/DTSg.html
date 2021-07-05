@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DTSg Class — DTSg • DTSg</title>
+<title>DTSg class — DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="DTSg Class — DTSg" />
+<meta property="og:title" content="DTSg class — DTSg" />
 <meta property="og:description" content="The DTSg class is the working horse of the package. It is an
  R6Class and offers an S3 interface in addition to its
  native R6 interface. In the usage sections of the documentation only the S3
@@ -107,10 +107,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -121,7 +121,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -138,30 +138,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DTSg Class</h1>
+    <h1>DTSg class</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/ClassDTSg.R'><code>R/ClassDTSg.R</code></a></small>
     <div class="hidden name"><code>DTSg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>The <code>DTSg</code> class is the working horse of the package. It is an
- <code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6Class</a></code> and offers an S3 interface in addition to its
+ <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code> and offers an S3 interface in addition to its
  native R6 interface. In the usage sections of the documentation only the S3
  interface is shown, however, the examples always show both possibilities.
  Generally, they are very similar anyway. While the R6 interface always has
- the object first and the method is selected with the help of the <code>$</code>
+ the object first and the method is selected with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>
  operator (for instance, <code>x$cols()</code>), the S3 interface always has the
  method first and the object as its first argument (for instance,
  <code><a href='cols.DTSg.html'>cols(x)</a></code>). An exception is the <code>new</code> method. It is not an S3
  method, but an abused S4 constructor with the character string <code>"DTSg"</code>
  as its first argument. Regarding the R6 interface, the <code>DTSg</code> class
  generator has to be used to access the <code>new</code> method with the help of
- the <code>$</code> operator.</p>
+ the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> operator.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new</span>(<span class='no'>Class</span>, <span class='no'>values</span>, <span class='kw'>ID</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>variant</span> <span class='kw'>=</span> <span class='st'>""</span>,
- <span class='kw'>aggregated</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fast</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>swallow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.status</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"explicit"</span>,
- <span class='st'>"implicit"</span>, <span class='st'>"undecided"</span>))</pre>
+    <pre class="usage"><span class='fu'>new</span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>values</span>, ID <span class='op'>=</span> <span class='st'>""</span>, parameter <span class='op'>=</span> <span class='st'>""</span>, unit <span class='op'>=</span> <span class='st'>""</span>, variant <span class='op'>=</span> <span class='st'>""</span>,
+ aggregated <span class='op'>=</span> <span class='cn'>FALSE</span>, fast <span class='op'>=</span> <span class='cn'>FALSE</span>, swallow <span class='op'>=</span> <span class='cn'>FALSE</span>, na.status <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"explicit"</span>,
+ <span class='st'>"implicit"</span>, <span class='st'>"undecided"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -292,7 +292,7 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 
 <p>A <code>DTSg</code> object has the following fields or properties as they are often
  called. They are implemented through so called active bindings which means
- that they can be accessed and actively set with the help of the <code>$</code>
+ that they can be accessed and actively set with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>
  operator (for instance, <code>x$ID</code> gets the value of the <em>ID</em> field
  and <code>x$ID &lt;- "River Flow"</code> sets its value). Please note that fields are
  always modified in place, i.e. no clone (copy) of the object is made
@@ -343,7 +343,7 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6Class</a></code>, <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>,
+    <div class='dont-index'><p><code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code>, <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>,
  <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>, <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code>,
  <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>setkey</a></code>, <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code>,
  <code><a href='https://rdrr.io/r/base/timezones.html'>OlsonNames</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>, <code><a href='https://rdrr.io/r/base/list.html'>list</a></code></p></div>
@@ -351,7 +351,8 @@ columns, or <code>"undecided"</code> for no such action. Please note that
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
 <span class='co'>## R6 constructor</span>
-<span class='no'>DTSg</span>$<span class='fu'>new</span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>, <span class='kw'>ID</span> <span class='kw'>=</span> <span class='st'>"River Flow"</span>)</div><div class='output co'>#&gt; Values:
+<span class='va'>DTSg</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span>, ID <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;
 #&gt;    1: 2007-01-01  9.540
@@ -374,7 +375,8 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S4 constructor</span>
-<span class='fu'>new</span>(<span class='kw'>Class</span> <span class='kw'>=</span> <span class='st'>"DTSg"</span>, <span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>, <span class='kw'>ID</span> <span class='kw'>=</span> <span class='st'>"River Flow"</span>)</div><div class='output co'>#&gt; Values:
+<span class='fu'>new</span><span class='op'>(</span>Class <span class='op'>=</span> <span class='st'>"DTSg"</span>, values <span class='op'>=</span> <span class='va'>flow</span>, ID <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;
 #&gt;    1: 2007-01-01  9.540
@@ -412,7 +414,7 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

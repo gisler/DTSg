@@ -3,7 +3,7 @@
 \name{setCols.DTSg}
 \alias{setCols.DTSg}
 \alias{setCols}
-\title{Set Values of Columns}
+\title{Set column values}
 \usage{
 \method{setCols}{DTSg}(
   x,
@@ -19,30 +19,28 @@
 
 \item{i}{An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the \code{i}
-argument of \code{\link[data.table]{data.table}}. Filter expressions can
-contain the special symbol \code{\link[data.table:special-symbols]{.N}}.}
+argument of \code{\link[data.table:data.table]{data.table::data.table}}. Filter expressions can contain the
+special symbol \code{\link[data.table:special-symbols]{.N}}.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
-set. The values of the \emph{.dateTime} column cannot be set.}
+set. The values of the \emph{.dateTime} column cannot be changed.}
 
 \item{values}{A vector, \code{\link{list}} or list-like object (e.g.
-\code{\link[data.table]{data.table}}) of replacement and/or new values
-accepted by the \code{value} argument of \pkg{data.table}'s
-\code{\link[data.table:assign]{set}} function. \code{NULL} as a value
-removes a column.}
+\code{\link[data.table:data.table]{data.table::data.table}}) of replacement and/or new values accepted by
+the \code{value} argument of \pkg{data.table}'s \code{\link[data.table:assign]{data.table::set}} function.
+\code{NULL} as a value removes a column.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 
-\item{\dots}{Not used (S3 method only).}
+\item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
-Set the values of columns, add columns to and/or remove columns from a
- \code{\link{DTSg}} object. The values can optionally be set for certain rows
- only.
+Changes the values of columns, adds columns to and/or removes columns from a
+\code{\link{DTSg}} object. The values can optionally be set for certain rows only.
 }
 \examples{
 # new DTSg object
@@ -50,14 +48,12 @@ x <- DTSg$new(values = flow)
 
 # cap river flows to 100
 ## R6 method
-x$setCols(i = flow > 100, cols = "flow", values = 100)
+x$setCols(i = flow > 100, cols = "flow", values = 100)$print()
 
 ## S3 method
-setCols(x = x, i = flow > 100, cols = "flow", values = 100)
+print(setCols(x = x, i = flow > 100, cols = "flow", values = 100))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link[data.table]{data.table}},
- \code{\link[data.table:special-symbols]{.N}}, \code{\link{cols}},
- \code{\link{list}}, \code{\link[data.table:assign]{set}}
+\code{\link{cols}}, \code{\link{getOption}}
 }

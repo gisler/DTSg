@@ -4,7 +4,7 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
   }
   if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
     stop(
-      "Dates must be between the years 1970 and 2199 for this TALF.",
+      "Timestamps must be between the years 1970 and 2199 for this TALF.",
       call. = FALSE
     )
   }

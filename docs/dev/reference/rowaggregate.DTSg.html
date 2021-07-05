@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aggregate Values Row-wise — rowaggregate.DTSg • DTSg</title>
+<title>Aggregate values row-wise — rowaggregate.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Aggregate Values Row-wise — rowaggregate.DTSg" />
+<meta property="og:title" content="Aggregate values row-wise — rowaggregate.DTSg" />
 <meta property="og:description" content="Applies one or more provided summary functions row-wise to selected columns
  of a DTSg object." />
 
@@ -96,10 +96,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -110,7 +110,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +127,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aggregate Values Row-wise</h1>
+    <h1>Aggregate values row-wise</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>rowaggregate.DTSg.Rd</code></div>
     </div>
@@ -138,14 +138,14 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
-<span class='fu'>rowaggregate</span>(
-  <span class='no'>x</span>,
-  <span class='no'>resultCols</span>,
-  <span class='no'>fun</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='no'>self</span>$<span class='fu'><a href='cols.DTSg.html'>cols</a></span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>),
-  <span class='kw'>clone</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"DTSgClone"</span>)
-)</pre>
+<span class='fu'>rowaggregate</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>resultCols</span>,
+  <span class='va'>fun</span>,
+  <span class='va'>...</span>,
+  cols <span class='op'>=</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>cols</span><span class='op'>(</span>class <span class='op'>=</span> <span class='st'>"numeric"</span><span class='op'>)</span>,
+  clone <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"DTSgClone"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,20 +199,22 @@ clone (copy) is made beforehand.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>DT</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>data.table</span><span class='kw ns'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span>(
-  <span class='kw'>date</span> <span class='kw'>=</span> <span class='no'>flow</span>$<span class='no'>date</span>,
-  <span class='kw'>flow1</span> <span class='kw'>=</span> <span class='no'>flow</span>$<span class='no'>flow</span> - <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>flow</span>)),
-  <span class='kw'>flow2</span> <span class='kw'>=</span> <span class='no'>flow</span>$<span class='no'>flow</span>,
-  <span class='kw'>flow3</span> <span class='kw'>=</span> <span class='no'>flow</span>$<span class='no'>flow</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>flow</span>))
-)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>DT</span>)
+<span class='va'>DT</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
+  date <span class='op'>=</span> <span class='va'>flow</span><span class='op'>$</span><span class='va'>date</span>,
+  flow1 <span class='op'>=</span> <span class='va'>flow</span><span class='op'>$</span><span class='va'>flow</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>flow</span><span class='op'>)</span><span class='op'>)</span>,
+  flow2 <span class='op'>=</span> <span class='va'>flow</span><span class='op'>$</span><span class='va'>flow</span>,
+  flow3 <span class='op'>=</span> <span class='va'>flow</span><span class='op'>$</span><span class='va'>flow</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>flow</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>DT</span><span class='op'>)</span>
 
 <span class='co'># mean and standard deviation of multiple measurements per timestamp</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>rowaggregate</span>(<span class='kw'>resultCols</span> <span class='kw'>=</span> <span class='st'>"flow"</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>rowaggregate</span><span class='op'>(</span>resultCols <span class='op'>=</span> <span class='st'>"flow"</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='va'>mean</span>, sd <span class='op'>=</span> <span class='va'>sd</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'>rowaggregate</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>resultCols</span> <span class='kw'>=</span> <span class='st'>"flow"</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))</div></pre>
+<span class='fu'>rowaggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, resultCols <span class='op'>=</span> <span class='st'>"flow"</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='va'>mean</span>, sd <span class='op'>=</span> <span class='va'>sd</span><span class='op'>)</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -228,7 +230,7 @@ clone (copy) is made beforehand.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

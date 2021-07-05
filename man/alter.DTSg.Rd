@@ -3,7 +3,7 @@
 \name{alter.DTSg}
 \alias{alter.DTSg}
 \alias{alter}
-\title{Alter Time Series}
+\title{Alter time series}
 \usage{
 \method{alter}{DTSg}(
   x,
@@ -19,39 +19,39 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{from}{A \code{\link{POSIXct}} date with the same time zone as the time
-series or a character string coercible to one. Specifies the new start of
-the time series.}
+\item{from}{A \code{\link{POSIXct}} timestamp in the same time zone as the time series
+or a character string coercible to one. Specifies the new start of the time
+series.}
 
-\item{to}{A \code{\link{POSIXct}} date with the same time zone as the time
-series or a character string coercible to one. Specifies the new end of the
-time series.}
+\item{to}{A \code{\link{POSIXct}} timestamp in the same time zone as the time series or
+a character string coercible to one. Specifies the new end of the time
+series.}
 
-\item{by}{Specifies the new periodicity in one of the ways the \code{by}
-argument of \code{\link{seq.POSIXt}} can be specified. Must be specified for
-time series with unrecognised periodicity. Time steps out of sync with the
-new periodicity are dropped.}
+\item{by}{Specifies the new periodicity in one of the ways the \code{by} argument
+of \code{\link{seq.POSIXt}} can be specified. Must be specified for time series with
+unrecognised periodicity. Time steps out of sync with the new periodicity
+are dropped.}
 
-\item{rollback}{A logical specifying if a call to \code{\link{rollback}} is
-made when appropriate.}
+\item{rollback}{A logical specifying if a call to \code{\link{rollback}} is made when
+appropriate.}
 
 \item{clone}{A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.}
+deep clone (copy) is made beforehand.}
 
-\item{na.status}{A character string. Either \code{"explicit"}, which makes
-missing timestamps according to the recognised periodicity explicit, or
+\item{na.status}{A character string. Either \code{"explicit"}, which makes missing
+timestamps explicit according to the recognised periodicity, or
 \code{"implicit"}, which removes timestamps with missing values on all value
-columns. Please note that \code{\link{DTSg}} objects work best with explicit
+columns. Please note that \code{\link{DTSg}} objects work best with explicitly
 missing values.}
 
 \item{\dots}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{\link{DTSg}} object.
+Returns a \code{DTSg} object.
 }
 \description{
 Shortens, lengthens, filters for a consecutive range, changes the periodicity
- and/or the status of missing values of a \code{\link{DTSg}} object.
+and/or the status of missing values of a \code{\link{DTSg}} object.
 }
 \examples{
 # new DTSg object
@@ -59,20 +59,19 @@ x <- DTSg$new(values = flow)
 
 # filter for the first two years
 ## R6 method
-x$alter(from = "2007-01-01", to = "2008-12-31")
+x$alter(from = "2007-01-01", to = "2008-12-31")$print()
 
 ## S3 method
-alter(x = x, from = "2007-01-01", to = "2008-12-31")
+print(alter(x = x, from = "2007-01-01", to = "2008-12-31"))
 
 # change periodicity to one month
 ## R6 method
-x$alter(by = "1 month")
+x$alter(by = "1 month")$print()
 
 ## S3 method
-alter(x = x, by = "1 month")
+print(alter(x = x, by = "1 month"))
 
 }
 \seealso{
-\code{\link{DTSg}}, \code{\link{values}}, \code{\link{POSIXct}},
- \code{\link{seq.POSIXt}}, \code{\link{rollback}}
+\code{\link{getOption}}, \code{\link{subset}}, \code{\link{nas}}
 }

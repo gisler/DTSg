@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Linear Interpolation — interpolateLinear • DTSg</title>
+<title>Linear interpolation — interpolateLinear • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Linear Interpolation — interpolateLinear" />
+<meta property="og:title" content="Linear interpolation — interpolateLinear" />
 <meta property="og:description" content="Linearly interpolates missing values of a numeric vector. For use with the
  colapply method of a DTSg object. Other uses are
  possible, but not recommended. It also serves as an example for writing user
@@ -100,10 +100,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -114,7 +114,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -131,7 +131,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Linear Interpolation</h1>
+    <h1>Linear interpolation</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/funinterpolate.R'><code>R/funinterpolate.R</code></a></small>
     <div class="hidden name"><code>interpolateLinear.Rd</code></div>
     </div>
@@ -145,7 +145,7 @@
  objects. See <code><a href='DTSg.html'>DTSg</a></code> for further information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>interpolateLinear</span>(<span class='no'>.col</span>, <span class='kw'>roll</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>rollends</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>.helpers</span>)</pre>
+    <pre class="usage"><span class='fu'>interpolateLinear</span><span class='op'>(</span><span class='va'>.col</span>, roll <span class='op'>=</span> <span class='cn'>Inf</span>, rollends <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>.helpers</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,14 +186,16 @@ of the time series shall be filled as well. See
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
 
 <span class='co'># linear interpolation of missing values</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'><a href='colapply.DTSg.html'>colapply</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>interpolateLinear</span>)
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>colapply</span><span class='op'>(</span>fun <span class='op'>=</span> <span class='va'>interpolateLinear</span><span class='op'>)</span>
 
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='colapply.DTSg.html'>colapply</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>interpolateLinear</span>)</div></pre>
+<span class='fu'><a href='colapply.DTSg.html'>colapply</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, fun <span class='op'>=</span> <span class='va'>interpolateLinear</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -209,7 +211,7 @@ of the time series shall be filled as well. See
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

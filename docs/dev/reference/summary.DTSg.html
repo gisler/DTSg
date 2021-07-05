@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Time Series Summary — summary.DTSg • DTSg</title>
+<title>Time series summary — summary.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Time Series Summary — summary.DTSg" />
+<meta property="og:title" content="Time series summary — summary.DTSg" />
 <meta property="og:description" content="Calculates summary statistics of selected columns of a DTSg
  object." />
 
@@ -96,10 +96,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/a_basicUsage.html">A. Basic Usage</a>
+      <a href="../articles/a_basicUsage.html">A. Basic usage</a>
     </li>
     <li>
-      <a href="../articles/b_advancedUsage.html">B. Advanced Usage</a>
+      <a href="../articles/b_advancedUsage.html">B. Advanced usage</a>
     </li>
   </ul>
 </li>
@@ -110,7 +110,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/gisler/DTSg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,7 +127,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Time Series Summary</h1>
+    <h1>Time series summary</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>summary.DTSg.Rd</code></div>
     </div>
@@ -138,7 +138,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
-<span class='fu'>summary</span>(<span class='no'>object</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='no'>self</span>$<span class='fu'><a href='cols.DTSg.html'>cols</a></span>(), <span class='no'>...</span>)</pre>
+<span class='fu'>summary</span><span class='op'>(</span><span class='va'>object</span>, cols <span class='op'>=</span> <span class='va'>self</span><span class='op'>$</span><span class='fu'>cols</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,11 +168,12 @@ summarised.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>DTSg</span>$<span class='fu'><a href='DTSg.html'>new</a></span>(<span class='kw'>values</span> <span class='kw'>=</span> <span class='no'>flow</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
 
 <span class='co'># calculate summary statistics</span>
 <span class='co'>## R6 method</span>
-<span class='no'>x</span>$<span class='fu'>summary</span>()</div><div class='output co'>#&gt;       flow        
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>summary</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       flow        
 #&gt;  Min.   :  4.995  
 #&gt;  1st Qu.:  8.085  
 #&gt;  Median : 11.325  
@@ -181,7 +182,8 @@ summarised.</p></td>
 #&gt;  Max.   :290.715  
 #&gt;  NA's   :23       </div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'>summary</span>(<span class='kw'>object</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt;       flow        
+<span class='fu'>summary</span><span class='op'>(</span>object <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       flow        
 #&gt;  Min.   :  4.995  
 #&gt;  1st Qu.:  8.085  
 #&gt;  Median : 11.325  
@@ -205,7 +207,7 @@ summarised.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

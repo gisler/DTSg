@@ -28,7 +28,7 @@
 \alias{by___H__}
 \alias{by____M_}
 \alias{by_____S}
-\title{Temporal Aggregation Level Functions}
+\title{Temporal Aggregation Level Functions (TALFs)}
 \usage{
 byFasttimeY_____(.dateTime, .helpers)
 
@@ -85,56 +85,55 @@ by_____S(.dateTime, .helpers)
 \arguments{
 \item{.dateTime}{A \code{\link{POSIXct}} vector.}
 
-\item{.helpers}{A \code{\link{list}} with helper data as handed over by
-\code{\link{DTSg}} objects' \code{\link{aggregate}} method.}
+\item{.helpers}{A \code{\link{list}} with helper data as handed over by methods of
+\code{\link{DTSg}} objects, which support the \code{funby} argument.}
 }
 \value{
 All functions return a \code{\link{POSIXct}} vector with timestamps
- corresponding to the function's temporal aggregation level.
+corresponding to the function's temporal aggregation level.
 }
 \description{
-Simply hand over one of these functions to the \code{funby} argument of one
- of the methods (e.g. \code{\link{aggregate}}) of \code{\link{DTSg}} objects
- which support it. The method does the rest of the work. See details for
- further information. Other uses are possible, but not recommended.
+Simply hand over one of these functions to the \code{funby} argument of one of the
+methods of \code{\link{DTSg}} objects, which support it. The method then does the rest
+of the work. See below and the respective method for further information.
+Other uses are possible, but not recommended.
 }
-\details{
-There are two families of temporal aggregation level functions. The
- one family truncates timestamps (truncating family), the other extracts a
- certain part of them (extracting family). Each family comes in two flavours:
- one using \code{\link[fasttime]{fastPOSIXct}} of \pkg{fasttime}, the other
- solely relying on base \R. The \pkg{fasttime} versions work with UTC time
- series or time series with an equivalent time zone only (execute
- \code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(),
- ignore.case = TRUE, value = TRUE)} for a full list of supported time zones)
- and are limited to dates between the years 1970 and 2199, but generally are
- faster for the extracting family of functions.
+\section{Families}{
 
-The truncating family sets timestamps to the lowest possible time of the
- corresponding temporal aggregation level:
- \itemize{
-   \item \code{*Y_____} truncates to year,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
-   \item \code{*YQ____} truncates to quarter, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
-   \item \code{*Ym____} truncates to month,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
-   \item \code{*Ymd___} truncates to day,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
-   \item \code{*YmdH__} truncates to hour,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
-   \item \code{*YmdHM_} truncates to minute,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
-   \item \code{*YmdHMS} truncates to second,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
- }
+There are two families of temporal aggregation level functions. The one
+family truncates timestamps (truncating family), the other extracts a certain
+part of them (extracting family). Each family comes in two flavours: one
+using \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}} of \pkg{fasttime}, the other solely relying
+on base \R. The \pkg{fasttime} versions work with UTC and equivalent as well
+as all Etc/GMT time zones only (execute
+\code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)} for a full list of supported time zones) and are
+limited to timestamps between the years 1970 and 2199, but generally are
+faster for the extracting family of functions.
+
+The truncating family sets timestamps to the lowest possible point in time of
+the corresponding temporal aggregation level:
+\itemize{
+\item \verb{*Y_____} truncates to year,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
+\item \verb{*YQ____} truncates to quarter, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
+\item \verb{*Ym____} truncates to month,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
+\item \verb{*Ymd___} truncates to day,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
+\item \verb{*YmdH__} truncates to hour,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
+\item \verb{*YmdHM_} truncates to minute,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
+\item \verb{*YmdHMS} truncates to second,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
+}
 
 By convention, the extracting family sets the year to 2199 and extracts a
- certain part of timestamps:
- \itemize{
-   \item \code{*______} extracts nothing,      i.e.               all timestamps become  \emph{2199-01-01 00:00:00.0}
-   \item \code{*_Q____} extracts the quarters, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-10-01 00:00:00.0}
-   \item \code{*_m____} extracts the months,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-11-01 00:00:00.0}
-   \item \code{*___H__} extracts the hours,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 11:00:00.0}
-   \item \code{*____M_} extracts the minutes,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:11:00.0}
-   \item \code{*_____S} extracts the seconds,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:00:11.0}
- }
+certain part of timestamps:
+\itemize{
+\item \verb{*______} extracts nothing,      i.e.          all timestamps become  \emph{2199-01-01 00:00:00.0}
+\item \verb{*_Q____} extracts the quarters, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-10-01 00:00:00.0}
+\item \verb{*_m____} extracts the months,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-11-01 00:00:00.0}
+\item \verb{*___H__} extracts the hours,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 11:00:00.0}
+\item \verb{*____M_} extracts the minutes,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:11:00.0}
+\item \verb{*_____S} extracts the seconds,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2199-01-01 00:00:11.0}
 }
+}
+
 \seealso{
-\code{\link{DTSg}}, \code{\link{aggregate}}, \code{\link{colapply}},
- \code{\link{subset}}, \code{\link[fasttime]{fastPOSIXct}},
- \code{\link{list}}, \code{\link{POSIXct}}
+\code{\link{aggregate}}, \code{\link{colapply}}, \code{\link{subset}}
 }
