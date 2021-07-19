@@ -89,7 +89,7 @@
       <h1 data-toc-skip>A. Basic usage</h1>
                         <h4 class="author">Gerold Hepp</h4>
             
-            <h4 class="date">2021-07-17</h4>
+            <h4 class="date">2021-07-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/master/vignettes/a_basicUsage.Rmd"><code>vignettes/a_basicUsage.Rmd</code></a></small>
       <div class="hidden name"><code>a_basicUsage.Rmd</code></div>
@@ -107,11 +107,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gisler.github.io/DTSg">DTSg</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'DTSg'</span>
-<span class="co">#&gt; The following objects are masked from 'package:data.table':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     set, setnames</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
 <span class="va">flow</span>
@@ -272,26 +267,12 @@
 <span class="co">#&gt;  3: 2007-03-01 12.889839</span>
 <span class="co">#&gt;  4: 2007-04-01 12.470500</span>
 <span class="co">#&gt;  5: 2007-05-01  9.233226</span>
-<span class="co">#&gt;  6: 2007-06-01  9.193500</span>
-<span class="co">#&gt;  7: 2007-07-01 12.272419</span>
-<span class="co">#&gt;  8: 2007-08-01 11.291129</span>
-<span class="co">#&gt;  9: 2007-09-01  8.874500</span>
-<span class="co">#&gt; 10: 2007-10-01 13.063065</span>
-<span class="co">#&gt; 11: 2007-11-01 25.668500</span>
-<span class="co">#&gt; 12: 2007-12-01 20.474032</span>
-<span class="co">#&gt; 13: 2008-01-01 19.677097</span>
-<span class="co">#&gt; 14: 2008-02-01 14.185345</span>
-<span class="co">#&gt; 15: 2008-03-01 23.577581</span>
-<span class="co">#&gt; 16: 2008-04-01 23.284000</span>
-<span class="co">#&gt; 17: 2008-05-01 14.325968</span>
-<span class="co">#&gt; 18: 2008-06-01  9.287000</span>
-<span class="co">#&gt; 19: 2008-07-01 22.004032</span>
+<span class="co">#&gt; ---                     </span>
 <span class="co">#&gt; 20: 2008-08-01 12.641129</span>
 <span class="co">#&gt; 21: 2008-09-01 13.710500</span>
 <span class="co">#&gt; 22: 2008-10-01 10.626774</span>
 <span class="co">#&gt; 23: 2008-11-01  8.902000</span>
 <span class="co">#&gt; 24: 2008-12-01 16.435645</span>
-<span class="co">#&gt;      .dateTime      flow</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ID:             River Flow</span>
 <span class="co">#&gt; Aggregated:     TRUE</span>
@@ -303,7 +284,7 @@
 <span class="co">#&gt; Time zone:      UTC</span>
 <span class="co">#&gt; Timestamps:     24</span></code></pre></div>
 <p>Printing the aggregated object shows us that its <code>aggregated</code> field has been set to <code>TRUE</code>. This is merely an indicator telling us to now interpret the timestamps of the series as periods between subsequent timestamps and not as snap-shots anymore.</p>
-<p>The one family of temporal aggregation level functions of the package sets timestamps to their respective lowest possible point in time given a certain temporal aggregation level, i.e. truncates timestamps, and the other family extracts a certain part of them. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:</p>
+<p>The one family of temporal aggregation level functions of the package sets timestamps to the lowest possible point in time of the corresponding temporal aggregation level, i.e. truncates timestamps, and the other family extracts a certain part of them. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TSQ</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span>funby <span class="op">=</span> <span class="va">by_Q____</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
 <span class="co"># or 'aggregate(TS, funby = by_Q____, fun = mean)'</span>
@@ -354,7 +335,7 @@
 <span class="co">#&gt; Time zone:      UTC</span>
 <span class="co">#&gt; Timestamps:     731</span></code></pre></div>
 <p>On a side note, some of the methods, which take a function as an argument (<code>colapply</code> and <code>rollapply</code>) hand over to it an additional <code>list</code> argument called <code>.helpers</code> containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like <code>cumsum</code>, which do not expect such a thing. A solution to this is to set the <code>helpers</code> argument of the respective method to <code>FALSE</code>.</p>
-<p>With this said, let’s join the result of the last calculation to the original time series data object and extract its <em>values</em> as a <code>data.table</code> for further processing in a final step (please note that the <em>.dateTime</em> column gets its original name back):</p>
+<p>With this said, let’s join the result of the last calculation to the original time series data object and extract its values as a <code>data.table</code> for further processing in a final step (please note that the <em>.dateTime</em> column gets its original name back):</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TS</span>  <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">merge</span><span class="op">(</span>y <span class="op">=</span> <span class="va">TSs</span>, suffixes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_orig"</span>, <span class="st">"_movavg"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># or 'merge(TS, y = TSs, suffixes = c("_orig", "_movavg"))'</span>

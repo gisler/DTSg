@@ -147,23 +147,23 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Any number of <code><a href='DTSg.html'>DTSg</a></code> objects or objects coercible to
-one (see <code><a href='DTSg.html'>new</a></code> for further information). <code><a href='https://rdrr.io/r/base/list.html'>list</a></code>s of
-such objects or a mixture of lists and non-lists are also accepted.</p></td>
+      <td><p>Any number of <code><a href='DTSg.html'>DTSg</a></code> objects or objects coercible to one (see
+<code><a href='DTSg.html'>new</a></code> for further information). <code><a href='https://rdrr.io/r/base/list.html'>list</a></code>s of such objects or a mixture of
+lists and non-lists are also accepted.</p></td>
     </tr>
     <tr>
       <th>clone</th>
       <td><p>A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.</p></td>
+deep clone (copy) is made beforehand.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
+    <p>Returns a <code>DTSg</code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='DTSg.html'>new</a></code>, <code><a href='https://rdrr.io/r/base/list.html'>list</a></code></p></div>
+    <div class='dont-index'><p><code><a href='cols.DTSg.html'>cols</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>getOption</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
@@ -174,15 +174,55 @@ clone (copy) is made beforehand.</p></td>
 <span class='va'>x</span><span class='op'>$</span><span class='fu'>rowbind</span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>flow</span><span class='op'>[</span><span class='fl'>1001</span><span class='op'>:</span><span class='fl'>1500</span>, <span class='op'>]</span>, <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>[</span><span class='fl'>501</span><span class='op'>:</span><span class='fl'>1000</span>, <span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
   <span class='va'>flow</span><span class='op'>[</span><span class='fl'>1501</span><span class='op'>:</span><span class='va'>.N</span>, <span class='op'>]</span>
-<span class='op'>)</span>
-
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
+#&gt;        .dateTime   flow
+#&gt;           &lt;POSc&gt;  &lt;num&gt;
+#&gt;    1: 2007-01-01  9.540
+#&gt;    2: 2007-01-02  9.285
+#&gt;    3: 2007-01-03  8.940
+#&gt;    4: 2007-01-04  8.745
+#&gt;    5: 2007-01-05  8.490
+#&gt;   ---                  
+#&gt; 2188: 2012-12-27 26.685
+#&gt; 2189: 2012-12-28 28.050
+#&gt; 2190: 2012-12-29 23.580
+#&gt; 2191: 2012-12-30 18.840
+#&gt; 2192: 2012-12-31 17.250
+#&gt; 
+#&gt; Aggregated:     FALSE
+#&gt; Regular:        TRUE
+#&gt; Periodicity:    Time difference of 1 days
+#&gt; Missing values: explicit
+#&gt; Time zone:      UTC
+#&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'>rowbind</span><span class='op'>(</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>rowbind</span><span class='op'>(</span>
   x <span class='op'>=</span> <span class='va'>x</span>,
   <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>flow</span><span class='op'>[</span><span class='fl'>1001</span><span class='op'>:</span><span class='fl'>1500</span>, <span class='op'>]</span>, <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>[</span><span class='fl'>501</span><span class='op'>:</span><span class='fl'>1000</span>, <span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
   <span class='va'>flow</span><span class='op'>[</span><span class='fl'>1501</span><span class='op'>:</span><span class='va'>.N</span>, <span class='op'>]</span>
-<span class='op'>)</span>
-
+<span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
+#&gt;        .dateTime   flow
+#&gt;           &lt;POSc&gt;  &lt;num&gt;
+#&gt;    1: 2007-01-01  9.540
+#&gt;    2: 2007-01-02  9.285
+#&gt;    3: 2007-01-03  8.940
+#&gt;    4: 2007-01-04  8.745
+#&gt;    5: 2007-01-05  8.490
+#&gt;   ---                  
+#&gt; 2188: 2012-12-27 26.685
+#&gt; 2189: 2012-12-28 28.050
+#&gt; 2190: 2012-12-29 23.580
+#&gt; 2191: 2012-12-30 18.840
+#&gt; 2192: 2012-12-31 17.250
+#&gt; 
+#&gt; Aggregated:     FALSE
+#&gt; Regular:        TRUE
+#&gt; Periodicity:    Time difference of 1 days
+#&gt; Missing values: explicit
+#&gt; Time zone:      UTC
+#&gt; Timestamps:     2192</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

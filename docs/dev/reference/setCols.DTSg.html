@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set values of columns — setCols.DTSg • DTSg</title>
+<title>Set column values — setCols.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="Set values of columns — setCols.DTSg" />
-<meta property="og:description" content="Set the values of columns, add columns to and/or remove columns from a
- DTSg object. The values can optionally be set for certain rows
- only." />
+<meta property="og:title" content="Set column values — setCols.DTSg" />
+<meta property="og:description" content="Changes the values of columns, adds columns to and/or removes columns from a
+DTSg object. The values can optionally be set for certain rows only." />
 
 
 <meta name="robots" content="noindex">
@@ -128,15 +127,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set values of columns</h1>
+    <h1>Set column values</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>setCols.DTSg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Set the values of columns, add columns to and/or remove columns from a
- <code><a href='DTSg.html'>DTSg</a></code> object. The values can optionally be set for certain rows
- only.</p>
+    <p>Changes the values of columns, adds columns to and/or removes columns from a
+<code><a href='DTSg.html'>DTSg</a></code> object. The values can optionally be set for certain rows only.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -147,10 +145,7 @@
   <span class='va'>values</span>,
   clone <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"DTSgClone"</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span>
-
-<span class='co'># S3 method for DTSg</span>
-<span class='fu'>set</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,26 +158,25 @@
       <th>i</th>
       <td><p>An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the <code>i</code>
-argument of <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>. Filter expressions can
-contain the special symbol <code><a href='https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html'>.N</a></code>.</p></td>
+argument of <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>. Filter expressions can contain the
+special symbol <code><a href='https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html'>.N</a></code>.</p></td>
     </tr>
     <tr>
       <th>cols</th>
       <td><p>A character vector specifying the columns whose values shall be
-set. The values of the <em>.dateTime</em> column cannot be set.</p></td>
+set. The values of the <em>.dateTime</em> column cannot be changed.</p></td>
     </tr>
     <tr>
       <th>values</th>
       <td><p>A vector, <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> or list-like object (e.g.
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>) of replacement and/or new values
-accepted by the <code>value</code> argument of <span class="pkg">data.table</span>'s
-<code>set</code> function. <code>NULL</code> as a value
-removes a column.</p></td>
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>) of replacement and/or new values accepted by
+the <code>value</code> argument of <span class="pkg">data.table</span>'s <code><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>data.table::set</a></code> function.
+<code>NULL</code> as a value removes a column.</p></td>
     </tr>
     <tr>
       <th>clone</th>
       <td><p>A logical specifying if the object is modified in place or if a
-clone (copy) is made beforehand.</p></td>
+deep clone (copy) is made beforehand.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -192,12 +186,10 @@ clone (copy) is made beforehand.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
+    <p>Returns a <code>DTSg</code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>,
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html'>.N</a></code>, <code><a href='cols.DTSg.html'>cols</a></code>,
- <code><a href='https://rdrr.io/r/base/list.html'>list</a></code>, <code>set</code></p></div>
+    <div class='dont-index'><p><code><a href='cols.DTSg.html'>cols</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>getOption</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
@@ -205,11 +197,51 @@ clone (copy) is made beforehand.</p></td>
 
 <span class='co'># cap river flows to 100</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>setCols</span><span class='op'>(</span>i <span class='op'>=</span> <span class='va'>flow</span> <span class='op'>&gt;</span> <span class='fl'>100</span>, cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>setCols</span><span class='op'>(</span>i <span class='op'>=</span> <span class='va'>flow</span> <span class='op'>&gt;</span> <span class='fl'>100</span>, cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
+#&gt;        .dateTime   flow
+#&gt;           &lt;POSc&gt;  &lt;num&gt;
+#&gt;    1: 2007-01-01  9.540
+#&gt;    2: 2007-01-02  9.285
+#&gt;    3: 2007-01-03  8.940
+#&gt;    4: 2007-01-04  8.745
+#&gt;    5: 2007-01-05  8.490
+#&gt;   ---                  
+#&gt; 2188: 2012-12-27 26.685
+#&gt; 2189: 2012-12-28 28.050
+#&gt; 2190: 2012-12-29 23.580
+#&gt; 2191: 2012-12-30 18.840
+#&gt; 2192: 2012-12-31 17.250
+#&gt; 
+#&gt; Aggregated:     FALSE
+#&gt; Regular:        TRUE
+#&gt; Periodicity:    Time difference of 1 days
+#&gt; Missing values: explicit
+#&gt; Time zone:      UTC
+#&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'>setCols</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, i <span class='op'>=</span> <span class='va'>flow</span> <span class='op'>&gt;</span> <span class='fl'>100</span>, cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>setCols</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, i <span class='op'>=</span> <span class='va'>flow</span> <span class='op'>&gt;</span> <span class='fl'>100</span>, cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Values:
+#&gt;        .dateTime   flow
+#&gt;           &lt;POSc&gt;  &lt;num&gt;
+#&gt;    1: 2007-01-01  9.540
+#&gt;    2: 2007-01-02  9.285
+#&gt;    3: 2007-01-03  8.940
+#&gt;    4: 2007-01-04  8.745
+#&gt;    5: 2007-01-05  8.490
+#&gt;   ---                  
+#&gt; 2188: 2012-12-27 26.685
+#&gt; 2189: 2012-12-28 28.050
+#&gt; 2190: 2012-12-29 23.580
+#&gt; 2191: 2012-12-30 18.840
+#&gt; 2192: 2012-12-31 17.250
+#&gt; 
+#&gt; Aggregated:     FALSE
+#&gt; Regular:        TRUE
+#&gt; Periodicity:    Time difference of 1 days
+#&gt; Missing values: explicit
+#&gt; Time zone:      UTC
+#&gt; Timestamps:     2192</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

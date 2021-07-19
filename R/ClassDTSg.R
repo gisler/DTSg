@@ -922,6 +922,14 @@ DTSg <- R6Class(
       invisible(self)
     },
 
+    raggregate = function(...) {
+      self$rowaggregate(...)
+    },
+
+    rbind = function(...) {
+      self$rowbind(...)
+    },
+
     refresh = function() {
       firstCol <- names(private$.values)[1L]
 
@@ -1277,6 +1285,10 @@ DTSg <- R6Class(
       invisible(self)
     },
 
+    set = function(...) {
+      self$setCols(...)
+    },
+
     setColNames = function(
       cols = self$cols(class = "numeric")[1L],
       values,
@@ -1345,6 +1357,10 @@ DTSg <- R6Class(
       }
 
       invisible(self)
+    },
+
+    setnames = function(...) {
+      self$setColNames(...)
     },
 
     subset = function(

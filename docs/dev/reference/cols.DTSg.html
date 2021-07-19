@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get names of value columns — cols.DTSg • DTSg</title>
+<title>Get column names — cols.DTSg • DTSg</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Get names of value columns — cols.DTSg" />
-<meta property="og:description" content="Queries all column names of a DTSg object, those of certain
- classes and/or those matching a certain pattern only." />
+<meta property="og:title" content="Get column names — cols.DTSg" />
+<meta property="og:description" content="Returns all column names of a DTSg object, those of certain classes
+and/or those matching a certain pattern only." />
 
 
 <meta name="robots" content="noindex">
@@ -127,14 +127,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get names of value columns</h1>
+    <h1>Get column names</h1>
     <small class="dont-index">Source: <a href='https://github.com/gisler/DTSg/blob/master/R/Swrappers.R'><code>R/Swrappers.R</code></a></small>
     <div class="hidden name"><code>cols.DTSg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Queries all column names of a <code><a href='DTSg.html'>DTSg</a></code> object, those of certain
- <code><a href='https://rdrr.io/r/base/class.html'>class</a></code>es and/or those matching a certain pattern only.</p>
+    <p>Returns all column names of a <code><a href='DTSg.html'>DTSg</a></code> object, those of certain <code><a href='https://rdrr.io/r/base/class.html'>class</a></code>es
+and/or those matching a certain pattern only.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -150,9 +150,8 @@
     <tr>
       <th>class</th>
       <td><p>An optional character vector matched to the most specific class
-(first element) of each column's <code><a href='https://rdrr.io/r/base/class.html'>class</a></code> vector. The
-&#8220;special class&#8221; <code>".numerary"</code> matches the <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code>
-and <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> classes.</p></td>
+(first element) of each column's <code><a href='https://rdrr.io/r/base/class.html'>class</a></code> vector. The &#8220;special
+class&#8221; <code>".numerary"</code> matches the <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> and <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> classes.</p></td>
     </tr>
     <tr>
       <th>pattern</th>
@@ -161,17 +160,14 @@ argument of <code><a href='https://rdrr.io/r/base/grep.html'>grep</a></code>.</p
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments passed on to <code><a href='https://rdrr.io/r/base/grep.html'>grep</a></code>. The
-<code>value</code> argument is rejected.</p></td>
+      <td><p>Further arguments passed on to <code><a href='https://rdrr.io/r/base/grep.html'>grep</a></code>. The <code>value</code> argument is
+rejected.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a character vector.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='https://rdrr.io/r/base/class.html'>class</a></code>, <code><a href='https://rdrr.io/r/base/grep.html'>grep</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>

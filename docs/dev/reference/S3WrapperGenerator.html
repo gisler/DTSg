@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="S3 wrapper method generator — S3WrapperGenerator" />
-<meta property="og:description" content="Generates S3 wrapper methods for public methods of R6ClassGenerators,
- but can also be used to generate &amp;#8220;plain&amp;#8221; function wrappers." />
+<meta property="og:description" content="Generates S3 wrapper methods for public methods of R6ClassGenerators, but
+can also be used to generate &amp;#8220;plain&amp;#8221; function wrappers." />
 
 
 <meta name="robots" content="noindex">
@@ -133,8 +133,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Generates S3 wrapper methods for public methods of <code>R6ClassGenerator</code>s,
- but can also be used to generate &#8220;plain&#8221; function wrappers.</p>
+    <p>Generates S3 wrapper methods for public methods of <code>R6ClassGenerator</code>s, but
+can also be used to generate &#8220;plain&#8221; function wrappers.</p>
     </div>
 
     <pre class="usage"><span class='fu'>S3WrapperGenerator</span><span class='op'>(</span><span class='va'>R6Method</span>, self <span class='op'>=</span> <span class='st'>"x"</span>, dots <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
@@ -144,18 +144,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>R6Method</th>
-      <td><p>An <code><a href='https://rdrr.io/r/base/expression.html'>expression</a></code> with or a public method
-(<code><a href='https://rdrr.io/r/base/function.html'>function</a></code>) of an <code>R6ClassGenerator</code>.</p></td>
+      <td><p>An <code><a href='https://rdrr.io/r/base/expression.html'>expression</a></code> with or a public method (<code><a href='https://rdrr.io/r/base/function.html'>function</a></code>) of
+an <code>R6ClassGenerator</code>.</p></td>
     </tr>
     <tr>
       <th>self</th>
-      <td><p>A character string specifying the name of the parameter which
+      <td><p>A character string specifying the name of the parameter, which
 will take the R6 object.</p></td>
     </tr>
     <tr>
       <th>dots</th>
-      <td><p>A logical specifying if a <code>...</code> parameter shall be added
-as last parameter in case none already exists. This might be required for S3
+      <td><p>A logical specifying if a <code>...</code> parameter shall be added as last
+parameter in case none already exists. This might be required for S3
 generic/method consistency.</p></td>
     </tr>
     </table>
@@ -165,11 +165,10 @@ generic/method consistency.</p></td>
     <p>Returns an S3 method (<code><a href='https://rdrr.io/r/base/function.html'>function</a></code>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/UseMethod.html'>S3Methods</a></code>, <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code>,
- <code><a href='https://rdrr.io/r/base/expression.html'>expression</a></code>, <code><a href='https://rdrr.io/r/base/function.html'>function</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/UseMethod.html'>S3Methods</a></code>, <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># generate S3 wrapper method for alter of DTSg</span>
+    <pre class="examples"><div class='input'><span class='co'># generate an S3 wrapper method for 'alter' of 'DTSg'</span>
 <span class='va'>alter.DTSg</span> <span class='op'>&lt;-</span> <span class='fu'>S3WrapperGenerator</span><span class='op'>(</span>
   R6Method <span class='op'>=</span> <span class='va'>DTSg</span><span class='op'>$</span><span class='va'>public_methods</span><span class='op'>$</span><span class='va'>alter</span>
 <span class='op'>)</span>

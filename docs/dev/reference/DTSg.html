@@ -41,18 +41,18 @@
 
 <meta property="og:title" content="DTSg class — DTSg" />
 <meta property="og:description" content="The DTSg class is the working horse of the package. It is an
- R6Class and offers an S3 interface in addition to its
- native R6 interface. In the usage sections of the documentation only the S3
- interface is shown, however, the examples always show both possibilities.
- Generally, they are very similar anyway. While the R6 interface always has
- the object first and the method is selected with the help of the $
- operator (for instance, x$cols()), the S3 interface always has the
- method first and the object as its first argument (for instance,
- cols(x)). An exception is the new method. It is not an S3
- method, but an abused S4 constructor with the character string &quot;DTSg&quot;
- as its first argument. Regarding the R6 interface, the DTSg class
- generator has to be used to access the new method with the help of
- the $ operator." />
+R6::R6Class and offers an S3 interface in addition to its native R6
+interface. In the usage sections of the documentation, unfortunately, only
+the usage of the S3 methods are displayed, however, the examples always show
+both ways of calling the respective method. Generally, they are very similar
+anyway. While the R6 interface always has the object first and the method is
+then selected with the help of the $ operator, for instance, x$cols(),
+the S3 interface always has the method first and then the object as its first
+argument, for instance, cols(x). An exception is the new method. It is
+not an S3 method, but an abused S4 constructor with the character string
+&quot;DTSg&quot; as its first argument. Regarding the R6 interface, the DTSg class
+generator has to be used to access the new method with the help of the $
+operator." />
 
 
 <meta name="robots" content="noindex">
@@ -145,53 +145,53 @@
 
     <div class="ref-description">
     <p>The <code>DTSg</code> class is the working horse of the package. It is an
- <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code> and offers an S3 interface in addition to its
- native R6 interface. In the usage sections of the documentation only the S3
- interface is shown, however, the examples always show both possibilities.
- Generally, they are very similar anyway. While the R6 interface always has
- the object first and the method is selected with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>
- operator (for instance, <code>x$cols()</code>), the S3 interface always has the
- method first and the object as its first argument (for instance,
- <code><a href='cols.DTSg.html'>cols(x)</a></code>). An exception is the <code>new</code> method. It is not an S3
- method, but an abused S4 constructor with the character string <code>"DTSg"</code>
- as its first argument. Regarding the R6 interface, the <code>DTSg</code> class
- generator has to be used to access the <code>new</code> method with the help of
- the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> operator.</p>
+<code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class</a></code> and offers an S3 interface in addition to its native R6
+interface. In the usage sections of the documentation, unfortunately, only
+the usage of the S3 methods are displayed, however, the examples always show
+both ways of calling the respective method. Generally, they are very similar
+anyway. While the R6 interface always has the object first and the method is
+then selected with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> operator, for instance, <code>x$cols()</code>,
+the S3 interface always has the method first and then the object as its first
+argument, for instance, <code><a href='cols.DTSg.html'>cols(x)</a></code>. An exception is the <code>new</code> method. It is
+not an S3 method, but an abused S4 constructor with the character string
+<code>"DTSg"</code> as its first argument. Regarding the R6 interface, the <code>DTSg</code> class
+generator has to be used to access the <code>new</code> method with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>
+operator.</p>
     </div>
 
     <pre class="usage"><span class='fu'>new</span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>values</span>, ID <span class='op'>=</span> <span class='st'>""</span>, parameter <span class='op'>=</span> <span class='st'>""</span>, unit <span class='op'>=</span> <span class='st'>""</span>, variant <span class='op'>=</span> <span class='st'>""</span>,
- aggregated <span class='op'>=</span> <span class='cn'>FALSE</span>, fast <span class='op'>=</span> <span class='cn'>FALSE</span>, swallow <span class='op'>=</span> <span class='cn'>FALSE</span>, na.status <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"explicit"</span>,
- <span class='st'>"implicit"</span>, <span class='st'>"undecided"</span><span class='op'>)</span><span class='op'>)</span></pre>
+  aggregated <span class='op'>=</span> <span class='cn'>FALSE</span>, fast <span class='op'>=</span> <span class='cn'>FALSE</span>, swallow <span class='op'>=</span> <span class='cn'>FALSE</span>, na.status <span class='op'>=</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"explicit"</span>, <span class='st'>"implicit"</span>, <span class='st'>"undecided"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>Class</th>
-      <td><p>A character string. Must be <code>"DTSg"</code> in order to create a
-<code>DTSg</code> object. Otherwise a different object may or may not be created
-(S4 constructor only).</p></td>
+      <td><p>A character string. Must be <code>"DTSg"</code> in order to create a <code>DTSg</code>
+object. Otherwise a different object may or may not be created (S4
+constructor only).</p></td>
     </tr>
     <tr>
       <th>values</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> or object inherited from class
-<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>, for instance,
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>. Its first column must be of class
-<code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> or coercible to it. It serves as the object's time
-index and is renamed to <em>.dateTime.</em></p></td>
+      <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> or object inherited from class <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>,
+for instance, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>. Its first column must be of class
+<code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> or coercible to it. It serves as the object's time index and is
+renamed to <em>.dateTime.</em></p></td>
     </tr>
     <tr>
       <th>ID</th>
-      <td><p>A character string specifying the ID (name) of the time series.</p></td>
+      <td><p>A character string specifying the ID (name) of the time series data
+object.</p></td>
     </tr>
     <tr>
       <th>parameter</th>
-      <td><p>A character string specifying the parameter of the time
-series.</p></td>
+      <td><p>A character string specifying the parameter name of the time
+series data.</p></td>
     </tr>
     <tr>
       <th>unit</th>
-      <td><p>A character string specifying the unit of the time series.</p></td>
+      <td><p>A character string specifying the unit of the time series data.</p></td>
     </tr>
     <tr>
       <th>variant</th>
@@ -201,38 +201,36 @@ lower bound measurements.</p></td>
     </tr>
     <tr>
       <th>aggregated</th>
-      <td><p>A logical signalling how the timestamps of the series have
-to be interpreted: as snap-shots (<code>FALSE</code>) or as periods between
-subsequent timestamps (<code>TRUE</code>).</p></td>
+      <td><p>A logical specifying how the timestamps of the series have
+to be interpreted: as snap-shots (<code>FALSE</code>) or as periods between subsequent
+timestamps (<code>TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>fast</th>
-      <td><p>A logical signalling if all rows (<code>FALSE</code>) or only the first
-1000 rows (<code>TRUE</code>) shall be used to check the object's integrity and
-for the automatic detection of the time series' periodicity.</p></td>
+      <td><p>A logical specifying if all rows (<code>FALSE</code>) or only the first 1000
+rows (<code>TRUE</code>) shall be used to check the object's integrity and for the
+automatic detection of the time series' periodicity.</p></td>
     </tr>
     <tr>
       <th>swallow</th>
-      <td><p>A logical signalling if the object provided through the
-<code>values</code> argument shall be &#8220;swallowed&#8221; by the <code>DTSg</code>
-object, i.e. no copy of the data shall be made. This is generally more
-resource efficient, but only works if the object provided through the
-<code>values</code> argument is a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>. Be warned,
-however, that if the creation of the <code>DTSg</code> object fails for some
-reason, the first column of the provided
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code> might have been coerced to
-<code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> and keyed (see <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>setkey</a></code> for
+      <td><p>A logical specifying if the object provided through the
+<code>values</code> argument shall be &#8220;swallowed&#8221; by the <code>DTSg</code> object, i.e. no
+copy of the data shall be made. This is generally more resource efficient,
+but only works when the provided object is a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>. Be
+warned, however, that when the creation of the <code>DTSg</code> object fails for some
+reason, the first column of the provided <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code> might
+have been coerced to <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> and keyed (see <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>data.table::setkey</a></code> for
 further information). Furthermore, all references to the &#8220;swallowed&#8221;
-<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code> in the global (and only the global)
-environment are removed upon successful creation of a <code>DTSg</code> object.</p></td>
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code> in the global (and only the global) environment
+are removed upon the successful creation of the <code>DTSg</code> object.</p></td>
     </tr>
     <tr>
       <th>na.status</th>
-      <td><p>A character string. Either <code>"explicit"</code>, which makes
-missing timestamps according to the recognised periodicity explicit, or
+      <td><p>A character string. Either <code>"explicit"</code>, which makes missing
+timestamps according to the recognised periodicity explicit, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
-columns, or <code>"undecided"</code> for no such action. Please note that
-<code>DTSg</code> objects work best with explicitly missing values.</p></td>
+columns, or <code>"undecided"</code> for no such action. Please note that <code>DTSg</code>
+objects work best with explicitly missing values.</p></td>
     </tr>
     </table>
 
@@ -241,28 +239,19 @@ columns, or <code>"undecided"</code> for no such action. Please note that
     <p>Returns a <code>DTSg</code> object.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Due to the <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> nature of the <em>.dateTime</em> column, the
- same sub-second accuracy, issues and limitations apply to <code>DTSg</code>
- objects. In order to prevent at least some of the possible precision issues,
- the lags in seconds between subsequent timestamps are rounded to
- microseconds during integrity checks. This corresponds to the maximum value
- allowed for <code><a href='https://rdrr.io/r/base/options.html'>options</a>("digits.secs")</code>. As a consequence, time
- series with a sub-second accuracy higher than a microsecond will never work.</p>
-<p>Some of the methods which take a function as an argument
- (<code><a href='colapply.DTSg.html'>colapply</a></code> and <code><a href='rollapply.DTSg.html'>rollapply</a></code>) hand over to it an
- additional <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> argument called <code>.helpers</code> containing
- useful data for the development of user defined functions (see the
- respective help pages for further information). This can of course be a
- problem for functions like <code><a href='https://rdrr.io/r/base/cumsum.html'>cumsum</a></code> which do not expect such a
- thing. A solution is to set the <code>helpers</code> argument of the respective
- method to <code>FALSE</code>.</p>
+    <p>Due to the <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> nature of the <em>.dateTime</em> column, the same sub-second
+accuracy, issues and limitations apply to <code>DTSg</code> objects. In order to prevent
+at least some of the possible precision issues, the lags between subsequent
+timestamps are rounded to microseconds during integrity checks. This
+corresponds to the maximum value allowed for
+<code><a href='https://rdrr.io/r/base/options.html'>options</a>("digits.secs")</code>. As a consequence, time series with a
+sub-second accuracy higher than a microsecond will never work.</p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 
 <p>A <code>DTSg</code> object has the following methods:</p><ul>
-<li><p><code>aggregate</code>: See <code><a href='aggregate.DTSg.html'>aggregate</a></code> for further
-     information.</p></li>
+<li><p><code>aggregate</code>: See <code><a href='aggregate.DTSg.html'>aggregate</a></code> for further information.</p></li>
 <li><p><code>alter</code>: See <code><a href='alter.DTSg.html'>alter</a></code> for further information.</p></li>
 <li><p><code>clone</code>: See <code><a href='clone.DTSg.html'>clone</a></code> for further information.</p></li>
 <li><p><code>colapply</code>: See <code><a href='colapply.DTSg.html'>colapply</a></code> for further information.</p></li>
@@ -273,13 +262,10 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 <li><p><code>plot</code>: See <code><a href='plot.DTSg.html'>plot</a></code> for further information.</p></li>
 <li><p><code>print</code>: See <code><a href='print.DTSg.html'>print</a></code> for further information.</p></li>
 <li><p><code>refresh</code>: See <code><a href='refresh.DTSg.html'>refresh</a></code> for further information.</p></li>
-<li><p><code>rollapply</code>: See <code><a href='rollapply.DTSg.html'>rollapply</a></code> for further
-     information.</p></li>
-<li><p><code>rowaggregate</code>: See <code><a href='rowaggregate.DTSg.html'>rowaggregate</a></code> for further
-     information.</p></li>
+<li><p><code>rollapply</code>: See <code><a href='rollapply.DTSg.html'>rollapply</a></code> for further information.</p></li>
+<li><p><code>rowaggregate</code>: See <code><a href='rowaggregate.DTSg.html'>rowaggregate</a></code> for further information.</p></li>
 <li><p><code>rowbind</code>: See <code><a href='rowbind.DTSg.html'>rowbind</a></code> for further information.</p></li>
-<li><p><code>setColNames</code>: See <code><a href='setColNames.DTSg.html'>setColNames</a></code> for further
-     information.</p></li>
+<li><p><code>setColNames</code>: See <code><a href='setColNames.DTSg.html'>setColNames</a></code> for further information.</p></li>
 <li><p><code>setCols</code>: See <code><a href='setCols.DTSg.html'>setCols</a></code> for further information.</p></li>
 <li><p><code>subset</code>: See <code><a href='subset.DTSg.html'>subset</a></code> for further information.</p></li>
 <li><p><code>summary</code>: See <code><a href='summary.DTSg.html'>summary</a></code> for further information.</p></li>
@@ -291,62 +277,53 @@ columns, or <code>"undecided"</code> for no such action. Please note that
     
 
 <p>A <code>DTSg</code> object has the following fields or properties as they are often
- called. They are implemented through so called active bindings which means
- that they can be accessed and actively set with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>
- operator (for instance, <code>x$ID</code> gets the value of the <em>ID</em> field
- and <code>x$ID &lt;- "River Flow"</code> sets its value). Please note that fields are
- always modified in place, i.e. no clone (copy) of the object is made
- beforehand. See <code><a href='clone.DTSg.html'>clone</a></code> for further information. Some of the
- fields are read-only though:</p><ul>
-<li><p><em>aggregated:</em> Same as <code>aggregated</code> argument.</p></li>
-<li><p><em>fast:</em> Same as <code>fast</code> argument.</p></li>
-<li><p><em>ID:</em> Same as <code>ID</code> argument. It is used as the title of
-     plots.</p></li>
-<li><p><em>na.status:</em> Same as <code>na.status</code> argument. When set, the
-     <em>values</em> of the object are expanded or collapsed accordingly.</p></li>
-<li><p><em>parameter:</em> Same as <code>parameter</code> argument. It is used as
-     the label of the primary axis of plots.</p></li>
-<li><p><em>periodicity:</em> A <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code> object for a regular
-     and a character string for an irregular <code>DTSg</code> object describing
-     its periodicity or containing <code>"unrecognised"</code> in case it could not
-     be detected. When set, the periodicity of the time series is changed as
-     specified. See <code>by</code> argument of <code><a href='alter.DTSg.html'>alter</a></code> for further
-     information.</p></li>
-<li><p><em>regular:</em> A logical signalling if all lags in seconds between
-     subsequent timestamps are the same (<code>TRUE</code>) or if some are
-     different (<code>FALSE</code>). A, for instance, monthly time series is
-     considered irregular in this sense (read-only).</p></li>
-<li><p><em>timestamps:</em> An integer showing the total number of timestamps
-     of the time series (read-only).</p></li>
-<li><p><em>timezone:</em> A character string containing the time zone of the
-     time series. When set, the series is converted to the specified time
-     zone. Only names from <code><a href='https://rdrr.io/r/base/timezones.html'>OlsonNames</a></code> are accepted.</p></li>
-<li><p><em>unit:</em> Same as <code>unit</code> argument. It is added to the label
-     of the primary axis of plots when the <em>parameter</em> field is set.</p></li>
-<li><p><em>variant:</em> Same as <code>variant</code> argument. It is added to the
-     label of the primary axis of plots when the <em>parameter</em> field is
-     set.</p></li>
+called. They are implemented through so called active bindings, which means
+that they can be accessed and actively set with the help of the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> operator,
+for instance, <code>x$ID</code> gets the value of the <code>ID</code> field and
+<code>x$ID &lt;- "River Flow"</code> sets its value. Please note that fields are always
+modified in place, i.e. no deep clone (copy) of the object is made
+beforehand. See <code><a href='clone.DTSg.html'>clone</a></code> for further information. Some of the fields are
+read-only though:</p><ul>
+<li><p><code>aggregated</code>: Same as the <code>aggregated</code> argument.</p></li>
+<li><p><code>fast</code>: Same as the <code>fast</code> argument.</p></li>
+<li><p><code>ID</code>: Same as the <code>ID</code> argument. It is used as the title of plots.</p></li>
+<li><p><code>na.status</code>: Same as the <code>na.status</code> argument. When set, the missing values
+of the object are expanded or collapsed accordingly.</p></li>
+<li><p><code>parameter</code>: Same as the <code>parameter</code> argument. It is used as the label of
+the primary axis of plots.</p></li>
+<li><p><code>periodicity</code>: A <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code> object for a regular and a character string
+for an irregular <code>DTSg</code> object describing its periodicity or containing
+<code>"unrecognised"</code> in case it could not be detected. When set, the periodicity
+of the time series is changed as specified. See the <code>by</code> argument of
+<code><a href='alter.DTSg.html'>alter</a></code> for further information.</p></li>
+<li><p><code>regular</code>: A logical signalling if all lags in seconds between subsequent
+timestamps are the same (<code>TRUE</code>) or if some are different (<code>FALSE</code>). A, for
+instance, monthly time series is considered irregular in this sense
+(read-only).</p></li>
+<li><p><code>timestamps</code>: An integer showing the total number of timestamps of the time
+series (read-only).</p></li>
+<li><p><code>timezone</code>: A character string showing the time zone of the time series.
+When set, the series is converted to the specified time zone. Only names from
+<code><a href='https://rdrr.io/r/base/timezones.html'>OlsonNames</a></code> are accepted.</p></li>
+<li><p><code>unit</code>: Same as the  <code>unit</code> argument. It is added to the label of the
+primary axis of plots when the <code>parameter</code> field is set.</p></li>
+<li><p><code>variant</code>: Same as the <code>variant</code> argument. It is added to the label of the
+primary axis of plots when the <code>parameter</code> field is set.</p></li>
 </ul>
 
-<p>The <em>parameter</em>, <em>unit</em> and <em>variant</em> fields are especially
- useful for time series with a single variable (value column) only.</p>
+<p>The <code>parameter</code>, <code>unit</code> and <code>variant</code> fields are especially useful for time
+series with a single variable (value column) only.</p>
     <h2 class="hasAnchor" id="options"><a class="anchor" href="#options"></a>Options</h2>
 
     
 
 <p>The behaviour of <code>DTSg</code> objects can be customised with the help of the
- following option. See <code><a href='https://rdrr.io/r/base/options.html'>options</a></code> for further information:</p><ul>
-<li><p><em>DTSgClone:</em> A logical specifying if <code>DTSg</code> objects are,
-     by default, modified in place (<code>FALSE</code>) or if a clone (copy) is
-     made beforehand (<code>TRUE</code>).</p></li>
+following option. See <code><a href='https://rdrr.io/r/base/options.html'>options</a></code> for further information:</p><ul>
+<li><p><em>DTSgClone:</em> A logical specifying if <code>DTSg</code> objects are, by default,
+modified in place (<code>FALSE</code>) or if a deep clone (copy) is made beforehand
+(<code>TRUE</code>).</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code>, <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>,
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>, <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code>,
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/setkey.html'>setkey</a></code>, <code><a href='https://rdrr.io/r/base/difftime.html'>difftime</a></code>,
- <code><a href='https://rdrr.io/r/base/timezones.html'>OlsonNames</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>, <code><a href='https://rdrr.io/r/base/list.html'>list</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
@@ -374,7 +351,7 @@ columns, or <code>"undecided"</code> for no such action. Please note that
 #&gt; Missing values: explicit
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
-<span class='co'>## S4 constructor</span>
+<span class='co'>## abused S4 constructor</span>
 <span class='fu'>new</span><span class='op'>(</span>Class <span class='op'>=</span> <span class='st'>"DTSg"</span>, values <span class='op'>=</span> <span class='va'>flow</span>, ID <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow

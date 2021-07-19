@@ -690,7 +690,7 @@ rowaggregate <- function(x, ...) {
 #' ## S3 method
 #' print(rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd)))
 #'
-#' @aliases rowaggregate
+#' @aliases rowaggregate raggregate
 #'
 #' @export
 rowaggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowaggregate))
@@ -731,7 +731,7 @@ rowbind <- function(x, ...) {
 #'   flow[1501:.N, ]
 #' ))
 #'
-#' @aliases rowbind
+#' @aliases rowbind rbind
 #'
 #' @export
 rowbind.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowbind))
@@ -766,7 +766,7 @@ setColNames <- function(x, ...) {
 #' ## S3 method
 #' print(setColNames(x = x, cols = "flow", values = "River Flow"))
 #'
-#' @aliases setColNames
+#' @aliases setColNames setnames
 #'
 #' @export
 setColNames.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setColNames))
@@ -808,7 +808,7 @@ setCols <- function(x, ...) {
 #' ## S3 method
 #' print(setCols(x = x, i = flow > 100, cols = "flow", values = 100))
 #'
-#' @aliases setCols
+#' @aliases setCols set
 #'
 #' @export
 setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))

@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="List missing values — nas.DTSg" />
-<meta property="og:description" content="Lists the missing values of selected columns of a DTSg object
- with recognised periodicity." />
+<meta property="og:description" content="Lists the missing values of selected columns of a DTSg object with
+recognised periodicity." />
 
 
 <meta name="robots" content="noindex">
@@ -133,8 +133,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Lists the missing values of selected columns of a <code><a href='DTSg.html'>DTSg</a></code> object
- with recognised periodicity.</p>
+    <p>Lists the missing values of selected columns of a <code><a href='DTSg.html'>DTSg</a></code> object with
+recognised periodicity.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -160,19 +160,17 @@ shall be listed.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code> with five columns:</p><ul>
-<li><p><em>.col:</em> the column name.</p></li>
-<li><p><em>.group:</em> the ID of the missing values group within each
-    column.</p></li>
-<li><p><em>.from:</em> the start date of the missing values group.</p></li>
-<li><p><em>.to:</em> the end date of the missing values group.</p></li>
-<li><p><em>.n:</em> the number of missing values in the group.</p></li>
+    <p>Returns a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code> with five columns:</p><ul>
+<li><p><em>.col:</em> the column name</p></li>
+<li><p><em>.group:</em> the ID of the missing values group within each column</p></li>
+<li><p><em>.from:</em> the first timestamp of the missing values group</p></li>
+<li><p><em>.to:</em> the last timestamp of the missing values group</p></li>
+<li><p><em>.n:</em> the number of missing values per group</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='cols.DTSg.html'>cols</a></code>,
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code></p></div>
+    <div class='dont-index'><p><code><a href='cols.DTSg.html'>cols</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>

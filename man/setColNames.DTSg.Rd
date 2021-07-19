@@ -3,6 +3,7 @@
 \name{setColNames.DTSg}
 \alias{setColNames.DTSg}
 \alias{setColNames}
+\alias{setnames}
 \title{Set column names}
 \usage{
 \method{setColNames}{DTSg}(

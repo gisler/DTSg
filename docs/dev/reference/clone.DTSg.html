@@ -40,14 +40,13 @@
 
 
 <meta property="og:title" content="Clone object — clone.DTSg" />
-<meta property="og:description" content="Clones (copies) a DTSg object. Merely assigning a variable
- representing a DTSg object to a new variable does not result
- in a copy of the object. Instead, both variables will reference and access
- the same data in the background, i.e. changing one will also affect the
- other. This is not an issue when calling methods with the DTSgClone
- option or clone argument set to TRUE, but has to be kept in
- mind when setting fields, as they are always modified in place. See
- DTSg for further information." />
+<meta property="og:description" content="Clones (copies) a DTSg object. Merely assigning a variable representing a
+DTSg object to a new variable does not result in a copy of the object.
+Instead, both variables will reference and access the same data under the
+hood, i.e. changing one will also affect the other. This is not an issue when
+calling methods with the DTSgClone option or clone argument set to
+TRUE, but has to be kept in mind when setting fields, as they are always
+modified in place. See DTSg for further information." />
 
 
 <meta name="robots" content="noindex">
@@ -139,14 +138,13 @@
     </div>
 
     <div class="ref-description">
-    <p>Clones (copies) a <code><a href='DTSg.html'>DTSg</a></code> object. Merely assigning a variable
- representing a <code><a href='DTSg.html'>DTSg</a></code> object to a new variable does not result
- in a copy of the object. Instead, both variables will reference and access
- the same data in the background, i.e. changing one will also affect the
- other. This is not an issue when calling methods with the <em>DTSgClone</em>
- option or <code>clone</code> argument set to <code>TRUE</code>, but has to be kept in
- mind when setting fields, as they are always modified in place. See
- <code><a href='DTSg.html'>DTSg</a></code> for further information.</p>
+    <p>Clones (copies) a <code><a href='DTSg.html'>DTSg</a></code> object. Merely assigning a variable representing a
+<code><a href='DTSg.html'>DTSg</a></code> object to a new variable does not result in a copy of the object.
+Instead, both variables will reference and access the same data under the
+hood, i.e. changing one will also affect the other. This is not an issue when
+calling methods with the <em>DTSgClone</em> option or <code>clone</code> argument set to
+<code>TRUE</code>, but has to be kept in mind when setting fields, as they are always
+modified in place. See <code><a href='DTSg.html'>DTSg</a></code> for further information.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -162,8 +160,8 @@
     <tr>
       <th>deep</th>
       <td><p>A logical specifying if a deep copy is made (for consistency with
-<code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code> the default is <code>FALSE</code>, but should generally
-be set to <code>TRUE</code>).</p></td>
+the <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6Class</a></code> the default is <code>FALSE</code>, but should generally be set to
+<code>TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -173,10 +171,10 @@ be set to <code>TRUE</code>).</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
+    <p>Returns a cloned <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/options.html'>options</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>

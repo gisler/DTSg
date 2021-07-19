@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Get values — values.DTSg" />
-<meta property="og:description" content="Queries the values of a DTSg object." />
+<meta property="og:description" content="Returns the values of a DTSg object." />
 
 
 <meta name="robots" content="noindex">
@@ -132,7 +132,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Queries the <em>values</em> of a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
+    <p>Returns the values of a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -153,23 +153,21 @@
     </tr>
     <tr>
       <th>reference</th>
-      <td><p>A logical specifying if a copy of the <em>values</em> or a
-reference to the <em>values</em> is returned. See details for further
-information.</p></td>
+      <td><p>A logical specifying if a copy of the values or a reference
+to the values is returned. See below for further information.</p></td>
     </tr>
     <tr>
       <th>drop</th>
       <td><p>A logical specifying if the object and all references to it shall
 be removed from the global (and only the global) environment after
-successfully querying its values. This feature allows for a resource
-efficient destruction of a <code><a href='DTSg.html'>DTSg</a></code> object while preserving its
-<em>values.</em></p></td>
+successfully returning its values. This feature allows for a resource
+efficient destruction of a <code><a href='DTSg.html'>DTSg</a></code> object while preserving its values.</p></td>
     </tr>
     <tr>
       <th>class</th>
-      <td><p>A character string specifying the class of the returned
-<em>values.</em> <code>"data.frame"</code> only works when either a copy of the
-<em>values</em> is returned or the object is dropped.</p></td>
+      <td><p>A character string specifying the class of the returned values.
+<code>"data.frame"</code> only works when either a copy of the values is returned or
+the object is dropped.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -179,24 +177,21 @@ efficient destruction of a <code><a href='DTSg.html'>DTSg</a></code> object whil
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>, a reference to a
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code> or a <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A reference to the <em>values</em> of a <code><a href='DTSg.html'>DTSg</a></code> object can be used
- to modify them in place. This includes the <em>.dateTime</em> column which
- serves as the object's time index. Modifying this column can therefore
- endanger the object's integrity. In case needs to do so ever arise,
- <code><a href='refresh.DTSg.html'>refresh</a></code> should be called immediately afterwards in order to
- check the object's integrity.</p>
+    <p>Returns a <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>, a reference to a
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code> or a <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The original name of the <em>.dateTime</em> column is restored when not
- returned as a reference or when dropped.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>The original name of the <em>.dateTime</em> column is restored when not returned as
+a reference or when dropped.</p>
+    <h2 class="hasAnchor" id="reference"><a class="anchor" href="#reference"></a>Reference</h2>
 
-    <div class='dont-index'><p><code><a href='DTSg.html'>DTSg</a></code>, <code><a href='refresh.DTSg.html'>refresh</a></code>,
- <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></code>, <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code></p></div>
+    
+
+<p>A reference to the values of a <code><a href='DTSg.html'>DTSg</a></code> object can be used to modify them in
+place. This includes the <em>.dateTime</em> column, which serves as the object's
+time index. Modifying this column can therefore endanger the object's
+integrity. In case needs to do so ever arise, <code><a href='refresh.DTSg.html'>refresh</a></code> should be called
+immediately afterwards in order to check the object's integrity.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>

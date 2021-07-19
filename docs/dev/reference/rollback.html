@@ -40,14 +40,13 @@
 
 
 <meta property="og:title" content="Rollback of months — rollback" />
-<meta property="og:description" content="Generating regular sequences of times with the help of
- seq.POSIXt can have undesirable effects. This function
- &amp;#8220;first advances the month without changing the day: if this results
- in an invalid day of the month, it is counted forward into the next month&amp;#8221;.
- Monthly or yearly sequences starting at the end of a month with 30 or 31
- days (or 29 in case of a leap year) therefore do not always fall on the end
- of shorter months. rollback reverts this process by counting the days
- backwards again." />
+<meta property="og:description" content="Generating regular sequences of time with the help of seq.POSIXt can have
+undesirable effects. This function &amp;#8220;first advances the month without
+changing the day: if this results in an invalid day of the month, it is
+counted forward into the next month&amp;#8221;. Monthly or yearly sequences starting at
+the end of a month with 30 or 31 days (or 29 in case of a leap year)
+therefore do not always fall on the end of shorter months. rollback fixes
+this by counting the days of affected months backwards again." />
 
 
 <meta name="robots" content="noindex">
@@ -139,14 +138,13 @@
     </div>
 
     <div class="ref-description">
-    <p>Generating regular sequences of times with the help of
- <code><a href='https://rdrr.io/r/base/seq.POSIXt.html'>seq.POSIXt</a></code> can have undesirable effects. This function
- &#8220;first advances the month without changing the day: if this results
- in an invalid day of the month, it is counted forward into the next month&#8221;.
- Monthly or yearly sequences starting at the end of a month with 30 or 31
- days (or 29 in case of a leap year) therefore do not always fall on the end
- of shorter months. <code>rollback</code> reverts this process by counting the days
- backwards again.</p>
+    <p>Generating regular sequences of time with the help of <code><a href='https://rdrr.io/r/base/seq.POSIXt.html'>seq.POSIXt</a></code> can have
+undesirable effects. This function &#8220;first advances the month without
+changing the day: if this results in an invalid day of the month, it is
+counted forward into the next month&#8221;. Monthly or yearly sequences starting at
+the end of a month with 30 or 31 days (or 29 in case of a leap year)
+therefore do not always fall on the end of shorter months. <code>rollback</code> fixes
+this by counting the days of affected months backwards again.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rollback</span><span class='op'>(</span><span class='va'>.dateTime</span>, <span class='va'>periodicity</span><span class='op'>)</span></pre>
@@ -168,9 +166,6 @@ year(s). See <code><a href='https://rdrr.io/r/base/seq.POSIXt.html'>seq.POSIXt</
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> vector.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/seq.POSIXt.html'>seq.POSIXt</a></code>, <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># rollback monthly time series</span>
