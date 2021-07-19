@@ -1,6 +1,7 @@
 # DTSg v0.7.1.9000
 
 * Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
+* `print` method now truncates the number of printed value rows more aggressively
 * Created a `pkgdown` website
 * Improved vignettes and documentation
 
