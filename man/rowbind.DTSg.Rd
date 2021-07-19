@@ -3,6 +3,7 @@
 \name{rowbind.DTSg}
 \alias{rowbind.DTSg}
 \alias{rowbind}
+\alias{rbind}
 \title{Combine rows}
 \usage{
 \method{rowbind}{DTSg}(x, ..., clone = getOption("DTSgClone"))

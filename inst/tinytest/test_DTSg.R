@@ -777,170 +777,178 @@ expect_identical(
 )
 
 #### rowaggregate method ####
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", list(sum = sum))$values(TRUE),
-  setkey(
-    DT1[, .(.dateTime = date, col1, col2, col3, col.sum = col1 + col2)],
-    ".dateTime"
-  ),
-  info = "values are aggregated correctly (single function)"
-)
+for (method in c("rowaggregate", "raggregate")) {
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", list(sum = sum))$values(TRUE),
+    setkey(
+      DT1[, .(.dateTime = date, col1, col2, col3, col.sum = col1 + col2)],
+      ".dateTime"
+    ),
+    info = "values are aggregated correctly (single function)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", c(sum = "sum"))$values(TRUE),
-  setkey(
-    DT1[, .(.dateTime = date, col1, col2, col3, col.sum = col1 + col2)],
-    ".dateTime"
-  ),
-  info = "values are aggregated correctly (single character function)"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", c(sum = "sum"))$values(TRUE),
+    setkey(
+      DT1[, .(.dateTime = date, col1, col2, col3, col.sum = col1 + col2)],
+      ".dateTime"
+    ),
+    info = "values are aggregated correctly (single character function)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate(c("colmean", "colsum"), list(mean = mean, sum = sum))$values(TRUE),
-  setkey(
-    DT1[, .(.dateTime = date, col1, col2, col3, colmean = (col1 + col2) / 2, colsum = col1 + col2)],
-    ".dateTime"
-  ),
-  info = "values are aggregated correctly (multiple functions)"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](c("colmean", "colsum"), list(mean = mean, sum = sum))$values(TRUE),
+    setkey(
+      DT1[, .(.dateTime = date, col1, col2, col3, colmean = (col1 + col2) / 2, colsum = col1 + col2)],
+      ".dateTime"
+    ),
+    info = "values are aggregated correctly (multiple functions)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", c(mean = "mean", sum = "sum"))$values(TRUE),
-  setkey(
-    DT1[, .(.dateTime = date, col1, col2, col3, col.mean = (col1 + col2) / 2, col.sum = col1 + col2)],
-    ".dateTime"
-  ),
-  info = "values are aggregated correctly (multiple character functions)"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", c(mean = "mean", sum = "sum"))$values(TRUE),
+    setkey(
+      DT1[, .(.dateTime = date, col1, col2, col3, col.mean = (col1 + col2) / 2, col.sum = col1 + col2)],
+      ".dateTime"
+    ),
+    info = "values are aggregated correctly (multiple character functions)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", list(sum), na.rm = TRUE)$values(TRUE)[["col"]],
-  c(2, 3, seq(10, 30, 4)),
-  info = '"..." passes on arguments correctly (single function)'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", list(sum), na.rm = TRUE)$values(TRUE)[["col"]],
+    c(2, 3, seq(10, 30, 4)),
+    info = '"..." passes on arguments correctly (single function)'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", "sum", na.rm = TRUE)$values(TRUE)[["col"]],
-  c(2, 3, seq(10, 30, 4)),
-  info = '"..." passes on arguments correctly (single character function)'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", "sum", na.rm = TRUE)$values(TRUE)[["col"]],
+    c(2, 3, seq(10, 30, 4)),
+    info = '"..." passes on arguments correctly (single character function)'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate("col", list(mean = mean, sum = sum), na.rm = TRUE)$values(TRUE)[["col.sum"]],
-  c(2, 3, seq(10, 30, 4)),
-  info = '"..." passes on arguments correctly (multiple functions)'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("col", list(mean = mean, sum = sum), na.rm = TRUE)$values(TRUE)[["col.sum"]],
+    c(2, 3, seq(10, 30, 4)),
+    info = '"..." passes on arguments correctly (multiple functions)'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$rowaggregate(c("colmean", "colsum"), c(mean = "mean", sum = "sum"), na.rm = TRUE)$values(TRUE)[["colsum"]],
-  c(2, 3, seq(10, 30, 4)),
-  info = '"..." passes on arguments correctly (multiple character functions)'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](c("colmean", "colsum"), c(mean = "mean", sum = "sum"), na.rm = TRUE)$values(TRUE)[["colsum"]],
+    c(2, 3, seq(10, 30, 4)),
+    info = '"..." passes on arguments correctly (multiple character functions)'
+  )
 
-expect_error(
-  DTSg$new(DT1)$rowaggregate(c("colmean", "col1"), list(mean = mean, sum = sum)),
-  info = 'existing "resultCols" return error'
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](c("colmean", "col1"), list(mean = mean, sum = sum)),
+    info = 'existing "resultCols" return error'
+  )
 
-expect_error(
-  DTSg$new(DT1)$rowaggregate("col", list(mean, sum)),
-  info = 'missing "fun" names return error'
-)
+  expect_error(
+    DTSg$new(DT1)[[method]]("col", list(mean, sum)),
+    info = 'missing "fun" names return error'
+  )
 
-expect_error(
-  DTSg$new(DT1)$rowaggregate("col", c("mean", sum = "sum")),
-  info = 'single missing "fun" name returns error'
-)
+  expect_error(
+    DTSg$new(DT1)[[method]]("col", c("mean", sum = "sum")),
+    info = 'single missing "fun" name returns error'
+  )
+}
 
 #### rowbind method ####
-expect_identical(
-  DTSg$new(DT1[1:2, ])$rowbind(
-    setnames(DT1[3:4, ], "col3", "col4"),
-    list(DTSg$new(DT1[5:6, -"col3"]), DT1[7:8, ])
-  )$values(),
-  setkey(DT1[, .(
-    date, col1, col2,
-    col3 = c("A", "B", rep(NA, 4), "G", "H"),
-    col4 = c(NA , NA , "C", "D", rep(NA, 4))
-  )], "date"),
-  info = "rows are bound correctly"
-)
+for (method in c("rowbind", "rbind")) {
+  expect_identical(
+    DTSg$new(DT1[1:2, ])[[method]](
+      setnames(DT1[3:4, ], "col3", "col4"),
+      list(DTSg$new(DT1[5:6, -"col3"]), DT1[7:8, ])
+    )$values(),
+    setkey(DT1[, .(
+      date, col1, col2,
+      col3 = c("A", "B", rep(NA, 4), "G", "H"),
+      col4 = c(NA , NA , "C", "D", rep(NA, 4))
+    )], "date"),
+    info = "rows are bound correctly"
+  )
 
-expect_error(
-  DTSg$new(DT1)$rowbind(DT1),
-  info = "duplicated timestamps return error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](DT1),
+    info = "duplicated timestamps return error"
+  )
+}
 
 #### setColNames method ####
-expect_identical(
-  DTSg$new(DT1)$setColNames(c("col2", "col3"), c("column2", "column3"))$cols(),
-  c("col1", "column2", "column3"),
-  info = "column names are set correctly"
-)
+for (method in c("setColNames", "setnames")) {
+  expect_identical(
+    DTSg$new(DT1)[[method]](c("col2", "col3"), c("column2", "column3"))$cols(),
+    c("col1", "column2", "column3"),
+    info = "column names are set correctly"
+  )
 
-expect_error(
-  DTSg$new(DT1)$setColNames("col2", ""),
-  info = "blank column name returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]]("col2", ""),
+    info = "blank column name returns error"
+  )
 
-expect_error(
-  DTSg$new(DT1)$setColNames("col2", ".column2"),
-  info = "column name with a starting dot returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]]("col2", ".column2"),
+    info = "column name with a starting dot returns error"
+  )
+}
 
 #### setCols method ####
-expect_identical(
-  DTSg$new(DT1)$setCols(2L, "col2", 3)$values(TRUE)[["col2"]],
-  DT1[["col1"]],
-  info = "values are set correctly (numeric vector and single column)"
-)
+for (method in c("setCols", "set")) {
+  expect_identical(
+    DTSg$new(DT1)[[method]](2L, "col2", 3)$values(TRUE)[["col2"]],
+    DT1[["col1"]],
+    info = "values are set correctly (numeric vector and single column)"
+  )
 
-expect_identical(
-  {
-    i <- 1:3
-    DTSg$new(DT1)$setCols(
-      i,
-      c("col1", "col2", "col3"),
-      DT2[1:3, .(col1, as.numeric(col2), col3)],
-    )$values()
-  },
-  setkey(rbind(
-    DT2[1:3, .(date = DT1$date[1:3], col1, col2 = as.numeric(col2), col3)],
-    DT1[4:8]
-  ), "date"),
-  info = "values are set correctly (numeric vector and multiple columns)"
-)
+  expect_identical(
+    {
+      i <- 1:3
+      DTSg$new(DT1)[[method]](
+        i,
+        c("col1", "col2", "col3"),
+        DT2[1:3, .(col1, as.numeric(col2), col3)],
+      )$values()
+    },
+    setkey(rbind(
+      DT2[1:3, .(date = DT1$date[1:3], col1, col2 = as.numeric(col2), col3)],
+      DT1[4:8]
+    ), "date"),
+    info = "values are set correctly (numeric vector and multiple columns)"
+  )
 
-expect_identical(
-  {
-    col2 <- rep(NA_real_, 8)
-    DTSg$new(DT1)$setCols(is.na(col2), "col2", 3)$values(TRUE)[["col2"]]
-  },
-  DT1[["col1"]],
-  info = "values are set correctly (expression)"
-)
+  expect_identical(
+    {
+      col2 <- rep(NA_real_, 8)
+      DTSg$new(DT1)[[method]](is.na(col2), "col2", 3)$values(TRUE)[["col2"]]
+    },
+    DT1[["col1"]],
+    info = "values are set correctly (expression)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$setCols(, "col4", DT1[["col1"]])$values(TRUE)[["col4"]],
-  DT1[["col1"]],
-  info = "column is added correctly"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](, "col4", DT1[["col1"]])$values(TRUE)[["col4"]],
+    DT1[["col1"]],
+    info = "column is added correctly"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$setCols(, "col2", NULL)$cols(),
-  c("col1", "col3"),
-  info = "column is removed correctly"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](, "col2", NULL)$cols(),
+    c("col1", "col3"),
+    info = "column is removed correctly"
+  )
 
-expect_error(
-  DTSg$new(DT1)$setCols(, ".dateTime", 1),
-  info = "setting .dateTime column returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](, ".dateTime", 1),
+    info = "setting .dateTime column returns error"
+  )
 
-expect_error(
-  DTSg$new(DT1)$setCols(, c("col1", "col2", "col3"), NULL),
-  info = "removing all value columns returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](, c("col1", "col2", "col3"), NULL),
+    info = "removing all value columns returns error"
+  )
+}
 
 #### subset method ####
 expect_identical(

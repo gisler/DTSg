@@ -3,6 +3,7 @@
 \name{rowaggregate.DTSg}
 \alias{rowaggregate.DTSg}
 \alias{rowaggregate}
+\alias{raggregate}
 \title{Aggregate values row-wise}
 \usage{
 \method{rowaggregate}{DTSg}(
