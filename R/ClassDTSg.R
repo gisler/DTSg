@@ -887,7 +887,7 @@ DTSg <- R6Class(
 
     print = function() {
       cat(  "Values:\n")
-      print(private$.values, class = TRUE)
+      print(private$.values, nrows = 11L, class = TRUE)
       cat(  "\n")
       if (private$.ID != "") {
         cat("ID:             ", private$.ID          , "\n", sep = "")
