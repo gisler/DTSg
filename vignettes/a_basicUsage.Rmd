@@ -37,13 +37,20 @@ summary(flow)
 Now that we have a data set, we can create our first object by providing it to the `new` method of the package's main R6 class generator `DTSg`. In addition, we specify an ID in order to give the object a name:
 
 ```{r}
-TS <- DTSg$new(values = flow, ID = "River Flow")
+TS <- DTSg$new(
+  values = flow,
+  ID = "River Flow"
+)
 ```
 
 Creating an object with the package's alternative interface abusing an S4 constructor looks like this:
 
 ```{r}
-TS <- new(Class = "DTSg", values = flow, ID = "River Flow")
+TS <- new(
+  Class = "DTSg",
+  values = flow, 
+  ID = "River Flow"
+)
 ```
 
 ## Object inspection

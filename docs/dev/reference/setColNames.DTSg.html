@@ -163,8 +163,8 @@ desired column names.</p></td>
     </tr>
     <tr>
       <th>clone</th>
-      <td><p>A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.</p></td>
+      <td><p>A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -174,7 +174,7 @@ deep clone (copy) is made beforehand.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code>DTSg</code> object.</p>
+    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='cols.DTSg.html'>cols</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>getOption</a></code></p></div>
@@ -185,7 +185,10 @@ deep clone (copy) is made beforehand.</p></td>
 
 <span class='co'># rename column "flow" to "River Flow"</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>setColNames</span><span class='op'>(</span>cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>setColNames</span><span class='op'>(</span>
+  cols <span class='op'>=</span> <span class='st'>"flow"</span>,
+  values <span class='op'>=</span> <span class='st'>"River Flow"</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime River Flow
 #&gt;           &lt;POSc&gt;      &lt;num&gt;
@@ -208,7 +211,11 @@ deep clone (copy) is made beforehand.</p></td>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>setColNames</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, cols <span class='op'>=</span> <span class='st'>"flow"</span>, values <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>setColNames</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  cols <span class='op'>=</span> <span class='st'>"flow"</span>,
+  values <span class='op'>=</span> <span class='st'>"River Flow"</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime River Flow
 #&gt;           &lt;POSc&gt;      &lt;num&gt;

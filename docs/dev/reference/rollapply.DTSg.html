@@ -187,18 +187,18 @@ steps after the &#8220;center&#8221; of the rolling window.</p></td>
     <tr>
       <th>weights</th>
       <td><p>A character string specifying the method applied to calculate
-weights for <code>fun</code>. Weights are useful for functions like <code><a href='https://rdrr.io/r/stats/weighted.mean.html'>weighted.mean</a></code>.
-See below for further information.</p></td>
+the weights handed over to <code>fun</code>. These are useful for functions like
+<code><a href='https://rdrr.io/r/stats/weighted.mean.html'>weighted.mean</a></code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>parameters</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> specifying parameters for weight calculation
-methods. See below for further information.</p></td>
+      <td><p>A <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> specifying parameters for the weight calculation
+method. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>resultCols</th>
       <td><p>An optional character vector of the same length as <code>cols</code>
-specifying the column names with the return values of <code>fun</code>. Non-existing
+specifying the column names for the return values of <code>fun</code>. Non-existing
 columns are added and existing columns are overwritten. Columns are matched
 element-wise between <code>cols</code> and <code>resultCols</code>.</p></td>
     </tr>
@@ -212,26 +212,26 @@ when <code>resultCols</code> is not specified.</p></td>
     <tr>
       <th>helpers</th>
       <td><p>A logical specifying if helper data shall be handed over to
-<code>fun</code>. See below for further information.</p></td>
+<code>fun</code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>memoryOverCPU</th>
-      <td><p>A logical specifying if memory usage is preferred over
-CPU usage for this method. The former is generally faster for smaller
-windows and shorter time series, the latter for bigger windows and longer
-time series or might even be the only one which works depending on the
-available hardware.</p></td>
+      <td><p>A logical specifying if memory usage shall be preferred
+over CPU usage for this method call. The former is generally faster for
+smaller windows and shorter time series, the latter for bigger windows and
+longer time series or might even be the only one which works depending on
+the available hardware.</p></td>
     </tr>
     <tr>
       <th>clone</th>
-      <td><p>A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.</p></td>
+      <td><p>A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code>DTSg</code> object.</p>
+    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     <h2 class="hasAnchor" id="weights"><a class="anchor" href="#weights"></a>Weights</h2>
 
     
@@ -241,7 +241,7 @@ deep clone (copy) is made beforehand.</p></td>
 each time step further away from the &#8220;center&#8221; adds one to it. So, for
 example, the distance of a timestamp three steps away from the
 &#8220;center&#8221; is four. Additionally, the calculation of the weights accepts
-a power \(p\) parameter as a named element of a <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> provided through
+a power parameter \(p\) as a named element of a <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> provided through
 the <code>parameters</code> argument: \(\frac{1}{d^p}\).</p>
     <h2 class="hasAnchor" id="helper-data"><a class="anchor" href="#helper-data"></a>Helper data</h2>
 
@@ -268,7 +268,12 @@ elements:</p><ul>
 
 <span class='co'># calculate a moving average</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>rollapply</span><span class='op'>(</span>fun <span class='op'>=</span> <span class='va'>mean</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, before <span class='op'>=</span> <span class='fl'>2</span>, after <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>rollapply</span><span class='op'>(</span>
+  fun <span class='op'>=</span> <span class='va'>mean</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  before <span class='op'>=</span> <span class='fl'>2</span>,
+  after <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime    flow
 #&gt;           &lt;POSc&gt;   &lt;num&gt;
@@ -291,7 +296,13 @@ elements:</p><ul>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>rollapply</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, fun <span class='op'>=</span> <span class='va'>mean</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, before <span class='op'>=</span> <span class='fl'>2</span>, after <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>rollapply</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  fun <span class='op'>=</span> <span class='va'>mean</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  before <span class='op'>=</span> <span class='fl'>2</span>,
+  after <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime    flow
 #&gt;           &lt;POSc&gt;   &lt;num&gt;

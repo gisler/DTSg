@@ -89,7 +89,7 @@
       <h1 data-toc-skip>A. Basic usage</h1>
                         <h4 class="author">Gerold Hepp</h4>
             
-            <h4 class="date">2021-07-19</h4>
+            <h4 class="date">2021-07-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/master/vignettes/a_basicUsage.Rmd"><code>vignettes/a_basicUsage.Rmd</code></a></small>
       <div class="hidden name"><code>a_basicUsage.Rmd</code></div>
@@ -132,10 +132,17 @@
 <span class="co">#&gt;  Max.   :2012-12-31 00:00:00   Max.   :290.715</span></code></pre></div>
 <p>Now that we have a data set, we can create our first object by providing it to the <code>new</code> method of the package’s main R6 class generator <code>DTSg</code>. In addition, we specify an ID in order to give the object a name:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span>, ID <span class="op">=</span> <span class="st">"River Flow"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
+  values <span class="op">=</span> <span class="va">flow</span>,
+  ID <span class="op">=</span> <span class="st">"River Flow"</span>
+<span class="op">)</span></code></pre></div>
 <p>Creating an object with the package’s alternative interface abusing an S4 constructor looks like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span>Class <span class="op">=</span> <span class="st">"DTSg"</span>, values <span class="op">=</span> <span class="va">flow</span>, ID <span class="op">=</span> <span class="st">"River Flow"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span>
+  Class <span class="op">=</span> <span class="st">"DTSg"</span>,
+  values <span class="op">=</span> <span class="va">flow</span>, 
+  ID <span class="op">=</span> <span class="st">"River Flow"</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="object-inspection" class="section level2">
 <h2 class="hasAnchor">

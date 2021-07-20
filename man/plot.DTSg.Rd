@@ -38,15 +38,15 @@ secondary axis.}
 \item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Displays an interactive plot of a \code{\link{DTSg}} object. This method requires
 \pkg{dygraphs} and \pkg{RColorBrewer} to be installed. Its main purpose is
 not to make pretty plots, but rather to offer a possibility to interactively
-explore the time series data. The title of the plot and the label of its
-primary axis are automatically generated from the object's metadata (fields).
-See \code{\link{DTSg}} for further information.
+explore time series data. The title of the plot and the label of its primary
+axis are automatically generated from the object's metadata (fields). See
+\code{\link{DTSg}} for further information.
 }
 \examples{
 # new DTSg object

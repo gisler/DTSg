@@ -43,8 +43,7 @@
 <meta property="og:description" content="Applies a temporal aggregation level function to the .dateTime column of a
 DTSg object and aggregates its values column-wise to the function's
 temporal aggregation level utilising one or more provided summary functions.
-Additionally, it sets the object's aggregated field to TRUE. See DTSg
-for further information." />
+Additionally, it sets the object's aggregated field to TRUE." />
 
 
 <meta name="robots" content="noindex">
@@ -139,8 +138,7 @@ for further information." />
     <p>Applies a temporal aggregation level function to the <em>.dateTime</em> column of a
 <code><a href='DTSg.html'>DTSg</a></code> object and aggregates its values column-wise to the function's
 temporal aggregation level utilising one or more provided summary functions.
-Additionally, it sets the object's <code>aggregated</code> field to <code>TRUE</code>. See <code><a href='DTSg.html'>DTSg</a></code>
-for further information.</p>
+Additionally, it sets the object's <code><a href='DTSg.html'>aggregated</a></code> field to <code>TRUE</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for DTSg</span>
@@ -167,15 +165,16 @@ for further information.</p>
     <tr>
       <th>funby</th>
       <td><p>One of the temporal aggregation level functions described in
-<code><a href='TALFs.html'>TALFs</a></code> or a user defined temporal aggregation level function. See below
-for further information.</p></td>
+<code><a href='TALFs.html'>TALFs</a></code> or a user defined temporal aggregation level function. See
+corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>fun</th>
       <td><p>A summary function, (named) <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> of summary functions or
 (named) character vector specifying summary functions applied column-wise
 to all the values of the same temporal aggregation level. The return
-value(s) must be of length one. See below for further information.</p></td>
+value(s) must be of length one. See corresponding section for further
+information.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -188,29 +187,29 @@ value(s) must be of length one. See below for further information.</p></td>
     <tr>
       <th>n</th>
       <td><p>A logical specifying if a column named <code>.n</code> giving the number of
-values per temporal aggregation level is added. See below for further
-information.</p></td>
+values per temporal aggregation level shall be added. See corresponding
+section for further information.</p></td>
     </tr>
     <tr>
       <th>ignoreDST</th>
-      <td><p>A logical specifying if day saving time is ignored during
-aggregation. See below for further information.</p></td>
+      <td><p>A logical specifying if day saving time shall be ignored
+by <code>funby</code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>multiplier</th>
       <td><p>A positive integerish value &#8220;multiplying&#8221; the
-temporal aggregation level of certain <code><a href='TALFs.html'>TALFs</a></code>. See below for further
-information.</p></td>
+temporal aggregation level of certain <code><a href='TALFs.html'>TALFs</a></code>. See corresponding section
+for further information.</p></td>
     </tr>
     <tr>
       <th>funbyHelpers</th>
       <td><p>An optional <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> with helper data passed on to
-<code>funby</code>. See below for further information.</p></td>
+<code>funby</code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>clone</th>
-      <td><p>A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.</p></td>
+      <td><p>A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.</p></td>
     </tr>
     </table>
 
@@ -225,13 +224,10 @@ deep clone (copy) is made beforehand.</p></td>
 <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> vector of the same length as the time series and accept two
 arguments: a <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> vector as its first and a <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> with helper data
 as its second. The default elements of this <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> are as follows:</p><ul>
-<li><p><em>timezone:</em> Same as the <code>timezone</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
+<li><p><em>timezone:</em> Same as the <code><a href='DTSg.html'>timezone</a></code> field.</p></li>
 <li><p><em>ignoreDST:</em> Same as the <code>ignoreDST</code> argument.</p></li>
-<li><p><em>periodicity:</em> Same as the <code>periodicity</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
-<li><p><em>na.status:</em> Same as the <code>na.status</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
+<li><p><em>periodicity:</em> Same as the <code><a href='DTSg.html'>periodicity</a></code> field.</p></li>
+<li><p><em>na.status:</em> Same as the <code><a href='DTSg.html'>na.status</a></code> field.</p></li>
 <li><p><em>multiplier:</em> Same as the <code>multiplier</code> argument.</p></li>
 </ul>
 
@@ -326,7 +322,11 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 
 <span class='co'># mean yearly river flows</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>byY_____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  funby <span class='op'>=</span> <span class='va'>byY_____</span>,
+  fun <span class='op'>=</span> <span class='st'>"mean"</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;     .dateTime     flow
 #&gt;        &lt;POSc&gt;    &lt;num&gt;
@@ -346,7 +346,12 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     6</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>byY_____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  funby <span class='op'>=</span> <span class='va'>byY_____</span>,
+  fun <span class='op'>=</span> <span class='st'>"mean"</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;     .dateTime     flow
 #&gt;        &lt;POSc&gt;    &lt;num&gt;
@@ -367,7 +372,11 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Timestamps:     6</div><div class='input'>
 <span class='co'># variance and standard deviation of river flows per quarter</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>byYQ____</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  funby <span class='op'>=</span> <span class='va'>byYQ____</span>,
+  fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;      .dateTime  flow.var   flow.sd
 #&gt;         &lt;POSc&gt;     &lt;num&gt;     &lt;num&gt;
@@ -392,7 +401,12 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     24</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>byYQ____</span>, fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  funby <span class='op'>=</span> <span class='va'>byYQ____</span>,
+  fun <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>var <span class='op'>=</span> <span class='st'>"var"</span>, sd <span class='op'>=</span> <span class='st'>"sd"</span><span class='op'>)</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;      .dateTime  flow.var   flow.sd
 #&gt;         &lt;POSc&gt;     &lt;num&gt;     &lt;num&gt;
@@ -418,7 +432,12 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Timestamps:     24</div><div class='input'>
 <span class='co'># mean of river flows of all first and all second half years</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>funby <span class='op'>=</span> <span class='va'>by_m____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, multiplier <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  funby <span class='op'>=</span> <span class='va'>by_m____</span>,
+  fun <span class='op'>=</span> <span class='st'>"mean"</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  multiplier <span class='op'>=</span> <span class='fl'>6</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;     .dateTime     flow
 #&gt;        &lt;POSc&gt;    &lt;num&gt;
@@ -432,7 +451,13 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, funby <span class='op'>=</span> <span class='va'>by_m____</span>, fun <span class='op'>=</span> <span class='st'>"mean"</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>, multiplier <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>aggregate</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  funby <span class='op'>=</span> <span class='va'>by_m____</span>,
+  fun <span class='op'>=</span> <span class='st'>"mean"</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  multiplier <span class='op'>=</span> <span class='fl'>6</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;     .dateTime     flow
 #&gt;        &lt;POSc&gt;    &lt;num&gt;

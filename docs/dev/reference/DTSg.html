@@ -175,7 +175,7 @@ constructor only).</p></td>
     <tr>
       <th>values</th>
       <td><p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> or object inherited from class <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>,
-for instance, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>. Its first column must be of class
+e.g. <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table</a></code>. Its first column must be of class
 <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> or coercible to it. It serves as the object's time index and is
 renamed to <em>.dateTime.</em></p></td>
     </tr>
@@ -227,7 +227,7 @@ are removed upon the successful creation of the <code>DTSg</code> object.</p></t
     <tr>
       <th>na.status</th>
       <td><p>A character string. Either <code>"explicit"</code>, which makes missing
-timestamps according to the recognised periodicity explicit, or
+timestamps explicit according to the recognised periodicity, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
 columns, or <code>"undecided"</code> for no such action. Please note that <code>DTSg</code>
 objects work best with explicitly missing values.</p></td>
@@ -305,7 +305,7 @@ series (read-only).</p></li>
 <li><p><code>timezone</code>: A character string showing the time zone of the time series.
 When set, the series is converted to the specified time zone. Only names from
 <code><a href='https://rdrr.io/r/base/timezones.html'>OlsonNames</a></code> are accepted.</p></li>
-<li><p><code>unit</code>: Same as the  <code>unit</code> argument. It is added to the label of the
+<li><p><code>unit</code>: Same as the <code>unit</code> argument. It is added to the label of the
 primary axis of plots when the <code>parameter</code> field is set.</p></li>
 <li><p><code>variant</code>: Same as the <code>variant</code> argument. It is added to the label of the
 primary axis of plots when the <code>parameter</code> field is set.</p></li>
@@ -320,15 +320,18 @@ series with a single variable (value column) only.</p>
 <p>The behaviour of <code>DTSg</code> objects can be customised with the help of the
 following option. See <code><a href='https://rdrr.io/r/base/options.html'>options</a></code> for further information:</p><ul>
 <li><p><em>DTSgClone:</em> A logical specifying if <code>DTSg</code> objects are, by default,
-modified in place (<code>FALSE</code>) or if a deep clone (copy) is made beforehand
-(<code>TRUE</code>).</p></li>
+modified in place (<code>FALSE</code>) or if a deep clone (copy) shall be made
+beforehand (<code>TRUE</code>).</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
 <span class='co'>## R6 constructor</span>
-<span class='va'>DTSg</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span>, ID <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span>
+<span class='va'>DTSg</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  values <span class='op'>=</span> <span class='va'>flow</span>,
+  ID <span class='op'>=</span> <span class='st'>"River Flow"</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;
@@ -352,7 +355,11 @@ modified in place (<code>FALSE</code>) or if a deep clone (copy) is made beforeh
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     2192</div><div class='input'>
 <span class='co'>## abused S4 constructor</span>
-<span class='fu'>new</span><span class='op'>(</span>Class <span class='op'>=</span> <span class='st'>"DTSg"</span>, values <span class='op'>=</span> <span class='va'>flow</span>, ID <span class='op'>=</span> <span class='st'>"River Flow"</span><span class='op'>)</span>
+<span class='fu'>new</span><span class='op'>(</span>
+  Class <span class='op'>=</span> <span class='st'>"DTSg"</span>,
+  values <span class='op'>=</span> <span class='va'>flow</span>,
+  ID <span class='op'>=</span> <span class='st'>"River Flow"</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;        .dateTime   flow
 #&gt;           &lt;POSc&gt;  &lt;num&gt;

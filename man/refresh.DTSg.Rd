@@ -13,7 +13,7 @@
 \item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Checks the integrity of a \code{\link{DTSg}} object and tries to automatically

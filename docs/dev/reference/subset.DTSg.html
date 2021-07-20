@@ -173,35 +173,36 @@ special symbol <code><a href='https://Rdatatable.gitlab.io/data.table/reference/
       <td><p>One of the temporal aggregation level functions described in
 <code><a href='TALFs.html'>TALFs</a></code> or a user defined temporal aggregation level function. Can be
 used to, for instance, select the last two observations of a certain
-temporal level. See examples and below for further information.</p></td>
+temporal level. See corresponding section and examples for further
+information.</p></td>
     </tr>
     <tr>
       <th>ignoreDST</th>
-      <td><p>A logical specifying if day saving time is ignored during
-aggregation. See below for further information.</p></td>
+      <td><p>A logical specifying if day saving time shall be ignored
+by <code>funby</code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>na.status</th>
       <td><p>A character string. Either <code>"explicit"</code>, which makes missing
-timestamps according to the recognised periodicity explicit, or
+timestamps explicit according to the recognised periodicity, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
-columns. See below for further information.</p></td>
+columns. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>clone</th>
-      <td><p>A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.</p></td>
+      <td><p>A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.</p></td>
     </tr>
     <tr>
       <th>multiplier</th>
       <td><p>A positive integerish value &#8220;multiplying&#8221; the
-temporal aggregation level of certain <code><a href='TALFs.html'>TALFs</a></code>. See below for further
-information.</p></td>
+temporal aggregation level of certain <code><a href='TALFs.html'>TALFs</a></code>. See corresponding section
+for further information.</p></td>
     </tr>
     <tr>
       <th>funbyHelpers</th>
       <td><p>An optional <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> with helper data passed on to
-<code>funby</code>. See below for further information.</p></td>
+<code>funby</code>. See corresponding section for further information.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -211,7 +212,7 @@ information.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a <code>DTSg</code> object.</p>
+    <p>Returns a <code><a href='DTSg.html'>DTSg</a></code> object.</p>
     <h2 class="hasAnchor" id="status-of-missing-values"><a class="anchor" href="#status-of-missing-values"></a>Status of missing values</h2>
 
     
@@ -219,8 +220,8 @@ information.</p></td>
 <p>Please note that filtering rows and having or making missing timestamps
 explicit equals to setting the values of all other timestamps to missing. The
 default value of <code>na.status</code> is therefore <code>"implicit"</code>. To simply filter for
-a consecutive range of a <code><a href='DTSg.html'>DTSg</a></code> object while leaving <code>na.status</code> untouched,
-<code><a href='alter.DTSg.html'>alter</a></code> is probably the better choice.</p>
+a consecutive range of a <code><a href='DTSg.html'>DTSg</a></code> object while leaving the <code>na.status</code>
+untouched, <code><a href='alter.DTSg.html'>alter</a></code> is probably the better choice.</p>
     <h2 class="hasAnchor" id="user-defined-talfs-talfs-helper-data-and-multiplier"><a class="anchor" href="#user-defined-talfs-talfs-helper-data-and-multiplier"></a>User defined TALFs, TALFs helper data and multiplier</h2>
 
     
@@ -229,13 +230,10 @@ a consecutive range of a <code><a href='DTSg.html'>DTSg</a></code> object while 
 <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> vector of the same length as the time series and accept two
 arguments: a <code><a href='https://rdrr.io/r/base/DateTimeClasses.html'>POSIXct</a></code> vector as its first and a <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> with helper data
 as its second. The default elements of this <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> are as follows:</p><ul>
-<li><p><em>timezone:</em> Same as the <code>timezone</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
+<li><p><em>timezone:</em> Same as the <code><a href='DTSg.html'>timezone</a></code> field.</p></li>
 <li><p><em>ignoreDST:</em> Same as the <code>ignoreDST</code> argument.</p></li>
-<li><p><em>periodicity:</em> Same as the <code>periodicity</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
-<li><p><em>na.status:</em> Same as the <code>na.status</code> field. See <code><a href='DTSg.html'>DTSg</a></code> for further
-information.</p></li>
+<li><p><em>periodicity:</em> Same as the <code><a href='DTSg.html'>periodicity</a></code> field.</p></li>
+<li><p><em>na.status:</em> Same as the <code><a href='DTSg.html'>na.status</a></code> field.</p></li>
 <li><p><em>multiplier:</em> Same as the <code>multiplier</code> argument.</p></li>
 </ul>
 
@@ -340,7 +338,10 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Timestamps:     6</div><div class='input'>
 <span class='co'># filter for the last two observations per year</span>
 <span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>subset</span><span class='op'>(</span>i <span class='op'>=</span> <span class='op'>(</span><span class='va'>.N</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>:</span><span class='va'>.N</span>, funby <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/IDateTime.html'>year</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>x</span><span class='op'>$</span><span class='fu'>subset</span><span class='op'>(</span>
+  i <span class='op'>=</span> <span class='op'>(</span><span class='va'>.N</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>:</span><span class='va'>.N</span>,
+  funby <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/IDateTime.html'>year</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>
+<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;      .dateTime  flow
 #&gt;         &lt;POSc&gt; &lt;num&gt;
@@ -363,7 +364,11 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 #&gt; Time zone:      UTC
 #&gt; Timestamps:     12</div><div class='input'>
 <span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>subset</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, i <span class='op'>=</span> <span class='op'>(</span><span class='va'>.N</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>:</span><span class='va'>.N</span>, funby <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/IDateTime.html'>year</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>subset</span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x</span>,
+  i <span class='op'>=</span> <span class='op'>(</span><span class='va'>.N</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>:</span><span class='va'>.N</span>,
+  funby <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/IDateTime.html'>year</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span>
+<span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Values:
 #&gt;      .dateTime  flow
 #&gt;         &lt;POSc&gt; &lt;num&gt;

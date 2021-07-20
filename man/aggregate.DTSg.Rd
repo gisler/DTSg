@@ -22,34 +22,35 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{funby}{One of the temporal aggregation level functions described in
-\code{\link{TALFs}} or a user defined temporal aggregation level function. See below
-for further information.}
+\code{\link{TALFs}} or a user defined temporal aggregation level function. See
+corresponding section for further information.}
 
 \item{fun}{A summary function, (named) \code{\link{list}} of summary functions or
 (named) character vector specifying summary functions applied column-wise
 to all the values of the same temporal aggregation level. The return
-value(s) must be of length one. See below for further information.}
+value(s) must be of length one. See corresponding section for further
+information.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to aggregate.}
 
 \item{n}{A logical specifying if a column named \code{.n} giving the number of
-values per temporal aggregation level is added. See below for further
-information.}
+values per temporal aggregation level shall be added. See corresponding
+section for further information.}
 
-\item{ignoreDST}{A logical specifying if day saving time is ignored during
-aggregation. See below for further information.}
+\item{ignoreDST}{A logical specifying if day saving time shall be ignored
+by \code{funby}. See corresponding section for further information.}
 
 \item{multiplier}{A positive integerish value \dQuote{multiplying} the
-temporal aggregation level of certain \code{\link{TALFs}}. See below for further
-information.}
+temporal aggregation level of certain \code{\link{TALFs}}. See corresponding section
+for further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
-\code{funby}. See below for further information.}
+\code{funby}. See corresponding section for further information.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
 Returns an aggregated \code{\link{DTSg}} object.
@@ -58,8 +59,7 @@ Returns an aggregated \code{\link{DTSg}} object.
 Applies a temporal aggregation level function to the \emph{.dateTime} column of a
 \code{\link{DTSg}} object and aggregates its values column-wise to the function's
 temporal aggregation level utilising one or more provided summary functions.
-Additionally, it sets the object's \code{aggregated} field to \code{TRUE}. See \code{\link{DTSg}}
-for further information.
+Additionally, it sets the object's \code{\link[=DTSg]{aggregated}} field to \code{TRUE}.
 }
 \section{User defined TALFs, TALFs helper data and multiplier}{
 
@@ -68,13 +68,10 @@ User defined temporal aggregation level functions have to return a
 arguments: a \code{\link{POSIXct}} vector as its first and a \code{\link{list}} with helper data
 as its second. The default elements of this \code{\link{list}} are as follows:
 \itemize{
-\item \emph{timezone:} Same as the \code{timezone} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{timezone:} Same as the \code{\link[=DTSg]{timezone}} field.
 \item \emph{ignoreDST:} Same as the \code{ignoreDST} argument.
-\item \emph{periodicity:} Same as the \code{periodicity} field. See \code{\link{DTSg}} for further
-information.
-\item \emph{na.status:} Same as the \code{na.status} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{periodicity:} Same as the \code{\link[=DTSg]{periodicity}} field.
+\item \emph{na.status:} Same as the \code{\link[=DTSg]{na.status}} field.
 \item \emph{multiplier:} Same as the \code{multiplier} argument.
 }
 
@@ -169,24 +166,53 @@ x <- DTSg$new(values = flow)
 
 # mean yearly river flows
 ## R6 method
-x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)$print()
+x$aggregate(
+  funby = byY_____,
+  fun = "mean",
+  na.rm = TRUE
+)$print()
 
 ## S3 method
-print(aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE))
+print(aggregate(
+  x = x,
+  funby = byY_____,
+  fun = "mean",
+  na.rm = TRUE
+))
 
 # variance and standard deviation of river flows per quarter
 ## R6 method
-x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)$print()
+x$aggregate(
+  funby = byYQ____,
+  fun = c(var = "var", sd = "sd"),
+  na.rm = TRUE
+)$print()
 
 ## S3 method
-print(aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE))
+print(aggregate(
+  x = x,
+  funby = byYQ____,
+  fun = c(var = "var", sd = "sd"),
+  na.rm = TRUE
+))
 
 # mean of river flows of all first and all second half years
 ## R6 method
-x$aggregate(funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)$print()
+x$aggregate(
+  funby = by_m____,
+  fun = "mean",
+  na.rm = TRUE,
+  multiplier = 6
+)$print()
 
 ## S3 method
-print(aggregate(x = x, funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6))
+print(aggregate(
+  x = x,
+  funby = by_m____,
+  fun = "mean",
+  na.rm = TRUE,
+  multiplier = 6
+))
 
 }
 \seealso{

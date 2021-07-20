@@ -32,30 +32,31 @@ special symbol \code{\link[data.table:special-symbols]{.N}}.}
 \item{funby}{One of the temporal aggregation level functions described in
 \code{\link{TALFs}} or a user defined temporal aggregation level function. Can be
 used to, for instance, select the last two observations of a certain
-temporal level. See examples and below for further information.}
-
-\item{ignoreDST}{A logical specifying if day saving time is ignored during
-aggregation. See below for further information.}
-
-\item{na.status}{A character string. Either \code{"explicit"}, which makes missing
-timestamps according to the recognised periodicity explicit, or
-\code{"implicit"}, which removes timestamps with missing values on all value
-columns. See below for further information.}
-
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
-
-\item{multiplier}{A positive integerish value \dQuote{multiplying} the
-temporal aggregation level of certain \code{\link{TALFs}}. See below for further
+temporal level. See corresponding section and examples for further
 information.}
 
+\item{ignoreDST}{A logical specifying if day saving time shall be ignored
+by \code{funby}. See corresponding section for further information.}
+
+\item{na.status}{A character string. Either \code{"explicit"}, which makes missing
+timestamps explicit according to the recognised periodicity, or
+\code{"implicit"}, which removes timestamps with missing values on all value
+columns. See corresponding section for further information.}
+
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
+
+\item{multiplier}{A positive integerish value \dQuote{multiplying} the
+temporal aggregation level of certain \code{\link{TALFs}}. See corresponding section
+for further information.}
+
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
-\code{funby}. See below for further information.}
+\code{funby}. See corresponding section for further information.}
 
 \item{...}{Further arguments passed on to \code{fun}.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Filters rows and/or selects columns of a \code{\link{DTSg}} object.
@@ -65,8 +66,8 @@ Filters rows and/or selects columns of a \code{\link{DTSg}} object.
 Please note that filtering rows and having or making missing timestamps
 explicit equals to setting the values of all other timestamps to missing. The
 default value of \code{na.status} is therefore \code{"implicit"}. To simply filter for
-a consecutive range of a \code{\link{DTSg}} object while leaving \code{na.status} untouched,
-\code{\link{alter}} is probably the better choice.
+a consecutive range of a \code{\link{DTSg}} object while leaving the \code{na.status}
+untouched, \code{\link{alter}} is probably the better choice.
 }
 
 \section{User defined TALFs, TALFs helper data and multiplier}{
@@ -76,13 +77,10 @@ User defined temporal aggregation level functions have to return a
 arguments: a \code{\link{POSIXct}} vector as its first and a \code{\link{list}} with helper data
 as its second. The default elements of this \code{\link{list}} are as follows:
 \itemize{
-\item \emph{timezone:} Same as the \code{timezone} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{timezone:} Same as the \code{\link[=DTSg]{timezone}} field.
 \item \emph{ignoreDST:} Same as the \code{ignoreDST} argument.
-\item \emph{periodicity:} Same as the \code{periodicity} field. See \code{\link{DTSg}} for further
-information.
-\item \emph{na.status:} Same as the \code{na.status} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{periodicity:} Same as the \code{\link[=DTSg]{periodicity}} field.
+\item \emph{na.status:} Same as the \code{\link[=DTSg]{na.status}} field.
 \item \emph{multiplier:} Same as the \code{multiplier} argument.
 }
 
@@ -156,10 +154,17 @@ print(subset(x = x, i = 1:6))
 
 # filter for the last two observations per year
 ## R6 method
-x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})$print()
+x$subset(
+  i = (.N - 1):.N,
+  funby = function(x, ...) {data.table::year(x)}
+)$print()
 
 ## S3 method
-print(subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)}))
+print(subset(
+  x = x,
+  i = (.N - 1):.N,
+  funby = function(x, ...) {data.table::year(x)}
+))
 
 }
 \seealso{

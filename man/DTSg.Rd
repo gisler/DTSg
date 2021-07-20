@@ -16,7 +16,7 @@ object. Otherwise a different object may or may not be created (S4
 constructor only).}
 
 \item{values}{A \code{\link{data.frame}} or object inherited from class \code{\link{data.frame}},
-for instance, \code{\link[data.table:data.table]{data.table::data.table}}. Its first column must be of class
+e.g. \code{\link[data.table:data.table]{data.table::data.table}}. Its first column must be of class
 \code{\link{POSIXct}} or coercible to it. It serves as the object's time index and is
 renamed to \emph{.dateTime.}}
 
@@ -52,7 +52,7 @@ further information). Furthermore, all references to the \dQuote{swallowed}
 are removed upon the successful creation of the \code{DTSg} object.}
 
 \item{na.status}{A character string. Either \code{"explicit"}, which makes missing
-timestamps according to the recognised periodicity explicit, or
+timestamps explicit according to the recognised periodicity, or
 \code{"implicit"}, which removes timestamps with missing values on all value
 columns, or \code{"undecided"} for no such action. Please note that \code{DTSg}
 objects work best with explicitly missing values.}
@@ -142,7 +142,7 @@ series (read-only).
 \item \code{timezone}: A character string showing the time zone of the time series.
 When set, the series is converted to the specified time zone. Only names from
 \code{\link{OlsonNames}} are accepted.
-\item \code{unit}: Same as the  \code{unit} argument. It is added to the label of the
+\item \code{unit}: Same as the \code{unit} argument. It is added to the label of the
 primary axis of plots when the \code{parameter} field is set.
 \item \code{variant}: Same as the \code{variant} argument. It is added to the label of the
 primary axis of plots when the \code{parameter} field is set.
@@ -158,17 +158,24 @@ The behaviour of \code{DTSg} objects can be customised with the help of the
 following option. See \code{\link{options}} for further information:
 \itemize{
 \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are, by default,
-modified in place (\code{FALSE}) or if a deep clone (copy) is made beforehand
-(\code{TRUE}).
+modified in place (\code{FALSE}) or if a deep clone (copy) shall be made
+beforehand (\code{TRUE}).
 }
 }
 
 \examples{
 # new DTSg object
 ## R6 constructor
-DTSg$new(values = flow, ID = "River Flow")
+DTSg$new(
+  values = flow,
+  ID = "River Flow"
+)
 
 ## abused S4 constructor
-new(Class = "DTSg", values = flow, ID = "River Flow")
+new(
+  Class = "DTSg",
+  values = flow,
+  ID = "River Flow"
+)
 
 }

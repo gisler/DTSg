@@ -17,11 +17,11 @@ further information.}
 \code{by}, \code{by.x} and \code{by.y} arguments can endanger the object's integrity, they
 are rejected.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Joins two \code{\link{DTSg}} objects based on their \emph{.dateTime} column. Their time
@@ -33,10 +33,17 @@ x <- DTSg$new(values = flow)
 
 # merge with 'data.table'
 ## R6 method
-x$merge(y = flow, suffixes = c("_1", "_2"))$print()
+x$merge(
+  y = flow,
+  suffixes = c("_1", "_2")
+)$print()
 
 ## S3 method
-print(merge(x = x, y = flow, suffixes = c("_1", "_2")))
+print(merge(
+  x = x,
+  y = flow,
+  suffixes = c("_1", "_2")
+))
 
 }
 \seealso{

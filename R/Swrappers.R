@@ -6,44 +6,41 @@ NULL
 #' Applies a temporal aggregation level function to the _.dateTime_ column of a
 #' [`DTSg`] object and aggregates its values column-wise to the function's
 #' temporal aggregation level utilising one or more provided summary functions.
-#' Additionally, it sets the object's `aggregated` field to `TRUE`. See [`DTSg`]
-#' for further information.
+#' Additionally, it sets the object's [`aggregated`][DTSg] field to `TRUE`.
 #'
 #' @param x A [`DTSg`] object (S3 method only).
 #' @param funby One of the temporal aggregation level functions described in
-#'   [`TALFs`] or a user defined temporal aggregation level function. See below
-#'   for further information.
+#'   [`TALFs`] or a user defined temporal aggregation level function. See
+#'   corresponding section for further information.
 #' @param fun A summary function, (named) [`list`] of summary functions or
 #'   (named) character vector specifying summary functions applied column-wise
 #'   to all the values of the same temporal aggregation level. The return
-#'   value(s) must be of length one. See below for further information.
+#'   value(s) must be of length one. See corresponding section for further
+#'   information.
 #' @param \dots Further arguments passed on to `fun`.
 #' @param cols A character vector specifying the columns to aggregate.
 #' @param n A logical specifying if a column named `.n` giving the number of
-#'   values per temporal aggregation level is added. See below for further
-#'   information.
-#' @param ignoreDST A logical specifying if day saving time is ignored during
-#'   aggregation. See below for further information.
+#'   values per temporal aggregation level shall be added. See corresponding
+#'   section for further information.
+#' @param ignoreDST A logical specifying if day saving time shall be ignored
+#'   by `funby`. See corresponding section for further information.
 #' @param multiplier A positive integerish value \dQuote{multiplying} the
-#'   temporal aggregation level of certain [`TALFs`]. See below for further
-#'   information.
+#'   temporal aggregation level of certain [`TALFs`]. See corresponding section
+#'   for further information.
 #' @param funbyHelpers An optional [`list`] with helper data passed on to
-#'   `funby`. See below for further information.
-#' @param clone A logical specifying if the object is modified in place or if a
-#'   deep clone (copy) is made beforehand.
+#'   `funby`. See corresponding section for further information.
+#' @param clone A logical specifying if the object shall be modified in place or
+#'   if a deep clone (copy) shall be made beforehand.
 #'
 #' @section User defined TALFs, TALFs helper data and multiplier:
 #' User defined temporal aggregation level functions have to return a
 #' [`POSIXct`] vector of the same length as the time series and accept two
 #' arguments: a [`POSIXct`] vector as its first and a [`list`] with helper data
 #' as its second. The default elements of this [`list`] are as follows:
-#' * _timezone:_ Same as the `timezone` field. See [`DTSg`] for further
-#' information.
+#' * _timezone:_ Same as the [`timezone`][DTSg] field.
 #' * _ignoreDST:_ Same as the `ignoreDST` argument.
-#' * _periodicity:_ Same as the `periodicity` field. See [`DTSg`] for further
-#' information.
-#' * _na.status:_ Same as the `na.status` field. See [`DTSg`] for further
-#' information.
+#' * _periodicity:_ Same as the [`periodicity`][DTSg] field.
+#' * _na.status:_ Same as the [`na.status`][DTSg] field.
 #' * _multiplier:_ Same as the `multiplier` argument.
 #'
 #' Any additional element specified in the `funbyHelpers` argument is appended
@@ -126,24 +123,53 @@ NULL
 #'
 #' # mean yearly river flows
 #' ## R6 method
-#' x$aggregate(funby = byY_____, fun = "mean", na.rm = TRUE)$print()
+#' x$aggregate(
+#'   funby = byY_____,
+#'   fun = "mean",
+#'   na.rm = TRUE
+#' )$print()
 #'
 #' ## S3 method
-#' print(aggregate(x = x, funby = byY_____, fun = "mean", na.rm = TRUE))
+#' print(aggregate(
+#'   x = x,
+#'   funby = byY_____,
+#'   fun = "mean",
+#'   na.rm = TRUE
+#' ))
 #'
 #' # variance and standard deviation of river flows per quarter
 #' ## R6 method
-#' x$aggregate(funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE)$print()
+#' x$aggregate(
+#'   funby = byYQ____,
+#'   fun = c(var = "var", sd = "sd"),
+#'   na.rm = TRUE
+#' )$print()
 #'
 #' ## S3 method
-#' print(aggregate(x = x, funby = byYQ____, fun = c(var = "var", sd = "sd"), na.rm = TRUE))
+#' print(aggregate(
+#'   x = x,
+#'   funby = byYQ____,
+#'   fun = c(var = "var", sd = "sd"),
+#'   na.rm = TRUE
+#' ))
 #'
 #' # mean of river flows of all first and all second half years
 #' ## R6 method
-#' x$aggregate(funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6)$print()
+#' x$aggregate(
+#'   funby = by_m____,
+#'   fun = "mean",
+#'   na.rm = TRUE,
+#'   multiplier = 6
+#' )$print()
 #'
 #' ## S3 method
-#' print(aggregate(x = x, funby = by_m____, fun = "mean", na.rm = TRUE, multiplier = 6))
+#' print(aggregate(
+#'   x = x,
+#'   funby = by_m____,
+#'   fun = "mean",
+#'   na.rm = TRUE,
+#'   multiplier = 6
+#' ))
 #'
 #' @aliases aggregate
 #'
@@ -170,8 +196,8 @@ alter <- function(x, ...) {
 #'   of [`seq.POSIXt`] can be specified. Must be specified for time series with
 #'   unrecognised periodicity. Time steps out of sync with the new periodicity
 #'   are dropped.
-#' @param rollback A logical specifying if a call to [`rollback`] is made when
-#'   appropriate.
+#' @param rollback A logical specifying if a call to [`rollback`] shall be made
+#'   when appropriate.
 #' @param na.status A character string. Either `"explicit"`, which makes missing
 #'   timestamps explicit according to the recognised periodicity, or
 #'   `"implicit"`, which removes timestamps with missing values on all value
@@ -180,7 +206,7 @@ alter <- function(x, ...) {
 #' @param \dots Not used (S3 method only).
 #' @inheritParams aggregate.DTSg
 #'
-#' @return Returns a `DTSg` object.
+#' @return Returns a [`DTSg`] object.
 #'
 #' @seealso [`getOption`], [`subset`], [`nas`]
 #'
@@ -190,10 +216,17 @@ alter <- function(x, ...) {
 #'
 #' # filter for the first two years
 #' ## R6 method
-#' x$alter(from = "2007-01-01", to = "2008-12-31")$print()
+#' x$alter(
+#'   from = "2007-01-01",
+#'   to = "2008-12-31"
+#' )$print()
 #'
 #' ## S3 method
-#' print(alter(x = x, from = "2007-01-01", to = "2008-12-31"))
+#' print(alter(
+#'   x = x,
+#'   from = "2007-01-01",
+#'   to = "2008-12-31"
+#' ))
 #'
 #' # change periodicity to one month
 #' ## R6 method
@@ -222,9 +255,9 @@ clone <- function(x, ...) {
 #' `TRUE`, but has to be kept in mind when setting fields, as they are always
 #' modified in place. See [`DTSg`] for further information.
 #'
-#' @param deep A logical specifying if a deep copy is made (for consistency with
-#'   the [`R6::R6Class`] the default is `FALSE`, but should generally be set to
-#'   `TRUE`).
+#' @param deep A logical specifying if a deep copy shall be made (for
+#'   consistency with the [`R6::R6Class`] the default is `FALSE`, but should
+#'   generally be set to `TRUE`).
 #' @inheritParams alter.DTSg
 #'
 #' @return Returns a cloned [`DTSg`] object.
@@ -259,7 +292,7 @@ colapply <- function(x, ...) {
 #' @param fun A [`function`]. Its return value must be of length one.
 #' @param cols A character vector specifying the columns to apply `fun` to.
 #' @param resultCols An optional character vector of the same length as `cols`
-#'   specifying the column names with the return values of `fun`. Non-existing
+#'   specifying the column names for the return values of `fun`. Non-existing
 #'   columns are added and existing columns are overwritten. Columns are matched
 #'   element-wise between `cols` and `resultCols`.
 #' @param suffix An optional character string. The return values of `fun` are
@@ -267,11 +300,11 @@ colapply <- function(x, ...) {
 #'   `cols` and this suffix. Existing columns are never overwritten. Only used
 #'   when `resultCols` is not specified.
 #' @param helpers A logical specifying if helper data shall be handed over to
-#'   `fun`. See below for further information.
+#'   `fun`. See corresponding section for further information.
 #' @param funby One of the temporal aggregation level functions described in
 #'   [`TALFs`] or a user defined temporal aggregation level function. Can be
 #'   used to apply functions like [`cumsum`] to a certain temporal level. See
-#'   examples and below for further information.
+#'   corresponding section and examples for further information.
 #' @inheritParams aggregate.DTSg
 #'
 #' @section Helper data:
@@ -279,8 +312,7 @@ colapply <- function(x, ...) {
 #' [`list`] argument with helper data called `.helpers` to `fun`. This [`list`]
 #' contains the following elements:
 #' * _.dateTime:_ A [`POSIXct`] vector containing the _.dateTime_ column.
-#' * _periodicity:_ Same as the `periodicity` field. See [`DTSg`] for further
-#' information.
+#' * _periodicity:_ Same as the [`periodicity`][DTSg] field.
 #' * _minLag:_ A [`difftime`] object containing the minimum time difference
 #' between two subsequent timestamps.
 #' * _maxLag:_ A [`difftime`] object containing the maximum time difference
@@ -403,10 +435,17 @@ getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
 #'
 #' # merge with 'data.table'
 #' ## R6 method
-#' x$merge(y = flow, suffixes = c("_1", "_2"))$print()
+#' x$merge(
+#'   y = flow,
+#'   suffixes = c("_1", "_2")
+#' )$print()
 #'
 #' ## S3 method
-#' print(merge(x = x, y = flow, suffixes = c("_1", "_2")))
+#' print(merge(
+#'   x = x,
+#'   y = flow,
+#'   suffixes = c("_1", "_2")
+#' ))
 #'
 #' @aliases merge
 #'
@@ -482,9 +521,9 @@ setMethod(
 #' Displays an interactive plot of a [`DTSg`] object. This method requires
 #' \pkg{dygraphs} and \pkg{RColorBrewer} to be installed. Its main purpose is
 #' not to make pretty plots, but rather to offer a possibility to interactively
-#' explore the time series data. The title of the plot and the label of its
-#' primary axis are automatically generated from the object's metadata (fields).
-#' See [`DTSg`] for further information.
+#' explore time series data. The title of the plot and the label of its primary
+#' axis are automatically generated from the object's metadata (fields). See
+#' [`DTSg`] for further information.
 #'
 #' @param from A [`POSIXct`] timestamp in the same time zone as the time series
 #'   or a character string coercible to one. The data is plotted from this
@@ -596,15 +635,15 @@ rollapply <- function(x, ...) {
 #' @param after An integerish value specifying the size of the window in time
 #'   steps after the \dQuote{center} of the rolling window.
 #' @param weights A character string specifying the method applied to calculate
-#'   weights for `fun`. Weights are useful for functions like [`weighted.mean`].
-#'   See below for further information.
-#' @param parameters A [`list`] specifying parameters for weight calculation
-#'   methods. See below for further information.
-#' @param memoryOverCPU A logical specifying if memory usage is preferred over
-#'   CPU usage for this method. The former is generally faster for smaller
-#'   windows and shorter time series, the latter for bigger windows and longer
-#'   time series or might even be the only one which works depending on the
-#'   available hardware.
+#'   the weights handed over to `fun`. These are useful for functions like
+#'   [`weighted.mean`]. See corresponding section for further information.
+#' @param parameters A [`list`] specifying parameters for the weight calculation
+#'   method. See corresponding section for further information.
+#' @param memoryOverCPU A logical specifying if memory usage shall be preferred
+#'   over CPU usage for this method call. The former is generally faster for
+#'   smaller windows and shorter time series, the latter for bigger windows and
+#'   longer time series or might even be the only one which works depending on
+#'   the available hardware.
 #' @inheritParams colapply.DTSg
 #'
 #' @section Weights:
@@ -613,7 +652,7 @@ rollapply <- function(x, ...) {
 #' each time step further away from the \dQuote{center} adds one to it. So, for
 #' example, the distance of a timestamp three steps away from the
 #' \dQuote{center} is four. Additionally, the calculation of the weights accepts
-#' a power \eqn{p} parameter as a named element of a [`list`] provided through
+#' a power parameter \eqn{p} as a named element of a [`list`] provided through
 #' the `parameters` argument: \eqn{\frac{1}{d^p}}{1 / d^p}.
 #'
 #' @section Helper data:
@@ -637,10 +676,21 @@ rollapply <- function(x, ...) {
 #'
 #' # calculate a moving average
 #' ## R6 method
-#' x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)$print()
+#' x$rollapply(
+#'   fun = mean,
+#'   na.rm = TRUE,
+#'   before = 2,
+#'   after = 2
+#' )$print()
 #'
 #' ## S3 method
-#' print(rollapply(x = x, fun = mean, na.rm = TRUE, before = 2, after = 2))
+#' print(rollapply(
+#'   x = x,
+#'   fun = mean,
+#'   na.rm = TRUE,
+#'   before = 2,
+#'   after = 2
+#' ))
 #'
 #' @aliases rollapply
 #'
@@ -659,7 +709,11 @@ rowaggregate <- function(x, ...) {
 #'
 #' @param resultCols A character vector either of length one (names of `fun` are
 #'   appended in the case one or more functions are provided) or the same length
-#'   as `fun`.
+#'   as `fun` specifying the column names for the return values of `fun`.
+#' @param fun A summary function, (named) [`list`] of summary functions or
+#'   (named) character vector specifying summary functions applied row-wise to
+#'   all the values of the specified `cols`. The return value(s) must be of
+#'   length one. See corresponding section for further information.
 #' @param cols A character vector specifying the columns to apply `fun` to.
 #' @inheritParams aggregate.DTSg
 #'
@@ -685,10 +739,17 @@ rowaggregate <- function(x, ...) {
 #'
 #' # mean and standard deviation of multiple measurements per timestamp
 #' ## R6 method
-#' x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))$print()
+#' x$rowaggregate(
+#'   resultCols = "flow",
+#'   fun = list(mean = mean, sd = sd)
+#' )$print()
 #'
 #' ## S3 method
-#' print(rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd)))
+#' print(rowaggregate(
+#'   x = x,
+#'   resultCols = "flow",
+#'   fun = list(mean = mean, sd = sd)
+#' ))
 #'
 #' @aliases rowaggregate raggregate
 #'
@@ -761,10 +822,17 @@ setColNames <- function(x, ...) {
 #'
 #' # rename column "flow" to "River Flow"
 #' ## R6 method
-#' x$setColNames(cols = "flow", values = "River Flow")$print()
+#' x$setColNames(
+#'   cols = "flow",
+#'   values = "River Flow"
+#' )$print()
 #'
 #' ## S3 method
-#' print(setColNames(x = x, cols = "flow", values = "River Flow"))
+#' print(setColNames(
+#'   x = x,
+#'   cols = "flow",
+#'   values = "River Flow"
+#' ))
 #'
 #' @aliases setColNames setnames
 #'
@@ -803,10 +871,19 @@ setCols <- function(x, ...) {
 #'
 #' # cap river flows to 100
 #' ## R6 method
-#' x$setCols(i = flow > 100, cols = "flow", values = 100)$print()
+#' x$setCols(
+#'   i = flow > 100,
+#'   cols = "flow",
+#'   values = 100
+#' )$print()
 #'
 #' ## S3 method
-#' print(setCols(x = x, i = flow > 100, cols = "flow", values = 100))
+#' print(setCols(
+#'   x = x,
+#'   i = flow > 100,
+#'   cols = "flow",
+#'   values = 100
+#' ))
 #'
 #' @aliases setCols set
 #'
@@ -823,11 +900,12 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' @param funby One of the temporal aggregation level functions described in
 #'   [`TALFs`] or a user defined temporal aggregation level function. Can be
 #'   used to, for instance, select the last two observations of a certain
-#'   temporal level. See examples and below for further information.
+#'   temporal level. See corresponding section and examples for further
+#'   information.
 #' @param na.status A character string. Either `"explicit"`, which makes missing
-#'   timestamps according to the recognised periodicity explicit, or
+#'   timestamps explicit according to the recognised periodicity, or
 #'   `"implicit"`, which removes timestamps with missing values on all value
-#'   columns. See below for further information.
+#'   columns. See corresponding section for further information.
 #' @inheritParams aggregate.DTSg
 #' @inheritParams setCols.DTSg
 #'
@@ -839,8 +917,8 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' Please note that filtering rows and having or making missing timestamps
 #' explicit equals to setting the values of all other timestamps to missing. The
 #' default value of `na.status` is therefore `"implicit"`. To simply filter for
-#' a consecutive range of a [`DTSg`] object while leaving `na.status` untouched,
-#' [`alter`] is probably the better choice.
+#' a consecutive range of a [`DTSg`] object while leaving the `na.status`
+#' untouched, [`alter`] is probably the better choice.
 #'
 #' @inherit alter.DTSg return
 #'
@@ -859,10 +937,17 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'
 #' # filter for the last two observations per year
 #' ## R6 method
-#' x$subset(i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)})$print()
+#' x$subset(
+#'   i = (.N - 1):.N,
+#'   funby = function(x, ...) {data.table::year(x)}
+#' )$print()
 #'
 #' ## S3 method
-#' print(subset(x = x, i = (.N - 1):.N, funby = function(x, ...) {data.table::year(x)}))
+#' print(subset(
+#'   x = x,
+#'   i = (.N - 1):.N,
+#'   funby = function(x, ...) {data.table::year(x)}
+#' ))
 #'
 #' @aliases subset
 #'
@@ -909,7 +994,8 @@ values <- function(x, ...) {
 #' Returns the values of a [`DTSg`] object.
 #'
 #' @param reference A logical specifying if a copy of the values or a reference
-#'   to the values is returned. See below for further information.
+#'   to the values shall be returned. See corresponding section for further
+#'   information.
 #' @param drop A logical specifying if the object and all references to it shall
 #'   be removed from the global (and only the global) environment after
 #'   successfully returning its values. This feature allows for a resource
@@ -919,7 +1005,7 @@ values <- function(x, ...) {
 #'   the object is dropped.
 #' @inheritParams alter.DTSg
 #'
-#' @section Reference:
+#' @section Reference to the values:
 #' A reference to the values of a [`DTSg`] object can be used to modify them in
 #' place. This includes the _.dateTime_ column, which serves as the object's
 #' time index. Modifying this column can therefore endanger the object's
