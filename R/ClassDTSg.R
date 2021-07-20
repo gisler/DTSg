@@ -23,7 +23,7 @@
 #'   object. Otherwise a different object may or may not be created (S4
 #'   constructor only).
 #' @param values A [`data.frame`] or object inherited from class [`data.frame`],
-#'   for instance, [`data.table::data.table`]. Its first column must be of class
+#'   e.g. [`data.table::data.table`]. Its first column must be of class
 #'   [`POSIXct`] or coercible to it. It serves as the object's time index and is
 #'   renamed to _.dateTime._
 #' @param ID A character string specifying the ID (name) of the time series data
@@ -51,7 +51,7 @@
 #'   [`data.table::data.table`] in the global (and only the global) environment
 #'   are removed upon the successful creation of the `DTSg` object.
 #' @param na.status A character string. Either `"explicit"`, which makes missing
-#'   timestamps according to the recognised periodicity explicit, or
+#'   timestamps explicit according to the recognised periodicity, or
 #'   `"implicit"`, which removes timestamps with missing values on all value
 #'   columns, or `"undecided"` for no such action. Please note that `DTSg`
 #'   objects work best with explicitly missing values.
@@ -110,7 +110,7 @@
 #' * `timezone`: A character string showing the time zone of the time series.
 #' When set, the series is converted to the specified time zone. Only names from
 #' [`OlsonNames`] are accepted.
-#' * `unit`: Same as the  `unit` argument. It is added to the label of the
+#' * `unit`: Same as the `unit` argument. It is added to the label of the
 #' primary axis of plots when the `parameter` field is set.
 #' * `variant`: Same as the `variant` argument. It is added to the label of the
 #' primary axis of plots when the `parameter` field is set.
@@ -122,8 +122,8 @@
 #' The behaviour of `DTSg` objects can be customised with the help of the
 #' following option. See [`options`] for further information:
 #' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
-#' modified in place (`FALSE`) or if a deep clone (copy) is made beforehand
-#' (`TRUE`).
+#' modified in place (`FALSE`) or if a deep clone (copy) shall be made
+#' beforehand (`TRUE`).
 #'
 #' @note
 #' Due to the [`POSIXct`] nature of the _.dateTime_ column, the same sub-second
@@ -137,10 +137,17 @@
 #' @examples
 #' # new DTSg object
 #' ## R6 constructor
-#' DTSg$new(values = flow, ID = "River Flow")
+#' DTSg$new(
+#'   values = flow,
+#'   ID = "River Flow"
+#' )
 #'
 #' ## abused S4 constructor
-#' new(Class = "DTSg", values = flow, ID = "River Flow")
+#' new(
+#'   Class = "DTSg",
+#'   values = flow,
+#'   ID = "River Flow"
+#' )
 #'
 #' @docType class
 #'

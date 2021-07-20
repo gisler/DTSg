@@ -84,8 +84,8 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #'
 #' Simply hand over one of these functions to the `funby` argument of one of the
 #' methods of [`DTSg`] objects, which support it. The method then does the rest
-#' of the work. See below and the respective method for further information.
-#' Other uses are possible, but not recommended.
+#' of the work. See corresponding section and the respective method for further
+#' information. Other uses are possible, but not recommended.
 #'
 #' @param .dateTime A [`POSIXct`] vector.
 #' @param .helpers A [`list`] with helper data as handed over by methods of

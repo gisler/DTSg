@@ -95,8 +95,8 @@ corresponding to the function's temporal aggregation level.
 \description{
 Simply hand over one of these functions to the \code{funby} argument of one of the
 methods of \code{\link{DTSg}} objects, which support it. The method then does the rest
-of the work. See below and the respective method for further information.
-Other uses are possible, but not recommended.
+of the work. See corresponding section and the respective method for further
+information. Other uses are possible, but not recommended.
 }
 \section{Families}{
 

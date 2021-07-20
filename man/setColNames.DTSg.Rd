@@ -23,13 +23,13 @@ set. The name of the \emph{.dateTime} column cannot be changed.}
 \item{values}{A character vector of the same length as \code{cols} specifying the
 desired column names.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 
 \item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Changes the column names of \code{\link{DTSg}} objects.
@@ -40,10 +40,17 @@ x <- DTSg$new(values = flow)
 
 # rename column "flow" to "River Flow"
 ## R6 method
-x$setColNames(cols = "flow", values = "River Flow")$print()
+x$setColNames(
+  cols = "flow",
+  values = "River Flow"
+)$print()
 
 ## S3 method
-print(setColNames(x = x, cols = "flow", values = "River Flow"))
+print(setColNames(
+  x = x,
+  cols = "flow",
+  values = "River Flow"
+))
 
 }
 \seealso{

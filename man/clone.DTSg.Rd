@@ -10,9 +10,9 @@
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
-\item{deep}{A logical specifying if a deep copy is made (for consistency with
-the \code{\link[R6:R6Class]{R6::R6Class}} the default is \code{FALSE}, but should generally be set to
-\code{TRUE}).}
+\item{deep}{A logical specifying if a deep copy shall be made (for
+consistency with the \code{\link[R6:R6Class]{R6::R6Class}} the default is \code{FALSE}, but should
+generally be set to \code{TRUE}).}
 
 \item{...}{Not used (S3 method only).}
 }

@@ -10,10 +10,19 @@ print(colapply(x = x, fun = interpolateLinear))
 
 # daily cumulative sums per month
 ## R6 method
-x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)$print()
+x$colapply(
+  fun = cumsum,
+  helpers = FALSE,
+  funby = byYm____
+)$print()
 
 ## S3 method
-print(colapply(x = x, fun = cumsum, helpers = FALSE, funby = byYm____))
+print(colapply(
+  x = x,
+  fun = cumsum,
+  helpers = FALSE,
+  funby = byYm____
+))
 
 # calculate moving averages with the help of 'runner' (all four given
 # approaches provide the same result with explicitly missing timestamps)
@@ -24,8 +33,18 @@ if (requireNamespace("runner", quietly = TRUE) &&
   }
 
   ## R6 method
-  x$colapply(fun = runner::runner, f = mean, k = 5       , lag = -2       )$print()
-  x$colapply(fun = wrapper       , f = mean, k = "5 days", lag = "-2 days")$print()
+  x$colapply(
+    fun = runner::runner,
+    f = mean,
+    k = 5,
+    lag = -2
+  )$print()
+  x$colapply(
+    fun = wrapper,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days"
+  )$print()
   x$colapply(
     fun = runner::runner,
     f = mean,
@@ -42,8 +61,20 @@ if (requireNamespace("runner", quietly = TRUE) &&
   )$print()
 
   ## S3 method
-  print(colapply(x = x, fun = runner::runner, f = mean, k = 5       , lag = -2       ))
-  print(colapply(x = x, fun = wrapper       , f = mean, k = "5 days", lag = "-2 days"))
+  print(colapply(
+    x = x,
+    fun = runner::runner,
+    f = mean,
+    k = 5,
+    lag = -2
+  ))
+  print(colapply(
+    x = x,
+    fun = wrapper,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days"
+  ))
   print(colapply(
     x = x,
     fun = runner::runner,

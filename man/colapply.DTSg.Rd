@@ -30,7 +30,7 @@
 \item{cols}{A character vector specifying the columns to apply \code{fun} to.}
 
 \item{resultCols}{An optional character vector of the same length as \code{cols}
-specifying the column names with the return values of \code{fun}. Non-existing
+specifying the column names for the return values of \code{fun}. Non-existing
 columns are added and existing columns are overwritten. Columns are matched
 element-wise between \code{cols} and \code{resultCols}.}
 
@@ -40,28 +40,28 @@ added as new columns with names consisting of the columns specified in
 when \code{resultCols} is not specified.}
 
 \item{helpers}{A logical specifying if helper data shall be handed over to
-\code{fun}. See below for further information.}
+\code{fun}. See corresponding section for further information.}
 
 \item{funby}{One of the temporal aggregation level functions described in
 \code{\link{TALFs}} or a user defined temporal aggregation level function. Can be
 used to apply functions like \code{\link{cumsum}} to a certain temporal level. See
-examples and below for further information.}
+corresponding section and examples for further information.}
 
-\item{ignoreDST}{A logical specifying if day saving time is ignored during
-aggregation. See below for further information.}
+\item{ignoreDST}{A logical specifying if day saving time shall be ignored
+by \code{funby}. See corresponding section for further information.}
 
 \item{multiplier}{A positive integerish value \dQuote{multiplying} the
-temporal aggregation level of certain \code{\link{TALFs}}. See below for further
-information.}
+temporal aggregation level of certain \code{\link{TALFs}}. See corresponding section
+for further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
-\code{funby}. See below for further information.}
+\code{funby}. See corresponding section for further information.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Applies an arbitrary function to selected columns of a \code{\link{DTSg}} object.
@@ -73,8 +73,7 @@ In addition to the \code{...} argument, this method optionally hands over a
 contains the following elements:
 \itemize{
 \item \emph{.dateTime:} A \code{\link{POSIXct}} vector containing the \emph{.dateTime} column.
-\item \emph{periodicity:} Same as the \code{periodicity} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{periodicity:} Same as the \code{\link[=DTSg]{periodicity}} field.
 \item \emph{minLag:} A \code{\link{difftime}} object containing the minimum time difference
 between two subsequent timestamps.
 \item \emph{maxLag:} A \code{\link{difftime}} object containing the maximum time difference
@@ -89,13 +88,10 @@ User defined temporal aggregation level functions have to return a
 arguments: a \code{\link{POSIXct}} vector as its first and a \code{\link{list}} with helper data
 as its second. The default elements of this \code{\link{list}} are as follows:
 \itemize{
-\item \emph{timezone:} Same as the \code{timezone} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{timezone:} Same as the \code{\link[=DTSg]{timezone}} field.
 \item \emph{ignoreDST:} Same as the \code{ignoreDST} argument.
-\item \emph{periodicity:} Same as the \code{periodicity} field. See \code{\link{DTSg}} for further
-information.
-\item \emph{na.status:} Same as the \code{na.status} field. See \code{\link{DTSg}} for further
-information.
+\item \emph{periodicity:} Same as the \code{\link[=DTSg]{periodicity}} field.
+\item \emph{na.status:} Same as the \code{\link[=DTSg]{na.status}} field.
 \item \emph{multiplier:} Same as the \code{multiplier} argument.
 }
 
@@ -169,10 +165,19 @@ print(colapply(x = x, fun = interpolateLinear))
 
 # daily cumulative sums per month
 ## R6 method
-x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)$print()
+x$colapply(
+  fun = cumsum,
+  helpers = FALSE,
+  funby = byYm____
+)$print()
 
 ## S3 method
-print(colapply(x = x, fun = cumsum, helpers = FALSE, funby = byYm____))
+print(colapply(
+  x = x,
+  fun = cumsum,
+  helpers = FALSE,
+  funby = byYm____
+))
 
 # calculate moving averages with the help of 'runner' (all four given
 # approaches provide the same result with explicitly missing timestamps)
@@ -183,8 +188,18 @@ if (requireNamespace("runner", quietly = TRUE) &&
   }
 
   ## R6 method
-  x$colapply(fun = runner::runner, f = mean, k = 5       , lag = -2       )$print()
-  x$colapply(fun = wrapper       , f = mean, k = "5 days", lag = "-2 days")$print()
+  x$colapply(
+    fun = runner::runner,
+    f = mean,
+    k = 5,
+    lag = -2
+  )$print()
+  x$colapply(
+    fun = wrapper,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days"
+  )$print()
   x$colapply(
     fun = runner::runner,
     f = mean,
@@ -201,8 +216,20 @@ if (requireNamespace("runner", quietly = TRUE) &&
   )$print()
 
   ## S3 method
-  print(colapply(x = x, fun = runner::runner, f = mean, k = 5       , lag = -2       ))
-  print(colapply(x = x, fun = wrapper       , f = mean, k = "5 days", lag = "-2 days"))
+  print(colapply(
+    x = x,
+    fun = runner::runner,
+    f = mean,
+    k = 5,
+    lag = -2
+  ))
+  print(colapply(
+    x = x,
+    fun = wrapper,
+    f = mean,
+    k = "5 days",
+    lag = "-2 days"
+  ))
   print(colapply(
     x = x,
     fun = runner::runner,

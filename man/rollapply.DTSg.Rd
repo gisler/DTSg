@@ -38,14 +38,14 @@ steps before the \dQuote{center} of the rolling window.}
 steps after the \dQuote{center} of the rolling window.}
 
 \item{weights}{A character string specifying the method applied to calculate
-weights for \code{fun}. Weights are useful for functions like \code{\link{weighted.mean}}.
-See below for further information.}
+the weights handed over to \code{fun}. These are useful for functions like
+\code{\link{weighted.mean}}. See corresponding section for further information.}
 
-\item{parameters}{A \code{\link{list}} specifying parameters for weight calculation
-methods. See below for further information.}
+\item{parameters}{A \code{\link{list}} specifying parameters for the weight calculation
+method. See corresponding section for further information.}
 
 \item{resultCols}{An optional character vector of the same length as \code{cols}
-specifying the column names with the return values of \code{fun}. Non-existing
+specifying the column names for the return values of \code{fun}. Non-existing
 columns are added and existing columns are overwritten. Columns are matched
 element-wise between \code{cols} and \code{resultCols}.}
 
@@ -55,19 +55,19 @@ added as new columns with names consisting of the columns specified in
 when \code{resultCols} is not specified.}
 
 \item{helpers}{A logical specifying if helper data shall be handed over to
-\code{fun}. See below for further information.}
+\code{fun}. See corresponding section for further information.}
 
-\item{memoryOverCPU}{A logical specifying if memory usage is preferred over
-CPU usage for this method. The former is generally faster for smaller
-windows and shorter time series, the latter for bigger windows and longer
-time series or might even be the only one which works depending on the
-available hardware.}
+\item{memoryOverCPU}{A logical specifying if memory usage shall be preferred
+over CPU usage for this method call. The former is generally faster for
+smaller windows and shorter time series, the latter for bigger windows and
+longer time series or might even be the only one which works depending on
+the available hardware.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Applies an arbitrary function to a rolling window of selected columns of a
@@ -80,7 +80,7 @@ Currently, only one method to calculate weights is supported:
 each time step further away from the \dQuote{center} adds one to it. So, for
 example, the distance of a timestamp three steps away from the
 \dQuote{center} is four. Additionally, the calculation of the weights accepts
-a power \eqn{p} parameter as a named element of a \code{\link{list}} provided through
+a power parameter \eqn{p} as a named element of a \code{\link{list}} provided through
 the \code{parameters} argument: \eqn{\frac{1}{d^p}}{1 / d^p}.
 }
 
@@ -105,10 +105,21 @@ x <- DTSg$new(values = flow)
 
 # calculate a moving average
 ## R6 method
-x$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)$print()
+x$rollapply(
+  fun = mean,
+  na.rm = TRUE,
+  before = 2,
+  after = 2
+)$print()
 
 ## S3 method
-print(rollapply(x = x, fun = mean, na.rm = TRUE, before = 2, after = 2))
+print(rollapply(
+  x = x,
+  fun = mean,
+  na.rm = TRUE,
+  before = 2,
+  after = 2
+))
 
 }
 \seealso{

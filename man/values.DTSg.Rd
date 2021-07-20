@@ -17,7 +17,8 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{reference}{A logical specifying if a copy of the values or a reference
-to the values is returned. See below for further information.}
+to the values shall be returned. See corresponding section for further
+information.}
 
 \item{drop}{A logical specifying if the object and all references to it shall
 be removed from the global (and only the global) environment after
@@ -41,7 +42,7 @@ Returns the values of a \code{\link{DTSg}} object.
 The original name of the \emph{.dateTime} column is restored when not returned as
 a reference or when dropped.
 }
-\section{Reference}{
+\section{Reference to the values}{
 
 A reference to the values of a \code{\link{DTSg}} object can be used to modify them in
 place. This includes the \emph{.dateTime} column, which serves as the object's

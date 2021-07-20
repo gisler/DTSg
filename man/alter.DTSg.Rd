@@ -32,11 +32,11 @@ of \code{\link{seq.POSIXt}} can be specified. Must be specified for time series 
 unrecognised periodicity. Time steps out of sync with the new periodicity
 are dropped.}
 
-\item{rollback}{A logical specifying if a call to \code{\link{rollback}} is made when
-appropriate.}
+\item{rollback}{A logical specifying if a call to \code{\link{rollback}} shall be made
+when appropriate.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 
 \item{na.status}{A character string. Either \code{"explicit"}, which makes missing
 timestamps explicit according to the recognised periodicity, or
@@ -47,7 +47,7 @@ missing values.}
 \item{\dots}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Shortens, lengthens, filters for a consecutive range, changes the periodicity
@@ -59,10 +59,17 @@ x <- DTSg$new(values = flow)
 
 # filter for the first two years
 ## R6 method
-x$alter(from = "2007-01-01", to = "2008-12-31")$print()
+x$alter(
+  from = "2007-01-01",
+  to = "2008-12-31"
+)$print()
 
 ## S3 method
-print(alter(x = x, from = "2007-01-01", to = "2008-12-31"))
+print(alter(
+  x = x,
+  from = "2007-01-01",
+  to = "2008-12-31"
+))
 
 # change periodicity to one month
 ## R6 method

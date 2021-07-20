@@ -31,13 +31,13 @@ set. The values of the \emph{.dateTime} column cannot be changed.}
 the \code{value} argument of \pkg{data.table}'s \code{\link[data.table:assign]{data.table::set}} function.
 \code{NULL} as a value removes a column.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 
 \item{...}{Not used (S3 method only).}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Changes the values of columns, adds columns to and/or removes columns from a
@@ -49,10 +49,19 @@ x <- DTSg$new(values = flow)
 
 # cap river flows to 100
 ## R6 method
-x$setCols(i = flow > 100, cols = "flow", values = 100)$print()
+x$setCols(
+  i = flow > 100,
+  cols = "flow",
+  values = 100
+)$print()
 
 ## S3 method
-print(setCols(x = x, i = flow > 100, cols = "flow", values = 100))
+print(setCols(
+  x = x,
+  i = flow > 100,
+  cols = "flow",
+  values = 100
+))
 
 }
 \seealso{

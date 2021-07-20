@@ -20,22 +20,22 @@
 
 \item{resultCols}{A character vector either of length one (names of \code{fun} are
 appended in the case one or more functions are provided) or the same length
-as \code{fun}.}
+as \code{fun} specifying the column names for the return values of \code{fun}.}
 
 \item{fun}{A summary function, (named) \code{\link{list}} of summary functions or
-(named) character vector specifying summary functions applied column-wise
-to all the values of the same temporal aggregation level. The return
-value(s) must be of length one. See below for further information.}
+(named) character vector specifying summary functions applied row-wise to
+all the values of the specified \code{cols}. The return value(s) must be of
+length one. See corresponding section for further information.}
 
 \item{...}{Further arguments passed on to \code{fun}.}
 
 \item{cols}{A character vector specifying the columns to apply \code{fun} to.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Applies one or more provided summary functions row-wise to selected columns
@@ -63,10 +63,17 @@ x <- DTSg$new(values = DT)
 
 # mean and standard deviation of multiple measurements per timestamp
 ## R6 method
-x$rowaggregate(resultCols = "flow", fun = list(mean = mean, sd = sd))$print()
+x$rowaggregate(
+  resultCols = "flow",
+  fun = list(mean = mean, sd = sd)
+)$print()
 
 ## S3 method
-print(rowaggregate(x = x, resultCols = "flow", fun = list(mean = mean, sd = sd)))
+print(rowaggregate(
+  x = x,
+  resultCols = "flow",
+  fun = list(mean = mean, sd = sd)
+))
 
 }
 \seealso{

@@ -15,11 +15,11 @@
 \code{\link{new}} for further information). \code{\link{list}}s of such objects or a mixture of
 lists and non-lists are also accepted.}
 
-\item{clone}{A logical specifying if the object is modified in place or if a
-deep clone (copy) is made beforehand.}
+\item{clone}{A logical specifying if the object shall be modified in place or
+if a deep clone (copy) shall be made beforehand.}
 }
 \value{
-Returns a \code{DTSg} object.
+Returns a \code{\link{DTSg}} object.
 }
 \description{
 Combines the rows of \code{\link{DTSg}} and other suitable objects.
