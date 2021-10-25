@@ -1,6 +1,7 @@
-# DTSg v0.7.1.9000
+# DTSg v0.8.0
 
 * Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
+* Added undocumented methods `raggregate`, `rbind`, `set` and `setnames` acting as aliases for `rowaggregate`, `rowbind`, `setCols` and `setColNames`, which are exclusively available in the R6 interface
 * `print` method now truncates the number of printed rows of the values more aggressively
 * Created a `pkgdown` website
 * Improved vignettes and documentation
@@ -43,7 +44,7 @@
 # DTSg v0.5.0
 
 * Added `getCol` method: allows for querying the values of a single column of a `DTSg` object
-* Added `funby` and `ignoreDST` arguments to colapply: allows for applying functions like `cumsum` to a certain temporal level
+* Added `funby` and `ignoreDST` arguments to `colapply`: allows for applying functions like `cumsum` to a certain temporal level
 * Added `na.status` argument to `new` and `alter` methods: allows for making missing values either `"explicit"` (default) or `"implicit"` or leaving them alone via `"undecided"`
 * Added `na.status` field reflecting the status of missing values
 * Added `na.status` also to the `list` of helper data passed on to temporal aggregation level functions

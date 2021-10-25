@@ -389,7 +389,7 @@ expect_error(
   info = "use of arguments not allowed returns error"
 )
 
-#### getCol method ####
+#### getCol method and [ extract operator ####
 expect_identical(
   DTSg$new(DT1)$getCol("col2"),
   DT1[["col2"]],
@@ -776,7 +776,7 @@ expect_identical(
   info = '"suffix" adds columns correctly'
 )
 
-#### rowaggregate method ####
+#### rowaggregate and raggregate methods ####
 for (method in c("rowaggregate", "raggregate")) {
   expect_identical(
     DTSg$new(DT1)[[method]]("col", list(sum = sum))$values(TRUE),
@@ -854,7 +854,7 @@ for (method in c("rowaggregate", "raggregate")) {
   )
 }
 
-#### rowbind method ####
+#### rowbind and rbind methods ####
 for (method in c("rowbind", "rbind")) {
   expect_identical(
     DTSg$new(DT1[1:2, ])[[method]](
@@ -875,7 +875,7 @@ for (method in c("rowbind", "rbind")) {
   )
 }
 
-#### setColNames method ####
+#### setColNames and setnames methods ####
 for (method in c("setColNames", "setnames")) {
   expect_identical(
     DTSg$new(DT1)[[method]](c("col2", "col3"), c("column2", "column3"))$cols(),
@@ -894,7 +894,7 @@ for (method in c("setColNames", "setnames")) {
   )
 }
 
-#### setCols method ####
+#### setCols and set methods ####
 for (method in c("setCols", "set")) {
   expect_identical(
     DTSg$new(DT1)[[method]](2L, "col2", 3)$values(TRUE)[["col2"]],

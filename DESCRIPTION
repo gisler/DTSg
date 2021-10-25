@@ -2,7 +2,7 @@ Package: DTSg
 Type: Package
 Title: A Class for Working with Time Series Data Based on 'data.table' and 'R6'
     with Largely Optional Reference Semantics
-Version: 0.7.1.9000
+Version: 0.8.0
 Authors@R: person("Gerold", "Hepp", email = "ghepp@iwag.tuwien.ac.at", role = c("aut", "cre"))
 Description: Basic time series functionalities such as listing of missing
     values, application of arbitrary aggregation as well as rolling (asymmetric)
@@ -11,7 +11,7 @@ Description: Basic time series functionalities such as listing of missing
     package - offers reference semantics. In addition to its native R6
     interface, it provides an S3 interface inclusive an S3 wrapper method 
     generator for those who prefer the latter. Finally yet importantly, its
-    functional approach allows incorporating functionalities from many other
+    functional approach allows for incorporating functionalities from many other
     packages.
 License: MIT + file LICENSE
 URL: https://gisler.github.io/DTSg
