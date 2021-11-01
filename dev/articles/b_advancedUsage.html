@@ -237,9 +237,9 @@
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"magrittr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
-  <span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span><span class="st">"DTSg"</span>, <span class="va">flow</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span><span class="st">"DTSg"</span>, <span class="va">flow</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span><span class="op">(</span><span class="va">byYm____</span>, <span class="va">mean</span><span class="op">)</span>
   <span class="va">TS</span>
 <span class="op">}</span>

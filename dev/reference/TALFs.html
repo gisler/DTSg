@@ -221,7 +221,7 @@ part of them (extracting family). Each family comes in two flavours: one
 using <code><a href='https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html'>fasttime::fastPOSIXct</a></code> of <span class="pkg">fasttime</span>, the other solely relying
 on base <span style="R">R</span>. The <span class="pkg">fasttime</span> versions work with UTC and equivalent as well
 as all Etc/GMT time zones only (execute
-<code><a href='https://rdrr.io/r/base/grep.html'>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</a></code> for a full list of supported time zones) and are
+<code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones) and are
 limited to timestamps between the years 1970 and 2199, but generally are
 faster for the extracting family of functions.</p>
 <p>The truncating family sets timestamps to the lowest possible point in time of

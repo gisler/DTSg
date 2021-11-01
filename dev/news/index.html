@@ -169,7 +169,7 @@
 </li>
 <li>Added <code>multiplier</code> also to the <code>list</code> of helper data passed on to temporal aggregation level functions</li>
 <li>Added <code>helpers</code> argument to <code>colapply</code> and <code>rollapply</code> methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. <code>x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)</code> can now be written as <code>x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)</code>)</li>
-<li>Temporal aggregation level functions based on the <code>fasttime</code> package now also support time zones equivalent to UTC (execute <code><a href="https://rdrr.io/r/base/grep.html">grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</a></code> for a full list of supported time zones)</li>
+<li>Temporal aggregation level functions based on the <code>fasttime</code> package now also support time zones equivalent to UTC (execute <code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones)</li>
 <li>Fixed that a <code>DTSg</code> object with only one timestamp did not set the name of its <em>.dateTime</em> column as expected</li>
 <li>Improved vignettes and documentation</li>
 <li>Minor internal code improvements</li>
@@ -182,7 +182,7 @@
 <ul>
 <li>Added <code>subset</code> method: allows for filtering rows and/or selecting columns of a <code>DTSg</code> object</li>
 <li>Added <code>setCols</code> method: allows for setting the values of columns of, adding columns to and/or removing columns from a <code>DTSg</code> object</li>
-<li>Added <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code> extract operator: acts as a shortcut for the <code>getCol</code> method</li>
+<li>Added <code>[</code> extract operator: acts as a shortcut for the <code>getCol</code> method</li>
 <li>Added examples to the documentation of the <code>colapply</code> method showing how to calculate moving averages with the help of the <code>runner</code> package instead of the <code>rollapply</code> method</li>
 <li>
 <code>aggregate</code> method can benefit from <code>data.table</code>’s <em>GForce</em> optimisation now when its <code>fun</code> argument is provided with a character vector specifying summary functions</li>

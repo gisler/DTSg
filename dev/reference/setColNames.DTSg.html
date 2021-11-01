@@ -180,64 +180,66 @@ if a deep clone (copy) shall be made beforehand.</p></td>
     <div class='dont-index'><p><code><a href='cols.DTSg.html'>cols</a></code>, <code><a href='https://rdrr.io/r/base/options.html'>getOption</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># new DTSg object</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span>
-
-<span class='co'># rename column "flow" to "River Flow"</span>
-<span class='co'>## R6 method</span>
-<span class='va'>x</span><span class='op'>$</span><span class='fu'>setColNames</span><span class='op'>(</span>
-  cols <span class='op'>=</span> <span class='st'>"flow"</span>,
-  values <span class='op'>=</span> <span class='st'>"River Flow"</span>
-<span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Values:
-#&gt;        .dateTime River Flow
-#&gt;           &lt;POSc&gt;      &lt;num&gt;
-#&gt;    1: 2007-01-01      9.540
-#&gt;    2: 2007-01-02      9.285
-#&gt;    3: 2007-01-03      8.940
-#&gt;    4: 2007-01-04      8.745
-#&gt;    5: 2007-01-05      8.490
-#&gt;   ---                      
-#&gt; 2188: 2012-12-27     26.685
-#&gt; 2189: 2012-12-28     28.050
-#&gt; 2190: 2012-12-29     23.580
-#&gt; 2191: 2012-12-30     18.840
-#&gt; 2192: 2012-12-31     17.250
-#&gt; 
-#&gt; Aggregated:     FALSE
-#&gt; Regular:        TRUE
-#&gt; Periodicity:    Time difference of 1 days
-#&gt; Missing values: explicit
-#&gt; Time zone:      UTC
-#&gt; Timestamps:     2192</div><div class='input'>
-<span class='co'>## S3 method</span>
-<span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>setColNames</span><span class='op'>(</span>
-  x <span class='op'>=</span> <span class='va'>x</span>,
-  cols <span class='op'>=</span> <span class='st'>"flow"</span>,
-  values <span class='op'>=</span> <span class='st'>"River Flow"</span>
-<span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Values:
-#&gt;        .dateTime River Flow
-#&gt;           &lt;POSc&gt;      &lt;num&gt;
-#&gt;    1: 2007-01-01      9.540
-#&gt;    2: 2007-01-02      9.285
-#&gt;    3: 2007-01-03      8.940
-#&gt;    4: 2007-01-04      8.745
-#&gt;    5: 2007-01-05      8.490
-#&gt;   ---                      
-#&gt; 2188: 2012-12-27     26.685
-#&gt; 2189: 2012-12-28     28.050
-#&gt; 2190: 2012-12-29     23.580
-#&gt; 2191: 2012-12-30     18.840
-#&gt; 2192: 2012-12-31     17.250
-#&gt; 
-#&gt; Aggregated:     FALSE
-#&gt; Regular:        TRUE
-#&gt; Periodicity:    Time difference of 1 days
-#&gt; Missing values: explicit
-#&gt; Time zone:      UTC
-#&gt; Timestamps:     2192</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># new DTSg object</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'><a href='DTSg.html'>DTSg</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>values <span class='op'>=</span> <span class='va'>flow</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># rename column "flow" to "River Flow"</span></span>
+<span class='r-in'><span class='co'>## R6 method</span></span>
+<span class='r-in'><span class='va'>x</span><span class='op'>$</span><span class='fu'>setColNames</span><span class='op'>(</span></span>
+<span class='r-in'>  cols <span class='op'>=</span> <span class='st'>"flow"</span>,</span>
+<span class='r-in'>  values <span class='op'>=</span> <span class='st'>"River Flow"</span></span>
+<span class='r-in'><span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Values:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        .dateTime River Flow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1: 2007-01-01      9.540</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    2: 2007-01-02      9.285</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    3: 2007-01-03      8.940</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    4: 2007-01-04      8.745</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    5: 2007-01-05      8.490</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ---                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2188: 2012-12-27     26.685</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2189: 2012-12-28     28.050</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2190: 2012-12-29     23.580</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2191: 2012-12-30     18.840</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2192: 2012-12-31     17.250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Aggregated:     FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Regular:        TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Periodicity:    Time difference of 1 days</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Missing values: explicit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Time zone:      UTC</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Timestamps:     2192</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## S3 method</span></span>
+<span class='r-in'><span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>setColNames</span><span class='op'>(</span></span>
+<span class='r-in'>  x <span class='op'>=</span> <span class='va'>x</span>,</span>
+<span class='r-in'>  cols <span class='op'>=</span> <span class='st'>"flow"</span>,</span>
+<span class='r-in'>  values <span class='op'>=</span> <span class='st'>"River Flow"</span></span>
+<span class='r-in'><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Values:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        .dateTime River Flow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1: 2007-01-01      9.540</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    2: 2007-01-02      9.285</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    3: 2007-01-03      8.940</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    4: 2007-01-04      8.745</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    5: 2007-01-05      8.490</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ---                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2188: 2012-12-27     26.685</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2189: 2012-12-28     28.050</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2190: 2012-12-29     23.580</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2191: 2012-12-30     18.840</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2192: 2012-12-31     17.250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Aggregated:     FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Regular:        TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Periodicity:    Time difference of 1 days</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Missing values: explicit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Time zone:      UTC</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Timestamps:     2192</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
