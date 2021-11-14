@@ -595,6 +595,60 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Time zone:      UTC</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Timestamps:     2192</span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in checkFunction(x, args, ordered, nargs, null.ok):</span> object 'wrapper' not found</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># calculate rolling correlations somewhat inefficient with the help of 'runner'</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"runner"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>&amp;&amp;</span></span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/utils/packageDescription.html'>packageVersion</a></span><span class='op'>(</span><span class='st'>"runner"</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>package_version</a></span><span class='op'>(</span><span class='st'>"0.3.8"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>wrapper</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>f</span>, <span class='va'>k</span>, <span class='va'>lag</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='fu'>runner</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/runner/man/runner.html'>runner</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,</span>
+<span class='r-in'>      f <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'>f</span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span>, <span class='va'>x</span><span class='op'>[</span>, <span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span><span class='op'>}</span>,</span>
+<span class='r-in'>      k <span class='op'>=</span> <span class='va'>k</span>,</span>
+<span class='r-in'>      lag <span class='op'>=</span> <span class='va'>lag</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'>## R6 method</span></span>
+<span class='r-in'>  <span class='va'>x</span><span class='op'>$</span><span class='fu'>colapply</span><span class='op'>(</span></span>
+<span class='r-in'>    fun <span class='op'>=</span> <span class='va'>wrapper</span>,</span>
+<span class='r-in'>    y <span class='op'>=</span> <span class='va'>x</span><span class='op'>[</span><span class='st'>"flow"</span><span class='op'>]</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='st'>"flow"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>    f <span class='op'>=</span> <span class='va'>cor</span>,</span>
+<span class='r-in'>    k <span class='op'>=</span> <span class='fl'>5</span>,</span>
+<span class='r-in'>    lag <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span></span>
+<span class='r-in'>  <span class='op'>)</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'>## S3 method</span></span>
+<span class='r-in'>  <span class='fu'><a href='print.DTSg.html'>print</a></span><span class='op'>(</span><span class='fu'>colapply</span><span class='op'>(</span></span>
+<span class='r-in'>    x <span class='op'>=</span> <span class='va'>x</span>,</span>
+<span class='r-in'>    fun <span class='op'>=</span> <span class='va'>wrapper</span>,</span>
+<span class='r-in'>    y <span class='op'>=</span> <span class='va'>x</span><span class='op'>[</span><span class='st'>"flow"</span><span class='op'>]</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='st'>"flow"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>    f <span class='op'>=</span> <span class='va'>cor</span>,</span>
+<span class='r-in'>    k <span class='op'>=</span> <span class='fl'>5</span>,</span>
+<span class='r-in'>    lag <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span></span>
+<span class='r-in'>  <span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Values:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        .dateTime        flow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           &lt;POSc&gt;       &lt;num&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1: 2007-01-01  0.60913948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    2: 2007-01-02  0.21808830</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    3: 2007-01-03 -0.07628021</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    4: 2007-01-04 -0.20484280</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    5: 2007-01-05 -0.20798329</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ---                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2188: 2012-12-27  0.98269980</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2189: 2012-12-28  0.99617465</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2190: 2012-12-29  0.99277104</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2191: 2012-12-30  0.99215890</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2192: 2012-12-31  0.98580756</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Aggregated:     FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Regular:        TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Periodicity:    Time difference of 1 days</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Missing values: explicit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Time zone:      UTC</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Timestamps:     2192</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in checkFunction(x, args, ordered, nargs, null.ok):</span> object 'wrapper' not found</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
