@@ -3,9 +3,10 @@
 name: GitHub Pages
 
 on:
-  push:
+  workflow_run:
+    workflows: ['R-CMD-check']
     branches: [main]
-    tags: ['*']
+    types: [completed]
 
 jobs:
   pkgdown:
@@ -14,6 +15,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
 
