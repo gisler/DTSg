@@ -36,6 +36,6 @@ Suggests:
     rmarkdown,
     runner (>= 0.3.5),
     tinytest
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 VignetteBuilder: knitr

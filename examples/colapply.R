@@ -92,3 +92,35 @@ if (requireNamespace("runner", quietly = TRUE) &&
     idx = x[".dateTime"]
   ))
 }
+
+# calculate rolling correlations somewhat inefficient with the help of 'runner'
+if (requireNamespace("runner", quietly = TRUE) &&
+    packageVersion("runner") >= package_version("0.3.8")) {
+  wrapper <- function(x, y, f, k, lag, ...) {
+    runner::runner(
+      matrix(c(x, y), ncol = 2),
+      f = function(x) {f(x[, 1], x[, 2])},
+      k = k,
+      lag = lag
+    )
+  }
+
+  ## R6 method
+  x$colapply(
+    fun = wrapper,
+    y = x["flow"] + rnorm(length(x["flow"])),
+    f = cor,
+    k = 5,
+    lag = -2
+  )$print()
+
+  ## S3 method
+  print(colapply(
+    x = x,
+    fun = wrapper,
+    y = x["flow"] + rnorm(length(x["flow"])),
+    f = cor,
+    k = 5,
+    lag = -2
+  ))
+}

@@ -1,5 +1,7 @@
 # DTSg v0.8.1.9000
 
+* Added an example to the documentation of the `colapply` method showing how to calculate running correlations with the help of the `runner` package
+
 # DTSg v0.8.1
 
 * Added a "special class" called `".numerary"` available to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
