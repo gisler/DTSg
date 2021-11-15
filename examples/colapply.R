@@ -93,7 +93,8 @@ if (requireNamespace("runner", quietly = TRUE) &&
   ))
 }
 
-# calculate rolling correlations somewhat inefficient with the help of 'runner'
+# calculate rolling correlations somewhat inefficiently with the help of
+# 'runner'
 if (requireNamespace("runner", quietly = TRUE) &&
     packageVersion("runner") >= package_version("0.3.8")) {
   wrapper <- function(x, y, f, k, lag, ...) {

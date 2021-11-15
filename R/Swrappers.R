@@ -731,9 +731,9 @@ rowaggregate <- function(x, ...) {
 #' # new DTSg object
 #' DT <- data.table::data.table(
 #'   date = flow$date,
-#'   flow1 = flow$flow - rnorm(nrow(flow)),
+#'   flow1 = flow$flow - abs(rnorm(nrow(flow))),
 #'   flow2 = flow$flow,
-#'   flow3 = flow$flow + rnorm(nrow(flow))
+#'   flow3 = flow$flow + abs(rnorm(nrow(flow)))
 #' )
 #' x <- DTSg$new(values = DT)
 #'
