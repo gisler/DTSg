@@ -596,7 +596,8 @@ following <code><a href='TALFs.html'>TALFs</a></code> of the package:</p><ul>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Timestamps:     2192</span>
 <span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in checkFunction(x, args, ordered, nargs, null.ok):</span> object 'wrapper' not found</span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># calculate rolling correlations somewhat inefficient with the help of 'runner'</span></span>
+<span class='r-in'><span class='co'># calculate rolling correlations somewhat inefficiently with the help of</span></span>
+<span class='r-in'><span class='co'># 'runner'</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"runner"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>&amp;&amp;</span></span>
 <span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/utils/packageDescription.html'>packageVersion</a></span><span class='op'>(</span><span class='st'>"runner"</span><span class='op'>)</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>package_version</a></span><span class='op'>(</span><span class='st'>"0.3.8"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'>  <span class='va'>wrapper</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>f</span>, <span class='va'>k</span>, <span class='va'>lag</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span></span>
