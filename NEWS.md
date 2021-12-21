@@ -2,8 +2,8 @@
 
 # DTSg v0.8.1
 
-* Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
-* Added undocumented methods `raggregate`, `rbind`, `set` and `setnames` acting as aliases for `rowaggregate`, `rowbind`, `setCols` and `setColNames`, which are exclusively available in the R6 interface
+* Added a "special class" called `".numerary"` available to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
+* Added undocumented methods `raggregate`, `rbind`, `set` and `setnames` exclusive only to the R6 interface acting as aliases for the `rowaggregate`, `rowbind`, `setCols` and `setColNames` methods
 * `print` method now truncates the number of printed rows of the values more aggressively
 * Created a `pkgdown` website
 * Improved vignettes and documentation
