@@ -1,3 +1,5 @@
+# DTSg v0.8.1.9000
+
 # DTSg v0.8.1
 
 * Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go

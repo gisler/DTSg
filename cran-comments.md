@@ -1,13 +1,16 @@
-## Patch Release
+## Minor Release
 
-* Fixed error "Error in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, : invalid value 0 for 'digits' argument" related to tests in upcoming R 4.2.0
-* Slightly improved documentation
-* Minor internal code improvements
+* Added a "special class" called `".numerary"` to the `class` argument of the `cols` method: allows for querying the names of `integer` and `numeric` columns in one go
+* Added undocumented methods `raggregate`, `rbind`, `set` and `setnames` acting as aliases for `rowaggregate`, `rowbind`, `setCols` and `setColNames`, which are exclusively available in the R6 interface
+* `print` method now truncates the number of printed rows of the values more aggressively
+* Created a `pkgdown` website
+* Improved vignettes and documentation
 
 ## Test Environments
 
 * Windows on GitHub Actions (3.5.2)
 * Local Windows (4.0.2)
+* Windows on GitHub Actions (devel)
 * win-builder (devel)
 * macOS on GitHub Actions (oldrel)
 * macOS on GitHub Actions (release)
