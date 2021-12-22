@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -78,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/gisler/DTSg/">
+  <a href="https://github.com/gisler/DTSg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -97,66 +99,77 @@
   <div class="contents col-md-9">
 
 <p><code>DTSg</code> offers basic time series data functionalities such as listing of missing values, application of arbitrary aggregation as well as rolling (asymmetric) window functions and automatic detection of periodicity. As it is mainly based on <code>data.table</code>, it is fast and – in combination with the <code>R6</code> package – offers reference semantics. In addition to its native R6 interface, it provides an S3 interface inclusive an S3 wrapper method generator for those who prefer the latter. Finally yet importantly, its functional approach allows for incorporating functionalities from many other packages.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install the latest release from CRAN:</p>
 <p><code>install.packages("DTSg")</code></p>
-<p><a href="https://cran.r-project.org/package=DTSg"><img src="https://www.r-pkg.org/badges/version/DTSg" alt="CRAN Version"></a> <a href="https://cran.r-project.org/web/checks/check_results_DTSg.html"><img src="https://cranchecks.info/badges/summary/DTSg" alt="CRAN Checks"></a></p>
+<p><a href="https://cran.r-project.org/package=DTSg" class="external-link"><img src="https://www.r-pkg.org/badges/version/DTSg" alt="CRAN Version"></a> <a href="https://cran.r-project.org/web/checks/check_results_DTSg.html" class="external-link"><img src="https://cranchecks.info/badges/summary/DTSg" alt="CRAN Checks"></a></p>
 <p>Install the development version from GitHub (requires the <code>remotes</code> package):</p>
 <p><code>remotes::install_github("gisler/DTSg")</code></p>
-<p><a href="https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/gisler/DTSg"><img src="https://codecov.io/gh/gisler/DTSg/branch/main/graph/badge.svg?token=AYXU0fdU9T" alt="codecov"></a> <a href="https://github.com/gisler/DTSg/actions?query=workflow%3A%22Lint+Code+Base%22"><img src="https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg" alt="GitHub Super-Linter"></a></p>
+<p><a href="https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check" class="external-link"><img src="https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/gisler/DTSg" class="external-link"><img src="https://codecov.io/gh/gisler/DTSg/branch/main/graph/badge.svg?token=AYXU0fdU9T" alt="codecov"></a> <a href="https://github.com/gisler/DTSg/actions?query=workflow%3A%22Lint+Code+Base%22" class="external-link"><img src="https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg" alt="GitHub Super-Linter"></a></p>
 </div>
-<div id="semantic-versioning" class="section level2">
-<h2 class="hasAnchor">
-<a href="#semantic-versioning" class="anchor"></a>Semantic versioning</h2>
-<p>Releases of this project are versioned following the rules of <a href="https://semver.org">SemVer</a> with one exception: The public API of major version zero (0.y.z) should be considered stable.</p>
+<div class="section level2">
+<h2 id="semantic-versioning">Semantic versioning<a class="anchor" aria-label="anchor" href="#semantic-versioning"></a>
+</h2>
+<p>Releases of this project are versioned following the rules of <a href="https://semver.org" class="external-link">SemVer</a> with one exception: The public API of major version zero (0.y.z) should be considered stable.</p>
 </div>
 
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=DTSg">https://​cloud.r-project.org/​package=DTSg</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/gisler/DTSg/">https://​github.com/​gisler/​DTSg/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/gisler/DTSg/issues">https://​github.com/​gisler/​DTSg/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=DTSg" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/gisler/DTSg/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/gisler/DTSg/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing DTSg</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Gerold Hepp <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Gerold Hepp.</p>
+  <p></p>
+<p>Developed by Gerold Hepp.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -164,6 +177,8 @@
 
   
 
+
+  
 
   </body>
 </html>

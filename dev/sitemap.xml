@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://gisler.github.io/DTSg/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/articles/a_basicUsage.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/articles/b_advancedUsage.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/authors.html</loc>
+  </url>
+  <url>
     <loc>https://gisler.github.io/DTSg/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/pull_request_template.html</loc>
   </url>
   <url>
     <loc>https://gisler.github.io/DTSg/reference/DTSg.html</loc>
@@ -32,6 +59,9 @@
   </url>
   <url>
     <loc>https://gisler.github.io/DTSg/reference/getCol.DTSg.html</loc>
+  </url>
+  <url>
+    <loc>https://gisler.github.io/DTSg/reference/index.html</loc>
   </url>
   <url>
     <loc>https://gisler.github.io/DTSg/reference/interpolateLinear.html</loc>
@@ -77,11 +107,5 @@
   </url>
   <url>
     <loc>https://gisler.github.io/DTSg/reference/values.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/articles/a_basicUsage.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/articles/b_advancedUsage.html</loc>
   </url>
 </urlset>
