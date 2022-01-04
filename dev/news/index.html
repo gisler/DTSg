@@ -68,15 +68,15 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.1.9000" id="dtsg-v0819000">DTSg v0.8.1.9000<a class="anchor" aria-label="anchor" href="#dtsg-v0819000"></a></h2>
-<ul><li>Added an example to the documentation of the <code>colapply</code> method showing how to calculate running correlations with the help of the <code>runner</code> package</li>
+<ul><li>Added an example to the documentation of the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method showing how to calculate running correlations with the help of the <code>runner</code> package</li>
 <li>Slightly improved documentation</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.1" id="dtsg-v081">DTSg v0.8.1<small>2021-10-27</small><a class="anchor" aria-label="anchor" href="#dtsg-v081"></a></h2>
-<ul><li>Added a “special class” called <code>".numerary"</code> available to the <code>class</code> argument of the <code>cols</code> method: allows for querying the names of <code>integer</code> and <code>numeric</code> columns in one go</li>
-<li>Added undocumented methods <code>raggregate</code>, <code>rbind</code>, <code>set</code> and <code>setnames</code> exclusive only to the R6 interface acting as aliases for the <code>rowaggregate</code>, <code>rowbind</code>, <code>setCols</code> and <code>setColNames</code> methods</li>
+<ul><li>Added a “special class” called <code>".numerary"</code> available to the <code>class</code> argument of the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for querying the names of <code>integer</code> and <code>numeric</code> columns in one go</li>
+<li>Added undocumented methods <code><a href="../reference/rowaggregate.DTSg.html">raggregate()</a></code>, <code><a href="../reference/rowbind.DTSg.html">rbind()</a></code>, <code><a href="../reference/setCols.DTSg.html">set()</a></code> and <code><a href="../reference/setColNames.DTSg.html">setnames()</a></code> exclusive only to the R6 interface acting as aliases for the <code><a href="../reference/rowaggregate.DTSg.html">rowaggregate()</a></code>, <code><a href="../reference/rowbind.DTSg.html">rowbind()</a></code>, <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> and <code><a href="../reference/setColNames.DTSg.html">setColNames()</a></code> methods</li>
 <li>
-<code>print</code> method now truncates the number of printed rows of the values more aggressively</li>
+<code><a href="../reference/print.DTSg.html">print()</a></code> method now truncates the number of printed rows of the values more aggressively</li>
 <li>Created a <code>pkgdown</code> website</li>
 <li>Improved vignettes and documentation</li>
 </ul></div>
@@ -88,13 +88,13 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.0" id="dtsg-v070">DTSg v0.7.0<small>2020-09-05</small><a class="anchor" aria-label="anchor" href="#dtsg-v070"></a></h2>
-<ul><li>Added <code>rowaggregate</code> method: allows for applying summary functions row-wise to <code>DTSg</code> objects</li>
-<li>Added <code>rowbind</code> method: allows for combining the rows of <code>DTSg</code> objects</li>
-<li>Added <code>setColNames</code> method: allows for renaming columns of <code>DTSg</code> objects</li>
-<li>Added <code>multiplier</code> and <code>funbyHelpers</code> arguments to the <code>aggregate</code>, <code>colapply</code> and <code>subset</code> methods: allows for adjusting the temporal aggregation level of <code>TALFs</code> and for passing on user defined helper data to <code>TALFs</code>
+<ul><li>Added <code><a href="../reference/rowaggregate.DTSg.html">rowaggregate()</a></code> method: allows for applying summary functions row-wise to <code>DTSg</code> objects</li>
+<li>Added <code><a href="../reference/rowbind.DTSg.html">rowbind()</a></code> method: allows for combining the rows of <code>DTSg</code> objects</li>
+<li>Added <code><a href="../reference/setColNames.DTSg.html">setColNames()</a></code> method: allows for renaming columns of <code>DTSg</code> objects</li>
+<li>Added <code>multiplier</code> and <code>funbyHelpers</code> arguments to the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code>, <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/subset.DTSg.html">subset()</a></code> methods: allows for adjusting the temporal aggregation level of <code>TALFs</code> and for passing on user defined helper data to <code>TALFs</code>
 </li>
 <li>Added <code>multiplier</code> also to the <code>list</code> of helper data passed on to temporal aggregation level functions</li>
-<li>Added <code>helpers</code> argument to <code>colapply</code> and <code>rollapply</code> methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. <code>x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)</code> can now be written as <code>x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)</code>)</li>
+<li>Added <code>helpers</code> argument to <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/rollapply.DTSg.html">rollapply()</a></code> methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. <code>x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)</code> can now be written as <code>x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)</code>)</li>
 <li>Temporal aggregation level functions based on the <code>fasttime</code> package now also support time zones equivalent to UTC (execute <code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones)</li>
 <li>Fixed that a <code>DTSg</code> object with only one timestamp did not set the name of its <em>.dateTime</em> column as expected</li>
 <li>Improved vignettes and documentation</li>
@@ -102,33 +102,33 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.0" id="dtsg-v060">DTSg v0.6.0<small>2020-07-12</small><a class="anchor" aria-label="anchor" href="#dtsg-v060"></a></h2>
-<ul><li>Added <code>subset</code> method: allows for filtering rows and/or selecting columns of a <code>DTSg</code> object</li>
-<li>Added <code>setCols</code> method: allows for setting the values of columns of, adding columns to and/or removing columns from a <code>DTSg</code> object</li>
-<li>Added <code>[</code> extract operator: acts as a shortcut for the <code>getCol</code> method</li>
-<li>Added examples to the documentation of the <code>colapply</code> method showing how to calculate moving averages with the help of the <code>runner</code> package instead of the <code>rollapply</code> method</li>
+<ul><li>Added <code><a href="../reference/subset.DTSg.html">subset()</a></code> method: allows for filtering rows and/or selecting columns of a <code>DTSg</code> object</li>
+<li>Added <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> method: allows for setting the values of columns of, adding columns to and/or removing columns from a <code>DTSg</code> object</li>
+<li>Added <code>[</code> extract operator: acts as a shortcut for the <code><a href="../reference/getCol.DTSg.html">getCol()</a></code> method</li>
+<li>Added examples to the documentation of the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method showing how to calculate moving averages with the help of the <code>runner</code> package instead of the <code><a href="../reference/rollapply.DTSg.html">rollapply()</a></code> method</li>
 <li>
-<code>aggregate</code> method can benefit from <code>data.table</code>’s <em>GForce</em> optimisation now when its <code>fun</code> argument is provided with a character vector specifying summary functions</li>
-<li>Greatly sped up <code>nas</code> method</li>
-<li>Temporal aggregation level functions supplied to the <code>funby</code> argument of the <code>colapply</code> method are not forced to return a <code>POSIXct</code> timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the <code>subset</code> method).</li>
+<code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method can benefit from <code>data.table</code>’s <em>GForce</em> optimisation now when its <code>fun</code> argument is provided with a character vector specifying summary functions</li>
+<li>Greatly sped up <code><a href="../reference/nas.DTSg.html">nas()</a></code> method</li>
+<li>Temporal aggregation level functions supplied to the <code>funby</code> argument of the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method are not forced to return a <code>POSIXct</code> timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the <code><a href="../reference/subset.DTSg.html">subset()</a></code> method).</li>
 <li>
-<code>getCol</code> method now is capable of also querying the <em>.dateTime</em> column</li>
+<code><a href="../reference/getCol.DTSg.html">getCol()</a></code> method now is capable of also querying the <em>.dateTime</em> column</li>
 <li>
-<code>R6Method</code> argument of <code>S3WrapperGenerator</code> now also takes a public method of an <code>R6ClassGenerator</code> as a function and not only as an expression</li>
-<li>Fixed that not all missing values were made explicit after a call to the <code>merge</code> method despite an <code>"explicit"</code> <code>na.status</code> in some cases</li>
-<li>Fixed that <code>getCol</code> method tried to query all numeric columns instead of only the first one by default</li>
+<code>R6Method</code> argument of <code><a href="../reference/S3WrapperGenerator.html">S3WrapperGenerator()</a></code> function now also takes a public method of an <code>R6ClassGenerator</code> as a function and not only as an expression</li>
+<li>Fixed that not all missing values were made explicit after a call to the <code><a href="../reference/merge.DTSg.html">merge()</a></code> method despite an <code>"explicit"</code> <code>na.status</code> in some cases</li>
+<li>Fixed that <code><a href="../reference/getCol.DTSg.html">getCol()</a></code> method tried to query all numeric columns instead of only the first one by default</li>
 <li>Improved vignettes and documentation</li>
 <li>Minor internal code improvements</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.0" id="dtsg-v050">DTSg v0.5.0<small>2020-06-09</small><a class="anchor" aria-label="anchor" href="#dtsg-v050"></a></h2>
-<ul><li>Added <code>getCol</code> method: allows for querying the values of a single column of a <code>DTSg</code> object</li>
-<li>Added <code>funby</code> and <code>ignoreDST</code> arguments to <code>colapply</code>: allows for applying functions like <code>cumsum</code> to a certain temporal level</li>
-<li>Added <code>na.status</code> argument to <code>new</code> and <code>alter</code> methods: allows for making missing values either <code>"explicit"</code> (default) or <code>"implicit"</code> or leaving them alone via <code>"undecided"</code>
+<ul><li>Added <code><a href="../reference/getCol.DTSg.html">getCol()</a></code> method: allows for querying the values of a single column of a <code>DTSg</code> object</li>
+<li>Added <code>funby</code> and <code>ignoreDST</code> arguments to <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method: allows for applying functions like <code><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum()</a></code> to a certain temporal level</li>
+<li>Added <code>na.status</code> argument to <code><a href="../reference/DTSg.html">new()</a></code> and <code><a href="../reference/alter.DTSg.html">alter()</a></code> methods: allows for making missing values either <code>"explicit"</code> (default) or <code>"implicit"</code> or leaving them alone via <code>"undecided"</code>
 </li>
 <li>Added <code>na.status</code> field reflecting the status of missing values</li>
 <li>Added <code>na.status</code> also to the <code>list</code> of helper data passed on to temporal aggregation level functions</li>
 <li>
-<code>funby</code> argument of <code>aggregate</code> method now also accepts a named <code>list</code> of functions: allows for calculating several summary statistics at once</li>
+<code>funby</code> argument of <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method now also accepts a named <code>list</code> of functions: allows for calculating several summary statistics at once</li>
 <li>
 <code>periodicity</code> field can now be actively set in order to change the periodicity of the time series</li>
 <li>
@@ -139,13 +139,13 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.1" id="dtsg-v041">DTSg v0.4.1<small>2020-05-08</small><a class="anchor" aria-label="anchor" href="#dtsg-v041"></a></h2>
-<ul><li>Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be supplied” related to <code>rollback</code> in upcoming R 4.1.0</li>
+<ul><li>Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be supplied” related to <code><a href="../reference/rollback.html">rollback()</a></code> function in upcoming R 4.1.0</li>
 <li>Slightly improved vignettes</li>
 <li>Minor internal code improvements</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.0" id="dtsg-v040">DTSg v0.4.0<small>2020-03-28</small><a class="anchor" aria-label="anchor" href="#dtsg-v040"></a></h2>
-<ul><li>Added <code>memoryOverCPU</code> argument to <code>rollapply</code> method: allows for preferring CPU over memory usage which makes the method more flexible in terms of resource consumption</li>
+<ul><li>Added <code>memoryOverCPU</code> argument to <code><a href="../reference/rollapply.DTSg.html">rollapply()</a></code> method: allows for preferring CPU over memory usage which makes the method more flexible in terms of resource consumption</li>
 <li>Settings of option <code>DTSgClone</code> in e.g. <em>.RProfile</em> are now respected and not overwritten by <code>TRUE</code> when the package is loaded</li>
 <li>Fixed useless coercion of <code>POSIXct</code> <em>.dateTime</em> columns to <code>POSIXct</code> upon object creation in case they contained at least one missing value</li>
 <li>Switched to unit testing framework of the <code>tinytest</code> package instead of the <code>testthat</code> package</li>
@@ -154,12 +154,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="dtsg-v030">DTSg v0.3.0<small>2020-01-08</small><a class="anchor" aria-label="anchor" href="#dtsg-v030"></a></h2>
-<ul><li>Added <code>resultCols</code> and <code>suffix</code> arguments to <code>colapply</code> and <code>rollapply</code> methods: allows for adding return values of applied functions as new columns instead of replacing existing ones</li>
+<ul><li>Added <code>resultCols</code> and <code>suffix</code> arguments to <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/rollapply.DTSg.html">rollapply()</a></code> methods: allows for adding return values of applied functions as new columns instead of replacing existing ones</li>
 <li>
-<code>class</code> argument of <code>cols</code> method now accepts a character vector of class names</li>
-<li>Changed default value of <code>class</code> argument of <code>cols</code> method from <code>"all"</code> to <code>NULL</code>, however, for backward compatibility <code>"all"</code> can still be used for the same result, but will eventually be treated as a filter for classes of type <code>all</code>
+<code>class</code> argument of <code><a href="../reference/cols.DTSg.html">cols()</a></code> method now accepts a character vector of class names</li>
+<li>Changed default value of <code>class</code> argument of <code><a href="../reference/cols.DTSg.html">cols()</a></code> method from <code>"all"</code> to <code>NULL</code>, however, for backward compatibility <code>"all"</code> can still be used for the same result, but will eventually be treated as a filter for classes of type <code>all</code>
 </li>
-<li>Added <code>pattern</code> and <code>...</code> arguments to <code>cols</code> method: allows for searching column names</li>
+<li>Added <code>pattern</code> and <code>...</code> arguments to <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for searching column names</li>
 <li>Switched to argument check functions of the <code>checkmate</code> package instead of the <code>assertive.base</code>, <code>assertive.numbers</code>, <code>assertive.sets</code> and <code>assertive.types</code> packages</li>
 <li>Slightly improved vignettes and documentation</li>
 <li>Minor internal code improvements</li>
@@ -170,15 +170,15 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="dtsg-v020">DTSg v0.2.0<small>2019-10-14</small><a class="anchor" aria-label="anchor" href="#dtsg-v020"></a></h2>
-<ul><li>Added <code>swallow</code> argument to <code>new</code> method: allows for a more resource efficient object creation</li>
-<li>Added <code>drop</code> argument to <code>values</code> method: allows for a resource efficient destruction of a <code>DTSg</code> object while preserving its values</li>
-<li>Added <code>class</code> argument to <code>values</code> method: can be used to return the values of a <code>DTSg</code> object as a <code>data.frame</code> instead of a <code>data.table</code>
+<ul><li>Added <code>swallow</code> argument to <code><a href="../reference/DTSg.html">new()</a></code> method: allows for a more resource efficient object creation</li>
+<li>Added <code>drop</code> argument to <code><a href="../reference/values.DTSg.html">values()</a></code> method: allows for a resource efficient destruction of a <code>DTSg</code> object while preserving its values</li>
+<li>Added <code>class</code> argument to <code><a href="../reference/values.DTSg.html">values()</a></code> method: can be used to return the values of a <code>DTSg</code> object as a <code>data.frame</code> instead of a <code>data.table</code>
 </li>
 <li>
-<code>alter</code> method and linked with it <code>new</code> and other methods are now way more resource efficient in some cases</li>
+<code><a href="../reference/alter.DTSg.html">alter()</a></code> method and linked with it <code><a href="../reference/DTSg.html">new()</a></code> and other methods are now way more resource efficient in some cases</li>
 <li>Added <code>timestamps</code> field providing the total number of timestamps</li>
 <li>
-<code>print</code> method now omits empty metadata fields</li>
+<code><a href="../reference/print.DTSg.html">print()</a></code> method now omits empty metadata fields</li>
 <li>Added means to measure code coverage with the help of <code>covr</code>
 </li>
 <li>Removed <code>xts</code> from suggested packages list (already comes along with <code>dygraphs</code>)</li>
