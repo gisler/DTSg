@@ -2,8 +2,7 @@
 title: "B. Advanced usage"
 author: "Gerold Hepp"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{B. Advanced usage}
   %\VignetteEngine{knitr::rmarkdown}
