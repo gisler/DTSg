@@ -149,7 +149,9 @@ primary axis of plots when the \code{parameter} field is set.
 }
 
 The \code{parameter}, \code{unit} and \code{variant} fields are especially useful for time
-series with a single variable (value column) only.
+series with a single variable (value column) only. In case of multiple
+variables with different units utilising the \pkg{units} package may pose a
+viable option.
 }
 
 \section{Options}{

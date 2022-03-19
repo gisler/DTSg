@@ -400,14 +400,18 @@ cols <- function(x, ...) {
 }
 #' Get column names
 #'
-#' Returns all column names of a [`DTSg`] object, those of certain [`class`]es
-#' and/or those matching a certain pattern only.
+#' Returns all column names of a [`DTSg`] object, those of certain [`class`]es,
+#' [`mode`]s, [`typeof`]s and/or those matching a certain pattern only.
 #'
 #' @param class An optional character vector matched to the most specific class
 #'   (first element) of each column's [`class`] vector. The \dQuote{special
 #'   class} `".numerary"` matches the [`integer`] and [`numeric`] classes.
 #' @param pattern An optional character string passed on to the `pattern`
 #'   argument of [`grep`].
+#' @param mode An optional character vector matched to each column's [`mode`]
+#'   vector.
+#' @param typeof An optional character vector matched to each column's
+#'   [`typeof`] vector.
 #' @param \dots Further arguments passed on to [`grep`]. The `value` argument is
 #'   rejected.
 #' @inheritParams aggregate.DTSg

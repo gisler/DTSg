@@ -5,7 +5,7 @@
 \alias{cols}
 \title{Get column names}
 \usage{
-\method{cols}{DTSg}(x, class = NULL, pattern = NULL, ...)
+\method{cols}{DTSg}(x, class = NULL, pattern = NULL, mode = NULL, typeof = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
@@ -17,6 +17,12 @@ class} \code{".numerary"} matches the \code{\link{integer}} and \code{\link{nume
 \item{pattern}{An optional character string passed on to the \code{pattern}
 argument of \code{\link{grep}}.}
 
+\item{mode}{An optional character vector matched to each column's \code{\link{mode}}
+vector.}
+
+\item{typeof}{An optional character vector matched to each column's
+\code{\link{typeof}} vector.}
+
 \item{\dots}{Further arguments passed on to \code{\link{grep}}. The \code{value} argument is
 rejected.}
 }
@@ -24,8 +30,8 @@ rejected.}
 Returns a character vector.
 }
 \description{
-Returns all column names of a \code{\link{DTSg}} object, those of certain \code{\link{class}}es
-and/or those matching a certain pattern only.
+Returns all column names of a \code{\link{DTSg}} object, those of certain \code{\link{class}}es,
+\code{\link{mode}}s, \code{\link{typeof}}s and/or those matching a certain pattern only.
 }
 \examples{
 # new DTSg object

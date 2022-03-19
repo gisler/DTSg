@@ -1,6 +1,7 @@
 # DTSg v0.8.1.9000
 
 * Added undocumented method `names()` exclusive only to the R6 interface acting as alias for the `cols()` method
+* Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package.
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on.
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
 * Slightly improved documentation

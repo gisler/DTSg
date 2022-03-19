@@ -88,7 +88,7 @@ TS  <- TS$colapply(fun = interpolateLinear)
 TS$nas()
 ```
 
-In case no column name is provided through the `cols` argument of the `colapply` method, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method. It supports a `class` and/or `pattern` argument:
+In case no column name is provided through the `cols` argument of the `colapply` method, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method. It, among others, supports a `class` and/or `pattern` argument:
 
 ```{r}
 TS$cols() # or 'cols(TS)'

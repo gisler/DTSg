@@ -116,7 +116,9 @@
 #' primary axis of plots when the `parameter` field is set.
 #'
 #' The `parameter`, `unit` and `variant` fields are especially useful for time
-#' series with a single variable (value column) only.
+#' series with a single variable (value column) only. In case of multiple
+#' variables with different units utilising the \pkg{units} package may pose a
+#' viable option.
 #'
 #' @section Options:
 #' The behaviour of `DTSg` objects can be customised with the help of the
@@ -635,7 +637,13 @@ DTSg <- R6Class(
       invisible(self)
     },
 
-    cols = function(class = NULL, pattern = NULL, ...) {
+    cols = function(
+      class = NULL,
+      pattern = NULL,
+      mode = NULL,
+      typeof = NULL,
+      ...
+    ) {
       cols <- names(private$.values)[-1L]
 
       if (!is.null(class)) {
@@ -663,6 +671,30 @@ DTSg <- R6Class(
         }
 
         cols <- grep(pattern, cols, value = TRUE, ...)
+      }
+
+      if (!is.null(mode)) {
+        qassert(mode, "S+")
+
+        modes <- vapply(
+          private$.values[, cols, with = FALSE],
+          function(col) {mode(col)},
+          character(1L)
+        )
+
+        cols <- cols[modes %chin% mode]
+      }
+
+      if (!is.null(typeof)) {
+        qassert(typeof, "S+")
+
+        typeofs <- vapply(
+          private$.values[, cols, with = FALSE],
+          function(col) {typeof(col)},
+          character(1L)
+        )
+
+        cols <- cols[typeofs %chin% typeof]
       }
 
       cols

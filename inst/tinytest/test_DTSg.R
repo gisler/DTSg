@@ -340,13 +340,13 @@ for (method in c("cols", "names")) {
   expect_identical(
     DTSg$new(DT1)[[method]]("character"),
     "col3",
-    info = "character column names are returned"
+    info = "character column names are returned (class)"
   )
 
   expect_identical(
     DTSg$new(DT2)[[method]](c("logical", "character")),
     c("col2", "col3"),
-    info = "logical and character column names are returned"
+    info = "logical and character column names are returned (class)"
   )
 
   expect_identical(
@@ -358,19 +358,19 @@ for (method in c("cols", "names")) {
   expect_identical(
     DTSg$new(DT3)[[method]](".numerary"),
     c("col2", "col3"),
-    info = '".numerary" column names are returned'
+    info = '".numerary" column names are returned (class)'
   )
 
   expect_identical(
     DTSg$new(DT3)[[method]](c(".numerary", "character")),
     c("col1", "col2", "col3"),
-    info = '".numerary" and character column names are returned'
+    info = '".numerary" and character column names are returned (class)'
   )
 
   expect_identical(
     DTSg$new(DT1)[[method]](pattern = "^c.l1$"),
     "col1",
-    info = "column names matching pattern are returned"
+    info = "column names matching pattern are returned (pattern)"
   )
 
   expect_identical(
@@ -382,12 +382,59 @@ for (method in c("cols", "names")) {
   expect_identical(
     DTSg$new(DT1)[[method]](pattern = "COL1", ignore.case = TRUE),
     "col1",
-    info = '"..." passes on arguments correctly'
+    info = '"..." passes on arguments correctly (pattern)'
   )
 
   expect_error(
     DTSg$new(DT1)[[method]](pattern = ".*", value = FALSE),
-    info = "use of arguments not allowed returns error"
+    info = "use of arguments not allowed returns error (pattern)"
+  )
+
+  expect_identical(
+    DTSg$new(DT1)[[method]](mode = "character"),
+    "col3",
+    info = "character column names are returned (mode)"
+  )
+
+  expect_identical(
+    DTSg$new(DT2)[[method]](mode = c("logical", "character")),
+    c("col2", "col3"),
+    info = "logical and character column names are returned (mode)"
+  )
+
+  expect_identical(
+    DTSg$new(DT1)[[method]](mode = "integer"),
+    character(),
+    info = "no column name is returned (mode)"
+  )
+
+  expect_identical(
+    DTSg$new(DT1)[[method]](typeof = "character"),
+    "col3",
+    info = "character column names are returned (typeof)"
+  )
+
+  expect_identical(
+    DTSg$new(DT2)[[method]](typeof = c("logical", "character")),
+    c("col2", "col3"),
+    info = "logical and character column names are returned (typeof)"
+  )
+
+  expect_identical(
+    DTSg$new(DT1)[[method]](typeof = "integer"),
+    character(),
+    info = "no column name is returned (typeof)"
+  )
+
+  expect_identical(
+    DTSg$new(DT1)[[method]](
+      c("logical", "numeric", "character"),
+      "col2|col3",
+      c("logical", "character"),
+      "character"
+    ),
+    "col3",
+    info = "character column names are returned"
   )
 }
 
