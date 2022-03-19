@@ -780,6 +780,10 @@ DTSg <- R6Class(
       invisible(self)
     },
 
+    names = function(...) {
+      self$cols(...)
+    },
+
     nas = function(cols = self$cols()) {
       assertNAstatusPeriodicityOK(
         private$.na.status,

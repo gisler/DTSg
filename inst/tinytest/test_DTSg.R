@@ -329,65 +329,67 @@ expect_identical(
   info = "custom helper data is appended correctly"
 )
 
-#### cols method ####
-expect_identical(
-  DTSg$new(DT1)$cols(),
-  c("col1", "col2", "col3"),
-  info = "all column names are returned"
-)
+#### cols and names methods ####
+for (method in c("cols", "names")) {
+  expect_identical(
+    DTSg$new(DT1)[[method]](),
+    c("col1", "col2", "col3"),
+    info = "all column names are returned"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$cols("character"),
-  "col3",
-  info = "character column names are returned"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("character"),
+    "col3",
+    info = "character column names are returned"
+  )
 
-expect_identical(
-  DTSg$new(DT2)$cols(c("logical", "character")),
-  c("col2", "col3"),
-  info = "logical and character column names are returned"
-)
+  expect_identical(
+    DTSg$new(DT2)[[method]](c("logical", "character")),
+    c("col2", "col3"),
+    info = "logical and character column names are returned"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$cols("integer"),
-  character(),
-  info = "no column name is returned (class)"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]]("integer"),
+    character(),
+    info = "no column name is returned (class)"
+  )
 
-expect_identical(
-  DTSg$new(DT3)$cols(".numerary"),
-  c("col2", "col3"),
-  info = '".numerary" column names are returned'
-)
+  expect_identical(
+    DTSg$new(DT3)[[method]](".numerary"),
+    c("col2", "col3"),
+    info = '".numerary" column names are returned'
+  )
 
-expect_identical(
-  DTSg$new(DT3)$cols(c(".numerary", "character")),
-  c("col1", "col2", "col3"),
-  info = '".numerary" and character column names are returned'
-)
+  expect_identical(
+    DTSg$new(DT3)[[method]](c(".numerary", "character")),
+    c("col1", "col2", "col3"),
+    info = '".numerary" and character column names are returned'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$cols(pattern = "^c.l1$"),
-  "col1",
-  info = "column names matching pattern are returned"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](pattern = "^c.l1$"),
+    "col1",
+    info = "column names matching pattern are returned"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$cols(pattern = "COL1"),
-  character(),
-  info = "no column name is returned (pattern)"
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](pattern = "COL1"),
+    character(),
+    info = "no column name is returned (pattern)"
+  )
 
-expect_identical(
-  DTSg$new(DT1)$cols(pattern = "COL1", ignore.case = TRUE),
-  "col1",
-  info = '"..." passes on arguments correctly'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](pattern = "COL1", ignore.case = TRUE),
+    "col1",
+    info = '"..." passes on arguments correctly'
+  )
 
-expect_error(
-  DTSg$new(DT1)$cols(pattern = ".*", value = FALSE),
-  info = "use of arguments not allowed returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](pattern = ".*", value = FALSE),
+    info = "use of arguments not allowed returns error"
+  )
+}
 
 #### getCol method and [ extract operator ####
 expect_identical(

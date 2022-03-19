@@ -1,5 +1,6 @@
 # DTSg v0.8.1.9000
 
+* Added undocumented method `names()` exclusive only to the R6 interface acting as alias for the `cols()` method
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
 * Slightly improved documentation
 
