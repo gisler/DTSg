@@ -638,16 +638,7 @@ DTSg <- R6Class(
     cols = function(class = NULL, pattern = NULL, ...) {
       cols <- names(private$.values)[-1L]
 
-      if (testClass(class, "character") && length(class) == 1L && class == "all") {
-        warning(
-          paste(
-            '"class = \'all\'" is deprecated.',
-            "Please use argument's default value NULL to get all column names.",
-            sep = "\n"
-          ),
-          call. = FALSE
-        )
-      } else if (!is.null(class)) {
+      if (!is.null(class)) {
         qassert(class, "S+")
 
         if (".numerary" %chin% class) {
