@@ -63,6 +63,22 @@ print(setCols(
   values = 100
 ))
 
+# set measurement unit with the help of 'units'
+if (requireNamespace("units", quietly = TRUE)) {
+  ## R6 method
+  x$setCols(
+    cols = "flow",
+    values = units::set_units(x["flow"], "m^3/s")
+  )$print()
+
+  ## S3 method
+  print(setCols(
+    x = x,
+    cols = "flow",
+    values = units::set_units(x["flow"], "m^3/s")
+  ))
+}
+
 }
 \seealso{
 \code{\link{cols}}, \code{\link{getOption}}

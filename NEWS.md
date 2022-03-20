@@ -3,12 +3,13 @@
 * Added undocumented method `names()` exclusive only to the R6 interface acting as alias for the `cols()` method
 * Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package.
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on.
+* Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
 * Slightly improved documentation
 
 # DTSg v0.8.1
 
-* Added a "special class" called `".numerary"` available to the `class` argument of the `cols()` method: allows for querying the names of `integer` and `numeric` columns in one go
+* Added a “special class” called `".numerary"` available to the `class` argument of the `cols()` method: allows for querying the names of `integer` and `numeric` columns in one go
 * Added undocumented methods `raggregate()`, `rbind()`, `set()` and `setnames()` exclusive only to the R6 interface acting as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods
 * `print()` method now truncates the number of printed rows of the values more aggressively
 * Created a `pkgdown` website

@@ -116,9 +116,9 @@
 #' primary axis of plots when the `parameter` field is set.
 #'
 #' The `parameter`, `unit` and `variant` fields are especially useful for time
-#' series with a single variable (value column) only. In case of multiple
-#' variables with different units utilising the \pkg{units} package may pose a
-#' viable option.
+#' series of a single variable. For time series of multiple variables with
+#' differing units the functionality of the \pkg{units} package may pose a
+#' viable alternative.
 #'
 #' @section Options:
 #' The behaviour of `DTSg` objects can be customised with the help of the
