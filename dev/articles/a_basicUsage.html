@@ -50,7 +50,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Vignettes
      
     <span class="caret"></span>
@@ -91,7 +91,7 @@
       <h1 data-toc-skip>A. Basic usage</h1>
                         <h4 data-toc-skip class="author">Gerold Hepp</h4>
             
-            <h4 data-toc-skip class="date">2022-01-17</h4>
+            <h4 data-toc-skip class="date">2022-03-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/vignettes/a_basicUsage.Rmd" class="external-link"><code>vignettes/a_basicUsage.Rmd</code></a></small>
       <div class="hidden name"><code>a_basicUsage.Rmd</code></div>
@@ -222,7 +222,7 @@
 <span class="co"># or 'colapply(TS, fun = interpolateLinear)'</span>
 <span class="va">TS</span><span class="op">$</span><span class="fu">nas</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Empty data.table (0 rows and 5 cols): .col,.group,.from,.to,.n</span></code></pre></div>
-<p>In case no column name is provided through the <code>cols</code> argument of the <code>colapply</code> method, the first numeric column is taken by default. Column names for the <code>cols</code> argument can be requested from <code>DTSg</code> objects with the help of the <code>cols</code> method. It supports a <code>class</code> and/or <code>pattern</code> argument:</p>
+<p>In case no column name is provided through the <code>cols</code> argument of the <code>colapply</code> method, the first numeric column is taken by default. Column names for the <code>cols</code> argument can be requested from <code>DTSg</code> objects with the help of the <code>cols</code> method. It, among others, supports a <code>class</code> and/or <code>pattern</code> argument:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span><span class="op">)</span> <span class="co"># or 'cols(TS)'</span>
 <span class="co">#&gt; [1] "flow"</span>
@@ -508,7 +508,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
