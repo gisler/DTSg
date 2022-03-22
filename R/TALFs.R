@@ -7,7 +7,7 @@ byFasttimeYmdH__call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d
 byFasttimeYmdHM_call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   ), tz = .helpers[["timezone"]]))
 byFasttimeYmdHMScall <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime)), tz = .helpers[["timezone"]]))
 
-byFasttime______call <- quote(fasttime::fastPOSIXct(    rep("2199-01-01"           ,  length(.dateTime)          ), tz = .helpers[["timezone"]]))
+byFasttime______call <- quote(rep(fasttime::fastPOSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)))
 byFasttime_Q____call <- quote(fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
 byFasttime_m____call <- quote(fasttime::fastPOSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]))
 byFasttime___H__call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]))
@@ -22,7 +22,7 @@ byYmdH__call <- quote(as.POSIXct(  trunc(.dateTime     , units = "hours"        
 byYmdHM_call <- quote(as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers[["timezone"]]))
 byYmdHMScall <- quote(as.POSIXct(  trunc(.dateTime     , units = "secs"                               ), tz = .helpers[["timezone"]]))
 
-by______call <- quote(as.POSIXct(    rep("2199-01-01"           ,  length(.dateTime)          ), tz = .helpers[["timezone"]]))
+by______call <- quote(rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)))
 by_Q____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
 by_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]))
 by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]))
