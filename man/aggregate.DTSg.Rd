@@ -15,6 +15,7 @@
   ignoreDST = FALSE,
   multiplier = 1L,
   funbyHelpers = NULL,
+  funbyApproach = self$funbyApproach,
   clone = getOption("DTSgClone")
 )
 }
@@ -48,6 +49,8 @@ for further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
 \code{funby}. See corresponding section for further information.}
+
+\item{funbyApproach}{A character string.}
 
 \item{clone}{A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.}

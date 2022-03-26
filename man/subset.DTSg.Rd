@@ -15,6 +15,7 @@
   clone = getOption("DTSgClone"),
   multiplier = 1L,
   funbyHelpers = NULL,
+  funbyApproach = self$funbyApproach,
   ...
 )
 }
@@ -52,6 +53,8 @@ for further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
 \code{funby}. See corresponding section for further information.}
+
+\item{funbyApproach}{A character string.}
 
 \item{...}{Further arguments passed on to \code{fun}.}
 }

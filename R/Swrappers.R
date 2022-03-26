@@ -89,6 +89,7 @@ NULL
 #'   for further information.
 #' @param funbyHelpers An optional [`list`] with helper data passed on to
 #'   `funby`. See corresponding section for further information.
+#' @param funbyApproach A character string.
 #' @param clone A logical specifying if the object shall be modified in place or
 #'   if a deep clone (copy) shall be made beforehand.
 #'
@@ -564,9 +565,10 @@ new <- function(
   unit = "",
   variant = "",
   aggregated = FALSE,
-  fast = FALSE,
+  fast = getOption("DTSgFast"),
   swallow = FALSE,
-  na.status = c("explicit", "implicit", "undecided")
+  na.status = getOption("DTSgNA.status"),
+  funbyApproach = getOption("DTSgFunbyApproach")
 ) {
   # no R CMD check warning
 }

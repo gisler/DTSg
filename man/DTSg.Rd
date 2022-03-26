@@ -7,8 +7,9 @@
 \title{DTSg class}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
-  aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status =
-  c("explicit", "implicit", "undecided"))
+  aggregated = FALSE, fast = getOption("DTSgFast"), swallow = FALSE,
+  na.status = getOption("DTSgNA.status"), funbyApproach =
+  getOption("DTSgFunbyApproach"))
 }
 \arguments{
 \item{Class}{A character string. Must be \code{"DTSg"} in order to create a \code{DTSg}
@@ -56,6 +57,8 @@ timestamps explicit according to the recognised periodicity, or
 \code{"implicit"}, which removes timestamps with missing values on all value
 columns, or \code{"undecided"} for no such action. Please note that \code{DTSg}
 objects work best with explicitly missing values.}
+
+\item{funbyApproach}{A character string.}
 }
 \value{
 Returns a \code{DTSg} object.
