@@ -42,7 +42,7 @@ jobs:
         run: |
           install.packages("remotes")
           remotes::install_cran(
-            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "runner", "rcmdcheck"),
+            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "runner", "units", "rcmdcheck"),
             repos = "https://mran.microsoft.com/snapshot/2019-02-01",
             type = "win.binary",
             dependencies = TRUE
