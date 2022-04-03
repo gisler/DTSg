@@ -99,7 +99,7 @@ if (requireNamespace("runner", quietly = TRUE) &&
     packageVersion("runner") >= package_version("0.3.8")) {
   wrapper <- function(x, y, f, k, lag, ...) {
     runner::runner(
-      matrix(c(x, y), ncol = 2),
+      cbind(x, y),
       f = function(x) {f(x[, 1], x[, 2])},
       k = k,
       lag = lag
