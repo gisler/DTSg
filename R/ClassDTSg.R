@@ -132,6 +132,8 @@
 #' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
 #' modified in place (`FALSE`) or if a deep clone (copy) shall be made
 #' beforehand (`TRUE`).
+#' * _DTSgDeprecatedWarnings:_ A logical specifying if warnings are displayed
+#' when calling deprecated features.
 #' * _DTSgFast:_ Default value for the `fast` argument.
 #' * _DTSgFunbyApproach:_ Default value for the `funbyApproach` argument.
 #' * _DTSgNA.status:_ Default value for the `na.status` argument.

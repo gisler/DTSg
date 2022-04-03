@@ -1,4 +1,4 @@
-#### Calls (multiplier == 1L) #### # nolint
+# Calls, multiplier == 1L ####
 byFasttimeY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            ), tz = .helpers[["timezone"]]))
 byFasttimeYQ____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                              ), tz = .helpers[["timezone"]]))
 byFasttimeYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime),   month(.dateTime)                                                                        ), tz = .helpers[["timezone"]]))
@@ -22,7 +22,6 @@ byRcppCCTZYmdH__call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %0
 byRcppCCTZYmdHM_call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   , format(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
 byRcppCCTZYmdHMScall <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime), format(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
 
-byRcppCCTZ______call <- quote(rep(RcppCCTZ::parseDatetime("2199-01-01", fmt = "%Y-%m-%d", tzstr = .helpers[["timezone"]]), length(.dateTime)))
 byRcppCCTZ_Q____call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]))
 byRcppCCTZ_m____call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]))
 byRcppCCTZ___H__call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
@@ -44,7 +43,7 @@ by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateT
 by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]))
 by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]]))
 
-#### Calls (multiplier > 1L) #### # nolint
+# Calls, multiplier > 1L) ####
 byFasttimeMultY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 byFasttimeMultYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
 byFasttimeMultYmdH__call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
@@ -78,7 +77,7 @@ byMult___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.da
 byMult____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 byMult_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
 
-#### Functions ####
+# Functions ####
 to.fakeUTCdateTime <- function(.dateTime, .helpers) {
   assertNAstatusPeriodicityOK(
     .helpers[["na.status"]],
@@ -165,9 +164,14 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @name TALFs
 NULL
 
+## Truncating family ####
 #' @rdname TALFs
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
@@ -175,98 +179,31 @@ byY_____ <- function(.dateTime, .helpers) {
   )) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
+
   if (.helpers[["multiplier"]] == 1L) {
-    eval(byY_____call)
-  } else {
-    eval(byMultY_____call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byYQ____ <- function(.dateTime, .helpers) {
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
-  }
-  eval(byYQ____call)
-}
-#' @rdname TALFs
-#' @export
-byYm____ <- function(.dateTime, .helpers) {
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
-  }
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byYm____call)
-  } else {
-    eval(byMultYm____call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byYmd___ <- function(.dateTime, .helpers) {
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
-  }
-  eval(byYmd___call)
-}
-#' @rdname TALFs
-#' @export
-byYmdH__ <- function(.dateTime, .helpers) {
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byYmdH__call)
-  } else if (!grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one.",
-      call. = FALSE
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byY_____call),
+      fasttime = eval(byFasttimeY_____call),
+      RcppCCTZ = eval(byRcppCCTZY_____call)
     )
   } else {
-    eval(byMultYmdH__call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byYmdHM_ <- function(.dateTime, .helpers) {
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byYmdHM_call)
-  } else {
-    eval(byMultYmdHM_call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byYmdHMS <- function(.dateTime, .helpers) {
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byYmdHMScall)
-  } else {
-    eval(byMultYmdHMScall)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMultY_____call),
+      fasttime = eval(byFasttimeMultY_____call),
+      RcppCCTZ = eval(byRcppCCTZMultY_____call)
+    )
   }
 }
 
 #' @rdname TALFs
 #' @export
-by______ <- function(.dateTime, .helpers) {
-  eval(by______call)
-}
-#' @rdname TALFs
-#' @export
-by_Q____ <- function(.dateTime, .helpers) {
+byYQ____ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
@@ -274,11 +211,22 @@ by_Q____ <- function(.dateTime, .helpers) {
   )) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
-  eval(by_Q____call)
+
+  switch(
+    .helpers[["funbyApproach"]],
+    base     = eval(        byYQ____call),
+    fasttime = eval(byFasttimeYQ____call),
+    RcppCCTZ = eval(byRcppCCTZYQ____call)
+  )
 }
+
 #' @rdname TALFs
 #' @export
-by_m____ <- function(.dateTime, .helpers) {
+byYm____ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
@@ -286,15 +234,31 @@ by_m____ <- function(.dateTime, .helpers) {
   )) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
+
   if (.helpers[["multiplier"]] == 1L) {
-    eval(by_m____call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byYm____call),
+      fasttime = eval(byFasttimeYm____call),
+      RcppCCTZ = eval(byRcppCCTZYm____call)
+    )
   } else {
-    eval(byMult_m____call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMultYm____call),
+      fasttime = eval(byFasttimeMultYm____call),
+      RcppCCTZ = eval(byRcppCCTZMultYm____call)
+    )
   }
 }
+
 #' @rdname TALFs
 #' @export
-by___H__ <- function(.dateTime, .helpers) {
+byYmd___ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
@@ -302,8 +266,29 @@ by___H__ <- function(.dateTime, .helpers) {
   )) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
+
+  switch(
+    .helpers[["funbyApproach"]],
+    base     = eval(        byYmd___call),
+    fasttime = eval(byFasttimeYmd___call),
+    RcppCCTZ = eval(byRcppCCTZYmd___call)
+  )
+}
+
+#' @rdname TALFs
+#' @export
+byYmdH__ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["multiplier"]] == 1L) {
-    eval(by___H__call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byYmdH__call),
+      fasttime = eval(byFasttimeYmdH__call),
+      RcppCCTZ = eval(byRcppCCTZYmdH__call)
+    )
   } else if (!grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
     .helpers[["timezone"]],
@@ -315,24 +300,211 @@ by___H__ <- function(.dateTime, .helpers) {
       call. = FALSE
     )
   } else {
-    eval(byMult___H__call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMultYmdH__call),
+      fasttime = eval(byFasttimeMultYmdH__call),
+      RcppCCTZ = eval(byRcppCCTZMultYmdH__call)
+    )
   }
 }
+
+#' @rdname TALFs
+#' @export
+byYmdHM_ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
+  if (.helpers[["multiplier"]] == 1L) {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byYmdHM_call),
+      fasttime = eval(byFasttimeYmdHM_call),
+      RcppCCTZ = eval(byRcppCCTZYmdHM_call)
+    )
+  } else {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMultYmdHM_call),
+      fasttime = eval(byFasttimeMultYmdHM_call),
+      RcppCCTZ = eval(byRcppCCTZMultYmdHM_call)
+    )
+  }
+}
+
+#' @rdname TALFs
+#' @export
+byYmdHMS <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
+  if (.helpers[["multiplier"]] == 1L) {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byYmdHMScall),
+      fasttime = eval(byFasttimeYmdHMScall),
+      RcppCCTZ = eval(byRcppCCTZYmdHMScall)
+    )
+  } else {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMultYmdHMScall),
+      fasttime = eval(byFasttimeMultYmdHMScall),
+      RcppCCTZ = eval(byRcppCCTZMultYmdHMScall)
+    )
+  }
+}
+
+## Extracting family ####
+#' @rdname TALFs
+#' @export
+by______ <- function(.dateTime, .helpers) {
+  eval(by______call)
+}
+
+#' @rdname TALFs
+#' @export
+by_Q____ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
+  if (.helpers[["ignoreDST"]] && !grepl(
+    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
+    .helpers[["timezone"]],
+    ignore.case = TRUE
+  )) {
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+  }
+
+  switch(
+    .helpers[["funbyApproach"]],
+    base     = eval(        by_Q____call),
+    fasttime = eval(byFasttime_Q____call),
+    RcppCCTZ = eval(byRcppCCTZ_Q____call)
+  )
+}
+
+#' @rdname TALFs
+#' @export
+by_m____ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
+  if (.helpers[["ignoreDST"]] && !grepl(
+    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
+    .helpers[["timezone"]],
+    ignore.case = TRUE
+  )) {
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+  }
+
+  if (.helpers[["multiplier"]] == 1L) {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        by_m____call),
+      fasttime = eval(byFasttime_m____call),
+      RcppCCTZ = eval(byRcppCCTZ_m____call)
+    )
+  } else {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMult_m____call),
+      fasttime = eval(byFasttimeMult_m____call),
+      RcppCCTZ = eval(byRcppCCTZMult_m____call)
+    )
+  }
+}
+
+#' @rdname TALFs
+#' @export
+by___H__ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
+  if (.helpers[["ignoreDST"]] && !grepl(
+    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
+    .helpers[["timezone"]],
+    ignore.case = TRUE
+  )) {
+    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+  }
+
+  if (.helpers[["multiplier"]] == 1L) {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        by___H__call),
+      fasttime = eval(byFasttime___H__call),
+      RcppCCTZ = eval(byRcppCCTZ___H__call)
+    )
+  } else if (!grepl(
+    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
+    .helpers[["timezone"]],
+    ignore.case = TRUE
+  )) {
+    stop(
+      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
+      "with a multiplier greater than one.",
+      call. = FALSE
+    )
+  } else {
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMult___H__call),
+      fasttime = eval(byFasttimeMult___H__call),
+      RcppCCTZ = eval(byRcppCCTZMult___H__call)
+    )
+  }
+}
+
 #' @rdname TALFs
 #' @export
 by____M_ <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["multiplier"]] == 1L) {
-    eval(by____M_call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        by____M_call),
+      fasttime = eval(byFasttime____M_call),
+      RcppCCTZ = eval(byRcppCCTZ____M_call)
+    )
   } else {
-    eval(byMult____M_call)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMult____M_call),
+      fasttime = eval(byFasttimeMult____M_call),
+      RcppCCTZ = eval(byRcppCCTZMult____M_call)
+    )
   }
 }
+
 #' @rdname TALFs
 #' @export
 by_____S <- function(.dateTime, .helpers) {
+  if (.helpers[["funbyApproach"]] == "fasttime") {
+    assertFasttimeOK(.dateTime, .helpers)
+  }
+
   if (.helpers[["multiplier"]] == 1L) {
-    eval(by_____Scall)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        by_____Scall),
+      fasttime = eval(byFasttime_____Scall),
+      RcppCCTZ = eval(byRcppCCTZ_____Scall)
+    )
   } else {
-    eval(byMult_____Scall)
+    switch(
+      .helpers[["funbyApproach"]],
+      base     = eval(        byMult_____Scall),
+      fasttime = eval(byFasttimeMult_____Scall),
+      RcppCCTZ = eval(byRcppCCTZMult_____Scall)
+    )
   }
 }

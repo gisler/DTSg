@@ -1,16 +1,17 @@
 # DTSg v0.8.1.9000
 
-* Added undocumented `names()` method exclusive only to the R6 interface acting as alias for the `cols()` method
 * Added `funbyApproach` argument to `new()`, `aggregate()`, `colapply()` and `subset()` methods: allows for specifying the main function utilised for transforming timestamps within `TALFs` (either `"base"` utilising `as.POSIXct()` or `"fasttime"` utilising `fasttime::fastPOSIXct()` or `"RcppCCTZ"` utilising `RcppCCTZ::parseDatetime()`). Please note that the `byFasttime*` versions of the `TALFs` are now deprecated. Use this argument from now on instead
 * Added `funbyApproach` also to the `list` of helper data (`funbyHelpers` argument) passed on to temporal aggregation level functions
-* Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package
 * Added `funbyApproach` field reflecting the `funbyApproach` argument (can also be actively set in order to change the utilised approach)
+* Added undocumented `names()` method exclusive only to the R6 interface acting as alias for the `cols()` method
+* Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package
 * Added `DTSgFast`, `DTSgFunbyApproach` and `DTSgNA.status` options providing default values for the `fast`, `funbyApproach` and `na.status` arguments of the `new()` method
+* Added `DTSgDeprecatedWarnings` option: allows for disabling warnings from deprecated features.
 * Greatly sped up `by______()` and `byFasttime______()` `TALFs`
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on
 * Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
-* Slightly improved vignettes and documentation
+* Slightly improved documentation
 * Minor internal code improvements
 
 # DTSg v0.8.1

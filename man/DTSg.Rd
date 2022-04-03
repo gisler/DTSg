@@ -169,6 +169,8 @@ following option. See \code{\link{options}} for further information:
 \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are, by default,
 modified in place (\code{FALSE}) or if a deep clone (copy) shall be made
 beforehand (\code{TRUE}).
+\item \emph{DTSgDeprecatedWarnings:} A logical specifying if warnings are displayed
+when calling deprecated features.
 \item \emph{DTSgFast:} Default value for the \code{fast} argument.
 \item \emph{DTSgFunbyApproach:} Default value for the \code{funbyApproach} argument.
 \item \emph{DTSgNA.status:} Default value for the \code{na.status} argument.
