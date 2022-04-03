@@ -339,7 +339,8 @@ byYmdH__ <- function(.dateTime, .helpers) {
     ignore.case = TRUE
   )) {
     stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF with a multiplier greater than one.',
+      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
+      "with a multiplier greater than one.",
       call. = FALSE
     )
   } else {
@@ -416,7 +417,8 @@ by___H__ <- function(.dateTime, .helpers) {
     ignore.case = TRUE
   )) {
     stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF with a multiplier greater than one.',
+      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
+      "with a multiplier greater than one.",
       call. = FALSE
     )
   } else {
