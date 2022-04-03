@@ -185,16 +185,18 @@ DTSg <- R6Class(
       x <- tryCatch(
         fun(x, ...),
         error = function(e) {
-          stop(
-            sprintf("Cannot coerce %s because %s.", msgPart, deparse(e$message)),
-            call. = FALSE
-          )
+          stop(sprintf(
+            "Cannot coerce %s because %s.",
+            msgPart,
+            deparse(e$message)
+          ), call. = FALSE)
         },
         warning = function(w) {
-          stop(
-            sprintf("Will not coerce %s because %s.", msgPart, deparse(w$message)),
-            call. = FALSE
-          )
+          stop(sprintf(
+            "Will not coerce %s because %s.",
+            msgPart,
+            deparse(w$message)
+          ), call. = FALSE)
         }
       )
 
@@ -304,7 +306,8 @@ DTSg <- R6Class(
 
         if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
           stop(
-            '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
+            '"timezone", "periodicity" and "na.status" helpers are not ',
+            "allowed in this context.",
             call. = FALSE
           )
         }
@@ -460,7 +463,8 @@ DTSg <- R6Class(
           ]
 
           message(
-            'Missing values are always stripped regardless of the value of a possible "na.rm" argument.'
+            "Missing values are always stripped regardless of the value of a ",
+            'possible "na.rm" argument.'
           )
         }
       } else {
@@ -536,11 +540,8 @@ DTSg <- R6Class(
       } else if (na.status == "explicit" && by == "unrecognised" &&
                  private$.timestamps > 2L) {
         warning(
-          paste(
-            "Only time series with recognised periodicity can have explicitly missing values.",
-            'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
-            sep = "\n"
-          ),
+          "Only time series with recognised periodicity can have explicitly missing values.\n",
+          'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
           call. = FALSE
         )
       }
@@ -556,7 +557,10 @@ DTSg <- R6Class(
 
         private$.na.status <- na.status
       } else if (na.status == "undecided" && private$.na.status != "undecided") {
-        stop("Status of missing values has already been decided on.", call. = FALSE)
+        stop(
+          "Status of missing values has already been decided on.",
+          call. = FALSE
+        )
       }
 
       invisible(self)
@@ -990,7 +994,10 @@ DTSg <- R6Class(
       seqLen <- seq_len(private$determineLen(private$.timestamps))
 
       if (anyNA(private$.values[[1L]][seqLen])) {
-        stop(".dateTime column must not have any missing values.", call. = FALSE)
+        stop(
+          ".dateTime column must not have any missing values.",
+          call. = FALSE
+        )
       }
 
       if (private$.timestamps < 2L) {
