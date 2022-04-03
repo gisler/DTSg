@@ -508,7 +508,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"runner"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">package_version</a></span><span class="op">(</span><span class="st">"0.3.8"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="va">wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">f</span>, <span class="va">k</span>, <span class="va">lag</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">    <span class="fu">runner</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
 <span class="r-in">      f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">}</span>,</span>
 <span class="r-in">      k <span class="op">=</span> <span class="va">k</span>,</span>
 <span class="r-in">      lag <span class="op">=</span> <span class="va">lag</span></span>
@@ -537,17 +537,17 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime      flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.8100855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.7676535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.7371626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.3060053</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.1348807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.7758652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.8505487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.9052999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.5572129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.1172506</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9914883</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9973408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9989172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9992845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9999186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9974043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9936352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9965603</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9981393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9939358</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
