@@ -141,6 +141,19 @@ expect_true(
   info = '"funbyHelpers" takes precedence over "ignoreDST"'
 )
 
+expect_true(
+  {
+    DTSg$new(CEThourlyData)$aggregate(
+      byYmd___,
+      length,
+      funbyApproach = "fasttime",
+      funbyHelpers = list(funbyApproach = "RcppCCTZ")
+    )
+    TRUE
+  },
+  info = '"funbyHelpers" takes precedence over "funbyApproach"'
+)
+
 expect_error(
   DTSg$new(DT1)$aggregate(
     byYmdH__,
@@ -479,6 +492,12 @@ expect_true(
 expect_true(
   DTSg$new(UTChourlyData, fast = TRUE)$fast,
   info = '"fast" field is set correctly'
+)
+
+expect_identical(
+  DTSg$new(DT1, funbyApproach = "RcppCCTZ")$funbyApproach,
+  "RcppCCTZ",
+  info = '"funbyApproach" field is set correctly'
 )
 
 expect_identical(

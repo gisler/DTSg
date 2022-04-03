@@ -141,6 +141,12 @@ for (approach in c("base", "fasttime", "RcppCCTZ")) {
 for (approach in c("base", "RcppCCTZ")) {
   options(DTSgFunbyApproach = approach)
 
+  expect_identical(
+    getOption(DTSgFunbyApproach),
+    approach,
+    '"DTSgFunbyApproach" is set correctly'
+  )
+
   #### CETtoFromDST, multiplier == 1L ####
   expect_identical(
     DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
