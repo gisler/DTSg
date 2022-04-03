@@ -56,7 +56,10 @@
 #'   `"implicit"`, which removes timestamps with missing values on all value
 #'   columns, or `"undecided"` for no such action. Please note that `DTSg`
 #'   objects work best with explicitly missing values.
-#' @param funbyApproach A character string.
+#' @param funbyApproach A character string. Either `"base"`, which utilises
+#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
+#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
+#'   function for transforming timestamps within [`TALFs`].
 #'
 #' @return Returns a `DTSg` object.
 #'
@@ -93,6 +96,7 @@
 #' read-only though:
 #' * `aggregated`: Same as the `aggregated` argument.
 #' * `fast`: Same as the `fast` argument.
+#' * `funbyApproach`: Same as the `funbyApproach` argument.
 #' * `ID`: Same as the `ID` argument. It is used as the title of plots.
 #' * `na.status`: Same as the `na.status` argument. When set, the missing values
 #' of the object are expanded or collapsed accordingly.
@@ -128,6 +132,9 @@
 #' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
 #' modified in place (`FALSE`) or if a deep clone (copy) shall be made
 #' beforehand (`TRUE`).
+#' * _DTSgFast:_ Default value for the `fast` argument.
+#' * _DTSgFunbyApproach:_ Default value for the `funbyApproach` argument.
+#' * _DTSgNA.status:_ Default value for the `na.status` argument.
 #'
 #' @note
 #' Due to the [`POSIXct`] nature of the _.dateTime_ column, the same sub-second

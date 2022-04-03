@@ -89,7 +89,10 @@ NULL
 #'   for further information.
 #' @param funbyHelpers An optional [`list`] with helper data passed on to
 #'   `funby`. See corresponding section for further information.
-#' @param funbyApproach A character string.
+#' @param funbyApproach A character string. Either `"base"`, which utilises
+#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
+#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
+#'   function for transforming timestamps within [`TALFs`].
 #' @param clone A logical specifying if the object shall be modified in place or
 #'   if a deep clone (copy) shall be made beforehand.
 #'
@@ -117,15 +120,6 @@ NULL
 #' then aggregates all months of all first and all months of all second half
 #' years instead of all months of all years separately. This feature is
 #' supported by the following [`TALFs`] of the package:
-#' * \code{\link{byFasttimeY_____}}
-#' * \code{\link{byFasttimeYm____}}
-#' * \code{\link{byFasttimeYmdH__}}
-#' * \code{\link{byFasttimeYmdHM_}}
-#' * \code{\link{byFasttimeYmdHMS}}
-#' * \code{\link{byFasttime_m____}}
-#' * \code{\link{byFasttime___H__}}
-#' * \code{\link{byFasttime____M_}}
-#' * \code{\link{byFasttime_____S}}
 #' * \code{\link{byY_____}}
 #' * \code{\link{byYm____}}
 #' * \code{\link{byYmdH__}} (UTC and equivalent as well as all Etc/GMT time zones only)
@@ -158,13 +152,13 @@ NULL
 #'
 #' @section Ignore day saving time:
 #' `ignoreDST` tells a temporal aggregation level function if it is supposed to
-#' ignore day saving time while forming new timestamps. This can be a desired
-#' feature for time series strictly following the position of the sun such as
-#' hydrological time series. Doing so ensures that diurnal variations are
-#' preserved by all means and all intervals are of the \dQuote{correct} length,
-#' however, a possible limitation might be that the day saving time shift is
-#' invariably assumed to be one hour long. This feature requires that the
-#' periodicity of the time series was recognised and is supported by the
+#' ignore day saving time while transforming the timestamps. This can be a
+#' desired feature for time series strictly following the position of the sun
+#' such as hydrological time series. Doing so ensures that diurnal variations
+#' are preserved by all means and all intervals are of the \dQuote{correct}
+#' length, however, a possible limitation might be that the day saving time
+#' shift is invariably assumed to be one hour long. This feature requires that
+#' the periodicity of the time series was recognised and is supported by the
 #' following [`TALFs`] of the package:
 #' * \code{\link{byY_____}}
 #' * \code{\link{byYQ____}}

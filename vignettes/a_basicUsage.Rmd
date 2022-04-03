@@ -173,6 +173,7 @@ Valid results are returned for the following fields:
 
 * `aggregated`
 * `fast`
+* `funbyApproach`
 * `ID`
 * `na.status`
 * `parameter`

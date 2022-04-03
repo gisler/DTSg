@@ -120,33 +120,42 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @section Families:
 #' There are two families of temporal aggregation level functions. The one
 #' family truncates timestamps (truncating family), the other extracts a certain
-#' part of them (extracting family). Each family comes in two flavours: one
-#' using [`fasttime::fastPOSIXct`] of \pkg{fasttime}, the other solely relying
-#' on base \R. The \pkg{fasttime} versions work with UTC and equivalent as well
-#' as all Etc/GMT time zones only (execute
+#' part of them (extracting family). Each family comes in three flavours: the
+#' first utilises [`fasttime::fastPOSIXct`] of \pkg{fasttime}, the second
+#' [`RcppCCTZ::parseDatetime`] of \pkg{RcppCCTZ} and the third relies solely on
+#' base \R.
+#'
+#' The \pkg{fasttime} flavour works with UTC and equivalent as well as all
+#' Etc/GMT time zones only (execute
 #' `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case
-#' = TRUE, value = TRUE)` for a full list of supported time zones) and are
-#' limited to timestamps between the years 1970 and 2199, but generally are
-#' faster for the extracting family of functions.
+#' = TRUE, value = TRUE)` for a full list of supported time zones) and is
+#' limited to timestamps between the years 1970 and 2199, but generally is the
+#' fastest for the extracting family of functions. For time zones other than UTC
+#' and equivalent the \pkg{RcppCCTZ} flavour generally is the fastest.
+#'
+#' Use the `funbyApproach` argument of the respective calling method in order to
+#' specify the utilised flavour.
 #'
 #' The truncating family sets timestamps to the lowest possible point in time of
 #' the corresponding temporal aggregation level:
-#' - `*Y_____` truncates to year,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
-#' - `*YQ____` truncates to quarter, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
-#' - `*Ym____` truncates to month,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
-#' - `*Ymd___` truncates to day,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
-#' - `*YmdH__` truncates to hour,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
-#' - `*YmdHM_` truncates to minute,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
-#' - `*YmdHMS` truncates to second,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
+#' - `byY_____` truncates to year,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
+#' - `byYQ____` truncates to quarter, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
+#' - `byYm____` truncates to month,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
+#' - `byYmd___` truncates to day,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
+#' - `byYmdH__` truncates to hour,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
+#' - `byYmdHM_` truncates to minute,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
+#' - `byYmdHMS` truncates to second,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
 #'
 #' By convention, the extracting family sets the year to 2199 and extracts a
 #' certain part of timestamps:
-#' - `*______` extracts nothing,      i.e.          all timestamps become  _2199-01-01 00:00:00.0_
-#' - `*_Q____` extracts the quarters, e.g. _2000-11-11 11:11:11.1_ becomes _2199-10-01 00:00:00.0_
-#' - `*_m____` extracts the months,   e.g. _2000-11-11 11:11:11.1_ becomes _2199-11-01 00:00:00.0_
-#' - `*___H__` extracts the hours,    e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 11:00:00.0_
-#' - `*____M_` extracts the minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:11:00.0_
-#' - `*_____S` extracts the seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:00:11.0_
+#' - `by______` extracts nothing,      i.e.          all timestamps become  _2199-01-01 00:00:00.0_
+#' - `by_Q____` extracts the quarters, e.g. _2000-11-11 11:11:11.1_ becomes _2199-10-01 00:00:00.0_
+#' - `by_m____` extracts the months,   e.g. _2000-11-11 11:11:11.1_ becomes _2199-11-01 00:00:00.0_
+#' - `by___H__` extracts the hours,    e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 11:00:00.0_
+#' - `by____M_` extracts the minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:11:00.0_
+#' - `by_____S` extracts the seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:00:11.0_
+#'
+#' Please note that the `byFasttime*` versions are deprecated.
 #'
 #' @return All functions return a [`POSIXct`] vector with timestamps
 #'   corresponding to the function's temporal aggregation level.
@@ -155,122 +164,6 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #'
 #' @name TALFs
 NULL
-
-#' @rdname TALFs
-#' @export
-byFasttimeY_____ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttimeY_____call)
-  } else {
-    eval(byFasttimeMultY_____call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYQ____ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  eval(byFasttimeYQ____call)
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYm____ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttimeYm____call)
-  } else {
-    eval(byFasttimeMultYm____call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYmd___ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  eval(byFasttimeYmd___call)
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYmdH__ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttimeYmdH__call)
-  } else {
-    eval(byFasttimeMultYmdH__call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYmdHM_ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttimeYmdHM_call)
-  } else {
-    eval(byFasttimeMultYmdHM_call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttimeYmdHMS <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttimeYmdHMScall)
-  } else {
-    eval(byFasttimeMultYmdHMScall)
-  }
-}
-
-#' @rdname TALFs
-#' @export
-byFasttime______ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  eval(byFasttime______call)
-}
-#' @rdname TALFs
-#' @export
-byFasttime_Q____ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  eval(byFasttime_Q____call)
-}
-#' @rdname TALFs
-#' @export
-byFasttime_m____ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttime_m____call)
-  } else {
-    eval(byFasttimeMult_m____call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttime___H__ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttime___H__call)
-  } else {
-    eval(byFasttimeMult___H__call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttime____M_ <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttime____M_call)
-  } else {
-    eval(byFasttimeMult____M_call)
-  }
-}
-#' @rdname TALFs
-#' @export
-byFasttime_____S <- function(.dateTime, .helpers) {
-  assertFasttimeOK(.dateTime, .helpers)
-  if (.helpers[["multiplier"]] == 1L) {
-    eval(byFasttime_____Scall)
-  } else {
-    eval(byFasttimeMult_____Scall)
-  }
-}
 
 #' @rdname TALFs
 #' @export
