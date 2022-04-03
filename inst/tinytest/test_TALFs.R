@@ -3,6 +3,12 @@ source("data.R") # nolint
 for (approach in c("base", "fasttime", "RcppCCTZ")) {
   options(DTSgFunbyApproach = approach)
 
+  expect_identical(
+    getOption("DTSgFunbyApproach"),
+    approach,
+    '"DTSgFunbyApproach" is set correctly'
+  )
+
   #### UTC, multiplier == 1L ####
   expect_identical(
     DTSg$new(UTChourlyData)$aggregate(byY_____, sum)$values(TRUE)[["value"]],
@@ -140,12 +146,6 @@ for (approach in c("base", "fasttime", "RcppCCTZ")) {
 
 for (approach in c("base", "RcppCCTZ")) {
   options(DTSgFunbyApproach = approach)
-
-  expect_identical(
-    getOption(DTSgFunbyApproach),
-    approach,
-    '"DTSgFunbyApproach" is set correctly'
-  )
 
   #### CETtoFromDST, multiplier == 1L ####
   expect_identical(
