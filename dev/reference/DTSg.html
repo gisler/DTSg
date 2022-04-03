@@ -97,8 +97,9 @@ operator.</p>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new</span><span class="op">(</span><span class="va">Class</span>, <span class="va">values</span>, ID <span class="op">=</span> <span class="st">""</span>, parameter <span class="op">=</span> <span class="st">""</span>, unit <span class="op">=</span> <span class="st">""</span>, variant <span class="op">=</span> <span class="st">""</span>,
-  aggregated <span class="op">=</span> <span class="cn">FALSE</span>, fast <span class="op">=</span> <span class="cn">FALSE</span>, swallow <span class="op">=</span> <span class="cn">FALSE</span>, na.status <span class="op">=</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"explicit"</span>, <span class="st">"implicit"</span>, <span class="st">"undecided"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  aggregated <span class="op">=</span> <span class="cn">FALSE</span>, fast <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFast"</span><span class="op">)</span>, swallow <span class="op">=</span> <span class="cn">FALSE</span>,
+  na.status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgNA.status"</span><span class="op">)</span>, funbyApproach <span class="op">=</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFunbyApproach"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -149,6 +150,11 @@ timestamps explicit according to the recognised periodicity, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
 columns, or <code>"undecided"</code> for no such action. Please note that <code>DTSg</code>
 objects work best with explicitly missing values.</p></dd>
+<dt>funbyApproach</dt>
+<dd><p>A character string. Either <code>"base"</code>, which utilises
+<code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
+or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
+function for transforming timestamps within <code><a href="TALFs.html">TALFs</a></code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -201,6 +207,7 @@ modified in place, i.e. no deep clone (copy) of the object is made
 beforehand. See <code><a href="clone.DTSg.html">clone</a></code> for further information. Some of the fields are
 read-only though:</p><ul><li><p><code>aggregated</code>: Same as the <code>aggregated</code> argument.</p></li>
 <li><p><code>fast</code>: Same as the <code>fast</code> argument.</p></li>
+<li><p><code>funbyApproach</code>: Same as the <code>funbyApproach</code> argument.</p></li>
 <li><p><code>ID</code>: Same as the <code>ID</code> argument. It is used as the title of plots.</p></li>
 <li><p><code>na.status</code>: Same as the <code>na.status</code> argument. When set, the missing values
 of the object are expanded or collapsed accordingly.</p></li>
@@ -237,6 +244,11 @@ viable alternative.</p>
 following option. See <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></code> for further information:</p><ul><li><p><em>DTSgClone:</em> A logical specifying if <code>DTSg</code> objects are, by default,
 modified in place (<code>FALSE</code>) or if a deep clone (copy) shall be made
 beforehand (<code>TRUE</code>).</p></li>
+<li><p><em>DTSgDeprecatedWarnings:</em> A logical specifying if warnings are displayed
+when calling deprecated features.</p></li>
+<li><p><em>DTSgFast:</em> Default value for the <code>fast</code> argument.</p></li>
+<li><p><em>DTSgFunbyApproach:</em> Default value for the <code>funbyApproach</code> argument.</p></li>
+<li><p><em>DTSgNA.status:</em> Default value for the <code>na.status</code> argument.</p></li>
 </ul></div>
 
     <div id="ref-examples">

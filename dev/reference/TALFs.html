@@ -66,7 +66,7 @@ information. Other uses are possible, but not recommended."><meta name="robots" 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Temporal Aggregation Level Functions (TALFs)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/R/TALFs.R" class="external-link"><code>R/TALFs.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/R/TALFs.R" class="external-link"><code>R/TALFs.R</code></a>, <a href="https://github.com/gisler/DTSg/blob/HEAD/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>TALFs.Rd</code></div>
     </div>
 
@@ -78,33 +78,7 @@ information. Other uses are possible, but not recommended.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">byFasttimeY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttimeYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byFasttime_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
-
-<span class="fu">byY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">byY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
 
 <span class="fu">byYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
 
@@ -128,7 +102,33 @@ information. Other uses are possible, but not recommended.</p>
 
 <span class="fu">by____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
 
-<span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></code></pre></div>
+<span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttimeYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span>
+
+<span class="fu">byFasttime_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -150,29 +150,35 @@ corresponding to the function's temporal aggregation level.</p>
 
 <p>There are two families of temporal aggregation level functions. The one
 family truncates timestamps (truncating family), the other extracts a certain
-part of them (extracting family). Each family comes in two flavours: one
-using <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code> of <span class="pkg">fasttime</span>, the other solely relying
-on base <span style="R">R</span>. The <span class="pkg">fasttime</span> versions work with UTC and equivalent as well
-as all Etc/GMT time zones only (execute
-<code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones) and are
-limited to timestamps between the years 1970 and 2199, but generally are
-faster for the extracting family of functions.</p>
+part of them (extracting family). Each family comes in three flavours: the
+first utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code> of <span class="pkg">fasttime</span>, the second
+<code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> of <span class="pkg">RcppCCTZ</span> and the third relies solely on
+base <span style="R">R</span>.</p>
+<p>The <span class="pkg">fasttime</span> flavour works with UTC and equivalent as well as all
+Etc/GMT time zones only (execute
+<code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones) and is
+limited to timestamps between the years 1970 and 2199, but generally is the
+fastest for the extracting family of functions. For time zones other than UTC
+and equivalent the <span class="pkg">RcppCCTZ</span> flavour generally is the fastest.</p>
+<p>Use the <code>funbyApproach</code> argument of the respective calling method in order to
+specify the utilised flavour.</p>
 <p>The truncating family sets timestamps to the lowest possible point in time of
-the corresponding temporal aggregation level:</p><ul><li><p><code>*Y_____</code> truncates to year,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-01-01 00:00:00.0</em></p></li>
-<li><p><code>*YQ____</code> truncates to quarter, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-10-01 00:00:00.0</em></p></li>
-<li><p><code>*Ym____</code> truncates to month,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-01 00:00:00.0</em></p></li>
-<li><p><code>*Ymd___</code> truncates to day,     e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 00:00:00.0</em></p></li>
-<li><p><code>*YmdH__</code> truncates to hour,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:00:00.0</em></p></li>
-<li><p><code>*YmdHM_</code> truncates to minute,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:00.0</em></p></li>
-<li><p><code>*YmdHMS</code> truncates to second,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:11.0</em></p></li>
+the corresponding temporal aggregation level:</p><ul><li><p><code>byY_____</code> truncates to year,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-01-01 00:00:00.0</em></p></li>
+<li><p><code>byYQ____</code> truncates to quarter, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-10-01 00:00:00.0</em></p></li>
+<li><p><code>byYm____</code> truncates to month,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-01 00:00:00.0</em></p></li>
+<li><p><code>byYmd___</code> truncates to day,     e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 00:00:00.0</em></p></li>
+<li><p><code>byYmdH__</code> truncates to hour,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:00:00.0</em></p></li>
+<li><p><code>byYmdHM_</code> truncates to minute,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:00.0</em></p></li>
+<li><p><code>byYmdHMS</code> truncates to second,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:11.0</em></p></li>
 </ul><p>By convention, the extracting family sets the year to 2199 and extracts a
-certain part of timestamps:</p><ul><li><p><code>*______</code> extracts nothing,      i.e.          all timestamps become  <em>2199-01-01 00:00:00.0</em></p></li>
-<li><p><code>*_Q____</code> extracts the quarters, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-10-01 00:00:00.0</em></p></li>
-<li><p><code>*_m____</code> extracts the months,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-11-01 00:00:00.0</em></p></li>
-<li><p><code>*___H__</code> extracts the hours,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 11:00:00.0</em></p></li>
-<li><p><code>*____M_</code> extracts the minutes,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:11:00.0</em></p></li>
-<li><p><code>*_____S</code> extracts the seconds,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:00:11.0</em></p></li>
-</ul></div>
+certain part of timestamps:</p><ul><li><p><code>by______</code> extracts nothing,      i.e.          all timestamps become  <em>2199-01-01 00:00:00.0</em></p></li>
+<li><p><code>by_Q____</code> extracts the quarters, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-10-01 00:00:00.0</em></p></li>
+<li><p><code>by_m____</code> extracts the months,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-11-01 00:00:00.0</em></p></li>
+<li><p><code>by___H__</code> extracts the hours,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 11:00:00.0</em></p></li>
+<li><p><code>by____M_</code> extracts the minutes,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:11:00.0</em></p></li>
+<li><p><code>by_____S</code> extracts the seconds,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:00:11.0</em></p></li>
+</ul><p>Please note that the <code>byFasttime*</code> versions are deprecated.</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="aggregate.DTSg.html">aggregate</a></code>, <code><a href="colapply.DTSg.html">colapply</a></code>, <code><a href="subset.DTSg.html">subset</a></code></p></div>

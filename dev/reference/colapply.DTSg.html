@@ -85,6 +85,7 @@
   ignoreDST <span class="op">=</span> <span class="cn">FALSE</span>,
   multiplier <span class="op">=</span> <span class="fl">1L</span>,
   funbyHelpers <span class="op">=</span> <span class="cn">NULL</span>,
+  funbyApproach <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">funbyApproach</span>,
   clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -127,6 +128,11 @@ for further information.</p></dd>
 <dt>funbyHelpers</dt>
 <dd><p>An optional <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with helper data passed on to
 <code>funby</code>. See corresponding section for further information.</p></dd>
+<dt>funbyApproach</dt>
+<dd><p>A character string. Either <code>"base"</code>, which utilises
+<code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
+or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
+function for transforming timestamps within <code><a href="TALFs.html">TALFs</a></code>.</p></dd>
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
@@ -171,16 +177,7 @@ help of the <code>multiplier</code> argument. A <code>multiplier</code> of <code
 is a <code>multiplier</code> of <code>6</code> provided to <code><a href="TALFs.html">by_m____</a></code>. The function
 then aggregates all months of all first and all months of all second half
 years instead of all months of all years separately. This feature is
-supported by the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byFasttimeY_____</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttimeYm____</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttimeYmdH__</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttimeYmdHM_</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttimeYmdHMS</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttime_m____</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttime___H__</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttime____M_</a></code></p></li>
-<li><p><code><a href="TALFs.html">byFasttime_____S</a></code></p></li>
-<li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
+supported by the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYm____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYmdH__</a></code> (UTC and equivalent as well as all Etc/GMT time zones only)</p></li>
 <li><p><code><a href="TALFs.html">byYmdHM_</a></code></p></li>
@@ -195,13 +192,13 @@ supported by the following <code><a href="TALFs.html">TALFs</a></code> of the pa
     
 
 <p><code>ignoreDST</code> tells a temporal aggregation level function if it is supposed to
-ignore day saving time while forming new timestamps. This can be a desired
-feature for time series strictly following the position of the sun such as
-hydrological time series. Doing so ensures that diurnal variations are
-preserved by all means and all intervals are of the “correct” length,
-however, a possible limitation might be that the day saving time shift is
-invariably assumed to be one hour long. This feature requires that the
-periodicity of the time series was recognised and is supported by the
+ignore day saving time while transforming the timestamps. This can be a
+desired feature for time series strictly following the position of the sun
+such as hydrological time series. Doing so ensures that diurnal variations
+are preserved by all means and all intervals are of the “correct”
+length, however, a possible limitation might be that the day saving time
+shift is invariably assumed to be one hour long. This feature requires that
+the periodicity of the time series was recognised and is supported by the
 following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYQ____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYm____</a></code></p></li>
@@ -537,17 +534,17 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime      flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.7758652</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.8505487</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.9052999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.5572129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.1172506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.9590483</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.7509472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.8745737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.8106231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.5555030</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9974043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9936352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9965603</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9981393</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9939358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9851957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9834512</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9878689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9848489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9950107</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
