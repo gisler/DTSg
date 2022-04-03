@@ -1,17 +1,23 @@
 # DTSg v0.8.1.9000
 
-* Added undocumented method `names()` exclusive only to the R6 interface acting as alias for the `cols()` method
-* Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package.
-* It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on.
-* Greatly sped up `by______()` and `byFasttime______()` TALFs
+* Added `funbyApproach` argument to `new()`, `aggregate()`, `colapply()` and `subset()` methods: allows for specifying the main function utilised for transforming timestamps within `TALFs` (either `"base"` utilising `as.POSIXct()` or `"fasttime"` utilising `fasttime::fastPOSIXct()` or `"RcppCCTZ"` utilising `RcppCCTZ::parseDatetime()`). Please note that the `byFasttime*` versions of the `TALFs` are now deprecated. Use this argument from now on instead
+* Added `funbyApproach` also to the `list` of helper data (`funbyHelpers` argument) passed on to temporal aggregation level functions
+* Added `funbyApproach` field reflecting the `funbyApproach` argument (can also be actively set in order to change the utilised approach)
+* Added undocumented `names()` method exclusive only to the R6 interface acting as alias for the `cols()` method
+* Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. These can be especially handy when making use of the `units` package
+* Added `DTSgFast`, `DTSgFunbyApproach` and `DTSgNA.status` options providing default values for the `fast`, `funbyApproach` and `na.status` arguments of the `new()` method
+* Added `DTSgDeprecatedWarnings` option: allows for disabling warnings from deprecated features.
+* Greatly sped up `by______()` and `byFasttime______()` `TALFs`
+* It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on
 * Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
 * Slightly improved documentation
+* Minor internal code improvements
 
 # DTSg v0.8.1
 
 * Added a “special class” called `".numerary"` available to the `class` argument of the `cols()` method: allows for querying the names of `integer` and `numeric` columns in one go
-* Added undocumented methods `raggregate()`, `rbind()`, `set()` and `setnames()` exclusive only to the R6 interface acting as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods
+* Added undocumented `raggregate()`, `rbind()`, `set()` and `setnames()` methods exclusive only to the R6 interface acting as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods
 * `print()` method now truncates the number of printed rows of the values more aggressively
 * Created a `pkgdown` website
 * Improved vignettes and documentation
@@ -27,7 +33,7 @@
 * Added `rowaggregate()` method: allows for applying summary functions row-wise to `DTSg` objects
 * Added `rowbind()` method: allows for combining the rows of `DTSg` objects
 * Added `setColNames()` method: allows for renaming columns of `DTSg` objects
-* Added `multiplier` and `funbyHelpers` arguments to the `aggregate()`, `colapply()` and `subset()` methods: allows for adjusting the temporal aggregation level of `TALFs` and for passing on user defined helper data to `TALFs`
+* Added `multiplier` and `funbyHelpers` arguments to `aggregate()`, `colapply()` and `subset()` methods: allows for adjusting the temporal aggregation level of `TALFs` and for passing on user defined helper data to `TALFs`
 * Added `multiplier` also to the `list` of helper data passed on to temporal aggregation level functions
 * Added `helpers` argument to `colapply()` and `rollapply()` methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. `x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)` can now be written as `x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)`)
 * Temporal aggregation level functions based on the `fasttime` package now also support time zones equivalent to UTC (execute `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list of supported time zones)
@@ -43,7 +49,7 @@
 * Added examples to the documentation of the `colapply()` method showing how to calculate moving averages with the help of the `runner` package instead of the `rollapply()` method
 * `aggregate()` method can benefit from `data.table`'s *GForce* optimisation now when its `fun` argument is provided with a character vector specifying summary functions
 * Greatly sped up `nas()` method
-* Temporal aggregation level functions supplied to the `funby` argument of the `colapply()` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset()` method).
+* Temporal aggregation level functions supplied to the `funby` argument of the `colapply()` method are not forced to return a `POSIXct` timestamp any longer. They are, however, forced to return an atomic mode (the same goes for the `subset()` method)
 * `getCol()` method now is capable of also querying the *.dateTime* column
 * `R6Method` argument of `S3WrapperGenerator()` function now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression
 * Fixed that not all missing values were made explicit after a call to the `merge()` method despite an `"explicit"` `na.status` in some cases
@@ -56,7 +62,7 @@
 * Added `getCol()` method: allows for querying the values of a single column of a `DTSg` object
 * Added `funby` and `ignoreDST` arguments to `colapply()` method: allows for applying functions like `cumsum()` to a certain temporal level
 * Added `na.status` argument to `new()` and `alter()` methods: allows for making missing values either `"explicit"` (default) or `"implicit"` or leaving them alone via `"undecided"`
-* Added `na.status` field reflecting the status of missing values
+* Added `na.status` field reflecting the status of missing values (can also be actively set)
 * Added `na.status` also to the `list` of helper data passed on to temporal aggregation level functions
 * `funby` argument of `aggregate()` method now also accepts a named `list` of functions: allows for calculating several summary statistics at once
 * `periodicity` field can now be actively set in order to change the periodicity of the time series

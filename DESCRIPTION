@@ -33,6 +33,7 @@ Suggests:
     knitr,
     magrittr,
     RColorBrewer,
+    RcppCCTZ,
     rmarkdown,
     runner (>= 0.3.5),
     tinytest,

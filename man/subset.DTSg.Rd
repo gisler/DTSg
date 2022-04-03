@@ -15,6 +15,7 @@
   clone = getOption("DTSgClone"),
   multiplier = 1L,
   funbyHelpers = NULL,
+  funbyApproach = self$funbyApproach,
   ...
 )
 }
@@ -52,6 +53,11 @@ for further information.}
 
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
 \code{funby}. See corresponding section for further information.}
+
+\item{funbyApproach}{A character string. Either \code{"base"}, which utilises
+\code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
+or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
+function for transforming timestamps within \code{\link{TALFs}}.}
 
 \item{...}{Further arguments passed on to \code{fun}.}
 }
@@ -98,15 +104,6 @@ then aggregates all months of all first and all months of all second half
 years instead of all months of all years separately. This feature is
 supported by the following \code{\link{TALFs}} of the package:
 \itemize{
-\item \code{\link{byFasttimeY_____}}
-\item \code{\link{byFasttimeYm____}}
-\item \code{\link{byFasttimeYmdH__}}
-\item \code{\link{byFasttimeYmdHM_}}
-\item \code{\link{byFasttimeYmdHMS}}
-\item \code{\link{byFasttime_m____}}
-\item \code{\link{byFasttime___H__}}
-\item \code{\link{byFasttime____M_}}
-\item \code{\link{byFasttime_____S}}
 \item \code{\link{byY_____}}
 \item \code{\link{byYm____}}
 \item \code{\link{byYmdH__}} (UTC and equivalent as well as all Etc/GMT time zones only)
@@ -122,13 +119,13 @@ supported by the following \code{\link{TALFs}} of the package:
 \section{Ignore day saving time}{
 
 \code{ignoreDST} tells a temporal aggregation level function if it is supposed to
-ignore day saving time while forming new timestamps. This can be a desired
-feature for time series strictly following the position of the sun such as
-hydrological time series. Doing so ensures that diurnal variations are
-preserved by all means and all intervals are of the \dQuote{correct} length,
-however, a possible limitation might be that the day saving time shift is
-invariably assumed to be one hour long. This feature requires that the
-periodicity of the time series was recognised and is supported by the
+ignore day saving time while transforming the timestamps. This can be a
+desired feature for time series strictly following the position of the sun
+such as hydrological time series. Doing so ensures that diurnal variations
+are preserved by all means and all intervals are of the \dQuote{correct}
+length, however, a possible limitation might be that the day saving time
+shift is invariably assumed to be one hour long. This feature requires that
+the periodicity of the time series was recognised and is supported by the
 following \code{\link{TALFs}} of the package:
 \itemize{
 \item \code{\link{byY_____}}

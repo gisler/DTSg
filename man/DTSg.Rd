@@ -7,8 +7,9 @@
 \title{DTSg class}
 \usage{
 new(Class, values, ID = "", parameter = "", unit = "", variant = "",
-  aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status =
-  c("explicit", "implicit", "undecided"))
+  aggregated = FALSE, fast = getOption("DTSgFast"), swallow = FALSE,
+  na.status = getOption("DTSgNA.status"), funbyApproach =
+  getOption("DTSgFunbyApproach"))
 }
 \arguments{
 \item{Class}{A character string. Must be \code{"DTSg"} in order to create a \code{DTSg}
@@ -56,6 +57,11 @@ timestamps explicit according to the recognised periodicity, or
 \code{"implicit"}, which removes timestamps with missing values on all value
 columns, or \code{"undecided"} for no such action. Please note that \code{DTSg}
 objects work best with explicitly missing values.}
+
+\item{funbyApproach}{A character string. Either \code{"base"}, which utilises
+\code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
+or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
+function for transforming timestamps within \code{\link{TALFs}}.}
 }
 \value{
 Returns a \code{DTSg} object.
@@ -123,6 +129,7 @@ read-only though:
 \itemize{
 \item \code{aggregated}: Same as the \code{aggregated} argument.
 \item \code{fast}: Same as the \code{fast} argument.
+\item \code{funbyApproach}: Same as the \code{funbyApproach} argument.
 \item \code{ID}: Same as the \code{ID} argument. It is used as the title of plots.
 \item \code{na.status}: Same as the \code{na.status} argument. When set, the missing values
 of the object are expanded or collapsed accordingly.
@@ -162,6 +169,11 @@ following option. See \code{\link{options}} for further information:
 \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are, by default,
 modified in place (\code{FALSE}) or if a deep clone (copy) shall be made
 beforehand (\code{TRUE}).
+\item \emph{DTSgDeprecatedWarnings:} A logical specifying if warnings are displayed
+when calling deprecated features.
+\item \emph{DTSgFast:} Default value for the \code{fast} argument.
+\item \emph{DTSgFunbyApproach:} Default value for the \code{funbyApproach} argument.
+\item \emph{DTSgNA.status:} Default value for the \code{na.status} argument.
 }
 }
 

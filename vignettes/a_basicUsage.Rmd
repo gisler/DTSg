@@ -47,7 +47,7 @@ Creating an object with the package's alternative interface abusing an S4 constr
 ```{r}
 TS <- new(
   Class = "DTSg",
-  values = flow, 
+  values = flow,
   ID = "River Flow"
 )
 ```
@@ -173,6 +173,7 @@ Valid results are returned for the following fields:
 
 * `aggregated`
 * `fast`
+* `funbyApproach`
 * `ID`
 * `na.status`
 * `parameter`

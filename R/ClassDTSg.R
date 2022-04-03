@@ -16,8 +16,9 @@
 #' operator.
 #'
 #' @usage new(Class, values, ID = "", parameter = "", unit = "", variant = "",
-#'   aggregated = FALSE, fast = FALSE, swallow = FALSE, na.status =
-#'   c("explicit", "implicit", "undecided"))
+#'   aggregated = FALSE, fast = getOption("DTSgFast"), swallow = FALSE,
+#'   na.status = getOption("DTSgNA.status"), funbyApproach =
+#'   getOption("DTSgFunbyApproach"))
 #'
 #' @param Class A character string. Must be `"DTSg"` in order to create a `DTSg`
 #'   object. Otherwise a different object may or may not be created (S4
@@ -55,6 +56,10 @@
 #'   `"implicit"`, which removes timestamps with missing values on all value
 #'   columns, or `"undecided"` for no such action. Please note that `DTSg`
 #'   objects work best with explicitly missing values.
+#' @param funbyApproach A character string. Either `"base"`, which utilises
+#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
+#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
+#'   function for transforming timestamps within [`TALFs`].
 #'
 #' @return Returns a `DTSg` object.
 #'
@@ -91,6 +96,7 @@
 #' read-only though:
 #' * `aggregated`: Same as the `aggregated` argument.
 #' * `fast`: Same as the `fast` argument.
+#' * `funbyApproach`: Same as the `funbyApproach` argument.
 #' * `ID`: Same as the `ID` argument. It is used as the title of plots.
 #' * `na.status`: Same as the `na.status` argument. When set, the missing values
 #' of the object are expanded or collapsed accordingly.
@@ -126,6 +132,11 @@
 #' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
 #' modified in place (`FALSE`) or if a deep clone (copy) shall be made
 #' beforehand (`TRUE`).
+#' * _DTSgDeprecatedWarnings:_ A logical specifying if warnings are displayed
+#' when calling deprecated features.
+#' * _DTSgFast:_ Default value for the `fast` argument.
+#' * _DTSgFunbyApproach:_ Default value for the `funbyApproach` argument.
+#' * _DTSgNA.status:_ Default value for the `na.status` argument.
 #'
 #' @note
 #' Due to the [`POSIXct`] nature of the _.dateTime_ column, the same sub-second
@@ -161,6 +172,8 @@ DTSg <- R6Class(
 
   #### Private ####
   private = list(
+    .funbyApproach = character(),
+    .funbyApproaches = c("base", "fasttime", "RcppCCTZ"),
     .ID = character(),
     .isAggregated = logical(),
     .isFast = logical(),
@@ -292,7 +305,7 @@ DTSg <- R6Class(
       assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
     },
 
-    funbyHelpers = function(ignoreDST, multiplier, .helpers) {
+    funbyHelpers = function(ignoreDST, multiplier, funbyApproach, .helpers) {
       if (!is.null(.helpers)) {
         qassert(.helpers, "L+")
         helpers <- names(.helpers)
@@ -329,6 +342,14 @@ DTSg <- R6Class(
           )
           .helpers[["multiplier"]] <- NULL
         }
+        if ("funbyApproach" %chin% helpers) {
+          funbyApproach <- assertChoice(
+            .helpers[["funbyApproach"]],
+            private$.funbyApproaches,
+            .var.name = 'funbyHelpers[["funbyApproach"]]'
+          )
+          .helpers[["funbyApproach"]] <- NULL
+        }
       }
 
       c(list(
@@ -336,7 +357,8 @@ DTSg <- R6Class(
         ignoreDST = ignoreDST,
         periodicity = private$.periodicity,
         na.status = private$.na.status,
-        multiplier = multiplier
+        multiplier = multiplier,
+        funbyApproach = funbyApproach
       ), .helpers)
     },
 
@@ -407,12 +429,19 @@ DTSg <- R6Class(
       ignoreDST = FALSE,
       multiplier = 1L,
       funbyHelpers = NULL,
+      funbyApproach = self$funbyApproach,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(funby)
       qassert(ignoreDST, "B1")
       multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-      .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
+      funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+      .funbyHelpers <- private$funbyHelpers(
+        ignoreDST,
+        multiplier,
+        funbyApproach,
+        funbyHelpers
+      )
       qassert(funby(
         self$values(reference = TRUE)[[".dateTime"]][1L],
         .funbyHelpers
@@ -434,6 +463,7 @@ DTSg <- R6Class(
           ignoreDST = ignoreDST,
           multiplier = multiplier,
           funbyHelpers = funbyHelpers,
+          funbyApproach = funbyApproach,
           clone = FALSE
         ))
       }
@@ -577,6 +607,7 @@ DTSg <- R6Class(
       ignoreDST = FALSE,
       multiplier = 1L,
       funbyHelpers = NULL,
+      funbyApproach = self$funbyApproach,
       clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
@@ -599,6 +630,7 @@ DTSg <- R6Class(
           ignoreDST = ignoreDST,
           multiplier = multiplier,
           funbyHelpers = funbyHelpers,
+          funbyApproach = funbyApproach,
           clone = FALSE
         ))
       }
@@ -607,7 +639,13 @@ DTSg <- R6Class(
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-        .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
+        funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+        .funbyHelpers <- private$funbyHelpers(
+          ignoreDST,
+          multiplier,
+          funbyApproach,
+          funbyHelpers
+        )
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
           .funbyHelpers
@@ -718,9 +756,10 @@ DTSg <- R6Class(
       unit = "",
       variant = "",
       aggregated = FALSE,
-      fast = FALSE,
+      fast = getOption("DTSgFast"),
       swallow = FALSE,
-      na.status = c("explicit", "implicit", "undecided")
+      na.status = getOption("DTSgNA.status"),
+      funbyApproach = getOption("DTSgFunbyApproach")
     ) {
       assertDataFrame(values, min.rows = 1L, min.cols = 2L)
       assertCharacter(
@@ -731,7 +770,7 @@ DTSg <- R6Class(
       )
       assertNoStartingDot(names(values)[-1L])
       qassert(swallow, "B1")
-      na.status <- match.arg(na.status)
+      na.status <- match.arg(na.status, private$.na.statuses)
 
       if (is.data.table(values)) {
         if (swallow) {
@@ -749,6 +788,7 @@ DTSg <- R6Class(
       self$variant <- variant
       self$aggregated <- aggregated
       self$fast <- fast
+      self$funbyApproach <- funbyApproach
 
       private$.origDateTimeCol <- names(private$.values)[1L]
 
@@ -1412,7 +1452,8 @@ DTSg <- R6Class(
       na.status = "implicit",
       clone = getOption("DTSgClone"),
       multiplier = 1L,
-      funbyHelpers = NULL
+      funbyHelpers = NULL,
+      funbyApproach = self$funbyApproach
     ) {
       if (!missing(i)) {
         i <- private$determineFilter(i, as.expression(substitute(i)))
@@ -1433,7 +1474,8 @@ DTSg <- R6Class(
           na.status = na.status,
           clone = FALSE,
           multiplier = multiplier,
-          funbyHelpers = funbyHelpers
+          funbyHelpers = funbyHelpers,
+          funbyApproach = funbyApproach
         ))
       }
 
@@ -1444,7 +1486,13 @@ DTSg <- R6Class(
           assertFunction(funby)
           qassert(ignoreDST, "B1")
           multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-          .funbyHelpers <- private$funbyHelpers(ignoreDST, multiplier, funbyHelpers)
+          funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+          .funbyHelpers <- private$funbyHelpers(
+            ignoreDST,
+            multiplier,
+            funbyApproach,
+            funbyHelpers
+          )
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
             .funbyHelpers
@@ -1533,6 +1581,18 @@ DTSg <- R6Class(
         qassert(value, "B1")
 
         private$.isFast <- value
+
+        invisible(self)
+      }
+    },
+
+    funbyApproach = function(value) {
+      if (missing(value)) {
+        private$.funbyApproach
+      } else {
+        value <- match.arg(value, private$.funbyApproaches)
+
+        private$.funbyApproach <- value
 
         invisible(self)
       }
