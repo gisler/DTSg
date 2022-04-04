@@ -58,10 +58,12 @@ timestamps explicit according to the recognised periodicity, or
 columns, or \code{"undecided"} for no such action. Please note that \code{DTSg}
 objects work best with explicitly missing values.}
 
-\item{funbyApproach}{A character string. Either \code{"base"}, which utilises
-\code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
-or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
-function for transforming timestamps within \code{\link{TALFs}}.}
+\item{funbyApproach}{A character string specifying the default flavour of
+\code{\link{TALFs}} used with the created \code{DTSg} object. Either \code{"base"}, which
+utilises \code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises
+\code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}, or \code{"RcppCCTZ"}, which utilises
+\code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main function for transforming
+timestamps.}
 }
 \value{
 Returns a \code{DTSg} object.

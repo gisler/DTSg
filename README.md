@@ -16,4 +16,4 @@ Install the development version from GitHub (requires the `remotes` package):
 
 ## Semantic versioning
 
-Releases of this project are versioned following the rules of [SemVer](https://semver.org) with one exception: The public API of major version zero (0.y.z) should be considered stable.
+Releases of this project are versioned following the rules of [SemVer](https://semver.org).

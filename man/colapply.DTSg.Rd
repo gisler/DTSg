@@ -58,10 +58,11 @@ for further information.}
 \item{funbyHelpers}{An optional \code{\link{list}} with helper data passed on to
 \code{funby}. See corresponding section for further information.}
 
-\item{funbyApproach}{A character string. Either \code{"base"}, which utilises
+\item{funbyApproach}{A character string specifying the flavour of the applied
+temporal aggregation level function. Either \code{"base"}, which utilises
 \code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
 or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
-function for transforming timestamps within \code{\link{TALFs}}.}
+function for transforming timestamps.}
 
 \item{clone}{A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.}
@@ -99,13 +100,14 @@ as its second. The default elements of this \code{\link{list}} are as follows:
 \item \emph{periodicity:} Same as the \code{\link[=DTSg]{periodicity}} field.
 \item \emph{na.status:} Same as the \code{\link[=DTSg]{na.status}} field.
 \item \emph{multiplier:} Same as the \code{multiplier} argument.
+\item \emph{funbyApproach:} Same as the \code{funbyApproach} argument.
 }
 
 Any additional element specified in the \code{funbyHelpers} argument is appended
 to the end of the helper data \code{\link{list}}. In case \code{funbyHelpers} contains an
-\emph{ignoreDST} or \emph{multiplier} element, it takes precedence over the respective
-method argument. \emph{timezone, periodicity} and \emph{na.status} elements are
-rejected.
+\emph{ignoreDST, multiplier} or \emph{funbyApproach} element, it takes precedence over
+the respective method argument. \emph{timezone, periodicity} and \emph{na.status}
+elements are rejected, as they are always taken directly from the object.
 
 The temporal aggregation level of certain \code{\link{TALFs}} can be adjusted with the
 help of the \code{multiplier} argument. A \code{multiplier} of \code{10}, for example, makes

@@ -94,18 +94,18 @@ corresponding to the function's temporal aggregation level.
 }
 \description{
 Simply hand over one of these functions to the \code{funby} argument of one of the
-methods of \code{\link{DTSg}} objects, which support it. The method then does the rest
-of the work. See corresponding section and the respective method for further
-information. Other uses are possible, but not recommended.
+methods of a \code{\link{DTSg}} object, which supports it. The method then does the
+rest of the work. See respective calling method for further information.
+Other uses are possible, but not recommended.
 }
-\section{Families}{
+\section{Families and flavours}{
 
 There are two families of temporal aggregation level functions. The one
 family truncates timestamps (truncating family), the other extracts a certain
 part of them (extracting family). Each family comes in three flavours: the
-first utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}} of \pkg{fasttime}, the second
-\code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} of \pkg{RcppCCTZ} and the third relies solely on
-base \R.
+first relies solely on base \R, the second utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}
+of \pkg{fasttime} and the third \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} of
+\pkg{RcppCCTZ}.
 
 The \pkg{fasttime} flavour works with UTC and equivalent as well as all
 Etc/GMT time zones only (execute

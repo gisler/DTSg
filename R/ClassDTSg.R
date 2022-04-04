@@ -56,10 +56,12 @@
 #'   `"implicit"`, which removes timestamps with missing values on all value
 #'   columns, or `"undecided"` for no such action. Please note that `DTSg`
 #'   objects work best with explicitly missing values.
-#' @param funbyApproach A character string. Either `"base"`, which utilises
-#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
-#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
-#'   function for transforming timestamps within [`TALFs`].
+#' @param funbyApproach A character string specifying the default flavour of
+#'   [`TALFs`] used with the created `DTSg` object. Either `"base"`, which
+#'   utilises [`as.POSIXct`], or `"fasttime"`, which utilises
+#'   [`fasttime::fastPOSIXct`], or `"RcppCCTZ"`, which utilises
+#'   [`RcppCCTZ::parseDatetime`] as the main function for transforming
+#'   timestamps.
 #'
 #' @return Returns a `DTSg` object.
 #'

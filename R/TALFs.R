@@ -108,21 +108,21 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' Temporal Aggregation Level Functions (TALFs)
 #'
 #' Simply hand over one of these functions to the `funby` argument of one of the
-#' methods of [`DTSg`] objects, which support it. The method then does the rest
-#' of the work. See corresponding section and the respective method for further
-#' information. Other uses are possible, but not recommended.
+#' methods of a [`DTSg`] object, which supports it. The method then does the
+#' rest of the work. See respective calling method for further information.
+#' Other uses are possible, but not recommended.
 #'
 #' @param .dateTime A [`POSIXct`] vector.
 #' @param .helpers A [`list`] with helper data as handed over by methods of
 #'   [`DTSg`] objects, which support the `funby` argument.
 #'
-#' @section Families:
+#' @section Families and flavours:
 #' There are two families of temporal aggregation level functions. The one
 #' family truncates timestamps (truncating family), the other extracts a certain
 #' part of them (extracting family). Each family comes in three flavours: the
-#' first utilises [`fasttime::fastPOSIXct`] of \pkg{fasttime}, the second
-#' [`RcppCCTZ::parseDatetime`] of \pkg{RcppCCTZ} and the third relies solely on
-#' base \R.
+#' first relies solely on base \R, the second utilises [`fasttime::fastPOSIXct`]
+#' of \pkg{fasttime} and the third [`RcppCCTZ::parseDatetime`] of
+#' \pkg{RcppCCTZ}.
 #'
 #' The \pkg{fasttime} flavour works with UTC and equivalent as well as all
 #' Etc/GMT time zones only (execute

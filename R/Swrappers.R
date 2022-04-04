@@ -89,10 +89,11 @@ NULL
 #'   for further information.
 #' @param funbyHelpers An optional [`list`] with helper data passed on to
 #'   `funby`. See corresponding section for further information.
-#' @param funbyApproach A character string. Either `"base"`, which utilises
+#' @param funbyApproach A character string specifying the flavour of the applied
+#'   temporal aggregation level function. Either `"base"`, which utilises
 #'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
 #'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
-#'   function for transforming timestamps within [`TALFs`].
+#'   function for transforming timestamps.
 #' @param clone A logical specifying if the object shall be modified in place or
 #'   if a deep clone (copy) shall be made beforehand.
 #'
@@ -106,12 +107,13 @@ NULL
 #' * _periodicity:_ Same as the [`periodicity`][DTSg] field.
 #' * _na.status:_ Same as the [`na.status`][DTSg] field.
 #' * _multiplier:_ Same as the `multiplier` argument.
+#' * _funbyApproach:_ Same as the `funbyApproach` argument.
 #'
 #' Any additional element specified in the `funbyHelpers` argument is appended
 #' to the end of the helper data [`list`]. In case `funbyHelpers` contains an
-#' _ignoreDST_ or _multiplier_ element, it takes precedence over the respective
-#' method argument. _timezone, periodicity_ and _na.status_ elements are
-#' rejected.
+#' _ignoreDST, multiplier_ or _funbyApproach_ element, it takes precedence over
+#' the respective method argument. _timezone, periodicity_ and _na.status_
+#' elements are rejected, as they are always taken directly from the object.
 #'
 #' The temporal aggregation level of certain [`TALFs`] can be adjusted with the
 #' help of the `multiplier` argument. A `multiplier` of `10`, for example, makes
