@@ -11,6 +11,7 @@
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on
 * Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package
+* Bumped minimum tested R version from 3.5.2 to 4.0.2 using the corresponding MRAN repository snapshot
 * Slightly improved documentation
 * Minor internal code improvements
 

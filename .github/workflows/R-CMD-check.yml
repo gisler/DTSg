@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.5.2'}
           - {os: windows-latest, r: 'devel'}
           - {os: macOS-latest, r: 'oldrel'}
           - {os: macOS-latest, r: 'release'}
@@ -37,53 +36,15 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      - name: Install dependencies (3.5.2)
-        if: matrix.config.r == '3.5.2'
-        run: |
-          install.packages("remotes")
-          remotes::install_cran(
-            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "RcppCCTZ", "runner", "units", "rcmdcheck"),
-            repos = "https://mran.microsoft.com/snapshot/2019-02-01",
-            type = "win.binary",
-            dependencies = TRUE
-          )
-          remotes::install_deps(
-            dependencies = TRUE,
-            type = "win.binary",
-            upgrade = "never"
-          )
-        shell: Rscript {0}
-
-      - name: Check (3.5.2)
-        if: matrix.config.r == '3.5.2'
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-          _R_CHECK_FORCE_SUGGESTS_: false
-        run: |
-          rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--as-cran"),
-            build_args = "--no-manual",
-            check_dir = "check",
-            error_on = "warning"
-          )
-        shell: Rscript {0}
-
-      - name: Upload check results (3.5.2)
-        if: failure() && matrix.config.r == '3.5.2'
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
-
-      - name: Install dependencies (all but 3.5.2)
-        if: matrix.config.r != '3.5.2'
+      - name: Install dependencies (all but 4.0.2)
+        if: matrix.config.r != '4.0.2'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, any::covr
           needs: check, coverage
 
-      - name: Check (all but 3.5.2)
-        if: matrix.config.r != '3.5.2'
+      - name: Check (all but 4.0.2)
+        if: matrix.config.r != '4.0.2'
         uses: r-lib/actions/check-r-package@v2
 
       - name: Test coverage
