@@ -437,7 +437,10 @@ DTSg <- R6Class(
       assertFunction(funby)
       qassert(ignoreDST, "B1")
       multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-      funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+      funbyApproach <- assertFunbyApproach(
+        funbyApproach,
+        private$.funbyApproaches
+      )
       .funbyHelpers <- private$funbyHelpers(
         ignoreDST,
         multiplier,
@@ -641,7 +644,10 @@ DTSg <- R6Class(
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-        funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+        funbyApproach <- assertFunbyApproach(
+          funbyApproach,
+          private$.funbyApproaches
+        )
         .funbyHelpers <- private$funbyHelpers(
           ignoreDST,
           multiplier,
@@ -1488,7 +1494,10 @@ DTSg <- R6Class(
           assertFunction(funby)
           qassert(ignoreDST, "B1")
           multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-          funbyApproach <- match.arg(funbyApproach, private$.funbyApproaches)
+          funbyApproach <- assertFunbyApproach(
+            funbyApproach,
+            private$.funbyApproaches
+          )
           .funbyHelpers <- private$funbyHelpers(
             ignoreDST,
             multiplier,
@@ -1592,7 +1601,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.funbyApproach
       } else {
-        value <- match.arg(value, private$.funbyApproaches)
+        value <- assertFunbyApproach(value, private$.funbyApproaches)
 
         private$.funbyApproach <- value
 
