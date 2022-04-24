@@ -2,6 +2,5 @@
 .Rhistory
 .Rproj.user
 .Ruserdata
-docs/*
 vignettes/*.html
 vignettes/*.R

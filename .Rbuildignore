@@ -5,6 +5,5 @@
 ^_pkgdown\.yml$
 ^CONTRIBUTING\.md$
 ^cran-comments\.md$
-^docs$
 ^examples$
 ^LICENSE\.md$
