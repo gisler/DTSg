@@ -61,7 +61,8 @@
 #'   utilises [`as.POSIXct`], or `"fasttime"`, which utilises
 #'   [`fasttime::fastPOSIXct`], or `"RcppCCTZ"`, which utilises
 #'   [`RcppCCTZ::parseDatetime`] as the main function for transforming
-#'   timestamps.
+#'   timestamps. Custom approaches for user defined temporal aggregation level
+#'   functions are also possible.
 #'
 #' @return Returns a `DTSg` object.
 #'
@@ -175,7 +176,6 @@ DTSg <- R6Class(
   #### Private ####
   private = list(
     .funbyApproach = character(),
-    .funbyApproaches = c("base", "fasttime", "RcppCCTZ"),
     .ID = character(),
     .isAggregated = logical(),
     .isFast = logical(),
@@ -345,11 +345,7 @@ DTSg <- R6Class(
           .helpers[["multiplier"]] <- NULL
         }
         if ("funbyApproach" %chin% helpers) {
-          funbyApproach <- assertChoice(
-            .helpers[["funbyApproach"]],
-            private$.funbyApproaches,
-            .var.name = 'funbyHelpers[["funbyApproach"]]'
-          )
+          funbyApproach <- .helpers[["funbyApproach"]]
           .helpers[["funbyApproach"]] <- NULL
         }
       }
@@ -437,10 +433,6 @@ DTSg <- R6Class(
       assertFunction(funby)
       qassert(ignoreDST, "B1")
       multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-      funbyApproach <- assertFunbyApproach(
-        funbyApproach,
-        private$.funbyApproaches
-      )
       .funbyHelpers <- private$funbyHelpers(
         ignoreDST,
         multiplier,
@@ -644,10 +636,6 @@ DTSg <- R6Class(
         assertFunction(funby)
         qassert(ignoreDST, "B1")
         multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-        funbyApproach <- assertFunbyApproach(
-          funbyApproach,
-          private$.funbyApproaches
-        )
         .funbyHelpers <- private$funbyHelpers(
           ignoreDST,
           multiplier,
@@ -1494,10 +1482,6 @@ DTSg <- R6Class(
           assertFunction(funby)
           qassert(ignoreDST, "B1")
           multiplier <- assertCount(multiplier, positive = TRUE, coerce = TRUE)
-          funbyApproach <- assertFunbyApproach(
-            funbyApproach,
-            private$.funbyApproaches
-          )
           .funbyHelpers <- private$funbyHelpers(
             ignoreDST,
             multiplier,
@@ -1601,7 +1585,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.funbyApproach
       } else {
-        value <- assertFunbyApproach(value, private$.funbyApproaches)
+        qassert(value, "S1")
 
         private$.funbyApproach <- value
 

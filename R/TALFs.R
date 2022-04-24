@@ -168,6 +168,7 @@ NULL
 #' @rdname TALFs
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -200,6 +201,7 @@ byY_____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYQ____ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -223,6 +225,7 @@ byYQ____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYm____ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -255,6 +258,7 @@ byYm____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmd___ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -278,6 +282,7 @@ byYmd___ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdH__ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -312,6 +317,7 @@ byYmdH__ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdHM_ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -336,6 +342,7 @@ byYmdHM_ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdHMS <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -367,6 +374,7 @@ by______ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_Q____ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -390,6 +398,7 @@ by_Q____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_m____ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -422,6 +431,7 @@ by_m____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by___H__ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -464,6 +474,7 @@ by___H__ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by____M_ <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }
@@ -488,6 +499,7 @@ by____M_ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_____S <- function(.dateTime, .helpers) {
+  assertFunbyApproach(.helpers[["funbyApproach"]])
   if (.helpers[["funbyApproach"]] == "fasttime") {
     assertFasttimeOK(.dateTime, .helpers)
   }

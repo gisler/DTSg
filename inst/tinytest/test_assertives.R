@@ -1,3 +1,9 @@
+#### assertFunbyApproach ####
+expect_error(
+  assertFunbyApproach("special"),
+  info = "unsupported approach returns error"
+)
+
 #### assertFasttimeOK ####
 expect_error(
   assertFasttimeOK(seq(

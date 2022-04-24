@@ -63,7 +63,8 @@ objects work best with explicitly missing values.}
 utilises \code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises
 \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}, or \code{"RcppCCTZ"}, which utilises
 \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main function for transforming
-timestamps.}
+timestamps. Custom approaches for user defined temporal aggregation level
+functions are also possible.}
 }
 \value{
 Returns a \code{DTSg} object.
