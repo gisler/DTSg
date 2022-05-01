@@ -68,11 +68,11 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.1.9000" id="dtsg-v0819000">DTSg v0.8.1.9000<a class="anchor" aria-label="anchor" href="#dtsg-v0819000"></a></h2>
-<ul><li>Added <code>funbyApproach</code> argument to <code><a href="../reference/DTSg.html">new()</a></code>, <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code>, <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/subset.DTSg.html">subset()</a></code> methods: allows for specifying the flavour of the applied temporal aggregation level functions (either <code>"base"</code> utilising <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> or <code>"fasttime"</code> utilising <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct()</a></code> or <code>"RcppCCTZ"</code> utilising <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime()</a></code> as the main function for transforming timestamps). Please note that the <code>byFasttime*</code> versions of the TALFs are now deprecated. Use this argument from now on instead</li>
+<ul><li>Added <code>funbyApproach</code> argument to <code><a href="../reference/DTSg.html">new()</a></code>, <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code>, <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/subset.DTSg.html">subset()</a></code> methods: allows for specifying the flavour of the applied temporal aggregation level functions (either <code>"base"</code> utilising <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> or <code>"fasttime"</code> utilising <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct()</a></code> or <code>"RcppCCTZ"</code> utilising <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime()</a></code> as the main function for transforming timestamps). Custom approaches for user defined TALFs are also possible. Please note that the <code>byFasttime*</code> versions of the TALFs are now deprecated. Use this argument from now on instead</li>
 <li>Added <code>funbyApproach</code> also to the <code>list</code> of helper data (<code>funbyHelpers</code> argument) passed on to TALFs</li>
 <li>Added <code>funbyApproach</code> field reflecting the individual <code>funbyApproach</code> of a <code>DTSg</code> object (can also be actively set in order to change the utilised approach)</li>
-<li>Added undocumented <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> method exclusive only to the R6 interface acting as alias for the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method</li>
-<li>Added <code>mode</code> and <code>typeof</code> arguments to <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for getting column names with a certain <code><a href="https://rdrr.io/r/base/mode.html" class="external-link">mode()</a></code> and/or <code><a href="https://rdrr.io/r/base/typeof.html" class="external-link">typeof()</a></code>. These can be especially handy when making use of the <code>units</code> package</li>
+<li>Added undocumented <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> method exclusive only to the R6 interface acting as an alias for the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method</li>
+<li>Added <code>mode</code> and <code>typeof</code> arguments to <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for getting column names with a certain <code><a href="https://rdrr.io/r/base/mode.html" class="external-link">mode()</a></code> and/or <code><a href="https://rdrr.io/r/base/typeof.html" class="external-link">typeof()</a></code>. This can be especially handy when making use of the <code>units</code> package</li>
 <li>Added <code>DTSgFast</code>, <code>DTSgFunbyApproach</code> and <code>DTSgNA.status</code> options providing default values for the <code>fast</code>, <code>funbyApproach</code> and <code>na.status</code> arguments of the <code><a href="../reference/DTSg.html">new()</a></code> method</li>
 <li>Added <code>DTSgDeprecatedWarnings</code> option: allows for disabling warnings from deprecated features.</li>
 <li>Greatly sped up <code><a href="../reference/TALFs.html">by______()</a></code> and <code><a href="../reference/TALFs.html">byFasttime______()</a></code> TALFs</li>
@@ -177,8 +177,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.1" id="dtsg-v021">DTSg v0.2.1<small>2019-10-20</small><a class="anchor" aria-label="anchor" href="#dtsg-v021"></a></h2>
-<ul><li>Fixed error “Unsupported type passed to argument ‘data’.” related to <code>dygraphs</code> in at least some previous releases of R ≤ 3.5.3</li>
-</ul></div>
+<ul><li>Fixed error “Unsupported type passed to argument ‘data’.” related to <code>dygraphs</code> in at least some previous releases of R ≤ 3.5.3</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="dtsg-v020">DTSg v0.2.0<small>2019-10-14</small><a class="anchor" aria-label="anchor" href="#dtsg-v020"></a></h2>
 <ul><li>Added <code>swallow</code> argument to <code><a href="../reference/DTSg.html">new()</a></code> method: allows for a more resource efficient object creation</li>
@@ -198,12 +197,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.3" id="dtsg-v013">DTSg v0.1.3<small>2019-08-29</small><a class="anchor" aria-label="anchor" href="#dtsg-v013"></a></h2>
-<ul><li>Slightly improved vignettes and documentation</li>
-</ul></div>
+<ul><li>Slightly improved vignettes and documentation</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.2" id="dtsg-v012">DTSg v0.1.2<small>2019-03-13</small><a class="anchor" aria-label="anchor" href="#dtsg-v012"></a></h2>
-<ul><li>First release</li>
-</ul></div>
+<ul><li>First release</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -218,7 +215,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>
