@@ -1,4 +1,4 @@
-# DTSg v0.8.1.9000
+# DTSg v1.0.0
 
 * Added `funbyApproach` argument to `new()`, `aggregate()`, `colapply()` and `subset()` methods: allows for specifying the flavour of the applied temporal aggregation level functions (either `"base"` utilising `as.POSIXct()` or `"fasttime"` utilising `fasttime::fastPOSIXct()` or `"RcppCCTZ"` utilising `RcppCCTZ::parseDatetime()` as the main function for transforming timestamps). Custom approaches for user defined TALFs are also possible. Please note that the `byFasttime*` versions of the TALFs are now deprecated. Use this argument from now on instead
 * Added `funbyApproach` also to the `list` of helper data (`funbyHelpers` argument) passed on to TALFs
