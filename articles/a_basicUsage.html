@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -47,7 +49,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Vignettes
      
     <span class="caret"></span>
@@ -67,7 +69,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/gisler/DTSg/">
+  <a href="https://github.com/gisler/DTSg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,15 +84,15 @@
 
       
 
-      </header><script src="a_basicUsage_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>A. Basic usage</h1>
-                        <h4 class="author">Gerold Hepp</h4>
+                        <h4 data-toc-skip class="author">Gerold Hepp</h4>
             
-            <h4 class="date">2021-10-28</h4>
+            <h4 data-toc-skip class="date">2022-05-02</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/master/vignettes/a_basicUsage.Rmd"><code>vignettes/a_basicUsage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/vignettes/a_basicUsage.Rmd" class="external-link"><code>vignettes/a_basicUsage.Rmd</code></a></small>
       <div class="hidden name"><code>a_basicUsage.Rmd</code></div>
 
     </div>
@@ -99,15 +101,16 @@
     
 <p>This vignette introduces the <code>DTSg</code> package, shows how to create objects of its main as well as only class and explains their two interfaces: R6 as code and S3 in comments. Familiarity with the <code>data.table</code> package helps better understanding certain parts of the vignette, but is not essential to follow it.</p>
 <hr>
-<div id="object-creation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#object-creation" class="anchor"></a>Object creation</h2>
+<div class="section level2">
+<h2 id="object-creation">Object creation<a class="anchor" aria-label="anchor" href="#object-creation"></a>
+</h2>
 <p>First, let’s load some data. The package is shipped with a <code>data.table</code> containing a daily time series of river flows:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">DTSg</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gisler.github.io/DTSg/">DTSg</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">flow</span>)
-<span class="no">flow</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="va">flow</span>
 <span class="co">#&gt;             date   flow</span>
 <span class="co">#&gt;    1: 2007-01-01  9.540</span>
 <span class="co">#&gt;    2: 2007-01-02  9.285</span>
@@ -120,31 +123,34 @@
 <span class="co">#&gt; 2167: 2012-12-29 23.580</span>
 <span class="co">#&gt; 2168: 2012-12-30 18.840</span>
 <span class="co">#&gt; 2169: 2012-12-31 17.250</span>
-<span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span>(<span class="no">flow</span>)
-<span class="co">#&gt;       date                          flow        </span>
-<span class="co">#&gt;  Min.   :2007-01-01 00:00:00   Min.   :  4.995  </span>
-<span class="co">#&gt;  1st Qu.:2008-07-19 00:00:00   1st Qu.:  8.085  </span>
-<span class="co">#&gt;  Median :2010-01-12 00:00:00   Median : 11.325  </span>
-<span class="co">#&gt;  Mean   :2010-01-08 23:32:46   Mean   : 16.197  </span>
-<span class="co">#&gt;  3rd Qu.:2011-07-08 00:00:00   3rd Qu.: 18.375  </span>
-<span class="co">#&gt;  Max.   :2012-12-31 00:00:00   Max.   :290.715</span></pre></body></html></div>
+<span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="co">#&gt;       date                            flow        </span>
+<span class="co">#&gt;  Min.   :2007-01-01 00:00:00.0   Min.   :  4.995  </span>
+<span class="co">#&gt;  1st Qu.:2008-07-19 00:00:00.0   1st Qu.:  8.085  </span>
+<span class="co">#&gt;  Median :2010-01-12 00:00:00.0   Median : 11.325  </span>
+<span class="co">#&gt;  Mean   :2010-01-08 23:32:46.7   Mean   : 16.197  </span>
+<span class="co">#&gt;  3rd Qu.:2011-07-08 00:00:00.0   3rd Qu.: 18.375  </span>
+<span class="co">#&gt;  Max.   :2012-12-31 00:00:00.0   Max.   :290.715</span></code></pre></div>
 <p>Now that we have a data set, we can create our first object by providing it to the <code>new</code> method of the package’s main R6 class generator <code>DTSg</code>. In addition, we specify an ID in order to give the object a name:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$<span class="fu"><a href="../reference/DTSg.html">new</a></span>(
-  <span class="kw">values</span> <span class="kw">=</span> <span class="no">flow</span>,
-  <span class="kw">ID</span> <span class="kw">=</span> <span class="st">"River Flow"</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
+  values <span class="op">=</span> <span class="va">flow</span>,
+  ID <span class="op">=</span> <span class="st">"River Flow"</span>
+<span class="op">)</span></code></pre></div>
 <p>Creating an object with the package’s alternative interface abusing an S4 constructor looks like this:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">TS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span>(
-  <span class="kw">Class</span> <span class="kw">=</span> <span class="st">"DTSg"</span>,
-  <span class="kw">values</span> <span class="kw">=</span> <span class="no">flow</span>,
-  <span class="kw">ID</span> <span class="kw">=</span> <span class="st">"River Flow"</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span>
+  Class <span class="op">=</span> <span class="st">"DTSg"</span>,
+  values <span class="op">=</span> <span class="va">flow</span>,
+  ID <span class="op">=</span> <span class="st">"River Flow"</span>
+<span class="op">)</span></code></pre></div>
 </div>
-<div id="object-inspection" class="section level2">
-<h2 class="hasAnchor">
-<a href="#object-inspection" class="anchor"></a>Object inspection</h2>
+<div class="section level2">
+<h2 id="object-inspection">Object inspection<a class="anchor" aria-label="anchor" href="#object-inspection"></a>
+</h2>
 <p>Printing the object shows us, among others, the data provided, the specified ID and that the object represents a regular UTC time series with a periodicity of one day and 2192 timestamps. It also shows us that the first column has been renamed to <em>.dateTime.</em> This column serves as the object’s time index and cannot be changed at will:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">TS</span>$<span class="fu"><a href="../reference/print.DTSg.html">print</a></span>() <span class="co"># or 'print(TS)' or just 'TS'</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span> <span class="co"># or 'print(TS)' or just 'TS'</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;        .dateTime   flow</span>
 <span class="co">#&gt;           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -166,9 +172,10 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     2192</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     2192</span></code></pre></div>
 <p>With this done, we can move on and further explore our newly created time series data object with a summary (<code>summary</code>), a report on missing values (<code>nas</code>) and a plot (<code>plot</code>). It suddenly seems to contain several missing values, which apparently were not there upon loading the data set (<code>plot</code> requires the <code>dygraphs</code> and <code>RColorBrewer</code> packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">TS</span>$<span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span>() <span class="co"># or 'summary(TS)'</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="op">)</span> <span class="co"># or 'summary(TS)'</span>
 <span class="co">#&gt;       flow        </span>
 <span class="co">#&gt;  Min.   :  4.995  </span>
 <span class="co">#&gt;  1st Qu.:  8.085  </span>
@@ -177,18 +184,19 @@
 <span class="co">#&gt;  3rd Qu.: 18.375  </span>
 <span class="co">#&gt;  Max.   :290.715  </span>
 <span class="co">#&gt;  NA's   :23</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/nas.DTSg.html">nas</a></span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="st">"flow"</span>) <span class="co"># or 'nas(TS, cols = "flow")'</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">nas</span><span class="op">(</span>cols <span class="op">=</span> <span class="st">"flow"</span><span class="op">)</span> <span class="co"># or 'nas(TS, cols = "flow")'</span>
 <span class="co">#&gt;    .col .group      .from        .to .n</span>
 <span class="co">#&gt; 1: flow      1 2007-10-12 2007-10-24 13</span>
 <span class="co">#&gt; 2: flow      2 2007-10-26 2007-11-03  9</span>
 <span class="co">#&gt; 3: flow      3 2007-11-10 2007-11-10  1</span>
-<span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dygraphs"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="kw">&amp;&amp;</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"RColorBrewer"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) {
-  <span class="no">TS</span>$<span class="fu"><a href="../reference/plot.DTSg.html">plot</a></span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="st">"flow"</span>) <span class="co"># or 'plot(TS, cols = "flow")'</span>
-}</pre></body></html></div>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dygraphs"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">TS</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>cols <span class="op">=</span> <span class="st">"flow"</span><span class="op">)</span> <span class="co"># or 'plot(TS, cols = "flow")'</span>
+<span class="op">}</span></code></pre></div>
 <p><img src="plot.png"></p>
 <p>Looking at the original data set reveals that the missing values implicitly already were there. Putting the data set into the object simply expanded it to the automatically detected periodicity and made them explicit (this behaviour can be changed, however, <code>DTSg</code> objects work best with explicitly missing values):</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">flow</span>[<span class="no">date</span> <span class="kw">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(<span class="st">"2007-10-09"</span>, <span class="kw">tz</span> <span class="kw">=</span> <span class="st">"UTC"</span>) <span class="kw">&amp;</span> <span class="no">date</span> <span class="kw">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span>(<span class="st">"2007-11-13"</span>, <span class="kw">tz</span> <span class="kw">=</span> <span class="st">"UTC"</span>), ]
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">flow</span><span class="op">[</span><span class="va">date</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2007-10-09"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2007-11-13"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>, <span class="op">]</span>
 <span class="co">#&gt;           date   flow</span>
 <span class="co">#&gt;  1: 2007-10-09  9.180</span>
 <span class="co">#&gt;  2: 2007-10-10  9.075</span>
@@ -202,33 +210,36 @@
 <span class="co">#&gt; 10: 2007-11-09 37.200</span>
 <span class="co">#&gt; 11: 2007-11-11 27.450</span>
 <span class="co">#&gt; 12: 2007-11-12 39.750</span>
-<span class="co">#&gt; 13: 2007-11-13 31.350</span></pre></body></html></div>
+<span class="co">#&gt; 13: 2007-11-13 31.350</span></code></pre></div>
 </div>
-<div id="object-manipulation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#object-manipulation" class="anchor"></a>Object manipulation</h2>
+<div class="section level2">
+<h2 id="object-manipulation">Object manipulation<a class="anchor" aria-label="anchor" href="#object-manipulation"></a>
+</h2>
 <p>For fairly small gaps like this it might be okay to fill them by means of linear interpolation. Using the <code>colapply</code> method together with the <code>interpolateLinear</code> function will do the trick:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">TS</span>  <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="no">interpolateLinear</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span>  <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span>
 <span class="co"># or 'colapply(TS, fun = interpolateLinear)'</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/nas.DTSg.html">nas</a></span>()
-<span class="co">#&gt; Empty data.table (0 rows and 5 cols): .col,.group,.from,.to,.n</span></pre></body></html></div>
-<p>In case no column name is provided through the <code>cols</code> argument of the <code>colapply</code> method, the first numeric column is taken by default. Column names for the <code>cols</code> argument can be requested from <code>DTSg</code> objects with the help of the <code>cols</code> method. It supports a <code>class</code> and/or <code>pattern</code> argument:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>() <span class="co"># or 'cols(TS)'</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">nas</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Empty data.table (0 rows and 5 cols): .col,.group,.from,.to,.n</span></code></pre></div>
+<p>In case no column name is provided through the <code>cols</code> argument of the <code>colapply</code> method, the first numeric column is taken by default. Column names for the <code>cols</code> argument can be requested from <code>DTSg</code> objects with the help of the <code>cols</code> method. It, among others, supports a <code>class</code> and/or <code>pattern</code> argument:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span><span class="op">)</span> <span class="co"># or 'cols(TS)'</span>
 <span class="co">#&gt; [1] "flow"</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="st">"numeric"</span>) <span class="co"># or 'cols(TS, class = "numeric")'</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span> <span class="co"># or 'cols(TS, class = "numeric")'</span>
 <span class="co">#&gt; [1] "flow"</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="st">"character"</span>)
+<span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span>
 <span class="co">#&gt; character(0)</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"double"</span>, <span class="st">"integer"</span>)) <span class="co"># class of column flow is numeric</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="st">"integer"</span><span class="op">)</span><span class="op">)</span> <span class="co"># class of column flow is numeric</span>
 <span class="co">#&gt; character(0)</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"f.*w"</span>) <span class="co"># or 'cols(TS, pattern = "f.*w")'</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"f.*w"</span><span class="op">)</span> <span class="co"># or 'cols(TS, pattern = "f.*w")'</span>
 <span class="co">#&gt; [1] "flow"</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/cols.DTSg.html">cols</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"temp"</span>)
-<span class="co">#&gt; character(0)</span></pre></body></html></div>
+<span class="va">TS</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"temp"</span><span class="op">)</span>
+<span class="co">#&gt; character(0)</span></code></pre></div>
 <p>The time series reaches from the start of the year 2007 to the end of the year 2012. Let’s say we are only interested in the first two years. With <code>alter</code> we can shorten, lengthen and/or change the periodicity of a <code>DTSg</code> object. The latter can be achieved through its <code>by</code> argument (no example given):</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">TS</span>  <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span>(<span class="kw">from</span> <span class="kw">=</span> <span class="st">"2007-01-01"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"2008-12-31"</span>)
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span>  <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">alter</span><span class="op">(</span>from <span class="op">=</span> <span class="st">"2007-01-01"</span>, to <span class="op">=</span> <span class="st">"2008-12-31"</span><span class="op">)</span>
 <span class="co"># or 'alter(TS, from = "2007-01-01", to = "2008-12-31")'</span>
-<span class="no">TS</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime   flow</span>
 <span class="co">#&gt;          &lt;POSc&gt;  &lt;num&gt;</span>
@@ -250,11 +261,12 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     731</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     731</span></code></pre></div>
 <p>In order to get mean monthly river flows as an example, we can use the <code>aggregate</code> method with one of the package’s temporal aggregation level functions (TALFs) as its <code>funby</code> argument (the <code>fun</code> argument also accepts a named character vector or <code>list</code> of functions, which allows for calculating several summary statistics at once):</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">TSm</span> <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span>(<span class="kw">funby</span> <span class="kw">=</span> <span class="no">byYm____</span>, <span class="kw">fun</span> <span class="kw">=</span> <span class="no">mean</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TSm</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span>funby <span class="op">=</span> <span class="va">byYm____</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
 <span class="co"># or 'aggregate(TS, funby = byYm____, fun = mean)'</span>
-<span class="no">TSm</span>
+<span class="va">TSm</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;      .dateTime      flow</span>
 <span class="co">#&gt;         &lt;POSc&gt;     &lt;num&gt;</span>
@@ -278,12 +290,13 @@
 <span class="co">#&gt; Max lag:        Time difference of 31 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     24</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     24</span></code></pre></div>
 <p>Printing the aggregated object shows us that its <code>aggregated</code> field has been set to <code>TRUE</code>. This is merely an indicator telling us to now interpret the timestamps of the series as periods between subsequent timestamps and not as snap-shots anymore.</p>
 <p>The one family of temporal aggregation level functions of the package sets timestamps to the lowest possible point in time of the corresponding temporal aggregation level, i.e. truncates timestamps, and the other family extracts a certain part of them. An example is given for quarters below. By convention, the year is set to 2199 in the latter case:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">TSQ</span> <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span>(<span class="kw">funby</span> <span class="kw">=</span> <span class="no">by_Q____</span>, <span class="kw">fun</span> <span class="kw">=</span> <span class="no">mean</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TSQ</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span>funby <span class="op">=</span> <span class="va">by_Q____</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>
 <span class="co"># or 'aggregate(TS, funby = by_Q____, fun = mean)'</span>
-<span class="no">TSQ</span>
+<span class="va">TSQ</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;     .dateTime     flow</span>
 <span class="co">#&gt;        &lt;POSc&gt;    &lt;num&gt;</span>
@@ -300,12 +313,13 @@
 <span class="co">#&gt; Max lag:        Time difference of 92 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     4</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     4</span></code></pre></div>
 <p>Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the <code>multiplier</code> argument of the <code>aggregate</code> as well as other methods, e.g. <code>multiplier = 6</code> makes <code>byYm____</code> aggregate to half years instead of months.</p>
 <p>The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do so with the help of the <code>rollapply</code> method:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">TSs</span> <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/rollapply.DTSg.html">rollapply</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="no">mean</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">before</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">after</span> <span class="kw">=</span> <span class="fl">2</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TSs</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">rollapply</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, before <span class="op">=</span> <span class="fl">2</span>, after <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co"># or 'rollapply(TS, fun = mean, na.rm = TRUE, before = 2, after = 2)'</span>
-<span class="no">TSs</span>
+<span class="va">TSs</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime    flow</span>
 <span class="co">#&gt;          &lt;POSc&gt;   &lt;num&gt;</span>
@@ -327,12 +341,13 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     731</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     731</span></code></pre></div>
 <p>On a side note, some of the methods, which take a function as an argument (<code>colapply</code> and <code>rollapply</code>) hand over to it an additional <code>list</code> argument called <code>.helpers</code> containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like <code>cumsum</code>, which do not expect such a thing. A solution to this is to set the <code>helpers</code> argument of the respective method to <code>FALSE</code>.</p>
 <p>With this said, let’s join the result of the last calculation to the original time series data object and extract its values as a <code>data.table</code> for further processing in a final step (please note that the <em>.dateTime</em> column gets its original name back):</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">TS</span>  <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/merge.DTSg.html">merge</a></span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">TSs</span>, <span class="kw">suffixes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"_orig"</span>, <span class="st">"_movavg"</span>))
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span>  <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">merge</span><span class="op">(</span>y <span class="op">=</span> <span class="va">TSs</span>, suffixes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_orig"</span>, <span class="st">"_movavg"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># or 'merge(TS, y = TSs, suffixes = c("_orig", "_movavg"))'</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/values.DTSg.html">values</a></span>()
+<span class="va">TS</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;            date flow_orig flow_movavg</span>
 <span class="co">#&gt;   1: 2007-01-01     9.540      9.2550</span>
 <span class="co">#&gt;   2: 2007-01-02     9.285      9.1275</span>
@@ -344,13 +359,13 @@
 <span class="co">#&gt; 728: 2008-12-28    16.575     16.4520</span>
 <span class="co">#&gt; 729: 2008-12-29    13.695     14.5860</span>
 <span class="co">#&gt; 730: 2008-12-30    12.540     13.6875</span>
-<span class="co">#&gt; 731: 2008-12-31    11.940     12.7250</span></pre></body></html></div>
+<span class="co">#&gt; 731: 2008-12-31    11.940     12.7250</span></code></pre></div>
 <p>Better ways to add results of the <code>colapply</code> or <code>rollapply</code> method as new column(s) are actually their <code>resultCols</code> and <code>suffix</code> arguments. Their use would not have allowed for demonstrating the <code>merge</code> method though.</p>
 <hr>
 <p>For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods and functions have not been discussed in this vignette:</p>
 <ul>
 <li>
-<code>getCol</code> or <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>
+<code>getCol</code> or <code>[</code>
 </li>
 <li><code>refresh</code></li>
 <li><code>rowaggregate</code></li>
@@ -362,16 +377,18 @@
 <li><code>S3WrapperGenerator</code></li>
 </ul>
 </div>
-<div id="object-fields" class="section level2">
-<h2 class="hasAnchor">
-<a href="#object-fields" class="anchor"></a>Object fields</h2>
+<div class="section level2">
+<h2 id="object-fields">Object fields<a class="anchor" aria-label="anchor" href="#object-fields"></a>
+</h2>
 <p>The fields of a <code>DTSg</code> object of which the metadata are part of can be accessed through so called active bindings:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">TS</span>$<span class="no">ID</span>
-<span class="co">#&gt; [1] "River Flow"</span></pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="va">ID</span>
+<span class="co">#&gt; [1] "River Flow"</span></code></pre></div>
 <p>Valid results are returned for the following fields:</p>
 <ul>
 <li><code>aggregated</code></li>
 <li><code>fast</code></li>
+<li><code>funbyApproach</code></li>
 <li><code>ID</code></li>
 <li><code>na.status</code></li>
 <li><code>parameter</code></li>
@@ -383,14 +400,15 @@
 <li><code>variant</code></li>
 </ul>
 <p>A subset of this fields can also be actively set (please note that reference semantics always apply to fields, hence the “largely” in the title of the package):</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># two new `DTSg` objects in order to demonstrate reference semantics, which are</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># two new `DTSg` objects in order to demonstrate reference semantics, which are</span>
 <span class="co"># propagated by assignments and broken by deep clones</span>
-<span class="no">TSassigned</span> <span class="kw">&lt;-</span> <span class="no">TS</span>
-<span class="no">TScloned</span>   <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/clone.DTSg.html">clone</a></span>(<span class="kw">deep</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="co"># or 'clone(x = TS, deep = TRUE)'</span>
+<span class="va">TSassigned</span> <span class="op">&lt;-</span> <span class="va">TS</span>
+<span class="va">TScloned</span>   <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># or 'clone(x = TS, deep = TRUE)'</span>
 
 <span class="co"># set new ID</span>
-<span class="no">TS</span>$<span class="no">ID</span> <span class="kw">&lt;-</span> <span class="st">"Two River Flows"</span>
-<span class="no">TS</span>
+<span class="va">TS</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="st">"Two River Flows"</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime flow_orig flow_movavg</span>
 <span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span>
@@ -418,7 +436,7 @@
 <span class="co"># not to `TScloned` (as all data manipulating methods create a deep clone by</span>
 <span class="co"># default, it is usually best to set or update fields after and not before</span>
 <span class="co"># calling such a method)</span>
-<span class="no">TSassigned</span>
+<span class="va">TSassigned</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime flow_orig flow_movavg</span>
 <span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span>
@@ -441,7 +459,7 @@
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
 <span class="co">#&gt; Timestamps:     731</span>
-<span class="no">TScloned</span>
+<span class="va">TScloned</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime flow_orig flow_movavg</span>
 <span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span>
@@ -463,7 +481,7 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     731</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     731</span></code></pre></div>
 <p>The fields, which cannot be actively set are:</p>
 <ul>
 <li><code>regular</code></li>
@@ -484,11 +502,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Gerold Hepp.</p>
+  <p></p>
+<p>Developed by Gerold Hepp.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -496,6 +516,8 @@
 
   
 
+
+  
 
   </body>
 </html>

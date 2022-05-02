@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -47,7 +49,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Vignettes
      
     <span class="caret"></span>
@@ -67,7 +69,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/gisler/DTSg/">
+  <a href="https://github.com/gisler/DTSg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,15 +84,15 @@
 
       
 
-      </header><script src="b_advancedUsage_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>B. Advanced usage</h1>
-                        <h4 class="author">Gerold Hepp</h4>
+                        <h4 data-toc-skip class="author">Gerold Hepp</h4>
             
-            <h4 class="date">2021-10-28</h4>
+            <h4 data-toc-skip class="date">2022-05-02</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/master/vignettes/b_advancedUsage.Rmd"><code>vignettes/b_advancedUsage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/vignettes/b_advancedUsage.Rmd" class="external-link"><code>vignettes/b_advancedUsage.Rmd</code></a></small>
       <div class="hidden name"><code>b_advancedUsage.Rmd</code></div>
 
     </div>
@@ -100,11 +102,12 @@
 <p>This vignette illustrates some more advanced concepts of the <code>DTSg</code> package, namely reference semantics, chaining and piping as well as swallowing and dropping.</p>
 <hr>
 <p>First, let’s load the package as well as some data and let’s create a <code>DTSg</code> object:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">DTSg</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gisler.github.io/DTSg/">DTSg</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">flow</span>)
-<span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$<span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="no">flow</span>)
-<span class="no">TS</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;        .dateTime   flow</span>
 <span class="co">#&gt;           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -125,15 +128,16 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     2192</span></pre></body></html></div>
-<div id="reference-semantics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reference-semantics" class="anchor"></a>Reference semantics</h2>
+<span class="co">#&gt; Timestamps:     2192</span></code></pre></div>
+<div class="section level2">
+<h2 id="reference-semantics">Reference semantics<a class="anchor" aria-label="anchor" href="#reference-semantics"></a>
+</h2>
 <p>By default, every method manipulating the values of a <code>DTSg</code> object creates a deep clone (copy) of it beforehand. This behaviour can be overridden by setting the <code>clone</code> argument of the respective method to <code>FALSE</code>. Globally, deep cloning can be controlled with the help of the <em>DTSgClone</em> option:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">TS</span>$<span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span>(<span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span><span class="op">$</span><span class="fu">alter</span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span>
 <span class="co"># `TS` was deep cloned before shortening it, hence its end date is still in the</span>
 <span class="co"># year 2012</span>
-<span class="no">TS</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;        .dateTime   flow</span>
 <span class="co">#&gt;           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -156,13 +160,13 @@
 <span class="co">#&gt; Time zone:      UTC</span>
 <span class="co">#&gt; Timestamps:     2192</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">DTSgClone</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"DTSgClone"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>DTSgClone <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>
 <span class="co">#&gt; [1] FALSE</span>
 <span class="co"># `TS` was modified in place this time, hence its end date is in the year 2008</span>
 <span class="co"># now</span>
-<span class="no">TS</span>$<span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span>(<span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span>)
-<span class="no">TS</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">alter</span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;       .dateTime   flow</span>
 <span class="co">#&gt;          &lt;POSc&gt;  &lt;num&gt;</span>
@@ -183,27 +187,29 @@
 <span class="co">#&gt; Periodicity:    Time difference of 1 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     731</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     731</span></code></pre></div>
 <p>As we can see, with cloning set to <code>FALSE</code>, the object was altered in place, i.e. no assignment to a new or reassignment to an existing variable was necessary in order to make the changes stick. This is due to the R6 nature of <code>DTSg</code> objects.</p>
-<div id="note" class="section level3">
-<h3 class="hasAnchor">
-<a href="#note" class="anchor"></a>Note</h3>
+<div class="section level3">
+<h3 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
+</h3>
 <p>Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a <code>DTSg</code> object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data under the hood, i.e. changing one will also affect the other. In case you want a “real” copy of a <code>DTSg</code> object, you will have to use the <code>clone</code> method with its <code>deep</code> argument set to <code>TRUE</code> (for consistency with the <code>R6</code> package its default is <code>FALSE</code>):</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">TSc</span> <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/clone.DTSg.html">clone</a></span>(<span class="kw">deep</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co"># or 'clone(TS, deep = TRUE)'</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TSc</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co"># or 'clone(TS, deep = TRUE)'</span></code></pre></div>
 </div>
 </div>
-<div id="chaining-and-piping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#chaining-and-piping" class="anchor"></a>Chaining and piping</h2>
+<div class="section level2">
+<h2 id="chaining-and-piping">Chaining and piping<a class="anchor" aria-label="anchor" href="#chaining-and-piping"></a>
+</h2>
 <p>Especially in combination with reference semantics, chaining and piping can be a fast and comfortable way to apply several object manipulations in a row. While chaining only works in combination with the R6 interface, piping is an exclusive feature of the S3 interface.</p>
 <p>Let’s start with chaining:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$
-  <span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="no">flow</span>)$
-  <span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span>(<span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span>)$
-  <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(<span class="no">interpolateLinear</span>)$
-  <span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span>(<span class="no">byYm____</span>, <span class="no">mean</span>)
-<span class="no">TS</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span>
+  <span class="fu">new</span><span class="op">(</span><span class="va">flow</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">alter</span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">colapply</span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">aggregate</span><span class="op">(</span><span class="va">byYm____</span>, <span class="va">mean</span><span class="op">)</span>
+<span class="va">TS</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;      .dateTime      flow</span>
 <span class="co">#&gt;         &lt;POSc&gt;     &lt;num&gt;</span>
@@ -226,17 +232,18 @@
 <span class="co">#&gt; Max lag:        Time difference of 31 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     24</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     24</span></code></pre></div>
 <p>For piping, we have to make sure the <code>magrittr</code> package is installed and have to load it for access to its forward-pipe operator first (starting with R 4.1.0, the same can be achieved with R’s native pipe operator <code>|&gt;</code>):</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"magrittr"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) {
-  <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"magrittr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
 
-  <span class="no">TS</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="st">"DTSg"</span>, <span class="no">flow</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span>(<span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(<span class="no">interpolateLinear</span>) <span class="kw">%&gt;%</span>
-    <span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span>(<span class="no">byYm____</span>, <span class="no">mean</span>)
-  <span class="no">TS</span>
-}
+  <span class="va">TS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/DTSg.html">new</a></span><span class="op">(</span><span class="st">"DTSg"</span>, <span class="va">flow</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/alter.DTSg.html">alter</a></span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="../reference/aggregate.DTSg.html">aggregate</a></span><span class="op">(</span><span class="va">byYm____</span>, <span class="va">mean</span><span class="op">)</span>
+  <span class="va">TS</span>
+<span class="op">}</span>
 <span class="co">#&gt; Values:</span>
 <span class="co">#&gt;      .dateTime      flow</span>
 <span class="co">#&gt;         &lt;POSc&gt;     &lt;num&gt;</span>
@@ -259,36 +266,39 @@
 <span class="co">#&gt; Max lag:        Time difference of 31 days</span>
 <span class="co">#&gt; Missing values: explicit</span>
 <span class="co">#&gt; Time zone:      UTC</span>
-<span class="co">#&gt; Timestamps:     24</span></pre></body></html></div>
+<span class="co">#&gt; Timestamps:     24</span></code></pre></div>
 </div>
-<div id="swallowing-and-dropping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#swallowing-and-dropping" class="anchor"></a>Swallowing and dropping</h2>
+<div class="section level2">
+<h2 id="swallowing-and-dropping">Swallowing and dropping<a class="anchor" aria-label="anchor" href="#swallowing-and-dropping"></a>
+</h2>
 <p>An extension to reference semantics of existing <code>DTSg</code> objects are reference semantics during object creation. This behaviour can be triggered with the help of the <code>swallow</code> argument of the <code>new</code> method. When set to <code>TRUE</code>, a <code>data.table</code> provided through the <code>values</code> argument is “swallowed” by the <code>DTSg</code> object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span>
 
-<span class="no">DT</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>(<span class="no">flow</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"^DT$"</span>)
+<span class="va">DT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^DT$"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "DT"</span>
-<span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$<span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="no">DT</span>, <span class="kw">swallow</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"^DT$"</span>)
-<span class="co">#&gt; character(0)</span></pre></body></html></div>
+<span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">DT</span>, swallow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^DT$"</span><span class="op">)</span>
+<span class="co">#&gt; character(0)</span></code></pre></div>
 <p>The opposite of swallowing is called dropping. This term refers to querying the values of a <code>DTSg</code> object as a reference while removing all references to the original <code>DTSg</code> object from the global (and again only the global) environment at the same time:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$<span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="no">flow</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"^TS$"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^TS$"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "TS"</span>
-<span class="no">DT</span> <span class="kw">&lt;-</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/values.DTSg.html">values</a></span>(<span class="kw">drop</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"^TS$"</span>)
-<span class="co">#&gt; character(0)</span></pre></body></html></div>
+<span class="va">DT</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span>drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^TS$"</span><span class="op">)</span>
+<span class="co">#&gt; character(0)</span></code></pre></div>
 </div>
-<div id="column-access" class="section level2">
-<h2 class="hasAnchor">
-<a href="#column-access" class="anchor"></a>Column access</h2>
+<div class="section level2">
+<h2 id="column-access">Column access<a class="anchor" aria-label="anchor" href="#column-access"></a>
+</h2>
 <p>Sometimes need may arise to access a column other than the one currently processed from a function within the <code>colapply</code> method. This can be accomplished in the following way:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># add a new column recording if a certain value is missing or not before</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># add a new column recording if a certain value is missing or not before</span>
 <span class="co"># carrying out a linear interpolation</span>
-<span class="no">TS</span> <span class="kw">&lt;-</span> <span class="no">DTSg</span>$<span class="fu"><a href="../reference/DTSg.html">new</a></span>(<span class="no">flow</span>)
-<span class="no">TS</span>$<span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span>()
+<span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">flow</span><span class="op">)</span>
+<span class="va">TS</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       flow        </span>
 <span class="co">#&gt;  Min.   :  4.995  </span>
 <span class="co">#&gt;  1st Qu.:  8.085  </span>
@@ -297,13 +307,13 @@
 <span class="co">#&gt;  3rd Qu.: 18.375  </span>
 <span class="co">#&gt;  Max.   :290.715  </span>
 <span class="co">#&gt;  NA's   :23</span>
-<span class="no">TS</span>$
-  <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(
-    <span class="kw">function</span>(<span class="no">x</span>, <span class="no">...</span>) {<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">x</span>), <span class="fl">TRUE</span>, <span class="fl">FALSE</span>)},
-    <span class="kw">resultCols</span> <span class="kw">=</span> <span class="st">"missing"</span>
-  )$
-  <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(<span class="no">interpolateLinear</span>)$
-  <span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span>()
+<span class="va">TS</span><span class="op">$</span>
+  <span class="fu">colapply</span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">}</span>,
+    resultCols <span class="op">=</span> <span class="st">"missing"</span>
+  <span class="op">)</span><span class="op">$</span>
+  <span class="fu">colapply</span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">summary</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       flow          missing       </span>
 <span class="co">#&gt;  Min.   :  4.995   Mode :logical  </span>
 <span class="co">#&gt;  1st Qu.:  8.126   FALSE:2169     </span>
@@ -316,12 +326,12 @@
 <span class="co"># created column named "missing", which can be carried out with the help of the</span>
 <span class="co"># `getCol` method or its shortcut, the `[` operator, and the freely chosen `y`</span>
 <span class="co"># argument)</span>
-<span class="no">TS</span>$
-  <span class="fu"><a href="../reference/colapply.DTSg.html">colapply</a></span>(
-    <span class="kw">function</span>(<span class="no">x</span>, <span class="no">y</span>, <span class="no">...</span>) {<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(<span class="no">y</span>, <span class="fl">NA</span>, <span class="no">x</span>)},
-    <span class="kw">y</span> <span class="kw">=</span> <span class="no">TS</span>$<span class="fu"><a href="../reference/getCol.DTSg.html">getCol</a></span>(<span class="st">"missing"</span>) <span class="co"># or 'y = TS["missing"]'</span>
-  )$
-  <span class="fu"><a href="../reference/summary.DTSg.html">summary</a></span>()
+<span class="va">TS</span><span class="op">$</span>
+  <span class="fu">colapply</span><span class="op">(</span>
+    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">y</span>, <span class="cn">NA</span>, <span class="va">x</span><span class="op">)</span><span class="op">}</span>,
+    y <span class="op">=</span> <span class="va">TS</span><span class="op">$</span><span class="fu">getCol</span><span class="op">(</span><span class="st">"missing"</span><span class="op">)</span> <span class="co"># or 'y = TS["missing"]'</span>
+  <span class="op">)</span><span class="op">$</span>
+  <span class="fu">summary</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       flow          missing       </span>
 <span class="co">#&gt;  Min.   :  4.995   Mode :logical  </span>
 <span class="co">#&gt;  1st Qu.:  8.085   FALSE:2169     </span>
@@ -329,7 +339,7 @@
 <span class="co">#&gt;  Mean   : 16.197                  </span>
 <span class="co">#&gt;  3rd Qu.: 18.375                  </span>
 <span class="co">#&gt;  Max.   :290.715                  </span>
-<span class="co">#&gt;  NA's   :23</span></pre></body></html></div>
+<span class="co">#&gt;  NA's   :23</span></code></pre></div>
 <p>Please refer to the help pages for further details.</p>
 </div>
   </div>
@@ -345,11 +355,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Gerold Hepp.</p>
+  <p></p>
+<p>Developed by Gerold Hepp.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -357,6 +369,8 @@
 
   
 
+
+  
 
   </body>
 </html>
