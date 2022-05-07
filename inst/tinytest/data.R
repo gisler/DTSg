@@ -41,6 +41,16 @@ DT3 <- data.table(
   col3 = c(1, 2, 3, 4, 5)
 )
 
+DT4 <- data.table(
+  date = seq(
+    as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
+    as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
+    "30 mins"
+  ),
+  col1 = LETTERS[1:8],
+  col2 = c(1, rep(NA, 3), 5, 6, NA, NA)
+)
+
 #### funby test data ####
 daysPerHalfyear <- c(second = 184L, first = 182L)
 daysPerQuarter <- c(third = 92L, fourth = 92L, first = 91L, second = 91L)

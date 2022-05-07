@@ -2,9 +2,21 @@ source("data.R") # nolint
 
 #### interpolateLinear ####
 expect_identical(
-  DTSg$new(DT1)$colapply(interpolateLinear, cols = "col2")$values(TRUE)[["col2"]],
-  seq(1, 15, by = 2),
+  DTSg$new(DT4)$colapply(interpolateLinear)$values(TRUE)[["col2"]],
+  c(1:5, rep(6, 3)),
   info = '"interpolateLinear" works correctly'
+)
+
+expect_identical(
+  DTSg$new(DT4)$colapply(interpolateLinear, roll = 2)$values(TRUE)[["col2"]],
+  c(1, rep(NA, 3), 5, rep(6, 3)),
+  info = '"interpolateLinear" with "roll" > gap / 2 works correctly'
+)
+
+expect_identical(
+  DTSg$new(DT4)$colapply(interpolateLinear, roll = 1)$values(TRUE)[["col2"]],
+  c(1, rep(NA, 3), 5, 6, NA, NA),
+  info = '"interpolateLinear" with "roll" < gap / 2 works correctly'
 )
 
 #### rollback ####
@@ -14,7 +26,7 @@ expect_error(
 )
 
 expect_identical(
-  rollback(    seq(
+  rollback(seq(
     as.POSIXct("2000-01-31", tz = "Europe/Vienna"),
     as.POSIXct("2000-07-01", tz = "Europe/Vienna"),
     "1 month"

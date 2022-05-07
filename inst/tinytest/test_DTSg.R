@@ -980,7 +980,7 @@ for (method in c("setCols", "set")) {
       )$values()
     },
     setkey(rbind(
-      DT2[1:3, .(date = DT1$date[1:3], col1, col2 = as.numeric(col2), col3)],
+      DT2[1:3, .(date = DT1[["date"]][1:3], col1, col2 = as.numeric(col2), col3)],
       DT1[4:8]
     ), "date"),
     info = "values are set correctly (numeric vector and multiple columns)"

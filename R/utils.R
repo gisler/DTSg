@@ -4,6 +4,7 @@
 .colBefore <- NULL
 .dateTimeAfter <- NULL
 .dateTimeBefore <- NULL
+.fill <- NULL
 .divisor <- NULL
 
 #' Linear interpolation
@@ -19,15 +20,15 @@
 #'
 #' @param .col A numeric vector.
 #' @param roll A positive numeric specifying the maximum size of gaps whose
-#'   missing values shall be filled. For time series with unrecognised
+#'   missing values shall be interpolated. For time series with unrecognised
 #'   periodicity it is interpreted in seconds and for time series with
 #'   recognised periodicity it is multiplied with the maximum time difference
 #'   between two subsequent time steps in seconds. Thus, for regular time series
 #'   it is the number of time steps and for irregular it is an approximation of
 #'   it.
 #' @param rollends A logical specifying if missing values at the start and end
-#'   of the time series shall be filled as well. See [`data.table::data.table`]
-#'   for further information.
+#'   of the time series shall be filled. See [`data.table::data.table`] for
+#'   further information.
 #' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
 #'   See [`colapply`] for further information.
 #'
@@ -74,11 +75,14 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
   ]
   setnames(DT, c(4L, 5L), c(".dateTimeAfter", ".colAfter"))
 
+  DT[, .fill := sum(.colBefore), by = rleid(.col)]
+
   DT[, .divisor := as.numeric(.dateTimeAfter - .dateTimeBefore, units = "secs")]
-  DT[, .col := .colBefore]
+  DT[!is.na(.fill), .col := .colBefore]
   DT[
-    .divisor > 0,
-    .col := .colBefore + as.numeric(.dateTime - .dateTimeBefore, units = "secs") *
+    .divisor > 0 & !is.na(.fill),
+    .col := .colBefore +
+      as.numeric(.dateTime - .dateTimeBefore, units = "secs") *
       (.colAfter - .colBefore) / .divisor
   ]
 

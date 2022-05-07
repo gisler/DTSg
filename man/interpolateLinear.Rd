@@ -10,7 +10,7 @@ interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers)
 \item{.col}{A numeric vector.}
 
 \item{roll}{A positive numeric specifying the maximum size of gaps whose
-missing values shall be filled. For time series with unrecognised
+missing values shall be interpolated. For time series with unrecognised
 periodicity it is interpreted in seconds and for time series with
 recognised periodicity it is multiplied with the maximum time difference
 between two subsequent time steps in seconds. Thus, for regular time series
@@ -18,8 +18,8 @@ it is the number of time steps and for irregular it is an approximation of
 it.}
 
 \item{rollends}{A logical specifying if missing values at the start and end
-of the time series shall be filled as well. See \code{\link[data.table:data.table]{data.table::data.table}}
-for further information.}
+of the time series shall be filled. See \code{\link[data.table:data.table]{data.table::data.table}} for
+further information.}
 
 \item{.helpers}{A \code{\link{list}} with helper data as handed over by \code{\link{colapply}}.
 See \code{\link{colapply}} for further information.}
