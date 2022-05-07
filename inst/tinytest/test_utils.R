@@ -1,5 +1,12 @@
 source("data.R") # nolint
 
+#### interpolateLinear ####
+expect_identical(
+  DTSg$new(DT1)$colapply(interpolateLinear, cols = "col2")$values(TRUE)[["col2"]],
+  seq(1, 15, by = 2),
+  info = '"interpolateLinear" works correctly'
+)
+
 #### rollback ####
 expect_error(
   rollback(DT1[["date"]], "30 mins"),
