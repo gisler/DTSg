@@ -99,12 +99,17 @@
 <dt>...</dt>
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
 <dt>cols</dt>
-<dd><p>A character vector specifying the columns to apply <code>fun</code> to.</p></dd>
+<dd><p>A character vector specifying the columns to apply <code>fun</code> to.
+Another possibility is a character string containing either comma separated
+column names, for example, <code>"x,y,z"</code>, or the start and end column separated
+by a colon, for example, <code>"x:z"</code>.</p></dd>
 <dt>resultCols</dt>
 <dd><p>An optional character vector of the same length as <code>cols</code>
-specifying the column names for the return values of <code>fun</code>. Non-existing
-columns are added and existing columns are overwritten. Columns are matched
-element-wise between <code>cols</code> and <code>resultCols</code>.</p></dd>
+specifying the column names for the return values of <code>fun</code>. Another
+possibility is a character string containing comma separated column names,
+for example, <code>"x,y,z"</code>. Non-existing columns are added and existing columns
+are overwritten. Columns are matched element-wise between <code>cols</code> and
+<code>resultCols</code>.</p></dd>
 <dt>suffix</dt>
 <dd><p>An optional character string. The return values of <code>fun</code> are
 added as new columns with names consisting of the columns specified in
@@ -534,19 +539,19 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime      flow</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.9919471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.9597170</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.9614204</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.9428153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.1619128</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9966755</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9923744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9944368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9947697</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9853586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime       flow</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 -0.5539314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  0.5744761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  0.5802804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  0.8238561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  0.2591326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27  0.9884279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28  0.9833537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29  0.9866707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30  0.9891467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31  0.9997962</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>

@@ -102,7 +102,9 @@ DTSg object with recognised periodicity."><meta name="robots" content="noindex">
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns whose rolling window
-<code>fun</code> shall be applied to.</p></dd>
+<code>fun</code> shall be applied to. Another possibility is a character string
+containing either comma separated column names, for example, <code>"x,y,z"</code>, or
+the start and end column separated by a colon, for example, <code>"x:z"</code>.</p></dd>
 <dt>before</dt>
 <dd><p>An integerish value specifying the size of the window in time
 steps before the “center” of the rolling window.</p></dd>
@@ -118,9 +120,11 @@ the weights handed over to <code>fun</code>. These are useful for functions like
 method. See corresponding section for further information.</p></dd>
 <dt>resultCols</dt>
 <dd><p>An optional character vector of the same length as <code>cols</code>
-specifying the column names for the return values of <code>fun</code>. Non-existing
-columns are added and existing columns are overwritten. Columns are matched
-element-wise between <code>cols</code> and <code>resultCols</code>.</p></dd>
+specifying the column names for the return values of <code>fun</code>. Another
+possibility is a character string containing comma separated column names,
+for example, <code>"x,y,z"</code>. Non-existing columns are added and existing columns
+are overwritten. Columns are matched element-wise between <code>cols</code> and
+<code>resultCols</code>.</p></dd>
 <dt>suffix</dt>
 <dd><p>An optional character string. The return values of <code>fun</code> are
 added as new columns with names consisting of the columns specified in

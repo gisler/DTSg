@@ -98,8 +98,11 @@ negative numbers omit rows) or a filter expression accepted by the <code>i</code
 argument of <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
 special symbol <code><a href="https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
 <dt>cols</dt>
-<dd><p>A character vector specifying the columns to select. The
-<em>.dateTime</em> column is always selected and cannot be part of it.</p></dd>
+<dd><p>A character vector specifying the columns to select. Another
+possibility is a character string containing either comma separated column
+names, for example, <code>"x,y,z"</code>, or the start and end column separated by a
+colon, for example, <code>"x:z"</code>. The <em>.dateTime</em> column is always selected and
+cannot be part of it.</p></dd>
 <dt>funby</dt>
 <dd><p>One of the temporal aggregation level functions described in
 <code><a href="TALFs.html">TALFs</a></code> or a user defined temporal aggregation level function. Can be

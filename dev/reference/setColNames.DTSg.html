@@ -88,10 +88,14 @@
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns whose names shall be
-set. The name of the <em>.dateTime</em> column cannot be changed.</p></dd>
+set. Another possibility is a character string containing either comma
+separated column names, for example, <code>"x,y,z"</code>, or the start and end column
+separated by a colon, for example, <code>"x:z"</code>. The name of the <em>.dateTime</em>
+column cannot be changed.</p></dd>
 <dt>values</dt>
 <dd><p>A character vector of the same length as <code>cols</code> specifying the
-desired column names.</p></dd>
+desired column names. Another possibility is a character string containing
+comma separated column names, for example, <code>"x,y,z"</code>.</p></dd>
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
