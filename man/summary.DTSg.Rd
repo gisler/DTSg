@@ -11,7 +11,9 @@
 \item{object}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{cols}{A character vector specifying the columns whose values shall be
-summarised.}
+summarised. Another possibility is a character string containing either
+comma separated column names, for example, \code{"x,y,z"}, or the start and end
+column separated by a colon, for example, \code{"x:z"}.}
 
 \item{\dots}{Further arguments passed on to \code{\link{summary.data.frame}}.}
 }

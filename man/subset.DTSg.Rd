@@ -27,8 +27,11 @@ negative numbers omit rows) or a filter expression accepted by the \code{i}
 argument of \code{\link[data.table:data.table]{data.table::data.table}}. Filter expressions can contain the
 special symbol \code{\link[data.table:special-symbols]{.N}}.}
 
-\item{cols}{A character vector specifying the columns to select. The
-\emph{.dateTime} column is always selected and cannot be part of it.}
+\item{cols}{A character vector specifying the columns to select. Another
+possibility is a character string containing either comma separated column
+names, for example, \code{"x,y,z"}, or the start and end column separated by a
+colon, for example, \code{"x:z"}. The \emph{.dateTime} column is always selected and
+cannot be part of it.}
 
 \item{funby}{One of the temporal aggregation level functions described in
 \code{\link{TALFs}} or a user defined temporal aggregation level function. Can be

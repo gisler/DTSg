@@ -282,7 +282,7 @@ expect_identical(
 expect_identical(
   DTSg$new(DT1)$colapply(
     as.factor,
-    cols = c("col1", "col2"),
+    cols = c("col1,col2"),
     helpers = FALSE
   )$cols("factor"),
   c("col1", "col2"),
@@ -302,7 +302,7 @@ expect_identical(
 expect_identical(
   DTSg$new(DT1)$colapply(
     as.character,
-    cols = c("col1", "col2"),
+    cols = c("col1:col2"),
     resultCols = c("col1", "col4"),
     suffix = "_character"
   )$cols(),
@@ -340,6 +340,15 @@ expect_identical(
   )$values(TRUE)[["col1"]],
   cumsum(DT1[["col1"]]),
   info = "custom helper data is appended correctly"
+)
+
+expect_error(
+  DTSg$new(DT1)$colapply(
+    as.character,
+    cols = c("col1", "col2"),
+    resultCols = c("col1:col4")
+  ),
+  info = "colon returns error"
 )
 
 #### cols and names methods ####
@@ -823,8 +832,8 @@ expect_identical(
   DTSg$new(DT1)$rollapply(
     identity,
     before = 0L,
-    cols = c("col1", "col2"),
-    resultCols = c("col1", "col4"),
+    cols = c("col1,col2"),
+    resultCols = c("col1,col4"),
     suffix = "_character",
     helpers = FALSE
   )$cols(),
@@ -836,7 +845,7 @@ expect_identical(
   DTSg$new(DT1)$rollapply(
     identity,
     before = 0L,
-    cols = c("col1", "col2"),
+    cols = c("col1:col2"),
     suffix = "_identity",
     helpers = FALSE
   )$cols(),
@@ -952,6 +961,11 @@ for (method in c("setColNames", "setnames")) {
   )
 
   expect_error(
+    DTSg$new(DT1)[[method]](c("col2", "col3"), c("column2:column3"))$cols(),
+    info = "colon returns error"
+  )
+
+  expect_error(
     DTSg$new(DT1)[[method]]("col2", ""),
     info = "blank column name returns error"
   )
@@ -1005,6 +1019,11 @@ for (method in c("setCols", "set")) {
     DTSg$new(DT1)[[method]](, "col2", NULL)$cols(),
     c("col1", "col3"),
     info = "column is removed correctly"
+  )
+
+  expect_error(
+    DTSg$new(DT1)[[method]](, "col1:col3", DT1[, .(col1, as.numeric(col2), col3)]),
+    info = "colon returns error"
   )
 
   expect_error(

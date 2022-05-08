@@ -1,7 +1,8 @@
 # DTSg v1.0.0.9000
 
-* Fixed a bug in `interpolateLinear()` causing partial last observation carried forward behaviour when its `roll` argument was specified smaller than the size of the gap to be interpolated.
-* Fixed a bug in `interpolateLinear()` causing partial interpolation in certain cases when its `roll` argument was specified smaller than the size of the gap to be interpolated.
+* Column names can often now be additionally specified by a character string containing either comma separated column names, for example, `"x,y,z"`, or the start and end column separated by a colon, for example, `"x:z"`
+* Fixed a bug in `interpolateLinear()` causing partial last observation carried forward behaviour when its `roll` argument was specified smaller than the size of the gap to be interpolated
+* Fixed a bug in `interpolateLinear()` causing partial interpolation in certain cases when its `roll` argument was specified smaller than the size of the gap to be interpolated
 
 # DTSg v1.0.0
 
@@ -11,7 +12,7 @@
 * Added undocumented `names()` method exclusive only to the R6 interface acting as an alias for the `cols()` method
 * Added `mode` and `typeof` arguments to `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. This can be especially handy when making use of the `units` package
 * Added `DTSgFast`, `DTSgFunbyApproach` and `DTSgNA.status` options providing default values for the `fast`, `funbyApproach` and `na.status` arguments of the `new()` method
-* Added `DTSgDeprecatedWarnings` option: allows for disabling warnings from deprecated features.
+* Added `DTSgDeprecatedWarnings` option: allows for disabling warnings from deprecated features
 * Greatly sped up `by______()` and `byFasttime______()` TALFs
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on
 * Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package

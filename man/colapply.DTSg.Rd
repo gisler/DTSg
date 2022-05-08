@@ -28,12 +28,17 @@
 
 \item{...}{Further arguments passed on to \code{fun}.}
 
-\item{cols}{A character vector specifying the columns to apply \code{fun} to.}
+\item{cols}{A character vector specifying the columns to apply \code{fun} to.
+Another possibility is a character string containing either comma separated
+column names, for example, \code{"x,y,z"}, or the start and end column separated
+by a colon, for example, \code{"x:z"}.}
 
 \item{resultCols}{An optional character vector of the same length as \code{cols}
-specifying the column names for the return values of \code{fun}. Non-existing
-columns are added and existing columns are overwritten. Columns are matched
-element-wise between \code{cols} and \code{resultCols}.}
+specifying the column names for the return values of \code{fun}. Another
+possibility is a character string containing comma separated column names,
+for example, \code{"x,y,z"}. Non-existing columns are added and existing columns
+are overwritten. Columns are matched element-wise between \code{cols} and
+\code{resultCols}.}
 
 \item{suffix}{An optional character string. The return values of \code{fun} are
 added as new columns with names consisting of the columns specified in

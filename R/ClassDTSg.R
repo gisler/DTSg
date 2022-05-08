@@ -230,12 +230,11 @@ DTSg <- R6Class(
 
     determineCols = function(resultCols, suffix, cols) {
       if (!is.null(resultCols)) {
-        assertCharacter(
+        resultCols <- private$extractCols(
           resultCols,
-          min.chars = 1L,
-          any.missing = FALSE,
+          colon = FALSE,
           len = length(cols),
-          unique = TRUE
+          .var.name = "resultCols"
         )
 
         assertNoStartingDot(resultCols)
@@ -305,6 +304,51 @@ DTSg <- R6Class(
       }
 
       assertPOSIXct(to, lower = from, any.missing = FALSE, len = 1L)
+    },
+
+    extractCols = function(
+      cols,
+      colon = TRUE,
+      min.chars = 1L,
+      any.missing = FALSE,
+      len = NULL,
+      min.len = 1L,
+      unique = TRUE,
+      .var.name = "cols"
+    ) {
+      qassert(cols, "S+")
+
+      allCols <- names(private$.values)[-1L]
+
+      if (length(cols) == 1L && !cols %chin% allCols) {
+        if (colon && grepl(":", cols, fixed = TRUE)) {
+          cols <- strsplit(cols, ":", fixed = TRUE)[[1L]]
+
+          assertSubset(cols, allCols)
+
+          startCol <- which(cols[1L] == allCols)
+          endCol   <- which(cols[2L] == allCols)
+
+          cols <- allCols[startCol:endCol]
+        } else if (grepl(",", cols, fixed = TRUE)) {
+          cols <- strsplit(cols, ",", fixed = TRUE)[[1L]]
+        }
+      }
+
+      assertCharacter(
+        cols,
+        min.chars = min.chars,
+        any.missing = any.missing,
+        len = len,
+        min.len = min.len,
+        unique = unique,
+        .var.name = .var.name
+      )
+      if (colon) {
+        assertSubset(cols, allCols)
+      }
+
+      cols
     },
 
     funbyHelpers = function(ignoreDST, multiplier, funbyApproach, .helpers) {
@@ -444,8 +488,7 @@ DTSg <- R6Class(
         .funbyHelpers
       ), "P1")
       fun <- private$determineFun(fun, TRUE)
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
       qassert(n, "B1")
       qassert(clone, "B1")
 
@@ -608,8 +651,7 @@ DTSg <- R6Class(
       clone = getOption("DTSgClone")
     ) {
       assertFunction(fun)
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
       .cols <- private$determineCols(resultCols, suffix, cols)
       qassert(helpers, "B1")
       qassert(clone, "B1")
@@ -853,8 +895,7 @@ DTSg <- R6Class(
         private$.periodicity,
         level = "warning"
       )
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
 
       DTs <- vector("list", length(cols))
 
@@ -904,8 +945,7 @@ DTSg <- R6Class(
       }
       from <- private$determineFrom(from)
       to <- private$determineTo(to, from)
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
 
       ylab <- ""
 
@@ -937,7 +977,7 @@ DTSg <- R6Class(
       plot <- dygraphs::dyRangeSelector(plot)
 
       if (!is.null(secAxisCols)) {
-        assertCharacter(secAxisCols, any.missing = FALSE, min.len = 1L, unique = TRUE)
+        secAxisCols <- private$extractCols(cols)
         assertSubset(secAxisCols, cols)
         qassert(secAxisLabel, "S1")
 
@@ -1118,8 +1158,7 @@ DTSg <- R6Class(
         level = "warning"
       )
       assertFunction(fun)
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
       before <- assertCount(before, coerce = TRUE)
       after <- assertCount(after, coerce = TRUE)
       weights <- match.arg(weights)
@@ -1260,8 +1299,7 @@ DTSg <- R6Class(
       assertNoStartingDot(resultCols)
       assertDisjunct(resultCols, self$cols())
       fun <- private$determineFun(fun, length(fun) != length(resultCols))
-      assertCharacter(cols, any.missing = FALSE, min.len = 2L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols, min.len = 2L)
       qassert(clone, "B1")
 
       if (clone) {
@@ -1371,14 +1409,11 @@ DTSg <- R6Class(
       values,
       clone = getOption("DTSgClone")
     ) {
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
-      assertCharacter(
+      cols <- private$extractCols(cols)
+      values <- private$extractCols(
         values,
-        min.chars = 1L,
-        any.missing = FALSE,
-        len = length(cols),
-        unique = TRUE
+        colon = FALSE,
+        len = length(cols)
       )
       assertNoStartingDot(values)
 
@@ -1402,12 +1437,9 @@ DTSg <- R6Class(
         i <- private$determineFilter(i, as.expression(substitute(i)))
         assertFilter(i, private$.timestamps)
       }
-      assertCharacter(
+      cols <- private$extractCols(
         cols,
-        min.chars = 1L,
-        any.missing = FALSE,
-        min.len = 1L,
-        unique = TRUE
+        colon = FALSE
       )
       assertNoStartingDot(cols)
       if (length(cols) == length(names(private$.values)) - 1L &&
@@ -1455,8 +1487,7 @@ DTSg <- R6Class(
         i <- private$determineFilter(i, as.expression(substitute(i)))
         assertFilter(i, private$.timestamps)
       }
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
       na.status <- match.arg(na.status, private$.na.statuses)
       qassert(clone, "B1")
 
@@ -1518,8 +1549,7 @@ DTSg <- R6Class(
     },
 
     summary = function(cols = self$cols(), ...) {
-      assertCharacter(cols, any.missing = FALSE, min.len = 1L, unique = TRUE)
-      assertSubset(cols, self$cols())
+      cols <- private$extractCols(cols)
 
       summary(private$.values[, cols, with = FALSE], ...)
     },

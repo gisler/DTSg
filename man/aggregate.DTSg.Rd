@@ -34,7 +34,10 @@ information.}
 
 \item{\dots}{Further arguments passed on to \code{fun}.}
 
-\item{cols}{A character vector specifying the columns to aggregate.}
+\item{cols}{A character vector specifying the columns to aggregate. Another
+possibility is a character string containing either comma separated column
+names, for example, \code{"x,y,z"}, or the start and end column separated by a
+colon, for example, \code{"x:z"}.}
 
 \item{n}{A logical specifying if a column named \code{.n} giving the number of
 values per temporal aggregation level shall be added. See corresponding

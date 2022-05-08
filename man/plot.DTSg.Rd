@@ -27,10 +27,15 @@ a character string coercible to one. The data is plotted up to this
 timestamp.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
-plotted.}
+plotted. Another possibility is a character string containing either comma
+separated column names, for example, \code{"x,y,z"}, or the start and end column
+separated by a colon, for example, \code{"x:z"}.}
 
 \item{secAxisCols}{An optional character vector specifying the columns whose
-values shall be plotted on a secondary axis. Must be a subset of \code{cols}.}
+values shall be plotted on a secondary axis. Another possibility is a
+character string containing either comma separated column names, for
+example, \code{"x,y,z"}, or the start and end column separated by a colon, for
+example, \code{"x:z"}. Must be a subset of \code{cols}.}
 
 \item{secAxisLabel}{A character string specifying the label of the optional
 secondary axis.}

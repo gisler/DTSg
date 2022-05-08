@@ -18,10 +18,14 @@
 \item{x}{A \code{\link{DTSg}} object (S3 method only).}
 
 \item{cols}{A character vector specifying the columns whose names shall be
-set. The name of the \emph{.dateTime} column cannot be changed.}
+set. Another possibility is a character string containing either comma
+separated column names, for example, \code{"x,y,z"}, or the start and end column
+separated by a colon, for example, \code{"x:z"}. The name of the \emph{.dateTime}
+column cannot be changed.}
 
 \item{values}{A character vector of the same length as \code{cols} specifying the
-desired column names.}
+desired column names. Another possibility is a character string containing
+comma separated column names, for example, \code{"x,y,z"}.}
 
 \item{clone}{A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.}

@@ -47,8 +47,8 @@ DT4 <- data.table(
     as.POSIXct("2000-10-29 03:30:00", tz = "Europe/Vienna"),
     "30 mins"
   ),
-  col1 = LETTERS[1:8],
-  col2 = c(1, rep(NA, 3), 5, 6, NA, NA)
+  `col1, A` = LETTERS[1:8],
+  `col2, A` = c(1, rep(NA, 3), 5, 6, NA, NA)
 )
 
 #### funby test data ####

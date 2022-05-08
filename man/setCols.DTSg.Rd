@@ -24,7 +24,9 @@ argument of \code{\link[data.table:data.table]{data.table::data.table}}. Filter 
 special symbol \code{\link[data.table:special-symbols]{.N}}.}
 
 \item{cols}{A character vector specifying the columns whose values shall be
-set. The values of the \emph{.dateTime} column cannot be changed.}
+set. Another possibility is a character string containing comma separated
+column names, for example, \code{"x,y,z"}. The values of the \emph{.dateTime} column
+cannot be changed.}
 
 \item{values}{A vector, \code{\link{list}} or list-like object (e.g.
 \code{\link[data.table:data.table]{data.table::data.table}}) of replacement and/or new values accepted by
