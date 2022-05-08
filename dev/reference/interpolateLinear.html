@@ -90,13 +90,13 @@ by some of the methods of <code><a href="DTSg.html">DTSg</a></code> objects.</p>
     <dl><dt>.col</dt>
 <dd><p>A numeric vector.</p></dd>
 <dt>roll</dt>
-<dd><p>A positive numeric. For time series with unrecognised periodicity
-it is interpreted in seconds and for time series with recognised
-periodicity it is multiplied with the maximum time difference between two
-subsequent time steps in seconds. Thus, for regular time series it is the
-number of time steps and for irregular it is an approximation of it. Only
-missing values in distances from both ends of a gap smaller than this are
-interpolated.</p></dd>
+<dd><p>A positive numeric specifying the maximum size of gaps whose
+missing values shall be interpolated. For time series with unrecognised
+periodicity it is interpreted in seconds and for time series with
+recognised periodicity it is multiplied with the maximum time difference
+between two subsequent time steps in seconds. Thus, for regular time series
+it is the number of time steps and for irregular it is an approximation of
+it.</p></dd>
 <dt>rollends</dt>
 <dd><p>A logical specifying if missing values at the start and end
 of the time series shall be filled. See <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code> for
