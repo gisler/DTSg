@@ -18,7 +18,7 @@ of a DTSg object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -101,7 +101,10 @@ length one. See corresponding section for further information.</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
 <dt>cols</dt>
-<dd><p>A character vector specifying the columns to apply <code>fun</code> to.</p></dd>
+<dd><p>A character vector specifying the columns to apply <code>fun</code> to.
+Another possibility is a character string containing either comma separated
+column names, for example, <code>"x,y,z"</code>, or the start and end column separated
+by a colon, for example, <code>"x:z"</code>.</p></dd>
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
@@ -143,17 +146,17 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime     flow1  flow2     flow3 flow.mean   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;  &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.664863  9.540 10.405291  9.536718 0.8702185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  8.382868  9.285  9.671887  9.113252 0.6614496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.797396  8.940  9.541845  9.093080 0.3951282</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  8.247963  8.745  9.318812  8.770592 0.5358833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  8.403732  8.490  8.646683  8.513472 0.1231647</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.645584  9.540  9.714932  9.300172 0.5735976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  7.669988  9.285 10.359459  9.104816 1.3537586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.716868  8.940  9.755135  9.137334 0.5465392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  7.537359  8.745 10.540485  8.940948 1.5111214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  8.063288  8.490  9.363180  8.638823 0.6626013</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 25.687266 26.685 28.030263 26.800843 1.1757865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.750120 28.050 28.679208 28.159776 0.4741720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 21.798751 23.580 23.680809 23.019853 1.0587065</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 17.615811 18.840 19.255558 18.570456 0.8524570</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.146216 17.250 18.706072 17.700763 0.8721686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 26.251147 26.685 27.498724 26.811624 0.6333540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 26.369245 28.050 28.434627 27.617957 1.0983833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 20.859406 23.580 24.793137 23.077514 2.0144302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.231823 18.840 20.311019 19.127614 1.0690208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 15.937175 17.250 18.911973 17.366383 1.4908099</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -171,17 +174,17 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime     flow1  flow2     flow3 flow.mean   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;  &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.664863  9.540 10.405291  9.536718 0.8702185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  8.382868  9.285  9.671887  9.113252 0.6614496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.797396  8.940  9.541845  9.093080 0.3951282</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  8.247963  8.745  9.318812  8.770592 0.5358833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  8.403732  8.490  8.646683  8.513472 0.1231647</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.645584  9.540  9.714932  9.300172 0.5735976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  7.669988  9.285 10.359459  9.104816 1.3537586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.716868  8.940  9.755135  9.137334 0.5465392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  7.537359  8.745 10.540485  8.940948 1.5111214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  8.063288  8.490  9.363180  8.638823 0.6626013</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 25.687266 26.685 28.030263 26.800843 1.1757865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.750120 28.050 28.679208 28.159776 0.4741720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 21.798751 23.580 23.680809 23.019853 1.0587065</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 17.615811 18.840 19.255558 18.570456 0.8524570</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.146216 17.250 18.706072 17.700763 0.8721686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 26.251147 26.685 27.498724 26.811624 0.6333540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 26.369245 28.050 28.434627 27.617957 1.0983833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 20.859406 23.580 24.793137 23.077514 2.0144302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.231823 18.840 20.311019 19.127614 1.0690208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 15.937175 17.250 18.911973 17.366383 1.4908099</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>

@@ -22,7 +22,7 @@ DTSg for further information."><!-- mathjax --><script src="https://cdnjs.cloudf
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -108,10 +108,15 @@ a character string coercible to one. The data is plotted up to this
 timestamp.</p></dd>
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns whose values shall be
-plotted.</p></dd>
+plotted. Another possibility is a character string containing either comma
+separated column names, for example, <code>"x,y,z"</code>, or the start and end column
+separated by a colon, for example, <code>"x:z"</code>.</p></dd>
 <dt>secAxisCols</dt>
 <dd><p>An optional character vector specifying the columns whose
-values shall be plotted on a secondary axis. Must be a subset of <code>cols</code>.</p></dd>
+values shall be plotted on a secondary axis. Another possibility is a
+character string containing either comma separated column names, for
+example, <code>"x,y,z"</code>, or the start and end column separated by a colon, for
+example, <code>"x:z"</code>. Must be a subset of <code>cols</code>.</p></dd>
 <dt>secAxisLabel</dt>
 <dd><p>A character string specifying the label of the optional
 secondary axis.</p></dd>
