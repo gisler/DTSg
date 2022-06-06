@@ -36,15 +36,13 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      - name: Install dependencies (all but 4.0.2)
-        if: matrix.config.r != '4.0.2'
+      - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, any::covr
           needs: check, coverage
 
-      - name: Check (all but 4.0.2)
-        if: matrix.config.r != '4.0.2'
+      - name: Check
         uses: r-lib/actions/check-r-package@v2
 
       - name: Test coverage
