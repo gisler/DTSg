@@ -28,7 +28,7 @@ S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {
   }
   if (!is.expression(R6Method) ||
       R6Method[[1L]][[2L]][[3L]] != "public_methods" ||
-      class(eval(R6Method[[1L]][[2L]][[2L]])) != "R6ClassGenerator") {
+      !testClass(eval(R6Method[[1L]][[2L]][[2L]]), "R6ClassGenerator")) {
     stop(
       '"R6Method" must contain a public method of an "R6ClassGenerator".',
       call. = FALSE
