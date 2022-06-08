@@ -35,6 +35,12 @@ x$rowbind(
   flow[1501:.N, ]
 )$print()
 
+## 'rbind()' is a "hidden" R6 alias for 'rowbind()'
+x$rbind(
+  list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+  flow[1501:.N, ]
+)$print()
+
 ## S3 method
 print(rowbind(
   x = x,

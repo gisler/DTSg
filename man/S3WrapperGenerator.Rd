@@ -25,7 +25,7 @@ Generates S3 wrapper methods for public methods of \code{R6ClassGenerator}s, but
 can also be used to generate \dQuote{plain} function wrappers.
 }
 \examples{
-# generate an S3 wrapper method for 'alter' of 'DTSg'
+# generate an S3 wrapper method for 'alter()' of 'DTSg'
 alter.DTSg <- S3WrapperGenerator(
   R6Method = DTSg$public_methods$alter
 )

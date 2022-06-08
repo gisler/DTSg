@@ -71,6 +71,12 @@ x$rowaggregate(
   fun = list(mean = mean, sd = sd)
 )$print()
 
+## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'
+x$raggregate(
+  resultCols = "flow",
+  fun = list(mean = mean, sd = sd)
+)$print()
+
 ## S3 method
 print(rowaggregate(
   x = x,

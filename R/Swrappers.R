@@ -16,7 +16,7 @@
 #' @seealso [`S3Methods`], [`R6::R6Class`]
 #'
 #' @examples
-#' # generate an S3 wrapper method for 'alter' of 'DTSg'
+#' # generate an S3 wrapper method for 'alter()' of 'DTSg'
 #' alter.DTSg <- S3WrapperGenerator(
 #'   R6Method = DTSg$public_methods$alter
 #' )
@@ -431,6 +431,9 @@ cols <- function(x, ...) {
 #' ## R6 method
 #' x$cols(class = "numeric")
 #'
+#' ## 'names()' is a "hidden" R6 alias for 'cols()'
+#' x$names(class = "numeric")
+#'
 #' ## S3 method
 #' cols(x = x, class = "numeric")
 #'
@@ -826,6 +829,12 @@ rowaggregate <- function(x, ...) {
 #'   fun = list(mean = mean, sd = sd)
 #' )$print()
 #'
+#' ## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'
+#' x$raggregate(
+#'   resultCols = "flow",
+#'   fun = list(mean = mean, sd = sd)
+#' )$print()
+#'
 #' ## S3 method
 #' print(rowaggregate(
 #'   x = x,
@@ -863,6 +872,12 @@ rowbind <- function(x, ...) {
 #' # combine rows
 #' ## R6 method
 #' x$rowbind(
+#'   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
+#'   flow[1501:.N, ]
+#' )$print()
+#'
+#' ## 'rbind()' is a "hidden" R6 alias for 'rowbind()'
+#' x$rbind(
 #'   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
 #'   flow[1501:.N, ]
 #' )$print()
@@ -909,6 +924,12 @@ setColNames <- function(x, ...) {
 #' # rename column "flow" to "River Flow"
 #' ## R6 method
 #' x$setColNames(
+#'   cols = "flow",
+#'   values = "River Flow"
+#' )$print()
+#'
+#' ## 'setnames()' is a "hidden" R6 alias for 'setColNames()'
+#' x$setnames(
 #'   cols = "flow",
 #'   values = "River Flow"
 #' )$print()
@@ -960,6 +981,13 @@ setCols <- function(x, ...) {
 #' # cap river flows to 100
 #' ## R6 method
 #' x$setCols(
+#'   i = flow > 100,
+#'   cols = "flow",
+#'   values = 100
+#' )$print()
+#'
+#' ## 'set()' is a "hidden" R6 alias for 'setCols()'
+#' x$set(
 #'   i = flow > 100,
 #'   cols = "flow",
 #'   values = 100

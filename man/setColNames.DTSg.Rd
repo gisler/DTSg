@@ -49,6 +49,12 @@ x$setColNames(
   values = "River Flow"
 )$print()
 
+## 'setnames()' is a "hidden" R6 alias for 'setColNames()'
+x$setnames(
+  cols = "flow",
+  values = "River Flow"
+)$print()
+
 ## S3 method
 print(setColNames(
   x = x,

@@ -41,6 +41,9 @@ x <- DTSg$new(values = flow)
 ## R6 method
 x$cols(class = "numeric")
 
+## 'names()' is a "hidden" R6 alias for 'cols()'
+x$names(class = "numeric")
+
 ## S3 method
 cols(x = x, class = "numeric")
 

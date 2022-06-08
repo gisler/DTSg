@@ -57,6 +57,13 @@ x$setCols(
   values = 100
 )$print()
 
+## 'set()' is a "hidden" R6 alias for 'setCols()'
+x$set(
+  i = flow > 100,
+  cols = "flow",
+  values = 100
+)$print()
+
 ## S3 method
 print(setCols(
   x = x,
