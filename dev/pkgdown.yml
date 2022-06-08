@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   a_basicUsage: a_basicUsage.html
   b_advancedUsage: b_advancedUsage.html
-last_built: 2022-05-09T20:06Z
+last_built: 2022-06-08T21:16Z
 urls:
   reference: https://gisler.github.io/DTSg/reference
   article: https://gisler.github.io/DTSg/articles

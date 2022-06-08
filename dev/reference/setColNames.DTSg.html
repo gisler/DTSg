@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.1.1.9000</span>
       </span>
     </div>
 
@@ -119,6 +119,33 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-in"><span class="co"># rename column "flow" to "River Flow"</span></span>
 <span class="r-in"><span class="co">## R6 method</span></span>
 <span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">setColNames</span><span class="op">(</span></span>
+<span class="r-in">  cols <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span class="r-in">  values <span class="op">=</span> <span class="st">"River Flow"</span></span>
+<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime River Flow</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01      9.540</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02      9.285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03      8.940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04      8.745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05      8.490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27     26.685</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28     28.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29     23.580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30     18.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31     17.250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Periodicity:    Time difference of 1 days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## 'setnames()' is a "hidden" R6 alias for 'setColNames()'</span></span>
+<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">setnames</span><span class="op">(</span></span>
 <span class="r-in">  cols <span class="op">=</span> <span class="st">"flow"</span>,</span>
 <span class="r-in">  values <span class="op">=</span> <span class="st">"River Flow"</span></span>
 <span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
