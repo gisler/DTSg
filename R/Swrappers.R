@@ -413,10 +413,9 @@ cols <- function(x, ...) {
 #'   class} `".numerary"` matches the [`integer`] and [`numeric`] classes.
 #' @param pattern An optional character string passed on to the `pattern`
 #'   argument of [`grep`].
-#' @param mode An optional character vector matched to each column's [`mode`]
-#'   vector.
+#' @param mode An optional character vector matched to each column's [`mode`].
 #' @param typeof An optional character vector matched to each column's
-#'   [`typeof`] vector.
+#'   [`typeof`].
 #' @param \dots Further arguments passed on to [`grep`]. The `value` argument is
 #'   rejected.
 #' @inheritParams aggregate.DTSg

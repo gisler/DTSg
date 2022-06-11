@@ -17,11 +17,10 @@ class} \code{".numerary"} matches the \code{\link{integer}} and \code{\link{nume
 \item{pattern}{An optional character string passed on to the \code{pattern}
 argument of \code{\link{grep}}.}
 
-\item{mode}{An optional character vector matched to each column's \code{\link{mode}}
-vector.}
+\item{mode}{An optional character vector matched to each column's \code{\link{mode}}.}
 
 \item{typeof}{An optional character vector matched to each column's
-\code{\link{typeof}} vector.}
+\code{\link{typeof}}.}
 
 \item{\dots}{Further arguments passed on to \code{\link{grep}}. The \code{value} argument is
 rejected.}

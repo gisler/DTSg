@@ -1,5 +1,7 @@
 # DTSg v1.1.1.9000
 
+* Slightly improved documentation
+
 # DTSg v1.1.1
 
 * Column names can often now be additionally specified by a character string containing either comma separated column names, for example, `"x,y,z"`, or the start and end column separated by a colon, for example, `"x:z"`
