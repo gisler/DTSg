@@ -89,30 +89,43 @@ DTSg object. The values can optionally be set for certain rows only."><meta name
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>i</dt>
 <dd><p>An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the <code>i</code>
 argument of <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
 special symbol <code><a href="https://Rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns whose values shall be
 set. Another possibility is a character string containing comma separated
 column names, for example, <code>"x,y,z"</code>. The values of the <em>.dateTime</em> column
 cannot be changed.</p></dd>
+
+
 <dt>values</dt>
 <dd><p>A vector, <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> or list-like object (e.g.
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>) of replacement and/or new values accepted by
 the <code>value</code> argument of <span class="pkg">data.table</span>'s <code><a href="https://Rdatatable.gitlab.io/data.table/reference/assign.html" class="external-link">data.table::set</a></code> function.
 <code>NULL</code> as a value removes a column.</p></dd>
+
+
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Not used (S3 method only).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
+    
+
+<p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -282,7 +295,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

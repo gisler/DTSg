@@ -91,37 +91,54 @@ and/or the status of missing values of a <code><a href="DTSg.html">DTSg</a></cod
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>from</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> timestamp in the same time zone as the time series
 or a character string coercible to one. Specifies the new start of the time
 series.</p></dd>
+
+
 <dt>to</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> timestamp in the same time zone as the time series or
 a character string coercible to one. Specifies the new end of the time
 series.</p></dd>
+
+
 <dt>by</dt>
 <dd><p>Specifies the new periodicity in one of the ways the <code>by</code> argument
 of <code><a href="https://rdrr.io/r/base/seq.POSIXt.html" class="external-link">seq.POSIXt</a></code> can be specified. Must be specified for time series with
 unrecognised periodicity. Time steps out of sync with the new periodicity
 are dropped.</p></dd>
+
+
 <dt>rollback</dt>
 <dd><p>A logical specifying if a call to <code><a href="rollback.html">rollback</a></code> shall be made
 when appropriate.</p></dd>
+
+
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
+
+
 <dt>na.status</dt>
 <dd><p>A character string. Either <code>"explicit"</code>, which makes missing
 timestamps explicit according to the recognised periodicity, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
 columns. Please note that <code><a href="DTSg.html">DTSg</a></code> objects work best with explicitly
 missing values.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Not used (S3 method only).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
+    
+
+<p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -256,7 +273,7 @@ missing values.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

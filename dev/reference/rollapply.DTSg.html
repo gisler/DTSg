@@ -96,28 +96,44 @@ DTSg object with recognised periodicity."><meta name="robots" content="noindex">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/function.html" class="external-link">function</a></code>. Its return value must be of length one.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns whose rolling window
 <code>fun</code> shall be applied to. Another possibility is a character string
 containing either comma separated column names, for example, <code>"x,y,z"</code>, or
 the start and end column separated by a colon, for example, <code>"x:z"</code>.</p></dd>
+
+
 <dt>before</dt>
 <dd><p>An integerish value specifying the size of the window in time
 steps before the “center” of the rolling window.</p></dd>
+
+
 <dt>after</dt>
 <dd><p>An integerish value specifying the size of the window in time
 steps after the “center” of the rolling window.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>A character string specifying the method applied to calculate
 the weights handed over to <code>fun</code>. These are useful for functions like
 <code><a href="https://rdrr.io/r/stats/weighted.mean.html" class="external-link">weighted.mean</a></code>. See corresponding section for further information.</p></dd>
+
+
 <dt>parameters</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying parameters for the weight calculation
 method. See corresponding section for further information.</p></dd>
+
+
 <dt>resultCols</dt>
 <dd><p>An optional character vector of the same length as <code>cols</code>
 specifying the column names for the return values of <code>fun</code>. Another
@@ -125,27 +141,38 @@ possibility is a character string containing comma separated column names,
 for example, <code>"x,y,z"</code>. Non-existing columns are added and existing columns
 are overwritten. Columns are matched element-wise between <code>cols</code> and
 <code>resultCols</code>.</p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>An optional character string. The return values of <code>fun</code> are
 added as new columns with names consisting of the columns specified in
 <code>cols</code> and this suffix. Existing columns are never overwritten. Only used
 when <code>resultCols</code> is not specified.</p></dd>
+
+
 <dt>helpers</dt>
 <dd><p>A logical specifying if helper data shall be handed over to
 <code>fun</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>memoryOverCPU</dt>
 <dd><p>A logical specifying if memory usage shall be preferred
 over CPU usage for this method call. The former is generally faster for
 smaller windows and shorter time series, the latter for bigger windows and
 longer time series or might even be the only one which works depending on
 the available hardware.</p></dd>
+
+
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
+    
+
+<p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
     <div id="weights">
     <h2>Weights</h2>
@@ -256,7 +283,7 @@ elements:</p><ul><li><p><em>before:</em> Same as the <code>before</code> argumen
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

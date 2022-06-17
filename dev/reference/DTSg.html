@@ -108,31 +108,47 @@ operator.</p>
 <dd><p>A character string. Must be <code>"DTSg"</code> in order to create a <code>DTSg</code>
 object. Otherwise a different object may or may not be created (S4
 constructor only).</p></dd>
+
+
 <dt>values</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> or object inherited from class <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code>,
 e.g. <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Its first column must be of class
 <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> or coercible to it. It serves as the object's time index and is
 renamed to <em>.dateTime.</em></p></dd>
+
+
 <dt>ID</dt>
 <dd><p>A character string specifying the ID (name) of the time series data
 object.</p></dd>
+
+
 <dt>parameter</dt>
 <dd><p>A character string specifying the parameter name of the time
 series data.</p></dd>
+
+
 <dt>unit</dt>
 <dd><p>A character string specifying the unit of the time series data.</p></dd>
+
+
 <dt>variant</dt>
 <dd><p>A character string specifying further metadata of the time
 series, for instance, <code>"min"</code> to point out that it is a time series of
 lower bound measurements.</p></dd>
+
+
 <dt>aggregated</dt>
 <dd><p>A logical specifying how the timestamps of the series have
 to be interpreted: as snap-shots (<code>FALSE</code>) or as periods between subsequent
 timestamps (<code>TRUE</code>).</p></dd>
+
+
 <dt>fast</dt>
 <dd><p>A logical specifying if all rows (<code>FALSE</code>) or only the first 1000
 rows (<code>TRUE</code>) shall be used to check the object's integrity and for the
 automatic detection of the time series' periodicity.</p></dd>
+
+
 <dt>swallow</dt>
 <dd><p>A logical specifying if the object provided through the
 <code>values</code> argument shall be “swallowed” by the <code>DTSg</code> object, i.e. no
@@ -144,12 +160,16 @@ have been coerced to <code><a href="https://rdrr.io/r/base/DateTimeClasses.html"
 further information). Furthermore, all references to the “swallowed”
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code> in the global (and only the global) environment
 are removed upon the successful creation of the <code>DTSg</code> object.</p></dd>
+
+
 <dt>na.status</dt>
 <dd><p>A character string. Either <code>"explicit"</code>, which makes missing
 timestamps explicit according to the recognised periodicity, or
 <code>"implicit"</code>, which removes timestamps with missing values on all value
 columns, or <code>"undecided"</code> for no such action. Please note that <code>DTSg</code>
 objects work best with explicitly missing values.</p></dd>
+
+
 <dt>funbyApproach</dt>
 <dd><p>A character string specifying the default flavour of
 <code><a href="TALFs.html">TALFs</a></code> used with the created <code>DTSg</code> object. Either <code>"base"</code>, which
@@ -158,10 +178,13 @@ utilises <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-
 <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main function for transforming
 timestamps. Custom approaches for user defined temporal aggregation level
 functions are also possible.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code>DTSg</code> object.</p>
+    
+
+<p>Returns a <code>DTSg</code> object.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -328,7 +351,7 @@ when calling deprecated features.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

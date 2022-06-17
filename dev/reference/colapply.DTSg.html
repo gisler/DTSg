@@ -94,15 +94,23 @@
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/function.html" class="external-link">function</a></code>. Its return value must be of length one.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns to apply <code>fun</code> to.
 Another possibility is a character string containing either comma separated
 column names, for example, <code>"x,y,z"</code>, or the start and end column separated
 by a colon, for example, <code>"x:z"</code>.</p></dd>
+
+
 <dt>resultCols</dt>
 <dd><p>An optional character vector of the same length as <code>cols</code>
 specifying the column names for the return values of <code>fun</code>. Another
@@ -110,42 +118,61 @@ possibility is a character string containing comma separated column names,
 for example, <code>"x,y,z"</code>. Non-existing columns are added and existing columns
 are overwritten. Columns are matched element-wise between <code>cols</code> and
 <code>resultCols</code>.</p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>An optional character string. The return values of <code>fun</code> are
 added as new columns with names consisting of the columns specified in
 <code>cols</code> and this suffix. Existing columns are never overwritten. Only used
 when <code>resultCols</code> is not specified.</p></dd>
+
+
 <dt>helpers</dt>
 <dd><p>A logical specifying if helper data shall be handed over to
 <code>fun</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>funby</dt>
 <dd><p>One of the temporal aggregation level functions described in
 <code><a href="TALFs.html">TALFs</a></code> or a user defined temporal aggregation level function. Can be
 used to apply functions like <code><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></code> to a certain temporal level. See
 corresponding section and examples for further information.</p></dd>
+
+
 <dt>ignoreDST</dt>
 <dd><p>A logical specifying if day saving time shall be ignored
 by <code>funby</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>multiplier</dt>
 <dd><p>A positive integerish value “multiplying” the
 temporal aggregation level of certain <code><a href="TALFs.html">TALFs</a></code>. See corresponding section
 for further information.</p></dd>
+
+
 <dt>funbyHelpers</dt>
 <dd><p>An optional <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with helper data passed on to
 <code>funby</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>funbyApproach</dt>
 <dd><p>A character string specifying the flavour of the applied
 temporal aggregation level function. Either <code>"base"</code>, which utilises
 <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
 or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
 function for transforming timestamps.</p></dd>
+
+
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
+    
+
+<p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
     <div id="helper-data">
     <h2>Helper data</h2>
@@ -541,17 +568,17 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime       flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  0.5382849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  0.7437416</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  0.7028936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  0.7120093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 -0.7470230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 -0.9748217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 -0.8972150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  0.1045454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  0.7532741</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  0.9365185</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27  0.9914675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28  0.9873743</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29  0.9956739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30  0.9951617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31  0.9999998</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27  0.9961313</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28  0.9878552</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29  0.9821262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30  0.9779153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31  0.9291094</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -574,7 +601,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
