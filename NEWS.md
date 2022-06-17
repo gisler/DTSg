@@ -1,6 +1,7 @@
 # DTSg v1.1.1.9000
 
 * Slightly improved documentation
+* Minor internal code improvements
 
 # DTSg v1.1.1
 
