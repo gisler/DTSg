@@ -33,7 +33,7 @@ flow
 summary(flow)
 ```
 
-Now that we have a data set, we can create our first object by providing it to the `new` method of the package's main R6 class generator `DTSg`. In addition, we specify an ID in order to give the object a name:
+Now that we have a data set, we can create our first object by providing it to the `new()` method of the package's main R6 class generator `DTSg`. In addition, we specify an ID in order to give the object a name:
 
 ```{r}
 TS <- DTSg$new(
@@ -60,7 +60,7 @@ Printing the object shows us, among others, the data provided, the specified ID 
 TS$print() # or 'print(TS)' or just 'TS'
 ```
 
-With this done, we can move on and further explore our newly created time series data object with a summary (`summary`), a report on missing values (`nas`) and a plot (`plot`). It suddenly seems to contain several missing values, which apparently were not there upon loading the data set (`plot` requires the `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
+With this done, we can move on and further explore our newly created time series data object with a summary (`summary()`), a report on missing values (`nas()`) and a plot (`plot()`). It suddenly seems to contain several missing values, which apparently were not there upon loading the data set (`plot()` requires the `dygraphs` and `RColorBrewer` packages to be installed; HTML vignettes unfortunately cannot display interactive elements, hence I included a static image of the JavaScript chart instead):
 
 ```{r}
 TS$summary() # or 'summary(TS)'
@@ -80,7 +80,7 @@ flow[date >= as.POSIXct("2007-10-09", tz = "UTC") & date <= as.POSIXct("2007-11-
 
 ## Object manipulation
 
-For fairly small gaps like this it might be okay to fill them by means of linear interpolation. Using the `colapply` method together with the `interpolateLinear` function will do the trick:
+For fairly small gaps like this it might be okay to fill them by means of linear interpolation. Using the `colapply()` method together with the `interpolateLinear()` function will do the trick:
 
 ```{r}
 TS  <- TS$colapply(fun = interpolateLinear)
@@ -88,7 +88,7 @@ TS  <- TS$colapply(fun = interpolateLinear)
 TS$nas()
 ```
 
-In case no column name is provided through the `cols` argument of the `colapply` method, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols` method. It, among others, supports a `class` and/or `pattern` argument:
+In case no column name is provided through the `cols` argument of the `colapply()` method, the first numeric column is taken by default. Column names for the `cols` argument can be requested from `DTSg` objects with the help of the `cols()` method. It, among others, supports a `class` and/or `pattern` argument:
 
 ```{r}
 TS$cols() # or 'cols(TS)'
@@ -99,7 +99,7 @@ TS$cols(pattern = "f.*w") # or 'cols(TS, pattern = "f.*w")'
 TS$cols(pattern = "temp")
 ```
 
-The time series reaches from the start of the year 2007 to the end of the year 2012. Let's say we are only interested in the first two years. With `alter` we can shorten, lengthen and/or change the periodicity of a `DTSg` object. The latter can be achieved through its `by` argument (no example given):
+The time series reaches from the start of the year 2007 to the end of the year 2012. Let's say we are only interested in the first two years. With `alter()` we can shorten, lengthen and/or change the periodicity of a `DTSg` object. The latter can be achieved through its `by` argument (no example given):
 
 ```{r}
 TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
@@ -107,7 +107,7 @@ TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
 TS
 ```
 
-In order to get mean monthly river flows as an example, we can use the `aggregate` method with one of the package's temporal aggregation level functions (TALFs) as its `funby` argument (the `fun` argument also accepts a named character vector or `list` of functions, which allows for calculating several summary statistics at once):
+In order to get mean monthly river flows as an example, we can use the `aggregate()` method with one of the package's temporal aggregation level functions (TALFs) as its `funby` argument (the `fun` argument also accepts a named character vector or `list` of functions, which allows for calculating several summary statistics at once):
 
 ```{r}
 TSm <- TS$aggregate(funby = byYm____, fun = mean)
@@ -125,9 +125,9 @@ TSQ <- TS$aggregate(funby = by_Q____, fun = mean)
 TSQ
 ```
 
-Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the `multiplier` argument of the `aggregate` as well as other methods, e.g. `multiplier = 6` makes `byYm____` aggregate to half years instead of months.
+Additional temporal aggregation level functions exist for years, days, hours, minutes and seconds. Furthermore, the temporal aggregation level of certain temporal aggregation level functions can be adjusted via the `multiplier` argument of the `aggregate()` as well as other methods, e.g. `multiplier = 6` makes `byYm____` aggregate to half years instead of months.
 
-The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do so with the help of the `rollapply` method:
+The last thing we want to achieve for now is the calculation of moving averages for a window of two time steps before and after each timestamp. We can do so with the help of the `rollapply()` method:
 
 ```{r}
 TSs <- TS$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
@@ -135,7 +135,7 @@ TSs <- TS$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
 TSs
 ```
 
-On a side note, some of the methods, which take a function as an argument (`colapply` and `rollapply`) hand over to it an additional `list` argument called `.helpers` containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like `cumsum`, which do not expect such a thing. A solution to this is to set the `helpers` argument of the respective method to `FALSE`.
+On a side note, some of the methods, which take a function as an argument (`colapply()` and `rollapply()`) hand over to it an additional `list` argument called `.helpers` containing useful data for the development of user defined functions (please see the respective help pages for further information). This can of course be a problem for functions like `cumsum()`, which do not expect such a thing. A solution to this is to set the `helpers` argument of the respective method to `FALSE`.
 
 With this said, let's join the result of the last calculation to the original time series data object and extract its values as a `data.table` for further processing in a final step (please note that the *.dateTime* column gets its original name back):
 
@@ -145,21 +145,21 @@ TS  <- TS$merge(y = TSs, suffixes = c("_orig", "_movavg"))
 TS$values()
 ```
 
-Better ways to add results of the `colapply` or `rollapply` method as new column(s) are actually their `resultCols` and `suffix` arguments. Their use would not have allowed for demonstrating the `merge` method though.
+Better ways to add results of the `colapply()` or `rollapply()` method as new column(s) are actually their `resultCols` and `suffix` arguments. Their use would not have allowed for demonstrating the `merge()` method though.
 
 ---
 
 For a full explanation of all the methods and functions available in the package as well as their arguments please consult the help pages. Especially the following methods and functions have not been discussed in this vignette:
 
-* `getCol` or `[`
-* `refresh`
-* `rowaggregate`
-* `rowbind`
-* `setColNames`
-* `setCols`
-* `subset`
-* `rollback`
-* `S3WrapperGenerator`
+* `getCol()` or `` `[.DTSg`()``
+* `refresh()`
+* `rowaggregate()`
+* `rowbind()`
+* `setColNames()`
+* `setCols()`
+* `subset()`
+* `rollback()`
+* `S3WrapperGenerator()`
 
 ## Object fields
 

@@ -52,7 +52,7 @@ As we can see, with cloning set to `FALSE`, the object was altered in place, i.e
 
 ### Note
 
-Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a `DTSg` object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data under the hood, i.e. changing one will also affect the other. In case you want a "real" copy of a `DTSg` object, you will have to use the `clone` method with its `deep` argument set to `TRUE` (for consistency with the `R6` package its default is `FALSE`):
+Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a `DTSg` object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data under the hood, i.e. changing one will also affect the other. In case you want a "real" copy of a `DTSg` object, you will have to use the `clone()` method with its `deep` argument set to `TRUE` (for consistency with the `R6` package its default is `FALSE`):
 
 ```{r}
 TSc <- TS$clone(deep = TRUE)
@@ -90,7 +90,7 @@ if (requireNamespace("magrittr", quietly = TRUE)) {
 
 ## Swallowing and dropping
 
-An extension to reference semantics of existing `DTSg` objects are reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new` method. When set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:
+An extension to reference semantics of existing `DTSg` objects are reference semantics during object creation. This behaviour can be triggered with the help of the `swallow` argument of the `new()` method. When set to `TRUE`, a `data.table` provided through the `values` argument is "swallowed" by the `DTSg` object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:
 
 ```{r}
 library(data.table)
@@ -112,7 +112,7 @@ ls(pattern = "^TS$")
 
 ## Column access
 
-Sometimes need may arise to access a column other than the one currently processed from a function within the `colapply` method. This can be accomplished in the following way:
+Sometimes need may arise to access a column other than the one currently processed from a function within the `colapply()` method. This can be accomplished in the following way:
 
 ```{r}
 # add a new column recording if a certain value is missing or not before
