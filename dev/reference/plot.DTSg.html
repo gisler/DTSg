@@ -82,16 +82,16 @@ axis are automatically generated from the object's metadata (fields). See
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">plot</span><span class="op">(</span>
-  <span class="va">x</span>,
-  from <span class="op">=</span> <span class="fu">first</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span>reference <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
-  to <span class="op">=</span> <span class="fu">last</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span>reference <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
-  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,
-  secAxisCols <span class="op">=</span> <span class="cn">NULL</span>,
-  secAxisLabel <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">plot</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  from <span class="op">=</span> <span class="fu">first</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span>reference <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu">last</span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span>reference <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,</span>
+<span>  secAxisCols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  secAxisLabel <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -149,19 +149,19 @@ secondary axis.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot data</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dygraphs"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="co">## R6 method</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co">## S3 method</span></span>
-<span class="r-in">  <span class="fu">plot</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot data</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dygraphs"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RColorBrewer"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co">## R6 method</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## S3 method</span></span></span>
+<span class="r-in"><span>  <span class="fu">plot</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -176,7 +176,7 @@ secondary axis.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

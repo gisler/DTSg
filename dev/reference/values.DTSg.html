@@ -72,14 +72,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">values</span><span class="op">(</span>
-  <span class="va">x</span>,
-  reference <span class="op">=</span> <span class="cn">FALSE</span>,
-  drop <span class="op">=</span> <span class="cn">FALSE</span>,
-  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"data.frame"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">values</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  reference <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"data.frame"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -136,12 +136,12 @@ immediately afterwards in order to check the object's integrity.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get values</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get values</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             date   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  9.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.285</span>
@@ -154,9 +154,9 @@ immediately afterwards in order to check the object's integrity.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.840</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.250</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu">values</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu">values</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             date   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  9.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.285</span>
@@ -169,7 +169,7 @@ immediately afterwards in order to check the object's integrity.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.840</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.250</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -184,7 +184,7 @@ immediately afterwards in order to check the object's integrity.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

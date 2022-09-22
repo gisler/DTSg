@@ -72,8 +72,8 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">rowbind</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">rowbind</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,15 +106,15 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># combine rows</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">rowbind</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># combine rows</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">rowbind</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -136,12 +136,12 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 'rbind()' is a "hidden" R6 alias for 'rowbind()'</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">rbind</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 'rbind()' is a "hidden" R6 alias for 'rowbind()'</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">rbind</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -163,13 +163,13 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">rowbind</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">rowbind</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">flow</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span>, <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">flow</span><span class="op">[</span><span class="fl">1501</span><span class="op">:</span><span class="va">.N</span>, <span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -191,7 +191,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -206,7 +206,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

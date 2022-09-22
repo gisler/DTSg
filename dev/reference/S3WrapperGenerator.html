@@ -74,7 +74,7 @@ can also be used to generate “plain” function wrappers.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">S3WrapperGenerator</span><span class="op">(</span><span class="va">R6Method</span>, self <span class="op">=</span> <span class="st">"x"</span>, dots <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">S3WrapperGenerator</span><span class="op">(</span><span class="va">R6Method</span>, self <span class="op">=</span> <span class="st">"x"</span>, dots <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -108,11 +108,11 @@ generic/method consistency.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># generate an S3 wrapper method for 'alter()' of 'DTSg'</span></span>
-<span class="r-in"><span class="va">alter.DTSg</span> <span class="op">&lt;-</span> <span class="fu">S3WrapperGenerator</span><span class="op">(</span></span>
-<span class="r-in">  R6Method <span class="op">=</span> <span class="va">DTSg</span><span class="op">$</span><span class="va">public_methods</span><span class="op">$</span><span class="va">alter</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># generate an S3 wrapper method for 'alter()' of 'DTSg'</span></span></span>
+<span class="r-in"><span><span class="va">alter.DTSg</span> <span class="op">&lt;-</span> <span class="fu">S3WrapperGenerator</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  R6Method <span class="op">=</span> <span class="va">DTSg</span><span class="op">$</span><span class="va">public_methods</span><span class="op">$</span><span class="va">alter</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -127,7 +127,7 @@ generic/method consistency.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

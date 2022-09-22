@@ -72,14 +72,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">setColNames</span><span class="op">(</span>
-  <span class="va">x</span>,
-  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span><span class="op">[</span><span class="fl">1L</span><span class="op">]</span>,
-  <span class="va">values</span>,
-  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">setColNames</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span><span class="op">[</span><span class="fl">1L</span><span class="op">]</span>,</span>
+<span>  <span class="va">values</span>,</span>
+<span>  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -124,15 +124,15 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># rename column "flow" to "River Flow"</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">setColNames</span><span class="op">(</span></span>
-<span class="r-in">  cols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  values <span class="op">=</span> <span class="st">"River Flow"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># rename column "flow" to "River Flow"</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">setColNames</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  cols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  values <span class="op">=</span> <span class="st">"River Flow"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime River Flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
@@ -154,12 +154,12 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 'setnames()' is a "hidden" R6 alias for 'setColNames()'</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">setnames</span><span class="op">(</span></span>
-<span class="r-in">  cols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  values <span class="op">=</span> <span class="st">"River Flow"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 'setnames()' is a "hidden" R6 alias for 'setColNames()'</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">setnames</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  cols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  values <span class="op">=</span> <span class="st">"River Flow"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime River Flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
@@ -181,13 +181,13 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">setColNames</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  cols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  values <span class="op">=</span> <span class="st">"River Flow"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">setColNames</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  cols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  values <span class="op">=</span> <span class="st">"River Flow"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime River Flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;      &lt;num&gt;</span>
@@ -209,7 +209,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -224,7 +224,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

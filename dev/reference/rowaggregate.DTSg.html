@@ -74,15 +74,15 @@ of a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">rowaggregate</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">resultCols</span>,
-  <span class="va">fun</span>,
-  <span class="va">...</span>,
-  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,
-  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">rowaggregate</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">resultCols</span>,</span>
+<span>  <span class="va">fun</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,</span>
+<span>  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -141,35 +141,35 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">DT</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span class="r-in">  date <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">date</span>,</span>
-<span class="r-in">  flow1 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  flow2 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span>,</span>
-<span class="r-in">  flow3 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">DT</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># mean and standard deviation of multiple measurements per timestamp</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">rowaggregate</span><span class="op">(</span></span>
-<span class="r-in">  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">DT</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  date <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">date</span>,</span></span>
+<span class="r-in"><span>  flow1 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  flow2 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span>,</span></span>
+<span class="r-in"><span>  flow3 <span class="op">=</span> <span class="va">flow</span><span class="op">$</span><span class="va">flow</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">flow</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">DT</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># mean and standard deviation of multiple measurements per timestamp</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">rowaggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime     flow1  flow2     flow3 flow.mean   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;  &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.648895  9.540 10.805058  9.664651 1.0834731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.219134  9.285  9.617946  9.374027 0.2137923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  7.968742  8.940  8.945972  8.618238 0.5624879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  6.870558  8.745  9.620045  8.411868 1.4046896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.994354  8.490  9.481100  8.655151 0.7570069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.779605  9.540 10.247528  9.522378 0.7341202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.013733  9.285  9.746843  9.348525 0.3706606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.317099  8.940 10.653360  9.303487 1.2098018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  8.589263  8.745  9.255788  8.863350 0.3486675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.004523  8.490  8.914376  8.136300 1.0028519</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.506141 26.685 27.859328 26.350156 1.7014863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.405773 28.050 28.457340 27.971038 0.5302120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.577515 23.580 23.895801 23.684439 0.1830496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 17.828334 18.840 19.152738 18.607024 0.6922571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.625761 17.250 17.833893 17.236551 0.6041778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.895445 26.685 26.961456 26.180634 1.1215567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.113288 28.050 28.489458 27.884249 0.7028982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 22.797116 23.580 24.949184 23.775433 1.0892636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.401527 18.840 18.859525 18.700350 0.2589729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.446019 17.250 17.440705 17.045575 0.5279135</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -177,26 +177,26 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">raggregate</span><span class="op">(</span></span>
-<span class="r-in">  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">raggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime     flow1  flow2     flow3 flow.mean   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;  &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.648895  9.540 10.805058  9.664651 1.0834731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.219134  9.285  9.617946  9.374027 0.2137923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  7.968742  8.940  8.945972  8.618238 0.5624879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  6.870558  8.745  9.620045  8.411868 1.4046896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.994354  8.490  9.481100  8.655151 0.7570069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.779605  9.540 10.247528  9.522378 0.7341202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.013733  9.285  9.746843  9.348525 0.3706606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.317099  8.940 10.653360  9.303487 1.2098018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  8.589263  8.745  9.255788  8.863350 0.3486675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.004523  8.490  8.914376  8.136300 1.0028519</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.506141 26.685 27.859328 26.350156 1.7014863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.405773 28.050 28.457340 27.971038 0.5302120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.577515 23.580 23.895801 23.684439 0.1830496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 17.828334 18.840 19.152738 18.607024 0.6922571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.625761 17.250 17.833893 17.236551 0.6041778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.895445 26.685 26.961456 26.180634 1.1215567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.113288 28.050 28.489458 27.884249 0.7028982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 22.797116 23.580 24.949184 23.775433 1.0892636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.401527 18.840 18.859525 18.700350 0.2589729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.446019 17.250 17.440705 17.045575 0.5279135</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -204,27 +204,27 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">rowaggregate</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">rowaggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  resultCols <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime     flow1  flow2     flow3 flow.mean   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;  &lt;num&gt;     &lt;num&gt;     &lt;num&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.648895  9.540 10.805058  9.664651 1.0834731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.219134  9.285  9.617946  9.374027 0.2137923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  7.968742  8.940  8.945972  8.618238 0.5624879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  6.870558  8.745  9.620045  8.411868 1.4046896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.994354  8.490  9.481100  8.655151 0.7570069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  8.779605  9.540 10.247528  9.522378 0.7341202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.013733  9.285  9.746843  9.348525 0.3706606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  8.317099  8.940 10.653360  9.303487 1.2098018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04  8.589263  8.745  9.255788  8.863350 0.3486675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05  7.004523  8.490  8.914376  8.136300 1.0028519</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.506141 26.685 27.859328 26.350156 1.7014863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.405773 28.050 28.457340 27.971038 0.5302120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.577515 23.580 23.895801 23.684439 0.1830496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 17.828334 18.840 19.152738 18.607024 0.6922571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.625761 17.250 17.833893 17.236551 0.6041778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 24.895445 26.685 26.961456 26.180634 1.1215567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 27.113288 28.050 28.489458 27.884249 0.7028982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 22.797116 23.580 24.949184 23.775433 1.0892636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.401527 18.840 18.859525 18.700350 0.2589729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 16.446019 17.250 17.440705 17.045575 0.5279135</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -232,7 +232,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -247,7 +247,7 @@ if a deep clone (copy) shall be made beforehand.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

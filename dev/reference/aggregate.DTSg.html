@@ -78,20 +78,20 @@ Additionally, it sets the object's <code><a href="DTSg.html">aggregated</a></cod
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">aggregate</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">funby</span>,
-  <span class="va">fun</span>,
-  <span class="va">...</span>,
-  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,
-  n <span class="op">=</span> <span class="cn">FALSE</span>,
-  ignoreDST <span class="op">=</span> <span class="cn">FALSE</span>,
-  multiplier <span class="op">=</span> <span class="fl">1L</span>,
-  funbyHelpers <span class="op">=</span> <span class="cn">NULL</span>,
-  funbyApproach <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">funbyApproach</span>,
-  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">aggregate</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">funby</span>,</span>
+<span>  <span class="va">fun</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ignoreDST <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  multiplier <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  funbyHelpers <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  funbyApproach <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">funbyApproach</span>,</span>
+<span>  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -250,16 +250,16 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># mean yearly river flows</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byY_____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># mean yearly river flows</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byY_____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .dateTime     flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;POSc&gt;    &lt;num&gt;</span>
@@ -278,14 +278,14 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byY_____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byY_____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .dateTime     flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;POSc&gt;    &lt;num&gt;</span>
@@ -304,14 +304,14 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># variance and standard deviation of river flows per quarter</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byYQ____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"var"</span>, sd <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># variance and standard deviation of river flows per quarter</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byYQ____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"var"</span>, sd <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow.var   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;POSc&gt;     &lt;num&gt;     &lt;num&gt;</span>
@@ -335,14 +335,14 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     24</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byYQ____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"var"</span>, sd <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byYQ____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"var"</span>, sd <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow.var   flow.sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;POSc&gt;     &lt;num&gt;     &lt;num&gt;</span>
@@ -366,15 +366,15 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     24</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># mean of river flows of all first and all second half years</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">by_m____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  multiplier <span class="op">=</span> <span class="fl">6</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># mean of river flows of all first and all second half years</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">by_m____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  multiplier <span class="op">=</span> <span class="fl">6</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .dateTime     flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;POSc&gt;    &lt;num&gt;</span>
@@ -387,15 +387,15 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">by_m____</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  multiplier <span class="op">=</span> <span class="fl">6</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">aggregate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">by_m____</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  multiplier <span class="op">=</span> <span class="fl">6</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .dateTime     flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;POSc&gt;    &lt;num&gt;</span>
@@ -408,7 +408,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -423,7 +423,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

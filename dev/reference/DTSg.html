@@ -96,10 +96,10 @@ operator.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new</span><span class="op">(</span><span class="va">Class</span>, <span class="va">values</span>, ID <span class="op">=</span> <span class="st">""</span>, parameter <span class="op">=</span> <span class="st">""</span>, unit <span class="op">=</span> <span class="st">""</span>, variant <span class="op">=</span> <span class="st">""</span>,
-  aggregated <span class="op">=</span> <span class="cn">FALSE</span>, fast <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFast"</span><span class="op">)</span>, swallow <span class="op">=</span> <span class="cn">FALSE</span>,
-  na.status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgNA.status"</span><span class="op">)</span>, funbyApproach <span class="op">=</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFunbyApproach"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new</span><span class="op">(</span><span class="va">Class</span>, <span class="va">values</span>, ID <span class="op">=</span> <span class="st">""</span>, parameter <span class="op">=</span> <span class="st">""</span>, unit <span class="op">=</span> <span class="st">""</span>, variant <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  aggregated <span class="op">=</span> <span class="cn">FALSE</span>, fast <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFast"</span><span class="op">)</span>, swallow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgNA.status"</span><span class="op">)</span>, funbyApproach <span class="op">=</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgFunbyApproach"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -279,12 +279,12 @@ when calling deprecated features.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="co">## R6 constructor</span></span>
-<span class="r-in"><span class="va">DTSg</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
-<span class="r-in">  values <span class="op">=</span> <span class="va">flow</span>,</span>
-<span class="r-in">  ID <span class="op">=</span> <span class="st">"River Flow"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="co">## R6 constructor</span></span></span>
+<span class="r-in"><span><span class="va">DTSg</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  values <span class="op">=</span> <span class="va">flow</span>,</span></span>
+<span class="r-in"><span>  ID <span class="op">=</span> <span class="st">"River Flow"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -307,13 +307,13 @@ when calling deprecated features.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## abused S4 constructor</span></span>
-<span class="r-in"><span class="fu">new</span><span class="op">(</span></span>
-<span class="r-in">  Class <span class="op">=</span> <span class="st">"DTSg"</span>,</span>
-<span class="r-in">  values <span class="op">=</span> <span class="va">flow</span>,</span>
-<span class="r-in">  ID <span class="op">=</span> <span class="st">"River Flow"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## abused S4 constructor</span></span></span>
+<span class="r-in"><span><span class="fu">new</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  Class <span class="op">=</span> <span class="st">"DTSg"</span>,</span></span>
+<span class="r-in"><span>  values <span class="op">=</span> <span class="va">flow</span>,</span></span>
+<span class="r-in"><span>  ID <span class="op">=</span> <span class="st">"River Flow"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -336,7 +336,7 @@ when calling deprecated features.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -351,7 +351,7 @@ when calling deprecated features.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

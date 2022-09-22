@@ -84,7 +84,7 @@ this by counting the days of affected months backwards again.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rollback</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">periodicity</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rollback</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">periodicity</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,20 +107,20 @@ year(s). See <code><a href="https://rdrr.io/r/base/seq.POSIXt.html" class="exter
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># rollback monthly time series</span></span>
-<span class="r-in"><span class="va">by</span> <span class="op">&lt;-</span> <span class="st">"1 month"</span></span>
-<span class="r-in"><span class="fu">rollback</span><span class="op">(</span></span>
-<span class="r-in">  .dateTime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span></span>
-<span class="r-in">    from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2000-01-31"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span class="r-in">    to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2000-12-31"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span class="r-in">    by <span class="op">=</span> <span class="va">by</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  periodicity <span class="op">=</span> <span class="va">by</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># rollback monthly time series</span></span></span>
+<span class="r-in"><span><span class="va">by</span> <span class="op">&lt;-</span> <span class="st">"1 month"</span></span></span>
+<span class="r-in"><span><span class="fu">rollback</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  .dateTime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2000-01-31"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="st">"2000-12-31"</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    by <span class="op">=</span> <span class="va">by</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  periodicity <span class="op">=</span> <span class="va">by</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "2000-01-31 UTC" "2000-02-29 UTC" "2000-03-31 UTC" "2000-04-30 UTC"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "2000-05-31 UTC" "2000-06-30 UTC" "2000-07-31 UTC" "2000-08-31 UTC"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "2000-09-30 UTC" "2000-10-31 UTC" "2000-11-30 UTC" "2000-12-31 UTC"</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -135,7 +135,7 @@ year(s). See <code><a href="https://rdrr.io/r/base/seq.POSIXt.html" class="exter
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
