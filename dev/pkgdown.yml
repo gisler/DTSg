@@ -1,10 +1,10 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   a_basicUsage: a_basicUsage.html
   b_advancedUsage: b_advancedUsage.html
-last_built: 2022-09-22T17:17Z
+last_built: 2022-12-18T09:30Z
 urls:
   reference: https://gisler.github.io/DTSg/reference
   article: https://gisler.github.io/DTSg/articles

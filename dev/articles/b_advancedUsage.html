@@ -89,9 +89,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>B. Advanced usage</h1>
-                        <h4 data-toc-skip class="author">Gerold Hepp</h4>
+                        <h4 data-toc-skip class="author">Gerold
+Hepp</h4>
             
-            <h4 data-toc-skip class="date">2022-09-22</h4>
+            <h4 data-toc-skip class="date">2022-12-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/HEAD/vignettes/b_advancedUsage.Rmd" class="external-link"><code>vignettes/b_advancedUsage.Rmd</code></a></small>
       <div class="hidden name"><code>b_advancedUsage.Rmd</code></div>
@@ -100,9 +101,12 @@
 
     
     
-<p>This vignette illustrates some more advanced concepts of the <code>DTSg</code> package, namely reference semantics, chaining and piping as well as swallowing and dropping.</p>
+<p>This vignette illustrates some more advanced concepts of the
+<code>DTSg</code> package, namely reference semantics, chaining and
+piping as well as swallowing and dropping.</p>
 <hr>
-<p>First, let’s load the package as well as some data and let’s create a <code>DTSg</code> object:</p>
+<p>First, let’s load the package as well as some data and let’s create a
+<code>DTSg</code> object:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gisler.github.io/DTSg/">DTSg</a></span><span class="op">)</span></span>
 <span></span>
@@ -133,7 +137,12 @@
 <div class="section level2">
 <h2 id="reference-semantics">Reference semantics<a class="anchor" aria-label="anchor" href="#reference-semantics"></a>
 </h2>
-<p>By default, every method manipulating the values of a <code>DTSg</code> object creates a deep clone (copy) of it beforehand. This behaviour can be overridden by setting the <code>clone</code> argument of the respective method to <code>FALSE</code>. Globally, deep cloning can be controlled with the help of the <em>DTSgClone</em> option:</p>
+<p>By default, every method manipulating the values of a
+<code>DTSg</code> object creates a deep clone (copy) of it beforehand.
+This behaviour can be overridden by setting the <code>clone</code>
+argument of the respective method to <code>FALSE</code>. Globally, deep
+cloning can be controlled with the help of the <em>DTSgClone</em>
+option:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TS</span><span class="op">$</span><span class="fu">alter</span><span class="op">(</span><span class="st">"2007-01-01"</span>, <span class="st">"2008-12-31"</span><span class="op">)</span></span>
 <span><span class="co"># `TS` was deep cloned before shortening it, hence its end date is still in the</span></span>
@@ -189,11 +198,22 @@
 <span><span class="co">#&gt; Missing values: explicit</span></span>
 <span><span class="co">#&gt; Time zone:      UTC</span></span>
 <span><span class="co">#&gt; Timestamps:     731</span></span></code></pre></div>
-<p>As we can see, with cloning set to <code>FALSE</code>, the object was altered in place, i.e. no assignment to a new or reassignment to an existing variable was necessary in order to make the changes stick. This is due to the R6 nature of <code>DTSg</code> objects.</p>
+<p>As we can see, with cloning set to <code>FALSE</code>, the object was
+altered in place, i.e. no assignment to a new or reassignment to an
+existing variable was necessary in order to make the changes stick. This
+is due to the R6 nature of <code>DTSg</code> objects.</p>
 <div class="section level3">
 <h3 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h3>
-<p>Using reference semantics can result in undesired behaviour. Merely assigning a variable representing a <code>DTSg</code> object to a new variable does not result in a copy of the object. Instead, both variables will reference and access the same data under the hood, i.e. changing one will also affect the other. In case you want a “real” copy of a <code>DTSg</code> object, you will have to use the <code><a href="../reference/clone.DTSg.html">clone()</a></code> method with its <code>deep</code> argument set to <code>TRUE</code> (for consistency with the <code>R6</code> package its default is <code>FALSE</code>):</p>
+<p>Using reference semantics can result in undesired behaviour. Merely
+assigning a variable representing a <code>DTSg</code> object to a new
+variable does not result in a copy of the object. Instead, both
+variables will reference and access the same data under the hood,
+i.e. changing one will also affect the other. In case you want a “real”
+copy of a <code>DTSg</code> object, you will have to use the
+<code><a href="../reference/clone.DTSg.html">clone()</a></code> method with its <code>deep</code> argument set to
+<code>TRUE</code> (for consistency with the <code>R6</code> package its
+default is <code>FALSE</code>):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TSc</span> <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co"># or 'clone(TS, deep = TRUE)'</span></span></code></pre></div>
@@ -202,7 +222,11 @@
 <div class="section level2">
 <h2 id="chaining-and-piping">Chaining and piping<a class="anchor" aria-label="anchor" href="#chaining-and-piping"></a>
 </h2>
-<p>Especially in combination with reference semantics, chaining and piping can be a fast and comfortable way to apply several object manipulations in a row. While chaining only works in combination with the R6 interface, piping is an exclusive feature of the S3 interface.</p>
+<p>Especially in combination with reference semantics, chaining and
+piping can be a fast and comfortable way to apply several object
+manipulations in a row. While chaining only works in combination with
+the R6 interface, piping is an exclusive feature of the S3
+interface.</p>
 <p>Let’s start with chaining:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span></span>
@@ -234,7 +258,10 @@
 <span><span class="co">#&gt; Missing values: explicit</span></span>
 <span><span class="co">#&gt; Time zone:      UTC</span></span>
 <span><span class="co">#&gt; Timestamps:     24</span></span></code></pre></div>
-<p>For piping, we have to make sure the <code>magrittr</code> package is installed and have to load it for access to its forward-pipe operator first (starting with R 4.1.0, the same can be achieved with R’s native pipe operator <code>|&gt;</code>):</p>
+<p>For piping, we have to make sure the <code>magrittr</code> package is
+installed and have to load it for access to its forward-pipe operator
+first (starting with R 4.1.0, the same can be achieved with R’s native
+pipe operator <code>|&gt;</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"magrittr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
@@ -272,7 +299,14 @@
 <div class="section level2">
 <h2 id="swallowing-and-dropping">Swallowing and dropping<a class="anchor" aria-label="anchor" href="#swallowing-and-dropping"></a>
 </h2>
-<p>An extension to reference semantics of existing <code>DTSg</code> objects are reference semantics during object creation. This behaviour can be triggered with the help of the <code>swallow</code> argument of the <code><a href="../reference/DTSg.html">new()</a></code> method. When set to <code>TRUE</code>, a <code>data.table</code> provided through the <code>values</code> argument is “swallowed” by the <code>DTSg</code> object, i.e. no copy of it is made and all references to it are removed from the global (and only the global) environment upon successful object creation:</p>
+<p>An extension to reference semantics of existing <code>DTSg</code>
+objects are reference semantics during object creation. This behaviour
+can be triggered with the help of the <code>swallow</code> argument of
+the <code><a href="../reference/DTSg.html">new()</a></code> method. When set to <code>TRUE</code>, a
+<code>data.table</code> provided through the <code>values</code>
+argument is “swallowed” by the <code>DTSg</code> object, i.e. no copy of
+it is made and all references to it are removed from the global (and
+only the global) environment upon successful object creation:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
 <span></span>
@@ -282,7 +316,10 @@
 <span><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">DT</span>, swallow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^DT$"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; character(0)</span></span></code></pre></div>
-<p>The opposite of swallowing is called dropping. This term refers to querying the values of a <code>DTSg</code> object as a reference while removing all references to the original <code>DTSg</code> object from the global (and again only the global) environment at the same time:</p>
+<p>The opposite of swallowing is called dropping. This term refers to
+querying the values of a <code>DTSg</code> object as a reference while
+removing all references to the original <code>DTSg</code> object from
+the global (and again only the global) environment at the same time:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TS</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">flow</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^TS$"</span><span class="op">)</span></span>
@@ -294,7 +331,9 @@
 <div class="section level2">
 <h2 id="column-access">Column access<a class="anchor" aria-label="anchor" href="#column-access"></a>
 </h2>
-<p>Sometimes need may arise to access a column other than the one currently processed from a function within the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method. This can be accomplished in the following way:</p>
+<p>Sometimes need may arise to access a column other than the one
+currently processed from a function within the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code>
+method. This can be accomplished in the following way:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a new column recording if a certain value is missing or not before</span></span>
 <span><span class="co"># carrying out a linear interpolation</span></span>
@@ -362,7 +401,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
