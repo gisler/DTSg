@@ -6,7 +6,7 @@ Install the latest release from CRAN:
 
 `install.packages("DTSg")`
 
-[![CRAN Version](https://www.r-pkg.org/badges/version/DTSg)](https://cran.r-project.org/package=DTSg) [![CRAN Checks](https://cranchecks.info/badges/summary/DTSg)](https://cran.r-project.org/web/checks/check_results_DTSg.html)
+[![CRAN Version](https://www.r-pkg.org/badges/version/DTSg)](https://cran.r-project.org/package=DTSg) [![CRAN Checks](https://badges.cranchecks.info/worst/DTSg.svg)](https://cran.r-project.org/web/checks/check_results_DTSg.html)
 
 Install the development version from GitHub (requires the `remotes` package):
 
