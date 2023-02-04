@@ -335,7 +335,7 @@ expect_identical(
   DTSg$new(DT1[, .(date, col1, col2, col3 = "A")])$colapply(
     cumsum,
     helpers = FALSE,
-    funby = function(x, .helpers) {.helpers[["custom"]]},
+    funby = function(x, .helpers) .helpers[["custom"]],
     funbyHelpers = list(custom = "col3")
   )$values(TRUE)[["col1"]],
   cumsum(DT1[["col1"]]),

@@ -100,7 +100,7 @@ if (requireNamespace("runner", quietly = TRUE) &&
   wrapper <- function(x, y, f, k, lag, ...) {
     runner::runner(
       cbind(x, y),
-      f = function(x) {f(x[, 1], x[, 2])},
+      f = function(x) f(x[, 1], x[, 2]),
       k = k,
       lag = lag
     )

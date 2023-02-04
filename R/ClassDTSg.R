@@ -408,7 +408,7 @@ DTSg <- R6Class(
       do.call(c, lapply(
         .SD,
         function(x, ...) {
-          lapply(funs, function(fun, y, ...) {fun(y, ...)}, y = x, ... = ...)
+          lapply(funs, function(fun, y, ...) fun(y, ...), y = x, ... = ...)
         },
         ... = ...
       ))
@@ -735,7 +735,7 @@ DTSg <- R6Class(
 
         classes <- vapply(
           private$.values[, -1L],
-          function(col) {class(col)[1L]},
+          function(col) class(col)[1L],
           character(1L)
         )
 
@@ -758,7 +758,7 @@ DTSg <- R6Class(
 
         modes <- vapply(
           private$.values[, cols, with = FALSE],
-          function(col) {mode(col)},
+          function(col) mode(col),
           character(1L)
         )
 
@@ -770,7 +770,7 @@ DTSg <- R6Class(
 
         typeofs <- vapply(
           private$.values[, cols, with = FALSE],
-          function(col) {typeof(col)},
+          function(col) typeof(col),
           character(1L)
         )
 
@@ -1330,7 +1330,7 @@ DTSg <- R6Class(
           ,
           (resultCols) := lapply(
             fun,
-            function(fun, x, ...) {fun(x, ...)},
+            function(fun, x, ...) fun(x, ...),
             x = unlist(.SD, recursive = FALSE),
             ... = ...
           ),
@@ -1357,7 +1357,7 @@ DTSg <- R6Class(
             if (testClass(...elt(i), "list")) {
               lapply(
                 seq_len(length(...elt(i))),
-                function(j, x) {x[[j]]},
+                function(j, x) x[[j]],
                 x = ...elt(i)
               )
             } else {
