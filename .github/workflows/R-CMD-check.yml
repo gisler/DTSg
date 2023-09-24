@@ -15,8 +15,8 @@ jobs:
           - {os: windows-latest, r: 'devel'}
           - {os: macOS-latest, r: 'oldrel'}
           - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-20.04, r: 'oldrel'}
-          - {os: ubuntu-20.04, r: 'release'}
+          - {os: ubuntu-22.04, r: 'oldrel'}
+          - {os: ubuntu-22.04, r: 'release'}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
