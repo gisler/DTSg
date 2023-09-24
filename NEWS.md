@@ -1,5 +1,6 @@
 # DTSg v1.1.1.9000
 
+* Cease use of legacy time zone symlinks in tests.
 * Slightly improved documentation.
 * Minor internal code improvements.
 
