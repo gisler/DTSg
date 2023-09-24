@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -72,37 +72,45 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">colapply</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">fun</span>,
-  <span class="va">...</span>,
-  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span><span class="op">[</span><span class="fl">1L</span><span class="op">]</span>,
-  resultCols <span class="op">=</span> <span class="cn">NULL</span>,
-  suffix <span class="op">=</span> <span class="cn">NULL</span>,
-  helpers <span class="op">=</span> <span class="cn">TRUE</span>,
-  funby <span class="op">=</span> <span class="cn">NULL</span>,
-  ignoreDST <span class="op">=</span> <span class="cn">FALSE</span>,
-  multiplier <span class="op">=</span> <span class="fl">1L</span>,
-  funbyHelpers <span class="op">=</span> <span class="cn">NULL</span>,
-  funbyApproach <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">funbyApproach</span>,
-  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">colapply</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">fun</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  cols <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="fu">cols</span><span class="op">(</span>class <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span><span class="op">[</span><span class="fl">1L</span><span class="op">]</span>,</span>
+<span>  resultCols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  helpers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  funby <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ignoreDST <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  multiplier <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  funbyHelpers <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  funbyApproach <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">funbyApproach</span>,</span>
+<span>  clone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"DTSgClone"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>fun</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/function.html" class="external-link">function</a></code>. Its return value must be of length one.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments passed on to <code>fun</code>.</p></dd>
+
+
 <dt>cols</dt>
 <dd><p>A character vector specifying the columns to apply <code>fun</code> to.
 Another possibility is a character string containing either comma separated
 column names, for example, <code>"x,y,z"</code>, or the start and end column separated
 by a colon, for example, <code>"x:z"</code>.</p></dd>
+
+
 <dt>resultCols</dt>
 <dd><p>An optional character vector of the same length as <code>cols</code>
 specifying the column names for the return values of <code>fun</code>. Another
@@ -110,42 +118,61 @@ possibility is a character string containing comma separated column names,
 for example, <code>"x,y,z"</code>. Non-existing columns are added and existing columns
 are overwritten. Columns are matched element-wise between <code>cols</code> and
 <code>resultCols</code>.</p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>An optional character string. The return values of <code>fun</code> are
 added as new columns with names consisting of the columns specified in
 <code>cols</code> and this suffix. Existing columns are never overwritten. Only used
 when <code>resultCols</code> is not specified.</p></dd>
+
+
 <dt>helpers</dt>
 <dd><p>A logical specifying if helper data shall be handed over to
 <code>fun</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>funby</dt>
 <dd><p>One of the temporal aggregation level functions described in
 <code><a href="TALFs.html">TALFs</a></code> or a user defined temporal aggregation level function. Can be
 used to apply functions like <code><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></code> to a certain temporal level. See
 corresponding section and examples for further information.</p></dd>
+
+
 <dt>ignoreDST</dt>
 <dd><p>A logical specifying if day saving time shall be ignored
 by <code>funby</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>multiplier</dt>
 <dd><p>A positive integerish value “multiplying” the
 temporal aggregation level of certain <code><a href="TALFs.html">TALFs</a></code>. See corresponding section
 for further information.</p></dd>
+
+
 <dt>funbyHelpers</dt>
 <dd><p>An optional <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with helper data passed on to
 <code>funby</code>. See corresponding section for further information.</p></dd>
+
+
 <dt>funbyApproach</dt>
 <dd><p>A character string specifying the flavour of the applied
 temporal aggregation level function. Either <code>"base"</code>, which utilises
 <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
 or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
 function for transforming timestamps.</p></dd>
+
+
 <dt>clone</dt>
 <dd><p>A logical specifying if the object shall be modified in place or
 if a deep clone (copy) shall be made beforehand.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
+    
+
+<p>Returns a <code><a href="DTSg.html">DTSg</a></code> object.</p>
     </div>
     <div id="helper-data">
     <h2>Helper data</h2>
@@ -221,12 +248,12 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># linear interpolation of missing values</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># linear interpolation of missing values</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -248,9 +275,9 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;  &lt;num&gt;</span>
@@ -272,14 +299,14 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># daily cumulative sums per month</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">  fun <span class="op">=</span> <span class="va">cumsum</span>,</span>
-<span class="r-in">  helpers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byYm____</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># daily cumulative sums per month</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="va">cumsum</span>,</span></span>
+<span class="r-in"><span>  helpers <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byYm____</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime    flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;   &lt;num&gt;</span>
@@ -301,14 +328,14 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">  fun <span class="op">=</span> <span class="va">cumsum</span>,</span>
-<span class="r-in">  helpers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  funby <span class="op">=</span> <span class="va">byYm____</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>  fun <span class="op">=</span> <span class="va">cumsum</span>,</span></span>
+<span class="r-in"><span>  helpers <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="va">byYm____</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime    flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;   &lt;num&gt;</span>
@@ -330,75 +357,75 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># calculate moving averages with the help of 'runner' (all four given</span></span>
-<span class="r-in"><span class="co"># approaches provide the same result with explicitly missing timestamps)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"runner"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"runner"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">package_version</a></span><span class="op">(</span><span class="st">"0.3.5"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span>, <span class="va">.helpers</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu">runner</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span><span class="op">(</span><span class="va">...</span>, idx <span class="op">=</span> <span class="va">.helpers</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co">## R6 method</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="fl">5</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    fun <span class="op">=</span> <span class="va">wrapper</span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span>
-<span class="r-in">    idx <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="fu">getCol</span><span class="op">(</span>col <span class="op">=</span> <span class="st">".dateTime"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span>
-<span class="r-in">    idx <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">".dateTime"</span><span class="op">]</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co">## S3 method</span></span>
-<span class="r-in">  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="fl">5</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">    fun <span class="op">=</span> <span class="va">wrapper</span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span>
-<span class="r-in">    idx <span class="op">=</span> <span class="fu"><a href="getCol.DTSg.html">getCol</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, col <span class="op">=</span> <span class="st">".dateTime"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">mean</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="st">"5 days"</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span>
-<span class="r-in">    idx <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">".dateTime"</span><span class="op">]</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># calculate moving averages with the help of 'runner' (all four given</span></span></span>
+<span class="r-in"><span><span class="co"># approaches provide the same result with explicitly missing timestamps)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"runner"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"runner"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">package_version</a></span><span class="op">(</span><span class="st">"0.3.5"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span>, <span class="va">.helpers</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">runner</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span><span class="op">(</span><span class="va">...</span>, idx <span class="op">=</span> <span class="va">.helpers</span><span class="op">[[</span><span class="st">".dateTime"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## R6 method</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="va">wrapper</span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span></span>
+<span class="r-in"><span>    idx <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="fu">getCol</span><span class="op">(</span>col <span class="op">=</span> <span class="st">".dateTime"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span></span>
+<span class="r-in"><span>    idx <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">".dateTime"</span><span class="op">]</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## S3 method</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="va">wrapper</span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span></span>
+<span class="r-in"><span>    idx <span class="op">=</span> <span class="fu"><a href="getCol.DTSg.html">getCol</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, col <span class="op">=</span> <span class="st">".dateTime"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="fu">runner</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="st">"5 days"</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="st">"-2 days"</span>,</span></span>
+<span class="r-in"><span>    idx <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">".dateTime"</span><span class="op">]</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime    flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;   &lt;num&gt;</span>
@@ -504,54 +531,54 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkFunction(x, args, ordered, nargs, null.ok):</span> object 'wrapper' not found</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># calculate rolling correlations somewhat inefficiently with the help of</span></span>
-<span class="r-in"><span class="co"># 'runner'</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"runner"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"runner"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">package_version</a></span><span class="op">(</span><span class="st">"0.3.8"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">f</span>, <span class="va">k</span>, <span class="va">lag</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu">runner</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
-<span class="r-in">      f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">}</span>,</span>
-<span class="r-in">      k <span class="op">=</span> <span class="va">k</span>,</span>
-<span class="r-in">      lag <span class="op">=</span> <span class="va">lag</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co">## R6 method</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    fun <span class="op">=</span> <span class="va">wrapper</span>,</span>
-<span class="r-in">    y <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">cor</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="fl">5</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co">## S3 method</span></span>
-<span class="r-in">  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span>
-<span class="r-in">    x <span class="op">=</span> <span class="va">x</span>,</span>
-<span class="r-in">    fun <span class="op">=</span> <span class="va">wrapper</span>,</span>
-<span class="r-in">    y <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">    f <span class="op">=</span> <span class="va">cor</span>,</span>
-<span class="r-in">    k <span class="op">=</span> <span class="fl">5</span>,</span>
-<span class="r-in">    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(call):</span> object 'wrapper' not found</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># calculate rolling correlations somewhat inefficiently with the help of</span></span></span>
+<span class="r-in"><span><span class="co"># 'runner'</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"runner"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"runner"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">package_version</a></span><span class="op">(</span><span class="st">"0.3.8"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">wrapper</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">f</span>, <span class="va">k</span>, <span class="va">lag</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">runner</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/runner/man/runner.html" class="external-link">runner</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      k <span class="op">=</span> <span class="va">k</span>,</span></span>
+<span class="r-in"><span>      lag <span class="op">=</span> <span class="va">lag</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## R6 method</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="va">wrapper</span>,</span></span>
+<span class="r-in"><span>    y <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">cor</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## S3 method</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">colapply</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    x <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>    fun <span class="op">=</span> <span class="va">wrapper</span>,</span></span>
+<span class="r-in"><span>    y <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"flow"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    f <span class="op">=</span> <span class="va">cor</span>,</span></span>
+<span class="r-in"><span>    k <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    lag <span class="op">=</span> <span class="op">-</span><span class="fl">2</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime      flow</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.7738961</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.5245314</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.5237596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.2549584</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.6538019</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9868126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9942098</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9926188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9942805</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9961054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime        flow</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;       &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  0.90095990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  0.89896089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03  0.83183197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 -0.09186063</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 -0.07491090</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27  0.98162090</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28  0.98001332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29  0.98705636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30  0.98935756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31  0.99199204</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
@@ -559,7 +586,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-out co"><span class="r-pr">#&gt;</span> Missing values: explicit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time zone:      UTC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Timestamps:     2192</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkFunction(x, args, ordered, nargs, null.ok):</span> object 'wrapper' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(call):</span> object 'wrapper' not found</span>
 </code></pre></div>
     </div>
   </div>
@@ -574,7 +601,7 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

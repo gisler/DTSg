@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DTSg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -72,39 +72,50 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for DTSg</span>
-<span class="fu">values</span><span class="op">(</span>
-  <span class="va">x</span>,
-  reference <span class="op">=</span> <span class="cn">FALSE</span>,
-  drop <span class="op">=</span> <span class="cn">FALSE</span>,
-  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"data.frame"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for DTSg</span></span>
+<span><span class="fu">values</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  reference <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.table"</span>, <span class="st">"data.frame"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code><a href="DTSg.html">DTSg</a></code> object (S3 method only).</p></dd>
+
+
 <dt>reference</dt>
 <dd><p>A logical specifying if a copy of the values or a reference
 to the values shall be returned. See corresponding section for further
 information.</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>A logical specifying if the object and all references to it shall
 be removed from the global (and only the global) environment after
 successfully returning its values. This feature allows for a resource
 efficient destruction of a <code><a href="DTSg.html">DTSg</a></code> object while preserving its values.</p></dd>
+
+
 <dt>class</dt>
 <dd><p>A character string specifying the class of the returned values.
 <code>"data.frame"</code> only works when either a copy of the values is returned or
 the object is dropped.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Not used (S3 method only).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>, a reference to a
+    
+
+<p>Returns a <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>, a reference to a
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code> or a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code>.</p>
     </div>
     <div id="note">
@@ -125,12 +136,12 @@ immediately afterwards in order to check the object's integrity.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># new DTSg object</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># get values</span></span>
-<span class="r-in"><span class="co">## R6 method</span></span>
-<span class="r-in"><span class="va">x</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># new DTSg object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va"><a href="DTSg.html">DTSg</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>values <span class="op">=</span> <span class="va">flow</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get values</span></span></span>
+<span class="r-in"><span><span class="co">## R6 method</span></span></span>
+<span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">values</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             date   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  9.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.285</span>
@@ -143,9 +154,9 @@ immediately afterwards in order to check the object's integrity.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.840</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.250</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## S3 method</span></span>
-<span class="r-in"><span class="fu">values</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## S3 method</span></span></span>
+<span class="r-in"><span><span class="fu">values</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             date   flow</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  9.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  9.285</span>
@@ -158,7 +169,7 @@ immediately afterwards in order to check the object's integrity.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 23.580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 18.840</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 17.250</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -173,7 +184,7 @@ immediately afterwards in order to check the object's integrity.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
