@@ -29,7 +29,7 @@ jobs:
           install.packages("remotes")
           remotes::install_cran(
             c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "RcppCCTZ", "runner", "units", "rcmdcheck"),
-            repos = "https://mran.microsoft.com/snapshot/2020-06-22",
+            repos = "https://packagemanager.posit.co/cran/2020-06-22",
             type = "win.binary",
             dependencies = TRUE
           )
