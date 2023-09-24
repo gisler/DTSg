@@ -1,4 +1,4 @@
-# DTSg v1.1.1.9000
+# DTSg v1.1.2
 
 * Cease use of legacy time zone symlinks in tests.
 * Bumped minimum tested R version from 4.0.2 to 4.2.3 using the corresponding Posit Public Package Manager snapshot.

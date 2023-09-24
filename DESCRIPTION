@@ -2,8 +2,8 @@ Package: DTSg
 Type: Package
 Title: A Class for Working with Time Series Data Based on 'data.table' and 'R6'
     with Largely Optional Reference Semantics
-Version: 1.1.1.9000
-Authors@R: person("Gerold", "Hepp", email = "ghepp@iwag.tuwien.ac.at", role = c("aut", "cre"))
+Version: 1.1.2
+Authors@R: person("Gerold", "Hepp", email = "gisler@hepp.cc", role = c("aut", "cre"))
 Description: Basic time series functionalities such as listing of missing
     values, application of arbitrary aggregation as well as rolling (asymmetric)
     window functions and automatic detection of periodicity. As it is mainly
