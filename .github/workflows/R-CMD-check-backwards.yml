@@ -2,7 +2,7 @@ name: R-CMD-check-backwards
 
 on:
   push:
-    branches: [main]
+    branches: [main, ci-tests]
   pull_request:
     branches: [main]
 
