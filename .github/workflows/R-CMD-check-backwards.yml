@@ -21,7 +21,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.0.2'
+          r-version: '4.2.3'
           use-public-rspm: true
 
       - name: Install dependencies
@@ -29,7 +29,7 @@ jobs:
           install.packages("remotes")
           remotes::install_cran(
             c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "RcppCCTZ", "runner", "units", "rcmdcheck"),
-            repos = "https://packagemanager.posit.co/cran/2020-06-22",
+            repos = "https://packagemanager.posit.co/cran/2023-03-15",
             type = "win.binary",
             dependencies = TRUE
           )
