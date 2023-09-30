@@ -1,13 +1,13 @@
-# Minor release
+# Patch release
 
-* Column names can often now be additionally specified by a character string containing either comma separated column names, for example, `"x,y,z"`, or the start and end column separated by a colon, for example, `"x:z"`
-* Fixed a bug in `interpolateLinear()` causing partial last observation carried forward behaviour when its `roll` argument was specified smaller than the size of the gap to be interpolated
-* Fixed a bug in `interpolateLinear()` causing partial interpolation in certain cases when its `roll` argument was specified smaller than the size of the gap to be interpolated
-* Slightly improved documentation
+* Cease use of legacy time zone symlinks in tests.
+* Bumped minimum tested R version from 4.0.2 to 4.2.3 using the corresponding Posit Public Package Manager snapshot.
+* Slightly improved documentation.
+* Minor internal code improvements.
 
 # Test environments
 
-* Windows on GitHub Actions (4.0.2)
+* Windows on GitHub Actions (4.2.3)
 * Local Windows (release)
 * Windows on GitHub Actions (devel)
 * macOS on GitHub Actions (oldrel)

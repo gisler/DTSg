@@ -8,7 +8,7 @@ NULL
   suppressWarnings(onCRAN <- isTRUE(as.logical(as.numeric(
     Sys.getenv("_R_CHECK_EXAMPLE_TIMING_CPU_TO_ELAPSED_THRESHOLD_")
   ))))
-  if(onCRAN) {
+  if (onCRAN) {
     setDTthreads(2L)
   }
 
