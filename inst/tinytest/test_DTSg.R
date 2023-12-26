@@ -1,4 +1,4 @@
-source("data.R") # nolint
+source("data.R")
 
 #### aggregate method ####
 expect_identical(
@@ -1118,13 +1118,12 @@ expect_identical(
   info = "values are copied"
 )
 
-expect_identical(
+expect_null(
   {
     TS <- DTSg$new(DT1)
     TS$values(TRUE)[, col1 := NULL]
     TS$values(TRUE)[["col1"]]
   },
-  NULL,
   info = "reference to values is returned"
 )
 

@@ -2,13 +2,13 @@ assertFunbyApproach <- function(funbyApproach) {
   funbyApproach <- match.arg(funbyApproach, c("base", "fasttime", "RcppCCTZ"))
 
   if (funbyApproach == "fasttime" &&
-      !requireNamespace("fasttime", quietly = TRUE)) {
+        !requireNamespace("fasttime", quietly = TRUE)) {
     stop(
       'Package "fasttime" must be installed for this approach.',
       call. = FALSE
     )
   } else if (funbyApproach == "RcppCCTZ" &&
-             !requireNamespace("RcppCCTZ", quietly = TRUE)) {
+               !requireNamespace("RcppCCTZ", quietly = TRUE)) {
     stop(
       'Package "RcppCCTZ" must be installed for this approach.',
       call. = FALSE

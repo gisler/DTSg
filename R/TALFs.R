@@ -98,7 +98,7 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
   )
 
   if (grepl("^\\d+ (month|year)(s?)$", .helpers[["periodicity"]]) &&
-      mday(.dateTime[1L]) > 28L) {
+        mday(.dateTime[1L]) > 28L) {
     .dateTime <- rollback(.dateTime, .helpers[["periodicity"]])
   }
 

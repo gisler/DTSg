@@ -121,7 +121,7 @@ TS <- DTSg$new(flow)
 TS$summary()
 TS$
   colapply(
-    function(x, ...) ifelse(is.na(x), TRUE, FALSE),
+    function(x, ...) is.na(x),
     resultCols = "missing"
   )$
   colapply(interpolateLinear)$

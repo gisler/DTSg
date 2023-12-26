@@ -1,4 +1,4 @@
-source("data.R") # nolint
+source("data.R")
 
 for (approach in c("base", "fasttime", "RcppCCTZ")) {
   options(DTSgFunbyApproach = approach)

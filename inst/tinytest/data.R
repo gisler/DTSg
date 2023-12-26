@@ -1,4 +1,4 @@
-library(data.table) # nolint
+library(data.table)
 
 #### global test data ####
 DT1 <- data.table(

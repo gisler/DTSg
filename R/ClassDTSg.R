@@ -251,7 +251,7 @@ DTSg <- R6Class(
       tryCatch(
         {
           if (!testMultiClass(i, c("integer", "numeric")) && !is.expression(i) &&
-              !is.character(i) && !is.list(i)) {
+                !is.character(i) && !is.list(i)) {
             i <- expr
           }
 
@@ -429,15 +429,14 @@ DTSg <- R6Class(
         if (...length() > 0L) {
           dots <- list(...)
           dots <- sprintf("%s = %s", names(dots), dots)
-          sprintf(", %s", paste(dots, collapse = ", "))
+          sprintf(", %s", toString(dots))
         } else {
           ""
         }
       }
 
-      text <- paste(
-        sprintf("%s = %s(%s%s)", resultCols, funs, cols, dotsToCharacter(...)),
-        collapse = ", "
+      text <- toString(
+        sprintf("%s = %s(%s%s)", resultCols, funs, cols, dotsToCharacter(...))
       )
 
       sprintf("list(%s)", text)
@@ -581,7 +580,7 @@ DTSg <- R6Class(
       }
 
       if ((by != private$.periodicity || na.status == "explicit") &&
-          by != "unrecognised") {
+            by != "unrecognised") {
         if (rollback && mday(from) > 28L && grepl("^\\d+ (month|year)(s?)$", by)) {
           DT <- data.table(
             .dateTime = rollback(seq(
@@ -608,7 +607,7 @@ DTSg <- R6Class(
           call. = FALSE
         )
       } else if (na.status == "explicit" && by == "unrecognised" &&
-                 private$.timestamps > 2L) {
+                   private$.timestamps > 2L) {
         warning(
           "Only time series with recognised periodicity can have explicitly missing values.\n",
           'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
@@ -758,7 +757,7 @@ DTSg <- R6Class(
 
         modes <- vapply(
           private$.values[, cols, with = FALSE],
-          function(col) mode(col),
+          function(col) mode(col), # nolint
           character(1L)
         )
 
@@ -770,7 +769,7 @@ DTSg <- R6Class(
 
         typeofs <- vapply(
           private$.values[, cols, with = FALSE],
-          function(col) typeof(col),
+          function(col) typeof(col), # nolint
           character(1L)
         )
 
@@ -937,7 +936,7 @@ DTSg <- R6Class(
       secAxisLabel = ""
     ) {
       if (!requireNamespace("dygraphs", quietly = TRUE) ||
-          !requireNamespace("RColorBrewer", quietly = TRUE)) {
+            !requireNamespace("RColorBrewer", quietly = TRUE)) {
         stop(
           'Packages "dygraphs" and "RColorBrewer" must be installed for this method.',
           call. = FALSE
@@ -1124,7 +1123,7 @@ DTSg <- R6Class(
             DT <- private$.values[DT, on = sprintf("%s == .dateTime", firstCol)]
             lags <- diff(DT[[1L]])
             if (all(lags >= private$.minLag) && all(lags <= private$.maxLag) &&
-                sum(!is.na(DT[, -1L])) == sum(!is.na(private$.values[seqLen, -1L]))) {
+                  sum(!is.na(DT[, -1L])) == sum(!is.na(private$.values[seqLen, -1L]))) {
               private$.periodicity <- by
 
               break
@@ -1443,8 +1442,8 @@ DTSg <- R6Class(
       )
       assertNoStartingDot(cols)
       if (length(cols) == length(names(private$.values)) - 1L &&
-          ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
-          is.null(values))) {
+            ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
+            is.null(values))) {
         stop("Removing all value columns is not allowed.", call. = FALSE)
       }
       qassert(clone, "B1")

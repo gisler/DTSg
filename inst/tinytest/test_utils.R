@@ -1,4 +1,4 @@
-source("data.R") # nolint
+source("data.R")
 
 #### interpolateLinear ####
 expect_identical(
