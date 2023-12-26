@@ -32,9 +32,9 @@ Linearly interpolates missing values of a numeric vector. For use with the
 \code{\link{colapply}} method of \code{\link{DTSg}} objects. Other uses are possible, but not
 recommended.
 
-This \code{\link{function}} also serves as an example for writing user defined
-\code{\link{function}}s utilising one of the \code{\link{list}}s with helper data as handed over
-by some of the methods of \code{\link{DTSg}} objects.
+This \code{\link{function}} mainly serves as an example for writing user defined
+\code{\link{function}}s utilising one of the \code{\link{list}}s with helper data handed over by
+some of the methods of \code{\link{DTSg}} objects.
 }
 \examples{
 # new DTSg object

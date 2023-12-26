@@ -14,9 +14,9 @@
 #' [`colapply`] method of [`DTSg`] objects. Other uses are possible, but not
 #' recommended.
 #'
-#' This [`function`] also serves as an example for writing user defined
-#' [`function`]s utilising one of the [`list`]s with helper data as handed over
-#' by some of the methods of [`DTSg`] objects.
+#' This [`function`] mainly serves as an example for writing user defined
+#' [`function`]s utilising one of the [`list`]s with helper data handed over by
+#' some of the methods of [`DTSg`] objects.
 #'
 #' @param .col A numeric vector.
 #' @param roll A positive numeric specifying the maximum size of gaps whose

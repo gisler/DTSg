@@ -113,7 +113,7 @@ NULL
 #' * _funbyApproach:_ Same as the `funbyApproach` argument.
 #'
 #' Any additional element specified in the `funbyHelpers` argument is appended
-#' to the end of the helper data [`list`]. In case `funbyHelpers` contains an
+#' to the end of the default [`list`]. In case `funbyHelpers` contains an
 #' _ignoreDST, multiplier_ or _funbyApproach_ element, it takes precedence over
 #' the respective method argument. _timezone, periodicity_ and _na.status_
 #' elements are rejected, as they are always taken directly from the object.
@@ -163,8 +163,8 @@ NULL
 #' are preserved by all means and all intervals are of the \dQuote{correct}
 #' length, however, a possible limitation might be that the day saving time
 #' shift is invariably assumed to be one hour long. This feature requires that
-#' the periodicity of the time series was recognised and is supported by the
-#' following [`TALFs`] of the package:
+#' the periodicity of the time series has been recognised and is supported by
+#' the following [`TALFs`] of the package:
 #' * \code{\link{byY_____}}
 #' * \code{\link{byYQ____}}
 #' * \code{\link{byYm____}}
