@@ -180,7 +180,7 @@ as its second. The default elements of this <code><a href="https://rdrr.io/r/bas
 <li><p><em>multiplier:</em> Same as the <code>multiplier</code> argument.</p></li>
 <li><p><em>funbyApproach:</em> Same as the <code>funbyApproach</code> argument.</p></li>
 </ul><p>Any additional element specified in the <code>funbyHelpers</code> argument is appended
-to the end of the helper data <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>. In case <code>funbyHelpers</code> contains an
+to the end of the default <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>. In case <code>funbyHelpers</code> contains an
 <em>ignoreDST, multiplier</em> or <em>funbyApproach</em> element, it takes precedence over
 the respective method argument. <em>timezone, periodicity</em> and <em>na.status</em>
 elements are rejected, as they are always taken directly from the object.</p>
@@ -209,7 +209,7 @@ supported by the following <code><a href="TALFs.html">TALFs</a></code> of the pa
 <li><p><code>c(sd = "sd", var = "var")</code></p></li>
 </ul><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> or character vector must have names in case more than one summary
 function is provided. The method can benefit from <span class="pkg">data.table</span>'s
-<em><a href="https://Rdatatable.gitlab.io/data.table/reference/datatable-optimize.html" class="external-link">GForce</a></em> optimisation in case a character
+<em><a href="https://rdatatable.gitlab.io/data.table/reference/datatable-optimize.html" class="external-link">GForce</a></em> optimisation in case a character
 vector specifying summary functions is provided.</p>
     </div>
     <div id="number-of-values-per-temporal-aggregation-level">
@@ -234,8 +234,8 @@ such as hydrological time series. Doing so ensures that diurnal variations
 are preserved by all means and all intervals are of the “correct”
 length, however, a possible limitation might be that the day saving time
 shift is invariably assumed to be one hour long. This feature requires that
-the periodicity of the time series was recognised and is supported by the
-following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
+the periodicity of the time series has been recognised and is supported by
+the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYQ____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYm____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYmd___</a></code></p></li>

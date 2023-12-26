@@ -201,7 +201,7 @@ as its second. The default elements of this <code><a href="https://rdrr.io/r/bas
 <li><p><em>multiplier:</em> Same as the <code>multiplier</code> argument.</p></li>
 <li><p><em>funbyApproach:</em> Same as the <code>funbyApproach</code> argument.</p></li>
 </ul><p>Any additional element specified in the <code>funbyHelpers</code> argument is appended
-to the end of the helper data <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>. In case <code>funbyHelpers</code> contains an
+to the end of the default <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>. In case <code>funbyHelpers</code> contains an
 <em>ignoreDST, multiplier</em> or <em>funbyApproach</em> element, it takes precedence over
 the respective method argument. <em>timezone, periodicity</em> and <em>na.status</em>
 elements are rejected, as they are always taken directly from the object.</p>
@@ -232,8 +232,8 @@ such as hydrological time series. Doing so ensures that diurnal variations
 are preserved by all means and all intervals are of the “correct”
 length, however, a possible limitation might be that the day saving time
 shift is invariably assumed to be one hour long. This feature requires that
-the periodicity of the time series was recognised and is supported by the
-following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
+the periodicity of the time series has been recognised and is supported by
+the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYQ____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYm____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYmd___</a></code></p></li>
@@ -566,19 +566,19 @@ following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li
 <span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime      flow</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;     &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01 0.9345048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02 0.9645586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 0.8923152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 0.8792760</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 0.5883575</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27 0.9947655</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28 0.9897945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29 0.9989216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30 0.9992124</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31 0.9993762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        .dateTime         flow</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;POSc&gt;        &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1: 2007-01-01  0.941791227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2: 2007-01-02  0.009817851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3: 2007-01-03 -0.011750441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4: 2007-01-04 -0.473861745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: 2007-01-05 -0.821206409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2188: 2012-12-27  0.984751630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2189: 2012-12-28  0.991771763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2190: 2012-12-29  0.984696145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2191: 2012-12-30  0.990272595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2192: 2012-12-31  0.967707603</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Aggregated:     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Regular:        TRUE</span>
