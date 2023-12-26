@@ -1,11 +1,19 @@
-linters: linters_with_defaults(
-    object_usage_linter = NULL,
+linters: all_linters(
     commas_linter = NULL,
     cyclocomp_linter = NULL,
+    extraction_operator_linter = NULL,
+    function_argument_linter = NULL,
+    if_not_else_linter = NULL,
+    implicit_integer_linter = NULL,
+    indentation_linter = NULL,
     line_length_linter = NULL,
+    nonportable_path_linter = NULL,
     object_name_linter = NULL,
+    object_usage_linter = NULL,
     spaces_inside_linter = NULL,
     todo_comment_linter = todo_comment_linter(
       todo = c("todo", "to-do", "to do", "fixme", "fix-me", "fix me")
-    )
+    ),
+    undesirable_function_linter = NULL
   )
+exclusions: list("inst", "vignettes")
