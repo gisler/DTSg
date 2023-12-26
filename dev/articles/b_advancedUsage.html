@@ -349,7 +349,7 @@ method. This can be accomplished in the following way:</p>
 <span><span class="co">#&gt;  NA's   :23</span></span>
 <span><span class="va">TS</span><span class="op">$</span></span>
 <span>  <span class="fu">colapply</span><span class="op">(</span></span>
-<span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>    resultCols <span class="op">=</span> <span class="st">"missing"</span></span>
 <span>  <span class="op">)</span><span class="op">$</span></span>
 <span>  <span class="fu">colapply</span><span class="op">(</span><span class="va">interpolateLinear</span><span class="op">)</span><span class="op">$</span></span>
