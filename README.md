@@ -8,7 +8,7 @@ Install the latest release from CRAN:
 
 [![CRAN Version](https://www.r-pkg.org/badges/version/DTSg)](https://cran.r-project.org/package=DTSg) [![CRAN Checks](https://badges.cranchecks.info/worst/DTSg.svg)](https://cran.r-project.org/web/checks/check_results_DTSg.html)
 
-Install the development version from GitHub (requires the `remotes` package):
+Install the [development version](https://gisler.github.io/DTSg/dev/) from GitHub (requires the `remotes` package):
 
 `remotes::install_github("gisler/DTSg")`
 
