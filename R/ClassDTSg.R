@@ -756,7 +756,7 @@ DTSg <- R6Class(
         qassert(mode, "S+")
 
         modes <- vapply(
-          private$.values[, cols, with = FALSE],
+          private$.values[, ..cols],
           function(col) mode(col), # nolint
           character(1L)
         )
@@ -768,7 +768,7 @@ DTSg <- R6Class(
         qassert(typeof, "S+")
 
         typeofs <- vapply(
-          private$.values[, cols, with = FALSE],
+          private$.values[, ..cols],
           function(col) typeof(col), # nolint
           character(1L)
         )
@@ -962,8 +962,7 @@ DTSg <- R6Class(
       plot <- dygraphs::dygraph(
         as.xts.data.table(private$.values[
           between(.dateTime, from, to),
-          c(".dateTime", cols),
-          with = FALSE
+          c(".dateTime", ..cols)
         ]),
         private$.ID,
         ylab = ylab
@@ -1531,10 +1530,10 @@ DTSg <- R6Class(
           ]
           values[, .group := NULL]
         } else {
-          values <- private$.values[eval(i), cols, with = FALSE]
+          values <- private$.values[eval(i), ..cols]
         }
       } else {
-        values <- private$.values[, cols, with = FALSE]
+        values <- private$.values[, ..cols]
       }
 
       assertDataTable(values, min.rows = 1L, .var.name = "self$values(reference = TRUE)")
@@ -1550,7 +1549,7 @@ DTSg <- R6Class(
     summary = function(cols = self$cols(), ...) {
       cols <- private$extractCols(cols)
 
-      summary(private$.values[, cols, with = FALSE], ...)
+      summary(private$.values[, ..cols], ...)
     },
 
     values = function(
