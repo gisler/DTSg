@@ -373,13 +373,10 @@ DTSg <- R6Class(
         calls <- append(calls, quote(.N))
       }
 
-      calls <- substitute2(calls, list(calls = calls))
-
-      if (!rowaggregate) {
-        calls[[1L]] <- as.name("c")
-      }
-
-      calls
+      as.call(c(
+        if (rowaggregate) as.name("list") else as.name("c"),
+        calls
+      ))
     },
 
     funbyHelpers = function(ignoreDST, multiplier, funbyApproach, .helpers) {
