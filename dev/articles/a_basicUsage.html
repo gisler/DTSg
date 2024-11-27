@@ -168,7 +168,6 @@ serves as the object’s time index and cannot be changed at will:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TS</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span> <span class="co"># or 'print(TS)' or just 'TS'</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;        .dateTime   flow</span></span>
 <span><span class="co">#&gt;           &lt;POSc&gt;  &lt;num&gt;</span></span>
 <span><span class="co">#&gt;    1: 2007-01-01  9.540</span></span>
@@ -284,7 +283,6 @@ through its <code>by</code> argument (no example given):</p>
 <span><span class="co"># or 'alter(TS, from = "2007-01-01", to = "2008-12-31")'</span></span>
 <span><span class="va">TS</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;       .dateTime   flow</span></span>
 <span><span class="co">#&gt;          &lt;POSc&gt;  &lt;num&gt;</span></span>
 <span><span class="co">#&gt;   1: 2007-01-01  9.540</span></span>
@@ -317,7 +315,6 @@ summary statistics at once):</p>
 <span><span class="co"># or 'aggregate(TS, funby = byYm____, fun = mean)'</span></span>
 <span><span class="va">TSm</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;      .dateTime      flow</span></span>
 <span><span class="co">#&gt;         &lt;POSc&gt;     &lt;num&gt;</span></span>
 <span><span class="co">#&gt;  1: 2007-01-01 25.281290</span></span>
@@ -357,7 +354,6 @@ case:</p>
 <span><span class="co"># or 'aggregate(TS, funby = by_Q____, fun = mean)'</span></span>
 <span><span class="va">TSQ</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;     .dateTime     flow</span></span>
 <span><span class="co">#&gt;        &lt;POSc&gt;    &lt;num&gt;</span></span>
 <span><span class="co">#&gt; 1: 2199-01-01 18.46127</span></span>
@@ -389,7 +385,6 @@ method:</p>
 <span><span class="co"># or 'rollapply(TS, fun = mean, na.rm = TRUE, before = 2, after = 2)'</span></span>
 <span><span class="va">TSs</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;       .dateTime    flow</span></span>
 <span><span class="co">#&gt;          &lt;POSc&gt;   &lt;num&gt;</span></span>
 <span><span class="co">#&gt;   1: 2007-01-01  9.2550</span></span>
@@ -503,7 +498,6 @@ title of the package):</p>
 <span><span class="va">TS</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="st">"Two River Flows"</span></span>
 <span><span class="va">TS</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;       .dateTime flow_orig flow_movavg</span></span>
 <span><span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;   1: 2007-01-01     9.540      9.2550</span></span>
@@ -532,7 +526,6 @@ title of the package):</p>
 <span><span class="co"># calling such a method)</span></span>
 <span><span class="va">TSassigned</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;       .dateTime flow_orig flow_movavg</span></span>
 <span><span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;   1: 2007-01-01     9.540      9.2550</span></span>
@@ -556,7 +549,6 @@ title of the package):</p>
 <span><span class="co">#&gt; Timestamps:     731</span></span>
 <span><span class="va">TScloned</span></span>
 <span><span class="co">#&gt; Values:</span></span>
-<span><span class="co">#&gt; Key: &lt;.dateTime&gt;</span></span>
 <span><span class="co">#&gt;       .dateTime flow_orig flow_movavg</span></span>
 <span><span class="co">#&gt;          &lt;POSc&gt;     &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;   1: 2007-01-01     9.540      9.2550</span></span>
