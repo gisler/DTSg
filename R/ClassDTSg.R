@@ -539,10 +539,43 @@ DTSg <- R6Class(
       } else {
         private$.values <- private$.values[
           ,
-          eval(expr),
+          .j,
           keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-          .SDcols = cols
+          .SDcols = cols,
+          env = list(.j = expr)
         ]
+
+        if (n) {
+          message(".n column calculated from .dateTime column.")
+        }
+      } else {
+        private$.values <- private$.values[
+          !is.na(.cols),
+          .j,
+          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+          .SDcols = cols,
+          env = list(.cols = cols, .j = expr)
+        ]
+
+        if (n) {
+          message(
+            "Missing values are always stripped regardless of the value of a ",
+            'possible "na.rm" argument.'
+          )
+        }
+      }
+
+      if (!is.null(names(fun))) {
+        resultCols <- sprintf(
+          "%s.%s",
+          rep(cols, length(fun)),
+          rep(names(fun), each = length(cols))
+        )
+
+        setnames(private$.values, 2:(length(resultCols) + 1L), resultCols)
+      }
+      if (n) {
+        setnames(private$.values, length(private$.values), ".n")
       }
 
       private$.isAggregated <- TRUE
@@ -708,9 +741,10 @@ DTSg <- R6Class(
 
       private$.values[
         ,
-        eval(expr),
+        .j,
         by = by,
-        .SDcols = cols
+        .SDcols = cols,
+        env = list(.j = expr)
       ]
 
       invisible(self)
@@ -902,7 +936,8 @@ DTSg <- R6Class(
         if (anyNA(private$.values[[cols[i]]])) {
           DT <- private$.values[
             ,
-            .(.dateTime, .col = get(cols[i]), .group = rleid(get(cols[i])))
+            .(.dateTime, .col = .cols, .group = rleid(.cols)),
+            env = list(.cols = cols[i])
           ]
 
           DT <- DT[
@@ -1311,31 +1346,15 @@ DTSg <- R6Class(
         ))
       }
 
-      if (testClass(fun, "character")) {
-        private$.values[
-          ,
-          (resultCols) := eval(parse(text = private$optiLapply(
-            fun,
-            "unlist(.SD, recursive = FALSE)",
-            resultCols,
-            ...
-          ))),
-          by = seq_len(private$.timestamps),
-          .SDcols = cols
-        ]
-      } else {
-        private$.values[
-          ,
-          (resultCols) := lapply(
-            fun,
-            function(fun, x, ...) fun(x, ...),
-            x = unlist(.SD, recursive = FALSE),
-            ... = ...
-          ),
-          by = seq_len(private$.timestamps),
-          .SDcols = cols
-        ]
-      }
+      expr <- private$fapply(unname(fun), rowaggregate = TRUE, ...)
+
+      private$.values[
+        ,
+        (resultCols) := .j,
+        by = seq_len(private$.timestamps),
+        .SDcols = cols,
+        env = list(.j = expr)
+      ]
 
       invisible(self)
     },
@@ -1458,7 +1477,7 @@ DTSg <- R6Class(
       }
 
       if (!missing(i)) {
-        private$.values[eval(i), (cols) := values]
+        private$.values[.i, (cols) := values, env = list(.i = i)]
       } else {
         private$.values[, (cols) := values]
       }
@@ -1524,13 +1543,13 @@ DTSg <- R6Class(
 
           values <- private$.values[
             ,
-            .SD[eval(i)],
+            .SD[.i, env = list(.i = i)],
             by = .(.group = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
           values[, .group := NULL]
         } else {
-          values <- private$.values[eval(i), ..cols]
+          values <- private$.values[.i, ..cols, env = list(.i = i)]
         }
       } else {
         values <- private$.values[, ..cols]
