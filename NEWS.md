@@ -1,5 +1,6 @@
 # DTSg v1.1.3.9000
 
+* Fixed support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions (either it stopped working somewhere down the line or it never worked).
 * Slightly improved documentation.
 * Minor internal code improvements.
 
