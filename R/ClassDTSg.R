@@ -352,10 +352,10 @@ DTSg <- R6Class(
     },
 
     fapply = function(funs, rowaggregate = FALSE, n = FALSE, ...) {
-      createRowCall <- function(fun, dots) {
-        as.call(c(fun, str2lang("unlist(.SD, recursive = FALSE)"), dots))
+      rowCalls <- function(fun, dots) {
+        as.call(c(fun, quote(unlist(.SD, recursive = FALSE)), dots))
       }
-      createColCall <- function(fun, dots) {
+      colCalls <- function(fun, dots) {
         as.call(c(as.name("lapply"), as.name(".SD"), fun, dots))
       }
 
@@ -366,7 +366,7 @@ DTSg <- R6Class(
 
       calls <- lapply(
         funs,
-        if (rowaggregate) createRowCall else createColCall,
+        if (rowaggregate) rowCalls else colCalls,
         dots = dots
       )
       if (n) {
