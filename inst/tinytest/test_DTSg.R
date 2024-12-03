@@ -52,8 +52,8 @@ expect_identical(
       "1 hour"
     ),
     col1.mean = c( 2, 6 , 10, 14),
-    col1.sum  = c( 4, 12, 20, 28),
     col2.mean = c(NA, 6 , 10, 14),
+    col1.sum  = c( 4, 12, 20, 28),
     col2.sum  = c(NA, 12, 20, 28),
     .n = rep(2L, 4),
     key = ".dateTime"
@@ -70,8 +70,8 @@ expect_identical(
       "1 hour"
     ),
     col1.mean = c( 2, 6 , 10, 14),
-    col1.sum  = c( 4, 12, 20, 28),
     col2.mean = c(NA, 6 , 10, 14),
+    col1.sum  = c( 4, 12, 20, 28),
     col2.sum  = c(NA, 12, 20, 28),
     .n = rep(2L, 4),
     key = ".dateTime"
