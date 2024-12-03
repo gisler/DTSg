@@ -351,6 +351,34 @@ DTSg <- R6Class(
       cols
     },
 
+    fapply = function(funs, rowaggregate = FALSE, n = FALSE, ...) {
+      rowCalls <- function(fun, dots) {
+        as.call(c(fun, quote(unlist(.SD, recursive = FALSE)), dots))
+      }
+      colCalls <- function(fun, dots) {
+        as.call(c(as.name("lapply"), as.name(".SD"), fun, dots))
+      }
+
+      if (testClass(funs, "character")) {
+        funs <- lapply(funs, as.name)
+      }
+      dots <- list(...)
+
+      calls <- lapply(
+        funs,
+        if (rowaggregate) rowCalls else colCalls,
+        dots = dots
+      )
+      if (n) {
+        calls <- append(calls, quote(.N))
+      }
+
+      as.call(c(
+        if (rowaggregate) as.name("list") else as.name("c"),
+        calls
+      ))
+    },
+
     funbyHelpers = function(ignoreDST, multiplier, funbyApproach, .helpers) {
       if (!is.null(.helpers)) {
         qassert(.helpers, "L+")
@@ -402,44 +430,6 @@ DTSg <- R6Class(
         multiplier = multiplier,
         funbyApproach = funbyApproach
       ), .helpers)
-    },
-
-    multiLapply = function(.SD, funs, ...) {
-      do.call(c, lapply(
-        .SD,
-        function(x, ...) {
-          lapply(funs, function(fun, y, ...) fun(y, ...), y = x, ... = ...)
-        },
-        ... = ...
-      ))
-    },
-
-    optiLapply = function(funs, cols, resultCols, ...) {
-      if (is.null(resultCols)) {
-        funs <- rep(funs, length(cols))
-        cols <- rep(cols, each = length(funs) / length(cols))
-        if (!is.null(names(funs))) {
-          resultCols <- sprintf("%s.%s", cols, names(funs))
-        } else {
-          resultCols <- cols
-        }
-      }
-
-      dotsToCharacter <- function(...) {
-        if (...length() > 0L) {
-          dots <- list(...)
-          dots <- sprintf("%s = %s", names(dots), dots)
-          sprintf(", %s", toString(dots))
-        } else {
-          ""
-        }
-      }
-
-      text <- toString(
-        sprintf("%s = %s(%s%s)", resultCols, funs, cols, dotsToCharacter(...))
-      )
-
-      sprintf("list(%s)", text)
     },
 
     rmGlobalReferences = function(addr) {
@@ -507,36 +497,9 @@ DTSg <- R6Class(
         ))
       }
 
-      if (testClass(fun, "character")) {
-        expr <- expression(eval(parse(text = private$optiLapply(fun, cols, NULL, ...))))
-      } else {
-        expr <- expression(private$multiLapply(.SD, fun, ...))
-      }
+      expr <- private$fapply(unname(fun), n = n, ...)
 
-      if (n) {
-        if (length(cols) > 1L) {
-          private$.values <- private$.values[
-            ,
-            c(eval(expr), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-            .SDcols = cols
-          ]
-
-          message(".n column calculated from .dateTime column.")
-        } else {
-          private$.values <- private$.values[
-            !is.na(get(cols)),
-            c(eval(expr), .(.n = .N)),
-            keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-            .SDcols = cols
-          ]
-
-          message(
-            "Missing values are always stripped regardless of the value of a ",
-            'possible "na.rm" argument.'
-          )
-        }
-      } else {
+      if (length(cols) > 1L) {
         private$.values <- private$.values[
           ,
           .j,
