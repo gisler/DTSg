@@ -28,9 +28,9 @@ byRcppCCTZ___H__call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:0
 byRcppCCTZ____M_call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
 byRcppCCTZ_____Scall <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
 
-byY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"  , year(.dateTime)                              ), tz = .helpers[["timezone"]]))
+byY_____call <- quote(as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]))
 byYQ____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
-byYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime),   month(.dateTime)          ), tz = .helpers[["timezone"]]))
+byYm____call <- quote(as.POSIXct(  trunc(.dateTime     , units = "months"                             ), tz = .helpers[["timezone"]]))
 byYmd___call <- quote(as.POSIXct(  trunc(.dateTime     , units = "days"                               ), tz = .helpers[["timezone"]]))
 byYmdH__call <- quote(as.POSIXct(  trunc(.dateTime     , units = "hours"                              ), tz = .helpers[["timezone"]]))
 byYmdHM_call <- quote(as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers[["timezone"]]))
