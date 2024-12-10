@@ -74,18 +74,14 @@ TS <- DTSg$
 TS
 ```
 
-For piping, we have to make sure the `magrittr` package is installed and have to load it for access to its forward-pipe operator first (starting with R 4.1.0, the same can be achieved with R's native pipe operator `|>`):
+For piping, we have to make sure that R 4.1.0 or later is installed in order to have access to R's native pipe operator `|>` (alternatively, the same can be achieved with the forward-pipe operator `%>%` of the `magrittr` package):
 
 ```{r}
-if (requireNamespace("magrittr", quietly = TRUE)) {
-  library(magrittr)
-
-  TS <- new("DTSg", flow) %>%
-    alter("2007-01-01", "2008-12-31") %>%
-    colapply(interpolateLinear) %>%
-    aggregate(byYm____, mean)
-  TS
-}
+TS <- new("DTSg", flow) |>
+  alter("2007-01-01", "2008-12-31") |>
+  colapply(interpolateLinear) |>
+  aggregate(byYm____, mean)
+TS
 ```
 
 ## Swallowing and dropping
