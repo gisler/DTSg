@@ -1,3 +1,34 @@
+# byExpressions ####
+byCalls <- expression(
+  Y      =      year(.dateTime)                                                                                             %/% multiplier * multiplier      ,
+  Ym     = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
+  Ymd    = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
+  YmdH   = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
+  YmdHM  = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
+  YmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
+
+  "_" = rep(0L, length(.dateTime)),
+  m =  (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L,
+  H =    hour(.dateTime)       %/% multiplier * multiplier     ,
+  M =  minute(.dateTime)       %/% multiplier * multiplier     ,
+  S =  second(.dateTime)       %/% multiplier * multiplier
+)
+
+bySprintfCalls <- expression(
+  Y      = sprintf("%04d-01-01"                   , year(.dateTime)                                                                                             %/% multiplier * multiplier      ),
+  Ym     = sprintf("%04d-%02d-01"                 , year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L)),
+  Ymd    = sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        )),
+  YmdH   = sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     )),
+  YmdHM  = sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     )),
+  YmdHMS = sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     )),
+
+  "_" = rep("2199-01-01", length(.dateTime)),
+  m = sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L),
+  H = sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% multiplier * multiplier     ),
+  M = sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% multiplier * multiplier     ),
+  S = sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% multiplier * multiplier     )
+)
+
 # Calls, multiplier == 1L ####
 byFasttimeY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            ), tz = .helpers[["timezone"]]))
 byFasttimeYQ____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                              ), tz = .helpers[["timezone"]]))
