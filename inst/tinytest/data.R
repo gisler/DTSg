@@ -69,8 +69,7 @@ UTChourlyData <- data.table(
   quarter   = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
   month     = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
   yearMonth = rep(  7:18       , daysPerMonth    * 24L),
-  day       = rep(  1:366                              , each = 24L),
-  monthDay  = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
+  day       = rep(  1:366, each = 24L)
 )
 
 UTCfractionalSecondData <- data.table(
@@ -99,8 +98,7 @@ CEThourlyData <- data.table(
   quarter   = rep(c(3:4  , 1:2), daysPerQuarter  * 24L),
   month     = rep(c(7:12 , 1:6), daysPerMonth    * 24L),
   yearMonth = rep(  7:18       , daysPerMonth    * 24L),
-  day       = rep(  1:366                              , each = 24L),
-  monthDay  = rep(unlist(lapply(daysPerMonth, seq_len)), each = 24L)
+  day       = rep(  1:366, each = 24L)
 )
 
 CETtoDSTfractionalSecondData <- data.table(

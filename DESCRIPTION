@@ -30,7 +30,6 @@ Suggests:
     dygraphs,
     fasttime,
     knitr,
-    magrittr,
     RColorBrewer,
     RcppCCTZ,
     rmarkdown,
