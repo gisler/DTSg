@@ -29,7 +29,7 @@ bySprintfCalls <- expression(
   S = sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% multiplier * multiplier     )
 )
 
-# Calls, multiplier == 1L ####
+# Nested list of expressions ####
 byExternal <- list(
   single = list(
     base = expression(
