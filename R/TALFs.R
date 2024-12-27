@@ -1,37 +1,54 @@
-# byExpressions ####
-byCalls <- expression(
-  Y      =      year(.dateTime)                                                                                             %/% multiplier * multiplier      ,
-  Ym     = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
-  Ymd    = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
-  YmdH   = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
-  YmdHM  = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
-  YmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
+# List of expressions (internal approach) ####
+byInternal <- list(
+  byExpr = expression(
+    byY_____ =      year(.dateTime)                                                                                             %/% multiplier * multiplier      ,
+    byYm____ = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
+    byYmd___ = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
+    byYmdH__ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
+    byYmdHM_ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
+    byYmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
 
-  "_" = rep(0L, length(.dateTime)),
-  m =  (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L,
-  H =    hour(.dateTime)       %/% multiplier * multiplier     ,
-  M =  minute(.dateTime)       %/% multiplier * multiplier     ,
-  S =  second(.dateTime)       %/% multiplier * multiplier
+    by______ = rep(0L, length(.dateTime)),
+    by_m____ =  (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L,
+    by___H__ =    hour(.dateTime)       %/% multiplier * multiplier     ,
+    by____M_ =  minute(.dateTime)       %/% multiplier * multiplier     ,
+    by_____S =  second(.dateTime)       %/% multiplier * multiplier
+  ),
+  bySprintfExpr = expression(
+    byY_____ = sprintf("%04d-01-01"                   , year(.dateTime)                                                                                             %/% multiplier * multiplier     ),
+    byYm____ = sprintf("%04d-%02d-01"                 , year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
+    byYmd___ = sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
+    byYmdH__ = sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
+    byYmdHM_ = sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
+    byYmdHMS = sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
+
+    by______ = rep("2199-01-01", length(.dateTime)),
+    by_m____ = sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L),
+    by___H__ = sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% multiplier * multiplier     ),
+    by____M_ = sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% multiplier * multiplier     ),
+    by_____S = sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% multiplier * multiplier     )
+  )
 )
 
-bySprintfCalls <- expression(
-  Y      = sprintf("%04d-01-01"                   , year(.dateTime)                                                                                             %/% multiplier * multiplier      ),
-  Ym     = sprintf("%04d-%02d-01"                 , year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L)),
-  Ymd    = sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        )),
-  YmdH   = sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     )),
-  YmdHM  = sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     )),
-  YmdHMS = sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     )),
-
-  "_" = rep("2199-01-01", length(.dateTime)),
-  m = sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L),
-  H = sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% multiplier * multiplier     ),
-  M = sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% multiplier * multiplier     ),
-  S = sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% multiplier * multiplier     )
-)
-
-# Nested list of expressions ####
+# Nested list of expressions (external approaches) ####
 byExternal <- list(
   single = list(
+    internal = list(
+      byY_____ = "byY_____",
+      byYQ____ = "byYQ____",
+      byYm____ = "byYm____",
+      byYmd___ = "byYmd___",
+      byYmdH__ = "byYmdH__",
+      byYmdHM_ = "byYmdHM_",
+      byYmdHMS = "byYmdHMS",
+
+      by______ = "by______",
+      by_Q____ = "by_Q____",
+      by_m____ = "by_m____",
+      by___H__ = "by___H__",
+      by____M_ = "by____M_",
+      by_____S = "by_____S"
+    ),
     base = expression(
       byY_____ = as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]),
       byYQ____ = as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
@@ -81,6 +98,18 @@ byExternal <- list(
     )
   ),
   multi = list(
+    internal = list(
+      byY_____ = "byY_____",
+      byYm____ = "byYm____",
+      byYmdH__ = "byYmdH__",
+      byYmdHM_ = "byYmdHM_",
+      byYmdHMS = "byYmdHMS",
+
+      by_m____ = "by_m____",
+      by___H__ = "by___H__",
+      by____M_ = "by____M_",
+      by_____S = "by_____S"
+    ),
     base = expression(
       byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),

@@ -1,5 +1,8 @@
 assertFunbyApproach <- function(funbyApproach) {
-  funbyApproach <- match.arg(funbyApproach, c("base", "fasttime", "RcppCCTZ"))
+  funbyApproach <- match.arg(
+    funbyApproach,
+    c("internal", "base", "fasttime", "RcppCCTZ")
+  )
 
   if (funbyApproach == "fasttime" &&
         !requireNamespace("fasttime", quietly = TRUE)) {
