@@ -20,7 +20,7 @@ byFasttimeY_____ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["byY_____"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["byY_____"]])
 }
 
 #' @rdname TALFs
@@ -29,7 +29,7 @@ byFasttimeYQ____ <- function(.dateTime, .helpers) {
   byFasttimeWarning()
   assertFasttimeOK(.dateTime, .helpers)
 
-  eval(byExternal[["single"]][["fasttime"]][["byYQ____"]])
+  eval(byExpr[["single"]][["fasttime"]][["byYQ____"]])
 }
 
 #' @rdname TALFs
@@ -40,7 +40,7 @@ byFasttimeYm____ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["byYm____"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["byYm____"]])
 }
 
 #' @rdname TALFs
@@ -49,7 +49,7 @@ byFasttimeYmd___ <- function(.dateTime, .helpers) {
   byFasttimeWarning()
   assertFasttimeOK(.dateTime, .helpers)
 
-  eval(byExternal[["single"]][["fasttime"]][["byYmd___"]])
+  eval(byExpr[["single"]][["fasttime"]][["byYmd___"]])
 }
 
 #' @rdname TALFs
@@ -60,7 +60,7 @@ byFasttimeYmdH__ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["byYmdH__"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["byYmdH__"]])
 }
 
 #' @rdname TALFs
@@ -71,7 +71,7 @@ byFasttimeYmdHM_ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["byYmdHM_"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["byYmdHM_"]])
 }
 
 #' @rdname TALFs
@@ -82,7 +82,7 @@ byFasttimeYmdHMS <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["byYmdHMS"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["byYmdHMS"]])
 }
 
 ## Extracting family ####
@@ -92,7 +92,7 @@ byFasttime______ <- function(.dateTime, .helpers) {
   byFasttimeWarning()
   assertFasttimeOK(.dateTime, .helpers)
 
-  eval(byExternal[["single"]][["fasttime"]][["by______"]])
+  eval(byExpr[["single"]][["fasttime"]][["by______"]])
 }
 
 #' @rdname TALFs
@@ -101,7 +101,7 @@ byFasttime_Q____ <- function(.dateTime, .helpers) {
   byFasttimeWarning()
   assertFasttimeOK(.dateTime, .helpers)
 
-  eval(byExternal[["single"]][["fasttime"]][["by_Q____"]])
+  eval(byExpr[["single"]][["fasttime"]][["by_Q____"]])
 }
 
 #' @rdname TALFs
@@ -112,7 +112,7 @@ byFasttime_m____ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["by_m____"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["by_m____"]])
 }
 
 #' @rdname TALFs
@@ -123,7 +123,7 @@ byFasttime___H__ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["by___H__"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["by___H__"]])
 }
 
 #' @rdname TALFs
@@ -134,7 +134,7 @@ byFasttime____M_ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["by____M_"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["by____M_"]])
 }
 
 #' @rdname TALFs
@@ -145,5 +145,5 @@ byFasttime_____S <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][["fasttime"]][["by_____S"]])
+  eval(byExpr[[singleOrMulti]][["fasttime"]][["by_____S"]])
 }

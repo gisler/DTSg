@@ -1,12 +1,12 @@
-# List of expressions (internal approach) ####
-byInternal <- list(
+# data.table approach ####
+byDataTableExpr <- list(
   byExpr = expression(
-    byY_____ =      year(.dateTime)                                                                                             %/% multiplier * multiplier      ,
-    byYm____ = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
-    byYmd___ = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
-    byYmdH__ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
-    byYmdHM_ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
-    byYmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
+    byY_____ =      year(.dateTime)                                                                                             %/% multiplier * multiplier                             ,
+    byYm____ = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L                       ),
+    byYmd___ = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                                               ),
+    byYmdH__ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
+    byYmdHM_ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
+    byYmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
 
     by______ = rep(0L, length(.dateTime)),
     by_m____ =  (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L,
@@ -30,24 +30,50 @@ byInternal <- list(
   )
 )
 
-# Nested list of expressions (external approaches) ####
-byExternal <- list(
-  single = list(
-    internal = list(
-      byY_____ = "byY_____",
-      byYQ____ = "byYQ____",
-      byYm____ = "byYm____",
-      byYmd___ = "byYmd___",
-      byYmdH__ = "byYmdH__",
-      byYmdHM_ = "byYmdHM_",
-      byYmdHMS = "byYmdHMS",
+dataTableApproach <- function(.dateTime, by, .helpers) {
+  if (by %chin% c("byYQ____", "by_Q____")) {
+    multiplier <- 3L
+    by <- if (by == "byYQ____") "byYm____" else "by_m____"
+  } else {
+    multiplier <- .helpers[["multiplier"]]
+  }
 
-      by______ = "by______",
-      by_Q____ = "by_Q____",
-      by_m____ = "by_m____",
-      by___H__ = "by___H__",
-      by____M_ = "by____M_",
-      by_____S = "by_____S"
+  if (
+        by %chin% c("by______", "by_Q____", "by_m____", "by___H__", "by____M_", "by_____S")) {
+    type <- "bySprintfExpr"
+  } else {
+    type <- "byExpr"
+  }
+
+  DT <- data.table(.dateTime = .dateTime)
+
+  if (type == "bySprintfExpr") {
+    DT[, .dateTime := as.POSIXct(eval(byDataTableExpr[[type]][[by]]), tz = .helpers[["timezone"]])]
+  } else {
+    DT[, .dateTime := min(.dateTime), by = eval(byDataTableExpr[[type]][[by]])]
+  }
+
+  DT[[1L]]
+}
+
+# Nested list of expressions ####
+byExpr <- list(
+  single = list(
+    "data.table" = expression(
+      byY_____ = dataTableApproach(.dateTime, "byY_____", .helpers),
+      byYQ____ = dataTableApproach(.dateTime, "byYQ____", .helpers),
+      byYm____ = dataTableApproach(.dateTime, "byYm____", .helpers),
+      byYmd___ = dataTableApproach(.dateTime, "byYmd___", .helpers),
+      byYmdH__ = dataTableApproach(.dateTime, "byYmdH__", .helpers),
+      byYmdHM_ = dataTableApproach(.dateTime, "byYmdHM_", .helpers),
+      byYmdHMS = dataTableApproach(.dateTime, "byYmdHMS", .helpers),
+
+      by______ = dataTableApproach(.dateTime, "by______", .helpers),
+      by_Q____ = dataTableApproach(.dateTime, "by_Q____", .helpers),
+      by_m____ = dataTableApproach(.dateTime, "by_m____", .helpers),
+      by___H__ = dataTableApproach(.dateTime, "by___H__", .helpers),
+      by____M_ = dataTableApproach(.dateTime, "by____M_", .helpers),
+      by_____S = dataTableApproach(.dateTime, "by_____S", .helpers)
     ),
     base = expression(
       byY_____ = as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]),
@@ -98,18 +124,6 @@ byExternal <- list(
     )
   ),
   multi = list(
-    internal = list(
-      byY_____ = "byY_____",
-      byYm____ = "byYm____",
-      byYmdH__ = "byYmdH__",
-      byYmdHM_ = "byYmdHM_",
-      byYmdHMS = "byYmdHMS",
-
-      by_m____ = "by_m____",
-      by___H__ = "by___H__",
-      by____M_ = "by____M_",
-      by_____S = "by_____S"
-    ),
     base = expression(
       byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),
@@ -148,9 +162,10 @@ byExternal <- list(
     )
   )
 )
+byExpr[["multi"]][["data.table"]] <- byExpr[["single"]][["data.table"]]
 
 # Functions ####
-to.fakeUTCdateTime <- function(.dateTime, .helpers) {
+toFakeUTCdateTime <- function(.dateTime, .helpers) {
   assertNAstatusPeriodicityOK(
     .helpers[["na.status"]],
     .helpers[["periodicity"]],
@@ -250,12 +265,12 @@ byY_____ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
 }
 
 #' @rdname TALFs
@@ -271,10 +286,10 @@ byYQ____ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
 }
 
 #' @rdname TALFs
@@ -290,12 +305,12 @@ byYm____ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
 }
 
 #' @rdname TALFs
@@ -311,10 +326,10 @@ byYmd___ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
 }
 
 #' @rdname TALFs
@@ -338,7 +353,7 @@ byYmdH__ <- function(.dateTime, .helpers) {
     )
   }
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
 }
 
 #' @rdname TALFs
@@ -351,7 +366,7 @@ byYmdHM_ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
 }
 
 #' @rdname TALFs
@@ -364,14 +379,14 @@ byYmdHMS <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHMS"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHMS"]])
 }
 
 ## Extracting family ####
 #' @rdname TALFs
 #' @export
 by______ <- function(.dateTime, .helpers) {
-  eval(byExternal[["single"]][["base"]][["by______"]])
+  eval(byExpr[["single"]][["base"]][["by______"]])
 }
 
 #' @rdname TALFs
@@ -387,10 +402,10 @@ by_Q____ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
 }
 
 #' @rdname TALFs
@@ -406,12 +421,12 @@ by_m____ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
 }
 
 #' @rdname TALFs
@@ -427,7 +442,7 @@ by___H__ <- function(.dateTime, .helpers) {
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -443,7 +458,7 @@ by___H__ <- function(.dateTime, .helpers) {
     )
   }
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
 }
 
 #' @rdname TALFs
@@ -456,7 +471,7 @@ by____M_ <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
 }
 
 #' @rdname TALFs
@@ -469,5 +484,5 @@ by_____S <- function(.dateTime, .helpers) {
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_____S"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_____S"]])
 }

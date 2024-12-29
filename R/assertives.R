@@ -1,7 +1,7 @@
 assertFunbyApproach <- function(funbyApproach) {
   funbyApproach <- match.arg(
     funbyApproach,
-    c("internal", "base", "fasttime", "RcppCCTZ")
+    c("data.table", "base", "fasttime", "RcppCCTZ")
   )
 
   if (funbyApproach == "fasttime" &&
