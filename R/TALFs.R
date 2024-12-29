@@ -14,15 +14,10 @@ byDataTableExpr <- list(
     by____M_ =  minute(.dateTime)       %/% multiplier * multiplier     ,
     by_____S =  second(.dateTime)       %/% multiplier * multiplier
   ),
+  byPOSIXctExpr = expression(
+    by______ = rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime))
+  ),
   bySprintfExpr = expression(
-    byY_____ = sprintf("%04d-01-01"                   , year(.dateTime)                                                                                             %/% multiplier * multiplier     ),
-    byYm____ = sprintf("%04d-%02d-01"                 , year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L),
-    byYmd___ = sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                        ),
-    byYmdH__ = sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier     ),
-    byYmdHM_ = sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier     ),
-    byYmdHMS = sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier     ),
-
-    by______ = rep("2199-01-01", length(.dateTime)),
     by_m____ = sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L),
     by___H__ = sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% multiplier * multiplier     ),
     by____M_ = sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% multiplier * multiplier     ),
@@ -30,16 +25,23 @@ byDataTableExpr <- list(
   )
 )
 
-dataTableApproach <- function(.dateTime, by, .helpers) {
+dataTableApproach <- function(.dateTime, .helpers, by) {
   if (by %chin% c("byYQ____", "by_Q____")) {
-    multiplier <- 3L
     by <- if (by == "byYQ____") "byYm____" else "by_m____"
+    multiplier <- 3L
   } else {
     multiplier <- .helpers[["multiplier"]]
   }
 
-  if (
-        by %chin% c("by______", "by_Q____", "by_m____", "by___H__", "by____M_", "by_____S")) {
+  if (by == "by______") {
+    type <- "byPOSIXctExpr"
+  } else if (by %chin% c(
+    "by_Q____",
+    "by_m____",
+    "by___H__",
+    "by____M_",
+    "by_____S"
+  )) {
     type <- "bySprintfExpr"
   } else {
     type <- "byExpr"
@@ -47,34 +49,34 @@ dataTableApproach <- function(.dateTime, by, .helpers) {
 
   DT <- data.table(.dateTime = .dateTime)
 
-  if (type == "bySprintfExpr") {
-    DT[, .dateTime := as.POSIXct(eval(byDataTableExpr[[type]][[by]]), tz = .helpers[["timezone"]])]
-  } else {
+  if (type == "byExpr") {
     DT[, .dateTime := min(.dateTime), by = eval(byDataTableExpr[[type]][[by]])]
+  } else {
+    DT[, .dateTime := eval(byDataTableExpr[[type]][[by]])]
   }
 
-  DT[[1L]]
+  if (type == "bySprintfExpr") {
+    timestamps <- unique(DT)
+
+    fmt <- if (by == "by_m____") "%Y-%m-%d" else "%Y-%m-%d %H:%M:%E1S"
+    timestamps[, `:=`(
+      .dateTime4join = .dateTime,
+      .dateTime = RcppCCTZ::parseDatetime(
+        .dateTime,
+        fmt = fmt,
+        tzstr = .helpers[["timezone"]]
+      )
+    )]
+
+    DT <- timestamps[DT, on = .(.dateTime4join == .dateTime)]
+  }
+
+  structure(DT[[".dateTime"]], tzone = .helpers[["timezone"]])
 }
 
 # Nested list of expressions ####
 byExpr <- list(
   single = list(
-    "data.table" = expression(
-      byY_____ = dataTableApproach(.dateTime, "byY_____", .helpers),
-      byYQ____ = dataTableApproach(.dateTime, "byYQ____", .helpers),
-      byYm____ = dataTableApproach(.dateTime, "byYm____", .helpers),
-      byYmd___ = dataTableApproach(.dateTime, "byYmd___", .helpers),
-      byYmdH__ = dataTableApproach(.dateTime, "byYmdH__", .helpers),
-      byYmdHM_ = dataTableApproach(.dateTime, "byYmdHM_", .helpers),
-      byYmdHMS = dataTableApproach(.dateTime, "byYmdHMS", .helpers),
-
-      by______ = dataTableApproach(.dateTime, "by______", .helpers),
-      by_Q____ = dataTableApproach(.dateTime, "by_Q____", .helpers),
-      by_m____ = dataTableApproach(.dateTime, "by_m____", .helpers),
-      by___H__ = dataTableApproach(.dateTime, "by___H__", .helpers),
-      by____M_ = dataTableApproach(.dateTime, "by____M_", .helpers),
-      by_____S = dataTableApproach(.dateTime, "by_____S", .helpers)
-    ),
     base = expression(
       byY_____ = as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]),
       byYQ____ = as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
@@ -124,6 +126,22 @@ byExpr <- list(
     )
   ),
   multi = list(
+    "data.table" = expression(
+      byY_____ = dataTableApproach(.dateTime, .helpers, "byY_____"),
+      byYQ____ = dataTableApproach(.dateTime, .helpers, "byYQ____"),
+      byYm____ = dataTableApproach(.dateTime, .helpers, "byYm____"),
+      byYmd___ = dataTableApproach(.dateTime, .helpers, "byYmd___"),
+      byYmdH__ = dataTableApproach(.dateTime, .helpers, "byYmdH__"),
+      byYmdHM_ = dataTableApproach(.dateTime, .helpers, "byYmdHM_"),
+      byYmdHMS = dataTableApproach(.dateTime, .helpers, "byYmdHMS"),
+
+      by______ = dataTableApproach(.dateTime, .helpers, "by______"),
+      by_Q____ = dataTableApproach(.dateTime, .helpers, "by_Q____"),
+      by_m____ = dataTableApproach(.dateTime, .helpers, "by_m____"),
+      by___H__ = dataTableApproach(.dateTime, .helpers, "by___H__"),
+      by____M_ = dataTableApproach(.dateTime, .helpers, "by____M_"),
+      by_____S = dataTableApproach(.dateTime, .helpers, "by_____S")
+    ),
     base = expression(
       byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),
@@ -162,7 +180,7 @@ byExpr <- list(
     )
   )
 )
-byExpr[["multi"]][["data.table"]] <- byExpr[["single"]][["data.table"]]
+byExpr[["single"]][["data.table"]] <- byExpr[["multi"]][["data.table"]]
 
 # Functions ####
 toFakeUTCdateTime <- function(.dateTime, .helpers) {
