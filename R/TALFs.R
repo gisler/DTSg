@@ -1,81 +1,93 @@
-# Calls, multiplier == 1L ####
-byFasttimeY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            ), tz = .helpers[["timezone"]]))
-byFasttimeYQ____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                              ), tz = .helpers[["timezone"]]))
-byFasttimeYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime),   month(.dateTime)                                                                        ), tz = .helpers[["timezone"]]))
-byFasttimeYmd___call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                       ), tz = .helpers[["timezone"]]))
-byFasttimeYmdH__call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                      ), tz = .helpers[["timezone"]]))
-byFasttimeYmdHM_call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   ), tz = .helpers[["timezone"]]))
-byFasttimeYmdHMScall <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime)), tz = .helpers[["timezone"]]))
+# Nested list of expressions ####
+byExternal <- list(
+  single = list(
+    base = expression(
+      byY_____ = as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]),
+      byYQ____ = as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
+      byYm____ = as.POSIXct(  trunc(.dateTime     , units = "months"                             ), tz = .helpers[["timezone"]]),
+      byYmd___ = as.POSIXct(  trunc(.dateTime     , units = "days"                               ), tz = .helpers[["timezone"]]),
+      byYmdH__ = as.POSIXct(  trunc(.dateTime     , units = "hours"                              ), tz = .helpers[["timezone"]]),
+      byYmdHM_ = as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers[["timezone"]]),
+      byYmdHMS = as.POSIXct(  trunc(.dateTime     , units = "secs"                               ), tz = .helpers[["timezone"]]),
 
-byFasttime______call <- quote(rep(fasttime::fastPOSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)))
-byFasttime_Q____call <- quote(fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
-byFasttime_m____call <- quote(fasttime::fastPOSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]))
-byFasttime___H__call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]))
-byFasttime____M_call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]))
-byFasttime_____Scall <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]]))
+      by______ = rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
+      by_Q____ = as.POSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
+      by_m____ = as.POSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by___H__ = as.POSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by____M_ = as.POSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by_____S = as.POSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]])
+    ),
+    fasttime = expression(
+      byY_____ = fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            ), tz = .helpers[["timezone"]]),
+      byYQ____ = fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                              ), tz = .helpers[["timezone"]]),
+      byYm____ = fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime),   month(.dateTime)                                                                        ), tz = .helpers[["timezone"]]),
+      byYmd___ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d"               , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                       ), tz = .helpers[["timezone"]]),
+      byYmdH__ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                      ), tz = .helpers[["timezone"]]),
+      byYmdHM_ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   ), tz = .helpers[["timezone"]]),
+      byYmdHMS = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime)), tz = .helpers[["timezone"]]),
 
-byRcppCCTZY_____call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                                                                                    ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZYQ____call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                                                                                      ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZYm____call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime),   month(.dateTime)                                                                                                                                ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZYmd___call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d"                 , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                                               ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZYmdH__call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00%s"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                      , strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
-byRcppCCTZYmdHM_call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   , strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
-byRcppCCTZYmdHMScall <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime), strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
+      by______ = rep(fasttime::fastPOSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
+      by_Q____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
+      by_m____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by___H__ = fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]),
+      by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]])
+    ),
+    RcppCCTZ = expression (
+      byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                                                                                    ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYQ____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                                                                                      ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime),   month(.dateTime)                                                                                                                                ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYmd___ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d"                 , year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                                               ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYmdH__ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00%s"    , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                      , strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]),
+      byYmdHM_ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   , strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]),
+      byYmdHMS = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime), strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]),
 
-byRcppCCTZ_Q____call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]))
-byRcppCCTZ_m____call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]))
-byRcppCCTZ___H__call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
-byRcppCCTZ____M_call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
-byRcppCCTZ_____Scall <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
+      by_Q____ = RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]),
+      by_m____ = RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]),
+      by___H__ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
+      by____M_ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
+      by_____S = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]])
+    )
+  ),
+  multi = list(
+    base = expression(
+      byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
+      byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),
+      byYmdH__ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
+      byYmdHM_ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
+      byYmdHMS = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
 
-byY_____call <- quote(as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]))
-byYQ____call <- quote(as.POSIXct(sprintf("%04d-%02d-01", year(.dateTime), quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
-byYm____call <- quote(as.POSIXct(  trunc(.dateTime     , units = "months"                             ), tz = .helpers[["timezone"]]))
-byYmd___call <- quote(as.POSIXct(  trunc(.dateTime     , units = "days"                               ), tz = .helpers[["timezone"]]))
-byYmdH__call <- quote(as.POSIXct(  trunc(.dateTime     , units = "hours"                              ), tz = .helpers[["timezone"]]))
-byYmdHM_call <- quote(as.POSIXct(  trunc(.dateTime     , units = "mins"                               ), tz = .helpers[["timezone"]]))
-byYmdHMScall <- quote(as.POSIXct(  trunc(.dateTime     , units = "secs"                               ), tz = .helpers[["timezone"]]))
+      by_m____ = as.POSIXct(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]),
+      by___H__ = as.POSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      by____M_ = as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      by_____S = as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]])
+    ),
+    fasttime = expression(
+      byY_____ = fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      byYm____ = fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]),
+      byYmdH__ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      byYmdHM_ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      byYmdHMS = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
 
-by______call <- quote(rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)))
-by_Q____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]))
-by_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]))
-by___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]))
-by____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]))
-by_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]]))
+      by_m____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]),
+      by___H__ = fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
+      by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]])
+    ),
+    RcppCCTZ = expression (
+      byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
+      byYmdH__ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d %H:%M:%E1S"  , tzstr = .helpers[["timezone"]]),
+      byYmdHM_ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]),
+      byYmdHMS = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]),
 
-# Calls, multiplier > 1L) ####
-byFasttimeMultY_____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-01-01"                   , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byFasttimeMultYm____call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-01"                 , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
-byFasttimeMultYmdH__call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:00:00"    , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byFasttimeMultYmdHM_call <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byFasttimeMultYmdHMScall <- quote(fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-
-byFasttimeMult_m____call <- quote(fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
-byFasttimeMult___H__call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byFasttimeMult____M_call <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byFasttimeMult_____Scall <- quote(fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-
-byRcppCCTZMultY_____call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZMultYm____call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]))
-byRcppCCTZMultYmdH__call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d %H:%M:%E1S"  , tzstr = .helpers[["timezone"]]))
-byRcppCCTZMultYmdHM_call <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
-byRcppCCTZMultYmdHMScall <- quote(RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), fmt = "%Y-%m-%d %H:%M:%E1S%z", tzstr = .helpers[["timezone"]]))
-
-byRcppCCTZMult_m____call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]))
-byRcppCCTZMult___H__call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
-byRcppCCTZMult____M_call <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
-byRcppCCTZMult_____Scall <- quote(RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]))
-
-byMultY_____call <- quote(as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ))
-byMultYm____call <- quote(as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ))
-byMultYmdH__call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ))
-byMultYmdHM_call <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"))
-byMultYmdHMScall <- quote(as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"))
-
-byMult_m____call <- quote(as.POSIXct(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), tz = .helpers[["timezone"]]))
-byMult___H__call <- quote(as.POSIXct(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byMult____M_call <- quote(as.POSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
-byMult_____Scall <- quote(as.POSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]))
+      by_m____ = RcppCCTZ::parseDatetime(sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L), fmt = "%Y-%m-%d"           , tzstr = .helpers[["timezone"]]),
+      by___H__ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
+      by____M_ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
+      by_____S = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]])
+    )
+  )
+)
 
 # Functions ####
 to.fakeUTCdateTime <- function(.dateTime, .helpers) {
@@ -181,21 +193,9 @@ byY_____ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byY_____call),
-      fasttime = eval(byFasttimeY_____call),
-      RcppCCTZ = eval(byRcppCCTZY_____call)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMultY_____call),
-      fasttime = eval(byFasttimeMultY_____call),
-      RcppCCTZ = eval(byRcppCCTZMultY_____call)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
 }
 
 #' @rdname TALFs
@@ -214,12 +214,7 @@ byYQ____ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  switch(
-    .helpers[["funbyApproach"]],
-    base     = eval(        byYQ____call),
-    fasttime = eval(byFasttimeYQ____call),
-    RcppCCTZ = eval(byRcppCCTZYQ____call)
-  )
+  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
 }
 
 #' @rdname TALFs
@@ -238,21 +233,9 @@ byYm____ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byYm____call),
-      fasttime = eval(byFasttimeYm____call),
-      RcppCCTZ = eval(byRcppCCTZYm____call)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMultYm____call),
-      fasttime = eval(byFasttimeMultYm____call),
-      RcppCCTZ = eval(byRcppCCTZMultYm____call)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
 }
 
 #' @rdname TALFs
@@ -271,12 +254,7 @@ byYmd___ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  switch(
-    .helpers[["funbyApproach"]],
-    base     = eval(        byYmd___call),
-    fasttime = eval(byFasttimeYmd___call),
-    RcppCCTZ = eval(byRcppCCTZYmd___call)
-  )
+  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
 }
 
 #' @rdname TALFs
@@ -287,14 +265,8 @@ byYmdH__ <- function(.dateTime, .helpers) {
     assertFasttimeOK(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byYmdH__call),
-      fasttime = eval(byFasttimeYmdH__call),
-      RcppCCTZ = eval(byRcppCCTZYmdH__call)
-    )
-  } else if (!grepl(
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+  if (singleOrMulti == "multi" && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
     .helpers[["timezone"]],
     ignore.case = TRUE
@@ -304,14 +276,9 @@ byYmdH__ <- function(.dateTime, .helpers) {
       "with a multiplier greater than one.",
       call. = FALSE
     )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMultYmdH__call),
-      fasttime = eval(byFasttimeMultYmdH__call),
-      RcppCCTZ = eval(byRcppCCTZMultYmdH__call)
-    )
   }
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
 }
 
 #' @rdname TALFs
@@ -322,21 +289,9 @@ byYmdHM_ <- function(.dateTime, .helpers) {
     assertFasttimeOK(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byYmdHM_call),
-      fasttime = eval(byFasttimeYmdHM_call),
-      RcppCCTZ = eval(byRcppCCTZYmdHM_call)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMultYmdHM_call),
-      fasttime = eval(byFasttimeMultYmdHM_call),
-      RcppCCTZ = eval(byRcppCCTZMultYmdHM_call)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
 }
 
 #' @rdname TALFs
@@ -347,28 +302,16 @@ byYmdHMS <- function(.dateTime, .helpers) {
     assertFasttimeOK(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byYmdHMScall),
-      fasttime = eval(byFasttimeYmdHMScall),
-      RcppCCTZ = eval(byRcppCCTZYmdHMScall)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMultYmdHMScall),
-      fasttime = eval(byFasttimeMultYmdHMScall),
-      RcppCCTZ = eval(byRcppCCTZMultYmdHMScall)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHMS"]])
 }
 
 ## Extracting family ####
 #' @rdname TALFs
 #' @export
 by______ <- function(.dateTime, .helpers) {
-  eval(by______call)
+  eval(byExternal[["single"]][["base"]][["by______"]])
 }
 
 #' @rdname TALFs
@@ -387,12 +330,7 @@ by_Q____ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  switch(
-    .helpers[["funbyApproach"]],
-    base     = eval(        by_Q____call),
-    fasttime = eval(byFasttime_Q____call),
-    RcppCCTZ = eval(byRcppCCTZ_Q____call)
-  )
+  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
 }
 
 #' @rdname TALFs
@@ -411,21 +349,9 @@ by_m____ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        by_m____call),
-      fasttime = eval(byFasttime_m____call),
-      RcppCCTZ = eval(byRcppCCTZ_m____call)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMult_m____call),
-      fasttime = eval(byFasttimeMult_m____call),
-      RcppCCTZ = eval(byRcppCCTZMult_m____call)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
 }
 
 #' @rdname TALFs
@@ -444,14 +370,8 @@ by___H__ <- function(.dateTime, .helpers) {
     .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        by___H__call),
-      fasttime = eval(byFasttime___H__call),
-      RcppCCTZ = eval(byRcppCCTZ___H__call)
-    )
-  } else if (!grepl(
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+  if (singleOrMulti == "multi" && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
     .helpers[["timezone"]],
     ignore.case = TRUE
@@ -461,14 +381,9 @@ by___H__ <- function(.dateTime, .helpers) {
       "with a multiplier greater than one.",
       call. = FALSE
     )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMult___H__call),
-      fasttime = eval(byFasttimeMult___H__call),
-      RcppCCTZ = eval(byRcppCCTZMult___H__call)
-    )
   }
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
 }
 
 #' @rdname TALFs
@@ -479,21 +394,9 @@ by____M_ <- function(.dateTime, .helpers) {
     assertFasttimeOK(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        by____M_call),
-      fasttime = eval(byFasttime____M_call),
-      RcppCCTZ = eval(byRcppCCTZ____M_call)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMult____M_call),
-      fasttime = eval(byFasttimeMult____M_call),
-      RcppCCTZ = eval(byRcppCCTZMult____M_call)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
 }
 
 #' @rdname TALFs
@@ -504,19 +407,7 @@ by_____S <- function(.dateTime, .helpers) {
     assertFasttimeOK(.dateTime, .helpers)
   }
 
-  if (.helpers[["multiplier"]] == 1L) {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        by_____Scall),
-      fasttime = eval(byFasttime_____Scall),
-      RcppCCTZ = eval(byRcppCCTZ_____Scall)
-    )
-  } else {
-    switch(
-      .helpers[["funbyApproach"]],
-      base     = eval(        byMult_____Scall),
-      fasttime = eval(byFasttimeMult_____Scall),
-      RcppCCTZ = eval(byRcppCCTZMult_____Scall)
-    )
-  }
+  singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
+
+  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_____S"]])
 }

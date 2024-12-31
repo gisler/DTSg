@@ -351,7 +351,13 @@ DTSg <- R6Class(
       cols
     },
 
-    funApply = function(funs, rowaggregate = FALSE, n = FALSE, ...) {
+    funApply = function(
+      funs,
+      rowaggregate = FALSE,
+      n = FALSE,
+      nCols = NULL,
+      ...
+    ) {
       rowCalls <- function(fun, dots) {
         as.call(c(fun, quote(unlist(.SD, recursive = FALSE)), dots))
       }
@@ -370,7 +376,15 @@ DTSg <- R6Class(
         dots = dots
       )
       if (n) {
-        calls <- append(calls, quote(.N))
+        if (nCols > 1L) {
+          calls <- append(calls, quote(.N))
+
+          message(".n column calculated from .dateTime column.")
+        } else {
+          calls <- append(calls, quote(sum(.n)))
+
+          message(".n column calculated disregarding any missing values.")
+        }
       }
 
       as.call(c(
@@ -497,36 +511,21 @@ DTSg <- R6Class(
         ))
       }
 
-      expr <- private$funApply(unname(fun), n = n, ...)
+      nCols <- length(cols)
 
-      if (length(cols) > 1L) {
-        private$.values <- private$.values[
-          ,
-          .j,
-          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-          .SDcols = cols,
-          env = list(.j = expr)
-        ]
-
-        if (n) {
-          message(".n column calculated from .dateTime column.")
-        }
-      } else {
-        private$.values <- private$.values[
-          !is.na(.cols),
-          .j,
-          keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
-          .SDcols = cols,
-          env = list(.cols = cols, .j = expr)
-        ]
-
-        if (n) {
-          message(
-            "Missing values are always stripped regardless of the value of a ",
-            'possible "na.rm" argument.'
-          )
-        }
+      if (n && nCols == 1L) {
+        private$.values[, .n := as.integer(!is.na(.cols)), env = list(.cols = cols)]
       }
+
+      expr <- private$funApply(unname(fun), n = n, nCols = nCols, ...)
+
+      private$.values <- private$.values[
+        ,
+        .j,
+        keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+        .SDcols = cols,
+        env = list(.j = expr)
+      ]
 
       if (!is.null(names(fun))) {
         resultCols <- sprintf(
