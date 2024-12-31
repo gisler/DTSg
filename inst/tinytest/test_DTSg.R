@@ -46,14 +46,40 @@ expect_identical(
 expect_identical(
   DTSg$new(DT4)$aggregate(by___H__, mean, cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
   c(1L, 0L, 2L, 0L),
-  info = '.n is correct (single column, function and "ignoreDST")'
+  info = ".n is correct (single column with many NAs, function and ignoreDST = TRUE)"
 )
 
 expect_identical(
   DTSg$new(DT4)$aggregate(by___H__, "mean", cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
   c(1L, 0L, 2L, 0L),
-  info = '.n is correct (single column, character function and "ignoreDST")'
+  info = ".n is correct (single column with many NAs, character function and ignoreDST = TRUE)"
 )
+
+options("datatable.verbose" = TRUE)
+expect_true(
+  {
+    output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, "sum"))
+    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+  },
+  info = "GForce optimsation kicked in (single column as well as function and n = FALSE)"
+)
+
+expect_true(
+  {
+    output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, "sum", n = TRUE))
+    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+  },
+  info = "GForce optimsation kicked in (single column as well as function and n = TRUE)"
+)
+
+expect_true(
+  {
+    output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, c(sum = "sum", mean = "mean"), cols = c("col1", "col2"), n = TRUE))
+    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+  },
+  info = "GForce optimsation kicked in (multiple columns as well as functions and n = TRUE)"
+)
+options("datatable.verbose" = FALSE)
 
 expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE),
