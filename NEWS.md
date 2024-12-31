@@ -1,5 +1,12 @@
 # DTSg v1.1.3.9000
 
+* Fixed a bug in the `aggregate()` method causing incorrect results under the following conditions:
+  * The time zone of the `DTSg` object is not UTC or a time zone equivalent to UTC.
+  * The `ignoreDST` argument is `TRUE`.
+  * A single column with missing values is aggregated.
+* Related to the above fix are the following breaking changes when aggregating a single column with missing values:
+  * A possible `.n` column now contains `0` instead of `NA` in case all values of a certain temporal aggregation level are missing.
+  * The stripping of missing values within summary functions now depends on the value of a possible `na.rm` argument.
 * Fixed support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions (either it stopped working somewhere down the line or it never worked). Please note that the column order of the resulting `DTSg` object is now different due to this fix.
 * The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Slightly improved documentation.
