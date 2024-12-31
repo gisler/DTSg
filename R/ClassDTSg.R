@@ -232,7 +232,7 @@ DTSg <- R6Class(
       if (!is.null(resultCols)) {
         resultCols <- private$extractCols(
           resultCols,
-          colon = FALSE,
+          isSelect = FALSE,
           len = length(cols),
           .var.name = "resultCols"
         )
@@ -308,7 +308,7 @@ DTSg <- R6Class(
 
     extractCols = function(
       cols,
-      colon = TRUE,
+      isSelect = TRUE,
       min.chars = 1L,
       any.missing = FALSE,
       len = NULL,
@@ -321,7 +321,7 @@ DTSg <- R6Class(
       allCols <- names(private$.values)[-1L]
 
       if (length(cols) == 1L && !cols %chin% allCols) {
-        if (colon && grepl(":", cols, fixed = TRUE)) {
+        if (isSelect && grepl(":", cols, fixed = TRUE)) {
           cols <- strsplit(cols, ":", fixed = TRUE)[[1L]]
 
           assertSubset(cols, allCols)
@@ -344,7 +344,7 @@ DTSg <- R6Class(
         unique = unique,
         .var.name = .var.name
       )
-      if (colon) {
+      if (isSelect) {
         assertSubset(cols, allCols)
       }
 
@@ -1387,7 +1387,7 @@ DTSg <- R6Class(
       cols <- private$extractCols(cols)
       values <- private$extractCols(
         values,
-        colon = FALSE,
+        isSelect = FALSE,
         len = length(cols)
       )
       assertNoStartingDot(values)
@@ -1414,10 +1414,10 @@ DTSg <- R6Class(
       }
       cols <- private$extractCols(
         cols,
-        colon = FALSE
+        isSelect = FALSE
       )
       assertNoStartingDot(cols)
-      if (length(cols) == length(names(private$.values)) - 1L &&
+      if (setequal(cols, names(private$.values)[-1L]) &&
             ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
             is.null(values))) {
         stop("Removing all value columns is not allowed.", call. = FALSE)

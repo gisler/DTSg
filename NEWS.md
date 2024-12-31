@@ -1,5 +1,7 @@
 # DTSg v1.1.3.9000
 
+* Sped up the `byY_____()` and `byYm____()` TALFs of the `"base"` `funbyApproach`.
+* The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Fixed a bug in the `aggregate()` method causing incorrect results under the following conditions:
   * The time zone of the `DTSg` object is not UTC or a time zone equivalent to UTC.
   * The `ignoreDST` argument is `TRUE`.
@@ -7,16 +9,17 @@
 * Related to the above fix are the following breaking changes when aggregating a single column with missing values:
   * A possible `.n` column now contains `0` instead of `NA` in case all values of a certain temporal aggregation level are missing.
   * The stripping of missing values within summary functions now depends on the value of a possible `na.rm` argument.
-* Fixed support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions (either it stopped working somewhere down the line or it never worked). Please note that the column order of the resulting `DTSg` object is now different due to this fix.
-* The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
-* Slightly improved documentation.
+* Fixed the support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions. Please note that the column order of the resulting `DTSg` object is now different due to this fix.
+* Fixed that the `set()` method was too anxious about removing all value columns.
+* Removed `magrittr` from the suggested packages list (vignettes now use R's native pipe operator).
+* Slightly improved the documentation.
 * Minor internal code improvements.
 
 # DTSg v1.1.3
 
-* Ceased use of legacy time zone symlinks in tests.
-* Bumped minimum tested R version from 4.0.2 to 4.2.3 using the corresponding _Posit_ public package manager snapshot.
-* Slightly improved documentation.
+* Ceased the use of legacy time zone symlinks in tests.
+* Bumped the minimum tested R version from 4.0.2 to 4.2.3 using the corresponding _Posit_ public package manager snapshot.
+* Slightly improved the documentation.
 * Minor internal code improvements.
 
 # DTSg v1.1.1
@@ -24,7 +27,7 @@
 * Column names can often now be additionally specified by a character string containing either comma separated column names, for example, `"x,y,z"`, or the start and end column separated by a colon, for example, `"x:z"`.
 * Fixed a bug in the `interpolateLinear()` function causing partial last observation carried forward behaviour when its `roll` argument was specified smaller than the size of the gap to be interpolated.
 * Fixed a bug in the `interpolateLinear()` function causing partial interpolation in certain cases when its `roll` argument was specified smaller than the size of the gap to be interpolated.
-* Slightly improved documentation.
+* Slightly improved the documentation.
 
 # DTSg v1.0.0
 
@@ -39,8 +42,8 @@
 * It is no longer possible to use the deprecated value `"all"` with the `class` argument of the `cols()` method in order to get all column names. Use the default value `NULL` instead for this. `"all"` is treated as a filter for classes of type `all` from now on.
 * Added an example to the `setCols()` method showing how to set measurement units with the help of the `units` package.
 * Added an example to the documentation of the `colapply()` method showing how to calculate running correlations with the help of the `runner` package.
-* Bumped minimum tested R version from 3.5.2 to 4.0.2 using the corresponding _MRAN_ repository snapshot.
-* Slightly improved documentation.
+* Bumped the minimum tested R version from 3.5.2 to 4.0.2 using the corresponding _MRAN_ repository snapshot.
+* Slightly improved the documentation.
 * Minor internal code improvements.
 
 # DTSg v0.8.1
@@ -49,12 +52,12 @@
 * Added undocumented `raggregate()`, `rbind()`, `set()` and `setnames()` methods exclusive only to the R6 interface acting as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods.
 * The `print()` method now truncates the number of printed rows of the values more aggressively.
 * Created a `pkgdown` website.
-* Improved vignettes and documentation.
+* Improved the vignettes and documentation.
 
 # DTSg v0.7.1
 
 * Fixed error "Error in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, : invalid value 0 for 'digits' argument" related to tests in upcoming R 4.2.0.
-* Slightly improved documentation.
+* Slightly improved the documentation.
 * Minor internal code improvements.
 
 # DTSg v0.7.0
@@ -67,7 +70,7 @@
 * Added `helpers` argument to the `colapply()` and `rollapply()` methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. `x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)` can now be written as `x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)`).
 * TALFs based on the `fasttime` package now also support time zones equivalent to UTC (execute `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list of supported time zones).
 * Fixed that a `DTSg` object with only one timestamp did not set the name of its *.dateTime* column as expected.
-* Improved vignettes and documentation.
+* Improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.6.0
@@ -83,7 +86,7 @@
 * The `R6Method` argument of the `S3WrapperGenerator()` function now also takes a public method of an `R6ClassGenerator` as a function and not only as an expression.
 * Fixed that not all missing values were made explicit after a call to the `merge()` method despite an `"explicit"` `na.status` in some cases.
 * Fixed that the `getCol()` method tried to query all numeric columns instead of only the first one by default.
-* Improved vignettes and documentation.
+* Improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.5.0
@@ -97,13 +100,13 @@
 * The `periodicity` field can now be actively set in order to change the periodicity of the time series.
 * The `timezone` field can now be actively set in order to convert the time zone of the series.
 * Fixed that a `DTSg` object with only one timestamp accepted a missing value in its *.dateTime* column.
-* Improved vignettes and documentation.
+* Improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.4.1
 
 * Fixed error "Error in as.POSIXct.numeric(e) : 'origin' must be supplied" related to the `rollback()` function in upcoming R 4.1.0.
-* Slightly improved vignettes.
+* Slightly improved the vignettes.
 * Minor internal code improvements.
 
 # DTSg v0.4.0
@@ -112,7 +115,7 @@
 * Settings of the option `DTSgClone` in e.g. *.RProfile* are now respected and not overwritten by `TRUE` when the package is loaded.
 * Fixed useless coercion of `POSIXct` *.dateTime* columns to `POSIXct` upon object creation in case they contained at least one missing value.
 * Switched to the unit testing framework of the `tinytest` instead of the `testthat` package.
-* Slightly improved vignettes and documentation.
+* Slightly improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.3.0
@@ -122,7 +125,7 @@
 * Changed the default value of the `class` argument of the `cols()` method from `"all"` to `NULL`, however, for backward compatibility `"all"` can still be used for the same result, but will eventually be treated as a filter for classes of type `all`.
 * Added `pattern` and `...` arguments to the `cols()` method: allows for searching column names.
 * Switched to the argument check functions of the `checkmate` package instead of the `assertive.base`, `assertive.numbers`, `assertive.sets` and `assertive.types` packages.
-* Slightly improved vignettes and documentation.
+* Slightly improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.2.1
@@ -138,13 +141,13 @@
 * Added `timestamps` field providing the total number of timestamps.
 * The `print()` method now omits empty metadata fields.
 * Added means to measure code coverage with the help of the `covr` package.
-* Removed `xts` from suggested packages list (already comes along with the `dygraphs` package).
-* Slightly improved vignettes and documentation.
+* Removed `xts` from the suggested packages list (already comes along with the `dygraphs` package).
+* Slightly improved the vignettes and documentation.
 * Minor internal code improvements.
 
 # DTSg v0.1.3
 
-* Slightly improved vignettes and documentation.
+* Slightly improved the vignettes and documentation.
 
 # DTSg v0.1.2
 
