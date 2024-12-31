@@ -68,16 +68,28 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.3.9000" id="dtsg-v1139000">DTSg v1.1.3.9000<a class="anchor" aria-label="anchor" href="#dtsg-v1139000"></a></h2>
-<ul><li>Fixed support for <code>data.table</code>’s <em>GForce</em> optimisation when the <code>fun</code> argument of the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method is provided with a character vector specifying summary functions (either it stopped working somewhere down the line or it never worked). Please note that the column order of the resulting <code>DTSg</code> object is now different due to this fix.</li>
+<ul><li>Sped up the <code><a href="../reference/TALFs.html">byY_____()</a></code> and <code><a href="../reference/TALFs.html">byYm____()</a></code> TALFs of the <code>"base"</code> <code>funbyApproach</code>.</li>
 <li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method does not print its values’ key anymore, as it used to be <code>data.table</code>’s default before v1.15.0.</li>
-<li>Slightly improved documentation.</li>
+<li>Fixed a bug in the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method causing incorrect results under the following conditions:
+<ul><li>The time zone of the <code>DTSg</code> object is not UTC or a time zone equivalent to UTC.</li>
+<li>The <code>ignoreDST</code> argument is <code>TRUE</code>.</li>
+<li>A single column with missing values is aggregated.</li>
+</ul></li>
+<li>Related to the above fix are the following breaking changes when aggregating a single column with missing values:
+<ul><li>A possible <code>.n</code> column now contains <code>0</code> instead of <code>NA</code> in case all values of a certain temporal aggregation level are missing.</li>
+<li>The stripping of missing values within summary functions now depends on the value of a possible <code>na.rm</code> argument.</li>
+</ul></li>
+<li>Fixed the support for <code>data.table</code>’s <em>GForce</em> optimisation when the <code>fun</code> argument of the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method is provided with a character vector specifying summary functions. Please note that the column order of the resulting <code>DTSg</code> object is now different due to this fix.</li>
+<li>Fixed that the <code><a href="../reference/setCols.DTSg.html">set()</a></code> method was too anxious about removing all value columns.</li>
+<li>Removed <code>magrittr</code> from the suggested packages list (vignettes now use R’s native pipe operator).</li>
+<li>Slightly improved the documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.3" id="dtsg-v113">DTSg v1.1.3<small>2023-09-27</small><a class="anchor" aria-label="anchor" href="#dtsg-v113"></a></h2>
-<ul><li>Ceased use of legacy time zone symlinks in tests.</li>
-<li>Bumped minimum tested R version from 4.0.2 to 4.2.3 using the corresponding <em>Posit</em> public package manager snapshot.</li>
-<li>Slightly improved documentation.</li>
+<ul><li>Ceased the use of legacy time zone symlinks in tests.</li>
+<li>Bumped the minimum tested R version from 4.0.2 to 4.2.3 using the corresponding <em>Posit</em> public package manager snapshot.</li>
+<li>Slightly improved the documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -85,7 +97,7 @@
 <ul><li>Column names can often now be additionally specified by a character string containing either comma separated column names, for example, <code>"x,y,z"</code>, or the start and end column separated by a colon, for example, <code>"x:z"</code>.</li>
 <li>Fixed a bug in the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function causing partial last observation carried forward behaviour when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
 <li>Fixed a bug in the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function causing partial interpolation in certain cases when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
-<li>Slightly improved documentation.</li>
+<li>Slightly improved the documentation.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="dtsg-v100">DTSg v1.0.0<small>2022-05-02</small><a class="anchor" aria-label="anchor" href="#dtsg-v100"></a></h2>
@@ -100,8 +112,8 @@
 <li>It is no longer possible to use the deprecated value <code>"all"</code> with the <code>class</code> argument of the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method in order to get all column names. Use the default value <code>NULL</code> instead for this. <code>"all"</code> is treated as a filter for classes of type <code>all</code> from now on.</li>
 <li>Added an example to the <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> method showing how to set measurement units with the help of the <code>units</code> package.</li>
 <li>Added an example to the documentation of the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method showing how to calculate running correlations with the help of the <code>runner</code> package.</li>
-<li>Bumped minimum tested R version from 3.5.2 to 4.0.2 using the corresponding <em>MRAN</em> repository snapshot.</li>
-<li>Slightly improved documentation.</li>
+<li>Bumped the minimum tested R version from 3.5.2 to 4.0.2 using the corresponding <em>MRAN</em> repository snapshot.</li>
+<li>Slightly improved the documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -110,12 +122,12 @@
 <li>Added undocumented <code><a href="../reference/rowaggregate.DTSg.html">raggregate()</a></code>, <code><a href="../reference/rowbind.DTSg.html">rbind()</a></code>, <code><a href="../reference/setCols.DTSg.html">set()</a></code> and <code><a href="../reference/setColNames.DTSg.html">setnames()</a></code> methods exclusive only to the R6 interface acting as aliases for the <code><a href="../reference/rowaggregate.DTSg.html">rowaggregate()</a></code>, <code><a href="../reference/rowbind.DTSg.html">rowbind()</a></code>, <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> and <code><a href="../reference/setColNames.DTSg.html">setColNames()</a></code> methods.</li>
 <li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method now truncates the number of printed rows of the values more aggressively.</li>
 <li>Created a <code>pkgdown</code> website.</li>
-<li>Improved vignettes and documentation.</li>
+<li>Improved the vignettes and documentation.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.1" id="dtsg-v071">DTSg v0.7.1<small>2021-05-30</small><a class="anchor" aria-label="anchor" href="#dtsg-v071"></a></h2>
 <ul><li>Fixed error “Error in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, : invalid value 0 for ‘digits’ argument” related to tests in upcoming R 4.2.0.</li>
-<li>Slightly improved documentation.</li>
+<li>Slightly improved the documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -128,7 +140,7 @@
 <li>Added <code>helpers</code> argument to the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/rollapply.DTSg.html">rollapply()</a></code> methods: controls if helper data is passed on to an applied function (makes occasionally needed anonymous function wrappers obsolete, e.g. <code>x$colapply(fun = function(x, ...) {cumsum(x)}, funby = byYm____)</code> can now be written as <code>x$colapply(fun = cumsum, helpers = FALSE, funby = byYm____)</code>).</li>
 <li>TALFs based on the <code>fasttime</code> package now also support time zones equivalent to UTC (execute <code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones).</li>
 <li>Fixed that a <code>DTSg</code> object with only one timestamp did not set the name of its <em>.dateTime</em> column as expected.</li>
-<li>Improved vignettes and documentation.</li>
+<li>Improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -144,7 +156,7 @@
 <li>The <code>R6Method</code> argument of the <code><a href="../reference/S3WrapperGenerator.html">S3WrapperGenerator()</a></code> function now also takes a public method of an <code>R6ClassGenerator</code> as a function and not only as an expression.</li>
 <li>Fixed that not all missing values were made explicit after a call to the <code><a href="../reference/merge.DTSg.html">merge()</a></code> method despite an <code>"explicit"</code> <code>na.status</code> in some cases.</li>
 <li>Fixed that the <code><a href="../reference/getCol.DTSg.html">getCol()</a></code> method tried to query all numeric columns instead of only the first one by default.</li>
-<li>Improved vignettes and documentation.</li>
+<li>Improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -158,13 +170,13 @@
 <li>The <code>periodicity</code> field can now be actively set in order to change the periodicity of the time series.</li>
 <li>The <code>timezone</code> field can now be actively set in order to convert the time zone of the series.</li>
 <li>Fixed that a <code>DTSg</code> object with only one timestamp accepted a missing value in its <em>.dateTime</em> column.</li>
-<li>Improved vignettes and documentation.</li>
+<li>Improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.1" id="dtsg-v041">DTSg v0.4.1<small>2020-05-08</small><a class="anchor" aria-label="anchor" href="#dtsg-v041"></a></h2>
 <ul><li>Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be supplied” related to the <code><a href="../reference/rollback.html">rollback()</a></code> function in upcoming R 4.1.0.</li>
-<li>Slightly improved vignettes.</li>
+<li>Slightly improved the vignettes.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -173,7 +185,7 @@
 <li>Settings of the option <code>DTSgClone</code> in e.g. <em>.RProfile</em> are now respected and not overwritten by <code>TRUE</code> when the package is loaded.</li>
 <li>Fixed useless coercion of <code>POSIXct</code> <em>.dateTime</em> columns to <code>POSIXct</code> upon object creation in case they contained at least one missing value.</li>
 <li>Switched to the unit testing framework of the <code>tinytest</code> instead of the <code>testthat</code> package.</li>
-<li>Slightly improved vignettes and documentation.</li>
+<li>Slightly improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -184,7 +196,7 @@
 <li>Changed the default value of the <code>class</code> argument of the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method from <code>"all"</code> to <code>NULL</code>, however, for backward compatibility <code>"all"</code> can still be used for the same result, but will eventually be treated as a filter for classes of type <code>all</code>.</li>
 <li>Added <code>pattern</code> and <code>...</code> arguments to the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for searching column names.</li>
 <li>Switched to the argument check functions of the <code>checkmate</code> package instead of the <code>assertive.base</code>, <code>assertive.numbers</code>, <code>assertive.sets</code> and <code>assertive.types</code> packages.</li>
-<li>Slightly improved vignettes and documentation.</li>
+<li>Slightly improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
@@ -200,13 +212,13 @@
 <li>Added <code>timestamps</code> field providing the total number of timestamps.</li>
 <li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method now omits empty metadata fields.</li>
 <li>Added means to measure code coverage with the help of the <code>covr</code> package.</li>
-<li>Removed <code>xts</code> from suggested packages list (already comes along with the <code>dygraphs</code> package).</li>
-<li>Slightly improved vignettes and documentation.</li>
+<li>Removed <code>xts</code> from the suggested packages list (already comes along with the <code>dygraphs</code> package).</li>
+<li>Slightly improved the vignettes and documentation.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.3" id="dtsg-v013">DTSg v0.1.3<small>2019-08-29</small><a class="anchor" aria-label="anchor" href="#dtsg-v013"></a></h2>
-<ul><li>Slightly improved vignettes and documentation.</li>
+<ul><li>Slightly improved the vignettes and documentation.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.2" id="dtsg-v012">DTSg v0.1.2<small>2019-03-13</small><a class="anchor" aria-label="anchor" href="#dtsg-v012"></a></h2>
