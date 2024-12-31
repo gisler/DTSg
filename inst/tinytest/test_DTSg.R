@@ -44,6 +44,18 @@ expect_identical(
 )
 
 expect_identical(
+  DTSg$new(DT4)$aggregate(by___H__, mean, cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
+  c(1L, 0L, 2L, 0L),
+  info = '.n is correct (single column, function and "ignoreDST")'
+)
+
+expect_identical(
+  DTSg$new(DT4)$aggregate(by___H__, "mean", cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
+  c(1L, 0L, 2L, 0L),
+  info = '.n is correct (single column, character function and "ignoreDST")'
+)
+
+expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE),
   data.table(
     .dateTime = seq(

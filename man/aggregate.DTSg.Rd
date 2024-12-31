@@ -133,8 +133,7 @@ Depending on the number of columns to aggregate, the \code{.n} column contains
 different counts:
 \itemize{
 \item One column: The counts are calculated from the columns' values disregarding
-any missing values. This means that missing values are always stripped
-regardless of the value of a possible \code{na.rm} argument.
+any missing values.
 \item More than one column: The counts are calculated from the \emph{.dateTime} column
 including all missing values.
 }
