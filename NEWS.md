@@ -10,6 +10,7 @@
 * Fixed support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions (either it stopped working somewhere down the line or it never worked). Please note that the column order of the resulting `DTSg` object is now different due to this fix.
 * The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Slightly improved documentation.
+* Fixed that the `set()` method was too anxious about removing all value columns.
 * Minor internal code improvements.
 
 # DTSg v1.1.3

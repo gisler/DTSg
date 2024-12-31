@@ -1047,6 +1047,11 @@ for (method in c("setCols", "set")) {
     DTSg$new(DT1)[[method]](, c("col1", "col2", "col3"), NULL),
     info = "removing all value columns returns error"
   )
+
+  expect_warning(
+    DTSg$new(DT1)[[method]](, c("col1", "col2", "col4"), NULL),
+    info = "removing non-existent value column returns warning from data.table"
+  )
 }
 
 #### subset method ####

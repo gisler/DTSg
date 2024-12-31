@@ -1417,7 +1417,7 @@ DTSg <- R6Class(
         isSelect = FALSE
       )
       assertNoStartingDot(cols)
-      if (length(cols) == length(names(private$.values)) - 1L &&
+      if (setequal(cols, names(private$.values)[-1L]) &&
             ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
             is.null(values))) {
         stop("Removing all value columns is not allowed.", call. = FALSE)
