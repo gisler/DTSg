@@ -1,6 +1,6 @@
 # DTSg v1.1.3.9000
 
-* Added `"timechange"` `funbyApproach` utilising `timechange::time_floor()` as the main function for transforming timestamps. This new approach generally is faster than the existing ones for both families of TALFs and all time zones.
+* Added `"timechange"` `funbyApproach` utilising `timechange::time_floor()` as the main function for transforming timestamps. This new approach generally is way faster than the existing ones for both families of TALFs and all time zones.
 * Sped up the `byY_____()` and `byYm____()` TALFs of the `"base"` `funbyApproach`.
 * The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Fixed a bug in the `aggregate()` method causing incorrect results under the following conditions:
