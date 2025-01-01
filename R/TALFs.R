@@ -259,8 +259,6 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #' - `by____M_` extracts the minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:11:00.0_
 #' - `by_____S` extracts the seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:00:11.0_
 #'
-#' Please note that the `byFasttime*` versions are deprecated.
-#'
 #' @return All functions return a [`POSIXct`] vector with timestamps
 #'   corresponding to the function's temporal aggregation level.
 #'
