@@ -71,7 +71,7 @@ dataTableApproach <- function(.dateTime, .helpers, by) {
     DT <- timestamps[DT, on = .(.dateTime4join == .dateTime)]
   }
 
-  structure(DT[[".dateTime"]], tzone = .helpers[["timezone"]])
+  structure(DT[[1L]], tzone = .helpers[["timezone"]])
 }
 
 # Nested list of expressions ####
@@ -273,10 +273,7 @@ NULL
 #' @rdname TALFs
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -294,10 +291,7 @@ byY_____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYQ____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -313,10 +307,7 @@ byYQ____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYm____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -334,10 +325,7 @@ byYm____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmd___ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -353,10 +341,7 @@ byYmd___ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdH__ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
   if (singleOrMulti == "multi" && !grepl(
@@ -377,10 +362,7 @@ byYmdH__ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdHM_ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
@@ -390,10 +372,7 @@ byYmdHM_ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 byYmdHMS <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
@@ -410,10 +389,7 @@ by______ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_Q____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -429,10 +405,7 @@ by_Q____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_m____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -450,10 +423,7 @@ by_m____ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by___H__ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
@@ -482,10 +452,7 @@ by___H__ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by____M_ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
@@ -495,10 +462,7 @@ by____M_ <- function(.dateTime, .helpers) {
 #' @rdname TALFs
 #' @export
 by_____S <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
