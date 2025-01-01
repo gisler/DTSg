@@ -71,7 +71,7 @@
 <ul><li>Sped up the <code><a href="../reference/TALFs.html">byY_____()</a></code> and <code><a href="../reference/TALFs.html">byYm____()</a></code> TALFs of the <code>"base"</code> <code>funbyApproach</code>.</li>
 <li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method does not print its values’ key anymore, as it used to be <code>data.table</code>’s default before v1.15.0.</li>
 <li>Fixed a bug in the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method causing incorrect results under the following conditions:
-<ul><li>The time zone of the <code>DTSg</code> object is not UTC or a time zone equivalent to UTC.</li>
+<ul><li>The time zone of the <code>DTSg</code> object is not UTC or equivalent.</li>
 <li>The <code>ignoreDST</code> argument is <code>TRUE</code>.</li>
 <li>A single column with missing values is aggregated.</li>
 </ul></li>
@@ -81,6 +81,7 @@
 </ul></li>
 <li>Fixed the support for <code>data.table</code>’s <em>GForce</em> optimisation when the <code>fun</code> argument of the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method is provided with a character vector specifying summary functions. Please note that the column order of the resulting <code>DTSg</code> object is now different due to this fix.</li>
 <li>Fixed that the <code><a href="../reference/setCols.DTSg.html">set()</a></code> method was too anxious about removing all value columns.</li>
+<li>It is no longer possible to use the deprecated <code>byFasttime*()</code> TALFs. Please use the <code>"fasttime"</code> <code>funbyApproach</code> from now on.</li>
 <li>Removed <code>magrittr</code> from the suggested packages list (vignettes now use R’s native pipe operator).</li>
 <li>Slightly improved the documentation.</li>
 <li>Minor internal code improvements.</li>
@@ -108,7 +109,7 @@
 <li>Added <code>mode</code> and <code>typeof</code> arguments to the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method: allows for getting column names with a certain <code><a href="https://rdrr.io/r/base/mode.html" class="external-link">mode()</a></code> and/or <code><a href="https://rdrr.io/r/base/typeof.html" class="external-link">typeof()</a></code>. This can be especially handy when making use of the <code>units</code> package.</li>
 <li>Added <code>DTSgFast</code>, <code>DTSgFunbyApproach</code> and <code>DTSgNA.status</code> options providing default values for the <code>fast</code>, <code>funbyApproach</code> and <code>na.status</code> arguments of the <code><a href="../reference/DTSg.html">new()</a></code> method.</li>
 <li>Added <code>DTSgDeprecatedWarnings</code> option: allows for disabling warnings from deprecated features.</li>
-<li>Greatly sped up the <code><a href="../reference/TALFs.html">by______()</a></code> and <code><a href="../reference/TALFs.html">byFasttime______()</a></code> TALFs.</li>
+<li>Greatly sped up the <code><a href="../reference/TALFs.html">by______()</a></code> and <code>byFasttime______()</code> TALFs.</li>
 <li>It is no longer possible to use the deprecated value <code>"all"</code> with the <code>class</code> argument of the <code><a href="../reference/cols.DTSg.html">cols()</a></code> method in order to get all column names. Use the default value <code>NULL</code> instead for this. <code>"all"</code> is treated as a filter for classes of type <code>all</code> from now on.</li>
 <li>Added an example to the <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> method showing how to set measurement units with the help of the <code>units</code> package.</li>
 <li>Added an example to the documentation of the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method showing how to calculate running correlations with the help of the <code>runner</code> package.</li>

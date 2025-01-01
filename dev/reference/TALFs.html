@@ -66,7 +66,7 @@ Other uses are possible, but not recommended."><meta name="robots" content="noin
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Temporal Aggregation Level Functions (TALFs)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/main/R/TALFs.R" class="external-link"><code>R/TALFs.R</code></a>, <a href="https://github.com/gisler/DTSg/blob/main/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/main/R/TALFs.R" class="external-link"><code>R/TALFs.R</code></a></small>
     <div class="hidden name"><code>TALFs.Rd</code></div>
     </div>
 
@@ -102,33 +102,7 @@ Other uses are possible, but not recommended.</p>
 <span></span>
 <span><span class="fu">by____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttimeYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">byFasttime_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -182,8 +156,7 @@ certain part of timestamps:</p><ul><li><p><code>by______</code> extracts nothing
 <li><p><code>by___H__</code> extracts the hours,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 11:00:00.0</em></p></li>
 <li><p><code>by____M_</code> extracts the minutes,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:11:00.0</em></p></li>
 <li><p><code>by_____S</code> extracts the seconds,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-01-01 00:00:11.0</em></p></li>
-</ul><p>Please note that the <code>byFasttime*</code> versions are deprecated.</p>
-    </div>
+</ul></div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="aggregate.DTSg.html">aggregate</a></code>, <code><a href="colapply.DTSg.html">colapply</a></code>, <code><a href="subset.DTSg.html">subset</a></code></p></div>
