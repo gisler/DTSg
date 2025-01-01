@@ -1,77 +1,32 @@
-# data.table approach ####
-byDataTableExpr <- list(
-  byExpr = expression(
-    byY_____ =      year(.dateTime)                                                                                             %/% multiplier * multiplier                             ,
-    byYm____ = list(year(.dateTime),  (month(.dateTime) - 1L)                                                                   %/% multiplier * multiplier + 1L                       ),
-    byYmd___ = list(year(.dateTime),   month(.dateTime), mday(.dateTime)                                                                                                               ),
-    byYmdH__ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
-    byYmdHM_ = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
-    byYmdHMS = list(year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% multiplier * multiplier, as.POSIXlt(.dateTime)$zone),
+# timechange approach ####
+byTimechangeExpr <- expression(
+  byY_____ = timechange::time_floor(.dateTimeForced, sprintf("%s year"  , .helpers[["multiplier"]])),
+  byYm____ = timechange::time_floor(.dateTimeForced, sprintf("%s month" , .helpers[["multiplier"]])),
+  byYmd___ = timechange::time_floor(.dateTimeForced, sprintf("%s day"   , .helpers[["multiplier"]])),
+  byYmdH__ = timechange::time_floor(.dateTimeForced, sprintf("%s hour"  , .helpers[["multiplier"]])),
+  byYmdHM_ = timechange::time_floor(.dateTimeForced, sprintf("%s minute", .helpers[["multiplier"]])),
+  byYmdHMS = timechange::time_floor(.dateTimeForced, sprintf("%s second", .helpers[["multiplier"]])),
 
-    by______ = rep(0L, length(.dateTime)),
-    by_m____ =  (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L,
-    by___H__ =    hour(.dateTime)       %/% multiplier * multiplier     ,
-    by____M_ =  minute(.dateTime)       %/% multiplier * multiplier     ,
-    by_____S =  second(.dateTime)       %/% multiplier * multiplier
-  ),
-  byPOSIXctExpr = expression(
-    by______ = rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime))
-  ),
-  bySprintfExpr = expression(
-    by_m____ = sprintf("2199-%02d-01"         , (month(.dateTime) - 1L) %/% multiplier * multiplier + 1L),
-    by___H__ = sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% multiplier * multiplier     ),
-    by____M_ = sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% multiplier * multiplier     ),
-    by_____S = sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% multiplier * multiplier     )
-  )
+  by______ = rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
+  by_m____ = timechange::time_update(.dateTimeForced, year = 2199L,             mday = 1L, hour = 0L, minute = 0L, second = 0L,  month = (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L),
+  by___H__ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L,            minute = 0L, second = 0L,   hour =   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by____M_ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L,              second = 0L, minute = minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by_____S = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L, minute = 0L,              second = second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     )
 )
 
-dataTableApproach <- function(.dateTime, .helpers, by) {
+timechangeApproach <- function(.dateTime, .helpers, by) {
   if (by %chin% c("byYQ____", "by_Q____")) {
     by <- if (by == "byYQ____") "byYm____" else "by_m____"
-    multiplier <- 3L
+    .helpers[["multiplier"]] <- 3L
+  }
+
+  if (attr(.dateTime, "tzone") != .helpers[["timezone"]]) {
+    .dateTimeForced <- timechange::time_force_tz(.dateTime, tz = .helpers[["timezone"]])
   } else {
-    multiplier <- .helpers[["multiplier"]]
+    .dateTimeForced <- .dateTime
   }
 
-  if (by == "by______") {
-    type <- "byPOSIXctExpr"
-  } else if (by %chin% c(
-    "by_Q____",
-    "by_m____",
-    "by___H__",
-    "by____M_",
-    "by_____S"
-  )) {
-    type <- "bySprintfExpr"
-  } else {
-    type <- "byExpr"
-  }
-
-  DT <- data.table(.dateTime = .dateTime)
-
-  if (type == "byExpr") {
-    DT[, .dateTime := min(.dateTime), by = eval(byDataTableExpr[[type]][[by]])]
-  } else {
-    DT[, .dateTime := eval(byDataTableExpr[[type]][[by]])]
-  }
-
-  if (type == "bySprintfExpr") {
-    timestamps <- unique(DT)
-
-    fmt <- if (by == "by_m____") "%Y-%m-%d" else "%Y-%m-%d %H:%M:%E1S"
-    timestamps[, `:=`(
-      .dateTime4join = .dateTime,
-      .dateTime = RcppCCTZ::parseDatetime(
-        .dateTime,
-        fmt = fmt,
-        tzstr = .helpers[["timezone"]]
-      )
-    )]
-
-    DT <- timestamps[DT, on = .(.dateTime4join == .dateTime)]
-  }
-
-  structure(DT[[1L]], tzone = .helpers[["timezone"]])
+  eval(byTimechangeExpr[[by]])
 }
 
 # Nested list of expressions ####
@@ -102,7 +57,6 @@ byExpr <- list(
       byYmdHM_ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   ), tz = .helpers[["timezone"]]),
       byYmdHMS = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime)), tz = .helpers[["timezone"]]),
 
-      by______ = rep(fasttime::fastPOSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
       by_Q____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
       by_m____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]),
       by___H__ = fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]),
@@ -126,25 +80,10 @@ byExpr <- list(
     )
   ),
   multi = list(
-    "data.table" = expression(
-      byY_____ = dataTableApproach(.dateTime, .helpers, "byY_____"),
-      byYQ____ = dataTableApproach(.dateTime, .helpers, "byYQ____"),
-      byYm____ = dataTableApproach(.dateTime, .helpers, "byYm____"),
-      byYmd___ = dataTableApproach(.dateTime, .helpers, "byYmd___"),
-      byYmdH__ = dataTableApproach(.dateTime, .helpers, "byYmdH__"),
-      byYmdHM_ = dataTableApproach(.dateTime, .helpers, "byYmdHM_"),
-      byYmdHMS = dataTableApproach(.dateTime, .helpers, "byYmdHMS"),
-
-      by______ = dataTableApproach(.dateTime, .helpers, "by______"),
-      by_Q____ = dataTableApproach(.dateTime, .helpers, "by_Q____"),
-      by_m____ = dataTableApproach(.dateTime, .helpers, "by_m____"),
-      by___H__ = dataTableApproach(.dateTime, .helpers, "by___H__"),
-      by____M_ = dataTableApproach(.dateTime, .helpers, "by____M_"),
-      by_____S = dataTableApproach(.dateTime, .helpers, "by_____S")
-    ),
     base = expression(
       byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),
+      byYmd___ = as.POSIXct(trunc(.dateTime, units = "days"                                                                                                                                                                                                                                      ), tz = .helpers[["timezone"]]                                ),
       byYmdH__ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYmdHM_ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
       byYmdHMS = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
@@ -177,10 +116,26 @@ byExpr <- list(
       by___H__ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
       by____M_ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
       by_____S = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]])
+    ),
+    timechange = expression (
+      byY_____ = timechangeApproach(.dateTime, .helpers, "byY_____"),
+      byYQ____ = timechangeApproach(.dateTime, .helpers, "byYQ____"),
+      byYm____ = timechangeApproach(.dateTime, .helpers, "byYm____"),
+      byYmd___ = timechangeApproach(.dateTime, .helpers, "byYmd___"),
+      byYmdH__ = timechangeApproach(.dateTime, .helpers, "byYmdH__"),
+      byYmdHM_ = timechangeApproach(.dateTime, .helpers, "byYmdHM_"),
+      byYmdHMS = timechangeApproach(.dateTime, .helpers, "byYmdHMS"),
+
+      by______ = timechangeApproach(.dateTime, .helpers, "by______"),
+      by_Q____ = timechangeApproach(.dateTime, .helpers, "by_Q____"),
+      by_m____ = timechangeApproach(.dateTime, .helpers, "by_m____"),
+      by___H__ = timechangeApproach(.dateTime, .helpers, "by___H__"),
+      by____M_ = timechangeApproach(.dateTime, .helpers, "by____M_"),
+      by_____S = timechangeApproach(.dateTime, .helpers, "by_____S")
     )
   )
 )
-byExpr[["single"]][["data.table"]] <- byExpr[["multi"]][["data.table"]]
+byExpr[["single"]][["timechange"]] <- byExpr[["multi"]][["timechange"]]
 
 # Functions ####
 toFakeUTCdateTime <- function(.dateTime, .helpers) {
@@ -224,18 +179,20 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @section Families and flavours:
 #' There are two families of temporal aggregation level functions. The one
 #' family truncates timestamps (truncating family), the other extracts a certain
-#' part of them (extracting family). Each family comes in three flavours: the
+#' part of them (extracting family). Each family comes in four flavours: the
 #' first relies solely on base \R, the second utilises [`fasttime::fastPOSIXct`]
-#' of \pkg{fasttime} and the third [`RcppCCTZ::parseDatetime`] of
-#' \pkg{RcppCCTZ}.
+#' of \pkg{fasttime}, the third [`RcppCCTZ::parseDatetime`] of \pkg{RcppCCTZ}
+#' and the fourth [`timechange::time_floor`] of \pkg{timechange}.
 #'
-#' The \pkg{fasttime} flavour works with UTC and equivalent as well as all
-#' Etc/GMT time zones only (execute
+#' The \pkg{timechange} flavour generally is the fastest for both families of
+#' functions and all time zones. Second best option for the extracting family of
+#' functions generally is the \pkg{fasttime} flavour, which, however, works with
+#' UTC and equivalent as well as all Etc/GMT time zones only (execute
 #' `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case
 #' = TRUE, value = TRUE)` for a full list of supported time zones) and is
-#' limited to timestamps between the years 1970 and 2199, but generally is the
-#' fastest for the extracting family of functions. For time zones other than UTC
-#' and equivalent the \pkg{RcppCCTZ} flavour generally is the fastest.
+#' limited to timestamps between the years 1970 and 2199. For time zones other
+#' than UTC and equivalent the \pkg{RcppCCTZ} flavour generally is the second
+#' best option.
 #'
 #' Use the `funbyApproach` argument of the respective calling method in order to
 #' specify the utilised flavour.
@@ -349,8 +306,7 @@ byYmdH__ <- function(.dateTime, .helpers) {
   )) {
     stop(
       'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one.",
-      call. = FALSE
+      "with a multiplier greater than one."
     )
   }
 
@@ -439,8 +395,7 @@ by___H__ <- function(.dateTime, .helpers) {
   )) {
     stop(
       'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one.",
-      call. = FALSE
+      "with a multiplier greater than one."
     )
   }
 

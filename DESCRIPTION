@@ -25,15 +25,16 @@ Imports:
     checkmate,
     data.table,
     methods,
-    R6,
-    RcppCCTZ,
+    R6
 Suggests:
     dygraphs,
     fasttime,
     knitr,
     RColorBrewer,
+    RcppCCTZ,
     rmarkdown,
     runner (>= 0.3.5),
+    timechange,
     tinytest,
     units
 RoxygenNote: 7.3.2

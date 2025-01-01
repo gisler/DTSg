@@ -2,7 +2,6 @@
 #' @import data.table
 #' @import methods
 #' @import R6
-#' @import RcppCCTZ
 NULL
 
 .onLoad <- function(libname, pkgname) {
@@ -16,6 +15,6 @@ NULL
   getOption("DTSgClone"             , options(DTSgClone              = TRUE        ))
   getOption("DTSgDeprecatedWarnings", options(DTSgDeprecatedWarnings = TRUE        ))
   getOption("DTSgFast"              , options(DTSgFast               = FALSE       ))
-  getOption("DTSgFunbyApproach"     , options(DTSgFunbyApproach      = "data.table"))
+  getOption("DTSgFunbyApproach"     , options(DTSgFunbyApproach      = "base"      ))
   getOption("DTSgNA.status"         , options(DTSgNA.status          = "explicit"  ))
 }

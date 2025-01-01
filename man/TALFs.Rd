@@ -63,17 +63,19 @@ Other uses are possible, but not recommended.
 
 There are two families of temporal aggregation level functions. The one
 family truncates timestamps (truncating family), the other extracts a certain
-part of them (extracting family). Each family comes in three flavours: the
+part of them (extracting family). Each family comes in four flavours: the
 first relies solely on base \R, the second utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}
-of \pkg{fasttime} and the third \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} of
-\pkg{RcppCCTZ}.
+of \pkg{fasttime}, the third \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} of \pkg{RcppCCTZ}
+and the fourth \code{\link[timechange:time_round]{timechange::time_floor}} of \pkg{timechange}.
 
-The \pkg{fasttime} flavour works with UTC and equivalent as well as all
-Etc/GMT time zones only (execute
+The \pkg{timechange} flavour generally is the fastest for both families of
+functions and all time zones. Second best option for the extracting family of
+functions generally is the \pkg{fasttime} flavour, which, however, works with
+UTC and equivalent as well as all Etc/GMT time zones only (execute
 \code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)} for a full list of supported time zones) and is
-limited to timestamps between the years 1970 and 2199, but generally is the
-fastest for the extracting family of functions. For time zones other than UTC
-and equivalent the \pkg{RcppCCTZ} flavour generally is the fastest.
+limited to timestamps between the years 1970 and 2199. For time zones other
+than UTC and equivalent the \pkg{RcppCCTZ} flavour generally is the second
+best option.
 
 Use the \code{funbyApproach} argument of the respective calling method in order to
 specify the utilised flavour.

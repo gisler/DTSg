@@ -1,28 +1,20 @@
 assertFunbyApproach <- function(.dateTime, .helpers) {
   funbyApproach <- match.arg(
     .helpers[["funbyApproach"]],
-    c("base", "data.table", "fasttime", "RcppCCTZ")
+    c("base", "fasttime", "RcppCCTZ", "timechange")
   )
 
-  if (funbyApproach == "data.table") {
-    assertNAstatusPeriodicityOK(
-      .helpers[["na.status"]],
-      .helpers[["periodicity"]],
-      "error"
-    )
+  if (funbyApproach == "timechange") {
+    if(!requireNamespace("timechange", quietly = TRUE)) {
+      stop('Package "timechange" must be installed for this approach.')
+    }
   } else if (funbyApproach == "fasttime") {
     if(!requireNamespace("fasttime", quietly = TRUE)) {
-      stop(
-        'Package "fasttime" must be installed for this approach.',
-        call. = FALSE
-      )
+      stop('Package "fasttime" must be installed for this approach.')
     }
 
     if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
-      stop(
-        "Timestamps must be between the years 1970 and 2199 for this approach.",
-        call. = FALSE
-      )
+      stop("Timestamps must be between the years 1970 and 2199 for this approach.")
     }
 
     if (!grepl(
@@ -30,17 +22,12 @@ assertFunbyApproach <- function(.dateTime, .helpers) {
       .helpers[["timezone"]],
       ignore.case = TRUE
     )) {
-      stop(
-        'Time zone must be "UTC" or equivalent for this approach.',
-        call. = FALSE
-      )
+      stop('Time zone must be "UTC" or equivalent for this approach.')
     }
-  } else if (funbyApproach == "RcppCCTZ" &&
-               !requireNamespace("RcppCCTZ", quietly = TRUE)) {
-    stop(
-      'Package "RcppCCTZ" must be installed for this approach.',
-      call. = FALSE
-    )
+  } else if (funbyApproach == "RcppCCTZ") {
+    if (!requireNamespace("RcppCCTZ", quietly = TRUE)) {
+      stop('Package "RcppCCTZ" must be installed for this approach.')
+    }
   }
 
   invisible(funbyApproach)
@@ -48,7 +35,7 @@ assertFunbyApproach <- function(.dateTime, .helpers) {
 
 assertFilter <- function(x, limit) {
   if (!testMultiClass(x, c("integer", "numeric")) && !is.expression(x)) {
-    stop('"i" must be a numeric vector or an expression.', call. = FALSE)
+    stop('"i" must be a numeric vector or an expression.')
   } else if (testMultiClass(x, c("integer", "numeric"))) {
     assertIntegerish(
       x,
@@ -77,9 +64,9 @@ assertNAstatusPeriodicityOK <- function(
   )
   if (na.status != "explicit" || periodicity == "unrecognised") {
     if (level == "error") {
-      stop(msg, call. = FALSE)
+      stop(msg)
     } else {
-      warning(msg, call. = FALSE)
+      warning(msg)
     }
   }
 
@@ -88,10 +75,7 @@ assertNAstatusPeriodicityOK <- function(
 
 assertNoStartingDot <- function(x) {
   if (any(startsWith(x, "."))) {
-    stop(
-      sprintf('"%s" must not start with a ".".', deparse(substitute(x))),
-      call. = FALSE
-    )
+    stop(sprintf('"%s" must not start with a ".".', deparse(substitute(x))))
   }
 
   invisible(x)
