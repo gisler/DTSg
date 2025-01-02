@@ -674,14 +674,14 @@ DTSg <- R6Class(
           .funbyHelpers
         ), any.missing = FALSE, len = 1L)
 
-        by <- funby(private$.values[[".dateTime"]], .funbyHelpers)
+        by <- funby(private$.values[[1L]], .funbyHelpers)
       } else {
         by <- NULL
       }
 
       if (helpers) {
         .helpers <- list(
-          .dateTime = private$.values[[".dateTime"]],
+          .dateTime = private$.values[[1L]],
           periodicity = private$.periodicity,
           minLag = private$.minLag,
           maxLag = private$.maxLag
@@ -1645,7 +1645,7 @@ DTSg <- R6Class(
         qassert(value, "S1")
         assertSubset(value, OlsonNames())
 
-        attr(private$.values[[".dateTime"]], "tzone") <- value
+        attr(private$.values[[1L]], "tzone") <- value
         private$.timezone <- value
 
         invisible(self)
