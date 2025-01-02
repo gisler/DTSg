@@ -1,7 +1,7 @@
 source("data.R")
 
 for (approach in c("base", "fasttime", "RcppCCTZ")) {
-  options(DTSgFunbyApproach = approach)
+  old <- options(DTSgFunbyApproach = approach)
 
   expect_identical(
     getOption("DTSgFunbyApproach"),
@@ -340,3 +340,5 @@ for (approach in c("base", "RcppCCTZ")) {
     info = '"by_____S" works as expected (CETfromDST, multiplier > 1L)'
   )
 }
+
+options(DTSgFunbyApproach = old$DTSgFunbyApproach)

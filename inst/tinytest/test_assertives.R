@@ -25,37 +25,41 @@ expect_error(
 
 #### assertFilter ####
 expect_error(
-  assertFilter(TRUE, Inf),
+  DTSg:::assertFilter(TRUE, Inf),
+  pattern = '"i" must be a numeric vector or an expression.',
+  fixed = TRUE,
   info = "logical returns error"
 )
 
 #### assertNAstatusPeriodicityOK ####
 expect_error(
-  assertNAstatusPeriodicityOK("explicit", "unrecognised"),
+  DTSg:::assertNAstatusPeriodicityOK("explicit", "unrecognised"),
+  pattern = "^This functionality may only give complete and correct results ",
   info = 'unrecognised "periodicity" returns error'
 )
 
-# nolint start
-# expect_warning(
-#   assertNAstatusPeriodicityOK("explicit", "unrecognised", "warning"),
-#   info = 'unrecognised "periodicity" returns warning'
-# )
-# nolint end
+expect_warning(
+  DTSg:::assertNAstatusPeriodicityOK("explicit", "unrecognised", "warning"),
+  pattern = "^This functionality may only give complete and correct results ",
+  info = 'unrecognised "periodicity" returns warning'
+)
 
 expect_error(
-  assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
+  DTSg:::assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
+  pattern = "^This functionality may only give complete and correct results ",
   info = 'implicit "na.status" returns error'
 )
 
-# nolint start
-# expect_warning(
-#   assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
-#   info = 'undecided "na.status" returns warning'
-# )
-# nolint end
+expect_warning(
+  DTSg:::assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
+  pattern = "^This functionality may only give complete and correct results ",
+  info = 'undecided "na.status" returns warning'
+)
 
 #### assertNoStartingDot ####
 expect_error(
-  assertNoStartingDot(c("col1", ".col2", "col3")),
+  DTSg:::assertNoStartingDot(c("col1", ".col2", "col3")),
+  pattern = 'c("col1", ".col2", "col3")" must not start with a ".".',
+  fixed = TRUE,
   info = "column name with starting dot returns error"
 )

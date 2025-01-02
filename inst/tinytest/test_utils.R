@@ -22,6 +22,8 @@ expect_identical(
 #### rollback ####
 expect_error(
   rollback(DT1[["date"]], "30 mins"),
+  pattern = "Periodicity must be a multiple of month(s) or year(s).",
+  fixed = TRUE,
   info = 'wrong "periodicity" returns error'
 )
 
