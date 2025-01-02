@@ -44,7 +44,7 @@ jobs:
       - name: Check
         uses: r-lib/actions/check-r-package@v2
 
-      - name: Test coverage
+      - name: Code coverage
         id: covr
         if: success() && runner.os == 'Linux' && matrix.config.r == 'release'
         run: |
