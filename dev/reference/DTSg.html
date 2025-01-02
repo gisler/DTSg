@@ -174,12 +174,12 @@ objects work best with explicitly missing values.</p></dd>
 
 <dt id="arg-funbyapproach">funbyApproach<a class="anchor" aria-label="anchor" href="#arg-funbyapproach"></a></dt>
 <dd><p>A character string specifying the default flavour of
-<code><a href="TALFs.html">TALFs</a></code> used with the created <code>DTSg</code> object. Either <code>"base"</code>, which
-utilises <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises
-<code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>, or <code>"RcppCCTZ"</code>, which utilises
-<code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main function for transforming
-timestamps. Custom approaches for user defined temporal aggregation level
-functions are also possible.</p></dd>
+<code><a href="TALFs.html">TALFs</a></code> used with the created <code>DTSg</code> object. Either <code>"timechange"</code>, which
+utilises <code><a href="https://rdrr.io/pkg/timechange/man/time_round.html" class="external-link">timechange::time_floor</a></code>, or <code>"base"</code>, which utilises
+<code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
+or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
+function for transforming timestamps. Custom approaches for user defined
+temporal aggregation level functions are also possible.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -269,12 +269,15 @@ viable alternative.</p>
 <p>The behaviour of <code>DTSg</code> objects can be customised with the help of the
 following option. See <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></code> for further information:</p><ul><li><p><em>DTSgClone:</em> A logical specifying if <code>DTSg</code> objects are, by default,
 modified in place (<code>FALSE</code>) or if a deep clone (copy) shall be made
-beforehand (<code>TRUE</code>).</p></li>
+beforehand (<code>TRUE</code>) (package default is <code>TRUE</code>).</p></li>
 <li><p><em>DTSgDeprecatedWarnings:</em> A logical specifying if warnings are displayed
-when calling deprecated features.</p></li>
-<li><p><em>DTSgFast:</em> Default value for the <code>fast</code> argument.</p></li>
-<li><p><em>DTSgFunbyApproach:</em> Default value for the <code>funbyApproach</code> argument.</p></li>
-<li><p><em>DTSgNA.status:</em> Default value for the <code>na.status</code> argument.</p></li>
+when calling deprecated features (package default is <code>TRUE</code>).</p></li>
+<li><p><em>DTSgFast:</em> Default value for the <code>fast</code> argument (package default is
+<code>FALSE</code>).</p></li>
+<li><p><em>DTSgFunbyApproach:</em> Default value for the <code>funbyApproach</code> argument
+(package default is <code>"timechange"</code>).</p></li>
+<li><p><em>DTSgNA.status:</em> Default value for the <code>na.status</code> argument  (package
+default is <code>"explicit"</code>).</p></li>
 </ul></div>
 
     <div id="ref-examples">

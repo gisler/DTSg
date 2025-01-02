@@ -159,10 +159,11 @@ for further information.</p></dd>
 
 <dt id="arg-funbyapproach">funbyApproach<a class="anchor" aria-label="anchor" href="#arg-funbyapproach"></a></dt>
 <dd><p>A character string specifying the flavour of the applied
-temporal aggregation level function. Either <code>"base"</code>, which utilises
-<code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or <code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>,
-or <code>"RcppCCTZ"</code>, which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main
-function for transforming timestamps.</p></dd>
+temporal aggregation level function. Either <code>"timechange"</code>, which utilises
+<code><a href="https://rdrr.io/pkg/timechange/man/time_round.html" class="external-link">timechange::time_floor</a></code>, or <code>"base"</code>, which utilises <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></code>, or
+<code>"fasttime"</code>, which utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>, or <code>"RcppCCTZ"</code>,
+which utilises <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> as the main function for
+transforming timestamps.</p></dd>
 
 
 <dt id="arg-clone">clone<a class="anchor" aria-label="anchor" href="#arg-clone"></a></dt>
