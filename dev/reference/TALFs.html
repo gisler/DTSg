@@ -129,16 +129,18 @@ corresponding to the function's temporal aggregation level.</p>
 
 <p>There are two families of temporal aggregation level functions. The one
 family truncates timestamps (truncating family), the other extracts a certain
-part of them (extracting family). Each family comes in three flavours: the
+part of them (extracting family). Each family comes in four flavours: the
 first relies solely on base <span style="R">R</span>, the second utilises <code><a href="https://rdrr.io/pkg/fasttime/man/fastPOSIXct.html" class="external-link">fasttime::fastPOSIXct</a></code>
-of <span class="pkg">fasttime</span> and the third <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> of
-<span class="pkg">RcppCCTZ</span>.</p>
-<p>The <span class="pkg">fasttime</span> flavour works with UTC and equivalent as well as all
-Etc/GMT time zones only (execute
+of <span class="pkg">fasttime</span>, the third <code><a href="https://rdrr.io/pkg/RcppCCTZ/man/parseDatetime.html" class="external-link">RcppCCTZ::parseDatetime</a></code> of <span class="pkg">RcppCCTZ</span>
+and the fourth <code><a href="https://rdrr.io/pkg/timechange/man/time_round.html" class="external-link">timechange::time_floor</a></code> of <span class="pkg">timechange</span>.</p>
+<p>The <span class="pkg">timechange</span> flavour generally is the fastest for both families of
+functions and all time zones. Second best option for the extracting family of
+functions generally is the <span class="pkg">fasttime</span> flavour, which, however, works with
+UTC and equivalent as well as all Etc/GMT time zones only (execute
 <code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones) and is
-limited to timestamps between the years 1970 and 2199, but generally is the
-fastest for the extracting family of functions. For time zones other than UTC
-and equivalent the <span class="pkg">RcppCCTZ</span> flavour generally is the fastest.</p>
+limited to timestamps between the years 1970 and 2199. For time zones other
+than UTC and equivalent the <span class="pkg">RcppCCTZ</span> flavour generally is the second
+best option.</p>
 <p>Use the <code>funbyApproach</code> argument of the respective calling method in order to
 specify the utilised flavour.</p>
 <p>The truncating family sets timestamps to the lowest possible point in time of
