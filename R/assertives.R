@@ -41,7 +41,7 @@ assertFasttimeOK <- function(.dateTime, .helpers) {
 
 assertFilter <- function(x, limit) {
   if (!testMultiClass(x, c("integer", "numeric")) && !is.expression(x)) {
-    stop('"i" must be a numeric vector or an expression.', call. = FALSE)
+    stop('"i" must be a numeric vector or an expression.')
   } else if (testMultiClass(x, c("integer", "numeric"))) {
     assertIntegerish(
       x,
@@ -70,9 +70,9 @@ assertNAstatusPeriodicityOK <- function(
   )
   if (na.status != "explicit" || periodicity == "unrecognised") {
     if (level == "error") {
-      stop(msg, call. = FALSE)
+      stop(msg)
     } else {
-      warning(msg, call. = FALSE)
+      warning(msg)
     }
   }
 
@@ -81,10 +81,7 @@ assertNAstatusPeriodicityOK <- function(
 
 assertNoStartingDot <- function(x) {
   if (any(startsWith(x, "."))) {
-    stop(
-      sprintf('"%s" must not start with a ".".', deparse(substitute(x))),
-      call. = FALSE
-    )
+    stop(sprintf('"%s" must not start with a ".".', deparse(substitute(x))))
   }
 
   invisible(x)

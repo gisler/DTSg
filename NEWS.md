@@ -3,7 +3,7 @@
 * Sped up the `byY_____()` and `byYm____()` TALFs of the `"base"` `funbyApproach`.
 * The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Fixed a bug in the `aggregate()` method causing incorrect results under the following conditions:
-  * The time zone of the `DTSg` object is not UTC or a time zone equivalent to UTC.
+  * The time zone of the `DTSg` object is not UTC or equivalent.
   * The `ignoreDST` argument is `TRUE`.
   * A single column with missing values is aggregated.
 * Related to the above fix are the following breaking changes when aggregating a single column with missing values:
@@ -11,9 +11,11 @@
   * The stripping of missing values within summary functions now depends on the value of a possible `na.rm` argument.
 * Fixed the support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions. Please note that the column order of the resulting `DTSg` object is now different due to this fix.
 * Fixed that the `set()` method was too anxious about removing all value columns.
+* It is no longer possible to use the deprecated `byFasttime*()` TALFs. Please use the `"fasttime"` `funbyApproach` from now on.
 * Removed `magrittr` from the suggested packages list (vignettes now use R's native pipe operator).
 * Slightly improved the documentation.
-* Minor internal code improvements.
+* Improved tests.
+* Major internal code improvements.
 
 # DTSg v1.1.3
 

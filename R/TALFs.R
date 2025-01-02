@@ -26,7 +26,6 @@ byExternal <- list(
       byYmdHM_ = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00"  , year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                   ), tz = .helpers[["timezone"]]),
       byYmdHMS = fasttime::fastPOSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d", year(.dateTime),   month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime)), tz = .helpers[["timezone"]]),
 
-      by______ = rep(fasttime::fastPOSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
       by_Q____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         , quarter(.dateTime) * 3L - 2L), tz = .helpers[["timezone"]]),
       by_m____ = fasttime::fastPOSIXct(sprintf("2199-%02d-01"         ,   month(.dateTime)          ), tz = .helpers[["timezone"]]),
       by___H__ = fasttime::fastPOSIXct(sprintf("2199-01-01 %02d:00:00",    hour(.dateTime)          ), tz = .helpers[["timezone"]]),
@@ -166,8 +165,6 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' - `by____M_` extracts the minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:11:00.0_
 #' - `by_____S` extracts the seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2199-01-01 00:00:11.0_
 #'
-#' Please note that the `byFasttime*` versions are deprecated.
-#'
 #' @return All functions return a [`POSIXct`] vector with timestamps
 #'   corresponding to the function's temporal aggregation level.
 #'
@@ -273,8 +270,7 @@ byYmdH__ <- function(.dateTime, .helpers) {
   )) {
     stop(
       'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one.",
-      call. = FALSE
+      "with a multiplier greater than one."
     )
   }
 
@@ -378,8 +374,7 @@ by___H__ <- function(.dateTime, .helpers) {
   )) {
     stop(
       'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one.",
-      call. = FALSE
+      "with a multiplier greater than one."
     )
   }
 

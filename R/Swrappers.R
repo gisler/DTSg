@@ -29,10 +29,7 @@ S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {
   if (!is.expression(R6Method) ||
         R6Method[[1L]][[2L]][[3L]] != "public_methods" ||
         !is.R6Class(eval(R6Method[[1L]][[2L]][[2L]]))) {
-    stop(
-      '"R6Method" must contain a public method of an "R6ClassGenerator".',
-      call. = FALSE
-    )
+    stop('"R6Method" must contain a public method of an "R6ClassGenerator".')
   }
   qassert(self, "S1")
   qassert(dots, "B1")

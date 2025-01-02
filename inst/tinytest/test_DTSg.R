@@ -55,11 +55,11 @@ expect_identical(
   info = ".n is correct (single column with many NAs, character function and ignoreDST = TRUE)"
 )
 
-options("datatable.verbose" = TRUE)
+old <- options(datatable.verbose = TRUE)
 expect_true(
   {
     output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, "sum"))
-    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+    any(grepl("^GForce optimized j to '.+'", output))
   },
   info = "GForce optimsation kicked in (single column as well as function and n = FALSE)"
 )
@@ -67,7 +67,7 @@ expect_true(
 expect_true(
   {
     output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, "sum", n = TRUE))
-    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+    any(grepl("^GForce optimized j to '.+'", output))
   },
   info = "GForce optimsation kicked in (single column as well as function and n = TRUE)"
 )
@@ -75,11 +75,11 @@ expect_true(
 expect_true(
   {
     output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, c(sum = "sum", mean = "mean"), cols = c("col1", "col2"), n = TRUE))
-    any(grepl("^GForce optimized j to '.+' \\(see \\?GForce\\)$", output))
+    any(grepl("^GForce optimized j to '.+'", output))
   },
   info = "GForce optimsation kicked in (multiple columns as well as functions and n = TRUE)"
 )
-options("datatable.verbose" = FALSE)
+options(datatable.verbose = old$datatable.verbose)
 
 expect_identical(
   DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE),
@@ -151,11 +151,13 @@ expect_identical(
 
 expect_error(
   DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum)),
+  pattern = "^Assertion on 'names\\(fun\\)' failed: ",
   info = 'single missing "fun" name returns error'
 )
 
 expect_error(
   DTSg$new(DT1)$aggregate(byYmdH__, c("mean", "sum")),
+  pattern = "^Assertion on 'names\\(fun\\)' failed: ",
   info = 'missing "fun" names return error'
 )
 
@@ -198,6 +200,8 @@ expect_error(
     length,
     funbyHelpers = list(periodicity = "1 hour")
   ),
+  pattern = '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
+  fixed = TRUE,
   info = "use of helper data not allowed returns error"
 )
 
@@ -254,16 +258,21 @@ expect_identical(
 
 expect_error(
   DTSg$new(DT1)$alter(by = "unrecognised"),
+  pattern = 'Periodicity of the time series cannot be changed to "unrecognised".',
+  fixed = TRUE,
   info = "recognised to unrecognised periodicity returns error"
 )
 
 expect_warning(
   DTSg$new(DT3),
+  pattern = "^Only time series with recognised periodicity can have ",
   info = "explicitly missing values and unrecognised periodicity returns warning"
 )
 
 expect_error(
   DTSg$new(DT1)$alter(na.status = "undecided"),
+  pattern = "Status of missing values has already been decided on.",
+  fixed = TRUE,
   info = 'decided to undecided "na.status" returns error'
 )
 
@@ -386,6 +395,7 @@ expect_error(
     cols = c("col1", "col2"),
     resultCols = c("col1:col4")
   ),
+  pattern = "^Assertion on 'resultCols' failed: ",
   info = "colon returns error"
 )
 
@@ -447,6 +457,8 @@ for (method in c("cols", "names")) {
 
   expect_error(
     DTSg$new(DT1)[[method]](pattern = ".*", value = FALSE),
+    pattern = '"x" and "value" arguments are not allowed in this context.',
+    fixed = TRUE,
     info = "use of arguments not allowed returns error (pattern)"
   )
 
@@ -523,11 +535,13 @@ expect_identical(
 
 expect_error(
   DTSg$new(data.table(date = numeric(0L), col1 = integer(0L))),
+  pattern = "^Assertion on 'values' failed: ",
   info = "data.table without a single row returns error"
 )
 
 expect_error(
   DTSg$new(DT1[, .(date)]),
+  pattern = "^Assertion on 'values' failed: ",
   info = "data.table with a single column returns error"
 )
 
@@ -605,6 +619,8 @@ expect_identical(
 
 expect_error(
   DTSg$new(DT1[, .(date, col1)])$merge(DT2, by = "date"),
+  pattern = '"x", "by", "by.x" and "by.y" arguments are not allowed in this context.',
+  fixed = TRUE,
   info = "use of arguments not allowed returns error"
 )
 
@@ -652,16 +668,21 @@ expect_silent(
 #### refresh method ####
 expect_error(
   DTSg$new(data.table(date = "timestamp", col1 = DT2[["col1"]])),
+  pattern = '^Cannot coerce column "date" to class "POSIXct" because ',
   info = "failing to coerce .dateTime column returns error"
 )
 
 expect_warning(
   DTSg$new(data.table(date = as.character(DT2[["date"]]), col1 = DT2[["col1"]])),
+  pattern = 'Coerced column "date" to class "POSIXct".',
+  fixed = TRUE,
   info = "coercing .dateTime column returns warning"
 )
 
 expect_error(
   DTSg$new(data.table(date = .POSIXct(NA_real_), col1 = pi)),
+  pattern = ".dateTime column must not have any missing values.",
+  fixed = TRUE,
   info = "data.table with a single row and missing timestamp returns error"
 )
 
@@ -676,11 +697,15 @@ expect_error(
     date = c(DT1[["date"]][1:2], NA, NA, DT1[["date"]][5:8]),
     col1 = DT1[["col1"]]
   )),
+  pattern = ".dateTime column must not have any missing values.",
+  fixed = TRUE,
   info = "data.table with missing timestamps returns error"
 )
 
 expect_error(
   DTSg$new(DT1[c(1L, 1L), ]),
+  pattern = ".dateTime column must not have any duplicates.",
+  fixed = TRUE,
   info = "data.table with duplicated timestamps returns error"
 )
 
@@ -740,11 +765,15 @@ expect_identical(
 
 expect_error(
   DTSg$new(DT1)$regular <- FALSE,
+  pattern = "Read-only field.",
+  fixed = TRUE,
   info = '"regular" field is read-only'
 )
 
 expect_error(
   DTSg$new(DT1)$timestamps <- 1L,
+  pattern = "Read-only field.",
+  fixed = TRUE,
   info = '"timestamps" field is read-only'
 )
 
@@ -955,16 +984,19 @@ for (method in c("rowaggregate", "raggregate")) {
 
   expect_error(
     DTSg$new(DT1)[[method]](c("colmean", "col1"), list(mean = mean, sum = sum)),
+    pattern = "^Assertion on 'resultCols' failed: ",
     info = 'existing "resultCols" return error'
   )
 
   expect_error(
     DTSg$new(DT1)[[method]]("col", list(mean, sum)),
+    pattern = "^Assertion on 'names\\(fun\\)' failed: ",
     info = 'missing "fun" names return error'
   )
 
   expect_error(
     DTSg$new(DT1)[[method]]("col", c("mean", sum = "sum")),
+    pattern = "^Assertion on 'names\\(fun\\)' failed: ",
     info = 'single missing "fun" name returns error'
   )
 }
@@ -986,6 +1018,7 @@ for (method in c("rowbind", "rbind")) {
 
   expect_error(
     DTSg$new(DT1)[[method]](DT1),
+    pattern = "^Assertion on '.+' failed: ",
     info = "duplicated timestamps return error"
   )
 }
@@ -1000,16 +1033,20 @@ for (method in c("setColNames", "setnames")) {
 
   expect_error(
     DTSg$new(DT1)[[method]](c("col2", "col3"), c("column2:column3"))$cols(),
+    pattern = "^Assertion on 'cols' failed: ",
     info = "colon returns error"
   )
 
   expect_error(
     DTSg$new(DT1)[[method]]("col2", ""),
+    pattern = "^Assertion on 'cols' failed: ",
     info = "blank column name returns error"
   )
 
   expect_error(
     DTSg$new(DT1)[[method]]("col2", ".column2"),
+    pattern = '"values" must not start with a ".".',
+    fixed = TRUE,
     info = "column name with a starting dot returns error"
   )
 }
@@ -1061,22 +1098,27 @@ for (method in c("setCols", "set")) {
 
   expect_error(
     DTSg$new(DT1)[[method]](, "col1:col3", DT1[, .(col1, as.numeric(col2), col3)]),
+    pattern = "^Supplied 3 items to be assigned to 8 items ",
     info = "colon returns error"
   )
 
   expect_error(
     DTSg$new(DT1)[[method]](, ".dateTime", 1),
+    pattern = '"cols" must not start with a ".".',
+    fixed = TRUE,
     info = "setting .dateTime column returns error"
   )
 
   expect_error(
     DTSg$new(DT1)[[method]](, c("col1", "col2", "col3"), NULL),
+    pattern = "Removing all value columns is not allowed.",
+    fixed = TRUE,
     info = "removing all value columns returns error"
   )
 
-  expect_warning(
-    DTSg$new(DT1)[[method]](, c("col1", "col2", "col4"), NULL),
-    info = "removing non-existent value column returns warning from data.table"
+  expect_silent(
+    suppressWarnings(DTSg$new(DT1)[[method]](, c("col1", "col2", "col4"), NULL)),
+    info = "seemingly removing all value columns returns no error"
   )
 }
 
@@ -1119,21 +1161,25 @@ expect_identical(
 
 expect_error(
   DTSg$new(DT1)$subset(col2 > 100),
+  pattern = "^Assertion on '.+' failed: ",
   info = "empty filter result returns error"
 )
 
 expect_error(
   DTSg$new(DT1)$subset(12L),
+  pattern = "^Assertion on 'i' failed: ",
   info = "missing timestamps return error"
 )
 
 expect_error(
   DTSg$new(DT1)$subset(c(1L, 1L)),
+  pattern = "^Assertion on 'i' failed: ",
   info = "duplicated timestamps return error"
 )
 
 expect_error(
   DTSg$new(DT1)$subset(, ""),
+  pattern = "^Assertion on 'cols' failed: ",
   info = "blank selection returns error"
 )
 
