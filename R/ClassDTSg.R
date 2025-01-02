@@ -204,18 +204,18 @@ DTSg <- R6Class(
             "Cannot coerce %s because %s.",
             msgPart,
             deparse(e$message)
-          ), call. = FALSE)
+          ))
         },
         warning = function(w) {
           stop(sprintf(
             "Will not coerce %s because %s.",
             msgPart,
             deparse(w$message)
-          ), call. = FALSE)
+          ))
         }
       )
 
-      warning(sprintf("Coerced %s.", msgPart), call. = FALSE)
+      warning(sprintf("Coerced %s.", msgPart))
 
       x
     },
@@ -408,8 +408,7 @@ DTSg <- R6Class(
         if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
           stop(
             '"timezone", "periodicity" and "na.status" helpers are not ',
-            "allowed in this context.",
-            call. = FALSE
+            "allowed in this context."
           )
         }
 
@@ -596,16 +595,12 @@ DTSg <- R6Class(
 
         private$.na.status <- na.status
       } else if (by != private$.periodicity && by == "unrecognised") {
-        stop(
-          'Periodicity of the time series cannot be changed to "unrecognised".',
-          call. = FALSE
-        )
+        stop('Periodicity of the time series cannot be changed to "unrecognised".')
       } else if (na.status == "explicit" && by == "unrecognised" &&
                    private$.timestamps > 2L) {
         warning(
           "Only time series with recognised periodicity can have explicitly missing values.\n",
-          'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.',
-          call. = FALSE
+          'Consider calling "alter()" with "na.status = \'explicit\'" and specified "by" argument.'
         )
       }
 
@@ -620,10 +615,7 @@ DTSg <- R6Class(
 
         private$.na.status <- na.status
       } else if (na.status == "undecided" && private$.na.status != "undecided") {
-        stop(
-          "Status of missing values has already been decided on.",
-          call. = FALSE
-        )
+        stop("Status of missing values has already been decided on.")
       }
 
       invisible(self)
@@ -737,10 +729,7 @@ DTSg <- R6Class(
 
       if (!is.null(pattern)) {
         if (any(names(list(...)) %chin% c("x", "value"))) {
-          stop(
-            '"x" and "value" arguments are not allowed in this context.',
-            call. = FALSE
-          )
+          stop('"x" and "value" arguments are not allowed in this context.')
         }
 
         cols <- grep(pattern, cols, value = TRUE, ...)
@@ -844,10 +833,7 @@ DTSg <- R6Class(
       assertSetEqual(y$timezone, self$timezone)
       assertSetEqual(y$aggregated, self$aggregated)
       if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
-        stop(
-          '"x", "by", "by.x" and "by.y" arguments are not allowed in this context.',
-          call. = FALSE
-        )
+        stop('"x", "by", "by.x" and "by.y" arguments are not allowed in this context.')
       }
       qassert(clone, "B1")
 
@@ -931,10 +917,7 @@ DTSg <- R6Class(
     ) {
       if (!requireNamespace("dygraphs", quietly = TRUE) ||
             !requireNamespace("RColorBrewer", quietly = TRUE)) {
-        stop(
-          'Packages "dygraphs" and "RColorBrewer" must be installed for this method.',
-          call. = FALSE
-        )
+        stop('Packages "dygraphs" and "RColorBrewer" must be installed for this method.')
       }
       from <- private$determineFrom(from)
       to <- private$determineTo(to, from)
@@ -1062,10 +1045,7 @@ DTSg <- R6Class(
       seqLen <- seq_len(private$determineLen(private$.timestamps))
 
       if (anyNA(private$.values[[1L]][seqLen])) {
-        stop(
-          ".dateTime column must not have any missing values.",
-          call. = FALSE
-        )
+        stop(".dateTime column must not have any missing values.")
       }
 
       if (private$.timestamps < 2L) {
@@ -1077,7 +1057,7 @@ DTSg <- R6Class(
         lags <- round(diff(private$.values[[1L]][seqLen]), 6L)
 
         if (any(lags == 0)) {
-          stop(".dateTime column must not have any duplicates.", call. = FALSE)
+          stop(".dateTime column must not have any duplicates.")
         }
 
         private$.minLag <- min(lags)
@@ -1420,7 +1400,7 @@ DTSg <- R6Class(
       if (setequal(cols, names(private$.values)[-1L]) &&
             ((is.list(values) && all(vapply(values, is.null, logical(1L)))) ||
             is.null(values))) {
-        stop("Removing all value columns is not allowed.", call. = FALSE)
+        stop("Removing all value columns is not allowed.")
       }
       qassert(clone, "B1")
 
@@ -1646,7 +1626,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.isRegular
       } else {
-        stop("Read-only field.", call. = FALSE)
+        stop("Read-only field.")
       }
     },
 
@@ -1654,7 +1634,7 @@ DTSg <- R6Class(
       if (missing(value)) {
         private$.timestamps
       } else {
-        stop("Read-only field.", call. = FALSE)
+        stop("Read-only field.")
       }
     },
 

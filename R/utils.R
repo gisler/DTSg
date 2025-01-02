@@ -121,10 +121,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
 rollback <- function(.dateTime, periodicity) {
   qassert(.dateTime, "P+")
   if (!grepl("^\\d+ (month|year)(s?)$", qassert(periodicity, "S1"))) {
-    stop(
-      "Periodicity must be a multiple of month(s) or year(s).",
-      call. = FALSE
-    )
+    stop("Periodicity must be a multiple of month(s) or year(s).")
   }
 
   periodicity <- unlist(strsplit(periodicity, " ", fixed = TRUE))
