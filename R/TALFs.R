@@ -1,16 +1,16 @@
 # timechange approach ####
 byTimechangeExpr <- expression(
-  byY_____ = timechange::time_floor(.dateTimeForced, sprintf("%s year"  , .helpers[["multiplier"]])),
-  byYm____ = timechange::time_floor(.dateTimeForced, sprintf("%s month" , .helpers[["multiplier"]])),
-  byYmd___ = timechange::time_floor(.dateTimeForced, sprintf("%s day"   , .helpers[["multiplier"]])),
-  byYmdH__ = timechange::time_floor(.dateTimeForced, sprintf("%s hour"  , .helpers[["multiplier"]])),
-  byYmdHM_ = timechange::time_floor(.dateTimeForced, sprintf("%s minute", .helpers[["multiplier"]])),
-  byYmdHMS = timechange::time_floor(.dateTimeForced, sprintf("%s second", .helpers[["multiplier"]])),
+  byY_____ = time_floor(.dateTimeForced, sprintf("%s year"  , .helpers[["multiplier"]])),
+  byYm____ = time_floor(.dateTimeForced, sprintf("%s month" , .helpers[["multiplier"]])),
+  byYmd___ = time_floor(.dateTimeForced, sprintf("%s day"   , .helpers[["multiplier"]])),
+  byYmdH__ = time_floor(.dateTimeForced, sprintf("%s hour"  , .helpers[["multiplier"]])),
+  byYmdHM_ = time_floor(.dateTimeForced, sprintf("%s minute", .helpers[["multiplier"]])),
+  byYmdHMS = time_floor(.dateTimeForced, sprintf("%s second", .helpers[["multiplier"]])),
 
-  by_m____ = timechange::time_update(.dateTimeForced, year = 2199L,             mday = 1L, hour = 0L, minute = 0L, second = 0L,  month = (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L),
-  by___H__ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L,            minute = 0L, second = 0L,   hour =   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
-  by____M_ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L,              second = 0L, minute = minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
-  by_____S = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L, minute = 0L,              second = second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     )
+  by_m____ = time_update(.dateTimeForced, year = 2199L,             mday = 1L, hour = 0L, minute = 0L, second = 0L,  month = (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L),
+  by___H__ = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L,            minute = 0L, second = 0L,   hour =   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by____M_ = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L,              second = 0L, minute = minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by_____S = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L, minute = 0L,              second = second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     )
 )
 
 timechangeApproach <- function(.dateTime, .helpers, by) {
@@ -20,7 +20,7 @@ timechangeApproach <- function(.dateTime, .helpers, by) {
   }
 
   if (attr(.dateTime, "tzone") != .helpers[["timezone"]]) {
-    .dateTimeForced <- timechange::time_force_tz(.dateTime, tz = .helpers[["timezone"]])
+    .dateTimeForced <- time_force_tz(.dateTime, tz = .helpers[["timezone"]])
   } else {
     .dateTimeForced <- .dateTime
   }

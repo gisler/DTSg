@@ -59,12 +59,12 @@ columns, or \code{"undecided"} for no such action. Please note that \code{DTSg}
 objects work best with explicitly missing values.}
 
 \item{funbyApproach}{A character string specifying the default flavour of
-\code{\link{TALFs}} used with the created \code{DTSg} object. Either \code{"base"}, which
-utilises \code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises
-\code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}, or \code{"RcppCCTZ"}, which utilises
-\code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main function for transforming
-timestamps. Custom approaches for user defined temporal aggregation level
-functions are also possible.}
+\code{\link{TALFs}} used with the created \code{DTSg} object. Either \code{"timechange"}, which
+utilises \code{\link[timechange:time_round]{timechange::time_floor}}, or \code{"base"}, which utilises
+\code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
+or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
+function for transforming timestamps. Custom approaches for user defined
+temporal aggregation level functions are also possible.}
 }
 \value{
 Returns a \code{DTSg} object.
@@ -171,12 +171,15 @@ following option. See \code{\link{options}} for further information:
 \itemize{
 \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are, by default,
 modified in place (\code{FALSE}) or if a deep clone (copy) shall be made
-beforehand (\code{TRUE}).
+beforehand (\code{TRUE}) (package's default is \code{TRUE}).
 \item \emph{DTSgDeprecatedWarnings:} A logical specifying if warnings are displayed
-when calling deprecated features.
-\item \emph{DTSgFast:} Default value for the \code{fast} argument.
-\item \emph{DTSgFunbyApproach:} Default value for the \code{funbyApproach} argument.
-\item \emph{DTSgNA.status:} Default value for the \code{na.status} argument.
+when calling deprecated features (package's default is \code{TRUE}).
+\item \emph{DTSgFast:} Default value for the \code{fast} argument (package's default is
+\code{FALSE}).
+\item \emph{DTSgFunbyApproach:} Default value for the \code{funbyApproach} argument
+(package's default is \code{"timechange"}).
+\item \emph{DTSgNA.status:} Default value for the \code{na.status} argument  (package's
+default is \code{"explicit"}).
 }
 }
 

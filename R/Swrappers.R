@@ -90,10 +90,11 @@ NULL
 #' @param funbyHelpers An optional [`list`] with helper data passed on to
 #'   `funby`. See corresponding section for further information.
 #' @param funbyApproach A character string specifying the flavour of the applied
-#'   temporal aggregation level function. Either `"base"`, which utilises
-#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
-#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
-#'   function for transforming timestamps.
+#'   temporal aggregation level function. Either `"timechange"`, which utilises
+#'   [`timechange::time_floor`], or `"base"`, which utilises [`as.POSIXct`], or
+#'   `"fasttime"`, which utilises [`fasttime::fastPOSIXct`], or `"RcppCCTZ"`,
+#'   which utilises [`RcppCCTZ::parseDatetime`] as the main function for
+#'   transforming timestamps.
 #' @param clone A logical specifying if the object shall be modified in place or
 #'   if a deep clone (copy) shall be made beforehand.
 #'

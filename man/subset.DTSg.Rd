@@ -58,10 +58,11 @@ for further information.}
 \code{funby}. See corresponding section for further information.}
 
 \item{funbyApproach}{A character string specifying the flavour of the applied
-temporal aggregation level function. Either \code{"base"}, which utilises
-\code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
-or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
-function for transforming timestamps.}
+temporal aggregation level function. Either \code{"timechange"}, which utilises
+\code{\link[timechange:time_round]{timechange::time_floor}}, or \code{"base"}, which utilises \code{\link{as.POSIXct}}, or
+\code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}, or \code{"RcppCCTZ"},
+which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main function for
+transforming timestamps.}
 
 \item{...}{Further arguments passed on to \code{fun}.}
 }
