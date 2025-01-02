@@ -14,7 +14,8 @@
 * It is no longer possible to use the deprecated `byFasttime*()` TALFs. Please use the `"fasttime"` `funbyApproach` from now on.
 * Removed `magrittr` from the suggested packages list (vignettes now use R's native pipe operator).
 * Slightly improved the documentation.
-* Minor internal code improvements.
+* Improved tests.
+* Major internal code improvements.
 
 # DTSg v1.1.3
 
