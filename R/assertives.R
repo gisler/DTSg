@@ -5,11 +5,11 @@ assertFunbyApproach <- function(.dateTime, .helpers) {
   )
 
   if (funbyApproach == "timechange") {
-    if(!requireNamespace("timechange", quietly = TRUE)) {
+    if (!requireNamespace("timechange", quietly = TRUE)) {
       stop('Package "timechange" must be installed for this approach.')
     }
   } else if (funbyApproach == "fasttime") {
-    if(!requireNamespace("fasttime", quietly = TRUE)) {
+    if (!requireNamespace("fasttime", quietly = TRUE)) {
       stop('Package "fasttime" must be installed for this approach.')
     }
 
@@ -24,10 +24,9 @@ assertFunbyApproach <- function(.dateTime, .helpers) {
     )) {
       stop('Time zone must be "UTC" or equivalent for this approach.')
     }
-  } else if (funbyApproach == "RcppCCTZ") {
-    if (!requireNamespace("RcppCCTZ", quietly = TRUE)) {
-      stop('Package "RcppCCTZ" must be installed for this approach.')
-    }
+  } else if (funbyApproach == "RcppCCTZ" &&
+               !requireNamespace("RcppCCTZ", quietly = TRUE)) {
+    stop('Package "RcppCCTZ" must be installed for this approach.')
   }
 
   invisible(funbyApproach)

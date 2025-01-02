@@ -62,7 +62,7 @@ byExpr <- list(
       by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]),
       by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]])
     ),
-    RcppCCTZ = expression (
+    RcppCCTZ = expression(
       byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                                                                                    ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYQ____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                                                                                      ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime),   month(.dateTime)                                                                                                                                ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
@@ -103,7 +103,7 @@ byExpr <- list(
       by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
       by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]])
     ),
-    RcppCCTZ = expression (
+    RcppCCTZ = expression(
       byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYmdH__ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d %H:%M:%E1S"  , tzstr = .helpers[["timezone"]]),
@@ -115,7 +115,7 @@ byExpr <- list(
       by____M_ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
       by_____S = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]])
     ),
-    timechange = expression (
+    timechange = expression(
       byY_____ = timechangeApproach(.dateTime, .helpers, "byY_____"),
       byYQ____ = timechangeApproach(.dateTime, .helpers, "byYQ____"),
       byYm____ = timechangeApproach(.dateTime, .helpers, "byYm____"),
