@@ -7,7 +7,6 @@ byTimechangeExpr <- expression(
   byYmdHM_ = timechange::time_floor(.dateTimeForced, sprintf("%s minute", .helpers[["multiplier"]])),
   byYmdHMS = timechange::time_floor(.dateTimeForced, sprintf("%s second", .helpers[["multiplier"]])),
 
-  by______ = rep(as.POSIXct("2199-01-01", tz = .helpers[["timezone"]]), length(.dateTime)),
   by_m____ = timechange::time_update(.dateTimeForced, year = 2199L,             mday = 1L, hour = 0L, minute = 0L, second = 0L,  month = (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L),
   by___H__ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L,            minute = 0L, second = 0L,   hour =   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
   by____M_ = timechange::time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L,              second = 0L, minute = minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
@@ -83,7 +82,6 @@ byExpr <- list(
     base = expression(
       byY_____ = as.POSIXct(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYm____ = as.POSIXct(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), tz = .helpers[["timezone"]]                                ),
-      byYmd___ = as.POSIXct(trunc(.dateTime, units = "days"                                                                                                                                                                                                                                      ), tz = .helpers[["timezone"]]                                ),
       byYmdH__ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), tz = .helpers[["timezone"]]                                ),
       byYmdHM_ = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:00%s"  , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime)                    %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
       byYmdHMS = as.POSIXct(sprintf("%04d-%02d-%02d %02d:%02d:%02d%s", year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime), minute(.dateTime), second(.dateTime) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]], strftime(.dateTime, "%z", tz = .helpers[["timezone"]])), tz = .helpers[["timezone"]], format = "%Y-%m-%d %H:%M:%S%z"),
@@ -126,7 +124,6 @@ byExpr <- list(
       byYmdHM_ = timechangeApproach(.dateTime, .helpers, "byYmdHM_"),
       byYmdHMS = timechangeApproach(.dateTime, .helpers, "byYmdHMS"),
 
-      by______ = timechangeApproach(.dateTime, .helpers, "by______"),
       by_Q____ = timechangeApproach(.dateTime, .helpers, "by_Q____"),
       by_m____ = timechangeApproach(.dateTime, .helpers, "by_m____"),
       by___H__ = timechangeApproach(.dateTime, .helpers, "by___H__"),
