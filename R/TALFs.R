@@ -1,5 +1,35 @@
+# timechange approach ####
+byTimechangeExpr <- expression(
+  byY_____ = time_floor(.dateTimeForced, sprintf("%s year"  , .helpers[["multiplier"]])),
+  byYm____ = time_floor(.dateTimeForced, sprintf("%s month" , .helpers[["multiplier"]])),
+  byYmd___ = time_floor(.dateTimeForced, sprintf("%s day"   , .helpers[["multiplier"]])),
+  byYmdH__ = time_floor(.dateTimeForced, sprintf("%s hour"  , .helpers[["multiplier"]])),
+  byYmdHM_ = time_floor(.dateTimeForced, sprintf("%s minute", .helpers[["multiplier"]])),
+  byYmdHMS = time_floor(.dateTimeForced, sprintf("%s second", .helpers[["multiplier"]])),
+
+  by_m____ = time_update(.dateTimeForced, year = 2199L,             mday = 1L, hour = 0L, minute = 0L, second = 0L,  month = (month(.dateTime) - 1L) %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L),
+  by___H__ = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L,            minute = 0L, second = 0L,   hour =   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by____M_ = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L,              second = 0L, minute = minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ),
+  by_____S = time_update(.dateTimeForced, year = 2199L, month = 1L, mday = 1L, hour = 0L, minute = 0L,              second = second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     )
+)
+
+timechangeApproach <- function(.dateTime, .helpers, by) {
+  if (by %chin% c("byYQ____", "by_Q____")) {
+    by <- if (by == "byYQ____") "byYm____" else "by_m____"
+    .helpers[["multiplier"]] <- 3L
+  }
+
+  if (attr(.dateTime, "tzone") != .helpers[["timezone"]]) {
+    .dateTimeForced <- time_force_tz(.dateTime, tz = .helpers[["timezone"]])
+  } else {
+    .dateTimeForced <- .dateTime
+  }
+
+  eval(byTimechangeExpr[[by]])
+}
+
 # Nested list of expressions ####
-byExternal <- list(
+byExpr <- list(
   single = list(
     base = expression(
       byY_____ = as.POSIXct(  trunc(.dateTime     , units = "years"                              ), tz = .helpers[["timezone"]]),
@@ -32,7 +62,7 @@ byExternal <- list(
       by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00",  minute(.dateTime)          ), tz = .helpers[["timezone"]]),
       by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d",  second(.dateTime)          ), tz = .helpers[["timezone"]])
     ),
-    RcppCCTZ = expression (
+    RcppCCTZ = expression(
       byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                                                                                    ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYQ____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), quarter(.dateTime) * 3L - 2L                                                                                                                      ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime),   month(.dateTime)                                                                                                                                ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
@@ -73,7 +103,7 @@ byExternal <- list(
       by____M_ = fasttime::fastPOSIXct(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]]),
       by_____S = fasttime::fastPOSIXct(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), tz = .helpers[["timezone"]])
     ),
-    RcppCCTZ = expression (
+    RcppCCTZ = expression(
       byY_____ = RcppCCTZ::parseDatetime(sprintf("%04d-01-01"                     , year(.dateTime)                                                                                            %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYm____ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-01"                   , year(.dateTime), (month(.dateTime) - 1L)                                                                   %/% .helpers[["multiplier"]] * .helpers[["multiplier"]] + 1L                                                   ), fmt = "%Y-%m-%d"             , tzstr = .helpers[["timezone"]]),
       byYmdH__ = RcppCCTZ::parseDatetime(sprintf("%04d-%02d-%02d %02d:00:00"      , year(.dateTime),  month(.dateTime), mday(.dateTime), hour(.dateTime)                                       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]                                                        ), fmt = "%Y-%m-%d %H:%M:%E1S"  , tzstr = .helpers[["timezone"]]),
@@ -84,12 +114,28 @@ byExternal <- list(
       by___H__ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 %02d:00:00",   hour(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
       by____M_ = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:%02d:00", minute(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]]),
       by_____S = RcppCCTZ::parseDatetime(sprintf("2199-01-01 00:00:%02d", second(.dateTime)       %/% .helpers[["multiplier"]] * .helpers[["multiplier"]]     ), fmt = "%Y-%m-%d %H:%M:%E1S", tzstr = .helpers[["timezone"]])
+    ),
+    timechange = expression(
+      byY_____ = timechangeApproach(.dateTime, .helpers, "byY_____"),
+      byYQ____ = timechangeApproach(.dateTime, .helpers, "byYQ____"),
+      byYm____ = timechangeApproach(.dateTime, .helpers, "byYm____"),
+      byYmd___ = timechangeApproach(.dateTime, .helpers, "byYmd___"),
+      byYmdH__ = timechangeApproach(.dateTime, .helpers, "byYmdH__"),
+      byYmdHM_ = timechangeApproach(.dateTime, .helpers, "byYmdHM_"),
+      byYmdHMS = timechangeApproach(.dateTime, .helpers, "byYmdHMS"),
+
+      by_Q____ = timechangeApproach(.dateTime, .helpers, "by_Q____"),
+      by_m____ = timechangeApproach(.dateTime, .helpers, "by_m____"),
+      by___H__ = timechangeApproach(.dateTime, .helpers, "by___H__"),
+      by____M_ = timechangeApproach(.dateTime, .helpers, "by____M_"),
+      by_____S = timechangeApproach(.dateTime, .helpers, "by_____S")
     )
   )
 )
+byExpr[["single"]][["timechange"]] <- byExpr[["multi"]][["timechange"]]
 
 # Functions ####
-to.fakeUTCdateTime <- function(.dateTime, .helpers) {
+toFakeUTCdateTime <- function(.dateTime, .helpers) {
   assertNAstatusPeriodicityOK(
     .helpers[["na.status"]],
     .helpers[["periodicity"]],
@@ -130,18 +176,20 @@ to.fakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @section Families and flavours:
 #' There are two families of temporal aggregation level functions. The one
 #' family truncates timestamps (truncating family), the other extracts a certain
-#' part of them (extracting family). Each family comes in three flavours: the
+#' part of them (extracting family). Each family comes in four flavours: the
 #' first relies solely on base \R, the second utilises [`fasttime::fastPOSIXct`]
-#' of \pkg{fasttime} and the third [`RcppCCTZ::parseDatetime`] of
-#' \pkg{RcppCCTZ}.
+#' of \pkg{fasttime}, the third [`RcppCCTZ::parseDatetime`] of \pkg{RcppCCTZ}
+#' and the fourth [`timechange::time_floor`] of \pkg{timechange}.
 #'
-#' The \pkg{fasttime} flavour works with UTC and equivalent as well as all
-#' Etc/GMT time zones only (execute
+#' The \pkg{timechange} flavour generally is the fastest for both families of
+#' functions and all time zones. Second best option for the extracting family of
+#' functions generally is the \pkg{fasttime} flavour, which, however, works with
+#' UTC and equivalent as well as all Etc/GMT time zones only (execute
 #' `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case
 #' = TRUE, value = TRUE)` for a full list of supported time zones) and is
-#' limited to timestamps between the years 1970 and 2199, but generally is the
-#' fastest for the extracting family of functions. For time zones other than UTC
-#' and equivalent the \pkg{RcppCCTZ} flavour generally is the fastest.
+#' limited to timestamps between the years 1970 and 2199. For time zones other
+#' than UTC and equivalent the \pkg{RcppCCTZ} flavour generally is the second
+#' best option.
 #'
 #' Use the `funbyApproach` argument of the respective calling method in order to
 #' specify the utilised flavour.
@@ -177,90 +225,75 @@ NULL
 #' @rdname TALFs
 #' @export
 byY_____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYQ____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYm____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYmd___ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYmdH__ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
   if (singleOrMulti == "multi" && !grepl(
@@ -274,96 +307,81 @@ byYmdH__ <- function(.dateTime, .helpers) {
     )
   }
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYmdHM_ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
 }
 
 #' @rdname TALFs
 #' @export
 byYmdHMS <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHMS"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHMS"]])
 }
 
 ## Extracting family ####
 #' @rdname TALFs
 #' @export
 by______ <- function(.dateTime, .helpers) {
-  eval(byExternal[["single"]][["base"]][["by______"]])
+  eval(byExpr[["single"]][["base"]][["by______"]])
 }
 
 #' @rdname TALFs
 #' @export
 by_Q____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
-  eval(byExternal[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
+  eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
 }
 
 #' @rdname TALFs
 #' @export
 by_m____ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
 }
 
 #' @rdname TALFs
 #' @export
 by___H__ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !grepl(
     "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
     .helpers[["timezone"]],
     ignore.case = TRUE
   )) {
-    .dateTime <- to.fakeUTCdateTime(.dateTime, .helpers)
+    .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -378,31 +396,25 @@ by___H__ <- function(.dateTime, .helpers) {
     )
   }
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
 }
 
 #' @rdname TALFs
 #' @export
 by____M_ <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
 }
 
 #' @rdname TALFs
 #' @export
 by_____S <- function(.dateTime, .helpers) {
-  assertFunbyApproach(.helpers[["funbyApproach"]])
-  if (.helpers[["funbyApproach"]] == "fasttime") {
-    assertFasttimeOK(.dateTime, .helpers)
-  }
+  assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
 
-  eval(byExternal[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_____S"]])
+  eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_____S"]])
 }

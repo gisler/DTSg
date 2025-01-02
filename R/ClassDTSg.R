@@ -57,12 +57,12 @@
 #'   columns, or `"undecided"` for no such action. Please note that `DTSg`
 #'   objects work best with explicitly missing values.
 #' @param funbyApproach A character string specifying the default flavour of
-#'   [`TALFs`] used with the created `DTSg` object. Either `"base"`, which
-#'   utilises [`as.POSIXct`], or `"fasttime"`, which utilises
-#'   [`fasttime::fastPOSIXct`], or `"RcppCCTZ"`, which utilises
-#'   [`RcppCCTZ::parseDatetime`] as the main function for transforming
-#'   timestamps. Custom approaches for user defined temporal aggregation level
-#'   functions are also possible.
+#'   [`TALFs`] used with the created `DTSg` object. Either `"timechange"`, which
+#'   utilises [`timechange::time_floor`], or `"base"`, which utilises
+#'   [`as.POSIXct`], or `"fasttime"`, which utilises [`fasttime::fastPOSIXct`],
+#'   or `"RcppCCTZ"`, which utilises [`RcppCCTZ::parseDatetime`] as the main
+#'   function for transforming timestamps. Custom approaches for user defined
+#'   temporal aggregation level functions are also possible.
 #'
 #' @return Returns a `DTSg` object.
 #'
@@ -134,12 +134,15 @@
 #' following option. See [`options`] for further information:
 #' * _DTSgClone:_ A logical specifying if `DTSg` objects are, by default,
 #' modified in place (`FALSE`) or if a deep clone (copy) shall be made
-#' beforehand (`TRUE`).
+#' beforehand (`TRUE`) (package's default is `TRUE`).
 #' * _DTSgDeprecatedWarnings:_ A logical specifying if warnings are displayed
-#' when calling deprecated features.
-#' * _DTSgFast:_ Default value for the `fast` argument.
-#' * _DTSgFunbyApproach:_ Default value for the `funbyApproach` argument.
-#' * _DTSgNA.status:_ Default value for the `na.status` argument.
+#' when calling deprecated features (package's default is `TRUE`).
+#' * _DTSgFast:_ Default value for the `fast` argument (package's default is
+#' `FALSE`).
+#' * _DTSgFunbyApproach:_ Default value for the `funbyApproach` argument
+#' (package's default is `"timechange"`).
+#' * _DTSgNA.status:_ Default value for the `na.status` argument  (package's
+#' default is `"explicit"`).
 #'
 #' @note
 #' Due to the [`POSIXct`] nature of the _.dateTime_ column, the same sub-second

@@ -25,7 +25,8 @@ Imports:
     checkmate,
     data.table,
     methods,
-    R6
+    R6,
+    timechange
 Suggests:
     dygraphs,
     fasttime,

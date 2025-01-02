@@ -1,25 +1,29 @@
 #### assertFunbyApproach ####
 expect_error(
-  assertFunbyApproach("special"),
+  DTSg:::assertFunbyApproach(, list(funbyApproach = "special")),
+  pattern = "^'arg' should be one of ",
   info = "unsupported approach returns error"
 )
 
-#### assertFasttimeOK ####
 expect_error(
-  assertFasttimeOK(seq(
+  DTSg:::assertFunbyApproach(seq(
     as.POSIXct("1960-01-01"),
     as.POSIXct("2209-12-31"),
     "1 year"
-  ), list(timezone = "UTC")),
+  ), list(funbyApproach = "fasttime", timezone = "UTC")),
+  pattern = "Timestamps must be between the years 1970 and 2199 for this approach.",
+  fixed = TRUE,
   info = 'unsuitable ".dateTime" returns error'
 )
 
 expect_error(
-  assertFasttimeOK(seq(
+  DTSg:::assertFunbyApproach(seq(
     as.POSIXct("1970-01-01"),
     as.POSIXct("2199-12-31"),
     "1 year"
-  ), list(timezone = "Europe/Vienna")),
+  ), list(funbyApproach = "fasttime", timezone = "Europe/Vienna")),
+  pattern = 'Time zone must be "UTC" or equivalent for this approach.',
+  fixed = TRUE,
   info = "unsuitable time zone returns error"
 )
 

@@ -15,7 +15,7 @@ jobs:
       R_KEEP_PKG_SOURCE: true
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -28,7 +28,7 @@ jobs:
         run: |
           install.packages("remotes")
           remotes::install_cran(
-            c("checkmate", "data.table", "R6", "dygraphs", "fasttime", "RColorBrewer", "RcppCCTZ", "runner", "units", "rcmdcheck"),
+            c("checkmate", "data.table", "R6", "timechange", "dygraphs", "fasttime", "RColorBrewer", "RcppCCTZ", "runner", "units", "rcmdcheck"),
             repos = "https://packagemanager.posit.co/cran/2023-03-15",
             type = "win.binary",
             dependencies = TRUE
