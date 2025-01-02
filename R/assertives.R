@@ -1,14 +1,10 @@
 assertFunbyApproach <- function(.dateTime, .helpers) {
   funbyApproach <- match.arg(
     .helpers[["funbyApproach"]],
-    c("base", "fasttime", "RcppCCTZ", "timechange")
+    c("timechange", "base", "fasttime", "RcppCCTZ")
   )
 
-  if (funbyApproach == "timechange") {
-    if (!requireNamespace("timechange", quietly = TRUE)) {
-      stop('Package "timechange" must be installed for this approach.')
-    }
-  } else if (funbyApproach == "fasttime") {
+  if (funbyApproach == "fasttime") {
     if (!requireNamespace("fasttime", quietly = TRUE)) {
       stop('Package "fasttime" must be installed for this approach.')
     }

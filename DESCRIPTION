@@ -25,7 +25,8 @@ Imports:
     checkmate,
     data.table,
     methods,
-    R6
+    R6,
+    timechange
 Suggests:
     dygraphs,
     fasttime,
@@ -34,7 +35,6 @@ Suggests:
     RcppCCTZ,
     rmarkdown,
     runner (>= 0.3.5),
-    timechange,
     tinytest,
     units
 RoxygenNote: 7.3.2
