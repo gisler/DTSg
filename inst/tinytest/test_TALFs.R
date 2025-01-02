@@ -1,6 +1,6 @@
 source("data.R")
 
-for (approach in c("base", "fasttime", "RcppCCTZ")) {
+for (approach in c("base", "fasttime", "RcppCCTZ", "timechange")) {
   old <- options(DTSgFunbyApproach = approach)
 
   expect_identical(
@@ -144,7 +144,7 @@ for (approach in c("base", "fasttime", "RcppCCTZ")) {
   )
 }
 
-for (approach in c("base", "RcppCCTZ")) {
+for (approach in c("base", "RcppCCTZ", "timechange")) {
   options(DTSgFunbyApproach = approach)
 
   #### CETtoFromDST, multiplier == 1L ####

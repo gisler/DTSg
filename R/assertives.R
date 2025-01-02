@@ -1,42 +1,35 @@
-assertFunbyApproach <- function(funbyApproach) {
-  funbyApproach <- match.arg(funbyApproach, c("base", "fasttime", "RcppCCTZ"))
+assertFunbyApproach <- function(.dateTime, .helpers) {
+  funbyApproach <- match.arg(
+    .helpers[["funbyApproach"]],
+    c("base", "fasttime", "RcppCCTZ", "timechange")
+  )
 
-  if (funbyApproach == "fasttime" &&
-        !requireNamespace("fasttime", quietly = TRUE)) {
-    stop(
-      'Package "fasttime" must be installed for this approach.',
-      call. = FALSE
-    )
+  if (funbyApproach == "timechange") {
+    if (!requireNamespace("timechange", quietly = TRUE)) {
+      stop('Package "timechange" must be installed for this approach.')
+    }
+  } else if (funbyApproach == "fasttime") {
+    if (!requireNamespace("fasttime", quietly = TRUE)) {
+      stop('Package "fasttime" must be installed for this approach.')
+    }
+
+    if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
+      stop("Timestamps must be between the years 1970 and 2199 for this approach.")
+    }
+
+    if (!grepl(
+      "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
+      .helpers[["timezone"]],
+      ignore.case = TRUE
+    )) {
+      stop('Time zone must be "UTC" or equivalent for this approach.')
+    }
   } else if (funbyApproach == "RcppCCTZ" &&
                !requireNamespace("RcppCCTZ", quietly = TRUE)) {
-    stop(
-      'Package "RcppCCTZ" must be installed for this approach.',
-      call. = FALSE
-    )
+    stop('Package "RcppCCTZ" must be installed for this approach.')
   }
 
   invisible(funbyApproach)
-}
-
-assertFasttimeOK <- function(.dateTime, .helpers) {
-  if (year(.dateTime[1L]) < 1970L || year(last(.dateTime)) > 2199L) {
-    stop(
-      "Timestamps must be between the years 1970 and 2199 for this approach.",
-      call. = FALSE
-    )
-  }
-  if (!grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
-    stop(
-      'Time zone must be "UTC" or equivalent for this approach.',
-      call. = FALSE
-    )
-  }
-
-  invisible(TRUE)
 }
 
 assertFilter <- function(x, limit) {
