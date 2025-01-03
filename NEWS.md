@@ -3,7 +3,7 @@
 * Added `"timechange"` `funbyApproach` utilising `timechange::time_floor()` as the main function for transforming timestamps. This new approach generally is way faster than the existing ones for both families of TALFs and all time zones, hence it is the new package's default.
 * Sped up the `byY_____()` and `byYm____()` TALFs of the `"base"` `funbyApproach`.
 * The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
-* Fixed a bug in the `aggregate()` method causing incorrect results under the following conditions:
+* Fixed a bug in the `aggregate()` method possibly causing incorrect results under the following conditions:
   * The time zone of the `DTSg` object is not UTC or equivalent.
   * The `ignoreDST` argument is `TRUE`.
   * A single column with missing values is aggregated.
