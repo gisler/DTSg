@@ -1,114 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://gisler.github.io/DTSg/404.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/articles/a_basicUsage.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/articles/b_advancedUsage.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/pull_request_template.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/S3WrapperGenerator.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/TALFs.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/aggregate.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/alter.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/clone.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/colapply.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/cols.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/flow.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/getCol.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/interpolateLinear.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/merge.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/nas.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/plot.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/print.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/refresh.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/rollapply.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/rollback.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/rowaggregate.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/rowbind.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/setColNames.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/setCols.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/subset.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/summary.DTSg.html</loc>
-  </url>
-  <url>
-    <loc>https://gisler.github.io/DTSg/reference/values.DTSg.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://gisler.github.io/DTSg/404.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/CONTRIBUTING.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/LICENSE-text.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/LICENSE.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/articles/a_basicUsage.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/articles/b_advancedUsage.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/articles/index.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/authors.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/index.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/news/index.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/S3WrapperGenerator.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/TALFs.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/aggregate.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/alter.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/clone.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/colapply.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/cols.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/flow.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/getCol.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/index.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/interpolateLinear.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/merge.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/nas.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/plot.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/print.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/refresh.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/rollapply.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/rollback.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/rowaggregate.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/rowbind.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/setColNames.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/setCols.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/subset.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/summary.DTSg.html</loc></url>
+<url><loc>https://gisler.github.io/DTSg/reference/values.DTSg.html</loc></url>
 </urlset>
+
