@@ -1,6 +1,6 @@
 #' @import checkmate
 #' @import data.table
-#' @import methods
+#' @importFrom methods setClass setMethod
 #' @import R6
 #' @import timechange
 NULL

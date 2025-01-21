@@ -171,14 +171,14 @@ following option. See \code{\link{options}} for further information:
 \itemize{
 \item \emph{DTSgClone:} A logical specifying if \code{DTSg} objects are, by default,
 modified in place (\code{FALSE}) or if a deep clone (copy) shall be made
-beforehand (\code{TRUE}) (package default is \code{TRUE}).
+beforehand (\code{TRUE}) (package's default is \code{TRUE}).
 \item \emph{DTSgDeprecatedWarnings:} A logical specifying if warnings are displayed
-when calling deprecated features (package default is \code{TRUE}).
-\item \emph{DTSgFast:} Default value for the \code{fast} argument (package default is
+when calling deprecated features (package's default is \code{TRUE}).
+\item \emph{DTSgFast:} Default value for the \code{fast} argument (package's default is
 \code{FALSE}).
 \item \emph{DTSgFunbyApproach:} Default value for the \code{funbyApproach} argument
-(package default is \code{"timechange"}).
-\item \emph{DTSgNA.status:} Default value for the \code{na.status} argument  (package
+(package's default is \code{"timechange"}).
+\item \emph{DTSgNA.status:} Default value for the \code{na.status} argument  (package's
 default is \code{"explicit"}).
 }
 }

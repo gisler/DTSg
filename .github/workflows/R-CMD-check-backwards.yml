@@ -49,13 +49,13 @@ jobs:
             args = c("--no-manual", "--as-cran"),
             build_args = "--no-manual",
             check_dir = "check",
-            error_on = "error"
+            error_on = "warning"
           )
         shell: Rscript {0}
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
