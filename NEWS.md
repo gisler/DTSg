@@ -1,3 +1,7 @@
+# DTSg v2.0.0.9000
+
+* Slightly improved the documentation.
+
 # DTSg v2.0.0
 
 * Added `"timechange"` `funbyApproach` utilising `timechange::time_floor()` as the main function for transforming timestamps. This new approach generally is way faster than the existing ones for both families of TALFs and all time zones, hence it is the new package's default.
@@ -12,7 +16,7 @@
   * The stripping of missing values within summary functions now depends on the value of a possible `na.rm` argument.
 * Fixed the support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions. Please note that the column order of the resulting `DTSg` object is now different due to this fix.
 * Fixed that the `set()` method was too anxious about removing all value columns.
-* It is no longer possible to use the deprecated `byFasttime*()` TALFs. Please use the `"fasttime"` or even better the new `"timechange" `funbyApproach` from now on.
+* It is no longer possible to use the deprecated `byFasttime*()` TALFs. Please use the `"fasttime"` or even better the new `"timechange"` `funbyApproach` from now on.
 * Removed `magrittr` from the suggested packages list (vignettes now use R's native pipe operator).
 * Slightly improved the documentation.
 * Improved tests.
