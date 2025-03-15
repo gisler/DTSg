@@ -1,5 +1,6 @@
 # DTSg v2.0.0.9000
 
+* More time zones are now considered UTC or equivalent (execute `grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list).
 * Slightly improved the documentation.
 
 # DTSg v2.0.0

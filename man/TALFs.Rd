@@ -72,10 +72,10 @@ The \pkg{timechange} flavour generally is the fastest for both families of
 functions and all time zones. Second best option for the extracting family of
 functions generally is the \pkg{fasttime} flavour, which, however, works with
 UTC and equivalent as well as all Etc/GMT time zones only (execute
-\code{grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)} for a full list of supported time zones) and is
-limited to timestamps between the years 1970 and 2199. For time zones other
-than UTC and equivalent the \pkg{RcppCCTZ} flavour generally is the second
-best option.
+\code{grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)} for a full list of supported
+time zones) and is limited to timestamps between the years 1970 and 2199. For
+time zones other than UTC and equivalent the \pkg{RcppCCTZ} flavour generally
+is the second best option.
 
 Use the \code{funbyApproach} argument of the respective calling method in order to
 specify the utilised flavour.
