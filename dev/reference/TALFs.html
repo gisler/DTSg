@@ -137,20 +137,20 @@ and the fourth <code><a href="https://rdrr.io/pkg/timechange/man/time_round.html
 functions and all time zones. Second best option for the extracting family of
 functions generally is the <span class="pkg">fasttime</span> flavour, which, however, works with
 UTC and equivalent as well as all Etc/GMT time zones only (execute
-<code>grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported time zones) and is
-limited to timestamps between the years 1970 and 2199. For time zones other
-than UTC and equivalent the <span class="pkg">RcppCCTZ</span> flavour generally is the second
-best option.</p>
+<code>grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list of supported
+time zones) and is limited to timestamps between the years 1970 and 2199. For
+time zones other than UTC and equivalent the <span class="pkg">RcppCCTZ</span> flavour generally
+is the second best option.</p>
 <p>Use the <code>funbyApproach</code> argument of the respective calling method in order to
 specify the utilised flavour.</p>
 <p>The truncating family sets timestamps to the lowest possible point in time of
-the corresponding temporal aggregation level:</p><ul><li><p><code>byY_____</code> truncates to year,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-01-01 00:00:00.0</em></p></li>
-<li><p><code>byYQ____</code> truncates to quarter, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-10-01 00:00:00.0</em></p></li>
-<li><p><code>byYm____</code> truncates to month,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-01 00:00:00.0</em></p></li>
-<li><p><code>byYmd___</code> truncates to day,     e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 00:00:00.0</em></p></li>
-<li><p><code>byYmdH__</code> truncates to hour,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:00:00.0</em></p></li>
-<li><p><code>byYmdHM_</code> truncates to minute,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:00.0</em></p></li>
-<li><p><code>byYmdHMS</code> truncates to second,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:11.0</em></p></li>
+the corresponding temporal aggregation level:</p><ul><li><p><code>byY_____</code> truncates to years,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-01-01 00:00:00.0</em></p></li>
+<li><p><code>byYQ____</code> truncates to quarters, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-10-01 00:00:00.0</em></p></li>
+<li><p><code>byYm____</code> truncates to months,   e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-01 00:00:00.0</em></p></li>
+<li><p><code>byYmd___</code> truncates to days,     e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 00:00:00.0</em></p></li>
+<li><p><code>byYmdH__</code> truncates to hours,    e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:00:00.0</em></p></li>
+<li><p><code>byYmdHM_</code> truncates to minutes,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:00.0</em></p></li>
+<li><p><code>byYmdHMS</code> truncates to seconds,  e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2000-11-11 11:11:11.0</em></p></li>
 </ul><p>By convention, the extracting family sets the year to 2199 and extracts a
 certain part of timestamps:</p><ul><li><p><code>by______</code> extracts nothing,      i.e.          all timestamps become  <em>2199-01-01 00:00:00.0</em></p></li>
 <li><p><code>by_Q____</code> extracts the quarters, e.g. <em>2000-11-11 11:11:11.1</em> becomes <em>2199-10-01 00:00:00.0</em></p></li>

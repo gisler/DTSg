@@ -99,8 +99,8 @@
 <dt id="arg-i">i<a class="anchor" aria-label="anchor" href="#arg-i"></a></dt>
 <dd><p>An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the <code>i</code>
-argument of <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
-special symbol <code><a href="https://rdrr.io/pkg/data.table/man/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
+argument of <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
+special symbol <code><a href="https://rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
 
 
 <dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
@@ -281,7 +281,7 @@ the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul
 <span class="r-in"><span><span class="co">## R6 method</span></span></span>
 <span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">subset</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  i <span class="op">=</span> <span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>,</span></span>
-<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow</span>
@@ -309,7 +309,7 @@ the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul
 <span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">subset</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
 <span class="r-in"><span>  i <span class="op">=</span> <span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>,</span></span>
-<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow</span>

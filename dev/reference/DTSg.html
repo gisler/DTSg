@@ -114,7 +114,7 @@ constructor only).</p></dd>
 
 <dt id="arg-values">values<a class="anchor" aria-label="anchor" href="#arg-values"></a></dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> or object inherited from class <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code>,
-e.g. <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code>. Its first column must be of class
+e.g. <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Its first column must be of class
 <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> or coercible to it. It serves as the object's time index and is
 renamed to <em>.dateTime.</em></p></dd>
 
@@ -155,12 +155,12 @@ automatic detection of the time series' periodicity.</p></dd>
 <dd><p>A logical specifying if the object provided through the
 <code>values</code> argument shall be “swallowed” by the <code>DTSg</code> object, i.e. no
 copy of the data shall be made. This is generally more resource efficient,
-but only works when the provided object is a <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code>. Be
+but only works when the provided object is a <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Be
 warned, however, that when the creation of the <code>DTSg</code> object fails for some
-reason, the first column of the provided <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code> might
-have been coerced to <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> and keyed (see <code><a href="https://rdrr.io/pkg/data.table/man/setkey.html" class="external-link">data.table::setkey</a></code> for
+reason, the first column of the provided <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code> might
+have been coerced to <code><a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a></code> and keyed (see <code><a href="https://rdatatable.gitlab.io/data.table/reference/setkey.html" class="external-link">data.table::setkey</a></code> for
 further information). Furthermore, all references to the “swallowed”
-<code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code> in the global (and only the global) environment
+<code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code> in the global (and only the global) environment
 are removed upon the successful creation of the <code>DTSg</code> object.</p></dd>
 
 
