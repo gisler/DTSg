@@ -196,13 +196,13 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #'
 #' The truncating family sets timestamps to the lowest possible point in time of
 #' the corresponding temporal aggregation level:
-#' - `byY_____` truncates to year,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
-#' - `byYQ____` truncates to quarter, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
-#' - `byYm____` truncates to month,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
-#' - `byYmd___` truncates to day,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
-#' - `byYmdH__` truncates to hour,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
-#' - `byYmdHM_` truncates to minute,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
-#' - `byYmdHMS` truncates to second,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
+#' - `byY_____` truncates to years,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
+#' - `byYQ____` truncates to quarters, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
+#' - `byYm____` truncates to months,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
+#' - `byYmd___` truncates to days,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
+#' - `byYmdH__` truncates to hours,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
+#' - `byYmdHM_` truncates to minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
+#' - `byYmdHMS` truncates to seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
 #'
 #' By convention, the extracting family sets the year to 2199 and extracts a
 #' certain part of timestamps:

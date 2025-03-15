@@ -83,13 +83,13 @@ specify the utilised flavour.
 The truncating family sets timestamps to the lowest possible point in time of
 the corresponding temporal aggregation level:
 \itemize{
-\item \code{byY_____} truncates to year,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
-\item \code{byYQ____} truncates to quarter, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
-\item \code{byYm____} truncates to month,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
-\item \code{byYmd___} truncates to day,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
-\item \code{byYmdH__} truncates to hour,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
-\item \code{byYmdHM_} truncates to minute,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
-\item \code{byYmdHMS} truncates to second,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
+\item \code{byY_____} truncates to years,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-01-01 00:00:00.0}
+\item \code{byYQ____} truncates to quarters, e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-10-01 00:00:00.0}
+\item \code{byYm____} truncates to months,   e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-01 00:00:00.0}
+\item \code{byYmd___} truncates to days,     e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 00:00:00.0}
+\item \code{byYmdH__} truncates to hours,    e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:00:00.0}
+\item \code{byYmdHM_} truncates to minutes,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:00.0}
+\item \code{byYmdHMS} truncates to seconds,  e.g. \emph{2000-11-11 11:11:11.1} becomes \emph{2000-11-11 11:11:11.0}
 }
 
 By convention, the extracting family sets the year to 2199 and extracts a
