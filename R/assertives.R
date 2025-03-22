@@ -54,7 +54,7 @@ assertNAstatusPeriodicityOK <- function(
     sep = "\n"
   )
   if (na.status != "explicit" || periodicity == "unrecognised") {
-    if (level == "error") {
+    if (level == "error") { # nolint
       stop(msg)
     } else {
       warning(msg)

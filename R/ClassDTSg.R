@@ -1626,19 +1626,19 @@ DTSg <- R6Class(
     },
 
     regular = function(value) {
-      if (missing(value)) {
-        private$.isRegular
-      } else {
+      if (!missing(value)) {
         stop("Read-only field.")
       }
+
+      private$.isRegular
     },
 
     timestamps = function(value) {
-      if (missing(value)) {
-        private$.timestamps
-      } else {
+      if (!missing(value)) {
         stop("Read-only field.")
       }
+
+      private$.timestamps
     },
 
     timezone = function(value) {
