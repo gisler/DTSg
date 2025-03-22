@@ -75,7 +75,7 @@
 <h2 class="page-header" data-toc-text="2.0.0" id="dtsg-v200">DTSg v2.0.0<small>2025-01-20</small><a class="anchor" aria-label="anchor" href="#dtsg-v200"></a></h2>
 <ul><li>Added <code>"timechange"</code> <code>funbyApproach</code> utilising <code><a href="https://rdrr.io/pkg/timechange/man/time_round.html" class="external-link">timechange::time_floor()</a></code> as the main function for transforming timestamps. This new approach generally is way faster than the existing ones for both families of TALFs and all time zones, hence it is the new package’s default.</li>
 <li>Sped up the <code><a href="../reference/TALFs.html">byY_____()</a></code> and <code><a href="../reference/TALFs.html">byYm____()</a></code> TALFs of the <code>"base"</code> <code>funbyApproach</code>.</li>
-<li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method does not print its values’ key anymore, as it used to be <code>data.table</code>’s default before v1.15.0.</li>
+<li>The <code><a href="../reference/print.DTSg.html">print()</a></code> method does not print the values’ key anymore, as it used to be <code>data.table</code>’s default before v1.15.0.</li>
 <li>Fixed a bug in the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method, which could lead to incorrect results under the following conditions:
 <ul><li>The time zone of the <code>DTSg</code> object is not UTC or equivalent.</li>
 <li>The <code>ignoreDST</code> argument is <code>TRUE</code>.</li>
