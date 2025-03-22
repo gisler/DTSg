@@ -13,11 +13,7 @@ assertFunbyApproach <- function(.dateTime, .helpers) {
       stop("Timestamps must be between the years 1970 and 2199 for this approach.")
     }
 
-    if (!grepl(
-      "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-      .helpers[["timezone"]],
-      ignore.case = TRUE
-    )) {
+    if (!testSupportedTZ(.helpers[["timezone"]])) {
       stop('Time zone must be "UTC" or equivalent for this approach.')
     }
   } else if (funbyApproach == "RcppCCTZ" &&
@@ -74,4 +70,14 @@ assertNoStartingDot <- function(x) {
   }
 
   invisible(x)
+}
+
+testSupportedTZ <- function(tz, anyGMT = FALSE) {
+  if (anyGMT) {
+    pattern <- "^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?\\d?\\d?|Greenwich)$"
+  } else {
+    pattern <- "^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$"
+  }
+
+  grepl(pattern, tz, ignore.case = TRUE)
 }

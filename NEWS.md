@@ -1,12 +1,13 @@
 # DTSg v2.0.0.9000
 
+* More time zones are now considered UTC or equivalent (execute `grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list).
 * Slightly improved the documentation.
 
 # DTSg v2.0.0
 
 * Added `"timechange"` `funbyApproach` utilising `timechange::time_floor()` as the main function for transforming timestamps. This new approach generally is way faster than the existing ones for both families of TALFs and all time zones, hence it is the new package's default.
 * Sped up the `byY_____()` and `byYm____()` TALFs of the `"base"` `funbyApproach`.
-* The `print()` method does not print its values' key anymore, as it used to be `data.table`'s default before v1.15.0.
+* The `print()` method does not print the values' key anymore, as it used to be `data.table`'s default before v1.15.0.
 * Fixed a bug in the `aggregate()` method, which could lead to incorrect results under the following conditions:
   * The time zone of the `DTSg` object is not UTC or equivalent.
   * The `ignoreDST` argument is `TRUE`.
@@ -15,7 +16,7 @@
   * A possible `.n` column now contains `0` instead of `NA` in case all values of a certain temporal aggregation level are missing.
   * The stripping of missing values within summary functions now depends on the value of a possible `na.rm` argument.
 * Fixed the support for `data.table`'s *GForce* optimisation when the `fun` argument of the `aggregate()` method is provided with a character vector specifying summary functions. Please note that the column order of the resulting `DTSg` object is now different due to this fix.
-* Fixed that the `set()` method was too anxious about removing all value columns.
+* Fixed that the `setCols()` method and its R6 alias `set()` was too anxious about removing all value columns.
 * It is no longer possible to use the deprecated `byFasttime*()` TALFs. Please use the `"fasttime"` or even better the new `"timechange"` `funbyApproach` from now on.
 * Removed `magrittr` from the suggested packages list (vignettes now use R's native pipe operator).
 * Slightly improved the documentation.

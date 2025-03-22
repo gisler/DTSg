@@ -185,24 +185,24 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #' functions and all time zones. Second best option for the extracting family of
 #' functions generally is the \pkg{fasttime} flavour, which, however, works with
 #' UTC and equivalent as well as all Etc/GMT time zones only (execute
-#' `grep("^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$", OlsonNames(), ignore.case
-#' = TRUE, value = TRUE)` for a full list of supported time zones) and is
-#' limited to timestamps between the years 1970 and 2199. For time zones other
-#' than UTC and equivalent the \pkg{RcppCCTZ} flavour generally is the second
-#' best option.
+#' `grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$",
+#' OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list of supported
+#' time zones) and is limited to timestamps between the years 1970 and 2199. For
+#' time zones other than UTC and equivalent the \pkg{RcppCCTZ} flavour generally
+#' is the second best option.
 #'
 #' Use the `funbyApproach` argument of the respective calling method in order to
 #' specify the utilised flavour.
 #'
 #' The truncating family sets timestamps to the lowest possible point in time of
 #' the corresponding temporal aggregation level:
-#' - `byY_____` truncates to year,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
-#' - `byYQ____` truncates to quarter, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
-#' - `byYm____` truncates to month,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
-#' - `byYmd___` truncates to day,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
-#' - `byYmdH__` truncates to hour,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
-#' - `byYmdHM_` truncates to minute,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
-#' - `byYmdHMS` truncates to second,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
+#' - `byY_____` truncates to years,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-01-01 00:00:00.0_
+#' - `byYQ____` truncates to quarters, e.g. _2000-11-11 11:11:11.1_ becomes _2000-10-01 00:00:00.0_
+#' - `byYm____` truncates to months,   e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-01 00:00:00.0_
+#' - `byYmd___` truncates to days,     e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 00:00:00.0_
+#' - `byYmdH__` truncates to hours,    e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:00:00.0_
+#' - `byYmdHM_` truncates to minutes,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:00.0_
+#' - `byYmdHMS` truncates to seconds,  e.g. _2000-11-11 11:11:11.1_ becomes _2000-11-11 11:11:11.0_
 #'
 #' By convention, the extracting family sets the year to 2199 and extracts a
 #' certain part of timestamps:
@@ -227,11 +227,7 @@ NULL
 byY_____ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -245,11 +241,7 @@ byY_____ <- function(.dateTime, .helpers) {
 byYQ____ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -261,11 +253,7 @@ byYQ____ <- function(.dateTime, .helpers) {
 byYm____ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -279,11 +267,7 @@ byYm____ <- function(.dateTime, .helpers) {
 byYmd___ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -296,14 +280,13 @@ byYmdH__ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
-  if (singleOrMulti == "multi" && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
+  if (singleOrMulti == "multi" && !testSupportedTZ(
     .helpers[["timezone"]],
-    ignore.case = TRUE
+    anyGMT = TRUE
   )) {
     stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one."
+      'Time zone must be "UTC" or equivalent or any GMT for this TALF with a ',
+      "multiplier greater than one."
     )
   }
 
@@ -342,11 +325,7 @@ by______ <- function(.dateTime, .helpers) {
 by_Q____ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -358,11 +337,7 @@ by_Q____ <- function(.dateTime, .helpers) {
 by_m____ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
@@ -376,23 +351,18 @@ by_m____ <- function(.dateTime, .helpers) {
 by___H__ <- function(.dateTime, .helpers) {
   assertFunbyApproach(.dateTime, .helpers)
 
-  if (.helpers[["ignoreDST"]] && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT(\\+|-)?0?$",
-    .helpers[["timezone"]],
-    ignore.case = TRUE
-  )) {
+  if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
     .dateTime <- toFakeUTCdateTime(.dateTime, .helpers)
   }
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
-  if (singleOrMulti == "multi" && !grepl(
-    "^(Etc/)?(UCT|UTC)$|^(Etc/)?GMT",
+  if (singleOrMulti == "multi" && !testSupportedTZ(
     .helpers[["timezone"]],
-    ignore.case = TRUE
+    anyGMT = TRUE
   )) {
     stop(
-      'Time zone must be "UTC" or equivalent or any Etc/GMT for this TALF ',
-      "with a multiplier greater than one."
+      'Time zone must be "UTC" or equivalent or any GMT for this TALF with a ',
+      "multiplier greater than one."
     )
   }
 
