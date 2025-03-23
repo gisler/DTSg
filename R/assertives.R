@@ -66,7 +66,7 @@ assertNAstatusPeriodicityOK <- function(
 
 assertNoStartingDot <- function(x) {
   if (any(startsWith(x, "."))) {
-    stop(sprintf('"%s" must not start with a ".".', deparse(substitute(x))))
+    stop(sprintf('"%s" must not start with a ".".', deparse1(substitute(x))))
   }
 
   invisible(x)
