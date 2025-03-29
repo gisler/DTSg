@@ -197,8 +197,8 @@ DTSg <- R6Class(
     .variant = character(),
 
     coerceCol = function(x, fun, ..., colname) {
-      toClass <- substring(deparse(substitute(fun)), 4L)
-      msgPart <- sprintf("column %s to class %s", deparse(colname), deparse(toClass))
+      toClass <- substring(deparse1(substitute(fun)), 4L)
+      msgPart <- sprintf("column %s to class %s", deparse1(colname), deparse1(toClass))
 
       x <- tryCatch(
         fun(x, ...),
@@ -206,14 +206,14 @@ DTSg <- R6Class(
           stop(sprintf(
             "Cannot coerce %s because %s.",
             msgPart,
-            deparse(e$message)
+            deparse1(e$message)
           ))
         },
         warning = function(w) {
           stop(sprintf(
             "Will not coerce %s because %s.",
             msgPart,
-            deparse(w$message)
+            deparse1(w$message)
           ))
         }
       )
@@ -1630,19 +1630,19 @@ DTSg <- R6Class(
     },
 
     regular = function(value) {
-      if (missing(value)) {
-        private$.isRegular
-      } else {
+      if (!missing(value)) {
         stop("Read-only field.")
       }
+
+      private$.isRegular
     },
 
     timestamps = function(value) {
-      if (missing(value)) {
-        private$.timestamps
-      } else {
+      if (!missing(value)) {
         stop("Read-only field.")
       }
+
+      private$.timestamps
     },
 
     timezone = function(value) {
