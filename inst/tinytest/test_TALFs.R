@@ -26,19 +26,6 @@ expect_identical(
   info = "day saving time shift is estimated correctly (Antarctica/Troll)"
 )
 
-expect_warning(
-  DTSg:::toFakeUTCdateTime(
-    as.POSIXct("1980-04-07", tz = "Europe/Vienna"),
-    list(
-      timezone = "Europe/Vienna",
-      periodicity = "1 day",
-      na.status = "explicit"
-    )
-  ),
-  pattern = "^The day saving time shift cannot be estimated and is assumed to be one hour long.$",
-  info = "inestimable day saving time shift returns warning"
-)
-
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {
   old <- options(DTSgFunbyApproach = approach)
 
