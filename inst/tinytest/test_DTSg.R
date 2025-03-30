@@ -298,7 +298,7 @@ expect_identical(
     TS$periodicity <- "1 hour"
     TS$periodicity
   },
-  .difftime(1, units = "hours"),
+  as.difftime(1, units = "hours"),
   info = '"periodicity" field is changed correctly'
 )
 

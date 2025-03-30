@@ -183,8 +183,8 @@ DTSg <- R6Class(
     .isAggregated = logical(),
     .isFast = logical(),
     .isRegular = logical(),
-    .maxLag = .difftime(0, units = "secs"),
-    .minLag = .difftime(0, units = "secs"),
+    .maxLag = as.difftime(0, units = "secs"),
+    .minLag = as.difftime(0, units = "secs"),
     .na.status = "undecided",
     .na.statuses = c("explicit", "implicit", "undecided"),
     .origDateTimeCol = character(),
@@ -1052,8 +1052,8 @@ DTSg <- R6Class(
       }
 
       if (private$.timestamps < 2L) {
-        private$.minLag <- .difftime(0, units = "secs")
-        private$.maxLag <- .difftime(0, units = "secs")
+        private$.minLag <- as.difftime(0, units = "secs")
+        private$.maxLag <- as.difftime(0, units = "secs")
         private$.isRegular <- TRUE
         private$.periodicity <- "unrecognised"
       } else {

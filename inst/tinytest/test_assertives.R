@@ -49,13 +49,13 @@ expect_warning(
 )
 
 expect_error(
-  DTSg:::assertNAstatusPeriodicityOK("implicit", .difftime(0, units = "secs")),
+  DTSg:::assertNAstatusPeriodicityOK("implicit", as.difftime(0, units = "secs")),
   pattern = "^This functionality may only give complete and correct results ",
   info = 'implicit "na.status" returns error'
 )
 
 expect_warning(
-  DTSg:::assertNAstatusPeriodicityOK("undecided", .difftime(0, units = "secs"), "warning"),
+  DTSg:::assertNAstatusPeriodicityOK("undecided", as.difftime(0, units = "secs"), "warning"),
   pattern = "^This functionality may only give complete and correct results ",
   info = 'undecided "na.status" returns warning'
 )
