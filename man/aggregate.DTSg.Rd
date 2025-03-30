@@ -147,10 +147,10 @@ ignore day saving time while transforming the timestamps. This can be a
 desired feature for time series strictly following the position of the sun
 such as hydrological time series. Doing so ensures that diurnal variations
 are preserved by all means and all intervals are of the \dQuote{correct}
-length, however, a possible limitation might be that the day saving time
-shift is invariably assumed to be one hour long. This feature requires that
-the periodicity of the time series has been recognised and is supported by
-the following \code{\link{TALFs}} of the package:
+length, however, a possible limitation might be that when the day saving time
+shift cannot be estimated, it is assumed to be one hour long and a warning is
+issued. This feature requires that the periodicity of the time series has
+been recognised and is supported by the following \code{\link{TALFs}} of the package:
 \itemize{
 \item \code{\link{byY_____}}
 \item \code{\link{byYQ____}}

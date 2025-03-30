@@ -1,5 +1,6 @@
 # DTSg v2.0.0.9000
 
+* The day saving time shift for the `ignoreDST` argument of the `aggregate()`, `colapply()` and `subset()` methods is now attempted to be estimated and not invariably assumed to be one hour long.
 * More time zones are now considered UTC or equivalent (execute `grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)` for a full list).
 * Slightly improved the documentation.
 * Minor internal code improvements, which require R ≥ 4.0.0.

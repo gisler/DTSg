@@ -717,8 +717,8 @@ for (by in c(
   expect_identical(
     {
       date <- seq(
-        as.POSIXct("2000-01-31", tz = "Europe/Vienna"),
-        as.POSIXct("2012-12-31", tz = "Europe/Vienna"),
+        as.POSIXct("1981-01-31", tz = "Europe/Vienna"),
+        as.POSIXct("2001-12-31", tz = "Europe/Vienna"),
         by
       )
       if (grepl("^\\d+ (month|year)(s?)$", by)) {

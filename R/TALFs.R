@@ -145,7 +145,31 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
   from <- .dateTime[1L]
 
   if (as.POSIXlt(from)$isdst) {
-    from <- from - 3600L
+    ts <- seq(
+      from,
+      as.POSIXct("1916-01-01", tz = .helpers[["timezone"]]),
+      by = "-1 DSTday"
+    )
+
+    i <- first(which(as.POSIXlt(ts)$isdst == 0L))
+    lagDSTday <- diff(ts[c(i, i - 1L)])
+
+    if (is.na(lagDSTday)) {
+      lagDST <- 3600L
+
+      warning(
+        "The day saving time shift cannot be estimated and is assumed to be ",
+        "one hour long."
+      )
+    } else {
+      lagDST <- as.difftime(
+        1L,
+        units = "days",
+        tz = .helpers[["timezone"]]
+      ) - lagDSTday
+    }
+
+    from <- from - lagDST
   }
 
   .dateTime <- seq(
