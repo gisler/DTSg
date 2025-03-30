@@ -1,12 +1,51 @@
 source("data.R")
 
+expect_identical(
+  DTSg:::toFakeUTCdateTime(
+    as.POSIXct("2024-12-31 03:00:00", tz = "Australia/Lord_Howe"),
+    list(
+      timezone = "Australia/Lord_Howe",
+      periodicity = "1 day",
+      na.status = "explicit"
+    )
+  ),
+  seq(as.POSIXct("2024-12-31 02:30:00", tz = "UTC"), by = "1 day", length.out = 1L),
+  info = "day saving time shift is estimated correctly (Australia/Lord_Howe)"
+)
+
+expect_identical(
+  DTSg:::toFakeUTCdateTime(
+    as.POSIXct("2024-06-30 03:00:00", tz = "Antarctica/Troll"),
+    list(
+      timezone = "Antarctica/Troll",
+      periodicity = "1 day",
+      na.status = "explicit"
+    )
+  ),
+  seq(as.POSIXct("2024-06-30 01:00:00", tz = "UTC"), by = "1 day", length.out = 1L),
+  info = "day saving time shift is estimated correctly (Antarctica/Troll)"
+)
+
+expect_warning(
+  DTSg:::toFakeUTCdateTime(
+    as.POSIXct("1980-04-07", tz = "Europe/Vienna"),
+    list(
+      timezone = "Europe/Vienna",
+      periodicity = "1 day",
+      na.status = "explicit"
+    )
+  ),
+  pattern = "^The day saving time shift cannot be estimated and is assumed to be one hour long.$",
+  info = "inestimable day saving time shift returns warning"
+)
+
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {
   old <- options(DTSgFunbyApproach = approach)
 
   expect_identical(
     getOption("DTSgFunbyApproach"),
     approach,
-    '"DTSgFunbyApproach" is set correctly'
+    info = '"DTSgFunbyApproach" is set correctly'
   )
 
   #### UTC, multiplier == 1L ####
