@@ -233,7 +233,8 @@ desired feature for time series strictly following the position of the sun
 such as hydrological time series. Doing so ensures that diurnal variations
 are preserved by all means and all intervals are of the “correct”
 length, however, a possible limitation might be that the day saving time
-shift is invariably assumed to be one hour long. This feature requires that
+shift is calculated from a daily time series ranging from 1 January to 30
+June of the <em>.dateTime</em> column's starting year. This feature requires that
 the periodicity of the time series has been recognised and is supported by
 the following <code><a href="TALFs.html">TALFs</a></code> of the package:</p><ul><li><p><code><a href="TALFs.html">byY_____</a></code></p></li>
 <li><p><code><a href="TALFs.html">byYQ____</a></code></p></li>
