@@ -200,7 +200,7 @@ expect_error(
     length,
     funbyHelpers = list(periodicity = "1 hour")
   ),
-  pattern = '"timezone", "periodicity" and "na.status" helpers are not allowed in this context.',
+  pattern = '"timezone", "periodicity", "na.status" and "assertion" helpers are not allowed in this context.',
   fixed = TRUE,
   info = "use of helper data not allowed returns error"
 )

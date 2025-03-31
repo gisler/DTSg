@@ -408,10 +408,12 @@ DTSg <- R6Class(
           .var.name = "names(funbyHelpers)"
         )
 
-        if (any(helpers %chin% c("timezone", "periodicity", "na.status"))) {
+        if (any(helpers %chin% c(
+          "timezone", "periodicity", "na.status", "assertion"
+        ))) {
           stop(
-            '"timezone", "periodicity" and "na.status" helpers are not ',
-            "allowed in this context."
+            '"timezone", "periodicity", "na.status" and "assertion" helpers ',
+            "are not allowed in this context."
           )
         }
 
@@ -444,7 +446,8 @@ DTSg <- R6Class(
         periodicity = private$.periodicity,
         na.status = private$.na.status,
         multiplier = multiplier,
-        funbyApproach = funbyApproach
+        funbyApproach = funbyApproach,
+        assertion = TRUE
       ), .helpers)
     },
 
@@ -524,7 +527,10 @@ DTSg <- R6Class(
       private$.values <- private$.values[
         ,
         eval(expr),
-        keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
+        keyby = .(.dateTime = funby(
+          .dateTime,
+          modifyList(.funbyHelpers, list(assertion = FALSE))
+        )),
         .SDcols = cols
       ]
 
@@ -677,7 +683,10 @@ DTSg <- R6Class(
           .funbyHelpers
         ), any.missing = FALSE, len = 1L)
 
-        by <- funby(private$.values[[1L]], .funbyHelpers)
+        by <- funby(
+          private$.values[[1L]],
+          modifyList(.funbyHelpers, list(assertion = FALSE))
+        )
       } else {
         by <- NULL
       }
@@ -1485,7 +1494,10 @@ DTSg <- R6Class(
           values <- private$.values[
             ,
             .SD[eval(i)],
-            by = .(.group = funby(.dateTime, .funbyHelpers)),
+            by = .(.group = funby(
+              .dateTime,
+              modifyList(.funbyHelpers, list(assertion = FALSE))
+            )),
             .SDcols = cols
           ]
           values[, .group := NULL]

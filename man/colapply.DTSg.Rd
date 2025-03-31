@@ -107,6 +107,7 @@ as its second. The default elements of this \code{\link{list}} are as follows:
 \item \emph{na.status:} Same as the \code{\link[=DTSg]{na.status}} field.
 \item \emph{multiplier:} Same as the \code{multiplier} argument.
 \item \emph{funbyApproach:} Same as the \code{funbyApproach} argument.
+\item \emph{assertion:} A logical specifying if the TALF is called by an assertion.
 }
 
 Any additional element specified in the \code{funbyHelpers} argument is appended

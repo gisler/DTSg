@@ -1,29 +1,34 @@
 source("data.R")
 
-expect_identical(
-  DTSg:::toFakeUTCdateTime(
-    as.POSIXct("2024-12-31 03:00:00", tz = "Australia/Lord_Howe"),
-    list(
-      timezone = "Australia/Lord_Howe",
-      periodicity = "1 day",
-      na.status = "explicit"
-    )
-  ),
-  seq(as.POSIXct("2024-12-31 02:30:00", tz = "UTC"), by = "1 day", length.out = 1L),
-  info = "day saving time shift is estimated correctly (Australia/Lord_Howe)"
+#### Day saving time shift ####
+.helpers <- list(
+  timezone = "Australia/Lord_Howe",
+  periodicity = "1 day",
+  na.status = "explicit",
+  assertion = FALSE
 )
+msgPart <- "day saving time shift is estimated correctly (%s)"
+info <- sprintf(msgPart, .helpers[["timezone"]])
 
 expect_identical(
   DTSg:::toFakeUTCdateTime(
-    as.POSIXct("2024-06-30 03:00:00", tz = "Antarctica/Troll"),
-    list(
-      timezone = "Antarctica/Troll",
-      periodicity = "1 day",
-      na.status = "explicit"
-    )
+    as.POSIXct("2024-12-31 03:00:00", tz = .helpers[["timezone"]]),
+    .helpers
+  ),
+  seq(as.POSIXct("2024-12-31 02:30:00", tz = "UTC"), by = "1 day", length.out = 1L),
+  info = info
+)
+
+.helpers[["timezone"]] <- "Antarctica/Troll"
+info <- sprintf(msgPart, .helpers[["timezone"]])
+
+expect_identical(
+  DTSg:::toFakeUTCdateTime(
+    as.POSIXct("2024-06-30 03:00:00", tz = .helpers[["timezone"]]),
+    .helpers
   ),
   seq(as.POSIXct("2024-06-30 01:00:00", tz = "UTC"), by = "1 day", length.out = 1L),
-  info = "day saving time shift is estimated correctly (Antarctica/Troll)"
+  info = info
 )
 
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {

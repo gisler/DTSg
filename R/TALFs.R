@@ -144,7 +144,7 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 
   from <- .dateTime[1L]
 
-  if (as.POSIXlt(from)$isdst) {
+  if (!.helpers[["assertion"]] && as.POSIXlt(from)$isdst) {
     ts <- seq(
       from,
       as.POSIXct("1916-01-01", tz = .helpers[["timezone"]]),

@@ -109,6 +109,7 @@ NULL
 #' * _na.status:_ Same as the [`na.status`][DTSg] field.
 #' * _multiplier:_ Same as the `multiplier` argument.
 #' * _funbyApproach:_ Same as the `funbyApproach` argument.
+#' * _assertion:_ A logical specifying if the TALF is called by an assertion.
 #'
 #' Any additional element specified in the `funbyHelpers` argument is appended
 #' to the end of the default [`list`]. In case `funbyHelpers` contains an
