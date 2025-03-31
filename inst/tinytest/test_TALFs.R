@@ -31,6 +31,18 @@ expect_identical(
   info = info
 )
 
+.helpers[["timezone"]] <- "Europe/Vienna"
+info <- sprintf(msgPart, .helpers[["timezone"]])
+
+expect_identical(
+  DTSg:::toFakeUTCdateTime(
+    as.POSIXct("1980-04-07", tz = .helpers[["timezone"]]),
+    .helpers
+  ),
+  seq(as.POSIXct("1980-04-06 23:00:00", tz = "UTC"), by = "1 day", length.out = 1L),
+  info = info
+)
+
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {
   old <- options(DTSgFunbyApproach = approach)
 

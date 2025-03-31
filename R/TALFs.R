@@ -152,7 +152,11 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
     )
 
     i <- first(which(as.POSIXlt(ts)$isdst == 0L))
-    lagDSTday <- diff(ts[c(i, i - 1L)])
+    i <- i:max(i - 2L, 1L)
+    lagDSTday <- diff(ts[i])
+    if (length(lagDSTday) > 1L) {
+      lagDSTday <- min(lagDSTday)
+    }
 
     if (length(lagDSTday) == 0L || is.na(lagDSTday)) {
       lagDST <- 3600L
