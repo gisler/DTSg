@@ -447,7 +447,7 @@ DTSg <- R6Class(
         na.status = private$.na.status,
         multiplier = multiplier,
         funbyApproach = funbyApproach,
-        assertion = TRUE
+        assertion = FALSE
       ), .helpers)
     },
 
@@ -493,7 +493,7 @@ DTSg <- R6Class(
       )
       qassert(funby(
         self$values(reference = TRUE)[[".dateTime"]][1L],
-        .funbyHelpers
+        modifyList(.funbyHelpers, list(assertion = TRUE))
       ), "P1")
       fun <- private$determineFun(fun, TRUE)
       cols <- private$extractCols(cols)
@@ -527,10 +527,7 @@ DTSg <- R6Class(
       private$.values <- private$.values[
         ,
         eval(expr),
-        keyby = .(.dateTime = funby(
-          .dateTime,
-          modifyList(.funbyHelpers, list(assertion = FALSE))
-        )),
+        keyby = .(.dateTime = funby(.dateTime, .funbyHelpers)),
         .SDcols = cols
       ]
 
@@ -680,13 +677,10 @@ DTSg <- R6Class(
         )
         assertAtomic(funby(
           self$values(reference = TRUE)[[".dateTime"]][1L],
-          .funbyHelpers
+          modifyList(.funbyHelpers, list(assertion = TRUE))
         ), any.missing = FALSE, len = 1L)
 
-        by <- funby(
-          private$.values[[1L]],
-          modifyList(.funbyHelpers, list(assertion = FALSE))
-        )
+        by <- funby(private$.values[[1L]], .funbyHelpers)
       } else {
         by <- NULL
       }
@@ -1488,16 +1482,13 @@ DTSg <- R6Class(
           )
           assertAtomic(funby(
             self$values(reference = TRUE)[[".dateTime"]][1L],
-            .funbyHelpers
+            modifyList(.funbyHelpers, list(assertion = TRUE))
           ), any.missing = FALSE, len = 1L)
 
           values <- private$.values[
             ,
             .SD[eval(i)],
-            by = .(.group = funby(
-              .dateTime,
-              modifyList(.funbyHelpers, list(assertion = FALSE))
-            )),
+            by = .(.group = funby(.dateTime, .funbyHelpers)),
             .SDcols = cols
           ]
           values[, .group := NULL]
