@@ -171,6 +171,11 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
         units = "days",
         tz = .helpers[["timezone"]]
       ) - lagDSTday
+
+      units(lagDST) <- "hours"
+      message(sprintf(
+        "Estimated day saving time shift: %s.", format(lagDST)
+      ))
     }
 
     from <- from - lagDST
