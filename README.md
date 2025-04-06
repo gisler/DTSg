@@ -12,7 +12,7 @@ Install the [development version](https://gisler.github.io/DTSg/dev/) from GitHu
 
 `remotes::install_github("gisler/DTSg")`
 
-[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/main/graph/badge.svg?token=AYXU0fdU9T)](https://app.codecov.io/gh/gisler/DTSg) [![GitHub Super-Linter](https://github.com/gisler/DTSg/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3A%22Lint+Code+Base%22)
+[![R build status](https://github.com/gisler/DTSg/workflows/R-CMD-check/badge.svg)](https://github.com/gisler/DTSg/actions?query=workflow%3AR-CMD-check) [![codecov](https://codecov.io/gh/gisler/DTSg/branch/main/graph/badge.svg?token=AYXU0fdU9T)](https://app.codecov.io/gh/gisler/DTSg)
 
 ## Semantic versioning
 
