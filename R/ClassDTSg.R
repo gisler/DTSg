@@ -72,7 +72,7 @@
 #' * `alter`: See [`alter`] for further information.
 #' * `clone`: See [`clone`] for further information.
 #' * `colapply`: See [`colapply`] for further information.
-#' * `cols`: See [`cols`] for further information.
+#' * `cols` and its R6 only alias `names`: See [`cols`] for further information.
 #' * `getCol`: See [`getCol`] for further information.
 #' * `merge`: See [`merge`] for further information.
 #' * `nas`: See [`nas`] for further information.
@@ -80,10 +80,10 @@
 #' * `print`: See [`print`] for further information.
 #' * `refresh`: See [`refresh`] for further information.
 #' * `rollapply`: See [`rollapply`] for further information.
-#' * `rowaggregate`: See [`rowaggregate`] for further information.
-#' * `rowbind`: See [`rowbind`] for further information.
-#' * `setColNames`: See [`setColNames`] for further information.
-#' * `setCols`: See [`setCols`] for further information.
+#' * `rowaggregate` and its R6 only alias `raggregate`: See [`rowaggregate`] for further information.
+#' * `rowbind` and its R6 only alias `rbind`: See [`rowbind`] for further information.
+#' * `setColNames` and its R6 only alias `setnames`: See [`setColNames`] for further information.
+#' * `setCols` and its R6 only alias `set`: See [`setCols`] for further information.
 #' * `subset`: See [`subset`] for further information.
 #' * `summary`: See [`summary`] for further information.
 #' * `values`: See [`values`] for further information.

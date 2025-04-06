@@ -101,7 +101,7 @@ A \code{DTSg} object has the following methods:
 \item \code{alter}: See \code{\link{alter}} for further information.
 \item \code{clone}: See \code{\link{clone}} for further information.
 \item \code{colapply}: See \code{\link{colapply}} for further information.
-\item \code{cols}: See \code{\link{cols}} for further information.
+\item \code{cols} and its R6 only alias \code{names}: See \code{\link{cols}} for further information.
 \item \code{getCol}: See \code{\link{getCol}} for further information.
 \item \code{merge}: See \code{\link{merge}} for further information.
 \item \code{nas}: See \code{\link{nas}} for further information.
@@ -109,10 +109,10 @@ A \code{DTSg} object has the following methods:
 \item \code{print}: See \code{\link{print}} for further information.
 \item \code{refresh}: See \code{\link{refresh}} for further information.
 \item \code{rollapply}: See \code{\link{rollapply}} for further information.
-\item \code{rowaggregate}: See \code{\link{rowaggregate}} for further information.
-\item \code{rowbind}: See \code{\link{rowbind}} for further information.
-\item \code{setColNames}: See \code{\link{setColNames}} for further information.
-\item \code{setCols}: See \code{\link{setCols}} for further information.
+\item \code{rowaggregate} and its R6 only alias \code{raggregate}: See \code{\link{rowaggregate}} for further information.
+\item \code{rowbind} and its R6 only alias \code{rbind}: See \code{\link{rowbind}} for further information.
+\item \code{setColNames} and its R6 only alias \code{setnames}: See \code{\link{setColNames}} for further information.
+\item \code{setCols} and its R6 only alias \code{set}: See \code{\link{setCols}} for further information.
 \item \code{subset}: See \code{\link{subset}} for further information.
 \item \code{summary}: See \code{\link{summary}} for further information.
 \item \code{values}: See \code{\link{values}} for further information.
