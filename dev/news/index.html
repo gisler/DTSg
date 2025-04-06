@@ -88,7 +88,7 @@
 <li>The stripping of missing values within summary functions now depends on the value of a possible <code>na.rm</code> argument.</li>
 </ul></li>
 <li>Fixed the support for <code>data.table</code>’s <em>GForce</em> optimisation when the <code>fun</code> argument of the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code> method is provided with a character vector specifying summary functions. Please note that the column order of the resulting <code>DTSg</code> object is now different due to this fix.</li>
-<li>Fixed that the <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> method and its R6 alias <code><a href="../reference/setCols.DTSg.html">set()</a></code> was too anxious about removing all value columns.</li>
+<li>Fixed that the <code><a href="../reference/setCols.DTSg.html">setCols()</a></code> method and its R6 only alias <code><a href="../reference/setCols.DTSg.html">set()</a></code> was too anxious about removing all value columns.</li>
 <li>It is no longer possible to use the deprecated <code>byFasttime*()</code> TALFs. Please use the <code>"fasttime"</code> or even better the new <code>"timechange"</code> <code>funbyApproach</code> from now on.</li>
 <li>Removed <code>magrittr</code> from the suggested packages list (vignettes now use R’s native pipe operator).</li>
 <li>Slightly improved the documentation.</li>
