@@ -3,6 +3,7 @@
 \name{cols.DTSg}
 \alias{cols.DTSg}
 \alias{cols}
+\alias{names}
 \title{Get column names}
 \usage{
 \method{cols}{DTSg}(x, class = NULL, pattern = NULL, mode = NULL, typeof = NULL, ...)

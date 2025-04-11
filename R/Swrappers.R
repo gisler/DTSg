@@ -434,7 +434,7 @@ cols <- function(x, ...) {
 #' ## S3 method
 #' cols(x = x, class = "numeric")
 #'
-#' @aliases cols
+#' @aliases cols names
 #'
 #' @export
 cols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$cols))
