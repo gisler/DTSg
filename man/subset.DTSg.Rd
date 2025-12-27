@@ -64,7 +64,7 @@ temporal aggregation level function. Either \code{"timechange"}, which utilises
 which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main function for
 transforming timestamps.}
 
-\item{...}{Further arguments passed on to \code{fun}.}
+\item{\dots}{Not used (S3 method only).}
 }
 \value{
 Returns a \code{\link{DTSg}} object.

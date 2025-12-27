@@ -1038,6 +1038,7 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #'   timestamps explicit according to the recognised periodicity, or
 #'   `"implicit"`, which removes timestamps with missing values on all value
 #'   columns. See corresponding section for further information.
+#' @param \dots Not used (S3 method only).
 #' @inheritParams aggregate.DTSg
 #' @inheritParams setCols.DTSg
 #'
