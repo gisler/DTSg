@@ -44,6 +44,12 @@ Returns a \code{\link{DTSg}} object.
 Applies one or more provided summary functions row-wise to selected columns
 of a \code{\link{DTSg}} object.
 }
+\section{R6 alias}{
+
+The \code{raggregate()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \section{Summary functions}{
 
 Some examples for \code{fun} are as follows:
@@ -71,7 +77,7 @@ x$rowaggregate(
   fun = list(mean = mean, sd = sd)
 )$print()
 
-## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'
+## 'raggregate()' is an R6 alias for 'rowaggregate()'
 x$raggregate(
   resultCols = "flow",
   fun = list(mean = mean, sd = sd)

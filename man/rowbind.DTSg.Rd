@@ -24,6 +24,12 @@ Returns a \code{\link{DTSg}} object.
 \description{
 Combines the rows of \code{\link{DTSg}} and other suitable objects.
 }
+\section{R6 alias}{
+
+The \code{rbind()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow[1:500, ])
@@ -35,7 +41,7 @@ x$rowbind(
   flow[1501:.N, ]
 )$print()
 
-## 'rbind()' is a "hidden" R6 alias for 'rowbind()'
+## 'rbind()' is an R6 alias for 'rowbind()'
 x$rbind(
   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
   flow[1501:.N, ]

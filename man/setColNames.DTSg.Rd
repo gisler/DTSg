@@ -38,6 +38,12 @@ Returns a \code{\link{DTSg}} object.
 \description{
 Changes the column names of \code{\link{DTSg}} objects.
 }
+\section{R6 alias}{
+
+The \code{setnames()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
@@ -49,7 +55,7 @@ x$setColNames(
   values = "River Flow"
 )$print()
 
-## 'setnames()' is a "hidden" R6 alias for 'setColNames()'
+## 'setnames()' is an R6 alias for 'setColNames()'
 x$setnames(
   cols = "flow",
   values = "River Flow"

@@ -33,6 +33,12 @@ Returns a character vector.
 Returns all column names of a \code{\link{DTSg}} object, those of certain \code{\link{class}}es,
 \code{\link{mode}}s, \code{\link{typeof}}s and/or those matching a certain pattern only.
 }
+\section{R6 alias}{
+
+The \code{names()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
@@ -41,7 +47,7 @@ x <- DTSg$new(values = flow)
 ## R6 method
 x$cols(class = "numeric")
 
-## 'names()' is a "hidden" R6 alias for 'cols()'
+## 'names()' is an R6 alias for 'cols()'
 x$names(class = "numeric")
 
 ## S3 method

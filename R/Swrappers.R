@@ -418,6 +418,10 @@ cols <- function(x, ...) {
 #'   rejected.
 #' @inheritParams aggregate.DTSg
 #'
+#' @section R6 alias:
+#' The `names()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @return Returns a character vector.
 #'
 #' @examples
@@ -428,7 +432,7 @@ cols <- function(x, ...) {
 #' ## R6 method
 #' x$cols(class = "numeric")
 #'
-#' ## 'names()' is a "hidden" R6 alias for 'cols()'
+#' ## 'names()' is an R6 alias for 'cols()'
 #' x$names(class = "numeric")
 #'
 #' ## S3 method
@@ -799,6 +803,10 @@ rowaggregate <- function(x, ...) {
 #'   by a colon, for example, `"x:z"`.
 #' @inheritParams aggregate.DTSg
 #'
+#' @section R6 alias:
+#' The `raggregate()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @section Summary functions:
 #' Some examples for `fun` are as follows:
 #' * [`mean`]
@@ -826,7 +834,7 @@ rowaggregate <- function(x, ...) {
 #'   fun = list(mean = mean, sd = sd)
 #' )$print()
 #'
-#' ## 'raggregate()' is a "hidden" R6 alias for 'rowaggregate()'
+#' ## 'raggregate()' is an R6 alias for 'rowaggregate()'
 #' x$raggregate(
 #'   resultCols = "flow",
 #'   fun = list(mean = mean, sd = sd)
@@ -858,6 +866,10 @@ rowbind <- function(x, ...) {
 #'   lists and non-lists are also accepted.
 #' @inheritParams alter.DTSg
 #'
+#' @section R6 alias:
+#' The `rbind()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @inherit alter.DTSg return
 #'
 #' @seealso [`cols`], [`getOption`]
@@ -873,7 +885,7 @@ rowbind <- function(x, ...) {
 #'   flow[1501:.N, ]
 #' )$print()
 #'
-#' ## 'rbind()' is a "hidden" R6 alias for 'rowbind()'
+#' ## 'rbind()' is an R6 alias for 'rowbind()'
 #' x$rbind(
 #'   list(flow[1001:1500, ], DTSg$new(values = flow[501:1000, ])),
 #'   flow[1501:.N, ]
@@ -910,6 +922,10 @@ setColNames <- function(x, ...) {
 #'   comma separated column names, for example, `"x,y,z"`.
 #' @inheritParams alter.DTSg
 #'
+#' @section R6 alias:
+#' The `setnames()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @inherit alter.DTSg return
 #'
 #' @seealso [`cols`], [`getOption`]
@@ -925,7 +941,7 @@ setColNames <- function(x, ...) {
 #'   values = "River Flow"
 #' )$print()
 #'
-#' ## 'setnames()' is a "hidden" R6 alias for 'setColNames()'
+#' ## 'setnames()' is an R6 alias for 'setColNames()'
 #' x$setnames(
 #'   cols = "flow",
 #'   values = "River Flow"
@@ -967,6 +983,10 @@ setCols <- function(x, ...) {
 #'   `NULL` as a value removes a column.
 #' @inheritParams alter.DTSg
 #'
+#' @section R6 alias:
+#' The `set()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @inherit alter.DTSg return
 #'
 #' @seealso [`cols`], [`getOption`]
@@ -983,7 +1003,7 @@ setCols <- function(x, ...) {
 #'   values = 100
 #' )$print()
 #'
-#' ## 'set()' is a "hidden" R6 alias for 'setCols()'
+#' ## 'set()' is an R6 alias for 'setCols()'
 #' x$set(
 #'   i = flow > 100,
 #'   cols = "flow",

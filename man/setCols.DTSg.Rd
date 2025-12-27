@@ -45,6 +45,12 @@ Returns a \code{\link{DTSg}} object.
 Changes the values of columns, adds columns to and/or removes columns from a
 \code{\link{DTSg}} object. The values can optionally be set for certain rows only.
 }
+\section{R6 alias}{
+
+The \code{set()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \examples{
 # new DTSg object
 x <- DTSg$new(values = flow)
@@ -57,7 +63,7 @@ x$setCols(
   values = 100
 )$print()
 
-## 'set()' is a "hidden" R6 alias for 'setCols()'
+## 'set()' is an R6 alias for 'setCols()'
 x$set(
   i = flow > 100,
   cols = "flow",
