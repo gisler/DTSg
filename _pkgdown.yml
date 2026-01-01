@@ -1,25 +1,32 @@
 url: https://gisler.github.io/DTSg
 
-template:
-  params:
-    bootswatch: readable
-
 development:
   mode: auto
 
+template:
+  bootstrap: 5
+  bslib:
+    preset: lumen
+    pkgdown-nav-height: 57.6px
+    base_font: {google: "Gelasio"}
+    heading_font: {google: "Raleway"}
+
 navbar:
-  left:
-    - icon: fa-home fa-lg
-      href: index.html
-    - text: "Reference"
+  structure:
+    left: [reference, vignettes, changelog]
+  components:
+    reference:
+      text: "Reference"
       href: reference/index.html
-    - text: "Vignettes"
+    vignettes:
+      text: "Vignettes"
       menu:
         - text: "A. Basic usage"
           href: articles/a_basicUsage.html
         - text: "B. Advanced usage"
           href: articles/b_advancedUsage.html
-    - text: "Changelog"
+    changelog:
+      text: "Changelog"
       href: news/index.html
 
 reference:
