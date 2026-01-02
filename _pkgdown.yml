@@ -40,25 +40,7 @@ reference:
       - DTSg
   - title: "Methods"
     contents:
-      - aggregate.DTSg
-      - alter.DTSg
-      - clone.DTSg
-      - colapply.DTSg
-      - cols.DTSg
-      - getCol.DTSg
-      - merge.DTSg
-      - nas.DTSg
-      - plot.DTSg
-      - print.DTSg
-      - refresh.DTSg
-      - rollapply.DTSg
-      - rowaggregate.DTSg
-      - rowbind.DTSg
-      - setColNames.DTSg
-      - setCols.DTSg
-      - subset.DTSg
-      - summary.DTSg
-      - values.DTSg
+      - ends_with(".DTSg")
   - title: "TALFs"
     contents:
       - TALFs
