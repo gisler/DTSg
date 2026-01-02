@@ -7,7 +7,7 @@ template:
   bootstrap: 5
   bslib:
     preset: lumen
-    pkgdown-nav-height: 57.6px
+    pkgdown-nav-height: 60.6px
     base_font: {google: "Gelasio"}
     heading_font: {google: "Raleway"}
 
