@@ -12,6 +12,7 @@ template:
     heading_font: {google: "Raleway"}
     headings-font-weight: 900
     danger: "#ff851b"
+    color-contrast-light: "#222222"
 
 navbar:
   bg: primary
