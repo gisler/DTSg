@@ -70,7 +70,7 @@ if (requireNamespace("dygraphs", quietly = TRUE) &&
   TS$plot(cols = "flow") # or 'plot(TS, cols = "flow")'
 }
 ```
-![](plot.png)
+![A line graph showing a time series of river flow containing missing values.](plot.png)
 
 Looking at the original data set reveals that the missing values implicitly already were there. Putting the data set into the object simply expanded it to the automatically detected periodicity and made them explicit (this behaviour can be changed, however, `DTSg` objects work best with explicitly missing values):
 
