@@ -135,7 +135,11 @@ if (requireNamespace("dygraphs", quietly = TRUE) &&
 }
 ```
 
-![](plot.png)
+![A line graph showing a time series of river flow containing missing
+values.](plot.png)
+
+A line graph showing a time series of river flow containing missing
+values.
 
 Looking at the original data set reveals that the missing values
 implicitly already were there. Putting the data set into the object
