@@ -7,12 +7,12 @@ template:
   bootstrap: 5
   bslib:
     preset: lumen
-    pkgdown-nav-height: 63.6px
-    base_font: {google: "Gelasio"}
+    pkgdown-nav-height: 63.6px # +6px to `$(".navbar").outerHeight()`
+    base_font: {google: "Gelasio"} # compatible with Georgia
     heading_font: {google: "Raleway"}
     headings-font-weight: 900
-    danger: "#ff851b"
-    color-contrast-light: "#222222"
+    danger: "#ff851b" # colour of "warning" (preset: lumen)
+    color-contrast-light: "#222222" # fix for search results (navbar: type: light)
 
 navbar:
   bg: primary
