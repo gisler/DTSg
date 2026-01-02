@@ -1317,7 +1317,7 @@ DTSg <- R6Class(
           function(i) {
             if (testClass(...elt(i), "list")) {
               lapply(
-                seq_len(length(...elt(i))),
+                seq_along(...elt(i)),
                 function(j, x) x[[j]],
                 x = ...elt(i)
               )
@@ -1367,7 +1367,7 @@ DTSg <- R6Class(
 
     setColNames = function(
       cols = self$cols(class = "numeric")[1L],
-      values,
+      values, # nolint
       clone = getOption("DTSgClone")
     ) {
       cols <- private$extractCols(cols)
@@ -1391,7 +1391,7 @@ DTSg <- R6Class(
     setCols = function(
       i,
       cols = self$cols(class = "numeric")[1L],
-      values,
+      values, # nolint
       clone = getOption("DTSgClone")
     ) {
       if (!missing(i)) {

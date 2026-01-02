@@ -20,7 +20,7 @@ timechangeApproach <- function(.dateTime, .helpers, by) {
   }
 
   if (attr(.dateTime, "tzone") != .helpers[["timezone"]]) {
-    .dateTimeForced <- time_force_tz(.dateTime, tz = .helpers[["timezone"]])
+    .dateTimeForced <- time_force_tz(.dateTime, tz = .helpers[["timezone"]]) # nolint
   } else {
     .dateTimeForced <- .dateTime
   }

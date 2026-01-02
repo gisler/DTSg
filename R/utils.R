@@ -46,7 +46,7 @@
 #' print(colapply(x = x, fun = interpolateLinear))
 #'
 #' @export
-interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) {
+interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # nolint
   qassert(.col, "n+")
   qassert(roll, "N1(0,]")
 
