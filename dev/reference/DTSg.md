@@ -37,7 +37,7 @@ new(Class, values, ID = "", parameter = "", unit = "", variant = "",
   A [`data.frame`](https://rdrr.io/r/base/data.frame.html) or object
   inherited from class
   [`data.frame`](https://rdrr.io/r/base/data.frame.html), e.g.
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html).
   Its first column must be of class
   [`POSIXct`](https://rdrr.io/r/base/DateTimeClasses.html) or coercible
   to it. It serves as the object's time index and is renamed to
@@ -81,17 +81,17 @@ new(Class, values, ID = "", parameter = "", unit = "", variant = "",
   argument shall be “swallowed” by the `DTSg` object, i.e. no copy of
   the data shall be made. This is generally more resource efficient, but
   only works when the provided object is a
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html).
   Be warned, however, that when the creation of the `DTSg` object fails
   for some reason, the first column of the provided
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html)
   might have been coerced to
   [`POSIXct`](https://rdrr.io/r/base/DateTimeClasses.html) and keyed
   (see
-  [`data.table::setkey`](https://rdatatable.gitlab.io/data.table/reference/setkey.html)
+  [`data.table::setkey`](https://rdrr.io/pkg/data.table/man/setkey.html)
   for further information). Furthermore, all references to the
   “swallowed”
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html)
   in the global (and only the global) environment are removed upon the
   successful creation of the `DTSg` object.
 

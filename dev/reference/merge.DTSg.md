@@ -28,7 +28,7 @@ merge(x, y, ..., clone = getOption("DTSgClone"))
 - ...:
 
   Further arguments passed on to
-  [`data.table::merge`](https://rdatatable.gitlab.io/data.table/reference/merge.html).
+  [`data.table::merge`](https://rdrr.io/pkg/data.table/man/merge.html).
   As the `by`, `by.x` and `by.y` arguments can endanger the object's
   integrity, they are rejected.
 

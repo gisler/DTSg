@@ -30,9 +30,9 @@ setCols(
   An integerish vector indexing rows (positive numbers pick and negative
   numbers omit rows) or a filter expression accepted by the `i` argument
   of
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html).
   Filter expressions can contain the special symbol
-  [`.N`](https://rdatatable.gitlab.io/data.table/reference/special-symbols.html).
+  [`.N`](https://rdrr.io/pkg/data.table/man/special-symbols.html).
 
 - cols:
 
@@ -45,10 +45,10 @@ setCols(
 
   A vector, [`list`](https://rdrr.io/r/base/list.html) or list-like
   object (e.g.
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html))
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html))
   of replacement and/or new values accepted by the `value` argument of
   data.table's
-  [`data.table::set`](https://rdatatable.gitlab.io/data.table/reference/assign.html)
+  [`data.table::set`](https://rdrr.io/pkg/data.table/man/assign.html)
   function. `NULL` as a value removes a column.
 
 - clone:

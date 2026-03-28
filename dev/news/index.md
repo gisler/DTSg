@@ -1,6 +1,8 @@
 # Changelog
 
-## DTSg v2.0.0.9000
+## DTSg v2.1.0.9000
+
+## DTSg v2.1.0
 
 - The day saving time shift for the `ignoreDST` argument of the
   [`aggregate()`](https://gisler.github.io/DTSg/dev/reference/aggregate.DTSg.md),

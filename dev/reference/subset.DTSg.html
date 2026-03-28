@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">DTSg</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,8 +71,8 @@
 <dt id="arg-i">i<a class="anchor" aria-label="anchor" href="#arg-i"></a></dt>
 <dd><p>An integerish vector indexing rows (positive numbers pick and
 negative numbers omit rows) or a filter expression accepted by the <code>i</code>
-argument of <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
-special symbol <code><a href="https://rdatatable.gitlab.io/data.table/reference/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
+argument of <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table</a></code>. Filter expressions can contain the
+special symbol <code><a href="https://rdrr.io/pkg/data.table/man/special-symbols.html" class="external-link">.N</a></code>.</p></dd>
 
 
 <dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
@@ -254,7 +254,7 @@ been recognised and is supported by the following <code><a href="TALFs.html">TAL
 <span class="r-in"><span><span class="co">## R6 method</span></span></span>
 <span class="r-in"><span><span class="va">x</span><span class="op">$</span><span class="fu">subset</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  i <span class="op">=</span> <span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>,</span></span>
-<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow</span>
@@ -282,7 +282,7 @@ been recognised and is supported by the following <code><a href="TALFs.html">TAL
 <span class="r-in"><span><span class="fu"><a href="print.DTSg.html">print</a></span><span class="op">(</span><span class="fu">subset</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>
 <span class="r-in"><span>  i <span class="op">=</span> <span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>,</span></span>
-<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
+<span class="r-in"><span>  funby <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/IDateTime.html" class="external-link">year</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Values:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      .dateTime  flow</span>

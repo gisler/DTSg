@@ -39,7 +39,7 @@ interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers)
 
   A logical specifying if missing values at the start and end of the
   time series shall be filled. See
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html)
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html)
   for further information.
 
 - .helpers:

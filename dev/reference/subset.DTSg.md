@@ -34,9 +34,9 @@ subset(
   An integerish vector indexing rows (positive numbers pick and negative
   numbers omit rows) or a filter expression accepted by the `i` argument
   of
-  [`data.table::data.table`](https://rdatatable.gitlab.io/data.table/reference/data.table.html).
+  [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html).
   Filter expressions can contain the special symbol
-  [`.N`](https://rdatatable.gitlab.io/data.table/reference/special-symbols.html).
+  [`.N`](https://rdrr.io/pkg/data.table/man/special-symbols.html).
 
 - cols:
 

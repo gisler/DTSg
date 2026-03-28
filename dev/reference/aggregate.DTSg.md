@@ -193,7 +193,7 @@ Some examples for `fun` are as follows:
 A [`list`](https://rdrr.io/r/base/list.html) or character vector must
 have names in case more than one summary function is provided. The
 method can benefit from data.table's
-*[GForce](https://rdatatable.gitlab.io/data.table/reference/datatable-optimize.html)*
+*[GForce](https://rdrr.io/pkg/data.table/man/datatable-optimize.html)*
 optimisation in case a character vector specifying summary functions is
 provided.
 
