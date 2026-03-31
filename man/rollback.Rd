@@ -2,27 +2,33 @@
 % Please edit documentation in R/utils.R
 \name{rollback}
 \alias{rollback}
+\alias{rollback.POSIXct}
 \title{Rollback of months}
 \usage{
-rollback(.dateTime, periodicity)
+rollback(.dateTime, ...)
+
+\method{rollback}{POSIXct}(.dateTime, periodicity, ...)
 }
 \arguments{
-\item{.dateTime}{A \code{\link{POSIXct}} vector.}
+\item{.dateTime}{The date or time vector, which shall be fixed.}
+
+\item{\dots}{Further arguments passed to or from other methods.}
 
 \item{periodicity}{A character string specifying a multiple of month(s) or
 year(s). See \code{\link{seq.POSIXt}} for further information.}
 }
 \value{
-Returns a \code{\link{POSIXct}} vector.
+Returns the fixed date or time vector.
 }
 \description{
-Generating regular sequences of time with the help of \code{\link{seq.POSIXt}} can have
-undesirable effects. This function \dQuote{first advances the month without
-changing the day: if this results in an invalid day of the month, it is
-counted forward into the next month}. Monthly or yearly sequences starting at
-the end of a month with 30 or 31 days (or 29 in case of a leap year)
-therefore do not always fall on the end of shorter months. \code{rollback} fixes
-this by counting the days of affected months backwards again.
+Generating regular sequences of dates or times with the help of \code{\link{seq}} can
+have undesirable effects. \dQuote{Using \sQuote{month} first advances the
+month without changing the day: if this results in an invalid day of the
+month, it is counted forward into the next month}. Monthly or yearly
+sequences starting at the end of a month with 30 or 31 days (or 29 in case of
+a leap year) therefore do not always fall on the end of shorter months.
+\code{rollback} fixes this by counting the days of affected months backwards
+again.
 }
 \examples{
 # rollback monthly time series

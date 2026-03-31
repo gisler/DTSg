@@ -2,12 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{interpolateLinear}
 \alias{interpolateLinear}
+\alias{interpolateLinear.numeric}
 \title{Linear interpolation}
 \usage{
-interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers)
+interpolateLinear(.col, .helpers, ...)
+
+\method{interpolateLinear}{numeric}(.col, .helpers, roll = Inf, rollends = TRUE, ...)
 }
 \arguments{
-\item{.col}{A numeric vector.}
+\item{.col}{The vector whose values shall be interpolated.}
+
+\item{.helpers}{A \code{\link{list}} with helper data as handed over by \code{\link{colapply}}.
+See \code{\link{colapply}} for further information.}
+
+\item{\dots}{Further arguments passed to or from other methods.}
 
 \item{roll}{A positive numeric specifying the maximum size of gaps whose
 missing values shall be interpolated. For time series with unrecognised
@@ -20,21 +28,18 @@ it.}
 \item{rollends}{A logical specifying if missing values at the start and end
 of the time series shall be filled. See \code{\link[data.table:data.table]{data.table::data.table}} for
 further information.}
-
-\item{.helpers}{A \code{\link{list}} with helper data as handed over by \code{\link{colapply}}.
-See \code{\link{colapply}} for further information.}
 }
 \value{
-Returns a numeric vector.
+Returns the interpolated vector.
 }
 \description{
-Linearly interpolates missing values of a numeric vector. For use with the
+Linearly interpolates missing values of a vector. For use with the
 \code{\link{colapply}} method of \code{\link{DTSg}} objects. Other uses are possible, but not
 recommended.
 
-This \code{\link{function}} mainly serves as an example for writing user defined
-\code{\link{function}}s utilising one of the \code{\link{list}}s with helper data handed over by
-some of the methods of \code{\link{DTSg}} objects.
+This method mainly serves as an example for writing user defined methods and
+functions utilising one of the \code{\link{list}}s with helper data handed over by some
+of the methods of \code{\link{DTSg}} objects.
 }
 \examples{
 # new DTSg object

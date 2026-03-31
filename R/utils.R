@@ -10,15 +10,26 @@
 #' Linear interpolation
 #'
 #' @description
-#' Linearly interpolates missing values of a numeric vector. For use with the
+#' Linearly interpolates missing values of a vector. For use with the
 #' [`colapply`] method of [`DTSg`] objects. Other uses are possible, but not
 #' recommended.
 #'
-#' This [`function`] mainly serves as an example for writing user defined
-#' [`function`]s utilising one of the [`list`]s with helper data handed over by
-#' some of the methods of [`DTSg`] objects.
+#' This method mainly serves as an example for writing user defined methods and
+#' functions utilising one of the [`list`]s with helper data handed over by some
+#' of the methods of [`DTSg`] objects.
 #'
-#' @param .col A numeric vector.
+#' @param .col The vector whose values shall be interpolated.
+#' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
+#'   See [`colapply`] for further information.
+#' @param \dots Further arguments passed to or from other methods.
+#'
+#' @return Returns the interpolated vector.
+#'
+#' @export
+interpolateLinear <- function(.col, .helpers, ...) {
+  UseMethod("interpolateLinear")
+}
+
 #' @param roll A positive numeric specifying the maximum size of gaps whose
 #'   missing values shall be interpolated. For time series with unrecognised
 #'   periodicity it is interpreted in seconds and for time series with
@@ -29,10 +40,6 @@
 #' @param rollends A logical specifying if missing values at the start and end
 #'   of the time series shall be filled. See [`data.table::data.table`] for
 #'   further information.
-#' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
-#'   See [`colapply`] for further information.
-#'
-#' @return Returns a numeric vector.
 #'
 #' @examples
 #' # new DTSg object
@@ -45,8 +52,16 @@
 #' ## S3 method
 #' print(colapply(x = x, fun = interpolateLinear))
 #'
+#' @rdname interpolateLinear
+#'
 #' @export
-interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # nolint
+interpolateLinear.numeric <- function(
+  .col,
+  .helpers,
+  roll = Inf,
+  rollends = TRUE,
+  ...
+) {
   qassert(.col, "n+")
   qassert(roll, "N1(0,]")
 
@@ -94,19 +109,26 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
 
 #' Rollback of months
 #'
-#' Generating regular sequences of time with the help of [`seq.POSIXt`] can have
-#' undesirable effects. This function \dQuote{first advances the month without
-#' changing the day: if this results in an invalid day of the month, it is
-#' counted forward into the next month}. Monthly or yearly sequences starting at
-#' the end of a month with 30 or 31 days (or 29 in case of a leap year)
-#' therefore do not always fall on the end of shorter months. `rollback` fixes
-#' this by counting the days of affected months backwards again.
+#' Generating regular sequences of dates or times with the help of [`seq`] can
+#' have undesirable effects. \dQuote{Using \sQuote{month} first advances the
+#' month without changing the day: if this results in an invalid day of the
+#' month, it is counted forward into the next month}. Monthly or yearly
+#' sequences starting at the end of a month with 30 or 31 days (or 29 in case of
+#' a leap year) therefore do not always fall on the end of shorter months.
+#' `rollback` fixes this by counting the days of affected months backwards
+#' again.
 #'
-#' @param .dateTime A [`POSIXct`] vector.
+#' @param .dateTime The date or time vector, which shall be fixed.
+#' @param \dots Further arguments passed to or from other methods.
+#'
+#' @return Returns the fixed date or time vector.
+#'
+#' @export
+rollback <- function(.dateTime, ...) {
+  UseMethod("rollback")
+}
 #' @param periodicity A character string specifying a multiple of month(s) or
 #'   year(s). See [`seq.POSIXt`] for further information.
-#'
-#' @return Returns a [`POSIXct`] vector.
 #'
 #' @examples
 #' # rollback monthly time series
@@ -120,8 +142,10 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
 #'   periodicity = by
 #' )
 #'
+#' @rdname rollback
+#'
 #' @export
-rollback <- function(.dateTime, periodicity) {
+rollback.POSIXct <- function(.dateTime, periodicity, ...) {
   qassert(.dateTime, "P+")
   if (!grepl("^\\d+ (month|year)(s?)$", qassert(periodicity, "S1"))) {
     stop("Periodicity must be a multiple of month(s) or year(s).")
