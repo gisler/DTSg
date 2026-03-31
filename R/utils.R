@@ -55,7 +55,10 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
   }
 
   DT <- data.table(.dateTime = .helpers[[".dateTime"]], key = ".dateTime")
-  values <- DT[, list(.dateTime = .dateTime[!is.na(.col)], .col = .col[!is.na(.col)])]
+  values <- DT[, list(
+    .dateTime = .dateTime[!is.na(.col)],
+    .col = as.numeric(.col[!is.na(.col)])
+  )]
 
   DT <- values[
     DT,

@@ -1,5 +1,6 @@
 # DTSg v2.1.0.9000
 
+* Fixed a possible loss of precision in the `interpolateLinear()` function when applied on an `integer` column.
 * Minor internal code improvements.
 
 # DTSg v2.1.0
