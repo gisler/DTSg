@@ -7,6 +7,10 @@
 .fill <- NULL
 .divisor <- NULL
 
+#' @export
+interpolateLinear <- function(.col, ...) {
+  UseMethod("interpolateLinear")
+}
 #' Linear interpolation
 #'
 #' @description
@@ -31,6 +35,7 @@
 #'   further information.
 #' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
 #'   See [`colapply`] for further information.
+#' @param \dots Not used.
 #'
 #' @return Returns a numeric vector.
 #'
@@ -45,8 +50,16 @@
 #' ## S3 method
 #' print(colapply(x = x, fun = interpolateLinear))
 #'
+#' @aliases interpolateLinear
+#'
 #' @export
-interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # nolint
+interpolateLinear.numeric <- function(
+  .col,
+  roll = Inf,
+  rollends = TRUE,
+  .helpers, # nolint
+  ...
+) {
   qassert(.col, "n+")
   qassert(roll, "N1(0,]")
 
@@ -92,6 +105,10 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
   DT[[".col"]]
 }
 
+#' @export
+rollback <- function(.dateTime, ...) {
+  UseMethod("rollback")
+}
 #' Rollback of months
 #'
 #' Generating regular sequences of time with the help of [`seq.POSIXt`] can have
@@ -105,6 +122,7 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
 #' @param .dateTime A [`POSIXct`] vector.
 #' @param periodicity A character string specifying a multiple of month(s) or
 #'   year(s). See [`seq.POSIXt`] for further information.
+#' @param \dots Not used.
 #'
 #' @return Returns a [`POSIXct`] vector.
 #'
@@ -120,8 +138,10 @@ interpolateLinear <- function(.col, roll = Inf, rollends = TRUE, .helpers) { # n
 #'   periodicity = by
 #' )
 #'
+#' @aliases rollback
+#'
 #' @export
-rollback <- function(.dateTime, periodicity) {
+rollback.POSIXct <- function(.dateTime, periodicity, ...) {
   qassert(.dateTime, "P+")
   if (!grepl("^\\d+ (month|year)(s?)$", qassert(periodicity, "S1"))) {
     stop("Periodicity must be a multiple of month(s) or year(s).")
