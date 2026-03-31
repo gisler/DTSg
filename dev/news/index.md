@@ -2,7 +2,24 @@
 
 ## DTSg v2.1.0.9000
 
+- Converted the
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
+  and
+  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
+  functions to S3 generics and added respective S3 methods
+  ([`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
+  and
+  [`rollback.POSIXct()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)).
+  This does not change the package’s API, but improves its
+  extensibility.
+- Fixed a possible loss of precision in the
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
+  function when applied on an `integer` column.
+- Minor internal code improvements.
+
 ## DTSg v2.1.0
+
+CRAN release: 2026-03-28
 
 - The day saving time shift for the `ignoreDST` argument of the
   [`aggregate()`](https://gisler.github.io/DTSg/dev/reference/aggregate.DTSg.md),
@@ -88,12 +105,12 @@ CRAN release: 2022-06-08
   `"x,y,z"`, or the start and end column separated by a colon, for
   example, `"x:z"`.
 - Fixed a bug in the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   function causing partial last observation carried forward behaviour
   when its `roll` argument was specified smaller than the size of the
   gap to be interpolated.
 - Fixed a bug in the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   function causing partial interpolation in certain cases when its
   `roll` argument was specified smaller than the size of the gap to be
   interpolated.
@@ -339,7 +356,7 @@ CRAN release: 2020-05-08
 
 - Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be
   supplied” related to the
-  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
   function in upcoming R 4.1.0.
 - Slightly improved the vignettes.
 - Minor internal code improvements.

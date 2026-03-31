@@ -66,9 +66,9 @@
 
 ## Other functions
 
-- [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+- [`interpolateLinear(`*`<numeric>`*`)`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   : Linear interpolation
-- [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+- [`rollback(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
   : Rollback of months
 - [`S3WrapperGenerator()`](https://gisler.github.io/DTSg/dev/reference/S3WrapperGenerator.md)
   : S3 wrapper method generator

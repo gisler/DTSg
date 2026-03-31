@@ -16,7 +16,8 @@ by some of the methods of
 ## Usage
 
 ``` r
-interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers)
+# S3 method for class 'numeric'
+interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers, ...)
 ```
 
 ## Arguments
@@ -50,6 +51,10 @@ interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers)
   See
   [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
   for further information.
+
+- ...:
+
+  Not used.
 
 ## Value
 

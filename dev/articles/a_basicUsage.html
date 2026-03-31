@@ -64,7 +64,7 @@
                         <h4 data-toc-skip class="author">Gerold
 Hepp</h4>
             
-            <h4 data-toc-skip class="date">2026-03-28</h4>
+            <h4 data-toc-skip class="date">2026-03-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gisler/DTSg/blob/main/vignettes/a_basicUsage.Rmd" class="external-link"><code>vignettes/a_basicUsage.Rmd</code></a></small>
       <div class="d-none name"><code>a_basicUsage.Rmd</code></div>
@@ -222,7 +222,7 @@ objects work best with explicitly missing values):</p>
 </h2>
 <p>For fairly small gaps like this it might be okay to fill them by
 means of linear interpolation. Using the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method
-together with the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function will do the
+together with the <code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear()</a></code> function will do the
 trick:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TS</span>  <span class="op">&lt;-</span> <span class="va">TS</span><span class="op">$</span><span class="fu">colapply</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">interpolateLinear</span><span class="op">)</span></span>
@@ -433,7 +433,7 @@ in this vignette:</p>
 <li><code><a href="../reference/setColNames.DTSg.html">setColNames()</a></code></li>
 <li><code><a href="../reference/setCols.DTSg.html">setCols()</a></code></li>
 <li><code><a href="../reference/subset.DTSg.html">subset()</a></code></li>
-<li><code><a href="../reference/rollback.html">rollback()</a></code></li>
+<li><code><a href="../reference/rollback.POSIXct.html">rollback()</a></code></li>
 <li><code><a href="../reference/S3WrapperGenerator.html">S3WrapperGenerator()</a></code></li>
 </ul>
 </div>

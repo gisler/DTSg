@@ -172,7 +172,7 @@ For fairly small gaps like this it might be okay to fill them by means
 of linear interpolation. Using the
 [`colapply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
 method together with the
-[`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+[`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
 function will do the trick:
 
 ``` r
@@ -418,7 +418,7 @@ in this vignette:
 - [`setColNames()`](https://gisler.github.io/DTSg/dev/reference/setColNames.DTSg.md)
 - [`setCols()`](https://gisler.github.io/DTSg/dev/reference/setCols.DTSg.md)
 - [`subset()`](https://gisler.github.io/DTSg/dev/reference/subset.DTSg.md)
-- [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+- [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
 - [`S3WrapperGenerator()`](https://gisler.github.io/DTSg/dev/reference/S3WrapperGenerator.md)
 
 ## Object fields

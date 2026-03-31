@@ -13,7 +13,8 @@ again.
 ## Usage
 
 ``` r
-rollback(.dateTime, periodicity)
+# S3 method for class 'POSIXct'
+rollback(.dateTime, periodicity, ...)
 ```
 
 ## Arguments
@@ -27,6 +28,10 @@ rollback(.dateTime, periodicity)
   A character string specifying a multiple of month(s) or year(s). See
   [`seq.POSIXt`](https://rdrr.io/r/base/seq.POSIXt.html) for further
   information.
+
+- ...:
+
+  Not used.
 
 ## Value
 

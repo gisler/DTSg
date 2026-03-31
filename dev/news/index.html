@@ -39,9 +39,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0.9000" id="dtsg-v2109000">DTSg v2.1.0.9000<a class="anchor" aria-label="anchor" href="#dtsg-v2109000"></a></h2>
-</div>
+<ul><li>Converted the <code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear()</a></code> and <code><a href="../reference/rollback.POSIXct.html">rollback()</a></code> functions to S3 generics and added respective S3 methods (<code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear.numeric()</a></code> and <code><a href="../reference/rollback.POSIXct.html">rollback.POSIXct()</a></code>). This does not change the package’s API, but improves its extensibility.</li>
+<li>Fixed a possible loss of precision in the <code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear()</a></code> function when applied on an <code>integer</code> column.</li>
+<li>Minor internal code improvements.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0" id="dtsg-v210">DTSg v2.1.0<a class="anchor" aria-label="anchor" href="#dtsg-v210"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.0" id="dtsg-v210">DTSg v2.1.0<a class="anchor" aria-label="anchor" href="#dtsg-v210"></a></h2><p class="text-muted">CRAN release: 2026-03-28</p>
 <ul><li>The day saving time shift for the <code>ignoreDST</code> argument of the <code><a href="../reference/aggregate.DTSg.html">aggregate()</a></code>, <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> and <code><a href="../reference/subset.DTSg.html">subset()</a></code> methods is now attempted to be estimated and not invariably assumed to be one hour long.</li>
 <li>More time zones are now considered UTC or equivalent (execute <code>grep("^(Etc/)?(UTC|UCT|Universal|Zulu)$|^(Etc/)?(GMT(\\+|-)?0?|Greenwich)$", OlsonNames(), ignore.case = TRUE, value = TRUE)</code> for a full list).</li>
 <li>Updated the package’s <code>pkgdown</code> website to Bootstrap 5.</li>
@@ -80,8 +83,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.1" id="dtsg-v111">DTSg v1.1.1<a class="anchor" aria-label="anchor" href="#dtsg-v111"></a></h2><p class="text-muted">CRAN release: 2022-06-08</p>
 <ul><li>Column names can often now be additionally specified by a character string containing either comma separated column names, for example, <code>"x,y,z"</code>, or the start and end column separated by a colon, for example, <code>"x:z"</code>.</li>
-<li>Fixed a bug in the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function causing partial last observation carried forward behaviour when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
-<li>Fixed a bug in the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function causing partial interpolation in certain cases when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
+<li>Fixed a bug in the <code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear()</a></code> function causing partial last observation carried forward behaviour when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
+<li>Fixed a bug in the <code><a href="../reference/interpolateLinear.numeric.html">interpolateLinear()</a></code> function causing partial interpolation in certain cases when its <code>roll</code> argument was specified smaller than the size of the gap to be interpolated.</li>
 <li>Slightly improved the documentation.</li>
 </ul></div>
     <div class="section level2">
@@ -160,7 +163,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="dtsg-v041">DTSg v0.4.1<a class="anchor" aria-label="anchor" href="#dtsg-v041"></a></h2><p class="text-muted">CRAN release: 2020-05-08</p>
-<ul><li>Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be supplied” related to the <code><a href="../reference/rollback.html">rollback()</a></code> function in upcoming R 4.1.0.</li>
+<ul><li>Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be supplied” related to the <code><a href="../reference/rollback.POSIXct.html">rollback()</a></code> function in upcoming R 4.1.0.</li>
 <li>Slightly improved the vignettes.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>
