@@ -237,7 +237,7 @@ aggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$aggregate))
 #### alter ####
 #' @export
 alter <- function(x, ...) {
-  UseMethod("alter", x)
+  UseMethod("alter")
 }
 #' Alter time series
 #'
@@ -301,7 +301,7 @@ alter.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$alter))
 #### clone ####
 #' @export
 clone <- function(x, ...) {
-  UseMethod("clone", x)
+  UseMethod("clone")
 }
 #' Clone object
 #'
@@ -341,7 +341,7 @@ clone.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$clone))
 #### colapply ####
 #' @export
 colapply <- function(x, ...) {
-  UseMethod("colapply", x)
+  UseMethod("colapply")
 }
 #' Apply function column-wise
 #'
@@ -399,7 +399,7 @@ colapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$colapply))
 #### cols ####
 #' @export
 cols <- function(x, ...) {
-  UseMethod("cols", x)
+  UseMethod("cols")
 }
 #' Get column names
 #'
@@ -446,7 +446,7 @@ cols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$cols))
 #### getCol ####
 #' @export
 getCol <- function(x, ...) {
-  UseMethod("getCol", x)
+  UseMethod("getCol")
 }
 #' Get column vector
 #'
@@ -528,7 +528,7 @@ merge.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$merge))
 #### nas ####
 #' @export
 nas <- function(x, ...) {
-  UseMethod("nas", x)
+  UseMethod("nas")
 }
 #' List missing values
 #'
@@ -671,7 +671,7 @@ print.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$print))
 #### refresh ####
 #' @export
 refresh <- function(x, ...) {
-  UseMethod("refresh", x)
+  UseMethod("refresh")
 }
 #' Object integrity
 #'
@@ -702,7 +702,7 @@ refresh.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$refresh))
 #### rollapply ####
 #' @export
 rollapply <- function(x, ...) {
-  UseMethod("rollapply", x)
+  UseMethod("rollapply")
 }
 #' Rolling window function
 #'
@@ -783,7 +783,7 @@ rollapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rollapply))
 #### rowaggregate ####
 #' @export
 rowaggregate <- function(x, ...) {
-  UseMethod("rowaggregate", x)
+  UseMethod("rowaggregate")
 }
 #' Aggregate values row-wise
 #'
@@ -855,7 +855,7 @@ rowaggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowaggreg
 #### rowbind ####
 #' @export
 rowbind <- function(x, ...) {
-  UseMethod("rowbind", x)
+  UseMethod("rowbind")
 }
 #' Combine rows
 #'
@@ -906,7 +906,7 @@ rowbind.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowbind))
 #### setColNames ####
 #' @export
 setColNames <- function(x, ...) {
-  UseMethod("setColNames", x)
+  UseMethod("setColNames")
 }
 #' Set column names
 #'
@@ -962,7 +962,7 @@ setColNames.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setColName
 #### setCols ####
 #' @export
 setCols <- function(x, ...) {
-  UseMethod("setCols", x)
+  UseMethod("setCols")
 }
 #' Set column values
 #'
@@ -1142,7 +1142,7 @@ summary.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$summary), "obj
 #### values ####
 #' @export
 values <- function(x, ...) {
-  UseMethod("values", x)
+  UseMethod("values")
 }
 #' Get values
 #'
