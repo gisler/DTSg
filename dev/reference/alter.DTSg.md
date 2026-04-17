@@ -50,7 +50,7 @@ alter(
 - rollback:
 
   A logical specifying if a call to
-  [`rollback`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
+  [`rollback`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
   shall be made when appropriate.
 
 - clone:

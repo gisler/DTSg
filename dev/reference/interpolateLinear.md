@@ -1,14 +1,12 @@
 # Linear interpolation
 
-Linearly interpolates missing values of a numeric vector. For use with
-the
+Linearly interpolates missing values of a vector. For use with the
 [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
 method of [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)
 objects. Other uses are possible, but not recommended.
 
-This [`function`](https://rdrr.io/r/base/function.html) mainly serves as
-an example for writing user defined
-[`function`](https://rdrr.io/r/base/function.html)s utilising one of the
+This method mainly serves as an example for writing user defined methods
+and functions utilising one of the
 [`list`](https://rdrr.io/r/base/list.html)s with helper data handed over
 by some of the methods of
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) objects.
@@ -16,15 +14,30 @@ by some of the methods of
 ## Usage
 
 ``` r
+interpolateLinear(.col, .helpers, ...)
+
 # S3 method for class 'numeric'
-interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers, ...)
+interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
 ```
 
 ## Arguments
 
 - .col:
 
-  A numeric vector.
+  The vector whose values shall be interpolated.
+
+- .helpers:
+
+  A [`list`](https://rdrr.io/r/base/list.html) with helper data as
+  handed over by
+  [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md).
+  See
+  [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
+  for further information.
+
+- ...:
+
+  Further arguments passed to or from other methods.
 
 - roll:
 
@@ -43,22 +56,9 @@ interpolateLinear(.col, roll = Inf, rollends = TRUE, .helpers, ...)
   [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html)
   for further information.
 
-- .helpers:
-
-  A [`list`](https://rdrr.io/r/base/list.html) with helper data as
-  handed over by
-  [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md).
-  See
-  [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
-  for further information.
-
-- ...:
-
-  Not used.
-
 ## Value
 
-Returns a numeric vector.
+Returns the interpolated vector.
 
 ## Examples
 

@@ -64,11 +64,11 @@
   [`by_____S()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md) :
   Temporal Aggregation Level Functions (TALFs)
 
-## Other functions
+## Utilities
 
-- [`interpolateLinear(`*`<numeric>`*`)`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
+- [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
   : Linear interpolation
-- [`rollback(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
+- [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
   : Rollback of months
 - [`S3WrapperGenerator()`](https://gisler.github.io/DTSg/dev/reference/S3WrapperGenerator.md)
   : S3 wrapper method generator
