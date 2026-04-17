@@ -44,7 +44,7 @@ reference:
   - title: "TALFs"
     contents:
       - TALFs
-  - title: "Other functions"
+  - title: "Utilities"
     contents:
       - interpolateLinear
       - rollback
