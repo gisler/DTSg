@@ -931,13 +931,13 @@ DTSg <- R6Class(
 
       ylab <- ""
 
-      if (private$.parameter != "") {
+      if (nzchar(private$.parameter)) {
         ylab <- private$.parameter
 
-        if (private$.variant != "") {
+        if (nzchar(private$.variant)) {
           ylab <- sprintf("%s, %s", ylab, private$.variant)
         }
-        if (private$.unit != "") {
+        if (nzchar(private$.unit)) {
           ylab <- sprintf("%s (%s)", ylab, private$.unit)
         }
       }
@@ -984,16 +984,16 @@ DTSg <- R6Class(
       cat(  "Values:\n")
       print(private$.values, nrows = 11L, class = TRUE, print.keys = FALSE)
       cat(  "\n")
-      if (private$.ID != "") {
+      if (nzchar(private$.ID)) {
         cat("ID:             ", private$.ID          , "\n", sep = "")
       }
-      if (private$.parameter != "") {
+      if (nzchar(private$.parameter)) {
         cat("Parameter:      ", private$.parameter   , "\n", sep = "")
       }
-      if (private$.unit != "") {
+      if (nzchar(private$.unit)) {
         cat("Unit:           ", private$.unit        , "\n", sep = "")
       }
-      if (private$.variant != "") {
+      if (nzchar(private$.variant)) {
         cat("Variant:        ", private$.variant     , "\n", sep = "")
       }
       cat(  "Aggregated:     ", private$.isAggregated, "\n", sep = "")
