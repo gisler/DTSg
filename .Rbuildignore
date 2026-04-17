@@ -6,4 +6,5 @@
 ^CONTRIBUTING\.md$
 ^cran-comments\.md$
 ^examples$
+^jarl\.toml$
 ^LICENSE\.md$

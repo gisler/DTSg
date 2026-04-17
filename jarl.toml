@@ -1,0 +1,5 @@
+# jarl check . --output-format concise
+
+[lint]
+extend-select = ["assignment", "fixed_regex", "nzchar", "quotes", "unnecessary_nesting"]
+ignore = ["internal_function"]
