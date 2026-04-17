@@ -3,6 +3,7 @@
 \name{colapply.DTSg}
 \alias{colapply.DTSg}
 \alias{colapply}
+\alias{capply}
 \title{Apply function column-wise}
 \usage{
 \method{colapply}{DTSg}(
@@ -165,6 +166,9 @@ x <- DTSg$new(values = flow)
 # linear interpolation of missing values
 ## R6 method
 x$colapply(fun = interpolateLinear)$print()
+
+## 'capply()' is an R6 alias for 'colapply()'
+x$capply(fun = interpolateLinear)$print()
 
 ## S3 method
 print(colapply(x = x, fun = interpolateLinear))

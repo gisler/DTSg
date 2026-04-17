@@ -627,6 +627,10 @@ DTSg <- R6Class(
       invisible(self)
     },
 
+    capply = function(...) {
+      self$colapply(...)
+    },
+
     colapply = function(
       fun,
       ...,

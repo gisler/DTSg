@@ -325,79 +325,81 @@ expect_identical(
   info = "deep clone is created by default"
 )
 
-#### colapply method ####
-expect_identical(
-  DTSg$new(DT1)$colapply(
-    as.factor,
-    cols = c("col1,col2"),
-    helpers = FALSE
-  )$cols("factor"),
-  c("col1", "col2"),
-  info = '"fun" is applied correctly'
-)
+#### colapply and capply methods ####
+for (method in c("colapply", "capply")) {
+  expect_identical(
+    DTSg$new(DT1)[[method]](
+      as.factor,
+      cols = c("col1,col2"),
+      helpers = FALSE
+    )$cols("factor"),
+    c("col1", "col2"),
+    info = '"fun" is applied correctly'
+  )
 
-expect_identical(
-  DTSg$new(DT1[-1L, ])$colapply(
-    interpolateLinear,
-    rollends = FALSE,
-    cols = "col2"
-  )$values(TRUE)[["col2"]],
-  c(NA, seq(5, 15, by = 2)),
-  info = '"..." passes on arguments correctly'
-)
+  expect_identical(
+    DTSg$new(DT1[-1L, ])[[method]](
+      interpolateLinear,
+      rollends = FALSE,
+      cols = "col2"
+    )$values(TRUE)[["col2"]],
+    c(NA, seq(5, 15, by = 2)),
+    info = '"..." passes on arguments correctly'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$colapply(
-    as.character,
-    cols = c("col1:col2"),
-    resultCols = c("col1", "col4"),
-    suffix = "_character"
-  )$cols(),
-  c("col1", "col2", "col3", "col4"),
-  info = '"resultCols" adds and overwrites columns correctly'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](
+      as.character,
+      cols = c("col1:col2"),
+      resultCols = c("col1", "col4"),
+      suffix = "_character"
+    )$cols(),
+    c("col1", "col2", "col3", "col4"),
+    info = '"resultCols" adds and overwrites columns correctly'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$colapply(
-    as.character,
-    cols = c("col1", "col2"),
-    suffix = "_character"
-  )$cols(),
-  c("col1", "col2", "col3", "col1_character", "col2_character"),
-  info = '"suffix" adds columns correctly'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](
+      as.character,
+      cols = c("col1", "col2"),
+      suffix = "_character"
+    )$cols(),
+    c("col1", "col2", "col3", "col1_character", "col2_character"),
+    info = '"suffix" adds columns correctly'
+  )
 
-expect_identical(
-  DTSg$new(DT1)$colapply(
-    cumsum,
-    cols = "col2",
-    helpers = FALSE,
-    funby = byYmdH__
-  )$values(TRUE)[["col2"]],
-  c(1, NA, 5, 12, 9, 20, 13, 28),
-  info = '"funby" is applied correctly'
-)
+  expect_identical(
+    DTSg$new(DT1)[[method]](
+      cumsum,
+      cols = "col2",
+      helpers = FALSE,
+      funby = byYmdH__
+    )$values(TRUE)[["col2"]],
+    c(1, NA, 5, 12, 9, 20, 13, 28),
+    info = '"funby" is applied correctly'
+  )
 
-expect_identical(
-  DTSg$new(DT1[, .(date, col1, col2, col3 = "A")])$colapply(
-    cumsum,
-    helpers = FALSE,
-    funby = function(x, .helpers) .helpers[["custom"]],
-    funbyHelpers = list(custom = "col3")
-  )$values(TRUE)[["col1"]],
-  cumsum(DT1[["col1"]]),
-  info = "custom helper data is appended correctly"
-)
+  expect_identical(
+    DTSg$new(DT1[, .(date, col1, col2, col3 = "A")])[[method]](
+      cumsum,
+      helpers = FALSE,
+      funby = function(x, .helpers) .helpers[["custom"]],
+      funbyHelpers = list(custom = "col3")
+    )$values(TRUE)[["col1"]],
+    cumsum(DT1[["col1"]]),
+    info = "custom helper data is appended correctly"
+  )
 
-expect_error(
-  DTSg$new(DT1)$colapply(
-    as.character,
-    cols = c("col1", "col2"),
-    resultCols = c("col1:col4")
-  ),
-  pattern = "^Assertion on 'resultCols' failed: ",
-  info = "colon returns error"
-)
+  expect_error(
+    DTSg$new(DT1)[[method]](
+      as.character,
+      cols = c("col1", "col2"),
+      resultCols = c("col1:col4")
+    ),
+    pattern = "^Assertion on 'resultCols' failed: ",
+    info = "colon returns error"
+  )
+}
 
 #### cols and names methods ####
 for (method in c("cols", "names")) {

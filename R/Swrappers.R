@@ -391,7 +391,7 @@ colapply <- function(x, ...) {
 #'
 #' @example examples/colapply.R
 #'
-#' @aliases colapply
+#' @aliases colapply capply
 #'
 #' @export
 colapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$colapply))
