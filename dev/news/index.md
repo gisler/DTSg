@@ -7,6 +7,9 @@
   method exclusively to the R6 interface acting as an alias for the
   [`colapply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
   method.
+- Converted all TALFs to S3 generics and added respective S3 methods
+  (`*.POSIXct()`). This does not change the package’s API, but improves
+  its extensibility.
 - Converted the
   [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
   and
@@ -15,7 +18,7 @@
   ([`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
   and
   [`rollback.POSIXct()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)).
-  This does not change the package’s API, but improves its
+  This as well does not change the package’s API, but improves its
   extensibility.
 - Fixed a possible loss of precision in the
   [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)

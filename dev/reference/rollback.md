@@ -12,7 +12,7 @@ counting the days of affected months backwards again.
 ## Usage
 
 ``` r
-rollback(.dateTime, ...)
+rollback(.dateTime, periodicity, ...)
 
 # S3 method for class 'POSIXct'
 rollback(.dateTime, periodicity, ...)
@@ -24,15 +24,15 @@ rollback(.dateTime, periodicity, ...)
 
   The date or time vector, which shall be fixed.
 
-- ...:
-
-  Further arguments passed to or from other methods.
-
 - periodicity:
 
   A character string specifying a multiple of month(s) or year(s). See
   [`seq.POSIXt`](https://rdrr.io/r/base/seq.POSIXt.html) for further
   information.
+
+- ...:
+
+  Further arguments passed to or from other methods.
 
 ## Value
 

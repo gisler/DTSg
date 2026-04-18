@@ -40,7 +40,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0.9000" id="dtsg-v2109000">DTSg v2.1.0.9000<a class="anchor" aria-label="anchor" href="#dtsg-v2109000"></a></h2>
 <ul><li>Added <code><a href="../reference/colapply.DTSg.html">capply()</a></code> method exclusively to the R6 interface acting as an alias for the <code><a href="../reference/colapply.DTSg.html">colapply()</a></code> method.</li>
-<li>Converted the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> and <code><a href="../reference/rollback.html">rollback()</a></code> functions to S3 generics and added respective S3 methods (<code><a href="../reference/interpolateLinear.html">interpolateLinear.numeric()</a></code> and <code><a href="../reference/rollback.html">rollback.POSIXct()</a></code>). This does not change the package’s API, but improves its extensibility.</li>
+<li>Converted all TALFs to S3 generics and added respective S3 methods (<code>*.POSIXct()</code>). This does not change the package’s API, but improves its extensibility.</li>
+<li>Converted the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> and <code><a href="../reference/rollback.html">rollback()</a></code> functions to S3 generics and added respective S3 methods (<code><a href="../reference/interpolateLinear.html">interpolateLinear.numeric()</a></code> and <code><a href="../reference/rollback.html">rollback.POSIXct()</a></code>). This as well does not change the package’s API, but improves its extensibility.</li>
 <li>Fixed a possible loss of precision in the <code><a href="../reference/interpolateLinear.html">interpolateLinear()</a></code> function when applied to an <code>integer</code> column.</li>
 <li>Minor internal code improvements.</li>
 </ul></div>

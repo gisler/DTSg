@@ -65,7 +65,7 @@ again.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rollback</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rollback</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">periodicity</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'POSIXct'</span></span>
 <span><span class="fu">rollback</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">periodicity</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -79,13 +79,13 @@ again.</p>
 <dd><p>The date or time vector, which shall be fixed.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further arguments passed to or from other methods.</p></dd>
-
-
 <dt id="arg-periodicity">periodicity<a class="anchor" aria-label="anchor" href="#arg-periodicity"></a></dt>
 <dd><p>A character string specifying a multiple of month(s) or
 year(s). See <code><a href="https://rdrr.io/r/base/seq.POSIXt.html" class="external-link">seq.POSIXt</a></code> for further information.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Further arguments passed to or from other methods.</p></dd>
 
 </dl></div>
     <div class="section level2">

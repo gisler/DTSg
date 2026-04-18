@@ -53,31 +53,70 @@ Other uses are possible, but not recommended.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">byY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">byY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byY_____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="fu">byYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYQ____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="fu">byYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYm____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">byYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="fu">byYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYmd___</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="fu">byYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYmdH__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="fu">byYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYmdHM_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">byYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">byYmdHMS</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by______</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by_Q____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by_m____</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by___H__</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by____M_</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'POSIXct'</span></span>
+<span><span class="fu">by_____S</span><span class="op">(</span><span class="va">.dateTime</span>, <span class="va">.helpers</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -91,6 +130,10 @@ Other uses are possible, but not recommended.</p>
 <dt id="arg--helpers">.helpers<a class="anchor" aria-label="anchor" href="#arg--helpers"></a></dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with helper data as handed over by methods of
 <code><a href="DTSg.html">DTSg</a></code> objects, which support the <code>funby</code> argument.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Further arguments passed to or from other methods.</p></dd>
 
 </dl></div>
     <div class="section level2">

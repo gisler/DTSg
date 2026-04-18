@@ -10,31 +10,70 @@ possible, but not recommended.
 ## Usage
 
 ``` r
-byY_____(.dateTime, .helpers)
+byY_____(.dateTime, .helpers, ...)
 
-byYQ____(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byY_____(.dateTime, .helpers, ...)
 
-byYm____(.dateTime, .helpers)
+byYQ____(.dateTime, .helpers, ...)
 
-byYmd___(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byYQ____(.dateTime, .helpers, ...)
 
-byYmdH__(.dateTime, .helpers)
+byYm____(.dateTime, .helpers, ...)
 
-byYmdHM_(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byYm____(.dateTime, .helpers, ...)
 
-byYmdHMS(.dateTime, .helpers)
+byYmd___(.dateTime, .helpers, ...)
 
-by______(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byYmd___(.dateTime, .helpers, ...)
 
-by_Q____(.dateTime, .helpers)
+byYmdH__(.dateTime, .helpers, ...)
 
-by_m____(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byYmdH__(.dateTime, .helpers, ...)
 
-by___H__(.dateTime, .helpers)
+byYmdHM_(.dateTime, .helpers, ...)
 
-by____M_(.dateTime, .helpers)
+# S3 method for class 'POSIXct'
+byYmdHM_(.dateTime, .helpers, ...)
 
-by_____S(.dateTime, .helpers)
+byYmdHMS(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+byYmdHMS(.dateTime, .helpers, ...)
+
+by______(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by______(.dateTime, .helpers, ...)
+
+by_Q____(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by_Q____(.dateTime, .helpers, ...)
+
+by_m____(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by_m____(.dateTime, .helpers, ...)
+
+by___H__(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by___H__(.dateTime, .helpers, ...)
+
+by____M_(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by____M_(.dateTime, .helpers, ...)
+
+by_____S(.dateTime, .helpers, ...)
+
+# S3 method for class 'POSIXct'
+by_____S(.dateTime, .helpers, ...)
 ```
 
 ## Arguments
@@ -49,6 +88,10 @@ by_____S(.dateTime, .helpers)
   handed over by methods of
   [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) objects,
   which support the `funby` argument.
+
+- ...:
+
+  Further arguments passed to or from other methods.
 
 ## Value
 
