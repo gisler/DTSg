@@ -1,4 +1,4 @@
-# Aggregate values
+# Aggregate time series data
 
 Applies a temporal aggregation level function to the *.dateTime* column
 of a [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)

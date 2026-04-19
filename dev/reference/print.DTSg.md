@@ -1,4 +1,4 @@
-# Print object
+# Print time series
 
 Prints a [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)
 object.

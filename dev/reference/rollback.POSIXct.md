@@ -1,19 +1,18 @@
 # Rollback of months
 
-Generating regular sequences of dates or times with the help of
-[`seq`](https://rdrr.io/r/base/seq.html) can have undesirable effects.
-“Using ‘month’ first advances the month without changing the day: if
-this results in an invalid day of the month, it is counted forward into
-the next month”. Monthly or yearly sequences starting at the end of a
-month with 30 or 31 days (or 29 in case of a leap year) therefore do not
-always fall on the end of shorter months. `rollback` fixes this by
-counting the days of affected months backwards again.
+Generating regular sequences of time with the help of
+[`seq.POSIXt`](https://rdrr.io/r/base/seq.POSIXt.html) can have
+undesirable effects. This method “first advances the month without
+changing the day: if this results in an invalid day of the month, it is
+counted forward into the next month”. Monthly or yearly sequences
+starting at the end of a month with 30 or 31 days (or 29 in case of a
+leap year) therefore do not always fall on the end of shorter months.
+`rollback` fixes this by counting the days of affected months backwards
+again.
 
 ## Usage
 
 ``` r
-rollback(.dateTime, periodicity, ...)
-
 # S3 method for class 'POSIXct'
 rollback(.dateTime, periodicity, ...)
 ```
@@ -22,7 +21,8 @@ rollback(.dateTime, periodicity, ...)
 
 - .dateTime:
 
-  The date or time vector, which shall be fixed.
+  The [`POSIXct`](https://rdrr.io/r/base/DateTimeClasses.html) vector,
+  which shall be fixed.
 
 - periodicity:
 
@@ -32,11 +32,12 @@ rollback(.dateTime, periodicity, ...)
 
 - ...:
 
-  Further arguments passed to or from other methods.
+  Not used.
 
 ## Value
 
-Returns the fixed date or time vector.
+Returns the fixed
+[`POSIXct`](https://rdrr.io/r/base/DateTimeClasses.html) vector.
 
 ## Examples
 

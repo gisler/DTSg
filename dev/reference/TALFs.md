@@ -10,67 +10,41 @@ possible, but not recommended.
 ## Usage
 
 ``` r
-byY_____(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 byY_____(.dateTime, .helpers, ...)
-
-byYQ____(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 byYQ____(.dateTime, .helpers, ...)
 
-byYm____(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 byYm____(.dateTime, .helpers, ...)
-
-byYmd___(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 byYmd___(.dateTime, .helpers, ...)
 
-byYmdH__(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 byYmdH__(.dateTime, .helpers, ...)
-
-byYmdHM_(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 byYmdHM_(.dateTime, .helpers, ...)
 
-byYmdHMS(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 byYmdHMS(.dateTime, .helpers, ...)
-
-by______(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 by______(.dateTime, .helpers, ...)
 
-by_Q____(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 by_Q____(.dateTime, .helpers, ...)
-
-by_m____(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 by_m____(.dateTime, .helpers, ...)
 
-by___H__(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 by___H__(.dateTime, .helpers, ...)
 
-by____M_(.dateTime, .helpers, ...)
-
 # S3 method for class 'POSIXct'
 by____M_(.dateTime, .helpers, ...)
-
-by_____S(.dateTime, .helpers, ...)
 
 # S3 method for class 'POSIXct'
 by_____S(.dateTime, .helpers, ...)
@@ -91,7 +65,7 @@ by_____S(.dateTime, .helpers, ...)
 
 - ...:
 
-  Further arguments passed to or from other methods.
+  Not used.
 
 ## Value
 

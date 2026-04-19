@@ -1,4 +1,4 @@
-# Object integrity
+# Time series integrity
 
 Checks the integrity of a
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) object and

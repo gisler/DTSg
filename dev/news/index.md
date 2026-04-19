@@ -4,25 +4,35 @@
 
 - Added
   [`capply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
-  method exclusively to the R6 interface acting as an alias for the
+  method exclusively to the R6 interface, which acts as an alias for the
   [`colapply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
-  method.
+  method. Unfortunately, it is not possible to supply S3 methods for all
+  of these aliases
+  ([`capply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md),
+  [`names()`](https://gisler.github.io/DTSg/dev/reference/cols.DTSg.md),
+  [`raggregate()`](https://gisler.github.io/DTSg/dev/reference/rowaggregate.DTSg.md),
+  [`rbind()`](https://gisler.github.io/DTSg/dev/reference/rowbind.DTSg.md),
+  [`set()`](https://gisler.github.io/DTSg/dev/reference/setCols.DTSg.md)
+  and
+  [`setnames()`](https://gisler.github.io/DTSg/dev/reference/setColNames.DTSg.md))
+  due to incompatible S3 generics.
 - Converted all TALFs to S3 generics and added respective S3 methods
   (`*.POSIXct()`). This does not change the package’s API, but improves
   its extensibility.
 - Converted the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   and
-  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
   functions to S3 generics and added respective S3 methods
-  ([`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  ([`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   and
-  [`rollback.POSIXct()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)).
+  [`rollback.POSIXct()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)).
   This as well does not change the package’s API, but improves its
   extensibility.
 - Fixed a possible loss of precision in the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
-  function when applied to an `integer` column.
+  [`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
+  method when applied to an `integer` column.
+- Slightly improved the documentation.
 - Minor internal code improvements.
 
 ## DTSg v2.1.0
@@ -113,12 +123,12 @@ CRAN release: 2022-06-08
   `"x,y,z"`, or the start and end column separated by a colon, for
   example, `"x:z"`.
 - Fixed a bug in the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   function causing partial last observation carried forward behaviour
   when its `roll` argument was specified smaller than the size of the
   gap to be interpolated.
 - Fixed a bug in the
-  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+  [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   function causing partial interpolation in certain cases when its
   `roll` argument was specified smaller than the size of the gap to be
   interpolated.
@@ -152,7 +162,7 @@ CRAN release: 2022-05-02
   utilised approach).
 - Added undocumented
   [`names()`](https://gisler.github.io/DTSg/dev/reference/cols.DTSg.md)
-  method exclusively to the R6 interface acting as an alias for the
+  method exclusively to the R6 interface, which acts as an alias for the
   [`cols()`](https://gisler.github.io/DTSg/dev/reference/cols.DTSg.md)
   method.
 - Added `mode` and `typeof` arguments to the
@@ -204,7 +214,7 @@ CRAN release: 2021-10-27
   [`set()`](https://gisler.github.io/DTSg/dev/reference/setCols.DTSg.md)
   and
   [`setnames()`](https://gisler.github.io/DTSg/dev/reference/setColNames.DTSg.md)
-  methods exclusively to the R6 interface acting as aliases for the
+  methods exclusively to the R6 interface, which act as aliases for the
   [`rowaggregate()`](https://gisler.github.io/DTSg/dev/reference/rowaggregate.DTSg.md),
   [`rowbind()`](https://gisler.github.io/DTSg/dev/reference/rowbind.DTSg.md),
   [`setCols()`](https://gisler.github.io/DTSg/dev/reference/setCols.DTSg.md)
@@ -364,7 +374,7 @@ CRAN release: 2020-05-08
 
 - Fixed error “Error in as.POSIXct.numeric(e) : ‘origin’ must be
   supplied” related to the
-  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+  [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
   function in upcoming R 4.1.0.
 - Slightly improved the vignettes.
 - Minor internal code improvements.

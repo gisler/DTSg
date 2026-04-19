@@ -1,4 +1,4 @@
-# Get values
+# Get time series data
 
 Returns the values of a
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) object.

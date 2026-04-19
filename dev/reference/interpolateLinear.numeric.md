@@ -1,21 +1,20 @@
 # Linear interpolation
 
-Linearly interpolates missing values of a vector. For use with the
+Linearly interpolates missing values of a numeric vector. For use with
+the
 [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
 method of [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)
 objects. Other uses are possible, but not recommended.
 
 This method mainly serves as an example for writing user defined methods
-and functions utilising one of the
-[`list`](https://rdrr.io/r/base/list.html)s with helper data handed over
-by some of the methods of
+or [`function`](https://rdrr.io/r/base/function.html)s utilising one of
+the [`list`](https://rdrr.io/r/base/list.html)s with helper data handed
+over by some of the methods of
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) objects.
 
 ## Usage
 
 ``` r
-interpolateLinear(.col, .helpers, ...)
-
 # S3 method for class 'numeric'
 interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
 ```
@@ -24,7 +23,7 @@ interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
 
 - .col:
 
-  The vector whose values shall be interpolated.
+  The numeric vector whose values shall be interpolated.
 
 - .helpers:
 
@@ -34,10 +33,6 @@ interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
   See
   [`colapply`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
   for further information.
-
-- ...:
-
-  Further arguments passed to or from other methods.
 
 - roll:
 
@@ -56,9 +51,13 @@ interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
   [`data.table::data.table`](https://rdrr.io/pkg/data.table/man/data.table.html)
   for further information.
 
+- ...:
+
+  Not used.
+
 ## Value
 
-Returns the interpolated vector.
+Returns the interpolated numeric vector.
 
 ## Examples
 

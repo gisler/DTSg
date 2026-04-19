@@ -8,28 +8,28 @@
 ## Methods
 
 - [`aggregate(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/aggregate.DTSg.md)
-  : Aggregate values
+  : Aggregate time series data
 - [`alter(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/alter.DTSg.md)
   : Alter time series
 - [`clone(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/clone.DTSg.md)
-  : Clone object
+  : Clone time series
 - [`colapply(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
-  : Apply function column-wise
+  : Apply a function column-wise
 - [`cols(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/cols.DTSg.md)
   : Get column names
 - [`getCol(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/getCol.DTSg.md)
   [`` `[`( ``*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/getCol.DTSg.md)
   : Get column vector
 - [`merge(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/merge.DTSg.md)
-  : Merge two objects
+  : Merge two time series
 - [`nas(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/nas.DTSg.md)
   : List missing values
 - [`plot(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/plot.DTSg.md)
   : Plot time series data
 - [`print(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/print.DTSg.md)
-  : Print object
+  : Print time series
 - [`refresh(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/refresh.DTSg.md)
-  : Object integrity
+  : Time series integrity
 - [`rollapply(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/rollapply.DTSg.md)
   : Rolling window function
 - [`rowaggregate(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/rowaggregate.DTSg.md)
@@ -45,30 +45,30 @@
 - [`summary(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/summary.DTSg.md)
   : Summarise time series data
 - [`values(`*`<DTSg>`*`)`](https://gisler.github.io/DTSg/dev/reference/values.DTSg.md)
-  : Get values
+  : Get time series data
 
 ## TALFs
 
-- [`byY_____()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYQ____()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYm____()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYmd___()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYmdH__()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYmdHM_()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`byYmdHMS()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by______()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by_Q____()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by_m____()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by___H__()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by____M_()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
-  [`by_____S()`](https://gisler.github.io/DTSg/dev/reference/TALFs.md) :
-  Temporal Aggregation Level Functions (TALFs)
+- [`byY_____(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYQ____(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYm____(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYmd___(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYmdH__(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYmdHM_(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`byYmdHMS(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by______(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by_Q____(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by_m____(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by___H__(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by____M_(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  [`by_____S(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/TALFs.md)
+  : Temporal Aggregation Level Functions (TALFs)
 
 ## Utilities
 
-- [`interpolateLinear()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.md)
+- [`interpolateLinear(`*`<numeric>`*`)`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
   : Linear interpolation
-- [`rollback()`](https://gisler.github.io/DTSg/dev/reference/rollback.md)
+- [`rollback(`*`<POSIXct>`*`)`](https://gisler.github.io/DTSg/dev/reference/rollback.POSIXct.md)
   : Rollback of months
 - [`S3WrapperGenerator()`](https://gisler.github.io/DTSg/dev/reference/S3WrapperGenerator.md)
   : S3 wrapper method generator

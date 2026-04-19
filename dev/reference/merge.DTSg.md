@@ -1,4 +1,4 @@
-# Merge two objects
+# Merge two time series
 
 Joins two [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)
 objects based on their *.dateTime* column. Their time zones and

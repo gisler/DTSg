@@ -1,4 +1,4 @@
-# Apply function column-wise
+# Apply a function column-wise
 
 Applies an arbitrary function to selected columns of a
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) object.

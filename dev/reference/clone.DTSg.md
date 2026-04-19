@@ -1,4 +1,4 @@
-# Clone object
+# Clone time series
 
 Clones (copies) a
 [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md) object.
