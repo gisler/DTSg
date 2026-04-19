@@ -3,7 +3,7 @@
 \name{print.DTSg}
 \alias{print.DTSg}
 \alias{print}
-\title{Print object}
+\title{Print time series}
 \usage{
 \method{print}{DTSg}(x, ...)
 }

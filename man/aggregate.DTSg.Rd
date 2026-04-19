@@ -3,7 +3,7 @@
 \name{aggregate.DTSg}
 \alias{aggregate.DTSg}
 \alias{aggregate}
-\title{Aggregate values}
+\title{Aggregate time series data}
 \usage{
 \method{aggregate}{DTSg}(
   x,

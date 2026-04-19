@@ -4,7 +4,7 @@
 \alias{colapply.DTSg}
 \alias{colapply}
 \alias{capply}
-\title{Apply function column-wise}
+\title{Apply a function column-wise}
 \usage{
 \method{colapply}{DTSg}(
   x,

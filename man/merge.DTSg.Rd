@@ -3,7 +3,7 @@
 \name{merge.DTSg}
 \alias{merge.DTSg}
 \alias{merge}
-\title{Merge two objects}
+\title{Merge two time series}
 \usage{
 \method{merge}{DTSg}(x, y, ..., clone = getOption("DTSgClone"))
 }

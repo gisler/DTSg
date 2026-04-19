@@ -3,7 +3,7 @@
 \name{refresh.DTSg}
 \alias{refresh.DTSg}
 \alias{refresh}
-\title{Object integrity}
+\title{Time series integrity}
 \usage{
 \method{refresh}{DTSg}(x, ...)
 }

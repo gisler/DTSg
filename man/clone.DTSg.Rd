@@ -3,7 +3,7 @@
 \name{clone.DTSg}
 \alias{clone.DTSg}
 \alias{clone}
-\title{Clone object}
+\title{Clone time series}
 \usage{
 \method{clone}{DTSg}(x, deep = FALSE, ...)
 }

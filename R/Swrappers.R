@@ -58,7 +58,7 @@ S3WrapperGenerator <- function(R6Method, self = "x", dots = TRUE) {
 #### aggregate ####
 #' @importFrom stats aggregate
 NULL
-#' Aggregate values
+#' Aggregate time series data
 #'
 #' Applies a temporal aggregation level function to the _.dateTime_ column of a
 #' [`DTSg`] object and aggregates its values column-wise to the function's
@@ -303,7 +303,7 @@ alter.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$alter))
 clone <- function(x, ...) {
   UseMethod("clone")
 }
-#' Clone object
+#' Clone time series
 #'
 #' Clones (copies) a [`DTSg`] object. Merely assigning a variable representing a
 #' [`DTSg`] object to a new variable does not result in a copy of the object.
@@ -343,7 +343,7 @@ clone.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$clone))
 colapply <- function(x, ...) {
   UseMethod("colapply")
 }
-#' Apply function column-wise
+#' Apply a function column-wise
 #'
 #' Applies an arbitrary function to selected columns of a [`DTSg`] object.
 #'
@@ -486,7 +486,7 @@ getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
 `[.DTSg` <- S3WrapperGenerator(expression(DTSg$public_methods$`[`))
 
 #### merge ####
-#' Merge two objects
+#' Merge two time series
 #'
 #' Joins two [`DTSg`] objects based on their _.dateTime_ column. Their time
 #' zones and `aggregated` fields must match.
@@ -644,7 +644,7 @@ setMethod(
 plot.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$plot))
 
 #### print ####
-#' Print object
+#' Print time series
 #'
 #' Prints a [`DTSg`] object.
 #'
@@ -673,7 +673,7 @@ print.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$print))
 refresh <- function(x, ...) {
   UseMethod("refresh")
 }
-#' Object integrity
+#' Time series integrity
 #'
 #' Checks the integrity of a [`DTSg`] object and tries to automatically
 #' (re-)detect its periodicity. Normally, there is no reason for a user to call
@@ -1144,7 +1144,7 @@ summary.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$summary), "obj
 values <- function(x, ...) {
   UseMethod("values")
 }
-#' Get values
+#' Get time series data
 #'
 #' Returns the values of a [`DTSg`] object.
 #'

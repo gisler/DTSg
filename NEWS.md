@@ -1,9 +1,10 @@
 # DTSg v2.1.0.9000
 
-* Added `capply()` method exclusively to the R6 interface acting as an alias for the `colapply()` method.
-* Converted the `interpolateLinear()` and `rollback()` functions to S3 generics and added respective S3 methods (`interpolateLinear.numeric()` and `rollback.POSIXct()`). This does not change the package's API, but improves its extensibility.
-* Fixed a possible loss of precision in the `interpolateLinear()` function when applied to an `integer` column.
+* Added `capply()` method exclusively to the R6 interface, which acts as an alias for the `colapply()` method. Unfortunately, it is not possible to supply S3 methods for all of these aliases (`capply()`, `names()`, `raggregate()`, `rbind()`, `set()` and `setnames()`) due to incompatible S3 generics. 
 * Converted all TALFs to S3 generics and added respective S3 methods (`*.POSIXct()`). This does not change the package's API, but improves its extensibility.
+* Converted the `interpolateLinear()` and `rollback()` functions to S3 generics and added respective S3 methods (`interpolateLinear.numeric()` and `rollback.POSIXct()`). This as well does not change the package's API, but improves its extensibility.
+* Fixed a possible loss of precision in the `interpolateLinear.numeric()` method when applied to an `integer` column.
+* Slightly improved the documentation.
 * Minor internal code improvements.
 
 # DTSg v2.1.0
@@ -53,7 +54,7 @@
 * Added `funbyApproach` argument to the `new()`, `aggregate()`, `colapply()` and `subset()` methods: allows for specifying the flavour of the applied temporal aggregation level functions (either `"base"` utilising `as.POSIXct()` or `"fasttime"` utilising `fasttime::fastPOSIXct()` or `"RcppCCTZ"` utilising `RcppCCTZ::parseDatetime()` as the main function for transforming timestamps). Custom approaches for user defined TALFs are also possible. Please note that the `byFasttime*` versions of the TALFs are now deprecated. Use this argument from now on instead.
 * Added `funbyApproach` also to the `list` of helper data (`funbyHelpers` argument) passed on to TALFs.
 * Added `funbyApproach` field reflecting the individual `funbyApproach` of a `DTSg` object (can also be actively set in order to change the utilised approach).
-* Added undocumented `names()` method exclusively to the R6 interface acting as an alias for the `cols()` method.
+* Added undocumented `names()` method exclusively to the R6 interface, which acts as an alias for the `cols()` method.
 * Added `mode` and `typeof` arguments to the `cols()` method: allows for getting column names with a certain `mode()` and/or `typeof()`. This can be especially handy when making use of the `units` package.
 * Added `DTSgFast`, `DTSgFunbyApproach` and `DTSgNA.status` options providing default values for the `fast`, `funbyApproach` and `na.status` arguments of the `new()` method.
 * Added `DTSgDeprecatedWarnings` option: allows for disabling warnings from deprecated features.
@@ -68,7 +69,7 @@
 # DTSg v0.8.1
 
 * Added a “special class” called `".numerary"` available to the `class` argument of the `cols()` method: allows for querying the names of `integer` and `numeric` columns in one go.
-* Added undocumented `raggregate()`, `rbind()`, `set()` and `setnames()` methods exclusively to the R6 interface acting as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods.
+* Added undocumented `raggregate()`, `rbind()`, `set()` and `setnames()` methods exclusively to the R6 interface, which act as aliases for the `rowaggregate()`, `rowbind()`, `setCols()` and `setColNames()` methods.
 * The `print()` method now truncates the number of printed rows of the values more aggressively.
 * Created a `pkgdown` website.
 * Improved the vignettes and documentation.

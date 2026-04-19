@@ -3,7 +3,7 @@
 \name{values.DTSg}
 \alias{values.DTSg}
 \alias{values}
-\title{Get values}
+\title{Get time series data}
 \usage{
 \method{values}{DTSg}(
   x,
