@@ -206,6 +206,7 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #' @param .dateTime A [`POSIXct`] vector.
 #' @param .helpers A [`list`] with helper data as handed over by methods of
 #'   [`DTSg`] objects, which support the `funby` argument.
+#' @param \dots Not used.
 #'
 #' @section Families and flavours:
 #' There are two families of temporal aggregation level functions. The one
@@ -252,13 +253,21 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #'
 #' @seealso [`aggregate`], [`colapply`], [`subset`]
 #'
+#' @aliases byY_____ byYQ____ byYm____ byYmd___ byYmdH__ byYmdHM_ byYmdHMS
+#'   by______ by_Q____ by_m____ by___H__ by____M_ by_____S
+#'
 #' @name TALFs
 NULL
 
 ## Truncating family ####
+#' @export
+byY_____ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byY_____")
+}
 #' @rdname TALFs
 #' @export
-byY_____ <- function(.dateTime, .helpers) {
+byY_____.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -270,9 +279,14 @@ byY_____ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byY_____"]])
 }
 
+#' @export
+byYQ____ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYQ____")
+}
 #' @rdname TALFs
 #' @export
-byYQ____ <- function(.dateTime, .helpers) {
+byYQ____.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -282,9 +296,14 @@ byYQ____ <- function(.dateTime, .helpers) {
   eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYQ____"]])
 }
 
+#' @export
+byYm____ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYm____")
+}
 #' @rdname TALFs
 #' @export
-byYm____ <- function(.dateTime, .helpers) {
+byYm____.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -296,9 +315,14 @@ byYm____ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYm____"]])
 }
 
+#' @export
+byYmd___ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYmd___")
+}
 #' @rdname TALFs
 #' @export
-byYmd___ <- function(.dateTime, .helpers) {
+byYmd___.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -308,9 +332,14 @@ byYmd___ <- function(.dateTime, .helpers) {
   eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["byYmd___"]])
 }
 
+#' @export
+byYmdH__ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYmdH__")
+}
 #' @rdname TALFs
 #' @export
-byYmdH__ <- function(.dateTime, .helpers) {
+byYmdH__.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -327,9 +356,14 @@ byYmdH__ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdH__"]])
 }
 
+#' @export
+byYmdHM_ <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYmdHM_")
+}
 #' @rdname TALFs
 #' @export
-byYmdHM_ <- function(.dateTime, .helpers) {
+byYmdHM_.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -337,9 +371,14 @@ byYmdHM_ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["byYmdHM_"]])
 }
 
+#' @export
+byYmdHMS <- function(.dateTime, .helpers, ...) {
+  UseMethod("byYmdHMS")
+}
 #' @rdname TALFs
 #' @export
-byYmdHMS <- function(.dateTime, .helpers) {
+byYmdHMS.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -348,15 +387,26 @@ byYmdHMS <- function(.dateTime, .helpers) {
 }
 
 ## Extracting family ####
+#' @export
+by______ <- function(.dateTime, .helpers, ...) {
+  UseMethod("by______")
+}
 #' @rdname TALFs
 #' @export
-by______ <- function(.dateTime, .helpers) {
+by______.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
+
   eval(byExpr[["single"]][["base"]][["by______"]])
 }
 
+#' @export
+by_Q____ <- function(.dateTime, .helpers, ...) {
+  UseMethod("by_Q____")
+}
 #' @rdname TALFs
 #' @export
-by_Q____ <- function(.dateTime, .helpers) {
+by_Q____.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -366,9 +416,14 @@ by_Q____ <- function(.dateTime, .helpers) {
   eval(byExpr[["single"]][[.helpers[["funbyApproach"]]]][["by_Q____"]])
 }
 
+#' @export
+by_m____ <- function(.dateTime, .helpers, ...) {
+  UseMethod("by_m____")
+}
 #' @rdname TALFs
 #' @export
-by_m____ <- function(.dateTime, .helpers) {
+by_m____.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -380,9 +435,14 @@ by_m____ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by_m____"]])
 }
 
+#' @export
+by___H__ <- function(.dateTime, .helpers, ...) {
+  UseMethod("by___H__")
+}
 #' @rdname TALFs
 #' @export
-by___H__ <- function(.dateTime, .helpers) {
+by___H__.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   if (.helpers[["ignoreDST"]] && !testSupportedTZ(.helpers[["timezone"]])) {
@@ -403,9 +463,14 @@ by___H__ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by___H__"]])
 }
 
+#' @export
+by____M_ <- function(.dateTime, .helpers, ...) {
+  UseMethod("by____M_")
+}
 #' @rdname TALFs
 #' @export
-by____M_ <- function(.dateTime, .helpers) {
+by____M_.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"
@@ -413,9 +478,14 @@ by____M_ <- function(.dateTime, .helpers) {
   eval(byExpr[[singleOrMulti]][[.helpers[["funbyApproach"]]]][["by____M_"]])
 }
 
+#' @export
+by_____S <- function(.dateTime, .helpers, ...) {
+  UseMethod("by_____S")
+}
 #' @rdname TALFs
 #' @export
-by_____S <- function(.dateTime, .helpers) {
+by_____S.POSIXct <- function(.dateTime, .helpers, ...) {
+  qassert(.dateTime, "P+")
   assertFunbyApproach(.dateTime, .helpers)
 
   singleOrMulti <- if (.helpers[["multiplier"]] == 1L) "single" else "multi"

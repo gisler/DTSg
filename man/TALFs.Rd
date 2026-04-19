@@ -15,39 +15,54 @@
 \alias{by___H__}
 \alias{by____M_}
 \alias{by_____S}
+\alias{byY_____.POSIXct}
+\alias{byYQ____.POSIXct}
+\alias{byYm____.POSIXct}
+\alias{byYmd___.POSIXct}
+\alias{byYmdH__.POSIXct}
+\alias{byYmdHM_.POSIXct}
+\alias{byYmdHMS.POSIXct}
+\alias{by______.POSIXct}
+\alias{by_Q____.POSIXct}
+\alias{by_m____.POSIXct}
+\alias{by___H__.POSIXct}
+\alias{by____M_.POSIXct}
+\alias{by_____S.POSIXct}
 \title{Temporal Aggregation Level Functions (TALFs)}
 \usage{
-byY_____(.dateTime, .helpers)
+\method{byY_____}{POSIXct}(.dateTime, .helpers, ...)
 
-byYQ____(.dateTime, .helpers)
+\method{byYQ____}{POSIXct}(.dateTime, .helpers, ...)
 
-byYm____(.dateTime, .helpers)
+\method{byYm____}{POSIXct}(.dateTime, .helpers, ...)
 
-byYmd___(.dateTime, .helpers)
+\method{byYmd___}{POSIXct}(.dateTime, .helpers, ...)
 
-byYmdH__(.dateTime, .helpers)
+\method{byYmdH__}{POSIXct}(.dateTime, .helpers, ...)
 
-byYmdHM_(.dateTime, .helpers)
+\method{byYmdHM_}{POSIXct}(.dateTime, .helpers, ...)
 
-byYmdHMS(.dateTime, .helpers)
+\method{byYmdHMS}{POSIXct}(.dateTime, .helpers, ...)
 
-by______(.dateTime, .helpers)
+\method{by______}{POSIXct}(.dateTime, .helpers, ...)
 
-by_Q____(.dateTime, .helpers)
+\method{by_Q____}{POSIXct}(.dateTime, .helpers, ...)
 
-by_m____(.dateTime, .helpers)
+\method{by_m____}{POSIXct}(.dateTime, .helpers, ...)
 
-by___H__(.dateTime, .helpers)
+\method{by___H__}{POSIXct}(.dateTime, .helpers, ...)
 
-by____M_(.dateTime, .helpers)
+\method{by____M_}{POSIXct}(.dateTime, .helpers, ...)
 
-by_____S(.dateTime, .helpers)
+\method{by_____S}{POSIXct}(.dateTime, .helpers, ...)
 }
 \arguments{
 \item{.dateTime}{A \code{\link{POSIXct}} vector.}
 
 \item{.helpers}{A \code{\link{list}} with helper data as handed over by methods of
 \code{\link{DTSg}} objects, which support the \code{funby} argument.}
+
+\item{\dots}{Not used.}
 }
 \value{
 All functions return a \code{\link{POSIXct}} vector with timestamps
