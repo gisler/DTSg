@@ -7,29 +7,24 @@
 .fill <- NULL
 .divisor <- NULL
 
-#' Linear interpolation
-#'
-#' @description
-#' Linearly interpolates missing values of a vector. For use with the
-#' [`colapply`] method of [`DTSg`] objects. Other uses are possible, but not
-#' recommended.
-#'
-#' This method mainly serves as an example for writing user defined methods and
-#' functions utilising one of the [`list`]s with helper data handed over by some
-#' of the methods of [`DTSg`] objects.
-#'
-#' @param .col The vector whose values shall be interpolated.
-#' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
-#'   See [`colapply`] for further information.
-#' @param \dots Further arguments passed to or from other methods.
-#'
-#' @return Returns the interpolated vector.
-#'
 #' @export
 interpolateLinear <- function(.col, .helpers, ...) {
   UseMethod("interpolateLinear")
 }
-
+#' Linear interpolation
+#'
+#' @description
+#' Linearly interpolates missing values of a numeric vector. For use with the
+#' [`colapply`] method of [`DTSg`] objects. Other uses are possible, but not
+#' recommended.
+#'
+#' This method mainly serves as an example for writing user defined methods or
+#' [`function`]s utilising one of the [`list`]s with helper data handed over by
+#' some of the methods of [`DTSg`] objects.
+#'
+#' @param .col The numeric vector whose values shall be interpolated.
+#' @param .helpers A [`list`] with helper data as handed over by [`colapply`].
+#'   See [`colapply`] for further information.
 #' @param roll A positive numeric specifying the maximum size of gaps whose
 #'   missing values shall be interpolated. For time series with unrecognised
 #'   periodicity it is interpreted in seconds and for time series with
@@ -40,6 +35,9 @@ interpolateLinear <- function(.col, .helpers, ...) {
 #' @param rollends A logical specifying if missing values at the start and end
 #'   of the time series shall be filled. See [`data.table::data.table`] for
 #'   further information.
+#' @param \dots Not used.
+#'
+#' @return Returns the interpolated numeric vector.
 #'
 #' @examples
 #' # new DTSg object
@@ -52,7 +50,7 @@ interpolateLinear <- function(.col, .helpers, ...) {
 #' ## S3 method
 #' print(colapply(x = x, fun = interpolateLinear))
 #'
-#' @rdname interpolateLinear
+#' @aliases interpolateLinear
 #'
 #' @export
 interpolateLinear.numeric <- function(
@@ -107,28 +105,26 @@ interpolateLinear.numeric <- function(
   DT[[".col"]]
 }
 
-#' Rollback of months
-#'
-#' Generating regular sequences of dates or times with the help of [`seq`] can
-#' have undesirable effects. \dQuote{Using \sQuote{month} first advances the
-#' month without changing the day: if this results in an invalid day of the
-#' month, it is counted forward into the next month}. Monthly or yearly
-#' sequences starting at the end of a month with 30 or 31 days (or 29 in case of
-#' a leap year) therefore do not always fall on the end of shorter months.
-#' `rollback` fixes this by counting the days of affected months backwards
-#' again.
-#'
-#' @param .dateTime The date or time vector, which shall be fixed.
-#' @param \dots Further arguments passed to or from other methods.
-#'
-#' @return Returns the fixed date or time vector.
-#'
 #' @export
-rollback <- function(.dateTime, ...) {
+rollback <- function(.dateTime, periodicity, ...) {
   UseMethod("rollback")
 }
+#' Rollback of months
+#'
+#' Generating regular sequences of time with the help of [`seq.POSIXt`] can have
+#' undesirable effects. This method \dQuote{first advances the month without
+#' changing the day: if this results in an invalid day of the month, it is
+#' counted forward into the next month}. Monthly or yearly sequences starting at
+#' the end of a month with 30 or 31 days (or 29 in case of a leap year)
+#' therefore do not always fall on the end of shorter months. `rollback` fixes
+#' this by counting the days of affected months backwards again.
+#'
+#' @param .dateTime The [`POSIXct`] vector, which shall be fixed.
 #' @param periodicity A character string specifying a multiple of month(s) or
 #'   year(s). See [`seq.POSIXt`] for further information.
+#' @param \dots Not used.
+#'
+#' @return Returns the fixed [`POSIXct`] vector.
 #'
 #' @examples
 #' # rollback monthly time series
@@ -142,7 +138,7 @@ rollback <- function(.dateTime, ...) {
 #'   periodicity = by
 #' )
 #'
-#' @rdname rollback
+#' @aliases rollback
 #'
 #' @export
 rollback.POSIXct <- function(.dateTime, periodicity, ...) {
