@@ -230,7 +230,6 @@ NULL
 #' ))
 #'
 #' @aliases aggregate
-#'
 #' @export
 aggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$aggregate))
 
@@ -294,7 +293,6 @@ alter <- function(x, ...) {
 #' print(alter(x = x, by = "1 month"))
 #'
 #' @aliases alter
-#'
 #' @export
 alter.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$alter))
 
@@ -334,7 +332,6 @@ clone <- function(x, ...) {
 #' clone(x = x, deep = TRUE)
 #'
 #' @aliases clone
-#'
 #' @export
 clone.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$clone))
 
@@ -370,6 +367,10 @@ colapply <- function(x, ...) {
 #'   corresponding section and examples for further information.
 #' @inheritParams aggregate.DTSg
 #'
+#' @section R6 alias:
+#' The `capply()` alias for this method is exclusively available in the R6
+#' interface.
+#'
 #' @section Helper data:
 #' In addition to the `...` argument, this method optionally hands over a
 #' [`list`] argument with helper data called `.helpers` to `fun`. This [`list`]
@@ -392,7 +393,6 @@ colapply <- function(x, ...) {
 #' @example examples/colapply.R
 #'
 #' @aliases colapply capply
-#'
 #' @export
 colapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$colapply))
 
@@ -439,7 +439,6 @@ cols <- function(x, ...) {
 #' cols(x = x, class = "numeric")
 #'
 #' @aliases cols names
-#'
 #' @export
 cols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$cols))
 
@@ -478,7 +477,6 @@ getCol <- function(x, ...) {
 #' x["flow"][1:10]
 #'
 #' @aliases getCol
-#'
 #' @export
 getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
 #' @rdname getCol.DTSg
@@ -521,7 +519,6 @@ getCol.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$getCol))
 #' ))
 #'
 #' @aliases merge
-#'
 #' @export
 merge.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$merge))
 
@@ -562,7 +559,6 @@ nas <- function(x, ...) {
 #' nas(x = x)
 #'
 #' @aliases nas
-#'
 #' @export
 nas.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$nas))
 
@@ -639,7 +635,6 @@ setMethod(
 #' }
 #'
 #' @aliases plot
-#'
 #' @export
 plot.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$plot))
 
@@ -664,7 +659,6 @@ plot.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$plot))
 #' print(x = x)
 #'
 #' @aliases print
-#'
 #' @export
 print.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$print))
 
@@ -695,7 +689,6 @@ refresh <- function(x, ...) {
 #' refresh(x = x)
 #'
 #' @aliases refresh
-#'
 #' @export
 refresh.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$refresh))
 
@@ -776,7 +769,6 @@ rollapply <- function(x, ...) {
 #' ))
 #'
 #' @aliases rollapply
-#'
 #' @export
 rollapply.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rollapply))
 
@@ -848,7 +840,6 @@ rowaggregate <- function(x, ...) {
 #' ))
 #'
 #' @aliases rowaggregate raggregate
-#'
 #' @export
 rowaggregate.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowaggregate))
 
@@ -899,7 +890,6 @@ rowbind <- function(x, ...) {
 #' ))
 #'
 #' @aliases rowbind rbind
-#'
 #' @export
 rowbind.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$rowbind))
 
@@ -955,7 +945,6 @@ setColNames <- function(x, ...) {
 #' ))
 #'
 #' @aliases setColNames setnames
-#'
 #' @export
 setColNames.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setColNames))
 
@@ -1035,7 +1024,6 @@ setCols <- function(x, ...) {
 #' }
 #'
 #' @aliases setCols set
-#'
 #' @export
 setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 
@@ -1103,7 +1091,6 @@ setCols.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$setCols))
 #' ))
 #'
 #' @aliases subset
-#'
 #' @export
 subset.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$subset))
 
@@ -1135,7 +1122,6 @@ subset.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$subset))
 #' summary(object = x)
 #'
 #' @aliases summary
-#'
 #' @export
 summary.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$summary), "object")
 
@@ -1186,6 +1172,5 @@ values <- function(x, ...) {
 #' values(x = x)
 #'
 #' @aliases values
-#'
 #' @export
 values.DTSg <- S3WrapperGenerator(expression(DTSg$public_methods$values))

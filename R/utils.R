@@ -51,7 +51,6 @@ interpolateLinear <- function(.col, .helpers, ...) {
 #' print(colapply(x = x, fun = interpolateLinear))
 #'
 #' @aliases interpolateLinear
-#'
 #' @export
 interpolateLinear.numeric <- function(
   .col,
@@ -139,7 +138,6 @@ rollback <- function(.dateTime, periodicity, ...) {
 #' )
 #'
 #' @aliases rollback
-#'
 #' @export
 rollback.POSIXct <- function(.dateTime, periodicity, ...) {
   qassert(.dateTime, "P+")

@@ -169,9 +169,7 @@
 #' )
 #'
 #' @docType class
-#'
 #' @aliases new
-#'
 #' @export
 DTSg <- R6Class(
   classname = "DTSg",

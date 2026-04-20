@@ -255,7 +255,6 @@ toFakeUTCdateTime <- function(.dateTime, .helpers) {
 #'
 #' @aliases byY_____ byYQ____ byYm____ byYmd___ byYmdH__ byYmdHM_ byYmdHMS
 #'   by______ by_Q____ by_m____ by___H__ by____M_ by_____S
-#'
 #' @name TALFs
 NULL
 

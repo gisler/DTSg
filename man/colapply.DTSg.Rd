@@ -80,6 +80,12 @@ Returns a \code{\link{DTSg}} object.
 \description{
 Applies an arbitrary function to selected columns of a \code{\link{DTSg}} object.
 }
+\section{R6 alias}{
+
+The \code{capply()} alias for this method is exclusively available in the R6
+interface.
+}
+
 \section{Helper data}{
 
 In addition to the \code{...} argument, this method optionally hands over a
