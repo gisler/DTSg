@@ -118,6 +118,11 @@ colapply(
 Returns a [`DTSg`](https://gisler.github.io/DTSg/dev/reference/DTSg.md)
 object.
 
+## R6 alias
+
+The `capply()` alias for this method is exclusively available in the R6
+interface.
+
 ## Helper data
 
 In addition to the `...` argument, this method optionally hands over a

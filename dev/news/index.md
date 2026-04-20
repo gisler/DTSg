@@ -6,8 +6,8 @@
   [`capply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
   method exclusively to the R6 interface, which acts as an alias for the
   [`colapply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md)
-  method. Unfortunately, it is not possible to supply S3 methods for all
-  of these aliases
+  method. Unfortunately, it is not possible to also supply S3 methods
+  for all of these R6 aliases
   ([`capply()`](https://gisler.github.io/DTSg/dev/reference/colapply.DTSg.md),
   [`names()`](https://gisler.github.io/DTSg/dev/reference/cols.DTSg.md),
   [`raggregate()`](https://gisler.github.io/DTSg/dev/reference/rowaggregate.DTSg.md),
