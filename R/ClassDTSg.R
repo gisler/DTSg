@@ -369,12 +369,11 @@ DTSg <- R6Class(
       if (testClass(funs, "character")) {
         funs <- lapply(funs, as.name)
       }
-      dots <- list(...)
 
       calls <- lapply(
         funs,
         if (rowaggregate) rowCalls else colCalls,
-        dots = dots
+        dots = list(...)
       )
       if (n) {
         if (nCols > 1L) {
@@ -736,7 +735,7 @@ DTSg <- R6Class(
       }
 
       if (!is.null(pattern)) {
-        if (any(names(list(...)) %chin% c("x", "value"))) {
+        if (any(...names() %chin% c("x", "value"))) {
           stop('"x" and "value" arguments are not allowed in this context.')
         }
 
@@ -840,7 +839,7 @@ DTSg <- R6Class(
       }
       assertSetEqual(y$timezone, self$timezone)
       assertSetEqual(y$aggregated, self$aggregated)
-      if (any(names(list(...)) %chin% c("x", "by", "by.x", "by.y"))) {
+      if (any(...names() %chin% c("x", "by", "by.x", "by.y"))) {
         stop('"x", "by", "by.x" and "by.y" arguments are not allowed in this context.')
       }
       qassert(clone, "B1")
