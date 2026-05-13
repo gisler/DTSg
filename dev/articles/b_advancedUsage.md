@@ -10,6 +10,7 @@ First, let’s load the package as well as some data and let’s create a
 `DTSg` object:
 
 ``` r
+
 library(DTSg)
 
 data(flow)
@@ -47,6 +48,7 @@ overridden by setting the `clone` argument of the respective method to
 *DTSgClone* option:
 
 ``` r
+
 TS$alter("2007-01-01", "2008-12-31")
 # `TS` was deep cloned before shortening it, hence its end date is still in the
 # year 2012
@@ -121,6 +123,7 @@ method with its `deep` argument set to `TRUE` (for consistency with the
 `R6` package its default is `FALSE`):
 
 ``` r
+
 TSc <- TS$clone(deep = TRUE)
 # or 'clone(TS, deep = TRUE)'
 ```
@@ -135,6 +138,7 @@ interface, piping is an exclusive feature of the S3 interface.
 Let’s start with chaining:
 
 ``` r
+
 TS <- DTSg$
   new(flow)$
   alter("2007-01-01", "2008-12-31")$
@@ -172,6 +176,7 @@ the same can be achieved with the forward-pipe operator `%>%` of the
 `magrittr` package):
 
 ``` r
+
 TS <- new("DTSg", flow) |>
   alter("2007-01-01", "2008-12-31") |>
   colapply(interpolateLinear) |>
@@ -214,7 +219,13 @@ and all references to it are removed from the global (and only the
 global) environment upon successful object creation:
 
 ``` r
+
 library(data.table)
+#> 
+#> Attaching package: 'data.table'
+#> The following object is masked from 'package:base':
+#> 
+#>     %notin%
 
 DT <- copy(flow)
 ls(pattern = "^DT$")
@@ -230,6 +241,7 @@ references to the original `DTSg` object from the global (and again only
 the global) environment at the same time:
 
 ``` r
+
 TS <- DTSg$new(flow)
 ls(pattern = "^TS$")
 #> [1] "TS"
@@ -246,6 +258,7 @@ processed from a function within the
 method. This can be accomplished in the following way:
 
 ``` r
+
 # add a new column recording if a certain value is missing or not before
 # carrying out a linear interpolation
 TS <- DTSg$new(flow)
@@ -257,7 +270,7 @@ TS$summary()
 #>  Mean   : 16.197  
 #>  3rd Qu.: 18.375  
 #>  Max.   :290.715  
-#>  NA's   :23
+#>  NAs    :23
 TS$
   colapply(
     function(x, ...) is.na(x),
@@ -290,7 +303,7 @@ TS$
 #>  Mean   : 16.197                  
 #>  3rd Qu.: 18.375                  
 #>  Max.   :290.715                  
-#>  NA's   :23
+#>  NAs    :23
 ```
 
 Please refer to the help pages for further details.

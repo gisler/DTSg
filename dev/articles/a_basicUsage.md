@@ -14,7 +14,13 @@ First, let’s load some data. The package is shipped with a `data.table`
 containing a daily time series of river flows:
 
 ``` r
+
 library(data.table)
+#> 
+#> Attaching package: 'data.table'
+#> The following object is masked from 'package:base':
+#> 
+#>     %notin%
 library(DTSg)
 
 data(flow)
@@ -48,6 +54,7 @@ method of the package’s main R6 class generator `DTSg`. In addition, we
 specify an ID in order to give the object a name:
 
 ``` r
+
 TS <- DTSg$new(
   values = flow,
   ID = "River Flow"
@@ -58,6 +65,7 @@ Creating an object with the package’s alternative interface abusing an
 S4 constructor looks like this:
 
 ``` r
+
 TS <- new(
   Class = "DTSg",
   values = flow,
@@ -74,6 +82,7 @@ the first column has been renamed to *.dateTime.* This column serves as
 the object’s time index and cannot be changed at will:
 
 ``` r
+
 TS$print() # or 'print(TS)' or just 'TS'
 #> Values:
 #>        .dateTime   flow
@@ -114,6 +123,7 @@ HTML vignettes unfortunately cannot display interactive elements, hence
 I included a static image of the JavaScript chart instead):
 
 ``` r
+
 TS$summary() # or 'summary(TS)'
 #>       flow        
 #>  Min.   :  4.995  
@@ -122,7 +132,7 @@ TS$summary() # or 'summary(TS)'
 #>  Mean   : 16.197  
 #>  3rd Qu.: 18.375  
 #>  Max.   :290.715  
-#>  NA's   :23
+#>  NAs    :23
 TS$nas(cols = "flow") # or 'nas(TS, cols = "flow")'
 #>      .col .group      .from        .to    .n
 #>    <char>  <int>     <POSc>     <POSc> <int>
@@ -148,6 +158,7 @@ them explicit (this behaviour can be changed, however, `DTSg` objects
 work best with explicitly missing values):
 
 ``` r
+
 flow[date >= as.POSIXct("2007-10-09", tz = "UTC") & date <= as.POSIXct("2007-11-13", tz = "UTC"), ]
 #>           date   flow
 #>         <POSc>  <num>
@@ -176,6 +187,7 @@ method together with the
 function will do the trick:
 
 ``` r
+
 TS  <- TS$colapply(fun = interpolateLinear)
 # or 'colapply(TS, fun = interpolateLinear)'
 TS$nas()
@@ -191,6 +203,7 @@ of the
 method. It, among others, supports a `class` and/or `pattern` argument:
 
 ``` r
+
 TS$cols() # or 'cols(TS)'
 #> [1] "flow"
 TS$cols(class = "numeric") # or 'cols(TS, class = "numeric")'
@@ -214,6 +227,7 @@ object. The latter can be achieved through its `by` argument (no example
 given):
 
 ``` r
+
 TS  <- TS$alter(from = "2007-01-01", to = "2008-12-31")
 # or 'alter(TS, from = "2007-01-01", to = "2008-12-31")'
 TS
@@ -249,6 +263,7 @@ character vector or `list` of functions, which allows for calculating
 several summary statistics at once):
 
 ``` r
+
 TSm <- TS$aggregate(funby = byYm____, fun = mean)
 # or 'aggregate(TS, funby = byYm____, fun = mean)'
 TSm
@@ -291,6 +306,7 @@ for quarters below. By convention, the year is set to 2199 in the latter
 case:
 
 ``` r
+
 TSQ <- TS$aggregate(funby = by_Q____, fun = mean)
 # or 'aggregate(TS, funby = by_Q____, fun = mean)'
 TSQ
@@ -328,6 +344,7 @@ We can do so with the help of the
 method:
 
 ``` r
+
 TSs <- TS$rollapply(fun = mean, na.rm = TRUE, before = 2, after = 2)
 # or 'rollapply(TS, fun = mean, na.rm = TRUE, before = 2, after = 2)'
 TSs
@@ -374,6 +391,7 @@ original time series data object and extract its values as a
 the *.dateTime* column gets its original name back):
 
 ``` r
+
 TS  <- TS$merge(y = TSs, suffixes = c("_orig", "_movavg"))
 # or 'merge(TS, y = TSs, suffixes = c("_orig", "_movavg"))'
 TS$values()
@@ -427,6 +445,7 @@ The fields of a `DTSg` object of which the metadata are part of can be
 accessed through so called active bindings:
 
 ``` r
+
 TS$ID
 #> [1] "River Flow"
 ```
@@ -451,6 +470,7 @@ reference semantics always apply to fields, hence the “largely” in the
 title of the package):
 
 ``` r
+
 # two new `DTSg` objects in order to demonstrate reference semantics, which are
 # propagated by assignments and broken by deep clones
 TSassigned <- TS

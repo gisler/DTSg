@@ -53,7 +53,7 @@ x$summary()
 #>  Mean   : 16.197  
 #>  3rd Qu.: 18.375  
 #>  Max.   :290.715  
-#>  NA's   :23       
+#>  NAs    :23       
 
 ## S3 method
 summary(object = x)
@@ -64,5 +64,5 @@ summary(object = x)
 #>  Mean   : 16.197  
 #>  3rd Qu.: 18.375  
 #>  Max.   :290.715  
-#>  NA's   :23       
+#>  NAs    :23       
 ```
