@@ -60,7 +60,7 @@ objects work best with explicitly missing values.}
 
 \item{funbyApproach}{A character string specifying the default flavour of
 \code{\link{TALFs}} used with the created \code{DTSg} object. Either \code{"timechange"}, which
-utilises \code{\link[timechange:time_round]{timechange::time_floor}}, or \code{"base"}, which utilises
+utilises \code{\link[timechange:time_floor]{timechange::time_floor}}, or \code{"base"}, which utilises
 \code{\link{as.POSIXct}}, or \code{"fasttime"}, which utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}},
 or \code{"RcppCCTZ"}, which utilises \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} as the main
 function for transforming timestamps. Custom approaches for user defined

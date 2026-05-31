@@ -30,7 +30,7 @@ cannot be changed.}
 
 \item{values}{A vector, \code{\link{list}} or list-like object (e.g.
 \code{\link[data.table:data.table]{data.table::data.table}}) of replacement and/or new values accepted by
-the \code{value} argument of \pkg{data.table}'s \code{\link[data.table:assign]{data.table::set}} function.
+the \code{value} argument of \pkg{data.table}'s \code{\link[data.table:set]{data.table::set}} function.
 \code{NULL} as a value removes a column.}
 
 \item{clone}{A logical specifying if the object shall be modified in place or

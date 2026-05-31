@@ -81,7 +81,7 @@ family truncates timestamps (truncating family), the other extracts a certain
 part of them (extracting family). Each family comes in four flavours: the
 first relies solely on base \R, the second utilises \code{\link[fasttime:fastPOSIXct]{fasttime::fastPOSIXct}}
 of \pkg{fasttime}, the third \code{\link[RcppCCTZ:parseDatetime]{RcppCCTZ::parseDatetime}} of \pkg{RcppCCTZ}
-and the fourth \code{\link[timechange:time_round]{timechange::time_floor}} of \pkg{timechange}.
+and the fourth \code{\link[timechange:time_floor]{timechange::time_floor}} of \pkg{timechange}.
 
 The \pkg{timechange} flavour generally is the fastest for both families of
 functions and all time zones. Second best option for the extracting family of
