@@ -591,7 +591,7 @@ DTSg <- R6Class(
         }
 
         if (by != private$.periodicity || nrow(DT) != private$.timestamps) {
-          private$.values <- private$.values[DT, ]
+          private$.values <- private$.values[DT, on = .(.dateTime)]
 
           self$refresh()
         }
