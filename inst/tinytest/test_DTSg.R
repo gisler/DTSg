@@ -32,25 +32,25 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, mean, cols = "col2", n = TRUE)$values(TRUE)[[".n"]],
+  suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, mean, cols = "col2", n = TRUE)$values(TRUE)[[".n"]]),
   c(1L, 2L, 2L, 2L),
   info = ".n is correct (single column and function)"
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, "mean", cols = "col2", n = TRUE)$values(TRUE)[[".n"]],
+  suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, "mean", cols = "col2", n = TRUE)$values(TRUE)[[".n"]]),
   c(1L, 2L, 2L, 2L),
   info = ".n is correct (single column and character function)"
 )
 
 expect_identical(
-  DTSg$new(DT4)$aggregate(by___H__, mean, cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
+  suppressMessages(DTSg$new(DT4)$aggregate(by___H__, mean, cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]]),
   c(1L, 0L, 2L, 0L),
   info = ".n is correct (single column with many NAs, function and ignoreDST = TRUE)"
 )
 
 expect_identical(
-  DTSg$new(DT4)$aggregate(by___H__, "mean", cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]],
+  suppressMessages(DTSg$new(DT4)$aggregate(by___H__, "mean", cols = "col2, A", n = TRUE, ignoreDST = TRUE)$values(TRUE)[[".n"]]),
   c(1L, 0L, 2L, 0L),
   info = ".n is correct (single column with many NAs, character function and ignoreDST = TRUE)"
 )
@@ -66,7 +66,7 @@ expect_true(
 
 expect_true(
   {
-    output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, "sum", n = TRUE))
+    output <- capture.output(suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, "sum", n = TRUE)))
     any(grepl("^GForce optimized j to '.+'", output))
   },
   info = "GForce optimsation kicked in (single column as well as function and n = TRUE)"
@@ -74,7 +74,7 @@ expect_true(
 
 expect_true(
   {
-    output <- capture.output(DTSg$new(DT1)$aggregate(byYmdH__, c(sum = "sum", mean = "mean"), cols = c("col1", "col2"), n = TRUE))
+    output <- capture.output(suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, c(sum = "sum", mean = "mean"), cols = c("col1", "col2"), n = TRUE)))
     any(grepl("^GForce optimized j to '.+'", output))
   },
   info = "GForce optimsation kicked in (multiple columns as well as functions and n = TRUE)"
@@ -82,7 +82,7 @@ expect_true(
 options(datatable.verbose = old$datatable.verbose)
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE),
+  suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, list(mean = mean, sum = sum), n = TRUE)$values(TRUE)),
   data.table(
     .dateTime = seq(
       as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
@@ -100,7 +100,7 @@ expect_identical(
 )
 
 expect_identical(
-  DTSg$new(DT1)$aggregate(byYmdH__, c(mean = "mean", sum = "sum"), n = TRUE)$values(TRUE),
+  suppressMessages(DTSg$new(DT1)$aggregate(byYmdH__, c(mean = "mean", sum = "sum"), n = TRUE)$values(TRUE)),
   data.table(
     .dateTime = seq(
       as.POSIXct("2000-10-29 01:00:00", tz = "Europe/Vienna"),
@@ -172,12 +172,12 @@ expect_true(
 )
 
 expect_true(
-  all(DTSg$new(CEThourlyData)$aggregate(
+  all(suppressMessages(DTSg$new(CEThourlyData)$aggregate(
     byYmd___,
     length,
     ignoreDST = FALSE,
     funbyHelpers = list(ignoreDST = TRUE)
-  )$values(TRUE)[["value"]] == 24L),
+  )$values(TRUE)[["value"]] == 24L)),
   info = '"funbyHelpers" takes precedence over "ignoreDST"'
 )
 
@@ -428,13 +428,13 @@ for (method in c("cols", "names")) {
   )
 
   expect_identical(
-    DTSg$new(DT3)[[method]](".numerary"),
+    DTSg$new(DT3, na.status = "implicit")[[method]](".numerary"),
     c("col2", "col3"),
     info = '".numerary" column names are returned (class)'
   )
 
   expect_identical(
-    DTSg$new(DT3)[[method]](c(".numerary", "character")),
+    DTSg$new(DT3, na.status = "implicit")[[method]](c(".numerary", "character")),
     c("col1", "col2", "col3"),
     info = '".numerary" and character column names are returned (class)'
   )
@@ -737,7 +737,7 @@ for (by in c(
 }
 
 expect_identical(
-  DTSg$new(DT3)$periodicity,
+  DTSg$new(DT3, na.status = "implicit")$periodicity,
   "unrecognised",
   info = "unrecognised periodicity is recognised correctly"
 )

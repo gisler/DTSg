@@ -11,10 +11,10 @@ msgPart <- "day saving time shift is estimated correctly (%s)"
 info <- sprintf(msgPart, .helpers[["timezone"]])
 
 expect_identical(
-  DTSg:::toFakeUTCdateTime(
+  suppressMessages(DTSg:::toFakeUTCdateTime(
     as.POSIXct("2024-12-31 03:00:00", tz = .helpers[["timezone"]]),
     .helpers
-  ),
+  )),
   seq(as.POSIXct("2024-12-31 02:30:00", tz = "UTC"), by = "1 day", length.out = 1L),
   info = info
 )
@@ -23,24 +23,24 @@ expect_identical(
 info <- sprintf(msgPart, .helpers[["timezone"]])
 
 expect_identical(
-  DTSg:::toFakeUTCdateTime(
+  suppressMessages(DTSg:::toFakeUTCdateTime(
     as.POSIXct("2024-06-30 03:00:00", tz = .helpers[["timezone"]]),
     .helpers
-  ),
+  )),
   seq(as.POSIXct("2024-06-30 01:00:00", tz = "UTC"), by = "1 day", length.out = 1L),
   info = info
 )
 
 .helpers[["timezone"]] <- "Europe/Vienna"
-info <- sprintf(msgPart, .helpers[["timezone"]])
 
-expect_identical(
+expect_warning(
   DTSg:::toFakeUTCdateTime(
     as.POSIXct("1980-04-07", tz = .helpers[["timezone"]]),
     .helpers
   ),
-  seq(as.POSIXct("1980-04-06 23:00:00", tz = "UTC"), by = "1 day", length.out = 1L),
-  info = info
+  pattern = "The day saving time shift cannot be estimated and is assumed to be one hour long.",
+  fixed = TRUE,
+  info = "day saving time shift not possible to estimate returns warning"
 )
 
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {
@@ -192,25 +192,25 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
 
   #### CETtoFromDST, multiplier == 1L ####
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), by = "year"][["value"]],
     info = '"byY_____" works as expected (CETtoFromDST, multiplier == 1L)'
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byYQ____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byYQ____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), by = "quarter"][["value"]],
     info = '"byYQ____" works as expected (CETtoFromDST, multiplier == 1L)'
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), by = "month"][["value"]],
     info = '"byYm____" works as expected (CETtoFromDST, multiplier == 1L)'
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byYmd___, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byYmd___, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), by = "day"][["value"]],
     info = '"byYmd___" works as expected (CETtoFromDST, multiplier == 1L)'
   )
@@ -240,13 +240,13 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(by_Q____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(by_Q____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), keyby = "quarter"][["value"]],
     info = '"by_Q____" works as expected (CETtoFromDST, multiplier == 1L)'
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(by_m____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(by_m____, sum, ignoreDST = TRUE)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), keyby = "month"][["value"]],
     info = '"by_m____" works as expected (CETtoFromDST, multiplier == 1L)'
   )
@@ -292,7 +292,7 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
   )
 
   expect_identical(
-    DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE),
+    suppressWarnings(DTSg$new(CETfromDSTfractionalSecondData)$aggregate(by___H__, sum, ignoreDST = TRUE)$values(TRUE)),
     setkey(data.table(
       .dateTime = as.POSIXct(c("2199-01-01 01:00:00", "2199-01-01 02:00:00", "2199-01-01 03:00:00"), tz = "Europe/Vienna"),
       value = CETfromDSTfractionalSecondData[, .(value = sum(value)), by = "hour"][["value"]]
@@ -314,7 +314,7 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
 
   #### CETtoFromDST, multiplier > 1L ####
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE, multiplier = 2L)$values(TRUE),
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byY_____, sum, ignoreDST = TRUE, multiplier = 2L)$values(TRUE)),
     setkey(data.table(
       .dateTime = as.POSIXct(c("1998-01-01", "2000-01-01"), tz = "Europe/Vienna"),
       value = CEThourlyData[, .(value = sum(value)), by = .(year %/% 2L * 2L)][["value"]]
@@ -323,7 +323,7 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE, multiplier = 3L)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(byYm____, sum, ignoreDST = TRUE, multiplier = 3L)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), by = .((yearMonth - 1L) %/% 3L * 3L + 1L)][["value"]],
     info = '"byYm____" works as expected (CETtoFromDST, multiplier > 1L)'
   )
@@ -341,7 +341,7 @@ for (approach in c("timechange", "base", "RcppCCTZ")) {
   )
 
   expect_identical(
-    DTSg$new(CEThourlyData)$aggregate(by_m____, sum, ignoreDST = TRUE, multiplier = 3L)$values(TRUE)[["value"]],
+    suppressMessages(DTSg$new(CEThourlyData)$aggregate(by_m____, sum, ignoreDST = TRUE, multiplier = 3L)$values(TRUE)[["value"]]),
     CEThourlyData[, .(value = sum(value)), keyby = .((month - 1L) %/% 3L * 3L + 1L)][["value"]],
     info = '"by_m____" works as expected (CETtoFromDST, multiplier > 1L)'
   )
