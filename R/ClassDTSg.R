@@ -354,11 +354,13 @@ DTSg <- R6Class(
 
     funApply = function(
       funs,
-      rowaggregate = FALSE,
-      n = FALSE,
-      nCols = NULL,
+      caller = c("aggregate", "rowaggregate"),
+      n = if (caller == "rowaggregate") FALSE,
+      nCols = if (caller == "rowaggregate") NULL,
       ...
     ) {
+      caller <- match.arg(caller)
+
       rowCalls <- function(fun, dots) {
         as.call(c(fun, quote(unlist(.SD, recursive = FALSE)), dots))
       }
@@ -372,7 +374,7 @@ DTSg <- R6Class(
 
       calls <- lapply(
         funs,
-        if (rowaggregate) rowCalls else colCalls,
+        if (caller == "rowaggregate") rowCalls else colCalls,
         dots = list(...)
       )
       if (n) {
@@ -388,7 +390,7 @@ DTSg <- R6Class(
       }
 
       as.call(c(
-        if (rowaggregate) as.name("list") else as.name("c"),
+        if (caller == "rowaggregate") as.name("list") else as.name("c"),
         calls
       ))
     },
@@ -519,7 +521,13 @@ DTSg <- R6Class(
         private$.values[, .n := as.integer(!is.na(get(cols)))]
       }
 
-      expr <- private$funApply(unname(fun), n = n, nCols = nCols, ...)
+      expr <- private$funApply(
+        unname(fun),
+        caller = "aggregate",
+        n = n,
+        nCols = nCols,
+        ...
+      )
 
       private$.values <- private$.values[
         ,
@@ -1292,7 +1300,7 @@ DTSg <- R6Class(
         ))
       }
 
-      expr <- private$funApply(unname(fun), rowaggregate = TRUE, ...)
+      expr <- private$funApply(unname(fun), caller = "rowaggregate", ...)
 
       private$.values[
         ,
