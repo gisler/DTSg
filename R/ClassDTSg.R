@@ -356,7 +356,7 @@ DTSg <- R6Class(
       funs,
       caller = c("aggregate", "rowaggregate"),
       n = if (caller == "rowaggregate") FALSE,
-      nCols = if (caller == "rowaggregate") NULL,
+      nCols = if (caller == "rowaggregate") NA_integer_,
       ...
     ) {
       caller <- match.arg(caller)
