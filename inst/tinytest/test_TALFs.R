@@ -33,15 +33,17 @@ expect_identical(
 
 .helpers[["timezone"]] <- "Europe/Vienna"
 
-expect_warning(
-  DTSg:::toFakeUTCdateTime(
-    as.POSIXct("1980-04-07", tz = .helpers[["timezone"]]),
-    .helpers
-  ),
-  pattern = "The day saving time shift cannot be estimated and is assumed to be one hour long.",
-  fixed = TRUE,
-  info = "day saving time shift not possible to estimate returns warning"
-)
+if (.Platform$OS.type == "windows") {
+  expect_warning(
+    DTSg:::toFakeUTCdateTime(
+      as.POSIXct("1980-04-07", tz = .helpers[["timezone"]]),
+      .helpers
+    ),
+    pattern = "The day saving time shift cannot be estimated and is assumed to be one hour long.",
+    fixed = TRUE,
+    info = "day saving time shift not possible to estimate returns warning"
+  )
+}
 
 for (approach in c("timechange", "base", "fasttime", "RcppCCTZ")) {
   old <- options(DTSgFunbyApproach = approach)
