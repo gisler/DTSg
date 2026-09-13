@@ -57,7 +57,8 @@ interpolateLinear(.col, .helpers, roll = Inf, rollends = TRUE, ...)
 
 ## Value
 
-Returns the interpolated numeric vector.
+Returns the interpolated numeric vector. An integer vector is converted
+to a double-precision vector.
 
 ## Examples
 

@@ -31,7 +31,8 @@
   extensibility.
 - Fixed a possible loss of precision in the
   [`interpolateLinear.numeric()`](https://gisler.github.io/DTSg/dev/reference/interpolateLinear.numeric.md)
-  method when applied to an `integer` column.
+  method when applied to an `integer` column. `integer` columns are
+  converted to `double` now.
 - Slightly improved the documentation.
 - Minor internal code improvements.
 
