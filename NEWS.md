@@ -3,7 +3,7 @@
 * Added `capply()` method exclusively to the R6 interface, which acts as an alias for the `colapply()` method. Unfortunately, it is not possible to also supply S3 methods for all of these R6 only aliases (`capply()`, `names()`, `raggregate()`, `rbind()`, `set()` and `setnames()`) due to incompatible S3 generics. 
 * Converted all TALFs to S3 generics and added respective S3 methods (`*.POSIXct()`). This does not change the package's API, but improves its extensibility.
 * Converted the `interpolateLinear()` and `rollback()` functions to S3 generics and added respective S3 methods (`interpolateLinear.numeric()` and `rollback.POSIXct()`). This as well does not change the package's API, but improves its extensibility.
-* Fixed a possible loss of precision in the `interpolateLinear.numeric()` method when applied to an `integer` column.
+* Fixed a possible loss of precision in the `interpolateLinear.numeric()` method when applied to an `integer` column. `integer` columns are converted to `double` now.
 * Slightly improved the documentation.
 * Minor internal code improvements.
 

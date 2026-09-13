@@ -37,7 +37,8 @@ interpolateLinear <- function(.col, .helpers, ...) {
 #'   further information.
 #' @param \dots Not used.
 #'
-#' @return Returns the interpolated numeric vector.
+#' @return Returns the interpolated numeric vector. An integer vector is
+#'   converted to a double-precision vector.
 #'
 #' @examples
 #' # new DTSg object

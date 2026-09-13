@@ -28,7 +28,8 @@ further information.}
 \item{\dots}{Not used.}
 }
 \value{
-Returns the interpolated numeric vector.
+Returns the interpolated numeric vector. An integer vector is
+converted to a double-precision vector.
 }
 \description{
 Linearly interpolates missing values of a numeric vector. For use with the
